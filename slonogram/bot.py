@@ -1,6 +1,6 @@
 from adaptix import Retort, name_mapping
 
-from typing import TypeVar, Optional, Callable, Any
+from typing import TypeVar, Optional, Callable
 
 from .schemas.result import Result
 from .protocols.session import Session
