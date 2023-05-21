@@ -1,7 +1,8 @@
 from adaptix import Retort, name_mapping
 
-from typing import TypeVar, Optional, Callable
+from typing import TypeVar, Optional, Callable, Any
 
+from .schemas.result import Result
 from .protocols.session import Session
 from .consts import TELEGRAM_API_URL
 
@@ -21,6 +22,7 @@ class Bot:
         retort = Retort(
             debug_path=True,
             recipe=[
+                name_mapping(Result, map={"data": "result"}),
                 name_mapping(trim_trailing_underscore=True),
             ],
         )

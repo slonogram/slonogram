@@ -8,7 +8,7 @@ T = TypeVar("T")
 class Result(Generic[T]):
     ok: bool
 
-    result: Optional[T] = None
+    data: Optional[T] = None
 
     error_code: Optional[int] = None
     description: Optional[str] = None
