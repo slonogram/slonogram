@@ -11,13 +11,13 @@ class PollType(str, Enum):
     quiz = "quiz"
 
 
-@dataclass
+@dataclass(slots=True)
 class PollOption:
     text: str
     voter_count: int
 
 
-@dataclass
+@dataclass(slots=True)
 class PollAnswer:
     poll_id: str
     user: User
@@ -25,7 +25,7 @@ class PollAnswer:
     option_ids: List[int]
 
 
-@dataclass
+@dataclass(slots=True)
 class Poll:
     id: str
     question: str
@@ -43,3 +43,6 @@ class Poll:
 
     open_period: Optional[int] = None
     close_date: Optional[int] = None
+
+
+__all__ = ["Poll", "PollAnswer", "PollOption", "PollType"]

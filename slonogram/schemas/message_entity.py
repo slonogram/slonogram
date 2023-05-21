@@ -8,7 +8,7 @@ from .user import User
 Utf16CodeUnits = NewType("Utf16CodeUnits", int)
 
 
-@dataclass
+@dataclass(slots=True)
 class MessageEntity:
     type_: MessageEntityType
     offset: Utf16CodeUnits
@@ -38,3 +38,6 @@ class MessageEntityType(str, Enum):
     text_link = "text_link"
     text_mention = "text_mention"
     custom_emoji = "custom_emoji"
+
+
+__all__ = ["MessageEntityType", "MessageEntity"]

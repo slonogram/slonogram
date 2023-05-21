@@ -3,7 +3,7 @@ from typing import Optional
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class Voice:
     file_id: str
     file_unique_id: str
@@ -13,7 +13,7 @@ class Voice:
     file_size: Optional[int] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class VideoNote:
     file_id: str
     file_unique_id: str
@@ -25,7 +25,7 @@ class VideoNote:
     file_size: Optional[int] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class Document:
     file_id: str
     file_unique_id: str
@@ -35,7 +35,7 @@ class Document:
     file_size: Optional[int] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class Audio:
     file_id: str
     file_unique_id: str
@@ -49,7 +49,7 @@ class Audio:
     thumbnail: Optional[PhotoSize] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class Animation:
     file_id: str
     file_unique_id: str
@@ -64,7 +64,7 @@ class Animation:
     file_size: Optional[int] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class PhotoSize:
     file_id: str
     file_unique_id: str
@@ -73,3 +73,13 @@ class PhotoSize:
     height: int
 
     file_size: Optional[int] = None
+
+
+__all__ = [
+    "PhotoSize",
+    "Animation",
+    "Audio",
+    "Document",
+    "VideoNote",
+    "Voice",
+]

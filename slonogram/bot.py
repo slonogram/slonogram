@@ -50,3 +50,6 @@ class Bot:
     @property
     def raw_session(self) -> Session:
         return self._session
+
+
+__all__ = ["Bot"]

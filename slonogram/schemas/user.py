@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 
-@dataclass
+@dataclass(slots=True)
 class User:
     id: int
     is_bot: bool
@@ -19,3 +19,6 @@ class User:
 
     is_premium: bool = False
     added_to_attachment_menu = False
+
+
+__all__ = ["User"]

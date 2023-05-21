@@ -38,3 +38,14 @@ class WriteAccessAllowed:
 @dataclass
 class MessageAutoDeleteTimerChanged:
     message_auto_delete_timer: int
+
+
+__all__ = [
+    "ProximityAlertTriggered",
+    "VideoChatParticipantsInvited",
+    "VideoChatStarted",
+    "VideoChatEnded",
+    "VideoChatScheduled",
+    "WriteAccessAllowed",
+    "MessageAutoDeleteTimerChanged",
+]

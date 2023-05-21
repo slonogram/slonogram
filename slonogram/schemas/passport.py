@@ -20,13 +20,13 @@ class PassportElementType(str, Enum):
     email = "email"
 
 
-@dataclass
+@dataclass(slots=True)
 class PassportData:
     data: List[EncryptedPassportElement]
     credentials: EncryptedCredentials
 
 
-@dataclass
+@dataclass(slots=True)
 class PassportFile:
     file_id: str
     file_unique_id: str
@@ -35,14 +35,14 @@ class PassportFile:
     file_date: int
 
 
-@dataclass
+@dataclass(slots=True)
 class EncryptedCredentials:
     data: str
     hash: str
     secret: str
 
 
-@dataclass
+@dataclass(slots=True)
 class EncryptedPassportElement:
     type_: PassportElementType
     hash: str
@@ -56,3 +56,12 @@ class EncryptedPassportElement:
     reverse_side: Optional[PassportFile] = None
     selfie: Optional[PassportFile] = None
     translation: Optional[PassportFile] = None
+
+
+__all__ = [
+    "EncryptedPassportElement",
+    "EncryptedCredentials",
+    "PassportFile",
+    "PassportData",
+    "PassportElementType",
+]

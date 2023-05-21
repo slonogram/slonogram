@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from .web import WebAppInfo, LoginUrl
 
 
-@dataclass
+@dataclass(slots=True)
 class SwitchInlineQueryChosenChat:
     query: Optional[str] = None
 
@@ -14,12 +14,12 @@ class SwitchInlineQueryChosenChat:
     allow_channel_chats: Optional[bool] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class CallbackGame:
     pass
 
 
-@dataclass
+@dataclass(slots=True)
 class InlineKeyboardButton:
     text: str
     url: str
@@ -37,6 +37,14 @@ class InlineKeyboardButton:
     pay: Optional[bool] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class InlineKeyboardMarkup:
     inline_keyboard: List[List[InlineKeyboardButton]]
+
+
+__all__ = [
+    "InlineKeyboardMarkup",
+    "InlineKeyboardButton",
+    "CallbackGame",
+    "SwitchInlineQueryChosenChat",
+]

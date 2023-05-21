@@ -2,7 +2,7 @@ from typing import Optional
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class ShippingAddress:
     country_code: str
     state: str
@@ -14,7 +14,7 @@ class ShippingAddress:
     post_code: str
 
 
-@dataclass
+@dataclass(slots=True)
 class OrderInfo:
     name: Optional[str] = None
     phone_number: Optional[str] = None
@@ -22,7 +22,7 @@ class OrderInfo:
     shipping_address: Optional[ShippingAddress] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class SuccessfulPayment:
     currency: str
     total_amount: int
@@ -35,10 +35,13 @@ class SuccessfulPayment:
     order_info: Optional[OrderInfo] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class Invoice:
     title: str
     description: str
     start_parameter: str
     currency: str
     total_amount: int
+
+
+__all__ = ["Invoice", "SuccessfulPayment", "OrderInfo", "ShippingAddress"]

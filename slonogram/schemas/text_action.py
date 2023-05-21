@@ -2,13 +2,13 @@ from typing import Optional
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class Dice:
     emoji: str
     value: int
 
 
-@dataclass
+@dataclass(slots=True)
 class Contact:
     phone_number: str
     first_name: str
@@ -16,3 +16,6 @@ class Contact:
 
     user_id: Optional[int] = None
     vcard: Optional[str] = None
+
+
+__all__ = ["Dice", "Contact"]

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 T = TypeVar("T")
 
 
-@dataclass
+@dataclass(slots=True)
 class Result(Generic[T]):
     ok: bool
 
@@ -17,3 +17,6 @@ class Result(Generic[T]):
         if self.data is None:
             raise TypeError("unwrap failed: data is None")
         return self.data
+
+
+__all__ = ["Result"]
