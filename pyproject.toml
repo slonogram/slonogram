@@ -7,8 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-aiohttp = "^3.8.4"
-orjson = "^3.8.12"
 adaptix = "^3.0.0a3"
 anyio = "^3.6.2"
 
