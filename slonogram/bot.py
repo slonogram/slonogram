@@ -26,7 +26,7 @@ class Bot:
         )
 
         if session_creator is None:
-            from .impl.aiohttp import AiohttpSession
+            from .impls.aiohttp_session import AiohttpSession
 
             session: Session = AiohttpSession(retort, token, api_url)
         else:
