@@ -25,14 +25,22 @@ from .action import (
 )
 from .message_entity import MessageEntity
 
-from typing import Optional, List
+from typing import Optional, List, NewType
 from dataclasses import dataclass
 from enum import Enum
+
+MessageId = NewType("MessageId", int)
+
+
+class ParseMode(str, Enum):
+    html = "HTML"
+    markdown_v2 = "MarkdownV2"
+    markdown = "Markdown"
 
 
 @dataclass(slots=True)
 class Message:
-    message_id: int
+    id: int
     date: int
     chat: Chat
 
@@ -109,7 +117,7 @@ class Message:
     is_automatic_forward: bool = False
 
 
-@dataclass
+@dataclass(slots=True)
 class Location:
     longitude: float
     latitude: float
@@ -120,13 +128,13 @@ class Location:
     proximity_alert_radius: Optional[int] = None
 
 
-@dataclass
+@dataclass(slots=True)
 class ChatLocation:
     location: Location
     address: str
 
 
-@dataclass
+@dataclass(slots=True)
 class ChatPermissions:
     can_send_messages: Optional[bool] = None
     can_send_audios: Optional[bool] = None
@@ -151,7 +159,7 @@ class ChatType(str, Enum):
     channel = "channel"
 
 
-@dataclass
+@dataclass(slots=True)
 class Chat:
     id: int
 

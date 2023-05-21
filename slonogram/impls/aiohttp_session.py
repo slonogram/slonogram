@@ -4,11 +4,8 @@ from aiohttp import ClientSession
 from typing import Type, TypeVar
 
 from ..schemas.result import Result
-
-try:
-    from orjson import loads as parse_json
-except ImportError:
-    from json import loads as parse_json
+from ..exceptions.api_error import ApiError
+from ..utils.json import loads as parse_json
 
 T = TypeVar("T")
 
@@ -21,7 +18,11 @@ class AiohttpSession:
         self._session = ClientSession()
 
     async def raw_method(
-        self, ty: Type[T], method_name: str, args: Dict
+        self,
+        ty: Type[T],
+        method_name: str,
+        args: Dict,
+        raise_if_error: bool = True,
     ) -> Result[T]:
         async with self._session.post(
             self._url.format(method=method_name), data=args
@@ -29,7 +30,13 @@ class AiohttpSession:
             data = await response.read()
             json = parse_json(data)
 
-            return self._retort.load(json, Result[ty])  # type: ignore
+            result = self._retort.load(json, Result[ty])  # type: ignore
+            if raise_if_error and not result.ok:
+                raise ApiError(
+                    error_code=result.error_code,  # type: ignore
+                    description=result.description,  # type: ignore
+                )
+            return result
 
     async def finalize(self) -> None:
         await self._session.close()

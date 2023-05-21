@@ -2,7 +2,21 @@ from typing import List, Optional
 from dataclasses import dataclass
 
 from .web import WebAppInfo, LoginUrl
-from .query import SwitchInlineQueryChosenChat, CallbackGame
+
+
+@dataclass
+class SwitchInlineQueryChosenChat:
+    query: Optional[str] = None
+
+    allow_user_chats: Optional[bool] = None
+    allow_bot_chats: Optional[bool] = None
+    allow_group_chats: Optional[bool] = None
+    allow_channel_chats: Optional[bool] = None
+
+
+@dataclass
+class CallbackGame:
+    pass
 
 
 @dataclass
@@ -23,5 +37,6 @@ class InlineKeyboardButton:
     pay: Optional[bool] = None
 
 
+@dataclass
 class InlineKeyboardMarkup:
     inline_keyboard: List[List[InlineKeyboardButton]]

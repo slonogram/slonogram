@@ -8,7 +8,11 @@ T = TypeVar("T")
 
 class Session(Protocol):
     async def raw_method(
-        self, ty: Type[T], method_name: str, args: Dict
+        self,
+        ty: Type[T],
+        method_name: str,
+        args: Dict,
+        raise_if_error: bool = True,
     ) -> Result[T]:
         ...
 

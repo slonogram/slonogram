@@ -12,3 +12,8 @@ class Result(Generic[T]):
 
     error_code: Optional[int] = None
     description: Optional[str] = None
+
+    def unwrap_data(self) -> T:
+        if self.data is None:
+            raise TypeError("unwrap failed: data is None")
+        return self.data
