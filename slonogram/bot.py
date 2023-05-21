@@ -20,7 +20,7 @@ class Bot:
     ) -> None:
         api_url = api_url.format(token=token, method="{method}")
         retort = Retort(
-            debug_path=True,
+            debug_path=False,
             recipe=[
                 name_mapping(Result, map={"data": "result"}),
                 name_mapping(trim_trailing_underscore=True),
