@@ -2,7 +2,18 @@ from typing import Optional
 from dataclasses import dataclass
 
 from .user import User
-from .chat import Message
+from .chat import Message, ChatType, Location
+
+
+@dataclass(slots=True)
+class InlineQuery:
+    id: str
+    from_: User
+    query: str
+    offset: str
+
+    chat_type: Optional[ChatType] = None
+    location: Optional[Location] = None
 
 
 @dataclass(slots=True)

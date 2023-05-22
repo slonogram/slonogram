@@ -1,16 +1,14 @@
-from typing import Optional, Callable, Dict, Any
+from typing import Optional, Dict, Any
 
 from ..protocols.session import Session
 from ..schemas.chat import Message, ParseMode, MessageId
 from ..schemas.message_entity import MessageEntity
 
-from ..utils.dict import set_if_not_none
+from ..utils.dict import set_if_not_none, JsonDumper
 
 
 class ChatApiWrapper:
-    def __init__(
-        self, json_dumper: Callable[[Any], str], session: Session
-    ) -> None:
+    def __init__(self, json_dumper: JsonDumper, session: Session) -> None:
         self._session = session
         self._json_dumper = json_dumper
 
@@ -42,14 +40,15 @@ class ChatApiWrapper:
                     "allow_sending_without_reply",
                     allow_sending_without_reply,
                 ),
+                ("entities", entities, self._json_dumper),
             ),
         )
-
-        if entities is not None:
-            args["entities"] = self._json_dumper(entities)
 
         result = await self._session.raw_method(
             Message, "sendMessage", args
         )
 
         return result.unwrap_data()
+
+
+__all__ = ["ChatApiWrapper"]

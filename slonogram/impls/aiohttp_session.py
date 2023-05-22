@@ -1,7 +1,7 @@
 from typing import Dict
 from adaptix import Retort
 from aiohttp import ClientSession
-from typing import Type, TypeVar
+from typing import Type, Any, TypeVar
 
 from ..schemas.result import Result
 from ..exceptions.api_error import ApiError
@@ -19,13 +19,14 @@ class AiohttpSession:
 
     async def raw_method(
         self,
-        ty: Type[T],
+        ty: Type[T] | Any,
         method_name: str,
         args: Dict,
         raise_if_error: bool = True,
     ) -> Result[T]:
         async with self._session.post(
-            self._url.format(method=method_name), data=args
+            self._url.format(method=method_name),
+            data=args,
         ) as response:
             data = await response.read()
             json = parse_json(data)

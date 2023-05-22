@@ -1,6 +1,6 @@
 from adaptix import Retort, name_mapping
 
-from typing import TypeVar, Optional, Callable
+from typing import TypeVar, Optional, Callable, Self
 
 from .schemas.result import Result
 from .schemas.chat import Message
@@ -8,7 +8,7 @@ from .schemas.chat import Message
 from .protocols.session import Session
 from .consts import TELEGRAM_API_URL
 
-from .wrappers import user, chat
+from .wrappers import user, chat, updates
 from .utils.json import dumps as dump_json
 
 T = TypeVar("T")
@@ -27,11 +27,12 @@ class Bot:
         retort = Retort(
             debug_path=True,
             recipe=[
-                name_mapping(Result, map={"data": "result"}),
-                name_mapping(Message, map={"id": "message_id"}),
                 name_mapping(trim_trailing_underscore=True),
+                name_mapping(Message, map={"id": "message_id"}),
+                name_mapping(Result, map={"data": "result"}),
             ],
         )
+        json_dumper = lambda value: dump_json(retort.dump(value))  # noqa
 
         if session_creator is None:
             from .impls.aiohttp_session import AiohttpSession
@@ -42,10 +43,18 @@ class Bot:
 
         self._session = session
 
+        self.updates = updates.UpdatesApiWrapper(session, json_dumper)
         self.user = user.UserApiWrapper(session)
-        self.chat = chat.ChatApiWrapper(
-            lambda value: dump_json(retort.dump(value)), session
-        )
+        self.chat = chat.ChatApiWrapper(json_dumper, session)
+
+    async def __aenter__(self) -> Self:
+        return self
+
+    async def __aexit__(self, _, exc, __):
+        await self._session.finalize()
+
+        if exc is not None:
+            raise exc from exc
 
     @property
     def raw_session(self) -> Session:

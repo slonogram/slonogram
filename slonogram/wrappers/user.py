@@ -10,3 +10,6 @@ class UserApiWrapper:
         return (
             await self._session.raw_method(User, "getMe", {})
         ).unwrap_data()
+
+
+__all__ = ["UserApiWrapper"]
