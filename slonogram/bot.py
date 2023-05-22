@@ -4,6 +4,7 @@ from typing import TypeVar, Optional, Callable, Self
 
 from .schemas.result import Result
 from .schemas.chat import Message
+from .schemas.updates import Update
 
 from .protocols.session import Session
 from .consts import TELEGRAM_API_URL
@@ -28,6 +29,7 @@ class Bot:
             debug_path=True,
             recipe=[
                 name_mapping(trim_trailing_underscore=True),
+                name_mapping(Update, map={"id": "update_id"}),
                 name_mapping(Message, map={"id": "message_id"}),
                 name_mapping(Result, map={"data": "result"}),
             ],

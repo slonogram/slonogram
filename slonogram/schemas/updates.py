@@ -24,7 +24,7 @@ class UpdateType(str, Enum):
 
 @dataclass(slots=True)
 class Update:
-    update_id: int
+    id: int
 
     message: Optional[Message] = None
     edited_message: Optional[Message] = None

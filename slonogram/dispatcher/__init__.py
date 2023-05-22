@@ -8,11 +8,9 @@ from anyio import create_task_group
 
 
 class Dispatcher:
-    def __init__(self, bot: Bot, base_name: Optional[str] = None) -> None:
-        base_set = LocalSet(base_name)
-
+    def __init__(self, bot: Bot) -> None:
         self._bot = bot
-        self._sets: List[LocalSet] = [base_set]
+        self._sets: List[LocalSet] = []
         self._task_group = create_task_group()
 
     async def run_polling(
@@ -38,10 +36,6 @@ class Dispatcher:
 
     def register_set(self, set_: LocalSet):
         self._sets.append(set_)
-
-    @property
-    def base_set(self) -> LocalSet:
-        return self._sets[0]
 
 
 __all__ = ["Dispatcher"]
