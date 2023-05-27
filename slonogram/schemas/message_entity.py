@@ -40,4 +40,4 @@ class MessageEntityType(str, Enum):
     custom_emoji = "custom_emoji"
 
 
-__all__ = ["MessageEntityType", "MessageEntity"]
+__all__ = ["MessageEntityType", "MessageEntity", "Utf16CodeUnits"]

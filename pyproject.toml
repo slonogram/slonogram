@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-adaptix = { git = "https://github.com/reagento/dataclass-factory", branch = "3.x/develop" }
+adaptix = { git = "https://github.com/reagento/dataclass-factory", rev = "b995294dfdfb93092890d40cda8897a4543c32d0" }
 anyio = "^3.6.2"
 
 
