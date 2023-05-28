@@ -1,16 +1,11 @@
-from typing import (
-    Optional,
-    List,
-    Self,
-    Generic,
-    TypeVar,
-    Callable,
-)
+from typing import Optional, List, Self, Generic, TypeVar, Callable, Any
 
-from ..schemas.updates import UpdateType
+from ..bot import Bot
+from ..schemas.updates import UpdateType, Update
 from ..schemas.chat import Message
 
-from .handler import Handler, HandlerFn, FilterFn
+from .handler import Handler, HandlerFn
+from ..filtering import FilterFn
 
 T = TypeVar("T")
 
@@ -35,13 +30,30 @@ class EntryScope(Generic[T]):
 
 
 class LocalSet:
-    def __init__(self, name: Optional[str] = None) -> None:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+    ) -> None:
         self._name = name
-        self._handlers: List[Handler] = []
+        self._handlers: List[Handler[Any]] = []
         self._sets: List[Self] = []
 
     def register_handler(self, handler: Handler) -> None:
         self._handlers.append(handler)
+
+    async def process_update(self, bot: Bot, update: Update) -> bool:
+        for handler in self._handlers:
+            data = update.message
+            if data is None:
+                raise NotImplementedError("TODO: non-message types")
+
+            result = await handler.handle(bot, data)
+            if result:
+                return True
+        for set_ in self._sets:
+            if await set_.process_update(bot, update):
+                return True
+        return False
 
     @property
     def message(self) -> EntryScope[Message]:

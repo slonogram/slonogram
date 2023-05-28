@@ -1,17 +1,29 @@
-from typing import TypeVar, TypeAlias, Callable, Awaitable, Optional, Type
+from typing import (
+    TypeVar,
+    TypeAlias,
+    Callable,
+    Awaitable,
+    Optional,
+    Type,
+    Generic,
+)
+from abc import ABCMeta, abstractmethod
 
 T = TypeVar("T")
+FilterFnReturnTy: TypeAlias = Optional[T] | Awaitable[Optional[T]]
+
+
+# Mypy crutch
+class ExplicitFilter(Generic[T], metaclass=ABCMeta):
+    @abstractmethod
+    def __call__(self, value: T) -> FilterFnReturnTy[T]:
+        _ = value
+        raise NotImplementedError
+
+
 FilterFn: TypeAlias = (
-    Callable[[T], Optional[T]] | Callable[[T], Awaitable[Optional[T]]]
+    ExplicitFilter[T] | Callable[[T], FilterFnReturnTy[T]]
 )
-
-
-def identity(value: T) -> T:
-    """
-    identity function(`a -> a`). Useful, for example,
-    when every update should be handled
-    """
-    return value
 
 
 def assert_filter_fn(fn: FilterFn) -> None:
@@ -45,10 +57,7 @@ def assert_instance_filter_fn(ty: Type[FilterFn]) -> None:
     _ = ty
 
 
-assert_filter_fn(identity)
-
 __all__ = [
-    "identity",
     "assert_filter_fn",
     "assert_instance_filter_fn",
     "FilterFn",

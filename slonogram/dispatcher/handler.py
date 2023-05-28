@@ -8,12 +8,13 @@ from typing import (
 )
 from inspect import iscoroutine
 
+from ..bot import Bot
 from ..filtering import FilterFn
 from ..schemas.updates import UpdateType
 
 T = TypeVar("T")
 R = TypeVar("R")
-HandlerFn: TypeAlias = Callable[[T], Awaitable[None]]
+HandlerFn: TypeAlias = Callable[[Bot, T], Awaitable[None]]
 
 
 class Handler(Generic[T]):
@@ -32,7 +33,7 @@ class Handler(Generic[T]):
     ) -> Handler[R]:
         return f(self._fn, self._update_type)
 
-    async def handle(self, data: T) -> bool:
+    async def handle(self, bot: Bot, data: T) -> bool:
         data_trans = self._filter(data)
         if iscoroutine(data_trans):
             data_opt = await data_trans
@@ -44,7 +45,7 @@ class Handler(Generic[T]):
         if data_opt is None:
             return False
 
-        await self._fn(data_opt)
+        await self._fn(bot, data_opt)
 
         return True
 

@@ -1,17 +1,34 @@
 from slonogram.schemas.chat import Message
-from ..chainable_filter import ChainableFilter
+from ..extended_filter import ExtendedFilter
+
+from typing import List, Optional
+from re import compile as compile_regex, Pattern
+
+TG_COMMAND_REGEX = compile_regex(r"\/([\w\-_\d]+)(@[\w_]+)?")
 
 
-class Command(ChainableFilter):
-    def __init__(self) -> None:
+class Command(ExtendedFilter[Message]):
+    def __init__(
+        self,
+        single_or_more: List[str] | str,
+        regex: Pattern = TG_COMMAND_REGEX,
+    ) -> None:
+        self._single_or_more = single_or_more
+        self._regex = regex
+
+    def __repr__(self) -> str:
+        if isinstance(self._single_or_more, list):
+            obj = self._single_or_more
+        else:
+            obj = [self._single_or_more]
+
+        return f"<command variations={obj!r}>"
+
+    def _match_single(self, text: str) -> Optional[int]:
         pass
 
     def __call__(self, message: Message) -> Message:
-        return message
+        raise NotImplementedError("TODO")
 
 
-def command() -> Command:
-    return Command()
-
-
-__all__ = ["Command", "command"]
+__all__ = ["Command"]

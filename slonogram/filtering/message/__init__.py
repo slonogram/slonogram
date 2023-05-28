@@ -1,3 +1,4 @@
-from .command import command
+from .command import Command
+from .eq import TextEq
 
-__all__ = ["command"]
+__all__ = ["Command", "TextEq"]
