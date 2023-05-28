@@ -1,4 +1,4 @@
 from .command import Command
-from .eq import TextEq
+from .text import TextEq, TextContains
 
-__all__ = ["Command", "TextEq"]
+__all__ = ["Command", "TextEq", "TextContains"]
