@@ -45,6 +45,7 @@ class Bot:
         return me
 
     async def __aenter__(self) -> Self:
+        # TODO: add initialization
         return self
 
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
