@@ -43,13 +43,13 @@ def _call_with_ctx(
 def _call_only_bot(
     fn: HandlerFnOnlyBot, ctx: Context[D, T]
 ) -> Awaitable[None]:
-    return fn(ctx.bot)
+    return fn(ctx.inter.bot)
 
 
 def _call_model_bot(
     fn: HandlerFnModelBot[T], ctx: Context[D, T]
 ) -> Awaitable[None]:
-    return fn(ctx.model, ctx.bot)
+    return fn(ctx.model, ctx.inter.bot)
 
 
 class Handler(Generic[D, T]):
