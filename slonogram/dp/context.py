@@ -7,14 +7,15 @@ D = TypeVar("D")
 
 
 class InterContextData(Generic[D]):
-    def __init__(self, data: D) -> None:
+    __slots__ = "data", "bot"
+
+    def __init__(self, data: D, bot: Bot) -> None:
         self.data = data
+        self.bot = bot
 
 
 class Context(Generic[D, T]):
-    bot: Bot
     model: T
-
     inter: InterContextData[D]
 
     def __init__(
