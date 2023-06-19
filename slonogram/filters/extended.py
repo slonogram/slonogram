@@ -10,17 +10,17 @@ T = TypeVar("T")
 D = TypeVar("D")
 
 
-class ExtendedFilter(Generic[T], metaclass=ABCMeta):
-    def __invert__(self) -> Inverted[T]:
+class ExtendedFilter(Generic[D, T], metaclass=ABCMeta):
+    def __invert__(self) -> Inverted[D, T]:
         return Inverted(self)
 
-    def __or__(self, rhs: FilterFn[T]) -> Or[T]:
+    def __or__(self, rhs: FilterFn[D, T]) -> Or[D, T]:
         return Or(self, rhs, False)
 
-    def __xor__(self, rhs: FilterFn[T]) -> Or[T]:
+    def __xor__(self, rhs: FilterFn[D, T]) -> Or[D, T]:
         return Or(self, rhs, True)
 
-    def __and__(self, rhs: FilterFn[T]) -> And[T]:
+    def __and__(self, rhs: FilterFn[D, T]) -> And[D, T]:
         return And(self, rhs)
 
     @abstractmethod
@@ -29,9 +29,9 @@ class ExtendedFilter(Generic[T], metaclass=ABCMeta):
         raise NotImplementedError
 
 
-class Or(ExtendedFilter[T]):
+class Or(ExtendedFilter[D, T]):
     def __init__(
-        self, lhs: FilterFn[T], rhs: FilterFn[T], exclusive: bool
+        self, lhs: FilterFn[D, T], rhs: FilterFn[D, T], exclusive: bool
     ) -> None:
         self.lhs_fn = lhs
         self.rhs_fn = rhs
@@ -56,8 +56,8 @@ class Or(ExtendedFilter[T]):
             return lhs
 
 
-class And(ExtendedFilter[T]):
-    def __init__(self, lhs: FilterFn[T], rhs: FilterFn[T]) -> None:
+class And(ExtendedFilter[D, T]):
+    def __init__(self, lhs: FilterFn[D, T], rhs: FilterFn[D, T]) -> None:
         self.lhs_fn = lhs
         self.rhs_fn = rhs
 
@@ -71,8 +71,8 @@ class And(ExtendedFilter[T]):
         return await self.rhs_fn(ctx)
 
 
-class Inverted(ExtendedFilter[T]):
-    def __init__(self, fn: FilterFn[T]) -> None:
+class Inverted(ExtendedFilter[D, T]):
+    def __init__(self, fn: FilterFn[D, T]) -> None:
         self.fn = fn
 
     def __repr__(self) -> str:
@@ -87,7 +87,7 @@ async def always_true(_: Context[D, T]) -> bool:
     return True
 
 
-def not_(fn: FilterFn[T]) -> Inverted[T]:
+def not_(fn: FilterFn[D, T]) -> Inverted[D, T]:
     return Inverted(fn)
 
 

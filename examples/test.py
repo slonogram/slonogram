@@ -1,10 +1,11 @@
 import asyncio
 
+from typing import Any
 from slonogram.dp import Dispatcher
 from slonogram.dp.local_set import LocalSet
 from slonogram.bot import Bot
 
-set_ = LocalSet("test")
+set_ = LocalSet[Any]("test")
 
 
 @set_.on_message.sent()

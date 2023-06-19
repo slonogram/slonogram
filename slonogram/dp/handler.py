@@ -7,19 +7,20 @@ from inspect import signature
 from typing import Generic, TypeVar, TypeAlias, Callable, Awaitable
 
 T = TypeVar("T")
+D = TypeVar("D")
 
-HandlerFnWithCtx: TypeAlias = Callable[[Context[T]], Awaitable[None]]
+HandlerFnWithCtx: TypeAlias = Callable[[Context[D, T]], Awaitable[None]]
 HandlerFnOnlyBot: TypeAlias = Callable[[Bot], Awaitable[None]]
 HandlerFnModelBot: TypeAlias = Callable[[T, Bot], Awaitable[None]]
 
 HandlerFn: TypeAlias = (
-    HandlerFnWithCtx[T] | HandlerFnOnlyBot | HandlerFnModelBot[T]
+    HandlerFnWithCtx[D, T] | HandlerFnOnlyBot | HandlerFnModelBot[T]
 )
 
 
 def _create_fn(
-    fn: HandlerFn[T], prefer_bot: bool
-) -> Callable[[Context[T]], Awaitable[None]]:
+    fn: HandlerFn[D, T], prefer_bot: bool
+) -> Callable[[Context[D, T]], Awaitable[None]]:
     sig = signature(fn)
     params_no = len(sig.parameters)
 
@@ -34,31 +35,34 @@ def _create_fn(
 
 
 def _call_with_ctx(
-    fn: HandlerFnWithCtx[T], ctx: Context[T]
+    fn: HandlerFnWithCtx[D, T], ctx: Context[D, T]
 ) -> Awaitable[None]:
     return fn(ctx)
 
 
 def _call_only_bot(
-    fn: HandlerFnOnlyBot, ctx: Context[T]
+    fn: HandlerFnOnlyBot, ctx: Context[D, T]
 ) -> Awaitable[None]:
     return fn(ctx.bot)
 
 
 def _call_model_bot(
-    fn: HandlerFnModelBot[T], ctx: Context[T]
+    fn: HandlerFnModelBot[T], ctx: Context[D, T]
 ) -> Awaitable[None]:
     return fn(ctx.model, ctx.bot)
 
 
-class Handler(Generic[T]):
+class Handler(Generic[D, T]):
     def __init__(
-        self, prefer_bot: bool, fn: HandlerFn[T], filter_: FilterFn[T]
+        self,
+        prefer_bot: bool,
+        fn: HandlerFn[D, T],
+        filter_: FilterFn[D, T],
     ) -> None:
         self.filter_ = filter_
         self.fn = _create_fn(fn, prefer_bot)
 
-    async def try_invoke(self, ctx: Context[T]) -> bool:
+    async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_result = await self.filter_(ctx)
         if filter_result is None:
             return False
