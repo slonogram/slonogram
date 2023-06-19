@@ -1,66 +1,56 @@
-from adaptix import Retort, name_mapping
+from typing import Optional, Self
+from .schemas.user import User
 
-from typing import TypeVar, Optional, Callable, Self
-
-from .schemas.result import Result
-from .schemas.chat import Message
-from .schemas.updates import Update
-
-from .protocols.session import Session
-from .consts import TELEGRAM_API_URL
-
-from .wrappers import user, chat, updates
-from .utils.json import dumps as dump_json
-
-T = TypeVar("T")
+from .protocols.api_session import ApiSession
+from .consts import DEFAULT_API_URL
 
 
 class Bot:
     def __init__(
         self,
-        token: str,
-        api_url: str = TELEGRAM_API_URL,
-        session_creator: Optional[
-            Callable[[Retort, str, str], Session]
-        ] = None,
+        token: Optional[str] = None,
+        base_url: Optional[str] = None,
+        session: Optional[ApiSession] = None,
     ) -> None:
-        api_url = api_url.format(token=token, method="{method}")
-        retort = Retort(
-            debug_path=True,
-            recipe=[
-                name_mapping(trim_trailing_underscore=True),
-                name_mapping(Update, map={"id": "update_id"}),
-                name_mapping(Message, map={"id": "message_id"}),
-                name_mapping(Result, map={"data": "result"}),
-            ],
-        )
-        json_dumper = lambda value: dump_json(retort.dump(value))  # noqa
+        u_session: ApiSession
 
-        if session_creator is None:
-            from .impls.aiohttp_session import AiohttpSession
+        if session is None:
+            from .extra.aiohttp_session import Session
 
-            session: Session = AiohttpSession(retort, token, api_url)
+            if token is None:
+                raise ValueError("No bot token passed")
+
+            u_session = Session(
+                token=token, base_url=base_url or DEFAULT_API_URL
+            )
         else:
-            session = session_creator(retort, token, api_url)
+            u_session = session
 
-        self._session = session
+        self._me: Optional[User] = None
+        self._session = u_session
 
-        self.updates = updates.UpdatesApiWrapper(session, json_dumper)
-        self.user = user.UserApiWrapper(session)
-        self.chat = chat.ChatApiWrapper(json_dumper, session)
+    @property
+    def initialized(self) -> bool:
+        return self._me is not None
+
+    @property
+    def me(self) -> User:
+        me = self._me
+        if me is None:
+            raise TypeError(
+                "`me` is None, to access `me` through the `Bot` type "
+                "it is necessary to use instance "
+                "inside the `async with` context"
+            )
+        return me
 
     async def __aenter__(self) -> Self:
         return self
 
-    async def __aexit__(self, _, exc, __):
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        _ = exc_value
+        _ = traceback
+
         await self._session.finalize()
-
-        if exc is not None:
-            raise exc from exc
-
-    @property
-    def raw_session(self) -> Session:
-        return self._session
-
-
-__all__ = ["Bot"]
+        if exc_type is not None:
+            raise exc_type
