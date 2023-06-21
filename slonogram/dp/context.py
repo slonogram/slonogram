@@ -1,3 +1,5 @@
+from anyio.abc import TaskGroup
+
 from typing import TypeVar, Generic
 from ..bot import Bot
 
@@ -7,20 +9,17 @@ D = TypeVar("D")
 
 
 class InterContextData(Generic[D]):
-    __slots__ = "data", "bot"
+    __slots__ = "data", "bot", "task_group"
 
-    def __init__(self, data: D, bot: Bot) -> None:
+    def __init__(self, data: D, bot: Bot, task_group: TaskGroup) -> None:
         self.data = data
         self.bot = bot
+        self.task_group = task_group
 
 
 class Context(Generic[D, T]):
-    model: T
-    inter: InterContextData[D]
+    __slots__ = "model", "inter"
 
-    def __init__(
-        self, inter: InterContextData[D], bot: Bot, model: T
-    ) -> None:
-        self.bot = bot
+    def __init__(self, inter: InterContextData[D], model: T) -> None:
         self.model = model
         self.inter = inter

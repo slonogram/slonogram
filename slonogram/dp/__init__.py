@@ -6,10 +6,8 @@ from typing import (
     TypeVar,
     Any,
 )
-from functools import cached_property
 
 from anyio import create_task_group
-from anyio.abc import TaskGroup
 
 from ..schemas.updates import UpdateType, Update
 from ..bot import Bot
@@ -35,10 +33,6 @@ class Dispatcher(Generic[D]):
         self._bot = bot
         self._data = data
 
-    @cached_property
-    def _task_group(self) -> TaskGroup:
-        return create_task_group()
-
     async def run_polling(
         self,
         offset: Optional[int] = None,
@@ -53,11 +47,11 @@ class Dispatcher(Generic[D]):
         updates_call_group = bot.updates
         processor = self.set._process_update
 
-        ctx: Context[D, Any] = Context(
-            inter=InterContextData(self._data, bot), bot=bot, model=None
-        )
-
-        async with self._task_group as tg:
+        async with create_task_group() as tg:
+            ctx: Context[D, Any] = Context(
+                inter=InterContextData(self._data, bot, tg),
+                model=None,
+            )
             while True:
                 updates: List[Update] = await updates_call_group.get(
                     offset, limit, timeout, allowed_updates
