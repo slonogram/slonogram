@@ -21,6 +21,7 @@ def text_eq(text: str) -> FilterFn:
 
 @local_set.on_message.edited(text_eq("/123"))
 async def print_message(bot: Bot, message: Message) -> None:
+    print(message.text)
     await bot.chat.send_message(message.chat.id, "123")
 
 

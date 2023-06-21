@@ -64,7 +64,7 @@ class Handler(Generic[D, T]):
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_result = await self.filter_(ctx)
-        if filter_result is None:
+        if not filter_result:
             return False
         await self.fn(ctx)
 
