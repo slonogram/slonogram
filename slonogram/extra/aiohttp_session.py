@@ -21,7 +21,7 @@ class Session(ApiSession):
         self, method: str, args: MethodArgs
     ) -> Dict[AnyStr, Any]:
         async with self._session.post(
-            f"{self._token}/{method}", data=args
+            f"/bot{self._token}/{method}", data=args
         ) as response:
             raw = await response.read()
             return loads(raw)

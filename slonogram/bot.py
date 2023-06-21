@@ -1,9 +1,15 @@
 import warnings
+from adaptix import Retort, name_mapping
 
 from typing import Optional, Self
 
 from .protocols.api_session import ApiSession
 from .consts import DEFAULT_API_URL
+
+from .schemas.chat import Message
+from .schemas.updates import Update
+
+from .call_groups import chat, user, updates
 
 
 class Bot:
@@ -14,6 +20,14 @@ class Bot:
         session: Optional[ApiSession] = None,
     ) -> None:
         u_session: ApiSession
+        retort = Retort(
+            debug_path=True,
+            recipe=[
+                name_mapping(Update, map={"id": "update_id"}),
+                name_mapping(Message, map={"id": "message_id"}),
+                name_mapping(trim_trailing_underscore=True),
+            ],
+        )
 
         if session is None:
             from .extra.aiohttp_session import Session
@@ -26,6 +40,10 @@ class Bot:
             )
         else:
             u_session = session
+
+        self.chat = chat.ChatCallGroup(retort, u_session)
+        self.user = user.UserCallGroup(retort, u_session)
+        self.updates = updates.UpdatesCallGroup(retort, u_session)
 
         self._session = u_session
         self._finalized = False

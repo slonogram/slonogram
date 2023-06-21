@@ -2,8 +2,8 @@ from __future__ import annotations
 from abc import ABCMeta, abstractmethod
 from typing import Dict, AnyStr, TypeAlias, Any
 
-HttpSerializable: TypeAlias = AnyStr | float | int | bool
-MethodArgs: TypeAlias = Dict[AnyStr, HttpSerializable]
+ScalarSerializable: TypeAlias = AnyStr | float | int | bool
+MethodArgs: TypeAlias = Dict[AnyStr, ScalarSerializable]
 
 
 class ApiSession(metaclass=ABCMeta):
@@ -18,4 +18,4 @@ class ApiSession(metaclass=ABCMeta):
         pass
 
 
-__all__ = ["HttpSerializable", "MethodArgs", "ApiSession"]
+__all__ = ["ScalarSerializable", "MethodArgs", "ApiSession"]

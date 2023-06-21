@@ -1,10 +1,37 @@
-from typing import Any
+import asyncio
+
+from slonogram.dp.context import Context
+from slonogram.dp import Dispatcher
 from slonogram.dp.local_set import LocalSet
+from slonogram.filters.types import FilterFn
+
+from slonogram.schemas.chat import Message
 from slonogram.bot import Bot
+from slonogram.schemas.updates import UpdateType
 
-set_ = LocalSet[Any]("test")
+local_set = LocalSet[None]("test")
 
 
-@set_.on_message.sent()
-async def only_bot(bot: Bot) -> None:
-    pass
+def text_eq(text: str) -> FilterFn:
+    async def filter_(context: Context[None, Message]) -> bool:
+        return context.model.text == text
+
+    return filter_
+
+
+@local_set.on_message.sent(text_eq("/123"))
+async def print_message(bot: Bot, message: Message) -> None:
+    await bot.chat.send_message(message.chat.id, "123")
+
+
+async def main() -> None:
+    async with Bot(open(".test_token").read()) as bot:
+        dp = Dispatcher(None, bot)
+        dp.set.include_set(local_set)
+
+        await dp.run_polling(
+            allowed_updates=[UpdateType.message, UpdateType.edited_message]
+        )
+
+
+asyncio.run(main())

@@ -7,7 +7,15 @@ class _ShowIsABug(Exception):
 
 
 class SkipLocalSet(_ShowIsABug):
-    pass
+    """
+    Skips current `LocalSet`
+    """
+
+
+class DontHandle(_ShowIsABug):
+    """
+    Skips current update
+    """
 
 
 __all__ = ["SkipLocalSet"]

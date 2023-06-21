@@ -8,14 +8,21 @@ from typing import (
     TypeAlias,
     Iterable,
     Any,
+    Awaitable,
 )
+from anyio import create_task_group
+from anyio.abc import TaskGroup
+from functools import cached_property
 
+from .context import Context
 from .handler import HandlerFn, Handler
 from .middlewares import Middlewares
 
+from ..exceptions.control_flow import SkipLocalSet, DontHandle
 from ..filters.extended import always_true
 from ..filters.types import FilterFn
 from ..schemas.chat import Message
+from ..schemas.updates import Update
 
 T = TypeVar("T")
 D = TypeVar("D")
@@ -37,9 +44,97 @@ class LocalSet(Generic[D]):
     def include_sets(self, sets: Iterable[LocalSet]) -> None:
         self._children.extend(sets)
 
+    @cached_property
+    def _task_group(self) -> TaskGroup:
+        return create_task_group()
+
     @property
     def on_message(self) -> MessageScope[D]:
         return MessageScope(self._handlers)
+
+    async def _process_message(
+        self,
+        ctx: Context[D, Message],
+        handlers: List[Handler[D, Message]],
+    ) -> bool:
+        for handler in handlers:
+            invoked = await handler.try_invoke(ctx)
+            if invoked:
+                return True
+
+        return False
+
+    async def _process_update(
+        self,
+        # if ctx.model is None this means that this set is root
+        ctx: Context[D, Any],
+        update: Update,
+    ) -> bool:
+        middlewares = self._middlewares
+
+        run_before = middlewares.run_before
+        handlers = self._handlers
+
+        call_fn: Callable[
+            [Context[D, Any], List[Handler[D, Message]]], Awaitable[bool]
+        ]
+        provided_handlers: List[Handler[D, Any]]
+
+        if update.message is not None:
+            ctx.model = update.message
+            call_fn = self._process_message
+            provided_handlers = handlers.message
+        elif update.edited_message is not None:
+            ctx.model = update.edited_message
+            call_fn = self._process_message
+            provided_handlers = handlers.edited_message
+        else:
+            raise NotImplementedError
+
+        ctx: Context[D, Any]  # type: ignore
+
+        async with self._task_group as tg:
+            for before_ooo in run_before.out_of_order:
+                tg.start_soon(before_ooo, ctx)
+
+            # IDK how to reduce code size here,
+            # Do we need it actually?
+            try:
+                for before_strict in run_before.strict:
+                    try:
+                        await before_strict(ctx)
+                    except SkipLocalSet:
+                        return False
+
+                result = await call_fn(ctx, provided_handlers)
+                if result:
+                    return True
+
+                for child in self._children:
+                    processed = await child._process_update(ctx, update)
+                    if processed:
+                        return True
+            except SkipLocalSet:
+                return False
+            except DontHandle as e:
+                if ctx.model is None:
+                    raise e
+                return False
+            finally:
+                run_after = middlewares.run_after
+                for after_ooo in run_after.out_of_order:
+                    tg.start_soon(after_ooo, ctx)
+                for after_strict in run_after.strict:
+                    try:
+                        await after_strict(ctx)
+                    except DontHandle as e:
+                        if ctx.model is None:
+                            raise e
+                        return False
+                    except SkipLocalSet:
+                        return False
+
+        return False
 
 
 class _TakesHandlers(Generic[D]):
@@ -48,6 +143,8 @@ class _TakesHandlers(Generic[D]):
 
 
 class MessageScope(_TakesHandlers[D]):
+    # Also, `prefer_bot_arg` can be retrieved from the type hints
+    # TODO: make this decorator less verbose
     def _generic_register(
         self,
         append_to: List[Handler[D, Message]],

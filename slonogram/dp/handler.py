@@ -11,10 +11,10 @@ D = TypeVar("D")
 
 HandlerFnWithCtx: TypeAlias = Callable[[Context[D, T]], Awaitable[None]]
 HandlerFnOnlyBot: TypeAlias = Callable[[Bot], Awaitable[None]]
-HandlerFnModelBot: TypeAlias = Callable[[T, Bot], Awaitable[None]]
+HandlerFnBotModel: TypeAlias = Callable[[Bot, T], Awaitable[None]]
 
 HandlerFn: TypeAlias = (
-    HandlerFnWithCtx[D, T] | HandlerFnOnlyBot | HandlerFnModelBot[T]
+    HandlerFnWithCtx[D, T] | HandlerFnOnlyBot | HandlerFnBotModel[T]
 )
 
 
@@ -30,7 +30,7 @@ def _create_fn(
         case 1:
             return partial(_call_with_ctx, fn)
         case 2:
-            return partial(_call_model_bot, fn)
+            return partial(_call_bot_model, fn)
     raise ValueError("> 2 arguments in the handler function")
 
 
@@ -46,10 +46,10 @@ def _call_only_bot(
     return fn(ctx.inter.bot)
 
 
-def _call_model_bot(
-    fn: HandlerFnModelBot[T], ctx: Context[D, T]
+def _call_bot_model(
+    fn: HandlerFnBotModel[T], ctx: Context[D, T]
 ) -> Awaitable[None]:
-    return fn(ctx.model, ctx.inter.bot)
+    return fn(ctx.inter.bot, ctx.model)
 
 
 class Handler(Generic[D, T]):
