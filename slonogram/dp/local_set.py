@@ -6,9 +6,12 @@ from typing import (
     Generic,
     Callable,
     TypeAlias,
+    Iterable,
+    Any,
 )
 
 from .handler import HandlerFn, Handler
+from .middlewares import Middlewares
 
 from ..filters.extended import always_true
 from ..filters.types import FilterFn
@@ -20,23 +23,31 @@ _OptFilterFn: TypeAlias = Optional[FilterFn[D, T]]
 _RegisterRetDeco: TypeAlias = Callable[[HandlerFn[D, T]], Handler[D, T]]
 
 
-class _Handlers(Generic[D]):
-    __slots__ = "message", "edited_message"
+class LocalSet(Generic[D]):
+    def __init__(self, name: Optional[str]) -> None:
+        self.name = name
 
-    message: List[Handler[D, Message]]
-    edited_message: List[Handler[D, Message]]
+        self._children: List[LocalSet] = []
+        self._handlers = _Handlers[D]()
+        self._middlewares = Middlewares[D, Any]()
 
-    def __init__(self) -> None:
-        self.message = []
-        self.edited_message = []
+    def include_set(self, set_: LocalSet) -> None:
+        self._children.append(set_)
+
+    def include_sets(self, sets: Iterable[LocalSet]) -> None:
+        self._children.extend(sets)
+
+    @property
+    def on_message(self) -> MessageScope[D]:
+        return MessageScope(self._handlers)
 
 
-class _TakesHandlers(Generic[D, T]):
-    def __init__(self, handlers: _Handlers) -> None:
+class _TakesHandlers(Generic[D]):
+    def __init__(self, handlers: _Handlers[D]) -> None:
         self._handlers = handlers
 
 
-class MessageScope(_TakesHandlers[D, Message]):
+class MessageScope(_TakesHandlers[D]):
     def _generic_register(
         self,
         append_to: List[Handler[D, Message]],
@@ -79,13 +90,12 @@ class MessageScope(_TakesHandlers[D, Message]):
         )
 
 
-class LocalSet(Generic[D]):
-    def __init__(self, name: Optional[str]) -> None:
-        self.name = name
+class _Handlers(Generic[D]):
+    __slots__ = "message", "edited_message"
 
-        self._children: List[LocalSet] = []
-        self._handlers = _Handlers[D]()
+    message: List[Handler[D, Message]]
+    edited_message: List[Handler[D, Message]]
 
-    @property
-    def on_message(self) -> MessageScope[D]:
-        return MessageScope(self._handlers)
+    def __init__(self) -> None:
+        self.message = []
+        self.edited_message = []
