@@ -19,7 +19,7 @@ def text_eq(text: str) -> FilterFn:
     return filter_
 
 
-@local_set.on_message.sent(text_eq("/123"))
+@local_set.on_message.edited(text_eq("/123"))
 async def print_message(bot: Bot, message: Message) -> None:
     await bot.chat.send_message(message.chat.id, "123")
 
@@ -27,7 +27,7 @@ async def print_message(bot: Bot, message: Message) -> None:
 async def main() -> None:
     async with Bot(open(".test_token").read()) as bot:
         dp = Dispatcher(None, bot)
-        dp.set.include_set(local_set)
+        dp.set.include(local_set)
 
         await dp.run_polling(
             allowed_updates=[UpdateType.message, UpdateType.edited_message]

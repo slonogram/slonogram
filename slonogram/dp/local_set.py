@@ -6,7 +6,6 @@ from typing import (
     Generic,
     Callable,
     TypeAlias,
-    Iterable,
     Any,
     Awaitable,
 )
@@ -38,10 +37,7 @@ class LocalSet(Generic[D]):
         self._handlers = _Handlers[D]()
         self._middlewares = Middlewares[D, Any]()
 
-    def include_set(self, set_: LocalSet) -> None:
-        self._children.append(set_)
-
-    def include_sets(self, sets: Iterable[LocalSet]) -> None:
+    def include(self, *sets: LocalSet) -> None:
         self._children.extend(sets)
 
     @cached_property
