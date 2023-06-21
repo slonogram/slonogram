@@ -1,5 +1,12 @@
-from dataclasses import dataclass
-from typing import Optional, List, TypeVar, Generic, Callable
+from __future__ import annotations
+from typing import (
+    Optional,
+    List,
+    TypeVar,
+    Generic,
+    Callable,
+    TypeAlias,
+)
 
 from .handler import HandlerFn, Handler
 
@@ -9,50 +16,76 @@ from ..schemas.chat import Message
 
 T = TypeVar("T")
 D = TypeVar("D")
+_OptFilterFn: TypeAlias = Optional[FilterFn[D, T]]
+_RegisterRetDeco: TypeAlias = Callable[[HandlerFn[D, T]], Handler[D, T]]
 
 
-@dataclass(slots=True)
 class _Handlers(Generic[D]):
+    __slots__ = "message", "edited_message"
+
     message: List[Handler[D, Message]]
     edited_message: List[Handler[D, Message]]
 
-
-class _TakesRegisterFn(Generic[D, T]):
-    def __init__(
-        self, register_fn: Callable[[Handler[D, T]], None]
-    ) -> None:
-        self._register_fn = register_fn
+    def __init__(self) -> None:
+        self.message = []
+        self.edited_message = []
 
 
-class MessageScope(Generic[D], _TakesRegisterFn[D, Message]):
+class _TakesHandlers(Generic[D, T]):
+    def __init__(self, handlers: _Handlers) -> None:
+        self._handlers = handlers
+
+
+class MessageScope(_TakesHandlers[D, Message]):
+    def _generic_register(
+        self,
+        append_to: List[Handler[D, Message]],
+        filter_fn: _OptFilterFn[D, Message],
+        prefer_bot_arg: bool,
+    ) -> _RegisterRetDeco[D, Message]:
+        u_filter_fn = filter_fn or always_true
+
+        def _ret_deco(h_fn: HandlerFn[D, Message]) -> Handler[D, Message]:
+            handler = Handler(prefer_bot_arg, h_fn, u_filter_fn)
+            append_to.append(handler)
+            return handler
+
+        return _ret_deco
+
+    # Can we somehow reduce this to smth like:
+    # ```
+    # sent = _register_fn('sent', 'message')
+    # edited = _register_fn('edited', 'edited_message')
+    # ```
+    #
+    # and satisfy `mypy`? I spent some time writing function `_register_fn`,
+    # but looks like `mypy` isn't satisfied with that approach.
     def sent(
         self,
-        filter_fn: Optional[FilterFn[D, Message]] = None,
+        filter_fn: _OptFilterFn[D, Message] = None,
         prefer_bot_arg: bool = True,
-    ) -> Callable[[HandlerFn[D, Message]], None]:
-        u_filter_fn: FilterFn[D, Message]
-        if filter_fn is None:
-            u_filter_fn = always_true
-        else:
-            u_filter_fn = filter_fn
+    ) -> _RegisterRetDeco[D, Message]:
+        return self._generic_register(
+            self._handlers.message, filter_fn, prefer_bot_arg
+        )
 
-        def sent_inner(fn: HandlerFn[D, Message]) -> None:
-            self._register_fn(
-                Handler(
-                    prefer_bot_arg,
-                    fn,
-                    u_filter_fn,
-                )
-            )
-
-        return sent_inner
+    def edited(
+        self,
+        filter_fn: _OptFilterFn[D, Message] = None,
+        prefer_bot_arg: bool = True,
+    ) -> _RegisterRetDeco[D, Message]:
+        return self._generic_register(
+            self._handlers.edited_message, filter_fn, prefer_bot_arg
+        )
 
 
 class LocalSet(Generic[D]):
     def __init__(self, name: Optional[str]) -> None:
         self.name = name
-        self._handlers = _Handlers[D]([], [])
+
+        self._children: List[LocalSet] = []
+        self._handlers = _Handlers[D]()
 
     @property
     def on_message(self) -> MessageScope[D]:
-        return MessageScope(self._handlers.message.append)
+        return MessageScope(self._handlers)

@@ -1,5 +1,6 @@
+import warnings
+
 from typing import Optional, Self
-from .schemas.user import User
 
 from .protocols.api_session import ApiSession
 from .consts import DEFAULT_API_URL
@@ -26,32 +27,35 @@ class Bot:
         else:
             u_session = session
 
-        self._me: Optional[User] = None
         self._session = u_session
-
-    @property
-    def initialized(self) -> bool:
-        return self._me is not None
-
-    @property
-    def me(self) -> User:
-        me = self._me
-        if me is None:
-            raise TypeError(
-                "`me` is None, to access `me` through the `Bot` type "
-                "it is necessary to use instance "
-                "inside the `async with` context"
-            )
-        return me
+        self._finalized = False
 
     async def __aenter__(self) -> Self:
-        # TODO: add initialization
         return self
 
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
         _ = exc_value
         _ = traceback
 
-        await self._session.finalize()
+        await self.finalize()
         if exc_type is not None:
             raise exc_type
+
+    async def finalize(self) -> None:
+        if self._finalized:
+            warnings.warn(
+                "tried to call `finalize` when `Bot`"
+                " instance is already finalized."
+            )
+            return
+
+        await self._session.finalize()
+        self._finalized = True
+
+    def __del__(self) -> None:
+        if not self._finalized:
+            warnings.warn(
+                "`Bot` is not finalized properly, you can do"
+                " this either by calling `await bot.finalize()` or wrapping "
+                "`Bot` creation in the `async with` context"
+            )
