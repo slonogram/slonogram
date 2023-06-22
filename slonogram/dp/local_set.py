@@ -11,11 +11,11 @@ from typing import (
 )
 
 from .context import Context
-from .handler import HandlerFn, Handler
-from .middlewares import Middlewares
+from ..handling.handler import HandlerFn, Handler
+from ..handling.middlewares import Middlewares
 
 from ..exceptions.control_flow import SkipLocalSet, DontHandle
-from ..filters.extended import always_true
+from ..filters import always_true
 from ..filters.types import FilterFn
 from ..schemas.chat import Message
 from ..schemas.updates import Update
@@ -55,12 +55,13 @@ class LocalSet(Generic[D]):
 
     async def _process_update(
         self,
-        # if ctx.model is None this means that this set is root
         ctx: Context[D, Any],
         update: Update,
     ) -> bool:
         tg = ctx.inter.task_group
         middlewares = self._middlewares
+        # if ctx.model is None this means that this set is root
+        is_root = ctx.model is None
 
         run_before = middlewares.run_before
         handlers = self._handlers
@@ -88,6 +89,7 @@ class LocalSet(Generic[D]):
 
         # IDK how to reduce code size here,
         # Do we need it actually?
+        cur_pad = ctx.pad
         try:
             for before_strict in run_before.strict:
                 try:
@@ -96,21 +98,23 @@ class LocalSet(Generic[D]):
                     return False
 
             result = await call_fn(ctx, provided_handlers)
-            ctx._patches.clear()
             if result:
                 return True
 
             for child in self._children:
+                ctx.pad = cur_pad.create_child()
                 processed = await child._process_update(ctx, update)
                 if processed:
                     return True
+
         except SkipLocalSet:
             return False
         except DontHandle as e:
-            if ctx.model is None:
+            if is_root:
                 raise e
             return False
         finally:
+            ctx.pad = cur_pad
             run_after = middlewares.run_after
             for after_ooo in run_after.out_of_order:
                 tg.start_soon(after_ooo, ctx)
@@ -118,13 +122,11 @@ class LocalSet(Generic[D]):
                 try:
                     await after_strict(ctx)
                 except DontHandle as e:
-                    if ctx.model is None:
+                    if is_root:
                         raise e
                     return False
                 except SkipLocalSet:
                     return False
-
-            ctx._patches.clear()
 
         return False
 
