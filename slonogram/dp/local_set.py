@@ -15,7 +15,7 @@ from ..handling.handler import HandlerFn, Handler
 from ..handling.middlewares import Middlewares
 
 from ..exceptions.control_flow import SkipLocalSet, DontHandle
-from ..filters import always_true
+from ..filters.extended import always_true
 from ..filters.types import FilterFn
 from ..schemas.chat import Message
 from ..schemas.updates import Update
@@ -46,8 +46,12 @@ class LocalSet(Generic[D]):
         ctx: Context[D, Message],
         handlers: List[Handler[D, Message]],
     ) -> bool:
+        check_pad = ctx.pad.create_child()
+        ctx.pad = check_pad
+
         for handler in handlers:
             invoked = await handler.try_invoke(ctx)
+            check_pad.clear()
             if invoked:
                 return True
 

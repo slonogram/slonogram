@@ -60,7 +60,11 @@ class Handler(Generic[D, T]):
         filter_: FilterFn[D, T],
     ) -> None:
         self.filter_ = filter_
+        self._fn_name = fn.__name__
         self.fn = _create_fn(fn, prefer_bot)
+
+    def __repr__(self) -> str:
+        return f"<Handler name={self._fn_name!r}>"
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_result = await self.filter_(ctx)

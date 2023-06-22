@@ -19,6 +19,12 @@ class ScratchPad(Generic[T]):
     def scratch(self, scratch: Scratch[T, R], value: R) -> None:
         self._scratches[scratch] = value
 
+    def __repr__(self) -> str:
+        return (
+            f"<ScratchPad scratches={self._scratches!r} "
+            f"parent={self._parent!r}>"
+        )
+
     def get(self, scratch: Scratch[T, R]) -> R:
         try:
             return self._scratches[scratch]
