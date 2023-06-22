@@ -96,6 +96,7 @@ class LocalSet(Generic[D]):
                     return False
 
             result = await call_fn(ctx, provided_handlers)
+            ctx._patches.clear()
             if result:
                 return True
 
@@ -122,6 +123,8 @@ class LocalSet(Generic[D]):
                     return False
                 except SkipLocalSet:
                     return False
+
+            ctx._patches.clear()
 
         return False
 

@@ -1,11 +1,4 @@
-from typing import (
-    NoReturn,
-    List,
-    Optional,
-    Generic,
-    TypeVar,
-    Any,
-)
+from typing import NoReturn, List, Optional, Generic, TypeVar
 
 from anyio import create_task_group
 
@@ -48,10 +41,7 @@ class Dispatcher(Generic[D]):
         processor = self.set._process_update
 
         async with create_task_group() as tg:
-            ctx: Context[D, Any] = Context(
-                inter=InterContextData(self._data, bot, tg),
-                model=None,
-            )
+            inter = InterContextData(self._data, bot, tg)
             while True:
                 updates: List[Update] = await updates_call_group.get(
                     offset, limit, timeout, allowed_updates
@@ -60,4 +50,11 @@ class Dispatcher(Generic[D]):
                     offset = updates[-1].id + 1
 
                 for update in updates:
-                    tg.start_soon(processor, ctx, update)
+                    tg.start_soon(
+                        processor,
+                        Context(
+                            inter,
+                            None,
+                        ),
+                        update,
+                    )

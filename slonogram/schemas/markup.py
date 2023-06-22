@@ -22,7 +22,7 @@ class CallbackGame:
 @dataclass(slots=True)
 class InlineKeyboardButton:
     text: str
-    url: str
+    url: Optional[str] = None
 
     web_app: Optional[WebAppInfo] = None
     login_url: Optional[LoginUrl] = None

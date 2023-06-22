@@ -29,6 +29,14 @@ class ExtendedFilter(Generic[D, T], metaclass=ABCMeta):
         raise NotImplementedError
 
 
+class Just(ExtendedFilter[D, T]):
+    def __init__(self, fn: FilterFn[D, T]) -> None:
+        self.fn = fn
+
+    def __call__(self, ctx: Context[D, T]) -> Awaitable[bool]:
+        return self.fn(ctx)
+
+
 class Or(ExtendedFilter[D, T]):
     def __init__(
         self, lhs: FilterFn[D, T], rhs: FilterFn[D, T], exclusive: bool
@@ -51,7 +59,7 @@ class Or(ExtendedFilter[D, T]):
             return bool(lhs ^ rhs)
         else:
             lhs = await self.lhs_fn(ctx)
-            if lhs is None:
+            if not lhs:
                 return await self.rhs_fn(ctx)
             return lhs
 
@@ -66,8 +74,8 @@ class And(ExtendedFilter[D, T]):
 
     async def __call__(self, ctx: Context[D, T]) -> bool:
         lhs = await self.lhs_fn(ctx)
-        if lhs is None:
-            return None
+        if not lhs:
+            return False
         return await self.rhs_fn(ctx)
 
 
@@ -80,7 +88,7 @@ class Inverted(ExtendedFilter[D, T]):
 
     async def __call__(self, ctx: Context[D, T]) -> bool:
         result = await self.fn(ctx)
-        return result is not None
+        return not result
 
 
 async def always_true(_: Context[D, T]) -> bool:
