@@ -4,6 +4,7 @@ from anyio.abc import TaskGroup
 from typing import TypeVar, Generic
 
 from ..handling.scratches.pad import ScratchPad
+from ..schemas.user import User
 from ..bot import Bot
 
 
@@ -13,11 +14,14 @@ R = TypeVar("R")
 
 
 class InterContextData(Generic[D]):
-    __slots__ = "data", "bot", "task_group"
+    __slots__ = "data", "bot", "me", "task_group"
 
-    def __init__(self, data: D, bot: Bot, task_group: TaskGroup) -> None:
+    def __init__(
+        self, me: User, data: D, bot: Bot, task_group: TaskGroup
+    ) -> None:
         self.data = data
         self.bot = bot
+        self.me = me
         self.task_group = task_group
 
 

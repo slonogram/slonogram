@@ -39,9 +39,10 @@ class Dispatcher(Generic[D]):
         bot = self._bot
         updates_call_group = bot.updates
         processor = self.set._process_update
+        me = await bot.user.get_me()
 
         async with create_task_group() as tg:
-            inter = InterContextData(self._data, bot, tg)
+            inter = InterContextData(me, self._data, bot, tg)
             while True:
                 updates: List[Update] = await updates_call_group.get(
                     offset, limit, timeout, allowed_updates
