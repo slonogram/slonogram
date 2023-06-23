@@ -53,6 +53,8 @@ class Word(_TextFilter, Generic[V]):
 
         if word_end != -1:
             pad.scratch(Text, text[word_end + 1 :])  # type: ignore
+        else:
+            pad.scratch(Text, "")  # type: ignore
         return True
 
     def __repr__(self) -> str:
