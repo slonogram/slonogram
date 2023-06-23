@@ -15,7 +15,6 @@ from ..handling.handler import HandlerFn, Handler
 from ..handling.middlewares import Middlewares
 
 from ..exceptions.control_flow import SkipLocalSet, DontHandle
-from ..filters.extended import always_true
 from ..filters.types import FilterFn
 from ..schemas.chat import Message
 from ..schemas.updates import Update
@@ -27,12 +26,17 @@ _RegisterRetDeco: TypeAlias = Callable[[HandlerFn[D, T]], Handler[D, T]]
 
 
 class LocalSet(Generic[D]):
-    def __init__(self, name: Optional[str]) -> None:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        filter_: Optional[FilterFn[D, Any]] = None,
+    ) -> None:
         self.name = name
 
         self._children: List[LocalSet] = []
         self._handlers = _Handlers[D]()
         self._middlewares = Middlewares[D, Any]()
+        self.filter_ = filter_
 
     def include(self, *sets: LocalSet) -> None:
         self._children.extend(sets)
@@ -41,11 +45,15 @@ class LocalSet(Generic[D]):
     def on_message(self) -> MessageScope[D]:
         return MessageScope(self._handlers)
 
-    async def _process_message(
+    async def _process_ctx(
         self,
-        ctx: Context[D, Message],
-        handlers: List[Handler[D, Message]],
+        ctx: Context[D, T],
+        handlers: List[Handler[D, T]],
     ) -> bool:
+        filter_ = self.filter_
+        if filter_ is not None and not await filter_(ctx):
+            return False
+
         check_pad = ctx.pad.create_child()
         ctx.pad = check_pad
 
@@ -71,17 +79,15 @@ class LocalSet(Generic[D]):
         handlers = self._handlers
 
         call_fn: Callable[
-            [Context[D, Any], List[Handler[D, Message]]], Awaitable[bool]
-        ]
+            [Context[D, Any], List[Handler[D, Any]]], Awaitable[bool]
+        ] = self._process_ctx
         provided_handlers: List[Handler[D, Any]]
 
         if update.message is not None:
             ctx.model = update.message
-            call_fn = self._process_message
             provided_handlers = handlers.message
         elif update.edited_message is not None:
             ctx.model = update.edited_message
-            call_fn = self._process_message
             provided_handlers = handlers.edited_message
         else:
             raise NotImplementedError
@@ -149,10 +155,8 @@ class MessageScope(_TakesHandlers[D]):
         filter_fn: _OptFilterFn[D, Message],
         prefer_bot_arg: bool,
     ) -> _RegisterRetDeco[D, Message]:
-        u_filter_fn = filter_fn or always_true
-
         def _ret_deco(h_fn: HandlerFn[D, Message]) -> Handler[D, Message]:
-            handler = Handler(prefer_bot_arg, h_fn, u_filter_fn)
+            handler = Handler(prefer_bot_arg, h_fn, filter_fn)
             append_to.append(handler)
             return handler
 

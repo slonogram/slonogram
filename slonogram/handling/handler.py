@@ -4,7 +4,14 @@ from ..filters.types import FilterFn
 
 from functools import partial
 from inspect import signature
-from typing import Generic, TypeVar, TypeAlias, Callable, Awaitable
+from typing import (
+    Generic,
+    TypeVar,
+    TypeAlias,
+    Callable,
+    Awaitable,
+    Optional,
+)
 
 T = TypeVar("T")
 D = TypeVar("D")
@@ -57,7 +64,7 @@ class Handler(Generic[D, T]):
         self,
         prefer_bot: bool,
         fn: HandlerFn[D, T],
-        filter_: FilterFn[D, T],
+        filter_: Optional[FilterFn[D, T]] = None,
     ) -> None:
         self.filter_ = filter_
         self._fn_name = fn.__name__
@@ -67,9 +74,10 @@ class Handler(Generic[D, T]):
         return f"<Handler name={self._fn_name!r}>"
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
-        filter_result = await self.filter_(ctx)
-        if not filter_result:
-            return False
+        filter_ = self.filter_
+        if filter_ is not None:
+            if not await filter_(ctx):
+                return False
         await self.fn(ctx)
 
         return True

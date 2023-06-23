@@ -9,7 +9,7 @@ Scratch: TypeAlias = Callable[[T], R]
 def attr_scratch(attr: str) -> Scratch[T, R]:
     class Impl:
         def __repr__(self) -> str:
-            return f"<Scratch attr={attr!r}>"
+            return f"<Scratch:attr attr={attr!r}>"
 
         def __call__(self, model: T) -> R:
             return getattr(model, attr)
