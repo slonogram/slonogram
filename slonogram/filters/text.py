@@ -106,12 +106,6 @@ def _maybe_casefold(
     return _casefold_collection(c)
 
 
-def _infix(t: V) -> str:
-    if isinstance(t, str):
-        return "=="
-    return "in"
-
-
 def _casefold_collection(c: V) -> Tuple[str] | Set[str] | List[str]:
     if isinstance(c, str):
         return (c.casefold(),)
