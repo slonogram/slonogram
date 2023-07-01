@@ -44,6 +44,9 @@ class LocalSet(Generic[D]):
     @property
     def on_message(self) -> MessageScope[D]:
         return MessageScope(self._handlers)
+    
+    async def feed_update(self, ctx: Context[D, T], update: Update) -> bool:
+        raise NotImplementedError
 
     async def _process_ctx(
         self,
