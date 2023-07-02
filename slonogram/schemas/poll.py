@@ -7,8 +7,8 @@ from .user import User
 
 
 class PollType(str, Enum):
-    regular = "regular"
-    quiz = "quiz"
+    REGULAR = "regular"
+    QUIZ = "quiz"
 
 
 @dataclass(slots=True)

@@ -5,19 +5,19 @@ from enum import Enum
 
 
 class PassportElementType(str, Enum):
-    personal_details = "personal_details"
-    passport = "passport"
-    driver_license = "driver_license"
-    identity_card = "identity_card"
-    internal_passport = "internal_passport"
-    address = "address"
-    utility_bill = "utility_bill"
-    bank_statement = "bank_statement"
-    rental_agreement = "rental_agreement"
-    passport_registration = "passport_registration"
-    temporary_registration = "temporary_registration"
-    phone_number = "phone_number"
-    email = "email"
+    PERSONAL_DETAILS = "personal_details"
+    PASSPORT = "passport"
+    DRIVER_LICENSE = "driver_license"
+    IDENTITY_CARD = "identity_card"
+    INTERNAL_PASSPORT = "internal_passport"
+    ADDRESS = "address"
+    UTILITY_BILL = "utility_bill"
+    BANK_STATEMENT = "bank_statement"
+    RENTAL_AGREEMENT = "rental_agreement"
+    PASSPORT_REGISTRATION = "passport_registration"
+    TEMPORARY_REGISTRATION = "temporary_registration"
+    PHONE_NUMBER = "phone_number"
+    EMAIL = "email"
 
 
 @dataclass(slots=True)

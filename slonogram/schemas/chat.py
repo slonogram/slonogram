@@ -33,9 +33,9 @@ MessageId = NewType("MessageId", int)
 
 
 class ParseMode(str, Enum):
-    html = "HTML"
-    markdown_v2 = "MarkdownV2"
-    markdown = "Markdown"
+    HTML = "HTML"
+    MARKDOWN_V2 = "MarkdownV2"
+    MARKDOWN = "Markdown"
 
 
 @dataclass(slots=True)
@@ -153,10 +153,10 @@ class ChatPermissions:
 
 
 class ChatType(str, Enum):
-    private = "private"
-    group = "group"
-    supergroup = "supergroup"
-    channel = "channel"
+    PRIVATE = "private"
+    GROUP = "group"
+    SUPERGROUP = "supergroup"
+    CHANNEL = "channel"
 
 
 @dataclass(slots=True)

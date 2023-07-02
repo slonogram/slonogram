@@ -6,20 +6,20 @@ from .chat import Message
 
 
 class UpdateType(str, Enum):
-    message = "message"
-    edited_message = "edited_message"
-    channel_post = "channel_post"
-    edited_channel_post = "edited_channel_post"
-    inline_query = "inline_query"
-    chosen_inline_result = "chosen_inline_result"
-    callback_query = "callback_query"
-    shipping_query = "shipping_query"
-    pre_checkout_query = "pre_checkout_query"
-    poll = "poll"
-    poll_answer = "poll_answer"
+    MESSAGE = "message"
+    EDITED_MESSAGE = "edited_message"
+    CHANNEL_POST = "channel_post"
+    EDITED_CHANNEL_POST = "edited_channel_post"
+    INLINE_QUERY = "inline_query"
+    CHOSEN_INLINE_RESULT = "chosen_inline_result"
+    CALLBACK_QUERY = "callback_query"
+    SHIPPING_QUERY = "shipping_query"
+    PRE_CHECKOUT_QUERY = "pre_checkout_query"
+    POLL = "poll"
+    POLL_ANSWER = "poll_answer"
 
-    chat_member = "chat_member"
-    chat_join_request = "chat_join_request"
+    CHAT_MEMBER = "chat_member"
+    CHAT_JOIN_REQUEST = "chat_join_request"
 
 
 @dataclass(slots=True)
