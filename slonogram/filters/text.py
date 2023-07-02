@@ -3,7 +3,7 @@ import re
 from abc import ABCMeta, abstractmethod
 from typing import Any, Tuple, Set, List, TypeVar, Generic
 
-from slonogram.dp.context import Context
+from slonogram.dispatching.context import Context
 from slonogram.handling.scratches.pad import ScratchPad
 
 from ..schemas.chat import Message

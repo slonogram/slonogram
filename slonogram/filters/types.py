@@ -1,5 +1,5 @@
 from typing import Callable, TypeAlias, TypeVar, Awaitable
-from ..dp.context import Context
+from ..dispatching.context import Context
 
 T = TypeVar("T")
 D = TypeVar("D")

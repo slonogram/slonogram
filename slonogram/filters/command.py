@@ -3,7 +3,7 @@ from typing import Any, Set, List, Tuple
 
 from .extended import ExtendedFilter
 
-from ..dp.context import Context
+from ..dispatching.context import Context
 from ..handling.scratches import Text
 from ..schemas.chat import Message
 from ..consts import COMMAND_REGEX
