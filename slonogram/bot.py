@@ -6,8 +6,8 @@ from typing import Optional, Self
 from .protocols.api_session import ApiSession
 from .consts import DEFAULT_API_URL
 
-from .schemas.chat import Message
-from .schemas.updates import Update
+from .schemas import Message
+from .schemas import Update
 
 from .call_groups import chat, user, updates
 

@@ -4,7 +4,7 @@ from anyio.abc import TaskGroup
 from typing import TypeVar, Generic
 
 from ..handling.scratches.pad import ScratchPad
-from ..schemas.user import User
+from ..schemas import User
 from ..bot import Bot
 
 

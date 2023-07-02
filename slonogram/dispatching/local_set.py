@@ -16,8 +16,7 @@ from ..handling.middlewares import Middlewares
 
 from ..exceptions.control_flow import SkipLocalSet, DontHandle
 from ..filters.types import FilterFn
-from ..schemas.chat import Message
-from ..schemas.updates import Update
+from ..schemas import Message, Update
 
 T = TypeVar("T")
 D = TypeVar("D")
@@ -44,8 +43,10 @@ class LocalSet(Generic[D]):
     @property
     def on_message(self) -> MessageScope[D]:
         return MessageScope(self._handlers)
-    
-    async def feed_update(self, ctx: Context[D, T], update: Update) -> bool:
+
+    async def feed_update(
+        self, ctx: Context[D, T], update: Update
+    ) -> bool:
         raise NotImplementedError
 
     async def _process_ctx(

@@ -1,6 +1,6 @@
 from typing import Optional, Awaitable, List
 
-from ..schemas.chat import (
+from ..schemas import (
     ParseMode,
     Message,
     MessageEntity,
@@ -66,7 +66,8 @@ class ChatCallGroup(CallsGroup):
         reply_markup: Optional[InlineKeyboardMarkup] = None,
     ) -> Awaitable[Message]:
         """
-        Edits message's text, pass `chat_id` with `message_id` or `inline_message_id`
+        Edits message's text, pass `chat_id` with `message_id`
+        or `inline_message_id`
         :param text: New text for the message
         :param chat_id: Chat's ID
         :param parse_mode: Parse-mode, can be `html` or `markdown`

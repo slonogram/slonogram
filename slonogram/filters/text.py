@@ -6,7 +6,7 @@ from typing import Any, Tuple, Set, List, TypeVar, Generic
 from slonogram.dispatching.context import Context
 from slonogram.handling.scratches.pad import ScratchPad
 
-from ..schemas.chat import Message
+from ..schemas import Message
 from ..handling.scratches import Text
 
 from .extended import ExtendedFilter

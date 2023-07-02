@@ -2,7 +2,7 @@ from typing import NoReturn, List, Optional, Generic, TypeVar
 
 from anyio import create_task_group
 
-from ..schemas.updates import UpdateType, Update
+from ..schemas import UpdateType, Update
 from ..bot import Bot
 from .context import InterContextData, Context
 from .local_set import LocalSet

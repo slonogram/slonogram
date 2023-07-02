@@ -8,7 +8,7 @@ from slonogram.filters.command import Command
 from slonogram.dispatching import Dispatcher
 from slonogram.dispatching import LocalSet
 
-from slonogram.schemas.chat import Message
+from slonogram.schemas import Message
 
 bare = LocalSet[None]()
 prefixed_set = LocalSet[None](

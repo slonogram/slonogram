@@ -5,7 +5,7 @@ from .extended import ExtendedFilter
 
 from ..dispatching.context import Context
 from ..handling.scratches import Text
-from ..schemas.chat import Message
+from ..schemas import Message
 from ..consts import COMMAND_REGEX
 
 

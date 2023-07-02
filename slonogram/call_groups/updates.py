@@ -1,6 +1,6 @@
 from typing import Optional, List, Awaitable
 
-from ..schemas.updates import UpdateType, Update
+from ..schemas import UpdateType, Update
 from .group import CallsGroup, UseRetort
 
 
