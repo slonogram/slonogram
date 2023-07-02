@@ -1,7 +1,7 @@
 from typing import Awaitable
 
 from .group import CallsGroup
-from ..schemas.user import User
+from ..schemas import User
 
 
 class UserCallGroup(CallsGroup):
