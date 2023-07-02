@@ -75,12 +75,6 @@ class ChatCallGroup(CallsGroup):
         :param reply_markup: New reply-markup
         :return: Edited message on success
         """
-
-        if not chat_id and not message_id and not inline_message_id:
-            raise ValueError(
-                "Please, pass `chat_id` with `message_id` or `inline_message_id`"
-            )
-
         return self._call(
             Message,
             "editMessageText",
