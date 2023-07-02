@@ -1,5 +1,5 @@
 from __future__ import annotations
-from ..dp.context import Context
+from ..dispatching.context import Context
 from typing import Protocol, Generic, TypeVar
 
 T = TypeVar("T")

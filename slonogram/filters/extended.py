@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 from typing import TypeVar, Generic, Awaitable
 from .types import FilterFn
 
-from ..dp.context import Context
+from ..dispatching.context import Context
 
 T = TypeVar("T")
 D = TypeVar("D")

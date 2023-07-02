@@ -1,4 +1,4 @@
-from ..dp.context import Context
+from ..dispatching.context import Context
 from ..bot import Bot
 from ..filters.types import FilterFn
 

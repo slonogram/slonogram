@@ -5,8 +5,8 @@ from slonogram.bot import Bot
 from slonogram.filters.text import Prefix, Eq, Word
 from slonogram.filters.command import Command
 
-from slonogram.dp import Dispatcher
-from slonogram.dp.local_set import LocalSet
+from slonogram.dispatching import Dispatcher
+from slonogram.dispatching import LocalSet
 
 from slonogram.schemas.chat import Message
 
