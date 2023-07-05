@@ -1,51 +1,21 @@
 import asyncio
 
-from slonogram.bot import Bot
+from slonogram import Bot, Dispatcher, LocalSet
 
-from slonogram.filters.text import Prefix, Eq, Word
-from slonogram.filters.command import Command
-
-from slonogram.dispatching import Dispatcher
-from slonogram.dispatching import LocalSet
-
-from slonogram.schemas import Message
-
-bare = LocalSet[None]()
-prefixed_set = LocalSet[None](
-    "prefixed", filter_=Prefix(r"(м[еэ]йда?|maid)\s*")
-)
+TOKEN = open("./test_token").read()
 set_ = LocalSet[None]()
 
 
-@bare.on_message.sent(Command("start"))
-async def on_start(bot: Bot, message: Message) -> None:
-    await bot.chat.send_message(message.chat.id, "start")
-
-
-@set_.on_message.sent(Word("скажи") & Word({"сыр", "рыр"}))
-async def on_prefix(bot: Bot, message: Message) -> None:
-    await bot.chat.send_message(message.chat.id, "кхе")
-
-
-@set_.on_message.edited(Eq("сыр"))
-async def on_edited(bot: Bot, message: Message) -> None:
-    await bot.chat.send_message(message.chat.id, "Сыр")
-
-
-@set_.on_message.sent(Eq("ладность"))
-async def on_ladno(bot: Bot, message: Message) -> None:
-    await bot.chat.send_message(message.chat.id, "Прохладность")
+@set_.on_message.sent()
+async def test(bot: Bot) -> None:
+    print("Hello")
 
 
 async def main() -> None:
-    async with Bot(open(".test_token").read()) as bot:
-        dp = Dispatcher(None, bot)
-        prefixed_set.include(set_)
+    bot = Bot(TOKEN)
+    dp = Dispatcher(None, bot)
 
-        dp.set.include(bare)
-        dp.set.include(prefixed_set)
-
-        await dp.run_polling()
+    dp.set.include(set_)
 
 
 asyncio.run(main())

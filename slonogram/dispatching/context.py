@@ -26,6 +26,8 @@ class InterContextData(Generic[D]):
 
 
 class Context(Generic[D, T]):
+    __slots__ = "pad", "inter"
+
     def __init__(self, inter: InterContextData[D], model: T) -> None:
         self.inter = inter
         self.pad = ScratchPad[T](model)

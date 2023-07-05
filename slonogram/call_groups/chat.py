@@ -35,6 +35,7 @@ class ChatCallGroup(CallsGroup):
         :param allow_sending_without_reply: Allow sending without reply?
         :return: Sent message on success
         """
+
         return self._call(
             Message,
             "sendMessage",
@@ -65,14 +66,19 @@ class ChatCallGroup(CallsGroup):
     ) -> Awaitable[Message]:
         """
         Use this method to forward messages of any kind
-        Service messages can't be forwarded. On success, the sent `Message` is returned.
+        Service messages can't be forwarded.
+        On success, the sent `Message` is returned.
 
         :param chat_id: Chat's ID
-        :param from_chat_id: Identifier for the chat where the original message was sent
-        :param message_id: Message identifier in the chat specified in `from_chat_id`
-        :param message_thread_id: Identifier for the target message thread (topic) of the forum
+        :param from_chat_id: Identifier for the chat where the original
+                             message was sent
+        :param message_id: Message identifier in the chat specified in
+                           `from_chat_id`
+        :param message_thread_id: Identifier for the target message thread
+                                  (topic) of the forum
         :param disable_notification: Send the message silently?
-        :param protect_content: Protects the contents of the forwarded message from forwarding and saving
+        :param protect_content: Protects the contents of the forwarded message
+                                from forwarding and saving
         """
 
         return self._call(

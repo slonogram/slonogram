@@ -1,77 +1,29 @@
 from ..dispatching.context import Context
-from ..bot import Bot
-from ..filters.types import FilterFn
+from ..filtering.types import FilterFn
 
-from functools import partial
-from inspect import signature
+from ._inspect import HandlerFn, AnyHandlerFn, into_handler_fn
+
 from typing import (
     Generic,
     TypeVar,
-    TypeAlias,
-    Callable,
-    Awaitable,
     Optional,
 )
 
 T = TypeVar("T")
 D = TypeVar("D")
 
-HandlerFnWithCtx: TypeAlias = Callable[[Context[D, T]], Awaitable[None]]
-HandlerFnOnlyBot: TypeAlias = Callable[[Bot], Awaitable[None]]
-HandlerFnBotModel: TypeAlias = Callable[[Bot, T], Awaitable[None]]
-
-HandlerFn: TypeAlias = (
-    HandlerFnWithCtx[D, T] | HandlerFnOnlyBot | HandlerFnBotModel[T]
-)
-
-
-def _create_fn(
-    fn: HandlerFn[D, T], prefer_bot: bool
-) -> Callable[[Context[D, T]], Awaitable[None]]:
-    sig = signature(fn)
-    params_no = len(sig.parameters)
-
-    match params_no:
-        case 1 if prefer_bot:
-            return partial(_call_only_bot, fn)
-        case 1:
-            return partial(_call_with_ctx, fn)
-        case 2:
-            return partial(_call_bot_model, fn)
-    raise ValueError("> 2 arguments in the handler function")
-
-
-def _call_with_ctx(
-    fn: HandlerFnWithCtx[D, T], ctx: Context[D, T]
-) -> Awaitable[None]:
-    return fn(ctx)
-
-
-def _call_only_bot(
-    fn: HandlerFnOnlyBot, ctx: Context[D, T]
-) -> Awaitable[None]:
-    return fn(ctx.inter.bot)
-
-
-def _call_bot_model(
-    fn: HandlerFnBotModel[T], ctx: Context[D, T]
-) -> Awaitable[None]:
-    return fn(ctx.inter.bot, ctx.model)
-
 
 class Handler(Generic[D, T]):
     def __init__(
         self,
-        prefer_bot: bool,
-        fn: HandlerFn[D, T],
+        fn: AnyHandlerFn[D, T],
         filter_: Optional[FilterFn[D, T]] = None,
     ) -> None:
         self.filter_ = filter_
-        self._fn_name = fn.__name__
-        self.fn = _create_fn(fn, prefer_bot)
+        self.fn: HandlerFn[D, T] = into_handler_fn(fn)
 
     def __repr__(self) -> str:
-        return f"<Handler name={self._fn_name!r}>"
+        return f"<Handler name={self.fn.__name__!r}>"
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_ = self.filter_
@@ -83,4 +35,4 @@ class Handler(Generic[D, T]):
         return True
 
 
-__all__ = ["Handler"]
+__all__ = ["Handler", "HandlerFn"]
