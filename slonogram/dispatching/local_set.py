@@ -32,5 +32,5 @@ class LocalSet(Generic[D]):
         self._children.extend(sets)
 
     @property
-    def on_message(self) -> OnMessage:
+    def on_message(self) -> OnMessage[D]:
         return OnMessage(self)
