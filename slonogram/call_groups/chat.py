@@ -54,6 +54,42 @@ class ChatCallGroup(CallsGroup):
             ),
         )
 
+    def forward_message(
+        self,
+        chat_id: int | str,
+        from_chat_id: int | str,
+        message_id: int,
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+    ) -> Awaitable[Message]:
+        """
+        Use this method to forward messages of any kind
+        Service messages can't be forwarded. On success, the sent `Message` is returned.
+
+        :param chat_id: Chat's ID
+        :param from_chat_id: Identifier for the chat where the original message was sent
+        :param message_id: Message identifier in the chat specified in `from_chat_id`
+        :param message_thread_id: Identifier for the target message thread (topic) of the forum
+        :param disable_notification: Send the message silently?
+        :param protect_content: Protects the contents of the forwarded message from forwarding and saving
+        """
+
+        return self._call(
+            Message,
+            "forwardMessage",
+            {
+                "chat_id": chat_id,
+                "from_chat_id": from_chat_id,
+                "message_id": message_id,
+            },
+            (
+                ("message_thread_id", message_thread_id),
+                ("disable_notification", disable_notification),
+                ("protect_content", protect_content),
+            ),
+        )
+
     def edit_message_text(
         self,
         text: str,
@@ -66,8 +102,9 @@ class ChatCallGroup(CallsGroup):
         reply_markup: Optional[InlineKeyboardMarkup] = None,
     ) -> Awaitable[Message]:
         """
-        Edits message's text, pass `chat_id` with `message_id`
-        or `inline_message_id`
+        Edits message's text.
+        Pass `chat_id` with `message_id` or `inline_message_id`
+
         :param text: New text for the message
         :param chat_id: Chat's ID
         :param parse_mode: Parse-mode, can be `html` or `markdown`
