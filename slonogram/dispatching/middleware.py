@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from .context import Context
 
-from typing import TypeVar, TypeAlias, Callable, Awaitable, List
+from typing import TypeVar, TypeAlias, Callable, Awaitable, List, Generic
 from functools import partial
 
 D = TypeVar("D")
@@ -12,7 +14,7 @@ AnyMiddlewareFn: TypeAlias = Callable[
 ]
 
 
-class Chain:
+class Chain(Generic[D, T]):
     def __init__(self, *middlewares: AnyMiddlewareFn[D, T]) -> None:
         tail: MiddlewareFn[D, T] = do_nothing
         path: List[str] = []
@@ -26,17 +28,23 @@ class Chain:
     def __call__(self, context: Context[D, T]) -> Awaitable[None]:
         return self._fn(context)
 
+    def __matmul__(self, rhs: MiddlewareFn[D, T]) -> Group[D, T]:
+        return Group(self, rhs)
+
     def __repr__(self) -> str:
         return " <| ".join(self._path)
 
 
-class Group:
+class Group(Generic[D, T]):
     def __init__(self, *chains: MiddlewareFn[D, T]) -> None:
         self._chains = chains
 
     async def __call__(self, context: Context[D, T]) -> None:
         for chain in self._chains:
             await chain(context)
+
+    def __matmul__(self, rhs: MiddlewareFn[D, T]) -> Group[D, T]:
+        return Group(*self._chains, rhs)
 
     def __repr__(self) -> str:
         wrapped = map(lambda chain: f"({chain!r})", self._chains)
