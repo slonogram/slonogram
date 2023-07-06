@@ -52,10 +52,12 @@ class If(ExtendedFilter[D, T]):
         condition: FilterFn[D, T],
         on_then: FilterFn[D, T] = always_true,
         on_else: FilterFn[D, T] = always_false,
+        restore_scratches: bool = True,
     ) -> None:
         self.condition = condition
         self.on_then = on_then
         self.on_else = on_else
+        self.restore_scratches = restore_scratches
 
     def then(self, new_then: FilterFn[D, T]) -> If[D, T]:
         return If(self.condition, new_then, self.on_else)
@@ -64,12 +66,20 @@ class If(ExtendedFilter[D, T]):
         return If(self.condition, self.on_then, new_else)
 
     def __repr__(self) -> str:
-        return f"(if {self.condition} then {self.on_then} else {self.on_else})"
+        restore_flag = "" if self.restore_scratches else "!r"
+        return (
+            f"(if{restore_flag} {self.condition} then"
+            f" {self.on_then} else {self.on_else})"
+        )
 
     async def __call__(self, ctx: Context[D, T]) -> bool:
+        if self.restore_scratches:
+            _copy = ctx.pad.copy()
         cond = await self.condition(ctx)
         if cond:
             return await self.on_then(ctx)
+        elif self.restore_scratches:
+            ctx.pad = _copy
         return await self.on_else(ctx)
 
 

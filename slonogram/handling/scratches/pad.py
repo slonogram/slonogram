@@ -1,4 +1,5 @@
 from __future__ import annotations
+from copy import copy
 from typing import Generic, TypeVar, Dict, Any, Optional
 from .scratch import Scratch
 
@@ -18,6 +19,17 @@ class ScratchPad(Generic[T]):
 
     def scratch(self, scratch: Scratch[T, R], value: R) -> None:
         self._scratches[scratch] = value
+
+    def copy(self) -> ScratchPad[T]:
+        """
+        Returns new `ScratchPad` with exact same parameters, but
+        scratches dict is copied, so scratches modification will not
+        affect original `ScratchPad`
+        """
+
+        pad = ScratchPad(self._model, self._parent)
+        pad._scratches = copy(self._scratches)
+        return pad
 
     def __repr__(self) -> str:
         return (
