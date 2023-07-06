@@ -47,4 +47,5 @@ __all__ = [
     "HandlerFn",
     "AnyHandlerFn",
     "HandlerInplaceTransformer",
+    "into_handler_fn",
 ]
