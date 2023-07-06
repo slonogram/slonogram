@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Optional, Awaitable, List
 
 from ..schemas import (
@@ -5,11 +6,25 @@ from ..schemas import (
     Message,
     MessageEntity,
     InlineKeyboardMarkup,
+    ChatAction,
 )
 from .group import CallsGroup
 
 
 class ChatCallGroup(CallsGroup):
+    def send_action(
+        self,
+        chat_id: int | str,
+        action: ChatAction,
+        message_thread_id: Optional[int] = None,
+    ) -> Awaitable[bool]:
+        return self._call(
+            bool,
+            "sendChatAction",
+            {"chat_id": chat_id, "action": action},
+            (("message_thread_id", message_thread_id),),
+        )
+
     def send_message(
         self,
         chat_id: int | str,
