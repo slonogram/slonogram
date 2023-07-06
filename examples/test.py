@@ -9,7 +9,7 @@ from slonogram.schemas import Message
 TOKEN = open(".test_token").read()
 
 set_ = LocalSet[None]()
-prefixed = LocalSet[None](filter_=Prefix(r"(м[еэ]йда?|maid)\s*"))
+prefixed = LocalSet(filter_=Prefix(r"(м[еэ]йда?|maid)\s*"))
 
 
 @prefixed.on_message(

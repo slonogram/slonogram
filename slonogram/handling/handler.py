@@ -16,19 +16,17 @@ class Handler(Generic[D, T]):
     def __init__(
         self,
         fn: AnyHandlerFn[D, T],
+        observer: bool = False,
         filter_: Optional[FilterFn[D, T]] = None,
     ) -> None:
         self.filter_ = filter_
         self._fn_name = fn.__name__
+        self.observer = observer
         self.fn: HandlerFn[D, T] = into_handler_fn(fn)
 
     def __repr__(self) -> str:
-        return f"<Handler name={self._fn_name!r}>"
-
-    def transform_inplace(
-        self, f: HandlerInplaceTransformer[D, T]
-    ) -> None:
-        f(self)
+        obs_flag = ":observer" if self.observer else ""
+        return f"<Handler{obs_flag} name={self._fn_name!r}>"
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_ = self.filter_
@@ -37,7 +35,7 @@ class Handler(Generic[D, T]):
                 return False
         await self.fn(ctx)
 
-        return True
+        return not self.observer
 
 
 HandlerInplaceTransformer: TypeAlias = Callable[[Handler[D, T]], None]

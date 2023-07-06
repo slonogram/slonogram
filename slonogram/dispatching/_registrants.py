@@ -31,11 +31,12 @@ class OnMessage(Generic[D]):
 
     def _register(
         self,
+        observer: bool,
         subtypes: MessageFlags,
         filter_: _OptFilterFn[D, Message],
     ) -> _RegRetDeco[D, Message]:
         def inner(fn: AnyHandlerFn) -> MsgHandler[D]:
-            handler = MsgHandler[D](fn, filter_)
+            handler = MsgHandler[D](fn, observer, filter_)
             if MessageFlags.SENT in subtypes:
                 self._set._sent_message_handlers.append(handler)
             if MessageFlags.EDITED in subtypes:
@@ -49,15 +50,20 @@ class OnMessage(Generic[D]):
         self,
         subtypes: MessageFlags,
         filter_: _OptFilterFn[D, Message] = None,
+        observer: bool = False,
     ) -> _RegRetDeco[D, Message]:
-        return self._register(subtypes, filter_)
+        return self._register(observer, subtypes, filter_)
 
     def sent(
-        self, filter_: _OptFilterFn[D, Message] = None
+        self,
+        filter_: _OptFilterFn[D, Message] = None,
+        observer: bool = False,
     ) -> _RegRetDeco[D, Message]:
-        return self._register(MessageFlags.SENT, filter_)
+        return self._register(observer, MessageFlags.SENT, filter_)
 
     def edited(
-        self, filter_: _OptFilterFn[D, Message] = None
+        self,
+        filter_: _OptFilterFn[D, Message] = None,
+        observer: bool = False,
     ) -> _RegRetDeco[D, Message]:
-        return self._register(MessageFlags.EDITED, filter_)
+        return self._register(observer, MessageFlags.EDITED, filter_)
