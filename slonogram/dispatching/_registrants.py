@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import (
     TYPE_CHECKING,
     Generic,
@@ -8,9 +10,9 @@ from typing import (
 )
 
 from ..filtering.types import FilterFn
-from ..handling import Handler, AnyHandlerFn
+from ..handling.handler import Handler, AnyHandlerFn
 from ..schemas import Message
-from .event_subtypes import MessageSubtypes
+from .event_flags import MessageFlags
 
 if TYPE_CHECKING:
     from .local_set import LocalSet
@@ -29,14 +31,14 @@ class OnMessage(Generic[D]):
 
     def _register(
         self,
-        subtypes: MessageSubtypes,
+        subtypes: MessageFlags,
         filter_: _OptFilterFn[D, Message],
     ) -> _RegRetDeco[D, Message]:
         def inner(fn: AnyHandlerFn) -> MsgHandler[D]:
             handler = MsgHandler[D](fn, filter_)
-            if MessageSubtypes.SENT in subtypes:
+            if MessageFlags.SENT in subtypes:
                 self._set._sent_message_handlers.append(handler)
-            if MessageSubtypes.EDITED in subtypes:
+            if MessageFlags.EDITED in subtypes:
                 self._set._edited_message_handlers.append(handler)
 
             return handler
@@ -45,7 +47,7 @@ class OnMessage(Generic[D]):
 
     def __call__(
         self,
-        subtypes: MessageSubtypes,
+        subtypes: MessageFlags,
         filter_: _OptFilterFn[D, Message] = None,
     ) -> _RegRetDeco[D, Message]:
         return self._register(subtypes, filter_)
@@ -53,9 +55,9 @@ class OnMessage(Generic[D]):
     def sent(
         self, filter_: _OptFilterFn[D, Message] = None
     ) -> _RegRetDeco[D, Message]:
-        return self._register(MessageSubtypes.SENT, filter_)
+        return self._register(MessageFlags.SENT, filter_)
 
     def edited(
         self, filter_: _OptFilterFn[D, Message] = None
     ) -> _RegRetDeco[D, Message]:
-        return self._register(MessageSubtypes.EDITED, filter_)
+        return self._register(MessageFlags.EDITED, filter_)

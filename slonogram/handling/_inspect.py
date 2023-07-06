@@ -1,7 +1,3 @@
-from ..dispatching.context import Context
-from ..bot import Bot
-
-from functools import partial
 from typing import (
     TypeVar,
     Callable,
@@ -10,21 +6,33 @@ from typing import (
     Any,
     Tuple,
     Type,
+    Generic,
+    Protocol,
 )
+
+from ..dispatching.context import Context
+from ..bot import Bot
+
 from inspect import signature
 
 D = TypeVar("D")
 T = TypeVar("T")
 
-HandlerFn: TypeAlias = Callable[[Context[D, T]], Awaitable[None]]
+
+class HandlerFn(Protocol, Generic[D, T]):
+    def __call__(self, context: Context[D, T], /) -> Awaitable[None]:
+        ...
+
+
 _Single: TypeAlias = Callable[[T], Awaitable[None]]
 _Two: TypeAlias = Callable[[D, T], Awaitable[None]]
 
 AnyHandlerFn: TypeAlias = (
     _Single[Bot]
+    | _Single[T]
     | _Single[Context[D, T]]
-    | _Two[Bot, Context[D, T]]
-    | _Two[Context[D, T], Bot]
+    | _Two[Bot, T]
+    | _Two[T, Bot]
 )
 
 
@@ -53,14 +61,8 @@ def _fmt_tps_tuple(tps: Tuple[Type, Type]) -> str:
     return f"({tps[0].__qualname__}, {tps[1].__qualname__})"
 
 
-def _named(name: str, f: HandlerFn[D, T]) -> HandlerFn[D, T]:
-    f.__name__ = name
-    return f
-
-
 def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
     sig = signature(original)
-    name_it = partial(_named, original.__name__)
     params = sig.parameters
     items = list(params.items())
 
@@ -68,17 +70,11 @@ def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
         case [(_, spec)]:
             origin = extract_origin_type(spec.annotation)
             if origin == Bot:
-                return name_it(
-                    lambda ctx: original(ctx.inter.bot)  # type: ignore
-                )
+                return lambda ctx: original(ctx.inter.bot)  # type: ignore
             elif origin == Context:
                 return original  # type: ignore
             else:
-                raise TypeError(
-                    "Not sure about type of the first argument,"
-                    " please provide type hint to disambiguate it "
-                    "(`Bot` or `Context[...]`)"
-                )
+                return lambda ctx: original(ctx.model)  # type: ignore
 
         case [(_, spec1), (_, spec2)]:
             origins = (
@@ -86,20 +82,20 @@ def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
                 extract_origin_type(spec2.annotation),
             )
 
-            if origins == (Bot, Context):
-                return name_it(
-                    lambda ctx: original(ctx.inter.bot, ctx)  # type: ignore
-                )
-            elif origins == (Context, Bot):
-                return name_it(
-                    lambda ctx: original(ctx, ctx.inter.bot)  # type: ignore
-                )
+            if origins[1] == Bot:
+                return lambda ctx: original(
+                    ctx.model, ctx.inter.bot
+                )  # type: ignore
+            elif origins[0] == Bot:
+                return lambda ctx: original(
+                    ctx.inter.bot, ctx.model
+                )  # type: ignore
             else:
                 raise TypeError(
                     f"Function `{_fmt_tps_tuple(origins)} -> Awaitable[None]` "
                     f"Can't be made into `(Context[D, T]) -> Awaitable[None]`"
                     f". Note: arguments should be either "
-                    f"`(Bot, Context)` or `(Context, Bot)`."
+                    f"`(Bot, T)` or `(T, Bot)`, where `T` is the model."
                 )
 
         case _:

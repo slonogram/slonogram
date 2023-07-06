@@ -8,6 +8,10 @@ from typing import (
 )
 from anyio import create_task_group
 
+from ..exceptions.control_flow import DontHandle, SkipLocalSet
+from ..handling.handler import Handler
+
+from .event_flags import MessageFlags
 from ..schemas import Message, UpdateType, Update
 from ..bot import Bot
 from .context import InterContextData, Context
@@ -15,6 +19,7 @@ from .local_set import LocalSet
 
 
 D = TypeVar("D")
+T = TypeVar("T")
 MsgCtx: TypeAlias = Context[D, Message]
 
 
@@ -34,38 +39,77 @@ class Dispatcher(Generic[D]):
         self._bot = bot
         self._data = data
 
+    async def _handle_set(
+        self, attr: str, set_: LocalSet[D], ctx: Context[D, T]
+    ) -> bool:
+        filter_ = set_.filter_
+        if filter_ is not None and not await filter_(ctx):
+            return False
+
+        mw = set_._middleware
+        try:
+            if mw is not None:
+                await mw(ctx)
+            h_list: List[Handler[D, T]] = getattr(set_, attr)
+
+            for handler in h_list:
+                if await handler.try_invoke(ctx):
+                    return True
+
+            for child in set_._children:
+                if await self._handle_set(attr, child, ctx):
+                    return True
+        except SkipLocalSet:
+            return False
+
+        return False
+
     async def feed_update(
         self, inter: InterContextData[D], update: Update
     ) -> bool:
-        if update.message is not None:
-            raise NotImplementedError
-        if update.edited_message is not None:
-            raise NotImplementedError
-        if update.callback_query is not None:
-            raise NotImplementedError
-        if update.inline_query is not None:
-            raise NotImplementedError
+        try:
+            if update.message is not None:
+                return await self._handle_set(
+                    "_sent_message_handlers",
+                    self.set,
+                    Context(inter, MessageFlags.SENT, update.message),
+                )
+            elif update.edited_message is not None:
+                return await self._handle_set(
+                    "_edited_message_handlers",
+                    self.set,
+                    Context(
+                        inter, MessageFlags.EDITED, update.edited_message
+                    ),
+                )
+            elif update.callback_query is not None:
+                raise NotImplementedError
+            elif update.inline_query is not None:
+                raise NotImplementedError
 
-        if update.channel_post is not None:
-            raise NotImplementedError
-        if update.chat_join_request is not None:
-            raise NotImplementedError
-        if update.chat_member is not None:
-            raise NotImplementedError
-        if update.chosen_inline_result is not None:
-            raise NotImplementedError
-        if update.edited_channel_post is not None:
-            raise NotImplementedError
-        if update.my_chat_member is not None:
-            raise NotImplementedError
-        if update.poll is not None:
-            raise NotImplementedError
-        if update.poll_answer is not None:
-            raise NotImplementedError
-        if update.pre_checkout_query is not None:
-            raise NotImplementedError
-        if update.shipping_query is not None:
-            raise NotImplementedError
+            elif update.channel_post is not None:
+                raise NotImplementedError
+            elif update.chat_join_request is not None:
+                raise NotImplementedError
+            elif update.chat_member is not None:
+                raise NotImplementedError
+            elif update.chosen_inline_result is not None:
+                raise NotImplementedError
+            elif update.edited_channel_post is not None:
+                raise NotImplementedError
+            elif update.my_chat_member is not None:
+                raise NotImplementedError
+            elif update.poll is not None:
+                raise NotImplementedError
+            elif update.poll_answer is not None:
+                raise NotImplementedError
+            elif update.pre_checkout_query is not None:
+                raise NotImplementedError
+            elif update.shipping_query is not None:
+                raise NotImplementedError
+        except DontHandle:
+            pass
+
         return False
 
     async def create_intercontext_data(self) -> InterContextData[D]:
@@ -95,4 +139,4 @@ class Dispatcher(Generic[D]):
                     offset = updates[-1].id + 1
 
                 for update in updates:
-                    tg.start_soon(feed, inter, update)
+                    tg.start_soon(feed, inter, update)  # type: ignore

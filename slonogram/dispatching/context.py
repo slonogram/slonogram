@@ -3,6 +3,7 @@ from anyio.abc import TaskGroup
 
 from typing import TypeVar, Generic
 
+from .event_flags import EventFlags
 from ..handling.scratches.pad import ScratchPad
 from ..schemas import User
 from ..bot import Bot
@@ -26,9 +27,12 @@ class InterContextData(Generic[D]):
 
 
 class Context(Generic[D, T]):
-    __slots__ = "pad", "inter"
+    __slots__ = "pad", "inter", "flags"
 
-    def __init__(self, inter: InterContextData[D], model: T) -> None:
+    def __init__(
+        self, inter: InterContextData[D], flags: EventFlags, model: T
+    ) -> None:
+        self.flags = flags
         self.inter = inter
         self.pad = ScratchPad[T](model)
 

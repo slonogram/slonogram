@@ -20,3 +20,11 @@ class Middleware(Generic[D, T], Protocol):
         self, /, call_next: NextMiddleware[D, T], context: Context[D, T]
     ) -> None:
         ...
+
+
+async def do_nothing(_: Context[D, T]) -> None:
+    pass
+
+
+def chain(*middlewares: Middleware[D, T]) -> Middleware[D, T]:
+    raise NotImplementedError
