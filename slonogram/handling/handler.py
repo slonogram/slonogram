@@ -3,6 +3,7 @@ from __future__ import annotations
 from ..dispatching.context import Context
 from ..filtering.types import FilterFn
 
+from .middleware import MiddlewareFn
 from ._inspect import HandlerFn, AnyHandlerFn
 from ._inspect import into_handler_fn
 
@@ -16,10 +17,13 @@ class Handler(Generic[D, T]):
     def __init__(
         self,
         fn: AnyHandlerFn[D, T],
-        observer: bool = False,
-        filter_: Optional[FilterFn[D, T]] = None,
+        observer: bool,
+        filter_: Optional[FilterFn[D, T]],
+        middleware: Optional[MiddlewareFn[D, T]],
     ) -> None:
         self.filter_ = filter_
+        self.middleware = middleware
+
         self._fn_name = fn.__name__
         self.observer = observer
         self.fn: HandlerFn[D, T] = into_handler_fn(fn)
@@ -33,6 +37,10 @@ class Handler(Generic[D, T]):
         if filter_ is not None:
             if not await filter_(ctx):
                 return False
+        mw = self.middleware
+        if mw is not None:
+            await mw(ctx)
+
         await self.fn(ctx)
 
         return not self.observer

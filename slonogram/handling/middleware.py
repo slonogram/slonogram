@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .context import Context
+from ..dispatching.context import Context
 
 from typing import TypeVar, TypeAlias, Callable, Awaitable, List, Generic
 from functools import partial

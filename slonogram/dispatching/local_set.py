@@ -7,7 +7,7 @@ from typing import (
     Any,
 )
 
-from .middleware import MiddlewareFn
+from ..handling.middleware import MiddlewareFn
 from ..filtering.types import FilterFn
 from ._registrants import OnMessage, MsgHandler
 
