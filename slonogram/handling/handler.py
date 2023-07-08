@@ -34,14 +34,20 @@ class Handler(Generic[D, T]):
 
     async def try_invoke(self, ctx: Context[D, T]) -> bool:
         filter_ = self.filter_
-        if filter_ is not None:
-            if not await filter_(ctx):
-                return False
-        mw = self.middleware
-        if mw is not None:
-            await mw(ctx)
+        prev_pad = ctx.pad
+        ctx.pad = prev_pad.create_child()
 
-        await self.fn(ctx)
+        try:
+            if filter_ is not None:
+                if not await filter_(ctx):
+                    return False
+            mw = self.middleware
+            if mw is not None:
+                await mw(ctx)
+
+            await self.fn(ctx)
+        finally:
+            ctx.pad = prev_pad
 
         return not self.observer
 

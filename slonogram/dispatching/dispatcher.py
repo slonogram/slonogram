@@ -43,11 +43,14 @@ class Dispatcher(Generic[D]):
         self, attr: str, set_: LocalSet[D], ctx: Context[D, T]
     ) -> bool:
         filter_ = set_.filter_
-        if filter_ is not None and not await filter_(ctx):
-            return False
+        parent_pad = ctx.pad
+        ctx.pad = parent_pad.create_child()
 
-        mw = set_._middleware
         try:
+            if filter_ is not None and not await filter_(ctx):
+                return False
+
+            mw = set_._middleware
             if mw is not None:
                 await mw(ctx)
             h_list: List[Handler[D, T]] = getattr(set_, attr)
@@ -61,6 +64,8 @@ class Dispatcher(Generic[D]):
                     return True
         except SkipLocalSet:
             return False
+        finally:
+            ctx.pad = parent_pad
 
         return False
 
