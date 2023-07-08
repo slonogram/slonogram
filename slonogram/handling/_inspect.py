@@ -62,6 +62,8 @@ def _fmt_tps_tuple(tps: Tuple[Type, Type]) -> str:
 
 
 def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
+    if getattr(original, "__treat_as_context__", False):
+        return original  # type: ignore
     sig = signature(original)
     params = sig.parameters
     items = list(params.items())
