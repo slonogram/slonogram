@@ -53,8 +53,8 @@ class CallsGroup:
         result = await self._session.call_method(method, args)
         if not result["ok"]:
             raise ApiError(
-                code=result["error_code"],
-                description=result["description"],
+                result["error_code"],
+                result["description"],
             )
 
         # TODO: Do we need ability to "delay" model loading?

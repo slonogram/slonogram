@@ -5,10 +5,16 @@ description = ""
 authors = ["Nero <nerodono0@gmail.com>"]
 readme = "README.md"
 
+[tool.poetry.extras]
+aiohttp = ["aiohttp"]
+di = ["slonodi"]
+
 [tool.poetry.dependencies]
 python = "^3.11"
 anyio = "^3.7.0"
 adaptix = { git = "https://github.com/reagento/dataclass-factory", branch = "3.x/develop", rev = "97a7217" }
+
+slonodi = { git = "https://github.com/slonogram/slonodi", branch = "main", rev = "56043ed7f9df827bb79382d3a470488873562004", optional = true }
 aiohttp = { version = "^3.8.4", optional = true }
 
 [tool.black]
@@ -18,9 +24,6 @@ line-length = 75
 pyre-check = "^0.9.18"
 flake8 = "^6.0.0"
 mypy = "^1.3.0"
-
-[tool.poetry.extras]
-aiohttp = ["aiohttp"]
 
 [build-system]
 requires = ["poetry-core"]

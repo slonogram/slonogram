@@ -24,7 +24,7 @@ class Handler(Generic[D, T]):
         self.filter_ = filter_
         self.middleware = middleware
 
-        self._fn_name = fn.__name__
+        self._fn_name = getattr(fn, "__name__", repr(fn))
         self.observer = observer
         self.fn: HandlerFn[D, T] = into_handler_fn(fn)
 
