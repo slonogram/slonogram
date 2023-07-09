@@ -5,7 +5,7 @@ from ..types.filter import FilterFn
 from ..types.middleware import MiddlewareFn
 from ..types.handler_fn import HandlerFn, AnyHandlerFn, into_handler_fn
 
-from typing import Generic, TypeVar, Optional, Callable, TypeAlias
+from typing import Generic, TypeVar, Optional
 
 T = TypeVar("T")
 
@@ -49,12 +49,6 @@ class Handler(Generic[T]):
         return not self.observer
 
 
-HandlerInplaceTransformer: TypeAlias = Callable[[Handler[T]], None]
-
 __all__ = [
     "Handler",
-    "HandlerFn",
-    "AnyHandlerFn",
-    "HandlerInplaceTransformer",
-    "into_handler_fn",
 ]

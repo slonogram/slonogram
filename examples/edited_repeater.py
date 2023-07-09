@@ -14,7 +14,6 @@ set_ = LocalSet()
 
 @set_.on_message.sent(Command("start"))
 async def start(bot: Bot, message: Message) -> None:
-    print("Start")
     await bot.chat.send_message(
         message.chat.id, "Hello! I'll repeat everything you edit"
     )
