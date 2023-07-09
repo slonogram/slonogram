@@ -6,8 +6,8 @@ from typing import (
     Any,
 )
 
-from ..handling.middleware import MiddlewareFn
-from ..filtering.types import FilterFn
+from ..types.middleware import MiddlewareFn
+from ..types.filter import FilterFn
 from ._registrants import OnMessage, MsgHandler
 
 T = TypeVar("T")

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from copy import copy
 from typing import Generic, TypeVar, Dict, Any, Optional
+
 from .scratch import Scratch
 
 T = TypeVar("T")
@@ -16,9 +17,6 @@ class ScratchPad(Generic[T]):
         self._scratches: Dict[Scratch[T, Any], Any] = {}
         self._model = model
         self._parent = parent
-
-    def scratch(self, scratch: Scratch[T, R], value: R) -> None:
-        self._scratches[scratch] = value
 
     def copy(self) -> ScratchPad[T]:
         """
@@ -37,14 +35,17 @@ class ScratchPad(Generic[T]):
             f"parent={self._parent!r}>"
         )
 
-    def get(self, scratch: Scratch[T, R]) -> R:
+    def __setitem__(self, scratch: Scratch[T, R], value: R) -> None:
+        self._scratches[scratch] = value
+
+    def __getitem__(self, scratch: Scratch[T, R]) -> R:
         try:
             return self._scratches[scratch]
         except KeyError:
             parent = self._parent
             if parent is None:
                 return scratch(self._model)
-            return parent.get(scratch)
+            return parent[scratch]
 
     def create_child(self) -> ScratchPad[T]:
         return ScratchPad(self._model, self)

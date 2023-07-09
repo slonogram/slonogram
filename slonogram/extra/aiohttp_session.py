@@ -8,8 +8,8 @@ except ImportError as ie:
         "to use aiohttp client"
     ) from ie
 
+from ..types.api_session import ApiSession, MethodArgs
 from ..utils.json import loads
-from ..protocols.api_session import ApiSession, MethodArgs
 
 
 class Session(ApiSession):

@@ -1,6 +1,7 @@
 from typing import Optional
-from .scratch import attr_scratch, Scratch
-from slonogram.schemas import Message
+
+from ..types.scratch import attr_scratch, Scratch
+from ..schemas import Message
 
 
 Text: Scratch[Message, Optional[str]] = attr_scratch("text")

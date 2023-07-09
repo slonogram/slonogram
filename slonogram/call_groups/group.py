@@ -2,7 +2,7 @@ from adaptix import Retort
 from typing import TypeVar, Type, Iterable, Tuple, Any, Generic, Optional
 
 from ..utils.json import dumps
-from ..protocols.api_session import (
+from ..types.api_session import (
     ApiSession,
     MethodArgs,
     ScalarSerializable,

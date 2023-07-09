@@ -4,7 +4,8 @@ from anyio.abc import TaskGroup
 from typing import TypeVar, Generic, Any
 
 from .event_flags import EventFlags
-from ..handling.scratches.pad import ScratchPad
+from .scratch_pad import ScratchPad
+
 from ..schemas import User
 from ..bot import Bot
 

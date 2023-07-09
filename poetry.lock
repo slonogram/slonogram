@@ -843,8 +843,8 @@ slonogram = {git = "https://github.com/slonogram/slonogram", branch = "develop"}
 [package.source]
 type = "git"
 url = "https://github.com/slonogram/slonodi"
-reference = "57855279fb203159be76f48abdf3746c1eefefae"
-resolved_reference = "57855279fb203159be76f48abdf3746c1eefefae"
+reference = "56043ed7f9df827bb79382d3a470488873562004"
+resolved_reference = "56043ed7f9df827bb79382d3a470488873562004"
 
 [[package]]
 name = "sniffio"
@@ -1035,4 +1035,4 @@ di = ["slonodi"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "1d86099787e7f2bbbc59da9997d5bcd06c62b547052d67e9f76d6caf2b6c379e"
+content-hash = "627f838f3cadc54273e08e52cda26eaad1db7f7324b591e8e0984a2a5593e294"

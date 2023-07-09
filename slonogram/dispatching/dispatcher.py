@@ -7,13 +7,15 @@ from typing import (
 )
 from anyio import create_task_group
 
+from ..types.event_flags import MessageFlags
+from ..types.context import InterContextData, Context
+
 from ..exceptions.control_flow import DontHandle, SkipLocalSet
 from ..handling.handler import Handler
 
-from .event_flags import MessageFlags
 from ..schemas import Message, UpdateType, Update
 from ..bot import Bot
-from .context import InterContextData, Context
+
 from .local_set import LocalSet
 
 

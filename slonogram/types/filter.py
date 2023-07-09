@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
-from typing import TypeVar, Generic, Awaitable
 
-from .types import FilterFn
-from ..dispatching.context import Context
+from typing import Callable, TypeAlias, Awaitable, TypeVar, Generic
+from .context import Context
 
 T = TypeVar("T")
+
+FilterFn: TypeAlias = Callable[[Context[T]], Awaitable[bool]]
 
 
 class AlwaysConst:
@@ -82,7 +83,7 @@ class If(ExtendedFilter[T]):
         return await self.on_else(ctx)
 
 
-class Just(ExtendedFilter[T]):
+class Predicate(ExtendedFilter[T]):
     __slots__ = ("fn",)
 
     def __init__(self, fn: FilterFn[T]) -> None:
@@ -156,4 +157,12 @@ def not_(fn: FilterFn[T]) -> Inverted[T]:
     return Inverted(fn)
 
 
-__all__ = ["not_", "always_true", "And", "Or", "ExtendedFilter"]
+__all__ = [
+    "FilterFn",
+    "ExtendedFilter",
+    "Inverted",
+    "And",
+    "Or",
+    "Predicate",
+    "If",
+]

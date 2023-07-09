@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from ..dispatching.context import Context
-from ..filtering.types import FilterFn
-
-from .middleware import MiddlewareFn
-from ._inspect import HandlerFn, AnyHandlerFn, into_handler_fn
+from ..types.context import Context
+from ..types.filter import FilterFn
+from ..types.middleware import MiddlewareFn
+from ..types.handler_fn import HandlerFn, AnyHandlerFn, into_handler_fn
 
 from typing import Generic, TypeVar, Optional, Callable, TypeAlias
 

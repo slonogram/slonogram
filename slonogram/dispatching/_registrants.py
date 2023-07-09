@@ -8,11 +8,13 @@ from typing import (
     Callable,
 )
 
-from ..filtering.types import FilterFn
-from ..handling.handler import Handler, AnyHandlerFn
-from ..handling.middleware import MiddlewareFn
+from ..types.filter import FilterFn
+from ..types.middleware import MiddlewareFn
+from ..types.event_flags import MessageFlags
+from ..types.handler_fn import AnyHandlerFn
+
+from ..handling.handler import Handler
 from ..schemas import Message
-from .event_flags import MessageFlags
 
 if TYPE_CHECKING:
     from .local_set import LocalSet
@@ -22,7 +24,7 @@ T = TypeVar("T")
 MsgHandler: TypeAlias = Handler[Message]
 _OptFilterFn: TypeAlias = Optional[FilterFn[T]]
 _OptMid: TypeAlias = Optional[MiddlewareFn[T]]
-_RegRetDeco: TypeAlias = Callable[[AnyHandlerFn], Handler[T]]
+_RegRetDeco: TypeAlias = Callable[[AnyHandlerFn[T]], Handler[T]]
 
 
 class OnMessage:

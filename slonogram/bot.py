@@ -3,12 +3,10 @@ from adaptix import Retort, name_mapping
 
 from typing import Optional, Self
 
-from .protocols.api_session import ApiSession
+from .types.api_session import ApiSession
+from .schemas import Message, Update
+
 from .consts import DEFAULT_API_URL
-
-from .schemas import Message
-from .schemas import Update
-
 from .call_groups import chat, user, updates
 
 
