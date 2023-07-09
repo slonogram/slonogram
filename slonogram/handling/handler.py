@@ -4,35 +4,33 @@ from ..dispatching.context import Context
 from ..filtering.types import FilterFn
 
 from .middleware import MiddlewareFn
-from ._inspect import HandlerFn, AnyHandlerFn
-from ._inspect import into_handler_fn
+from ._inspect import HandlerFn, AnyHandlerFn, into_handler_fn
 
 from typing import Generic, TypeVar, Optional, Callable, TypeAlias
 
 T = TypeVar("T")
-D = TypeVar("D")
 
 
-class Handler(Generic[D, T]):
+class Handler(Generic[T]):
     def __init__(
         self,
-        fn: AnyHandlerFn[D, T],
+        fn: AnyHandlerFn[T],
         observer: bool,
-        filter_: Optional[FilterFn[D, T]],
-        middleware: Optional[MiddlewareFn[D, T]],
+        filter_: Optional[FilterFn[T]],
+        middleware: Optional[MiddlewareFn[T]],
     ) -> None:
         self.filter_ = filter_
         self.middleware = middleware
 
         self._fn_name = getattr(fn, "__name__", repr(fn))
         self.observer = observer
-        self.fn: HandlerFn[D, T] = into_handler_fn(fn)
+        self.fn: HandlerFn[T] = into_handler_fn(fn)
 
     def __repr__(self) -> str:
         obs_flag = ":observer" if self.observer else ""
         return f"<Handler{obs_flag} name={self._fn_name!r}>"
 
-    async def try_invoke(self, ctx: Context[D, T]) -> bool:
+    async def try_invoke(self, ctx: Context[T]) -> bool:
         filter_ = self.filter_
         prev_pad = ctx.pad
         ctx.pad = prev_pad.create_child()
@@ -52,7 +50,7 @@ class Handler(Generic[D, T]):
         return not self.observer
 
 
-HandlerInplaceTransformer: TypeAlias = Callable[[Handler[D, T]], None]
+HandlerInplaceTransformer: TypeAlias = Callable[[Handler[T]], None]
 
 __all__ = [
     "Handler",

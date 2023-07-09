@@ -1,5 +1,4 @@
 from typing import (
-    Generic,
     TypeVar,
     List,
     NoReturn,
@@ -18,12 +17,11 @@ from .context import InterContextData, Context
 from .local_set import LocalSet
 
 
-D = TypeVar("D")
 T = TypeVar("T")
-MsgCtx: TypeAlias = Context[D, Message]
+MsgCtx: TypeAlias = Context[Message]
 
 
-class Dispatcher(Generic[D]):
+class Dispatcher:
     """
     ### skip_pending:
 
@@ -31,16 +29,14 @@ class Dispatcher(Generic[D]):
     (time is retrieved through the `time.time`)
     """
 
-    def __init__(
-        self, data: D, bot: Bot, skip_pending: bool = False
-    ) -> None:
+    def __init__(self, bot: Bot, skip_pending: bool = False) -> None:
         self.set: LocalSet = LocalSet("__dispatcher__")
         self.skip_pending = skip_pending
         self._bot = bot
-        self._data = data
+        self.data = None
 
     async def _handle_set(
-        self, attr: str, set_: LocalSet[D], ctx: Context[D, T]
+        self, attr: str, set_: LocalSet, ctx: Context[T]
     ) -> bool:
         filter_ = set_.filter_
         parent_pad = ctx.pad
@@ -53,7 +49,7 @@ class Dispatcher(Generic[D]):
             mw = set_._middleware
             if mw is not None:
                 await mw(ctx)
-            h_list: List[Handler[D, T]] = getattr(set_, attr)
+            h_list: List[Handler[T]] = getattr(set_, attr)
 
             for handler in h_list:
                 if await handler.try_invoke(ctx):
@@ -70,7 +66,7 @@ class Dispatcher(Generic[D]):
         return False
 
     async def feed_update(
-        self, inter: InterContextData[D], update: Update
+        self, inter: InterContextData, update: Update
     ) -> bool:
         try:
             if update.message is not None:
@@ -117,10 +113,10 @@ class Dispatcher(Generic[D]):
 
         return False
 
-    async def create_intercontext_data(self) -> InterContextData[D]:
+    async def create_intercontext_data(self) -> InterContextData:
         me = await self._bot.user.get_me()
         return InterContextData(
-            me, self._data, self._bot, create_task_group()
+            me, self.data, self._bot, create_task_group()
         )
 
     async def run_polling(

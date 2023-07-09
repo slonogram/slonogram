@@ -7,7 +7,6 @@ from .types import FilterFn
 from ..dispatching.context import Context
 
 T = TypeVar("T")
-D = TypeVar("D")
 
 
 class AlwaysConst:
@@ -17,7 +16,7 @@ class AlwaysConst:
     def __repr__(self) -> str:
         return f"const({self.const})"
 
-    async def __call__(self, _: Context[D, T]) -> bool:
+    async def __call__(self, _: Context[T]) -> bool:
         return self.const
 
 
@@ -25,33 +24,33 @@ always_true = AlwaysConst(True)
 always_false = AlwaysConst(False)
 
 
-class ExtendedFilter(Generic[D, T], metaclass=ABCMeta):
-    def __invert__(self) -> Inverted[D, T]:
+class ExtendedFilter(Generic[T], metaclass=ABCMeta):
+    def __invert__(self) -> Inverted[T]:
         return Inverted(self)
 
-    def __or__(self, rhs: FilterFn[D, T]) -> Or[D, T]:
+    def __or__(self, rhs: FilterFn[T]) -> Or[T]:
         return Or(self, rhs, False)
 
-    def __xor__(self, rhs: FilterFn[D, T]) -> Or[D, T]:
+    def __xor__(self, rhs: FilterFn[T]) -> Or[T]:
         return Or(self, rhs, True)
 
-    def __and__(self, rhs: FilterFn[D, T]) -> And[D, T]:
+    def __and__(self, rhs: FilterFn[T]) -> And[T]:
         return And(self, rhs)
 
     @abstractmethod
-    def __call__(self, ctx: Context[D, T]) -> Awaitable[bool]:
+    def __call__(self, ctx: Context[T]) -> Awaitable[bool]:
         _ = ctx
         raise NotImplementedError
 
 
-class If(ExtendedFilter[D, T]):
+class If(ExtendedFilter[T]):
     __slots__ = "condition", "on_then", "on_else"
 
     def __init__(
         self,
-        condition: FilterFn[D, T],
-        on_then: FilterFn[D, T] = always_true,
-        on_else: FilterFn[D, T] = always_false,
+        condition: FilterFn[T],
+        on_then: FilterFn[T] = always_true,
+        on_else: FilterFn[T] = always_false,
         restore_scratches: bool = True,
     ) -> None:
         self.condition = condition
@@ -59,10 +58,10 @@ class If(ExtendedFilter[D, T]):
         self.on_else = on_else
         self.restore_scratches = restore_scratches
 
-    def then(self, new_then: FilterFn[D, T]) -> If[D, T]:
+    def then(self, new_then: FilterFn[T]) -> If[T]:
         return If(self.condition, new_then, self.on_else)
 
-    def else_(self, new_else: FilterFn[D, T]) -> If[D, T]:
+    def else_(self, new_else: FilterFn[T]) -> If[T]:
         return If(self.condition, self.on_then, new_else)
 
     def __repr__(self) -> str:
@@ -72,7 +71,7 @@ class If(ExtendedFilter[D, T]):
             f" {self.on_then} else {self.on_else})"
         )
 
-    async def __call__(self, ctx: Context[D, T]) -> bool:
+    async def __call__(self, ctx: Context[T]) -> bool:
         if self.restore_scratches:
             _copy = ctx.pad.copy()
         cond = await self.condition(ctx)
@@ -83,21 +82,21 @@ class If(ExtendedFilter[D, T]):
         return await self.on_else(ctx)
 
 
-class Just(ExtendedFilter[D, T]):
+class Just(ExtendedFilter[T]):
     __slots__ = ("fn",)
 
-    def __init__(self, fn: FilterFn[D, T]) -> None:
+    def __init__(self, fn: FilterFn[T]) -> None:
         self.fn = fn
 
-    def __call__(self, ctx: Context[D, T]) -> Awaitable[bool]:
+    def __call__(self, ctx: Context[T]) -> Awaitable[bool]:
         return self.fn(ctx)
 
 
-class Or(ExtendedFilter[D, T]):
+class Or(ExtendedFilter[T]):
     __slots__ = "lhs_fn", "rhs_fn", "exclusive"
 
     def __init__(
-        self, lhs: FilterFn[D, T], rhs: FilterFn[D, T], exclusive: bool
+        self, lhs: FilterFn[T], rhs: FilterFn[T], exclusive: bool
     ) -> None:
         self.lhs_fn = lhs
         self.rhs_fn = rhs
@@ -110,7 +109,7 @@ class Or(ExtendedFilter[D, T]):
     def __repr__(self) -> str:
         return f"{self.lhs_fn} {self.symbol} {self.rhs_fn}"
 
-    async def __call__(self, ctx: Context[D, T]) -> bool:
+    async def __call__(self, ctx: Context[T]) -> bool:
         if self.exclusive:
             lhs = await self.lhs_fn(ctx)
             rhs = await self.rhs_fn(ctx)
@@ -122,38 +121,38 @@ class Or(ExtendedFilter[D, T]):
             return lhs
 
 
-class And(ExtendedFilter[D, T]):
+class And(ExtendedFilter[T]):
     __slots__ = "lhs_fn", "rhs_fn"
 
-    def __init__(self, lhs: FilterFn[D, T], rhs: FilterFn[D, T]) -> None:
+    def __init__(self, lhs: FilterFn[T], rhs: FilterFn[T]) -> None:
         self.lhs_fn = lhs
         self.rhs_fn = rhs
 
     def __repr__(self) -> str:
         return f"{self.lhs_fn} & {self.rhs_fn}"
 
-    async def __call__(self, ctx: Context[D, T]) -> bool:
+    async def __call__(self, ctx: Context[T]) -> bool:
         lhs = await self.lhs_fn(ctx)
         if not lhs:
             return False
         return await self.rhs_fn(ctx)
 
 
-class Inverted(ExtendedFilter[D, T]):
+class Inverted(ExtendedFilter[T]):
     __slots__ = ("fn",)
 
-    def __init__(self, fn: FilterFn[D, T]) -> None:
+    def __init__(self, fn: FilterFn[T]) -> None:
         self.fn = fn
 
     def __repr__(self) -> str:
         return f"~{self.fn}"
 
-    async def __call__(self, ctx: Context[D, T]) -> bool:
+    async def __call__(self, ctx: Context[T]) -> bool:
         result = await self.fn(ctx)
         return not result
 
 
-def not_(fn: FilterFn[D, T]) -> Inverted[D, T]:
+def not_(fn: FilterFn[T]) -> Inverted[T]:
     return Inverted(fn)
 
 

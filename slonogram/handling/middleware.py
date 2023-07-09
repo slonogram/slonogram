@@ -5,18 +5,17 @@ from ..dispatching.context import Context
 from typing import TypeVar, TypeAlias, Callable, Awaitable, List, Generic
 from functools import partial
 
-D = TypeVar("D")
 T = TypeVar("T")
 
-MiddlewareFn: TypeAlias = Callable[[Context[D, T]], Awaitable[None]]
+MiddlewareFn: TypeAlias = Callable[[Context[T]], Awaitable[None]]
 AnyMiddlewareFn: TypeAlias = Callable[
-    [MiddlewareFn[D, T], Context[D, T]], Awaitable[None]
+    [MiddlewareFn[T], Context[T]], Awaitable[None]
 ]
 
 
-class Chain(Generic[D, T]):
-    def __init__(self, *middlewares: AnyMiddlewareFn[D, T]) -> None:
-        tail: MiddlewareFn[D, T] = do_nothing
+class Chain(Generic[T]):
+    def __init__(self, *middlewares: AnyMiddlewareFn[T]) -> None:
+        tail: MiddlewareFn[T] = do_nothing
         path: List[str] = []
         for middleware in reversed(middlewares):
             tail = partial(middleware, tail)
@@ -25,25 +24,25 @@ class Chain(Generic[D, T]):
         self._fn = tail
         self._path = path
 
-    def __call__(self, context: Context[D, T]) -> Awaitable[None]:
+    def __call__(self, context: Context[T]) -> Awaitable[None]:
         return self._fn(context)
 
-    def __matmul__(self, rhs: MiddlewareFn[D, T]) -> Group[D, T]:
+    def __matmul__(self, rhs: MiddlewareFn[T]) -> Group[T]:
         return Group(self, rhs)
 
     def __repr__(self) -> str:
         return " <| ".join(self._path)
 
 
-class Group(Generic[D, T]):
-    def __init__(self, *chains: MiddlewareFn[D, T]) -> None:
+class Group(Generic[T]):
+    def __init__(self, *chains: MiddlewareFn[T]) -> None:
         self._chains = chains
 
-    async def __call__(self, context: Context[D, T]) -> None:
+    async def __call__(self, context: Context[T]) -> None:
         for chain in self._chains:
             await chain(context)
 
-    def __matmul__(self, rhs: MiddlewareFn[D, T]) -> Group[D, T]:
+    def __matmul__(self, rhs: MiddlewareFn[T]) -> Group[T]:
         return Group(*self._chains, rhs)
 
     def __repr__(self) -> str:
@@ -52,5 +51,5 @@ class Group(Generic[D, T]):
         return " -> ".join(wrapped)
 
 
-async def do_nothing(_: Context[D, T]) -> None:
+async def do_nothing(_: Context[T]) -> None:
     pass

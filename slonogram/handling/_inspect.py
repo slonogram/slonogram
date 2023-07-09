@@ -15,22 +15,22 @@ from ..bot import Bot
 
 from inspect import signature
 
-D = TypeVar("D")
+R = TypeVar("R")
 T = TypeVar("T")
 
 
-class HandlerFn(Protocol, Generic[D, T]):
-    def __call__(self, context: Context[D, T], /) -> Awaitable[None]:
+class HandlerFn(Protocol, Generic[T]):
+    def __call__(self, context: Context[T], /) -> Awaitable[None]:
         ...
 
 
 _Single: TypeAlias = Callable[[T], Awaitable[None]]
-_Two: TypeAlias = Callable[[D, T], Awaitable[None]]
+_Two: TypeAlias = Callable[[R, T], Awaitable[None]]
 
 AnyHandlerFn: TypeAlias = (
     _Single[Bot]
     | _Single[T]
-    | _Single[Context[D, T]]
+    | _Single[Context[T]]
     | _Two[Bot, T]
     | _Two[T, Bot]
 )
@@ -42,7 +42,7 @@ def extract_origin_type(t) -> type:
 
 def annotate_with_handler_fn(
     c: Callable[[Any], Awaitable[None]]
-) -> HandlerFn[Any, Any]:
+) -> HandlerFn[Any]:
     """
     Annotate first argument of `c` with the `Context` hint.
 
@@ -53,7 +53,7 @@ def annotate_with_handler_fn(
     """
     sig = signature(c)
     first_arg_k = next(iter(sig.parameters))
-    c.__annotations__[first_arg_k] = Context[Any, Any]
+    c.__annotations__[first_arg_k] = Context[Any]
     return c  # type: ignore
 
 
@@ -61,7 +61,7 @@ def _fmt_tps_tuple(tps: Tuple[Type, Type]) -> str:
     return f"({tps[0].__qualname__}, {tps[1].__qualname__})"
 
 
-def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
+def into_handler_fn(original: AnyHandlerFn[T]) -> HandlerFn[T]:
     if getattr(original, "__treat_as_context__", False):
         return original  # type: ignore
     sig = signature(original)
@@ -95,7 +95,7 @@ def into_handler_fn(original: AnyHandlerFn[D, T]) -> HandlerFn[D, T]:
             else:
                 raise TypeError(
                     f"Function `{_fmt_tps_tuple(origins)} -> Awaitable[None]` "
-                    f"Can't be made into `(Context[D, T]) -> Awaitable[None]`"
+                    f"Can't be made into `(Context[T]) -> Awaitable[None]`"
                     f". Note: arguments should be either "
                     f"`(Bot, T)` or `(T, Bot)`, where `T` is the model."
                 )
