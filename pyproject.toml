@@ -9,10 +9,10 @@ readme = "README.md"
 aiohttp = ["aiohttp"]
 
 [tool.poetry.dependencies]
+adaptix = { git = "https://github.com/reagento/dataclass-factory", branch = "3.x/develop", rev = "bcba021" }
+
 python = "^3.11"
 anyio = "^3.7.0"
-adaptix = { git = "https://github.com/reagento/dataclass-factory", branch = "3.x/develop", rev = "97a7217" }
-
 aiohttp = { version = "^3.8.4", optional = true }
 
 [tool.black]

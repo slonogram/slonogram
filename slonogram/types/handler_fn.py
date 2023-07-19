@@ -8,7 +8,8 @@ from typing import (
     cast,
     get_origin,
 )
-from inspect import signature, Signature
+
+from inspect import signature
 from .context import Context
 from ..bot import Bot
 
@@ -57,24 +58,18 @@ def into_handler_fn(anyfn: AnyHandlerFn[T]) -> HandlerFn[T]:
     if getattr(anyfn, "__cast_ctxed__", False):
         return cast(HandlerFn[T], anyfn)
 
-    fn_name = getattr(anyfn, "__name__", "<unnamed>")
     sig = signature(anyfn)
     params = sig.parameters
+    leading_pos = len(params)
 
-    if len(params) == 1:
+    if leading_pos == 1:
         first = next(iter(params.values()))
         annot = first.annotation
-        if annot is Signature.empty:
-            raise TypeError(
-                f"Provide annotation for the function {fn_name} parameter"
-            )
-        elif annot is Bot:
+        if annot is Bot:
             return _WrappedFn(anyfn, "only_bot")
-        elif get_origin(annot) is Context:
-            return cast(HandlerFn[T], anyfn)
         else:
-            raise TypeError(f"Unknown type {annot!r}")
-    elif len(params) == 2:
+            return cast(HandlerFn[T], anyfn)
+    elif leading_pos == 2:
         it = iter(params.values())
         first = next(it)
         second = next(it)
