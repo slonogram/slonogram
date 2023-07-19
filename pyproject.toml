@@ -7,9 +7,11 @@ readme = "README.md"
 
 [tool.poetry.extras]
 aiohttp = ["aiohttp"]
+slonodi = ["slonodi"]
 
 [tool.poetry.dependencies]
 adaptix = { git = "https://github.com/reagento/dataclass-factory", branch = "3.x/develop", rev = "bcba021" }
+slonodi = { git = "https://github.com/slonogram/slonodi", rev = "4e07d89", optional = true }
 
 python = "^3.11"
 anyio = "^3.7.0"
