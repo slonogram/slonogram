@@ -7,8 +7,11 @@ from ..schemas import (
     MessageEntity,
     InlineKeyboardMarkup,
     ChatAction,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+    ForceReply,
 )
-from .group import CallsGroup
+from .group import CallsGroup, UseRetort
 
 
 class ChatCallGroup(CallsGroup):
@@ -36,6 +39,12 @@ class ChatCallGroup(CallsGroup):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         allow_sending_without_reply: Optional[bool] = None,
+        reply_markup: Optional[
+            InlineKeyboardMarkup
+            | ReplyKeyboardMarkup
+            | ReplyKeyboardRemove
+            | ForceReply
+        ] = None,
     ) -> Awaitable[Message]:
         """
         Sends a message to chat
@@ -67,6 +76,7 @@ class ChatCallGroup(CallsGroup):
                     "allow_sending_without_reply",
                     allow_sending_without_reply,
                 ),
+                UseRetort("reply_markup", reply_markup),
             ),
         )
 

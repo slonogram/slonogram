@@ -34,7 +34,8 @@ async def on_get_master(
     bot: Bot, message: Message, text: str, master: Master
 ) -> None:
     await bot.chat.send_message(
-        message.chat.id, f"My master is {master} (scratch text = {text})"
+        message.chat.id,
+        f"My master is {master} (scratch text = {text})",
     )
 
 

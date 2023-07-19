@@ -78,7 +78,6 @@ class DefaultSpecifier:
 
 class SlonodiProvider(Provider[Context[Any]]):
     def provide_ctx(self, data: Any) -> Context[Any]:
-        print(data)
         return data
 
     def provide_container(self, ctx: Context[Any]) -> Container:

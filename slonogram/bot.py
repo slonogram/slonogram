@@ -7,7 +7,7 @@ from .types.api_session import ApiSession
 from .schemas import Message, Update
 
 from .consts import DEFAULT_API_URL
-from .call_groups import chat, user, updates
+from .call_groups import chat, user, updates, queries
 
 
 class Bot:
@@ -42,6 +42,7 @@ class Bot:
         self.chat = chat.ChatCallGroup(retort, u_session)
         self.user = user.UserCallGroup(retort, u_session)
         self.updates = updates.UpdatesCallGroup(retort, u_session)
+        self.queries = queries.QueriesCallGroup(retort, u_session)
 
         self._session = u_session
         self._finalized = False
