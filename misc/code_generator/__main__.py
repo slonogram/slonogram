@@ -5,6 +5,8 @@ from sys import argv, exit
 from json import load
 
 from .schemas_generator import generate_schemas
+from .call_groups_generator import generate_call_groups
+
 from .types import CodegenerationConfig, Spec, RETORT
 
 try:
@@ -36,3 +38,9 @@ schemas = generate_schemas(spec, config)
 with open(schemas_path, "w") as fp:
     wrote = fp.write(schemas)
     print(f">>[Schema] Wrote {wrote} bytes to {schemas_path}")
+
+call_groups = generate_call_groups(config, spec)
+
+for cg_name, text in call_groups.items():
+    print(f">>[CallGroup] Generated {cg_name} ({len(text)} bytes)")
+    open(call_groups_directory / f"{cg_name}.py", "w").write(text)

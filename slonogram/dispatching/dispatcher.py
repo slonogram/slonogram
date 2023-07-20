@@ -129,7 +129,7 @@ class Dispatcher:
         allowed_updates: Optional[List[UpdateType]] = None,
     ) -> NoReturn:
         inter = await self.create_intercontext_data()
-        get_updates = self._bot.updates.get
+        get_updates = self._bot.update.poll
         feed = self.feed_update
 
         async with inter.task_group as tg:

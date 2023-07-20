@@ -1,3 +1,4 @@
+import textwrap
 from dataclasses import dataclass, field
 from typing import Sequence, Optional, Protocol, TypeVar
 
@@ -22,12 +23,16 @@ class DocumentationString:
     return_brief: str
 
     def generate(self, level: int, /) -> str:
-        lines = [self.brief]
+        lines = ['"""', *textwrap.wrap(self.brief, 65)]
 
         for parameter in self.parameters:
-            lines.append(f":param {parameter.name}: {parameter.brief}")
+            base = f":param {parameter.name}: "
+            wrapped = textwrap.wrap(parameter.brief, 60 - len(base))
+            lines.append(f"{base}{wrapped[0]}")
+            lines.extend(" " * len(base) + w for w in wrapped[1:])
 
         lines.append(f":return: {self.return_brief}")
+        lines.append('"""')
         return generate(
             IndentedLines(lines), indent_level=level, use_black=False
         )
@@ -37,6 +42,14 @@ class DocumentationString:
 class SelfArg:
     def generate(self, level: int, /) -> str:
         return f"{gen_indent(level)}self"
+
+
+@dataclass
+class Lines:
+    lines: Sequence[GenerationHelper]
+
+    def generate(self, level: int, /) -> str:
+        return "\n".join(line.generate(level) for line in self.lines)
 
 
 @dataclass
@@ -71,6 +84,12 @@ class Pass:
         return f"{gen_indent(level)}pass"
 
 
+def by_default(k: SelfArg | FunctionArgument) -> int:
+    if isinstance(k, SelfArg):
+        return -1
+    return k.default is not None
+
+
 @dataclass
 class Function:
     name: str
@@ -83,7 +102,9 @@ class Function:
     def generate(self, level: int, /) -> str:
         indent = gen_indent(level)
         asyncness = "async " if self.async_ else ""
-        args = ", ".join(arg.generate(0) for arg in self.args)
+        args = ", ".join(
+            arg.generate(0) for arg in sorted(self.args, key=by_default)
+        )
         lines = [
             f"{indent}{asyncness}def {self.name}({args}) "
             f"-> {self.return_hint}:",
@@ -144,6 +165,15 @@ class IndentedLines:
     def generate(self, level: int, /) -> str:
         indent = gen_indent(level)
         return "\n".join(indent + line for line in self.lines)
+
+
+@dataclass
+class Noqa:
+    stmt: GenerationHelper
+
+    def generate(self, level: int, /) -> str:
+        value = self.stmt.generate(level)
+        return value + "  # noqa"
 
 
 @dataclass

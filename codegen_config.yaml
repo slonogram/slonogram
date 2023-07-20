@@ -2,6 +2,29 @@ renames:
   Update.update_id: id
   Message.message_id: id
 
+call_groups:
+  groups:
+    update: [getUpdates]
+    query: [answerCallbackQuery]
+    user: [getMe]
+    chat: [sendChatAction, sendMessage]
+
+  dump: [
+      # sendMessage
+      sendMessage.entities,
+      sendMessage.replyMarkup,
+    ]
+
+  renames:
+    answerCallbackQuery: answer_callback
+    getUpdates: poll
+    sendChatAction: send_action
+
+  replace_types:
+    sendAction.action: ChatAction
+    sendMessage.parse_mode: ParseMode
+    sendMessage.entities: MessageEntity
+
 enums:
   overrides:
     MessageEntity.type: EntityType

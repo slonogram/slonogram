@@ -1,7 +1,7 @@
 from yaml import safe_load  # type: ignore
 from adaptix import Retort
 from pathlib import Path
-from typing import Dict, NewType, TypeAlias, List
+from typing import Dict, NewType, TypeAlias, List, Set
 from dataclasses import dataclass, field
 
 RETORT = Retort()
@@ -9,6 +9,7 @@ RETORT = Retort()
 AbsolutePath = NewType("AbsolutePath", str)
 Ty = NewType("Ty", str)
 
+MethodName: TypeAlias = str
 Alias: TypeAlias = str
 RenameValue: TypeAlias = str
 
@@ -22,6 +23,19 @@ class Field:
 
 
 @dataclass
+class Method:
+    name: str
+    href: str
+
+    returns: List[str]
+    description: List[str]
+
+    subtypes: List[str] = field(default_factory=list)
+    subtype_of: List[str] = field(default_factory=list)
+    fields: List[Field] = field(default_factory=list)
+
+
+@dataclass
 class Type:
     name: str
     href: str
@@ -31,6 +45,7 @@ class Type:
 
 @dataclass
 class Spec:
+    methods: Dict[str, Method]
     types: Dict[str, Type]
 
 
@@ -41,8 +56,17 @@ class EnumsConfig:
 
 
 @dataclass
+class CallGroupsConfig:
+    groups: Dict[str, List[MethodName]]
+    renames: Dict[str, RenameValue]
+    dump: Set[AbsolutePath]
+    replace_types: Dict[AbsolutePath, Ty]
+
+
+@dataclass
 class CodegenerationConfig:
     enums: EnumsConfig
+    call_groups: CallGroupsConfig
     renames: Dict[AbsolutePath, RenameValue]
 
     @classmethod

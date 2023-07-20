@@ -456,6 +456,17 @@ files = [
 ]
 
 [[package]]
+name = "inflection"
+version = "0.5.1"
+description = "A port of Ruby on Rails inflector to Python"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
+    {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
+]
+
+[[package]]
 name = "intervaltree"
 version = "3.1.0"
 description = "Editable interval tree data structure for Python 2 and 3"
@@ -1092,4 +1103,4 @@ slonodi = ["slonodi"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "cd33f90fce0a97ebafe7a5851dfaa984ae509871d47594c7b6d6e1f4837c8980"
+content-hash = "18a1e461487994b5d20e62eab32c3ececa2cbdd7b84a20b1e2200dba49ceb09b"
