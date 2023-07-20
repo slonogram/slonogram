@@ -10,6 +10,30 @@ class GenerationHelper(Protocol):
 
 
 @dataclass
+class DocParameter:
+    name: str
+    brief: str
+
+
+@dataclass
+class DocumentationString:
+    brief: str
+    parameters: Sequence[DocParameter]
+    return_brief: str
+
+    def generate(self, level: int, /) -> str:
+        lines = [self.brief]
+
+        for parameter in self.parameters:
+            lines.append(f":param {parameter.name}: {parameter.brief}")
+
+        lines.append(f":return: {self.return_brief}")
+        return generate(
+            IndentedLines(lines), indent_level=level, use_black=False
+        )
+
+
+@dataclass
 class SelfArg:
     def generate(self, level: int, /) -> str:
         return f"{gen_indent(level)}self"
@@ -139,8 +163,12 @@ class Import:
         return f"{indent}import {self.package}"
 
 
-def generate(*helpers: GenerationHelper, use_black: bool = True) -> str:
-    result = "\n".join(helper.generate(0) for helper in helpers)
+def generate(
+    *helpers: GenerationHelper,
+    indent_level: int = 0,
+    use_black: bool = True,
+) -> str:
+    result = "\n".join(helper.generate(indent_level) for helper in helpers)
     if use_black:
         import black
         from black.report import NothingChanged
