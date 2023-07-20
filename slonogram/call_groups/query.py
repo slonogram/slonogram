@@ -12,14 +12,14 @@ class QueryCallGroup:
         self._session = session
         self._retort = retort
 
-    def answer_callback(
+    async def answer_callback(
         self,
         callback_query_id: str,
         text: Optional[str] = None,
         show_alert: Optional[bool] = None,
         url: Optional[str] = None,
         cache_time: Optional[int] = None,
-    ) -> Awaitable[bool]:
+    ) -> bool:
         """
         Use this method to send answers to callback queries sent from
         inline keyboards. The answer will be displayed to the user as a
@@ -50,19 +50,20 @@ class QueryCallGroup:
                            Defaults to 0.
         :return: See link mentioned above for more information
         """
-        args: dict = {"callback_query_id": callback_query_id}
+        params: dict = {"callback_query_id": callback_query_id}
         if text is not None:
-            args["text"] = text
+            params["text"] = text
 
         if show_alert is not None:
-            args["show_alert"] = show_alert
+            params["show_alert"] = show_alert
 
         if url is not None:
-            args["url"] = url
+            params["url"] = url
 
         if cache_time is not None:
-            args["cache_time"] = cache_time
+            params["cache_time"] = cache_time
 
         return self._retort.load(
-            self._session.call_method("answerCallbackQuery", args), bool
+            await self._session.call_method("answerCallbackQuery", params),
+            bool,
         )

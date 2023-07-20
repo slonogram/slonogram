@@ -31,7 +31,7 @@ def prefix_schema(r: ParsedType) -> str:
     if r.from_schema:
         if r.arg is None:
             return f"slonogram.schemas.{r.result}"
-        return f"slonogram.schemas.{r.arg}"
+        return f"List[slonogram.schemas.{r.arg}]"
     return r.result
 
 
@@ -40,7 +40,7 @@ def parse_multiple_types(
 ) -> str:
     match telegram_tps:
         case [tp]:
-            return parse_type(tp, True)
+            return parse_type(tp, prefix)
         case anything:
             return " | ".join(
                 prefix_schema(parse_type_ex(tp))

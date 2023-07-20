@@ -135,7 +135,7 @@ class Dispatcher:
         async with inter.task_group as tg:
             while True:
                 updates = await get_updates(
-                    offset, limit, timeout, allowed_updates
+                    offset, limit, timeout, allowed_updates  # type: ignore
                 )
 
                 if updates:

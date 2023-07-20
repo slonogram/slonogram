@@ -12,7 +12,7 @@ class UserCallGroup:
         self._session = session
         self._retort = retort
 
-    def get_me(self) -> Awaitable[slonogram.schemas.User]:
+    async def get_me(self) -> slonogram.schemas.User:
         """
         A simple method for testing your bot's authentication token.
         Requires no parameters. Returns basic information about the bot
@@ -20,9 +20,9 @@ class UserCallGroup:
         https://core.telegram.org/bots/api#getme
         :return: See link mentioned above for more information
         """
-        args: dict = {}
+        params: dict = {}
 
         return self._retort.load(
-            self._session.call_method("getMe", args),
+            await self._session.call_method("getMe", params),
             slonogram.schemas.User,
         )

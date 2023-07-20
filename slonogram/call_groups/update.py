@@ -12,13 +12,13 @@ class UpdateCallGroup:
         self._session = session
         self._retort = retort
 
-    def poll(
+    async def poll(
         self,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
         timeout: Optional[int] = None,
         allowed_updates: Optional[List[str]] = None,
-    ) -> Awaitable[slonogram.schemas.Update]:
+    ) -> List[slonogram.schemas.Update]:
         """
         Use this method to receive incoming updates using long polling
         (wiki). Returns an Array of Update objects. for more:
@@ -61,20 +61,20 @@ class UpdateCallGroup:
                                 time.
         :return: See link mentioned above for more information
         """
-        args: dict = {}
+        params: dict = {}
         if offset is not None:
-            args["offset"] = offset
+            params["offset"] = offset
 
         if limit is not None:
-            args["limit"] = limit
+            params["limit"] = limit
 
         if timeout is not None:
-            args["timeout"] = timeout
+            params["timeout"] = timeout
 
         if allowed_updates is not None:
-            args["allowed_updates"] = allowed_updates
+            params["allowed_updates"] = allowed_updates
 
         return self._retort.load(
-            self._session.call_method("getUpdates", args),
-            slonogram.schemas.Update,
+            await self._session.call_method("getUpdates", params),
+            List[slonogram.schemas.Update],
         )

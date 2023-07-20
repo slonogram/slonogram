@@ -12,12 +12,12 @@ class ChatCallGroup:
         self._session = session
         self._retort = retort
 
-    def send_action(
+    async def send_action(
         self,
         chat_id: int | str,
         action: str,
         message_thread_id: Optional[int] = None,
-    ) -> Awaitable[bool]:
+    ) -> bool:
         """
         Use this method when you need to tell the user that something is
         happening on the bot's side. The status is set for 5 seconds or
@@ -43,15 +43,15 @@ class ChatCallGroup:
                        video notes.
         :return: See link mentioned above for more information
         """
-        args: dict = {"chat_id": chat_id, "action": action}
+        params: dict = {"chat_id": chat_id, "action": action}
         if message_thread_id is not None:
-            args["message_thread_id"] = message_thread_id
+            params["message_thread_id"] = message_thread_id
 
         return self._retort.load(
-            self._session.call_method("sendChatAction", args), bool
+            await self._session.call_method("sendChatAction", params), bool
         )
 
-    def send_message(
+    async def send_message(
         self,
         chat_id: int | str,
         text: str,
@@ -69,7 +69,7 @@ class ChatCallGroup:
             | slonogram.schemas.ReplyKeyboardRemove
             | slonogram.schemas.ForceReply
         ] = None,
-    ) -> Awaitable[slonogram.schemas.Message]:
+    ) -> slonogram.schemas.Message:
         """
         Use this method to send text messages. On success, the sent
         Message is returned. for more:
@@ -108,37 +108,37 @@ class ChatCallGroup:
                              or to force a reply from the user.
         :return: See link mentioned above for more information
         """
-        args: dict = {"chat_id": chat_id, "text": text}
+        params: dict = {"chat_id": chat_id, "text": text}
         if message_thread_id is not None:
-            args["message_thread_id"] = message_thread_id
+            params["message_thread_id"] = message_thread_id
 
         if parse_mode is not None:
-            args["parse_mode"] = parse_mode
+            params["parse_mode"] = parse_mode
 
         if entities is not None:
-            args["entities"] = dumps(self._retort.dump(entities))
+            params["entities"] = dumps(self._retort.dump(entities))
 
         if disable_web_page_preview is not None:
-            args["disable_web_page_preview"] = disable_web_page_preview
+            params["disable_web_page_preview"] = disable_web_page_preview
 
         if disable_notification is not None:
-            args["disable_notification"] = disable_notification
+            params["disable_notification"] = disable_notification
 
         if protect_content is not None:
-            args["protect_content"] = protect_content
+            params["protect_content"] = protect_content
 
         if reply_to_message_id is not None:
-            args["reply_to_message_id"] = reply_to_message_id
+            params["reply_to_message_id"] = reply_to_message_id
 
         if allow_sending_without_reply is not None:
-            args[
+            params[
                 "allow_sending_without_reply"
             ] = allow_sending_without_reply
 
         if reply_markup is not None:
-            args["reply_markup"] = reply_markup
+            params["reply_markup"] = reply_markup
 
         return self._retort.load(
-            self._session.call_method("sendMessage", args),
+            await self._session.call_method("sendMessage", params),
             slonogram.schemas.Message,
         )

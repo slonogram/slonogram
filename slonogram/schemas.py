@@ -64,22 +64,20 @@ class ParseMode(str, Enum):
 @dataclass(slots=True)
 class Update:
     id: int
-    message: Optional[slonogram.schemas.Message] = None
-    edited_message: Optional[slonogram.schemas.Message] = None
-    channel_post: Optional[slonogram.schemas.Message] = None
-    edited_channel_post: Optional[slonogram.schemas.Message] = None
-    inline_query: Optional[slonogram.schemas.InlineQuery] = None
-    chosen_inline_result: Optional[
-        slonogram.schemas.ChosenInlineResult
-    ] = None
-    callback_query: Optional[slonogram.schemas.CallbackQuery] = None
-    shipping_query: Optional[slonogram.schemas.ShippingQuery] = None
-    pre_checkout_query: Optional[slonogram.schemas.PreCheckoutQuery] = None
-    poll: Optional[slonogram.schemas.Poll] = None
-    poll_answer: Optional[slonogram.schemas.PollAnswer] = None
-    my_chat_member: Optional[slonogram.schemas.ChatMemberUpdated] = None
-    chat_member: Optional[slonogram.schemas.ChatMemberUpdated] = None
-    chat_join_request: Optional[slonogram.schemas.ChatJoinRequest] = None
+    message: Optional[Message] = None
+    edited_message: Optional[Message] = None
+    channel_post: Optional[Message] = None
+    edited_channel_post: Optional[Message] = None
+    inline_query: Optional[InlineQuery] = None
+    chosen_inline_result: Optional[ChosenInlineResult] = None
+    callback_query: Optional[CallbackQuery] = None
+    shipping_query: Optional[ShippingQuery] = None
+    pre_checkout_query: Optional[PreCheckoutQuery] = None
+    poll: Optional[Poll] = None
+    poll_answer: Optional[PollAnswer] = None
+    my_chat_member: Optional[ChatMemberUpdated] = None
+    chat_member: Optional[ChatMemberUpdated] = None
+    chat_join_request: Optional[ChatJoinRequest] = None
 
 
 @dataclass(slots=True)
@@ -119,7 +117,7 @@ class Chat:
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     is_forum: Optional[bool] = None
-    photo: Optional[slonogram.schemas.ChatPhoto] = None
+    photo: Optional[ChatPhoto] = None
     active_usernames: Optional[List[str]] = None
     emoji_status_custom_emoji_id: Optional[str] = None
     bio: Optional[str] = None
@@ -129,8 +127,8 @@ class Chat:
     join_by_request: Optional[bool] = None
     description: Optional[str] = None
     invite_link: Optional[str] = None
-    pinned_message: Optional[slonogram.schemas.Message] = None
-    permissions: Optional[slonogram.schemas.ChatPermissions] = None
+    pinned_message: Optional[Message] = None
+    permissions: Optional[ChatPermissions] = None
     slow_mode_delay: Optional[int] = None
     message_auto_delete_time: Optional[int] = None
     has_aggressive_anti_spam_enabled: Optional[bool] = None
@@ -139,102 +137,88 @@ class Chat:
     sticker_set_name: Optional[str] = None
     can_set_sticker_set: Optional[bool] = None
     linked_chat_id: Optional[int] = None
-    location: Optional[slonogram.schemas.ChatLocation] = None
+    location: Optional[ChatLocation] = None
 
 
 @dataclass(slots=True)
 class Message:
     id: int
     date: int
-    chat: slonogram.schemas.Chat
+    chat: Chat
     message_thread_id: Optional[int] = None
-    from_: Optional[slonogram.schemas.User] = None
-    sender_chat: Optional[slonogram.schemas.Chat] = None
-    forward_from: Optional[slonogram.schemas.User] = None
-    forward_from_chat: Optional[slonogram.schemas.Chat] = None
+    from_: Optional[User] = None
+    sender_chat: Optional[Chat] = None
+    forward_from: Optional[User] = None
+    forward_from_chat: Optional[Chat] = None
     forward_from_message_id: Optional[int] = None
     forward_signature: Optional[str] = None
     forward_sender_name: Optional[str] = None
     forward_date: Optional[int] = None
     is_topic_message: Optional[bool] = None
     is_automatic_forward: Optional[bool] = None
-    reply_to_message: Optional[slonogram.schemas.Message] = None
-    via_bot: Optional[slonogram.schemas.User] = None
+    reply_to_message: Optional[Message] = None
+    via_bot: Optional[User] = None
     edit_date: Optional[int] = None
     has_protected_content: Optional[bool] = None
     media_group_id: Optional[str] = None
     author_signature: Optional[str] = None
     text: Optional[str] = None
-    entities: Optional[slonogram.schemas.MessageEntity] = None
-    animation: Optional[slonogram.schemas.Animation] = None
-    audio: Optional[slonogram.schemas.Audio] = None
-    document: Optional[slonogram.schemas.Document] = None
-    photo: Optional[slonogram.schemas.PhotoSize] = None
-    sticker: Optional[slonogram.schemas.Sticker] = None
-    video: Optional[slonogram.schemas.Video] = None
-    video_note: Optional[slonogram.schemas.VideoNote] = None
-    voice: Optional[slonogram.schemas.Voice] = None
+    entities: Optional[List[MessageEntity]] = None
+    animation: Optional[Animation] = None
+    audio: Optional[Audio] = None
+    document: Optional[Document] = None
+    photo: Optional[List[PhotoSize]] = None
+    sticker: Optional[Sticker] = None
+    video: Optional[Video] = None
+    video_note: Optional[VideoNote] = None
+    voice: Optional[Voice] = None
     caption: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     has_media_spoiler: Optional[bool] = None
-    contact: Optional[slonogram.schemas.Contact] = None
-    dice: Optional[slonogram.schemas.Dice] = None
-    game: Optional[slonogram.schemas.Game] = None
-    poll: Optional[slonogram.schemas.Poll] = None
-    venue: Optional[slonogram.schemas.Venue] = None
-    location: Optional[slonogram.schemas.Location] = None
-    new_chat_members: Optional[slonogram.schemas.User] = None
-    left_chat_member: Optional[slonogram.schemas.User] = None
+    contact: Optional[Contact] = None
+    dice: Optional[Dice] = None
+    game: Optional[Game] = None
+    poll: Optional[Poll] = None
+    venue: Optional[Venue] = None
+    location: Optional[Location] = None
+    new_chat_members: Optional[List[User]] = None
+    left_chat_member: Optional[User] = None
     new_chat_title: Optional[str] = None
-    new_chat_photo: Optional[slonogram.schemas.PhotoSize] = None
+    new_chat_photo: Optional[List[PhotoSize]] = None
     delete_chat_photo: Optional[bool] = None
     group_chat_created: Optional[bool] = None
     supergroup_chat_created: Optional[bool] = None
     channel_chat_created: Optional[bool] = None
     message_auto_delete_timer_changed: Optional[
-        slonogram.schemas.MessageAutoDeleteTimerChanged
+        MessageAutoDeleteTimerChanged
     ] = None
     migrate_to_chat_id: Optional[int] = None
     migrate_from_chat_id: Optional[int] = None
-    pinned_message: Optional[slonogram.schemas.Message] = None
-    invoice: Optional[slonogram.schemas.Invoice] = None
-    successful_payment: Optional[
-        slonogram.schemas.SuccessfulPayment
-    ] = None
-    user_shared: Optional[slonogram.schemas.UserShared] = None
-    chat_shared: Optional[slonogram.schemas.ChatShared] = None
+    pinned_message: Optional[Message] = None
+    invoice: Optional[Invoice] = None
+    successful_payment: Optional[SuccessfulPayment] = None
+    user_shared: Optional[UserShared] = None
+    chat_shared: Optional[ChatShared] = None
     connected_website: Optional[str] = None
-    write_access_allowed: Optional[
-        slonogram.schemas.WriteAccessAllowed
-    ] = None
-    passport_data: Optional[slonogram.schemas.PassportData] = None
-    proximity_alert_triggered: Optional[
-        slonogram.schemas.ProximityAlertTriggered
-    ] = None
-    forum_topic_created: Optional[
-        slonogram.schemas.ForumTopicCreated
-    ] = None
-    forum_topic_edited: Optional[slonogram.schemas.ForumTopicEdited] = None
-    forum_topic_closed: Optional[slonogram.schemas.ForumTopicClosed] = None
-    forum_topic_reopened: Optional[
-        slonogram.schemas.ForumTopicReopened
-    ] = None
-    general_forum_topic_hidden: Optional[
-        slonogram.schemas.GeneralForumTopicHidden
-    ] = None
+    write_access_allowed: Optional[WriteAccessAllowed] = None
+    passport_data: Optional[PassportData] = None
+    proximity_alert_triggered: Optional[ProximityAlertTriggered] = None
+    forum_topic_created: Optional[ForumTopicCreated] = None
+    forum_topic_edited: Optional[ForumTopicEdited] = None
+    forum_topic_closed: Optional[ForumTopicClosed] = None
+    forum_topic_reopened: Optional[ForumTopicReopened] = None
+    general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = None
     general_forum_topic_unhidden: Optional[
-        slonogram.schemas.GeneralForumTopicUnhidden
+        GeneralForumTopicUnhidden
     ] = None
-    video_chat_scheduled: Optional[
-        slonogram.schemas.VideoChatScheduled
-    ] = None
-    video_chat_started: Optional[slonogram.schemas.VideoChatStarted] = None
-    video_chat_ended: Optional[slonogram.schemas.VideoChatEnded] = None
+    video_chat_scheduled: Optional[VideoChatScheduled] = None
+    video_chat_started: Optional[VideoChatStarted] = None
+    video_chat_ended: Optional[VideoChatEnded] = None
     video_chat_participants_invited: Optional[
-        slonogram.schemas.VideoChatParticipantsInvited
+        VideoChatParticipantsInvited
     ] = None
-    web_app_data: Optional[slonogram.schemas.WebAppData] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
+    web_app_data: Optional[WebAppData] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
 
 
 @dataclass(slots=True)
@@ -248,7 +232,7 @@ class MessageEntity:
     offset: int
     length: int
     url: Optional[str] = None
-    user: Optional[slonogram.schemas.User] = None
+    user: Optional[User] = None
     language: Optional[str] = None
     custom_emoji_id: Optional[str] = None
 
@@ -269,7 +253,7 @@ class Animation:
     width: int
     height: int
     duration: int
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
     file_name: Optional[str] = None
     mime_type: Optional[str] = None
     file_size: Optional[int] = None
@@ -285,14 +269,14 @@ class Audio:
     file_name: Optional[str] = None
     mime_type: Optional[str] = None
     file_size: Optional[int] = None
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
 
 
 @dataclass(slots=True)
 class Document:
     file_id: str
     file_unique_id: str
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
     file_name: Optional[str] = None
     mime_type: Optional[str] = None
     file_size: Optional[int] = None
@@ -305,7 +289,7 @@ class Video:
     width: int
     height: int
     duration: int
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
     file_name: Optional[str] = None
     mime_type: Optional[str] = None
     file_size: Optional[int] = None
@@ -317,7 +301,7 @@ class VideoNote:
     file_unique_id: str
     length: int
     duration: int
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
     file_size: Optional[int] = None
 
 
@@ -354,7 +338,7 @@ class PollOption:
 @dataclass(slots=True)
 class PollAnswer:
     poll_id: str
-    user: slonogram.schemas.User
+    user: User
     option_ids: List[int]
 
 
@@ -362,7 +346,7 @@ class PollAnswer:
 class Poll:
     id: str
     question: str
-    options: slonogram.schemas.PollOption
+    options: List[PollOption]
     total_voter_count: int
     is_closed: bool
     is_anonymous: bool
@@ -370,7 +354,7 @@ class Poll:
     allows_multiple_answers: bool
     correct_option_id: Optional[int] = None
     explanation: Optional[str] = None
-    explanation_entities: Optional[slonogram.schemas.MessageEntity] = None
+    explanation_entities: Optional[List[MessageEntity]] = None
     open_period: Optional[int] = None
     close_date: Optional[int] = None
 
@@ -387,7 +371,7 @@ class Location:
 
 @dataclass(slots=True)
 class Venue:
-    location: slonogram.schemas.Location
+    location: Location
     title: str
     address: str
     foursquare_id: Optional[str] = None
@@ -404,8 +388,8 @@ class WebAppData:
 
 @dataclass(slots=True)
 class ProximityAlertTriggered:
-    traveler: slonogram.schemas.User
-    watcher: slonogram.schemas.User
+    traveler: User
+    watcher: User
     distance: int
 
 
@@ -481,13 +465,13 @@ class VideoChatEnded:
 
 @dataclass(slots=True)
 class VideoChatParticipantsInvited:
-    users: slonogram.schemas.User
+    users: List[User]
 
 
 @dataclass(slots=True)
 class UserProfilePhotos:
     total_count: int
-    photos: slonogram.schemas.List[PhotoSize]
+    photos: List[List[PhotoSize]]
 
 
 @dataclass(slots=True)
@@ -505,7 +489,7 @@ class WebAppInfo:
 
 @dataclass(slots=True)
 class ReplyKeyboardMarkup:
-    keyboard: slonogram.schemas.List[KeyboardButton]
+    keyboard: List[List[KeyboardButton]]
     is_persistent: Optional[bool] = None
     resize_keyboard: Optional[bool] = None
     one_time_keyboard: Optional[bool] = None
@@ -516,16 +500,12 @@ class ReplyKeyboardMarkup:
 @dataclass(slots=True)
 class KeyboardButton:
     text: str
-    request_user: Optional[
-        slonogram.schemas.KeyboardButtonRequestUser
-    ] = None
-    request_chat: Optional[
-        slonogram.schemas.KeyboardButtonRequestChat
-    ] = None
+    request_user: Optional[KeyboardButtonRequestUser] = None
+    request_chat: Optional[KeyboardButtonRequestChat] = None
     request_contact: Optional[bool] = None
     request_location: Optional[bool] = None
-    request_poll: Optional[slonogram.schemas.KeyboardButtonPollType] = None
-    web_app: Optional[slonogram.schemas.WebAppInfo] = None
+    request_poll: Optional[KeyboardButtonPollType] = None
+    web_app: Optional[WebAppInfo] = None
 
 
 @dataclass(slots=True)
@@ -542,12 +522,8 @@ class KeyboardButtonRequestChat:
     chat_is_forum: Optional[bool] = None
     chat_has_username: Optional[bool] = None
     chat_is_created: Optional[bool] = None
-    user_administrator_rights: Optional[
-        slonogram.schemas.ChatAdministratorRights
-    ] = None
-    bot_administrator_rights: Optional[
-        slonogram.schemas.ChatAdministratorRights
-    ] = None
+    user_administrator_rights: Optional[ChatAdministratorRights] = None
+    bot_administrator_rights: Optional[ChatAdministratorRights] = None
     bot_is_member: Optional[bool] = None
 
 
@@ -564,7 +540,7 @@ class ReplyKeyboardRemove:
 
 @dataclass(slots=True)
 class InlineKeyboardMarkup:
-    inline_keyboard: slonogram.schemas.List[InlineKeyboardButton]
+    inline_keyboard: List[List[InlineKeyboardButton]]
 
 
 @dataclass(slots=True)
@@ -572,14 +548,14 @@ class InlineKeyboardButton:
     text: str
     url: Optional[str] = None
     callback_data: Optional[str] = None
-    web_app: Optional[slonogram.schemas.WebAppInfo] = None
-    login_url: Optional[slonogram.schemas.LoginUrl] = None
+    web_app: Optional[WebAppInfo] = None
+    login_url: Optional[LoginUrl] = None
     switch_inline_query: Optional[str] = None
     switch_inline_query_current_chat: Optional[str] = None
     switch_inline_query_chosen_chat: Optional[
-        slonogram.schemas.SwitchInlineQueryChosenChat
+        SwitchInlineQueryChosenChat
     ] = None
-    callback_game: Optional[slonogram.schemas.CallbackGame] = None
+    callback_game: Optional[CallbackGame] = None
     pay: Optional[bool] = None
 
 
@@ -603,9 +579,9 @@ class SwitchInlineQueryChosenChat:
 @dataclass(slots=True)
 class CallbackQuery:
     id: str
-    from_: slonogram.schemas.User
+    from_: User
     chat_instance: str
-    message: Optional[slonogram.schemas.Message] = None
+    message: Optional[Message] = None
     inline_message_id: Optional[str] = None
     data: Optional[str] = None
     game_short_name: Optional[str] = None
@@ -629,7 +605,7 @@ class ChatPhoto:
 @dataclass(slots=True)
 class ChatInviteLink:
     invite_link: str
-    creator: slonogram.schemas.User
+    creator: User
     creates_join_request: bool
     is_primary: bool
     is_revoked: bool
@@ -663,7 +639,7 @@ class ChatMember:
 @dataclass(slots=True)
 class ChatMemberOwner:
     status: str
-    user: slonogram.schemas.User
+    user: User
     is_anonymous: bool
     custom_title: Optional[str] = None
 
@@ -671,7 +647,7 @@ class ChatMemberOwner:
 @dataclass(slots=True)
 class ChatMemberAdministrator:
     status: str
-    user: slonogram.schemas.User
+    user: User
     can_be_edited: bool
     is_anonymous: bool
     can_manage_chat: bool
@@ -691,13 +667,13 @@ class ChatMemberAdministrator:
 @dataclass(slots=True)
 class ChatMemberMember:
     status: str
-    user: slonogram.schemas.User
+    user: User
 
 
 @dataclass(slots=True)
 class ChatMemberRestricted:
     status: str
-    user: slonogram.schemas.User
+    user: User
     is_member: bool
     can_send_messages: bool
     can_send_audios: bool
@@ -719,35 +695,35 @@ class ChatMemberRestricted:
 @dataclass(slots=True)
 class ChatMemberLeft:
     status: str
-    user: slonogram.schemas.User
+    user: User
 
 
 @dataclass(slots=True)
 class ChatMemberBanned:
     status: str
-    user: slonogram.schemas.User
+    user: User
     until_date: int
 
 
 @dataclass(slots=True)
 class ChatMemberUpdated:
-    chat: slonogram.schemas.Chat
-    from_: slonogram.schemas.User
+    chat: Chat
+    from_: User
     date: int
-    old_chat_member: slonogram.schemas.ChatMember
-    new_chat_member: slonogram.schemas.ChatMember
-    invite_link: Optional[slonogram.schemas.ChatInviteLink] = None
+    old_chat_member: ChatMember
+    new_chat_member: ChatMember
+    invite_link: Optional[ChatInviteLink] = None
     via_chat_folder_invite_link: Optional[bool] = None
 
 
 @dataclass(slots=True)
 class ChatJoinRequest:
-    chat: slonogram.schemas.Chat
-    from_: slonogram.schemas.User
+    chat: Chat
+    from_: User
     user_chat_id: int
     date: int
     bio: Optional[str] = None
-    invite_link: Optional[slonogram.schemas.ChatInviteLink] = None
+    invite_link: Optional[ChatInviteLink] = None
 
 
 @dataclass(slots=True)
@@ -770,7 +746,7 @@ class ChatPermissions:
 
 @dataclass(slots=True)
 class ChatLocation:
-    location: slonogram.schemas.Location
+    location: Location
     address: str
 
 
@@ -861,7 +837,7 @@ class MenuButtonCommands:
 class MenuButtonWebApp:
     type: str
     text: str
-    web_app: slonogram.schemas.WebAppInfo
+    web_app: WebAppInfo
 
 
 @dataclass(slots=True)
@@ -886,7 +862,7 @@ class InputMediaPhoto:
     media: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     has_spoiler: Optional[bool] = None
 
 
@@ -897,7 +873,7 @@ class InputMediaVideo:
     thumbnail: Optional[InputFile | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     width: Optional[int] = None
     height: Optional[int] = None
     duration: Optional[int] = None
@@ -912,7 +888,7 @@ class InputMediaAnimation:
     thumbnail: Optional[InputFile | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     width: Optional[int] = None
     height: Optional[int] = None
     duration: Optional[int] = None
@@ -926,7 +902,7 @@ class InputMediaAudio:
     thumbnail: Optional[InputFile | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     duration: Optional[int] = None
     performer: Optional[str] = None
     title: Optional[str] = None
@@ -939,7 +915,7 @@ class InputMediaDocument:
     thumbnail: Optional[InputFile | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     disable_content_type_detection: Optional[bool] = None
 
 
@@ -957,11 +933,11 @@ class Sticker:
     height: int
     is_animated: bool
     is_video: bool
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    thumbnail: Optional[PhotoSize] = None
     emoji: Optional[str] = None
     set_name: Optional[str] = None
-    premium_animation: Optional[slonogram.schemas.File] = None
-    mask_position: Optional[slonogram.schemas.MaskPosition] = None
+    premium_animation: Optional[File] = None
+    mask_position: Optional[MaskPosition] = None
     custom_emoji_id: Optional[str] = None
     needs_repainting: Optional[bool] = None
     file_size: Optional[int] = None
@@ -974,8 +950,8 @@ class StickerSet:
     sticker_type: str
     is_animated: bool
     is_video: bool
-    stickers: slonogram.schemas.Sticker
-    thumbnail: Optional[slonogram.schemas.PhotoSize] = None
+    stickers: List[Sticker]
+    thumbnail: Optional[PhotoSize] = None
 
 
 @dataclass(slots=True)
@@ -990,24 +966,24 @@ class MaskPosition:
 class InputSticker:
     sticker: InputFile | str
     emoji_list: List[str]
-    mask_position: Optional[slonogram.schemas.MaskPosition] = None
+    mask_position: Optional[MaskPosition] = None
     keywords: Optional[List[str]] = None
 
 
 @dataclass(slots=True)
 class InlineQuery:
     id: str
-    from_: slonogram.schemas.User
+    from_: User
     query: str
     offset: str
     chat_type: Optional[str] = None
-    location: Optional[slonogram.schemas.Location] = None
+    location: Optional[Location] = None
 
 
 @dataclass(slots=True)
 class InlineQueryResultsButton:
     text: str
-    web_app: Optional[slonogram.schemas.WebAppInfo] = None
+    web_app: Optional[WebAppInfo] = None
     start_parameter: Optional[str] = None
 
 
@@ -1021,8 +997,8 @@ class InlineQueryResultArticle:
     type: str
     id: str
     title: str
-    input_message_content: slonogram.schemas.InputMessageContent
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
+    input_message_content: InputMessageContent
+    reply_markup: Optional[InlineKeyboardMarkup] = None
     url: Optional[str] = None
     hide_url: Optional[bool] = None
     description: Optional[str] = None
@@ -1043,11 +1019,9 @@ class InlineQueryResultPhoto:
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1063,11 +1037,9 @@ class InlineQueryResultGif:
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1083,11 +1055,9 @@ class InlineQueryResultMpeg4Gif:
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1100,15 +1070,13 @@ class InlineQueryResultVideo:
     title: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     video_width: Optional[int] = None
     video_height: Optional[int] = None
     video_duration: Optional[int] = None
     description: Optional[str] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1119,13 +1087,11 @@ class InlineQueryResultAudio:
     title: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     performer: Optional[str] = None
     audio_duration: Optional[int] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1136,12 +1102,10 @@ class InlineQueryResultVoice:
     title: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     voice_duration: Optional[int] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1153,12 +1117,10 @@ class InlineQueryResultDocument:
     mime_type: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
+    caption_entities: Optional[List[MessageEntity]] = None
     description: Optional[str] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
     thumbnail_url: Optional[str] = None
     thumbnail_width: Optional[int] = None
     thumbnail_height: Optional[int] = None
@@ -1175,10 +1137,8 @@ class InlineQueryResultLocation:
     live_period: Optional[int] = None
     heading: Optional[int] = None
     proximity_alert_radius: Optional[int] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
     thumbnail_url: Optional[str] = None
     thumbnail_width: Optional[int] = None
     thumbnail_height: Optional[int] = None
@@ -1196,10 +1156,8 @@ class InlineQueryResultVenue:
     foursquare_type: Optional[str] = None
     google_place_id: Optional[str] = None
     google_place_type: Optional[str] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
     thumbnail_url: Optional[str] = None
     thumbnail_width: Optional[int] = None
     thumbnail_height: Optional[int] = None
@@ -1213,10 +1171,8 @@ class InlineQueryResultContact:
     first_name: str
     last_name: Optional[str] = None
     vcard: Optional[str] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
     thumbnail_url: Optional[str] = None
     thumbnail_width: Optional[int] = None
     thumbnail_height: Optional[int] = None
@@ -1227,7 +1183,7 @@ class InlineQueryResultGame:
     type: str
     id: str
     game_short_name: str
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
 
 
 @dataclass(slots=True)
@@ -1239,11 +1195,9 @@ class InlineQueryResultCachedPhoto:
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1254,11 +1208,9 @@ class InlineQueryResultCachedGif:
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1269,11 +1221,9 @@ class InlineQueryResultCachedMpeg4Gif:
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1281,10 +1231,8 @@ class InlineQueryResultCachedSticker:
     type: str
     id: str
     sticker_file_id: str
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1296,11 +1244,9 @@ class InlineQueryResultCachedDocument:
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1312,11 +1258,9 @@ class InlineQueryResultCachedVideo:
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1327,11 +1271,9 @@ class InlineQueryResultCachedVoice:
     title: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1341,11 +1283,9 @@ class InlineQueryResultCachedAudio:
     audio_file_id: str
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
-    caption_entities: Optional[slonogram.schemas.MessageEntity] = None
-    reply_markup: Optional[slonogram.schemas.InlineKeyboardMarkup] = None
-    input_message_content: Optional[
-        slonogram.schemas.InputMessageContent
-    ] = None
+    caption_entities: Optional[List[MessageEntity]] = None
+    reply_markup: Optional[InlineKeyboardMarkup] = None
+    input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
@@ -1357,7 +1297,7 @@ class InputMessageContent:
 class InputTextMessageContent:
     message_text: str
     parse_mode: Optional[str] = None
-    entities: Optional[slonogram.schemas.MessageEntity] = None
+    entities: Optional[List[MessageEntity]] = None
     disable_web_page_preview: Optional[bool] = None
 
 
@@ -1398,7 +1338,7 @@ class InputInvoiceMessageContent:
     payload: str
     provider_token: str
     currency: str
-    prices: slonogram.schemas.LabeledPrice
+    prices: List[LabeledPrice]
     max_tip_amount: Optional[int] = None
     suggested_tip_amounts: Optional[List[int]] = None
     provider_data: Optional[str] = None
@@ -1418,9 +1358,9 @@ class InputInvoiceMessageContent:
 @dataclass(slots=True)
 class ChosenInlineResult:
     result_id: str
-    from_: slonogram.schemas.User
+    from_: User
     query: str
-    location: Optional[slonogram.schemas.Location] = None
+    location: Optional[Location] = None
     inline_message_id: Optional[str] = None
 
 
@@ -1459,14 +1399,14 @@ class OrderInfo:
     name: Optional[str] = None
     phone_number: Optional[str] = None
     email: Optional[str] = None
-    shipping_address: Optional[slonogram.schemas.ShippingAddress] = None
+    shipping_address: Optional[ShippingAddress] = None
 
 
 @dataclass(slots=True)
 class ShippingOption:
     id: str
     title: str
-    prices: slonogram.schemas.LabeledPrice
+    prices: List[LabeledPrice]
 
 
 @dataclass(slots=True)
@@ -1477,32 +1417,32 @@ class SuccessfulPayment:
     telegram_payment_charge_id: str
     provider_payment_charge_id: str
     shipping_option_id: Optional[str] = None
-    order_info: Optional[slonogram.schemas.OrderInfo] = None
+    order_info: Optional[OrderInfo] = None
 
 
 @dataclass(slots=True)
 class ShippingQuery:
     id: str
-    from_: slonogram.schemas.User
+    from_: User
     invoice_payload: str
-    shipping_address: slonogram.schemas.ShippingAddress
+    shipping_address: ShippingAddress
 
 
 @dataclass(slots=True)
 class PreCheckoutQuery:
     id: str
-    from_: slonogram.schemas.User
+    from_: User
     currency: str
     total_amount: int
     invoice_payload: str
     shipping_option_id: Optional[str] = None
-    order_info: Optional[slonogram.schemas.OrderInfo] = None
+    order_info: Optional[OrderInfo] = None
 
 
 @dataclass(slots=True)
 class PassportData:
-    data: slonogram.schemas.EncryptedPassportElement
-    credentials: slonogram.schemas.EncryptedCredentials
+    data: List[EncryptedPassportElement]
+    credentials: EncryptedCredentials
 
 
 @dataclass(slots=True)
@@ -1520,11 +1460,11 @@ class EncryptedPassportElement:
     data: Optional[str] = None
     phone_number: Optional[str] = None
     email: Optional[str] = None
-    files: Optional[slonogram.schemas.PassportFile] = None
-    front_side: Optional[slonogram.schemas.PassportFile] = None
-    reverse_side: Optional[slonogram.schemas.PassportFile] = None
-    selfie: Optional[slonogram.schemas.PassportFile] = None
-    translation: Optional[slonogram.schemas.PassportFile] = None
+    files: Optional[List[PassportFile]] = None
+    front_side: Optional[PassportFile] = None
+    reverse_side: Optional[PassportFile] = None
+    selfie: Optional[PassportFile] = None
+    translation: Optional[List[PassportFile]] = None
 
 
 @dataclass(slots=True)
@@ -1616,10 +1556,10 @@ class PassportElementErrorUnspecified:
 class Game:
     title: str
     description: str
-    photo: slonogram.schemas.PhotoSize
+    photo: List[PhotoSize]
     text: Optional[str] = None
-    text_entities: Optional[slonogram.schemas.MessageEntity] = None
-    animation: Optional[slonogram.schemas.Animation] = None
+    text_entities: Optional[List[MessageEntity]] = None
+    animation: Optional[Animation] = None
 
 
 @dataclass(slots=True)
@@ -1630,5 +1570,5 @@ class CallbackGame:
 @dataclass(slots=True)
 class GameHighScore:
     position: int
-    user: slonogram.schemas.User
+    user: User
     score: int

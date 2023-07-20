@@ -1,23 +1,19 @@
 import warnings
 from adaptix import Retort, name_mapping
 
-from typing import Optional, Self
+from typing import Self
 
 from .types.api_session import ApiSession
 from .schemas import Message, Update
 
-from .consts import DEFAULT_API_URL
 from .call_groups import chat, user, update, query
 
 
 class Bot:
     def __init__(
         self,
-        token: Optional[str] = None,
-        base_url: Optional[str] = None,
-        session: Optional[ApiSession] = None,
+        session: ApiSession,
     ) -> None:
-        u_session: ApiSession
         retort = Retort(
             debug_path=True,
             recipe=[
@@ -27,24 +23,12 @@ class Bot:
             ],
         )
 
-        if session is None:
-            from .extra.aiohttp_session import Session
+        self.chat = chat.ChatCallGroup(session, retort)
+        self.user = user.UserCallGroup(session, retort)
+        self.update = update.UpdateCallGroup(session, retort)
+        self.query = query.QueryCallGroup(session, retort)
 
-            if token is None:
-                raise ValueError("No bot token passed")
-
-            u_session = Session(
-                token=token, base_url=base_url or DEFAULT_API_URL
-            )
-        else:
-            u_session = session
-
-        self.chat = chat.ChatCallGroup(retort, u_session)
-        self.user = user.UserCallGroup(retort, u_session)
-        self.update = update.UpdateCallGroup(retort, u_session)
-        self.query = query.QueryCallGroup(retort, u_session)
-
-        self._session = u_session
+        self._session = session
         self._finalized = False
 
     async def __aenter__(self) -> Self:

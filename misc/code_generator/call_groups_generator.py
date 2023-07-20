@@ -122,7 +122,7 @@ def generate_call_group(
                 fn_body.extend(
                     [
                         f"if {arg_name} is not None:"
-                        f"    args[{arg.name!r}] = %s"
+                        f"    params[{arg.name!r}] = %s"
                         % use_retort(
                             arg_name, config, mk_abs(cg_method, arg.name)
                         ),
@@ -150,7 +150,7 @@ def generate_call_group(
                     ),
                     IndentedLines(
                         [
-                            "args: dict = {%s}"
+                            "params: dict = {%s}"
                             % ", ".join(
                                 f"{key!r}: "
                                 + use_retort(
@@ -164,14 +164,15 @@ def generate_call_group(
                     IndentedLines(
                         [
                             f"return self._retort.load("
-                            f"self._session.call_method("
-                            f"{cg_method!r}, args), "
+                            f"await self._session.call_method("
+                            f"{cg_method!r}, params), "
                             f"{ret_tp})"
                         ]
                     ),
                 ]
             ),
-            return_hint=f"Awaitable[{ret_tp}]",
+            return_hint=ret_tp,
+            async_=True,
         )
         body.append(function)
 

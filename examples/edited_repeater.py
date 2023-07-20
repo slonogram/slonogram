@@ -1,6 +1,7 @@
 import asyncio
 
 from slonogram import Bot
+from slonogram.extra.aiohttp_session import Session
 
 from slonogram.schemas import Message
 from slonogram.dispatching import Dispatcher, LocalSet
@@ -22,12 +23,14 @@ async def start(bot: Bot, message: Message) -> None:
 @set_.on_message.edited()
 async def edit_callback(bot: Bot, message: Message) -> None:
     await bot.chat.send_message(
-        message.chat.id, f"Edited: {message.text}", reply_to=message.id
+        message.chat.id,
+        f"Edited: {message.text}",
+        reply_to_message_id=message.id,
     )
 
 
 async def main() -> None:
-    async with Bot(TOKEN) as bot:
+    async with Bot(Session(TOKEN)) as bot:
         dp = Dispatcher(bot)
         dp.set.include(set_)
 
