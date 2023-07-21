@@ -50,15 +50,12 @@ def _model(context: Context[T]) -> T:
     return context.model
 
 
-class DefaultSpecifier:
-    def _deferred(
-        self,
-        names: Tuple[NameItem[Any], ...],
-        context: Context[Any],
-    ) -> Dict[str, Any]:
-        return {name: getter(context) for name, getter in names}
+def _deferred(names: Tuple[NameItem[Any], ...], ctx: Context[Any]) -> Dict[str, Any]:
+    return {name: getter(ctx) for name, getter in names}
 
-    def write_dependencies(
+
+class DefaultSpecifier:
+    def write_dependencies( # noqa
         self, params: Mapping[str, Parameter], _: Container
     ) -> Dict[str, Any] | Tuple[Dict[str, Any], DeferredEvaluation]:
         names: List[NameItem[Any]] = []
@@ -73,7 +70,7 @@ class DefaultSpecifier:
             elif annot in MODEL_TYPES:
                 names.append((name, _model))
 
-        return (_EMPTY_DICT, partial(self._deferred, tuple(names)))
+        return _EMPTY_DICT, partial(_deferred, tuple(names))
 
 
 class SlonodiProvider(Provider[Context[Any]]):
@@ -97,7 +94,7 @@ class FromScratchSpecifier(Generic[T, R]):
     def write_dependencies(
         self, _: Mapping[str, Parameter], __: Container
     ) -> Dict[str, Any] | Tuple[Dict[str, Any], DeferredEvaluation]:
-        return (_EMPTY_DICT, self._deferred)
+        return _EMPTY_DICT, self._deferred
 
 
 def from_scratch(
