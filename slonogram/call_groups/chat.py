@@ -113,7 +113,11 @@ class ChatCallGroup:
             params["parse_mode"] = parse_mode
 
         if entities is not None:
-            params["entities"] = dumps(self._session.retort.dump(entities))
+            params["entities"] = dumps(
+                self._session.retort.dump(
+                    entities, List[schemas.MessageEntity]
+                )
+            )
 
         if disable_web_page_preview is not None:
             params["disable_web_page_preview"] = disable_web_page_preview
@@ -134,7 +138,13 @@ class ChatCallGroup:
 
         if reply_markup is not None:
             params["reply_markup"] = dumps(
-                self._session.retort.dump(reply_markup)
+                self._session.retort.dump(
+                    reply_markup,
+                    schemas.InlineKeyboardMarkup
+                    | schemas.ReplyKeyboardMarkup
+                    | schemas.ReplyKeyboardRemove
+                    | schemas.ForceReply,
+                )
             )
 
         return self._session.call_method(

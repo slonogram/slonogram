@@ -33,10 +33,13 @@ from .helpers import (
 
 
 def use_retort(
-    expr: str, config: CodegenerationConfig, abs_path: AbsolutePath
+    expr: str,
+    config: CodegenerationConfig,
+    abs_path: AbsolutePath,
+    explicit_tp: str,
 ) -> str:
     if abs_path in config.call_groups.dump:
-        return f"dumps(self._session.retort.dump({expr}))"
+        return f"dumps(self._session.retort.dump({expr}, {explicit_tp}))"
     return expr
 
 
@@ -46,7 +49,6 @@ def mk_abs(k: str, v: str) -> AbsolutePath:
 
 def generate_call_group(
     cg_name: str,
-    # this is for black's sake!
     cg_methods: List[MethodName],
     methods: Dict[str, Method],
     config: CodegenerationConfig,
@@ -78,7 +80,7 @@ def generate_call_group(
         doc_params: List[DocParameter] = []
         ret_tp = parse_multiple_types(method.returns, prefix=True)
 
-        dict_presets: List[Tuple[str, str]] = []
+        dict_presets: List[Tuple[str, str, str]] = []
         fn_body: List[str] = []
         for arg in method.fields:
             absolute_path = AbsolutePath(f"{cg_method}.{arg.name}")
@@ -107,7 +109,7 @@ def generate_call_group(
 
             arg_name = escape_hard_keywords(arg.name)
             if arg.required:
-                dict_presets.append((arg.name, arg_name))
+                dict_presets.append((arg.name, arg_name, tp))
                 fn_args.append(
                     FunctionArgument(
                         arg_name,
@@ -120,7 +122,10 @@ def generate_call_group(
                         f"if {arg_name} is not None:"
                         f"    params[{arg.name!r}] = %s"
                         % use_retort(
-                            arg_name, config, mk_abs(cg_method, arg.name)
+                            arg_name,
+                            config,
+                            mk_abs(cg_method, arg.name),
+                            tp,
                         ),
                         "",
                     ]
@@ -150,9 +155,12 @@ def generate_call_group(
                             % ", ".join(
                                 f"{key!r}: "
                                 + use_retort(
-                                    value, config, mk_abs(cg_method, key)
+                                    value,
+                                    config,
+                                    mk_abs(cg_method, key),
+                                    e_tp,
                                 )
-                                for key, value in dict_presets
+                                for key, value, e_tp in dict_presets
                             )
                         ]
                     ),

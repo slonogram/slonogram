@@ -2,7 +2,28 @@ renames:
   Update.update_id: id
   Message.message_id: id
 
-# Possibly this boilerplate can be reduced by using dhall configuration
+defaults:
+  InlineQueryResultCachedAudio.type: audio
+  InlineQueryResultCachedDocument.type: document
+  InlineQueryResultCachedGif.type: gif
+  InlineQueryResultCachedMpeg4Gif.type: mpeg4_gif
+  InlineQueryResultCachedPhoto.type: photo
+  InlineQueryResultCachedSticker.type: sticker
+  InlineQueryResultCachedVideo.type: video
+  InlineQueryResultCachedVoice.type: voice
+  InlineQueryResultArticle.type: article
+  InlineQueryResultAudio.type: audio
+  InlineQueryResultContact.type: contact
+  InlineQueryResultGame.type: game
+  InlineQueryResultDocument.type: document
+  InlineQueryResultGif.type: gif
+  InlineQueryResultLocation.type: location
+  InlineQueryResultMpeg4Gif.type: mpeg4_gif
+  InlineQueryResultPhoto.type: photo
+  InlineQueryResultVenue.type: venue
+  InlineQueryResultVideo.type: video
+  InlineQueryResultVoice.type: voice
+
 call_groups:
   groups:
     update: [getUpdates, getWebhookInfo, deleteWebhook, setWebhook]

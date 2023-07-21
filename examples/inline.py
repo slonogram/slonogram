@@ -13,18 +13,20 @@ set_ = LocalSet()
 
 @set_.on_inline()
 async def respond_inline(bot: Bot, query: InlineQuery) -> None:
-    print(
-        await bot.query.answer_inline(
-            query.id,
-            [
-                InlineQueryResultArticle(
-                    "article",
-                    "1",
-                    "Hello",
-                    InputTextMessageContent("Hello world"),
-                )
-            ],
-        )
+    await bot.query.answer_inline(
+        query.id,
+        [
+            InlineQueryResultArticle(
+                "1",
+                "Hello",
+                InputTextMessageContent("Hello world"),
+            ),
+            InlineQueryResultArticle(
+                "2",
+                "Hello",
+                InputTextMessageContent("Hello world"),
+            ),
+        ],
     )
 
 

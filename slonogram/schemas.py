@@ -985,10 +985,10 @@ class InlineQueryResultsButton:
 
 @dataclass(slots=True)
 class InlineQueryResultArticle:
-    type: str
     id: str
     title: str
     input_message_content: InputMessageContent
+    type: str = "article"
     reply_markup: Optional[InlineKeyboardMarkup] = None
     url: Optional[str] = None
     hide_url: Optional[bool] = None
@@ -1000,10 +1000,10 @@ class InlineQueryResultArticle:
 
 @dataclass(slots=True)
 class InlineQueryResultPhoto:
-    type: str
     id: str
     photo_url: str
     thumbnail_url: str
+    type: str = "photo"
     photo_width: Optional[int] = None
     photo_height: Optional[int] = None
     title: Optional[str] = None
@@ -1017,10 +1017,10 @@ class InlineQueryResultPhoto:
 
 @dataclass(slots=True)
 class InlineQueryResultGif:
-    type: str
     id: str
     gif_url: str
     thumbnail_url: str
+    type: str = "gif"
     gif_width: Optional[int] = None
     gif_height: Optional[int] = None
     gif_duration: Optional[int] = None
@@ -1035,10 +1035,10 @@ class InlineQueryResultGif:
 
 @dataclass(slots=True)
 class InlineQueryResultMpeg4Gif:
-    type: str
     id: str
     mpeg4_url: str
     thumbnail_url: str
+    type: str = "mpeg4_gif"
     mpeg4_width: Optional[int] = None
     mpeg4_height: Optional[int] = None
     mpeg4_duration: Optional[int] = None
@@ -1053,12 +1053,12 @@ class InlineQueryResultMpeg4Gif:
 
 @dataclass(slots=True)
 class InlineQueryResultVideo:
-    type: str
     id: str
     video_url: str
     mime_type: str
     thumbnail_url: str
     title: str
+    type: str = "video"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -1072,10 +1072,10 @@ class InlineQueryResultVideo:
 
 @dataclass(slots=True)
 class InlineQueryResultAudio:
-    type: str
     id: str
     audio_url: str
     title: str
+    type: str = "audio"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -1087,10 +1087,10 @@ class InlineQueryResultAudio:
 
 @dataclass(slots=True)
 class InlineQueryResultVoice:
-    type: str
     id: str
     voice_url: str
     title: str
+    type: str = "voice"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -1101,11 +1101,11 @@ class InlineQueryResultVoice:
 
 @dataclass(slots=True)
 class InlineQueryResultDocument:
-    type: str
     id: str
     title: str
     document_url: str
     mime_type: str
+    type: str = "document"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -1119,11 +1119,11 @@ class InlineQueryResultDocument:
 
 @dataclass(slots=True)
 class InlineQueryResultLocation:
-    type: str
     id: str
     latitude: float
     longitude: float
     title: str
+    type: str = "location"
     horizontal_accuracy: Optional[float] = None
     live_period: Optional[int] = None
     heading: Optional[int] = None
@@ -1137,12 +1137,12 @@ class InlineQueryResultLocation:
 
 @dataclass(slots=True)
 class InlineQueryResultVenue:
-    type: str
     id: str
     latitude: float
     longitude: float
     title: str
     address: str
+    type: str = "venue"
     foursquare_id: Optional[str] = None
     foursquare_type: Optional[str] = None
     google_place_id: Optional[str] = None
@@ -1156,10 +1156,10 @@ class InlineQueryResultVenue:
 
 @dataclass(slots=True)
 class InlineQueryResultContact:
-    type: str
     id: str
     phone_number: str
     first_name: str
+    type: str = "contact"
     last_name: Optional[str] = None
     vcard: Optional[str] = None
     reply_markup: Optional[InlineKeyboardMarkup] = None
@@ -1171,17 +1171,17 @@ class InlineQueryResultContact:
 
 @dataclass(slots=True)
 class InlineQueryResultGame:
-    type: str
     id: str
     game_short_name: str
+    type: str = "game"
     reply_markup: Optional[InlineKeyboardMarkup] = None
 
 
 @dataclass(slots=True)
 class InlineQueryResultCachedPhoto:
-    type: str
     id: str
     photo_file_id: str
+    type: str = "photo"
     title: Optional[str] = None
     description: Optional[str] = None
     caption: Optional[str] = None
@@ -1193,9 +1193,9 @@ class InlineQueryResultCachedPhoto:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedGif:
-    type: str
     id: str
     gif_file_id: str
+    type: str = "gif"
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
@@ -1206,9 +1206,9 @@ class InlineQueryResultCachedGif:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedMpeg4Gif:
-    type: str
     id: str
     mpeg4_file_id: str
+    type: str = "mpeg4_gif"
     title: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
@@ -1219,19 +1219,19 @@ class InlineQueryResultCachedMpeg4Gif:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedSticker:
-    type: str
     id: str
     sticker_file_id: str
+    type: str = "sticker"
     reply_markup: Optional[InlineKeyboardMarkup] = None
     input_message_content: Optional[InputMessageContent] = None
 
 
 @dataclass(slots=True)
 class InlineQueryResultCachedDocument:
-    type: str
     id: str
     title: str
     document_file_id: str
+    type: str = "document"
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
@@ -1242,10 +1242,10 @@ class InlineQueryResultCachedDocument:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedVideo:
-    type: str
     id: str
     video_file_id: str
     title: str
+    type: str = "video"
     description: Optional[str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
@@ -1256,10 +1256,10 @@ class InlineQueryResultCachedVideo:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedVoice:
-    type: str
     id: str
     voice_file_id: str
     title: str
+    type: str = "voice"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -1269,9 +1269,9 @@ class InlineQueryResultCachedVoice:
 
 @dataclass(slots=True)
 class InlineQueryResultCachedAudio:
-    type: str
     id: str
     audio_file_id: str
+    type: str = "audio"
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None

@@ -72,7 +72,7 @@ class UpdateCallGroup:
 
         if allowed_updates is not None:
             params["allowed_updates"] = dumps(
-                self._session.retort.dump(allowed_updates)
+                self._session.retort.dump(allowed_updates, List[str])
             )
 
         return self._session.call_method(

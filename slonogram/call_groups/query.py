@@ -104,7 +104,11 @@ class QueryCallGroup:
         """
         params: dict = {
             "inline_query_id": inline_query_id,
-            "results": dumps(self._session.retort.dump(results)),
+            "results": dumps(
+                self._session.retort.dump(
+                    results, List[schemas.InlineQueryResult]
+                )
+            ),
         }
         if cache_time is not None:
             params["cache_time"] = cache_time

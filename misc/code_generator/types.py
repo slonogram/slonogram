@@ -65,6 +65,7 @@ class CallGroupsConfig:
 
 @dataclass
 class CodegenerationConfig:
+    defaults: Dict[AbsolutePath, str]
     unions: Dict[Ty, List[Ty]]
     enums: EnumsConfig
     call_groups: CallGroupsConfig

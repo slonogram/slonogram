@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from .parser import parse_multiple_types, escape_hard_keywords
 from .types import CodegenerationConfig, Spec, AbsolutePath
@@ -12,6 +12,12 @@ from .helpers import (
     Flake8Noqa,
     IndentedLines,
 )
+
+
+def maybe_repr(v: Optional[str], left_none: bool) -> Optional[str]:
+    if v is None:
+        return "None" if not left_none else None
+    return repr(v)
 
 
 def generate_schemas(spec: Spec, config: CodegenerationConfig) -> str:
@@ -67,13 +73,23 @@ def generate_schemas(spec: Spec, config: CodegenerationConfig) -> str:
                 tp = override_tp
 
             if field.required:
-                tp_fields.append(ClassField(field_name, tp))
+                tp_fields.append(
+                    ClassField(
+                        field_name,
+                        tp,
+                        maybe_repr(
+                            config.defaults.get(absolute_path), True
+                        ),
+                    )
+                )
             else:
                 tp_fields.append(
                     ClassField(
                         escape_hard_keywords(field_name),
                         f"Optional[{tp}]",
-                        "None",
+                        maybe_repr(
+                            config.defaults.get(absolute_path), False
+                        ),
                     )
                 )
         class_ = Class(ty_name, [], tp_fields)
