@@ -1,5 +1,5 @@
 from typing import Awaitable, Optional, List  # noqa
-import slonogram.schemas  # noqa
+from slonogram import schemas  # noqa
 from slonogram.types.api_session import ApiSession
 from slonogram.utils.json import dumps  # noqa
 
@@ -10,7 +10,7 @@ class UserCallGroup:
     def __init__(self, session: ApiSession) -> None:
         self._session = session
 
-    async def get_me(self) -> slonogram.schemas.User:
+    def get_me(self) -> Awaitable[schemas.User]:
         """
         A simple method for testing your bot's authentication token.
         Requires no parameters. Returns basic information about the bot
@@ -20,6 +20,4 @@ class UserCallGroup:
         """
         params: dict = {}
 
-        return await self._session.call_method(
-            slonogram.schemas.User, "getMe", params
-        )
+        return self._session.call_method(schemas.User, "getMe", params)

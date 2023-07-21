@@ -4,7 +4,7 @@ renames:
 
 call_groups:
   groups:
-    update: [getUpdates]
+    update: [getUpdates, getWebhookInfo, deleteWebhook, setWebhook]
     query: [answerCallbackQuery]
     user: [getMe]
     chat: [sendChatAction, sendMessage]

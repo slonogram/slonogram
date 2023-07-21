@@ -1,5 +1,5 @@
 from typing import Awaitable, Optional, List  # noqa
-import slonogram.schemas  # noqa
+from slonogram import schemas  # noqa
 from slonogram.types.api_session import ApiSession
 from slonogram.utils.json import dumps  # noqa
 
@@ -10,14 +10,14 @@ class QueryCallGroup:
     def __init__(self, session: ApiSession) -> None:
         self._session = session
 
-    async def answer_callback(
+    def answer_callback(
         self,
         callback_query_id: str,
         text: Optional[str] = None,
         show_alert: Optional[bool] = None,
         url: Optional[str] = None,
         cache_time: Optional[int] = None,
-    ) -> bool:
+    ) -> Awaitable[bool]:
         """
         Use this method to send answers to callback queries sent from
         inline keyboards. The answer will be displayed to the user as a
@@ -61,6 +61,6 @@ class QueryCallGroup:
         if cache_time is not None:
             params["cache_time"] = cache_time
 
-        return await self._session.call_method(
+        return self._session.call_method(
             bool, "answerCallbackQuery", params
         )

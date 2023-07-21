@@ -1,5 +1,5 @@
 from typing import Awaitable, Optional, List  # noqa
-import slonogram.schemas  # noqa
+from slonogram import schemas  # noqa
 from slonogram.types.api_session import ApiSession
 from slonogram.utils.json import dumps  # noqa
 
@@ -10,12 +10,12 @@ class ChatCallGroup:
     def __init__(self, session: ApiSession) -> None:
         self._session = session
 
-    async def send_action(
+    def send_action(
         self,
         chat_id: int | str,
         action: str,
         message_thread_id: Optional[int] = None,
-    ) -> bool:
+    ) -> Awaitable[bool]:
         """
         Use this method when you need to tell the user that something is
         happening on the bot's side. The status is set for 5 seconds or
@@ -45,29 +45,27 @@ class ChatCallGroup:
         if message_thread_id is not None:
             params["message_thread_id"] = message_thread_id
 
-        return await self._session.call_method(
-            bool, "sendChatAction", params
-        )
+        return self._session.call_method(bool, "sendChatAction", params)
 
-    async def send_message(
+    def send_message(
         self,
         chat_id: int | str,
         text: str,
         message_thread_id: Optional[int] = None,
-        parse_mode: Optional[slonogram.schemas.ParseMode] = None,
-        entities: Optional[List[slonogram.schemas.MessageEntity]] = None,
+        parse_mode: Optional[schemas.ParseMode] = None,
+        entities: Optional[List[schemas.MessageEntity]] = None,
         disable_web_page_preview: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_to_message_id: Optional[int] = None,
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[
-            slonogram.schemas.InlineKeyboardMarkup
-            | slonogram.schemas.ReplyKeyboardMarkup
-            | slonogram.schemas.ReplyKeyboardRemove
-            | slonogram.schemas.ForceReply
+            schemas.InlineKeyboardMarkup
+            | schemas.ReplyKeyboardMarkup
+            | schemas.ReplyKeyboardRemove
+            | schemas.ForceReply
         ] = None,
-    ) -> slonogram.schemas.Message:
+    ) -> Awaitable[schemas.Message]:
         """
         Use this method to send text messages. On success, the sent
         Message is returned. for more:
@@ -138,6 +136,6 @@ class ChatCallGroup:
                 self._session.retort.dump(reply_markup)
             )
 
-        return await self._session.call_method(
-            slonogram.schemas.Message, "sendMessage", params
+        return self._session.call_method(
+            schemas.Message, "sendMessage", params
         )

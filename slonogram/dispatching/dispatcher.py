@@ -11,8 +11,9 @@ from ..types.event_flags import MessageFlags, EmptyFlags
 from ..types.context import InterContextData, Context
 
 from ..exceptions.control_flow import DoNotHandle, SkipLocalSet
-from ..handling.handler import Handler
+from ..exceptions.api_error import ApiError
 
+from ..handling.handler import Handler
 from ..schemas import Message, UpdateType, Update
 from ..bot import Bot
 
@@ -25,15 +26,14 @@ MsgCtx: TypeAlias = Context[Message]
 
 class Dispatcher:
     """
-    ### skip_pending:
+    ### drop_pending:
 
-    skips updates sent before the current time
-    (time is retrieved through the `time.time`)
+    calls `deleteWebhook` with `drop_pending_updates` before the run
     """
 
-    def __init__(self, bot: Bot, skip_pending: bool = False) -> None:
+    def __init__(self, bot: Bot, drop_pending: bool = False) -> None:
         self.set: LocalSet = LocalSet("__dispatcher__")
-        self.skip_pending = skip_pending
+        self.drop_pending = drop_pending
         self._bot = bot
         self.data = None
 
@@ -125,6 +125,12 @@ class Dispatcher:
             me, self.data, self._bot, create_task_group()
         )
 
+    async def _drop_pending_updates(self) -> None:
+        try:
+            await self._bot.update.delete_webhook(True)
+        except ApiError:
+            pass
+
     async def run_polling(
         self,
         offset: Optional[int] = None,
@@ -132,6 +138,9 @@ class Dispatcher:
         timeout: Optional[int] = None,
         allowed_updates: Optional[List[UpdateType]] = None,
     ) -> NoReturn:
+        if self.drop_pending:
+            await self._drop_pending_updates()
+
         inter = await self.create_intercontext_data()
         get_updates = self._bot.update.poll
         feed = self.feed_update

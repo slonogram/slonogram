@@ -30,8 +30,8 @@ def escape_hard_keywords(name: str) -> str:
 def prefix_schema(r: ParsedType) -> str:
     if r.from_schema:
         if r.arg is None:
-            return f"slonogram.schemas.{r.result}"
-        return f"List[slonogram.schemas.{r.arg}]"
+            return f"schemas.{r.result}"
+        return f"List[schemas.{r.arg}]"
     return r.result
 
 

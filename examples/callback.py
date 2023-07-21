@@ -40,7 +40,7 @@ async def callback_request(bot: Bot, message: Message) -> None:
 
 async def main() -> None:
     async with Bot(Session(TOKEN)) as bot:
-        dp = Dispatcher(bot)
+        dp = Dispatcher(bot, drop_pending=True)
         dp.set.include(set_)
         await dp.run_polling()
 

@@ -53,7 +53,7 @@ def generate_call_group(
 ) -> str:
     imports: List[GenerationHelper] = [
         Noqa(Import("typing", ("Awaitable", "Optional", "List"))),
-        Noqa(Import("slonogram.schemas")),
+        Noqa(Import("slonogram", "schemas")),
         Import("slonogram.types.api_session", "ApiSession"),
         Noqa(Import("slonogram.utils.json", "dumps")),
     ]
@@ -100,7 +100,7 @@ def generate_call_group(
                         f"{absolute_path} type cannot be replaced: union"
                     )
                 on = (
-                    "slonogram.schemas."
+                    "schemas."
                     + config.call_groups.replace_types[absolute_path]
                 )
                 tp = wrap_list(on) if maybe_inside is not None else on
@@ -159,14 +159,13 @@ def generate_call_group(
                     IndentedLines(fn_body),
                     IndentedLines(
                         [
-                            f"return await self._session.call_method("
+                            f"return self._session.call_method("
                             f" {ret_tp}, {cg_method!r}, params)"
                         ]
                     ),
                 ]
             ),
-            return_hint=ret_tp,
-            async_=True,
+            return_hint=f"Awaitable[{ret_tp}]",
         )
         body.append(function)
 
