@@ -12,7 +12,8 @@ call_groups:
   dump: [
       # sendMessage
       sendMessage.entities,
-      sendMessage.replyMarkup,
+      sendMessage.reply_markup,
+      getUpdates.allowed_updates
     ]
 
   renames:
