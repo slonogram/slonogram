@@ -19,19 +19,17 @@ T = TypeVar("T")
 
 
 class Session(ApiSession):
+    __slots__ = "_token", "_session", "retort"
+
     def __init__(
         self,
         token: str,
         retort: Retort = DEFAULT_RETORT,
         base_url: str = DEFAULT_API_URL,
     ) -> None:
-        self._retort = retort
         self._token = token
         self._session = ClientSession(base_url=base_url)
-
-    @property
-    def retort(self) -> Retort:
-        return self._retort
+        super().__init__(retort)
 
     async def call_method(
         self, tp: Type[T], method: str, args: MethodArgs

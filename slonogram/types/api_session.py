@@ -9,10 +9,8 @@ T = TypeVar("T")
 
 
 class ApiSession(metaclass=ABCMeta):
-    @property
-    @abstractmethod
-    def retort(self) -> Retort:
-        raise NotImplementedError
+    def __init__(self, retort: Retort) -> None:
+        self.retort = retort
 
     @abstractmethod
     async def call_method(
