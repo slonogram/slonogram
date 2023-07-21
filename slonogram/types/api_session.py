@@ -1,16 +1,23 @@
 from __future__ import annotations
 from abc import ABCMeta, abstractmethod
-from typing import Dict, AnyStr, TypeAlias, Any
+from adaptix import Retort
+from typing import Dict, AnyStr, TypeAlias, TypeVar, Type
 
 ScalarSerializable: TypeAlias = AnyStr | float | int | bool
 MethodArgs: TypeAlias = Dict[AnyStr, ScalarSerializable]
+T = TypeVar("T")
 
 
 class ApiSession(metaclass=ABCMeta):
+    @property
+    @abstractmethod
+    def retort(self) -> Retort:
+        raise NotImplementedError
+
     @abstractmethod
     async def call_method(
-        self, method: str, args: MethodArgs
-    ) -> Dict[AnyStr, Any]:
+        self, tp: Type[T], method: str, args: MethodArgs
+    ) -> T:
         raise NotImplementedError
 
     @abstractmethod

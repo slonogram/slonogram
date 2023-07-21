@@ -1,16 +1,14 @@
 from typing import Awaitable, Optional, List  # noqa
 import slonogram.schemas  # noqa
-from adaptix import Retort
 from slonogram.types.api_session import ApiSession
 from slonogram.utils.json import dumps  # noqa
 
 
 class UpdateCallGroup:
-    __slots__ = "_retort", "_session"
+    __slots__ = ("_session",)
 
-    def __init__(self, session: ApiSession, retort: Retort) -> None:
+    def __init__(self, session: ApiSession) -> None:
         self._session = session
-        self._retort = retort
 
     async def poll(
         self,
@@ -74,7 +72,6 @@ class UpdateCallGroup:
         if allowed_updates is not None:
             params["allowed_updates"] = allowed_updates
 
-        return self._retort.load(
-            await self._session.call_method("getUpdates", params),
-            List[slonogram.schemas.Update],
+        return await self._session.call_method(
+            List[slonogram.schemas.Update], "getUpdates", params
         )

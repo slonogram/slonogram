@@ -1,11 +1,8 @@
 import warnings
-from adaptix import Retort, name_mapping
 
 from typing import Self
 
 from .types.api_session import ApiSession
-from .schemas import Message, Update
-
 from .call_groups import chat, user, update, query
 
 
@@ -14,19 +11,10 @@ class Bot:
         self,
         session: ApiSession,
     ) -> None:
-        retort = Retort(
-            debug_path=True,
-            recipe=[
-                name_mapping(Update, map={"id": "update_id"}),
-                name_mapping(Message, map={"id": "message_id"}),
-                name_mapping(trim_trailing_underscore=True),
-            ],
-        )
-
-        self.chat = chat.ChatCallGroup(session, retort)
-        self.user = user.UserCallGroup(session, retort)
-        self.update = update.UpdateCallGroup(session, retort)
-        self.query = query.QueryCallGroup(session, retort)
+        self.chat = chat.ChatCallGroup(session)
+        self.user = user.UserCallGroup(session)
+        self.update = update.UpdateCallGroup(session)
+        self.query = query.QueryCallGroup(session)
 
         self._session = session
         self._finalized = False

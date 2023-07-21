@@ -36,7 +36,7 @@ def use_retort(
     expr: str, config: CodegenerationConfig, abs_path: AbsolutePath
 ) -> str:
     if abs_path in config.call_groups.dump:
-        return f"dumps(self._retort.dump({expr}))"
+        return f"dumps(self._session.retort.dump({expr}))"
     return expr
 
 
@@ -54,7 +54,6 @@ def generate_call_group(
     imports: List[GenerationHelper] = [
         Noqa(Import("typing", ("Awaitable", "Optional", "List"))),
         Noqa(Import("slonogram.schemas")),
-        Import("adaptix", "Retort"),
         Import("slonogram.types.api_session", "ApiSession"),
         Noqa(Import("slonogram.utils.json", "dumps")),
     ]
@@ -64,11 +63,8 @@ def generate_call_group(
             [
                 SelfArg(),
                 FunctionArgument("session", "ApiSession"),
-                FunctionArgument("retort", "Retort"),
             ],
-            IndentedLines(
-                ["self._session = session", "self._retort = retort"]
-            ),
+            IndentedLines(["self._session = session"]),
             "None",
         )
     ]
@@ -163,10 +159,8 @@ def generate_call_group(
                     IndentedLines(fn_body),
                     IndentedLines(
                         [
-                            f"return self._retort.load("
-                            f"await self._session.call_method("
-                            f"{cg_method!r}, params), "
-                            f"{ret_tp})"
+                            f"return await self._session.call_method("
+                            f" {ret_tp}, {cg_method!r}, params)"
                         ]
                     ),
                 ]
@@ -181,7 +175,7 @@ def generate_call_group(
         Class(
             camelize(cg_name, True) + "CallGroup",
             body,
-            [ClassField("__slots__", default='"_retort", "_session"')],
+            [ClassField("__slots__", default='("_session",)')],
         ),
     )
     return result

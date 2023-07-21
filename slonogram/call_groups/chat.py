@@ -1,16 +1,14 @@
 from typing import Awaitable, Optional, List  # noqa
 import slonogram.schemas  # noqa
-from adaptix import Retort
 from slonogram.types.api_session import ApiSession
 from slonogram.utils.json import dumps  # noqa
 
 
 class ChatCallGroup:
-    __slots__ = "_retort", "_session"
+    __slots__ = ("_session",)
 
-    def __init__(self, session: ApiSession, retort: Retort) -> None:
+    def __init__(self, session: ApiSession) -> None:
         self._session = session
-        self._retort = retort
 
     async def send_action(
         self,
@@ -47,8 +45,8 @@ class ChatCallGroup:
         if message_thread_id is not None:
             params["message_thread_id"] = message_thread_id
 
-        return self._retort.load(
-            await self._session.call_method("sendChatAction", params), bool
+        return await self._session.call_method(
+            bool, "sendChatAction", params
         )
 
     async def send_message(
@@ -116,7 +114,7 @@ class ChatCallGroup:
             params["parse_mode"] = parse_mode
 
         if entities is not None:
-            params["entities"] = dumps(self._retort.dump(entities))
+            params["entities"] = dumps(self._session.retort.dump(entities))
 
         if disable_web_page_preview is not None:
             params["disable_web_page_preview"] = disable_web_page_preview
@@ -138,7 +136,6 @@ class ChatCallGroup:
         if reply_markup is not None:
             params["reply_markup"] = reply_markup
 
-        return self._retort.load(
-            await self._session.call_method("sendMessage", params),
-            slonogram.schemas.Message,
+        return await self._session.call_method(
+            slonogram.schemas.Message, "sendMessage", params
         )
