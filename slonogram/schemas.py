@@ -984,11 +984,6 @@ class InlineQueryResultsButton:
 
 
 @dataclass(slots=True)
-class InlineQueryResult:
-    pass
-
-
-@dataclass(slots=True)
 class InlineQueryResultArticle:
     type: str
     id: str
@@ -1285,11 +1280,6 @@ class InlineQueryResultCachedAudio:
 
 
 @dataclass(slots=True)
-class InputMessageContent:
-    pass
-
-
-@dataclass(slots=True)
 class InputTextMessageContent:
     message_text: str
     parse_mode: Optional[str] = None
@@ -1576,4 +1566,33 @@ InputMedia: TypeAlias = (
     | InputMediaAudio
     | InputMediaPhoto
     | InputMediaVideo
+)
+InlineQueryResult: TypeAlias = (
+    InlineQueryResultCachedAudio
+    | InlineQueryResultCachedDocument
+    | InlineQueryResultCachedGif
+    | InlineQueryResultCachedMpeg4Gif
+    | InlineQueryResultCachedPhoto
+    | InlineQueryResultCachedSticker
+    | InlineQueryResultCachedVideo
+    | InlineQueryResultCachedVoice
+    | InlineQueryResultArticle
+    | InlineQueryResultAudio
+    | InlineQueryResultContact
+    | InlineQueryResultGame
+    | InlineQueryResultDocument
+    | InlineQueryResultGif
+    | InlineQueryResultLocation
+    | InlineQueryResultMpeg4Gif
+    | InlineQueryResultPhoto
+    | InlineQueryResultVenue
+    | InlineQueryResultVideo
+    | InlineQueryResultVoice
+)
+InputMessageContent: TypeAlias = (
+    InputTextMessageContent
+    | InputLocationMessageContent
+    | InputVenueMessageContent
+    | InputContactMessageContent
+    | InputInvoiceMessageContent
 )

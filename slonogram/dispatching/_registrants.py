@@ -6,6 +6,7 @@ from typing import (
     TypeVar,
     TypeAlias,
     Callable,
+    Generic,
 )
 
 from ..types.filter import FilterFn
@@ -14,7 +15,7 @@ from ..types.event_flags import MessageFlags
 from ..types.handler_fn import AnyHandlerFn
 
 from ..handling.handler import Handler
-from ..schemas import Message, CallbackQuery
+from ..schemas import Message, CallbackQuery, InlineQuery
 
 if TYPE_CHECKING:
     from .local_set import LocalSet
@@ -33,19 +34,33 @@ class _ReceivesSet:
         self._set = set_
 
 
-class OnCallback(_ReceivesSet):
+class _JustSetUp(Generic[T], _ReceivesSet):
+    def __init__(self, set_: LocalSet, append_to: str) -> None:
+        super().__init__(set_)
+        self._append_to = append_to
+
     def __call__(
         self,
-        filter_: _OptFilterFn[CallbackQuery] = None,
-        middleware: _OptMid[CallbackQuery] = None,
-        observer: bool = False
-    ) -> _RegRetDeco[CallbackQuery]:
-        def inner(fn: AnyHandlerFn) -> CbHandler:
-            handler = Handler(fn, observer, filter_, middleware)
-            self._set.callback_handlers.append(handler)
+        filter_: _OptFilterFn[T] = None,
+        middleware: _OptMid[T] = None,
+        observer: bool = False,
+    ) -> _RegRetDeco[T]:
+        def inner(fn: AnyHandlerFn) -> Handler[T]:
+            handler = Handler[T](fn, observer, filter_, middleware)
+            getattr(self._set, self._append_to).append(handler)
             return handler
 
         return inner
+
+
+class OnInline(_JustSetUp[InlineQuery]):
+    def __init__(self, set_: LocalSet) -> None:
+        super().__init__(set_, "inline_handlers")
+
+
+class OnCallback(_JustSetUp[CallbackQuery]):
+    def __init__(self, set_: LocalSet) -> None:
+        super().__init__(set_, "callback_handlers")
 
 
 class OnMessage(_ReceivesSet):

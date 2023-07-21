@@ -1,9 +1,8 @@
 import asyncio
 
-from slonogram.bot import Bot
-from slonogram.extra.aiohttp_session import Session
-from slonogram.dispatching import Dispatcher, LocalSet
+from .base import run_bot
 
+from slonogram import Bot, LocalSet
 from slonogram.filtering.text import Command
 
 from slonogram.schemas import (
@@ -48,11 +47,4 @@ async def callback_request(bot: Bot, message: Message) -> None:
     )
 
 
-async def main() -> None:
-    async with Bot(Session(TOKEN)) as bot:
-        dp = Dispatcher(bot, drop_pending=True)
-        dp.set.include(set_)
-        await dp.run_polling()
-
-
-asyncio.run(main())
+asyncio.run(run_bot(set_))

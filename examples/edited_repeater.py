@@ -1,10 +1,9 @@
 import asyncio
 
-from slonogram import Bot
-from slonogram.extra.aiohttp_session import Session
+from .base import run_bot
 
+from slonogram import LocalSet, Bot
 from slonogram.schemas import Message
-from slonogram.dispatching import Dispatcher, LocalSet
 
 from slonogram.filtering.text import Command
 
@@ -29,12 +28,4 @@ async def edit_callback(bot: Bot, message: Message) -> None:
     )
 
 
-async def main() -> None:
-    async with Bot(Session(TOKEN)) as bot:
-        dp = Dispatcher(bot)
-        dp.set.include(set_)
-
-        await dp.run_polling()
-
-
-asyncio.run(main())
+asyncio.run(run_bot(set_))

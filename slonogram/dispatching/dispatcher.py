@@ -107,7 +107,11 @@ class Dispatcher:
                     ),
                 )
             elif update.inline_query is not None:
-                raise NotImplementedError
+                return await self._handle_set(
+                    "inline_handlers",
+                    self.set,
+                    Context(inter, EmptyFlags.EMPTY, update.inline_query),
+                )
 
             elif update.channel_post is not None:
                 raise NotImplementedError

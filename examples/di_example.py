@@ -5,7 +5,8 @@ from typing import NewType
 from slonodi import Container
 from slonodi.specifiers import requires
 
-from slonogram.extra.aiohttp_session import Session
+from .base import run_bot
+
 from slonogram.extra.scratches import Text
 from slonogram.extra.di import (
     from_scratch,
@@ -15,7 +16,7 @@ from slonogram.extra.di import (
 from slonogram.bot import Bot
 from slonogram.schemas import Message
 from slonogram.filtering.text import Command
-from slonogram.dispatching import LocalSet, Dispatcher
+from slonogram.dispatching import LocalSet
 
 TOKEN = open(".test_token").read()
 Master = NewType("Master", str)
@@ -41,12 +42,4 @@ async def on_get_master(
     )
 
 
-async def main() -> None:
-    async with Bot(Session(TOKEN)) as bot:
-        dp = Dispatcher(bot)
-        dp.data = container
-        dp.set.include(set_)
-        await dp.run_polling()
-
-
-asyncio.run(main())
+asyncio.run(run_bot(set_, data=container))

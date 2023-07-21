@@ -79,6 +79,7 @@ call_groups:
       sendMessage.entities,
       sendMessage.reply_markup,
       getUpdates.allowed_updates,
+      answerInlineQuery.results,
     ]
 
   renames:
@@ -122,6 +123,37 @@ call_groups:
     sendMessage.entities: MessageEntity
 
 unions:
+  InputMessageContent:
+    [
+      InputTextMessageContent,
+      InputLocationMessageContent,
+      InputVenueMessageContent,
+      InputContactMessageContent,
+      InputInvoiceMessageContent,
+    ]
+  InlineQueryResult:
+    [
+      InlineQueryResultCachedAudio,
+      InlineQueryResultCachedDocument,
+      InlineQueryResultCachedGif,
+      InlineQueryResultCachedMpeg4Gif,
+      InlineQueryResultCachedPhoto,
+      InlineQueryResultCachedSticker,
+      InlineQueryResultCachedVideo,
+      InlineQueryResultCachedVoice,
+      InlineQueryResultArticle,
+      InlineQueryResultAudio,
+      InlineQueryResultContact,
+      InlineQueryResultGame,
+      InlineQueryResultDocument,
+      InlineQueryResultGif,
+      InlineQueryResultLocation,
+      InlineQueryResultMpeg4Gif,
+      InlineQueryResultPhoto,
+      InlineQueryResultVenue,
+      InlineQueryResultVideo,
+      InlineQueryResultVoice,
+    ]
   InputMedia:
     [
       InputMediaAnimation,
