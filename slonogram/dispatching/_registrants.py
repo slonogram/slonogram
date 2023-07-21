@@ -14,7 +14,7 @@ from ..types.event_flags import MessageFlags
 from ..types.handler_fn import AnyHandlerFn
 
 from ..handling.handler import Handler
-from ..schemas import Message
+from ..schemas import Message, CallbackQuery
 
 if TYPE_CHECKING:
     from .local_set import LocalSet
@@ -22,15 +22,33 @@ if TYPE_CHECKING:
 T = TypeVar("T")
 
 MsgHandler: TypeAlias = Handler[Message]
+CbHandler: TypeAlias = Handler[CallbackQuery]
 _OptFilterFn: TypeAlias = Optional[FilterFn[T]]
 _OptMid: TypeAlias = Optional[MiddlewareFn[T]]
 _RegRetDeco: TypeAlias = Callable[[AnyHandlerFn[T]], Handler[T]]
 
 
-class OnMessage:
-    def __init__(self, set_: LocalSet) -> None:
+class _ReceivesSet:
+    def __init__(self, set_: LocalSet):
         self._set = set_
 
+
+class OnCallback(_ReceivesSet):
+    def __call__(
+        self,
+        filter_: _OptFilterFn[CallbackQuery] = None,
+        middleware: _OptMid[CallbackQuery] = None,
+        observer: bool = False
+    ) -> _RegRetDeco[CallbackQuery]:
+        def inner(fn: AnyHandlerFn) -> CbHandler:
+            handler = Handler(fn, observer, filter_, middleware)
+            self._set.callback_handlers.append(handler)
+            return handler
+
+        return inner
+
+
+class OnMessage(_ReceivesSet):
     def _register(
         self,
         observer: bool,
@@ -41,9 +59,9 @@ class OnMessage:
         def inner(fn: AnyHandlerFn) -> MsgHandler:
             handler = MsgHandler(fn, observer, filter_, middleware)
             if MessageFlags.SENT in subtypes:
-                self._set._sent_message_handlers.append(handler)
+                self._set.sent_message_handlers.append(handler)
             if MessageFlags.EDITED in subtypes:
-                self._set._edited_message_handlers.append(handler)
+                self._set.edited_message_handlers.append(handler)
 
             return handler
 

@@ -12,10 +12,10 @@ class SkipLocalSet(_ShowIsABug):
     """
 
 
-class DontHandle(_ShowIsABug):
+class DoNotHandle(_ShowIsABug):
     """
     Skips current update
     """
 
 
-__all__ = ["SkipLocalSet"]
+__all__ = ["SkipLocalSet", "DoNotHandle"]

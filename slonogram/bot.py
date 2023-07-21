@@ -28,7 +28,7 @@ class Bot:
 
         await self.finalize()
         if exc_type is not None:
-            raise exc_type
+            raise exc_value
 
     async def finalize(self) -> None:
         if self._finalized:

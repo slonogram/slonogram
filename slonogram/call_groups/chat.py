@@ -134,7 +134,9 @@ class ChatCallGroup:
             ] = allow_sending_without_reply
 
         if reply_markup is not None:
-            params["reply_markup"] = reply_markup
+            params["reply_markup"] = dumps(
+                self._session.retort.dump(reply_markup)
+            )
 
         return await self._session.call_method(
             slonogram.schemas.Message, "sendMessage", params

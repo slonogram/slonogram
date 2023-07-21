@@ -19,7 +19,7 @@ from slonodi.injector import Provider, Injector
 
 from ..bot import Bot
 
-from ..types.model_types import MODEL_TYPES
+from ..consts import MODEL_TYPES
 from ..types.scratch import Scratch
 from ..types.context import Context
 

@@ -7,10 +7,10 @@ from typing import (
 )
 from anyio import create_task_group
 
-from ..types.event_flags import MessageFlags
+from ..types.event_flags import MessageFlags, EmptyFlags
 from ..types.context import InterContextData, Context
 
-from ..exceptions.control_flow import DontHandle, SkipLocalSet
+from ..exceptions.control_flow import DoNotHandle, SkipLocalSet
 from ..handling.handler import Handler
 
 from ..schemas import Message, UpdateType, Update
@@ -48,7 +48,7 @@ class Dispatcher:
             if filter_ is not None and not await filter_(ctx):
                 return False
 
-            mw = set_._middleware
+            mw = set_._middleware # noqa
             if mw is not None:
                 await mw(ctx)
             h_list: List[Handler[T]] = getattr(set_, attr)
@@ -57,7 +57,7 @@ class Dispatcher:
                 if await handler.try_invoke(ctx):
                     return True
 
-            for child in set_._children:
+            for child in set_._children:  # noqa
                 if await self._handle_set(attr, child, ctx):
                     return True
         except SkipLocalSet:
@@ -73,20 +73,24 @@ class Dispatcher:
         try:
             if update.message is not None:
                 return await self._handle_set(
-                    "_sent_message_handlers",
+                    "sent_message_handlers",
                     self.set,
                     Context(inter, MessageFlags.SENT, update.message),
                 )
             elif update.edited_message is not None:
                 return await self._handle_set(
-                    "_edited_message_handlers",
+                    "edited_message_handlers",
                     self.set,
                     Context(
                         inter, MessageFlags.EDITED, update.edited_message
                     ),
                 )
             elif update.callback_query is not None:
-                raise NotImplementedError
+                return await self._handle_set(
+                    "callback_handlers",
+                    self.set,
+                    Context(inter, EmptyFlags.EMPTY, update.callback_query)
+                )
             elif update.inline_query is not None:
                 raise NotImplementedError
 
@@ -110,7 +114,7 @@ class Dispatcher:
                 raise NotImplementedError
             elif update.shipping_query is not None:
                 raise NotImplementedError
-        except DontHandle:
+        except DoNotHandle:
             pass
 
         return False
@@ -131,6 +135,9 @@ class Dispatcher:
         inter = await self.create_intercontext_data()
         get_updates = self._bot.update.poll
         feed = self.feed_update
+
+        if allowed_updates is None:
+            allowed_updates = list(self.set.collect_update_types())
 
         async with inter.task_group as tg:
             while True:

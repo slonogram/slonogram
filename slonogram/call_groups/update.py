@@ -70,7 +70,9 @@ class UpdateCallGroup:
             params["timeout"] = timeout
 
         if allowed_updates is not None:
-            params["allowed_updates"] = allowed_updates
+            params["allowed_updates"] = dumps(
+                self._session.retort.dump(allowed_updates)
+            )
 
         return await self._session.call_method(
             List[slonogram.schemas.Update], "getUpdates", params

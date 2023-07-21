@@ -38,7 +38,7 @@ class Context(Generic[T]):
 
     @property
     def model(self) -> T:
-        return self.pad._model
+        return self.pad._model  # noqa
 
     @model.setter
     def model(self, value: T) -> None:
