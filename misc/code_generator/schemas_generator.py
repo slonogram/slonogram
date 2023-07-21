@@ -9,15 +9,18 @@ from .helpers import (
     ClassField,
     generate,
     Decorate,
+    Flake8Noqa,
+    IndentedLines,
 )
 
 
 def generate_schemas(spec: Spec, config: CodegenerationConfig) -> str:
     schemas: List[GenerationHelper] = [
+        Flake8Noqa(),
         Import("__future__", "annotations"),
         Import("enum", "Enum"),
         Import("dataclasses", "dataclass"),
-        Import("typing", ("List", "Optional")),
+        Import("typing", ("List", "Optional", "IO", "TypeAlias")),
     ]
 
     # Enums generation
@@ -36,14 +39,23 @@ def generate_schemas(spec: Spec, config: CodegenerationConfig) -> str:
 
         schemas.append(Class(name, [], fields, inherits=("str", "Enum")))
 
+    unions: List[GenerationHelper] = []
     # Telegram types generation
     for ty_name, ty in spec.types.items():
+        if ty_name in config.unions:
+            items = config.unions[ty_name]  # type: ignore
+            unions.append(
+                IndentedLines(
+                    [f"{ty_name}: TypeAlias = %s" % " | ".join(items)]
+                )
+            )
+            continue
         desc = " ".join(ty.description)
         desc = f'"""{desc}"""'
 
         tp_fields: List[ClassField] = []
         for field in ty.fields:
-            tp = parse_multiple_types(field.types)
+            tp = parse_multiple_types(field.types, translate_io=True)
             field_name = escape_hard_keywords(field.name)
             absolute_path = AbsolutePath(f"{ty_name}.{field_name}")
 
@@ -72,4 +84,4 @@ def generate_schemas(spec: Spec, config: CodegenerationConfig) -> str:
             )
         )
 
-    return generate(*schemas)
+    return generate(*schemas, *unions)

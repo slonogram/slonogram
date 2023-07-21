@@ -3,6 +3,7 @@ from anyio.abc import TaskGroup
 
 from typing import TypeVar, Generic, Any
 
+from .fsm import FSMStorage
 from .event_flags import EventFlags
 from .scratch_pad import ScratchPad
 
@@ -15,14 +16,20 @@ R = TypeVar("R")
 
 
 class InterContextData:
-    __slots__ = "data", "bot", "me", "task_group"
+    __slots__ = "data", "bot", "me", "task_group", "fsm_storage"
 
     def __init__(
-        self, me: User, data: Any, bot: Bot, task_group: TaskGroup
+        self,
+        me: User,
+        fsm_storage: FSMStorage,
+        data: Any,
+        bot: Bot,
+        task_group: TaskGroup,
     ) -> None:
         self.data = data
         self.bot = bot
         self.me = me
+        self.fsm_storage = fsm_storage
         self.task_group = task_group
 
 

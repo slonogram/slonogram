@@ -1,7 +1,8 @@
-from typing import Awaitable, Optional, List  # noqa
-from slonogram import schemas  # noqa
+# flake8: noqa
+from typing import Awaitable, Optional, List, IO
+from slonogram import schemas
 from slonogram.types.api_session import ApiSession
-from slonogram.utils.json import dumps  # noqa
+from slonogram.utils.json import dumps
 
 
 class UpdateCallGroup:
@@ -113,7 +114,7 @@ class UpdateCallGroup:
     def set_webhook(
         self,
         url: str,
-        certificate: Optional[schemas.InputFile] = None,
+        certificate: Optional[IO[bytes]] = None,
         ip_address: Optional[str] = None,
         max_connections: Optional[int] = None,
         allowed_updates: Optional[List[str]] = None,

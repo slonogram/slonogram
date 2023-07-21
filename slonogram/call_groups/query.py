@@ -1,7 +1,8 @@
-from typing import Awaitable, Optional, List  # noqa
-from slonogram import schemas  # noqa
+# flake8: noqa
+from typing import Awaitable, Optional, List, IO
+from slonogram import schemas
 from slonogram.types.api_session import ApiSession
-from slonogram.utils.json import dumps  # noqa
+from slonogram.utils.json import dumps
 
 
 class QueryCallGroup:
@@ -64,3 +65,57 @@ class QueryCallGroup:
         return self._session.call_method(
             bool, "answerCallbackQuery", params
         )
+
+    def answer_inline(
+        self,
+        inline_query_id: str,
+        results: List[schemas.InlineQueryResult],
+        cache_time: Optional[int] = None,
+        is_personal: Optional[bool] = None,
+        next_offset: Optional[str] = None,
+        button: Optional[schemas.InlineQueryResultsButton] = None,
+    ) -> Awaitable[bool]:
+        """
+        Use this method to send answers to an inline query. On success,
+        True is returned. No more than 50 results per query are allowed.
+        for more: https://core.telegram.org/bots/api#answerinlinequery
+        :param inline_query_id: Unique identifier for the answered
+                                query
+        :param results: A JSON-serialized array of results for the
+                        inline query
+        :param cache_time: The maximum amount of time in seconds
+                           that the result of the inline query may
+                           be cached on the server. Defaults to 300.
+        :param is_personal: Pass True if results may be cached on
+                            the server side only for the user that
+                            sent the query. By default, results may
+                            be returned to any user who sends the
+                            same query.
+        :param next_offset: Pass the offset that a client should
+                            send in the next query with the same
+                            text to receive more results. Pass an
+                            empty string if there are no more
+                            results or if you don't support
+                            pagination. Offset length can't exceed
+                            64 bytes.
+        :param button: A JSON-serialized object describing a button
+                       to be shown above inline query results
+        :return: See link mentioned above for more information
+        """
+        params: dict = {
+            "inline_query_id": inline_query_id,
+            "results": results,
+        }
+        if cache_time is not None:
+            params["cache_time"] = cache_time
+
+        if is_personal is not None:
+            params["is_personal"] = is_personal
+
+        if next_offset is not None:
+            params["next_offset"] = next_offset
+
+        if button is not None:
+            params["button"] = button
+
+        return self._session.call_method(bool, "answerInlineQuery", params)

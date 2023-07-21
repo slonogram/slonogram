@@ -1,7 +1,8 @@
+# flake8: noqa
 from __future__ import annotations
 from enum import Enum
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, IO, TypeAlias
 
 
 class ChatAction(str, Enum):
@@ -852,11 +853,6 @@ class ResponseParameters:
 
 
 @dataclass(slots=True)
-class InputMedia:
-    pass
-
-
-@dataclass(slots=True)
 class InputMediaPhoto:
     type: str
     media: str
@@ -870,7 +866,7 @@ class InputMediaPhoto:
 class InputMediaVideo:
     type: str
     media: str
-    thumbnail: Optional[InputFile | str] = None
+    thumbnail: Optional[IO[bytes] | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -885,7 +881,7 @@ class InputMediaVideo:
 class InputMediaAnimation:
     type: str
     media: str
-    thumbnail: Optional[InputFile | str] = None
+    thumbnail: Optional[IO[bytes] | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -899,7 +895,7 @@ class InputMediaAnimation:
 class InputMediaAudio:
     type: str
     media: str
-    thumbnail: Optional[InputFile | str] = None
+    thumbnail: Optional[IO[bytes] | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -912,7 +908,7 @@ class InputMediaAudio:
 class InputMediaDocument:
     type: str
     media: str
-    thumbnail: Optional[InputFile | str] = None
+    thumbnail: Optional[IO[bytes] | str] = None
     caption: Optional[str] = None
     parse_mode: Optional[str] = None
     caption_entities: Optional[List[MessageEntity]] = None
@@ -964,7 +960,7 @@ class MaskPosition:
 
 @dataclass(slots=True)
 class InputSticker:
-    sticker: InputFile | str
+    sticker: IO[bytes] | str
     emoji_list: List[str]
     mask_position: Optional[MaskPosition] = None
     keywords: Optional[List[str]] = None
@@ -1572,3 +1568,12 @@ class GameHighScore:
     position: int
     user: User
     score: int
+
+
+InputMedia: TypeAlias = (
+    InputMediaAnimation
+    | InputMediaDocument
+    | InputMediaAudio
+    | InputMediaPhoto
+    | InputMediaVideo
+)

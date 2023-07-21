@@ -9,6 +9,9 @@ from anyio import create_task_group
 
 from ..types.event_flags import MessageFlags, EmptyFlags
 from ..types.context import InterContextData, Context
+from ..types.fsm import FSMStorage
+
+from ..extra.fsm_stub import StubStorage
 
 from ..exceptions.control_flow import DoNotHandle, SkipLocalSet
 from ..exceptions.api_error import ApiError
@@ -31,11 +34,21 @@ class Dispatcher:
     calls `deleteWebhook` with `drop_pending_updates` before the run
     """
 
-    def __init__(self, bot: Bot, drop_pending: bool = False) -> None:
+    def __init__(
+        self,
+        bot: Bot,
+        drop_pending: bool = False,
+        fsm_storage: Optional[FSMStorage] = None,
+    ) -> None:
         self.set: LocalSet = LocalSet("__dispatcher__")
         self.drop_pending = drop_pending
         self._bot = bot
         self.data = None
+
+        if fsm_storage is None:
+            self.fsm_storage: FSMStorage = StubStorage()
+        else:
+            self.fsm_storage = fsm_storage
 
     async def _handle_set(
         self, attr: str, set_: LocalSet, ctx: Context[T]
@@ -48,7 +61,7 @@ class Dispatcher:
             if filter_ is not None and not await filter_(ctx):
                 return False
 
-            mw = set_._middleware # noqa
+            mw = set_._middleware  # noqa
             if mw is not None:
                 await mw(ctx)
             h_list: List[Handler[T]] = getattr(set_, attr)
@@ -89,7 +102,9 @@ class Dispatcher:
                 return await self._handle_set(
                     "callback_handlers",
                     self.set,
-                    Context(inter, EmptyFlags.EMPTY, update.callback_query)
+                    Context(
+                        inter, EmptyFlags.EMPTY, update.callback_query
+                    ),
                 )
             elif update.inline_query is not None:
                 raise NotImplementedError
@@ -122,7 +137,11 @@ class Dispatcher:
     async def create_intercontext_data(self) -> InterContextData:
         me = await self._bot.user.get_me()
         return InterContextData(
-            me, self.data, self._bot, create_task_group()
+            me,
+            self.fsm_storage,
+            self.data,
+            self._bot,
+            create_task_group(),
         )
 
     async def _drop_pending_updates(self) -> None:

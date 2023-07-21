@@ -28,7 +28,7 @@ from .helpers import (
     DocParameter,
     Class,
     ClassField,
-    Noqa,
+    Flake8Noqa,
 )
 
 
@@ -52,10 +52,10 @@ def generate_call_group(
     config: CodegenerationConfig,
 ) -> str:
     imports: List[GenerationHelper] = [
-        Noqa(Import("typing", ("Awaitable", "Optional", "List"))),
-        Noqa(Import("slonogram", "schemas")),
+        Import("typing", ("Awaitable", "Optional", "List", "IO")),
+        Import("slonogram", "schemas"),
         Import("slonogram.types.api_session", "ApiSession"),
-        Noqa(Import("slonogram.utils.json", "dumps")),
+        Import("slonogram.utils.json", "dumps"),
     ]
     body: List[Function] = [
         Function(
@@ -170,6 +170,7 @@ def generate_call_group(
         body.append(function)
 
     result = generate(
+        Flake8Noqa(),
         *imports,
         Class(
             camelize(cg_name, True) + "CallGroup",

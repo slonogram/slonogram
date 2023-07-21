@@ -168,6 +168,12 @@ class IndentedLines:
 
 
 @dataclass
+class Flake8Noqa:
+    def generate(self, level: int, /) -> str:
+        return f"{gen_indent(level)}# flake8: noqa"
+
+
+@dataclass
 class Noqa:
     stmt: GenerationHelper
 

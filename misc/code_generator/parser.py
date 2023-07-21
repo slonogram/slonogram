@@ -36,28 +36,39 @@ def prefix_schema(r: ParsedType) -> str:
 
 
 def parse_multiple_types(
-    telegram_tps: Sequence[str], prefix: bool = False
+    telegram_tps: Sequence[str],
+    prefix: bool = False,
+    translate_io: bool = True,
 ) -> str:
     match telegram_tps:
         case [tp]:
-            return parse_type(tp, prefix)
+            return parse_type(tp, prefix, translate_io)
         case anything:
             return " | ".join(
-                prefix_schema(parse_type_ex(tp))
+                prefix_schema(parse_type_ex(tp, translate_io))
                 if prefix
-                else parse_type(tp)
+                else parse_type(tp, prefix, translate_io)
                 for tp in anything
             )
 
 
-def parse_type(telegram_tp: str, prefix: bool = False) -> str:
+def parse_type(
+    telegram_tp: str,
+    prefix: bool = False,
+    translate_io: bool = True,
+) -> str:
     if not prefix:
-        return parse_type_ex(telegram_tp).result
-    return prefix_schema(parse_type_ex(telegram_tp))
+        return parse_type_ex(telegram_tp, translate_io).result
+    return prefix_schema(parse_type_ex(telegram_tp, translate_io))
 
 
-def parse_type_ex(telegram_tp: str) -> ParsedType:
+def parse_type_ex(
+    telegram_tp: str, translate_io: bool = True
+) -> ParsedType:
     tp = telegram_tp.strip()
+    if tp == "InputFile" and translate_io:
+        return ParsedType("IO[bytes]", False, "bytes")
+
     if tp in TP_MAPPINGS:
         return ParsedType(TP_MAPPINGS[tp], False)
 

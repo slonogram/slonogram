@@ -2,21 +2,116 @@ renames:
   Update.update_id: id
   Message.message_id: id
 
+# Possibly this boilerplate can be reduced by using dhall configuration
 call_groups:
   groups:
     update: [getUpdates, getWebhookInfo, deleteWebhook, setWebhook]
-    query: [answerCallbackQuery]
-    user: [getMe]
-    chat: [sendChatAction, sendMessage]
+    query: [answerCallbackQuery, answerInlineQuery]
+    user:
+      [
+        getMe,
+        getUserProfilePhotos,
+        setMyCommands,
+        deleteMyCommands,
+        getMyCommands,
+        setMyName,
+        getMyName,
+        setMyDescription,
+        getMyDescription,
+        setMyShortDescription,
+        getMyShortDescription,
+        setMyDefaultAdministratorRights,
+        getMyDefaultAdministratorRights,
+      ]
+    chat: [
+        # Sending messages
+        sendChatAction,
+        sendMessage,
+        forwardMessage,
+        copyMessage,
+        sendPhoto,
+        sendAudio,
+        sendDocument,
+        sendVideo,
+        sendAnimation,
+        sendVoice,
+        sendVideoNote,
+        sendMediaGroup,
+        sendLocation,
+        sendVenue,
+        sendContact,
+        sendPoll,
+        sendDice,
+
+        # managing chat
+        banChatMember,
+        unbanChatMember,
+        restrictChatMember,
+        promoteChatMember,
+        setChatAdministratorCustomTitle,
+        banChatSenderChat,
+        unbanChatSenderChat,
+        setChatPermissions,
+        exportChatInviteLink,
+        createChatInviteLink,
+        editChatInviteLink,
+        revokeChatInviteLink,
+        approveChatJoinRequest,
+        declineChatJoinRequest,
+        setChatPhoto,
+        deleteChatPhoto,
+        setChatTitle,
+        setChatDescription,
+        pinChatMessage,
+        unpinChatMessage,
+        unpinAllChatMessages,
+        leaveChat,
+        getChat,
+        getChatAdministrators,
+        getChatMemberCount,
+        getChatMember,
+        setChatStickerSet,
+        deleteChatStickerSet,
+      ]
 
   dump: [
       # sendMessage
       sendMessage.entities,
       sendMessage.reply_markup,
-      getUpdates.allowed_updates
+      getUpdates.allowed_updates,
     ]
 
   renames:
+    answerInlineQuery: answer_inline
+    deleteChatStickerSet: delete_sticker_set
+    setChatStickerSet: set_sticker_set
+    getChatMember: get_member
+    getChatAdministrators: get_adminstrators
+    getChat: get
+    leaveChat: leave
+    unpinAllChatMessages: unpin_all_messages
+    unpinChatMessage: unpin_message
+    pinChatMessage: pin_message
+    setChatDescription: set_description
+    setChatTitle: set_title
+    deleteChatPhoto: delete_photo
+    setChatPhoto: set_photo
+    declineChatJoinRequest: decline_join_request
+    approveChatJoinRequest: approve_join_request
+    revokeChatInviteLink: revoke_invite_link
+    editChatInviteLink: edit_invite_link
+    createChatInviteLink: create_invite_link
+    exportChatInviteLink: export_invite_link
+    setChatPermissions: set_permissions
+    restrictChatMember: restrict_user
+    banChatSenderChat: ban_channel
+    unbanChatSenderChat: unban_channel
+    setChatAdministratorCustomTitle: set_custom_title
+    banChatMember: ban
+    unbanChatMember: unban
+    promoteChatMember: promote
+
+    getUserProfilePhotos: get_profile_photos
     answerCallbackQuery: answer_callback
     getUpdates: poll
     sendChatAction: send_action
@@ -25,6 +120,16 @@ call_groups:
     sendAction.action: ChatAction
     sendMessage.parse_mode: ParseMode
     sendMessage.entities: MessageEntity
+
+unions:
+  InputMedia:
+    [
+      InputMediaAnimation,
+      InputMediaDocument,
+      InputMediaAudio,
+      InputMediaPhoto,
+      InputMediaVideo,
+    ]
 
 enums:
   overrides:
