@@ -5,7 +5,7 @@ from .stash import Stash
 
 from typing import TypeVar, Generic
 
-M = TypeVar("M")
+M = TypeVar("M", covariant=True)
 
 
 class Context(Generic[M]):

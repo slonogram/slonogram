@@ -18,7 +18,7 @@ class Session(metaclass=ABCMeta):
         :param args: scalar arguments for the method, can be float, int, bool or str
 
         :raises: `slonogram.exceptions.api.ApiError` if call failed
-        :return: Response of the telegram api, directory the `result` payload
+        :return: Response of the telegram api, directly the `result` payload
         """
         raise NotImplementedError
 
