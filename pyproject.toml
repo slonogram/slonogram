@@ -7,10 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+anyio = "^4.1.0"
 
+adaptix = { git = "https://github.com/reagento/dataclass-factory.git", rev = "90148ac" }
 
 [tool.poetry.group.dev.dependencies]
-telegram-type-parser = { git = "https://github.com/nerodono/telegram_type_parser" }
+black = "^23.11.0"
+mypy = "^1.7.1"
+telegram-type-parser = { git = "https://github.com/nerodono/telegram_type_parser", rev = "445ec02" }
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
