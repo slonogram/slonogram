@@ -1,11 +1,7 @@
 from slonogram.dispatching import Dispatcher, Context
 from slonogram.schemas import Message, CallbackQuery
 
-from slonogram.dispatching.interests import (
-    message,
-    edited_message,
-    callback_query,
-)
+from slonogram.dispatching import interests as I
 
 
 async def test(ctx: Context[Message]) -> None:
@@ -16,6 +12,10 @@ async def callback(ctx: Context[CallbackQuery]) -> None:
     print("Callback")
 
 
+async def multi_model(ctx: Context[CallbackQuery | Message]) -> None:
+    print("Variance!")
+
+
 def true(ctx: Context[Message]) -> bool:
     return True
 
@@ -23,9 +23,16 @@ def true(ctx: Context[Message]) -> bool:
 # fmt: off
 dp = (
     Dispatcher()
-        .register(message > test)
-        .register(message > test, filter=true)
-        .register(message | edited_message > test)
-        .register(callback_query > callback)
+        .register(I.message > test)
+        .register(I.message > test, filter=true)
+        .register(I.message | I.edited_message > test)
+        .register(I.callback_query > callback)
+        .register(
+            I.callback_query_r
+            | I.inline_query_r
+            | I.message_r
+            > multi_model
+        )
+
 )
 # fmt: on
