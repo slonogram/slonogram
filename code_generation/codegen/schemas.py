@@ -48,7 +48,7 @@ class _CopyWith:
 
         args_j = ",".join(args)
         checked_fields_j = ",".join(checked_fields)
-        return f"def copy_with(self,{args_j}):\n" + indent(
+        return f"def copy_with(self,{args_j}) -> {cls_name}:\n" + indent(
             f"return {cls_name}({checked_fields_j})", INDENT_S
         )
 
