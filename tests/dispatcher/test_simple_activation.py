@@ -2,6 +2,8 @@ import pytest
 
 from test_helpers.message import MESSAGE_MOCK
 from test_helpers import BOT_MOCK
+from test_helpers.update import update
+
 
 from typing import Any
 
@@ -50,3 +52,27 @@ async def test_activation(
             BOT_MOCK,
         )
     ) == expect
+
+
+MSG_UPD = update(message=MESSAGE_MOCK)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "test_dp,input,expect",
+    [
+        (dp.on(Ic.message > _stub), MSG_UPD, HandlerActivation.activated),
+        (dp.on(Ic.callback_query > _stub), MSG_UPD, HandlerActivation.ignored),
+        (
+            dp.on(Ic.message | Ic.edited_message > _stub).on(Ic.callback_query > _stub),
+            MSG_UPD,
+            HandlerActivation.activated,
+        ),
+    ],
+)
+async def test_multiple_activations(
+    test_dp: Dispatcher,
+    input: schemas.Update,
+    expect: HandlerActivation,
+) -> None:
+    assert (await test_dp.feed_single(input, BOT_MOCK)) == expect
