@@ -25,7 +25,7 @@ def t(t: Context[Message]) -> bool:
 # fmt: off
 dp = (
     Dispatcher("main")
-        .on(Ic.message > message, filter=t)
+        .on(Ic.message > message)
         .filter(lambda ctx: ctx.model.chat.id == 10)
 )
 # fmt: on

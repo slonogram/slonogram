@@ -13,6 +13,8 @@ IMPORTS_GENERATED: str = "\n".join(f"import {n}" for n in IMPORTS)
 DTC = "@dataclasses.dataclass(slots=True)"
 TQS = '"""'
 
+INDENT_S = " " * INDENT
+
 
 @dataclass
 class Class:
@@ -24,6 +26,33 @@ class TypeAlias:
     output: str
 
 
+@dataclass
+class _CopyWithArg:
+    arg: str
+    tp: str
+
+
+@dataclass
+class _CopyWith:
+    args: list[_CopyWithArg]
+
+    def generate(self, cls_name: str) -> str:
+        args: list[str] = []
+        checked_fields: list[str] = []
+
+        for arg in self.args:
+            args.append(f"{arg.arg}: {arg.tp} | None = None")
+            checked_fields.append(
+                f"{arg.arg}=self.{arg.arg} if {arg.arg} is None else {arg.arg}"
+            )
+
+        args_j = ",".join(args)
+        checked_fields_j = ",".join(checked_fields)
+        return f"def copy_with(self,{args_j}):\n" + indent(
+            f"return {cls_name}({checked_fields_j})", INDENT_S
+        )
+
+
 def codegenerate_model(model: Model) -> Class | TypeAlias:
     if model.subtypes and not model.fields:
         return TypeAlias(
@@ -32,10 +61,11 @@ def codegenerate_model(model: Model) -> Class | TypeAlias:
     pre_cls = f"class {model.name}:\n"
 
     lines = "\n".join([*model.description, "", f"More info: {model.href}"])
-    pre_cls += (" " * INDENT) + TQS + lines + TQS
+    pre_cls += INDENT_S + TQS + lines + TQS
 
     optional_fields = ""
     required_fields = ""
+    copy_with = _CopyWith([])
 
     for field in model.fields:
         name = field.name
@@ -44,6 +74,8 @@ def codegenerate_model(model: Model) -> Class | TypeAlias:
 
         tps = " | ".join(map(fold, field.types))
         pre = f"{name}: {tps}"
+
+        copy_with.args.append(_CopyWithArg(name, tps))
 
         if field.required:
             required_fields += pre + "\n"
@@ -57,7 +89,11 @@ def codegenerate_model(model: Model) -> Class | TypeAlias:
     if not fields:
         fields = "pass\n"
 
-    return Class(pre_cls + "\n" + indent(fields, " " * INDENT))
+    copy_with_impl = ""
+    if copy_with.args:
+        copy_with_impl += "\n" + indent(copy_with.generate(model.name), INDENT_S)
+
+    return Class(pre_cls + "\n" + indent(fields, " " * INDENT) + copy_with_impl)
 
 
 def codegenerate_models(models: Iterable[Model]) -> str:

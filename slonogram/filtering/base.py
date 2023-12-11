@@ -6,6 +6,8 @@ from abc import ABCMeta, abstractmethod
 from ..dispatching.context import Context
 from ..dispatching.stash import Stash
 
+from ..utils import origin_of
+
 M = TypeVar("M", contravariant=True)
 BareFilter: TypeAlias = Callable[[Context[M]], bool]
 
@@ -14,6 +16,13 @@ class ExtendedFilter(Generic[M], metaclass=ABCMeta):
     @abstractmethod
     def __call__(self, ctx: Context[M]) -> bool:
         raise NotImplementedError
+
+    @abstractmethod
+    def __repr__(self) -> str:
+        raise NotImplementedError
+
+    def __not__(self) -> Not[M]:
+        return Not(self)
 
     def __and__(self, rhs: BareFilter[M]) -> And[M]:
         return And[M](self, rhs)
@@ -39,6 +48,10 @@ class Or(ExtendedFilter[M]):
         self.lhs = lhs
         self.rhs = rhs
 
+    def __repr__(self) -> str:
+        operator = "^" if self.exclusive else "|"
+        return f"{self.lhs!r} {operator} {self.rhs!r}"
+
     def __call__(self, ctx: Context[M]) -> bool:
         if self.exclusive:
             return bool(self.lhs(ctx) ^ self.rhs(ctx))
@@ -52,6 +65,9 @@ class And(ExtendedFilter[M]):
         self.lhs = lhs
         self.rhs = rhs
 
+    def __repr__(self) -> str:
+        return f"{self.lhs!r} & {self.rhs!r}"
+
     def __call__(self, ctx: Context[M]) -> bool:
         return self.lhs(ctx) and self.rhs(ctx)
 
@@ -62,8 +78,26 @@ class Predicate(ExtendedFilter[M]):
     def __init__(self, pred: BareFilter[M]) -> None:
         self.pred = pred
 
+    def __repr__(self) -> str:
+        return repr(self.pred)
+
     def __call__(self, ctx: Context[M]) -> bool:
         return self.pred(ctx)
+
+
+class Not(ExtendedFilter[M]):
+    __slots__ = ("filter",)
+
+    def __init__(self, pred: BareFilter[M]) -> None:
+        self.filter = pred
+
+    def __repr__(self) -> str:
+        if origin_of(self.filter) is not Predicate:
+            return f"~({self.filter!r})"
+        return f"~{self.filter!r}"
+
+    def __call__(self, ctx: Context[M]) -> bool:
+        return not self.filter(ctx)
 
 
 class Scope(ExtendedFilter[M]):
@@ -83,6 +117,9 @@ class Scope(ExtendedFilter[M]):
             self.stash = Stash()
         else:
             self.stash = stash
+
+    def __repr__(self) -> str:
+        return f"{{{self.filter!r}}}"
 
     def __call__(self, ctx: Context[M]) -> bool:
         subctx = Context(
