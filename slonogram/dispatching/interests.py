@@ -1,19 +1,25 @@
 from __future__ import annotations
+from dataclasses import dataclass
+from abc import ABCMeta, abstractmethod
 from typing import (
     TypeVar,
     Generic,
     TypeAlias,
-    Literal,
     Iterable as Y,
     Callable,
     overload,
     cast,
     Any,
+    Type,
 )
 
 from .handler import RawHandler, Handler
 
 from ..schemas import Message, CallbackQuery, InlineQuery
+from ..utils import origin_of
+from ..filtering.base import BareFilter
+
+from ..types import interest as I
 from ..types.interest import Interest
 
 
@@ -22,18 +28,32 @@ M = TypeVar("M", covariant=True)
 T = TypeVar("T")
 R = TypeVar("R")
 
-MessageCompat: TypeAlias = Literal[Interest.MESSAGE] | Literal[Interest.EDITED_MESSAGE]
-CallbackQCompat: TypeAlias = Literal[Interest.CALLBACK_QUERY]
-InlineQCompat: TypeAlias = Literal[Interest.INLINE_QUERY]
+MessageCompat: TypeAlias = I.MessageI | I.EditedMessageI
+CallbackQCompat: TypeAlias = I.CallbackQueryI
+InlineQCompat: TypeAlias = I.InlineQueryI
 
 RelaxedCompat: TypeAlias = Interest
+
+
+class Filter(Generic[M]):
+    __slots__ = ()
+
+
+@dataclass(slots=True, frozen=True)
+class _Disamb(Generic[T]):
+    tp: Type[T]
+    val: T
+
+
+def disamb(tp: Type[T], val: T) -> _Disamb[T]:
+    return _Disamb(tp, val)
 
 
 def identity(x: T) -> T:
     return x
 
 
-class InterestedHandler(Generic[T]):
+class Interested(Generic[C, T]):
     __slots__ = ("interests", "handler")
 
     def __init__(self, interests: set[Interest], handler: T) -> None:
@@ -42,11 +62,11 @@ class InterestedHandler(Generic[T]):
 
     def bimap(
         self, f: Callable[[set[Interest], T], tuple[set[Interest], R]]
-    ) -> InterestedHandler[R]:
+    ) -> Interested[C, R]:
         interests, handler = f(self.interests, self.handler)
-        return InterestedHandler[R](interests, handler)
+        return Interested[C, R](interests, handler)
 
-    def map(self, f: Callable[[T], R]) -> InterestedHandler[R]:
+    def map(self, f: Callable[[T], R]) -> Interested[C, R]:
         return self.bimap(lambda s, h: (s, f(h)))
 
     def _yield(self, interest: Interest) -> Y[T]:
@@ -60,32 +80,66 @@ class InterestedHandler(Generic[T]):
     def edited_message(self) -> Y[T]:
         return self._yield(Interest.EDITED_MESSAGE)
 
+    def callback_query(self) -> Y[T]:
+        return self._yield(Interest.CALLBACK_QUERY)
 
-class InterestCombinator(Generic[C, M]):
+    def inline_query(self) -> Y[T]:
+        return self._yield(Interest.INLINE_QUERY)
+
+
+class _Combinator(Generic[T, C, M], metaclass=ABCMeta):
+    interests: set[Interest]
+
+    @abstractmethod
+    def _combine(self, rhs: _Combinator[T, C, M]) -> T:
+        raise NotImplementedError
+
+    def __or__(self, rhs: _Combinator[T, C, M]) -> T:
+        return self._combine(rhs)
+
+
+class InterestCombinator(_Combinator["InterestCombinator[C, M]", C, M]):
     __slots__ = ("interests",)
 
     def __init__(self, interests: set[Interest]) -> None:
         self.interests = interests
 
-    def __or__(self, rhs: InterestCombinator[C, M]) -> InterestCombinator[C, M]:
+    def _combine(
+        self, rhs: _Combinator[InterestCombinator[C, M], C, M]
+    ) -> InterestCombinator[C, M]:
         return InterestCombinator[C, M]({*self.interests, *rhs.interests})
 
     @overload
-    def __gt__(self, rhs: RawHandler[M]) -> InterestedHandler[RawHandler[M]]:
+    def __gt__(self, rhs: RawHandler[M]) -> Interested[C, RawHandler[M]]:
         ...
 
     @overload
-    def __gt__(self, rhs: Handler[M]) -> InterestedHandler[Handler[M]]:
+    def __gt__(self, rhs: Handler[M]) -> Interested[C, Handler[M]]:
+        ...
+
+    @overload
+    def __gt__(self, rhs: _Disamb[Handler[M]]) -> Interested[C, Handler[M]]:
+        ...
+
+    @overload
+    def __gt__(self, rhs: _Disamb[Filter[M]]) -> Interested[C, BareFilter[M]]:
         ...
 
     def __gt__(
         self,
-        rhs: RawHandler[M] | Handler[M],
-    ) -> InterestedHandler[Handler[M]] | InterestedHandler[RawHandler[M]]:
-        # This is just for mypy to stfu
-        if isinstance(rhs, Handler):
-            return InterestedHandler[Handler[M]](self.interests, rhs)
-        return InterestedHandler[RawHandler[M]](self.interests, rhs)
+        rhs: Any,
+    ) -> Any:
+        if isinstance(rhs, _Disamb):
+            origin = origin_of(rhs.tp)
+            if origin is Handler:
+                return Interested[C, Handler[M]](self.interests, rhs.val)
+            elif origin is Filter:
+                return Interested[C, BareFilter[M]](self.interests, rhs.val)
+        elif isinstance(rhs, Handler):
+            return Interested[C, Handler[M]](self.interests, rhs)
+
+        # RawHandler here
+        return Interested[C, RawHandler[M]](self.interests, rhs)
 
 
 def relax(comb: InterestCombinator[C, M]) -> InterestCombinator[RelaxedCompat, Any]:
@@ -113,7 +167,7 @@ inline_query_r   = relax(inline_query)
 
 __all__ = [
     "InterestCombinator",
-    "InterestedHandler",
+    "Interested",
     #
     # Combinators
     #

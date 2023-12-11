@@ -21,7 +21,7 @@ class Handler(Generic[M]):
     def __init__(
         self,
         raw_handler: RawHandler[M],
-        layers: Layers[M],
+        layers: Layers[[], M],
         observer: bool = False,
     ) -> None:
         self.raw_handler = raw_handler
@@ -30,7 +30,7 @@ class Handler(Generic[M]):
 
     async def __call__(self, context: Context[M]) -> HandlerActivation:
         layers = self.layers
-        subctx = Context(Stash(context.stash), context.model, context.bot)
+        subctx = context.with_stash(Stash(context.stash))
 
         if layers.prepare is not None:
             await layers.prepare(subctx)
