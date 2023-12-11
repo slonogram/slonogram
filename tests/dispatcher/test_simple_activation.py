@@ -16,7 +16,6 @@ from slonogram.dispatching import (
     Context,
     Ic,
 )
-from slonogram.dispatching.interests import Interested
 
 pytest_plugins = ("pytest_asyncio",)
 
@@ -29,26 +28,28 @@ async def _stub(_: Context[Any]) -> None:
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    "filter,finalized,expect",
+    "filter,interests,handler,expect",
     [
-        (Const(True), Ic.message > _stub, _stub),
-        (Const(False), Ic.message > _stub, None),
-        (Const(True), Ic.edited_message > _stub, None),
+        (Const(True), Ic.message, _stub, _stub),
+        (Const(False), Ic.message, _stub, None),
+        (Const(True), Ic.edited_message, _stub, None),
         (
             Const(True),
-            Ic.message | Ic.edited_message > _stub,
+            Ic.message | Ic.edited_message,
+            _stub,
             _stub,
         ),
     ],
 )
 async def test_activation(
     filter: BareFilter[Any],
-    finalized: Interested[Any, Any],
+    interests: Ic.InterestCombinator[Any, Any],
+    handler: RawHandler[Any],
     expect: RawHandler[Any] | None,
 ) -> None:
     assert_activation(
         expect,
-        await dp.on(finalized, filter=filter).feed_single(
+        await dp.on(interests, handler, filter=filter).feed_single(
             schemas.Update(update_id=1337, message=MESSAGE_MOCK),
             BOT_MOCK,
         ),
@@ -62,10 +63,10 @@ MSG_UPD = update(message=MESSAGE_MOCK)
 @pytest.mark.parametrize(
     "test_dp,input,expect",
     [
-        (dp.on(Ic.message > _stub), MSG_UPD, _stub),
-        (dp.on(Ic.callback_query > _stub), MSG_UPD, None),
+        (dp.on(Ic.message, _stub), MSG_UPD, _stub),
+        (dp.on(Ic.callback_query, _stub), MSG_UPD, None),
         (
-            dp.on(Ic.message | Ic.edited_message > _stub).on(Ic.callback_query > _stub),
+            dp.on(Ic.message | Ic.edited_message, _stub).on(Ic.callback_query, _stub),
             MSG_UPD,
             _stub,
         ),

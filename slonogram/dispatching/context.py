@@ -3,6 +3,8 @@ from __future__ import annotations
 from ..bot import Bot
 from .stash import Stash
 
+from ..schemas import Message
+
 from typing import TypeVar, Generic
 
 M = TypeVar("M", covariant=True)
@@ -23,6 +25,9 @@ class Context(Generic[M]):
 
     def with_stash(self, stash: Stash) -> Context[M]:
         return Context(stash, self.model, self.bot)
+
+    def reply(self: Context[Message]) -> None:
+        pass
 
 
 __all__ = ["Context"]

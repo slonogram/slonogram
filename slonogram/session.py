@@ -1,7 +1,19 @@
+from __future__ import annotations
+
 from abc import ABCMeta, abstractmethod
 from typing import TypeAlias, Awaitable, Any, BinaryIO
 
 AllowedType: TypeAlias = float | int | bool | str
+
+
+class SessionContext(metaclass=ABCMeta):
+    @abstractmethod
+    def __aenter__(self) -> Awaitable[Session]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def __aexit__(self) -> Awaitable[None]:
+        raise NotImplementedError
 
 
 class Session(metaclass=ABCMeta):
@@ -23,4 +35,4 @@ class Session(metaclass=ABCMeta):
         raise NotImplementedError
 
 
-__all__ = ["Session", "AllowedType"]
+__all__ = ["Session", "SessionContext", "AllowedType"]

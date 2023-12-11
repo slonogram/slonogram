@@ -1,6 +1,5 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from functools import partial
 from typing import Any, overload, TypeVar, Iterable, Callable, TypeAlias
 
 from .context import Context
@@ -24,7 +23,7 @@ from ..schemas import (
 )
 from ..bot import Bot
 
-from .interests import Interested
+from .interests import InterestCombinator
 
 T = TypeVar("T")
 C1 = TypeVar("C1")
@@ -127,7 +126,8 @@ class Dispatcher:
     @overload
     def on(
         self,
-        handler: Interested[C1, RawHandler[M]],
+        interests: InterestCombinator[C1, M],
+        handler: RawHandler[M],
         filter: BareFilter[M] | None = None,
         *,
         prepare: SimpleMiddleware[M] | None = None,
@@ -137,44 +137,46 @@ class Dispatcher:
         ...
 
     @overload
-    def on(self, handler: Interested[C1, Handler[M]]) -> Dispatcher:
+    def on(
+        self,
+        interests: InterestCombinator[C1, M],
+        handler: Handler[M],
+    ) -> Dispatcher:
         ...
 
     def on(
         self,
-        handler: Interested[C1, RawHandler[M]] | Interested[C1, Handler[M]],
+        interests: InterestCombinator[C1, M],
+        handler: Handler[M] | RawHandler[M],
         filter: BareFilter[M] | None = None,
         *,
+        observer: bool = False,
         prepare: SimpleMiddleware[M] | None = None,
         before: SimpleMiddleware[M] | None = None,
         after: ExcMiddleware[M] | None = None,
     ) -> Dispatcher:
-        h: Interested[C1, Handler[Any]]
-
-        if isinstance(handler.handler, Handler):
-            h = handler
-        else:
-            h = handler.map(
-                partial(
-                    Handler,
-                    layers=Layers(
-                        prepare=prepare,
-                        before=before,
-                        after=after,
-                        filter=filter,
-                    ),
+        h: Handler[Any] = (
+            handler
+            if isinstance(handler, Handler)
+            else Handler(
+                handler,
+                layers=Layers(
+                    prepare=prepare,
+                    before=before,
+                    after=after,
+                    filter=filter,
                 ),
+                observer=observer,
             )
+        )
 
-        return Dispatcher(
-            self.name,
-            self.children,
-            self.handlers.extended_from(
-                message=h.message(),
-                edited_message=h.edited_message(),
-                callback_query=h.callback_query(),
-                inline_query=h.inline_query(),
-            ),
+        return self.alter_handlers(
+            lambda handlers: handlers.extended_from(
+                message=interests.yield_if(Interest.MESSAGE, h),
+                edited_message=interests.yield_if(Interest.EDITED_MESSAGE, h),
+                callback_query=interests.yield_if(Interest.CALLBACK_QUERY, h),
+                inline_query=interests.yield_if(Interest.INLINE_QUERY, h),
+            )
         )
 
     # Dispatching
