@@ -5,7 +5,7 @@ from typing import Any, overload, TypeVar, Iterable, Callable, TypeAlias
 
 from .context import Context
 from .layers import Layers
-from .handler import RawHandler, Handler, HandlerActivation
+from .handler import RawHandler, Handler, Activation
 from .stash import Stash
 
 from ..filtering.base import BareFilter
@@ -179,14 +179,16 @@ class Dispatcher:
 
     # Dispatching
 
-    async def dispatch_to_children(self, update: Update, bot: Bot) -> HandlerActivation:
+    async def dispatch_to_children(self, update: Update, bot: Bot) -> Activation[Any]:
         for child in self.children:
-            if await child.feed_single(update, bot) == HandlerActivation.activated:
-                return HandlerActivation.activated
+            activation = await child.feed_single(update, bot)
 
-        return HandlerActivation.ignored
+            if activation.is_activated:
+                return activation
 
-    async def feed_single(self, update: Update, bot: Bot) -> HandlerActivation:
+        return Activation.ignored()
+
+    async def feed_single(self, update: Update, bot: Bot) -> Activation[Any]:
         ref = self.handlers
         handlers: tuple[Handler[Any], ...]
         context = Context[Any](self.stash, None, bot)
@@ -224,7 +226,7 @@ class Dispatcher:
         elif update.chat_join_request is not None:
             raise NotImplementedError
         else:
-            return HandlerActivation.ignored
+            return Activation.ignored()
         layers = self.layers
 
         try:
@@ -232,14 +234,14 @@ class Dispatcher:
                 await layers.prepare(context)
 
             if layers.filter is not None and not layers.filter(context):
-                return HandlerActivation.ignored
+                return Activation.ignored()
 
             if layers.before is not None:
                 await layers.before(context)
 
             for handler in handlers:
-                if await handler(context) == HandlerActivation.activated:
-                    return HandlerActivation.activated
+                if (activation := await handler(context)).is_activated:
+                    return activation
         except Exception as exc:
             if layers.after is None:
                 # TODO: Maybe handling?

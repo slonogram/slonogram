@@ -1,6 +1,6 @@
 from .stash import Stash
 from .context import Context
-from .handler import Handler, HandlerActivation
+from .handler import Handler, Activation
 
 from .dispatcher import Dispatcher
 
@@ -12,6 +12,6 @@ __all__ = [
     "Context",
     "Handler",
     "Dispatcher",
-    "HandlerActivation",
+    "Activation",
     "Ic",
 ]
