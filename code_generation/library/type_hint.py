@@ -106,12 +106,9 @@ class Union(TypeHint):
         return " | ".join(n.translate() for n in self.variants)
 
     def collect_refs(self) -> TypeRefs:
-        return (
-            reduce(
-                lambda lhs, rhs: lhs | rhs,
-                map(lambda x: x.collect_refs(), self.variants),
-            )
-            | TypeRefs()
+        return reduce(
+            lambda lhs, rhs: lhs | rhs,
+            map(lambda x: x.collect_refs(), self.variants),
         )
 
     def __or__(self, rhs: TypeHint) -> Union:
