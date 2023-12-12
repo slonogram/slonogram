@@ -10,7 +10,7 @@ from .spec_models.schemas import Model
 from .spec_models.methods import Method
 
 from .codegen_impl.methods import generate_methods
-from .codegen_impl.schemas import codegenerate_models
+from .codegen_impl.schemas import generate_models
 
 
 parser = ArgumentParser(
@@ -34,7 +34,7 @@ print("# generated at:", str(datetime.now()))
 match args.type:
     case "schemas":
         models = adaptix.Retort().load(raw_json["types"], dict[str, Model])
-        print(codegenerate_models(models.values()))
+        print(generate_models(models.values()))
     case "methods":
         methods_class_name: str | None = args.methods_class_name
         if methods_class_name is None:

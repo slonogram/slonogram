@@ -1,128 +1,112 @@
 from typing import Iterable
-from textwrap import indent
 from keyword import kwlist
-from dataclasses import dataclass
 
-from . import fold
-from . import INDENT
+from .folder import fold_types
+
+from ..library.function import Argument, Function, self_arg
+from ..library.type_hint import TypeRefs, Ref
+from ..library.statement import Statement
+from ..library.dataclass import Dataclass, Field
+from ..library.simple import (
+    Collection,
+    FromImport,
+    TypeAlias,
+    Return,
+)
+
 from ..spec_models.schemas import Model
 
-IMPORTS: list[str] = ["dataclasses", "typing"]
-IMPORTS_GENERATED: str = "\n".join(f"import {n}" for n in IMPORTS)
-DTC = "@dataclasses.dataclass(slots=True)"
-TQS = '"""'
 
-INDENT_S = " " * INDENT
-
-
-@dataclass
-class Class:
-    output: str
-
-
-@dataclass
-class TypeAlias:
-    output: str
-
-
-@dataclass
-class _CopyWithArg:
-    arg: str
-    tp: str
-
-
-@dataclass
-class _CopyWith:
-    args: list[_CopyWithArg]
-
-    def generate(self, cls_name: str) -> str:
-        args: list[str] = []
-        checked_fields: list[str] = []
-
-        for arg in self.args:
-            args.append(f"{arg.arg}: {arg.tp} | None = None")
-            checked_fields.append(
-                f"{arg.arg}=self.{arg.arg} if {arg.arg} is None else {arg.arg}"
-            )
-
-        args_j = ",".join(args)
-        if args_j:
-            args_j += ","
-        checked_fields_j = ",".join(checked_fields)
-        return f"def copy_with(self,{args_j}) -> {cls_name}:\n" + indent(
-            f"return {cls_name}({checked_fields_j})", INDENT_S
-        )
-
-
-def codegenerate_model(model: Model) -> Class | TypeAlias | None:
-    if model.name == "InputFile":
-        return None  # Don't generate the InputFile
-
+def generate_model(model: Model) -> tuple[Statement, TypeRefs]:
     if model.subtypes and not model.fields:
-        return TypeAlias(
-            f"{model.name}: typing.TypeAlias = " + " | ".join(map(fold, model.subtypes))
+        aliased_tp = fold_types(model.subtypes)
+        return (
+            TypeAlias(model.name, aliased_tp),
+            aliased_tp.collect_refs() | TypeRefs(typing={"TypeAlias"}),
         )
-    pre_cls = f"class {model.name}:\n"
+    refs = TypeRefs()
+    optional_fields: list[Field] = []
+    required_fields: list[Field] = []
 
-    lines = "\n".join([*model.description, "", f"More info: {model.href}"])
-    pre_cls += INDENT_S + TQS + lines + TQS
-
-    optional_fields = ""
-    required_fields = ""
-    copy_with = _CopyWith([])
+    copy_args: list[Argument] = []
+    copy_bindings: list[str] = []
 
     for field in model.fields:
-        name = field.name
-        if name in kwlist:
-            name += "_"
+        field_name = field.name + "_" if field.name in kwlist else field.name
+        hint = fold_types(field.types)
+        refs |= hint.collect_refs()
 
-        tps = " | ".join(map(fold, field.types))
-        pre = f"{name}: {tps}"
-
-        copy_with.args.append(_CopyWithArg(name, tps))
+        copy_args.append(
+            Argument(
+                field_name,
+                hint | Ref("None"),
+                default="None",
+            )
+        )
+        copy_bindings.append(
+            f"{field_name}=self.{field_name} if {field_name} is None else {field_name}"
+        )
 
         if field.required:
-            required_fields += pre + "\n"
-            required_fields += repr(field.description) + "\n"
+            required_fields.append(Field(field_name, hint, field.description))
         else:
-            optional_fields += pre + " | None = None"
-            optional_fields += "\n"
-            optional_fields += repr(field.description) + "\n"
-
-    fields = required_fields + optional_fields
-    if not fields:
-        fields = "pass\n"
-
-    copy_with_impl = ""
-    if copy_with.args:
-        copy_with_impl += "\n" + indent(copy_with.generate(model.name), INDENT_S)
-
-    return Class(pre_cls + "\n" + indent(fields, " " * INDENT) + copy_with_impl)
-
-
-def codegenerate_models(models: Iterable[Model]) -> str:
-    transpiled_models = ""
-    post_trans = ""
-
-    for model in models:
-        gen = codegenerate_model(model)
-        if gen is None:
-            continue
-
-        if isinstance(gen, Class):
-            transpiled_models += DTC + "\n"
-            transpiled_models += gen.output + "\n"
-        else:
-            post_trans += gen.output + "\n"
+            optional_fields.append(
+                Field(
+                    field_name,
+                    hint | Ref("None"),
+                    field.description,
+                    default="None",
+                )
+            )
 
     return (
-        "from __future__ import annotations\n"
-        + IMPORTS_GENERATED
-        + "\n\n"
-        + transpiled_models
-        + "\n"
-        + post_trans
+        Dataclass(
+            model.name,
+            [*required_fields, *optional_fields],
+            doc="\n".join(model.description),
+            tail=(
+                Function(
+                    "copy_with",
+                    Ref(model.name),
+                    args=[self_arg(), *copy_args],
+                    doc="Copies all values from the arguments (if they're not None), otherwise copies from the instance",
+                    body=[
+                        Return(model.name + "(" + ", ".join(copy_bindings) + ")"),
+                    ],
+                ),
+            ),
+        ),
+        refs,
     )
 
 
-__all__ = ["codegenerate_models"]
+def generate_models(models: Iterable[Model]) -> str:
+    refs = TypeRefs()
+    definitions: list[Statement] = []
+    end: list[Statement] = []
+
+    for model in models:
+        stmt, m_refs = generate_model(model)
+
+        refs |= m_refs
+        if isinstance(stmt, TypeAlias):
+            end.append(stmt)
+        else:
+            definitions.append(stmt)
+
+    imports: list[Statement] = []
+    if refs.typing:
+        imports.append(FromImport("typing", list(refs.typing)))
+
+    return Collection(
+        [
+            FromImport("__future__", "annotations"),
+            *imports,
+            FromImport("dataclasses", "dataclass"),
+            *definitions,
+            *end,
+        ]
+    ).generate()
+
+
+__all__ = ["generate_models"]
