@@ -3,8 +3,7 @@ from textwrap import indent
 from keyword import kwlist
 from dataclasses import dataclass
 
-from telegram_type_parser import fold
-
+from . import fold
 from . import INDENT
 from ..spec_models.schemas import Model
 
@@ -47,13 +46,18 @@ class _CopyWith:
             )
 
         args_j = ",".join(args)
+        if args_j:
+            args_j += ","
         checked_fields_j = ",".join(checked_fields)
         return f"def copy_with(self,{args_j}) -> {cls_name}:\n" + indent(
             f"return {cls_name}({checked_fields_j})", INDENT_S
         )
 
 
-def codegenerate_model(model: Model) -> Class | TypeAlias:
+def codegenerate_model(model: Model) -> Class | TypeAlias | None:
+    if model.name == "InputFile":
+        return None  # Don't generate the InputFile
+
     if model.subtypes and not model.fields:
         return TypeAlias(
             f"{model.name}: typing.TypeAlias = " + " | ".join(map(fold, model.subtypes))
@@ -102,6 +106,8 @@ def codegenerate_models(models: Iterable[Model]) -> str:
 
     for model in models:
         gen = codegenerate_model(model)
+        if gen is None:
+            continue
 
         if isinstance(gen, Class):
             transpiled_models += DTC + "\n"

@@ -16,4 +16,5 @@ class Method:
     href: str
 
     description: list[str]
+    returns: list[str]
     arguments: list[Argument] = field(default_factory=list)

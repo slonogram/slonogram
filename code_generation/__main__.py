@@ -1,5 +1,6 @@
 import json
 import adaptix
+import sys
 
 from datetime import datetime
 from typing import Any
@@ -7,7 +8,9 @@ from argparse import ArgumentParser
 
 from .spec_models.schemas import Model
 from .spec_models.methods import Method
-from .codegen.schemas import codegenerate_models
+
+from .codegen_impl.methods import generate_methods
+from .codegen_impl.schemas import codegenerate_models
 
 
 parser = ArgumentParser(
@@ -16,6 +19,7 @@ parser = ArgumentParser(
 )
 
 parser.add_argument("-t", "--type", choices=["schemas", "methods"], required=True)
+parser.add_argument("-m", "--methods-class-name")
 parser.add_argument("spec_file")
 
 args = parser.parse_args()
@@ -32,6 +36,12 @@ match args.type:
         models = adaptix.Retort().load(raw_json["types"], dict[str, Model])
         print(codegenerate_models(models.values()))
     case "methods":
+        methods_class_name: str | None = args.methods_class_name
+        if methods_class_name is None:
+            print("[ERROR] no --method-class-name argument specified", file=sys.stderr)
+            sys.exit(1)
+
         methods = adaptix.Retort(
             recipe=[adaptix.name_mapping(Method, map={"arguments": "fields"})]
         ).load(raw_json["methods"], dict[str, Method])
+        print(generate_methods(methods.values(), methods_class_name))

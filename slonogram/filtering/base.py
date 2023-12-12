@@ -122,10 +122,8 @@ class Scope(ExtendedFilter[M]):
         return f"{{{self.filter!r}}}"
 
     def __call__(self, ctx: Context[M]) -> bool:
-        subctx = Context(
-            Stash(ctx.stash, self.stash.types) if self.extend_parent else self.stash,
-            ctx.model,
-            ctx.bot,
+        subctx = ctx.with_stash(
+            Stash(ctx.stash, self.stash.types) if self.extend_parent else self.stash
         )
         return self.filter(subctx)
 

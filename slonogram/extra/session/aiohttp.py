@@ -1,7 +1,9 @@
 from aiohttp import ClientSession
 
-from typing import Any, AsyncIterator, Awaitable, BinaryIO
+from typing import Any, AsyncIterator, BinaryIO
 from . import BASE_URL
+
+from slonogram.exceptions.api import ApiError, ErrorDetails
 
 from contextlib import asynccontextmanager
 from slonogram.session import AllowedType, Session
@@ -14,13 +16,29 @@ class AiohttpSession(Session):
         self.token = token
         self.session = session
 
-    def call_method(
+    async def call_method(
         self,
         name: str,
         args: dict[str, AllowedType] | None = None,
         files: dict[str, BinaryIO] | None = None,
-    ) -> Awaitable[Any]:
-        raise NotImplementedError
+    ) -> Any:
+        args: dict[str, Any]  # type: ignore
+        if args is None:
+            args = {}
+        if files is not None:
+            args.update(files)  # type: ignore
+
+        async with self.session.post(f"/bot{self.token}/{name}", data=args) as response:
+            js = await response.json()
+            if js["ok"]:
+                return js["result"]
+            raise ApiError(
+                method_name=name,
+                args=args,
+                error=ErrorDetails(
+                    code=js["error_code"], description=js["description"]
+                ),
+            )
 
 
 @asynccontextmanager
