@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from functools import reduce
-from typing import Sequence
+from typing import Sequence, Iterable
 from dataclasses import dataclass, field
 from abc import ABCMeta, abstractmethod
 
@@ -12,6 +12,22 @@ def _prefer(v: set[str] | None, otherwise: set[str]) -> set[str]:
     return v
 
 
+def collect_all_refs(hints: Iterable[TypeHint]) -> TypeRefs:
+    return reduce(
+        lambda lhs, rhs: lhs | rhs,
+        map(lambda x: x.collect_refs(), hints),
+    )
+
+
+SCALAR_BUILTINS = {
+    "True",
+    "False",
+    "None",
+    "int",
+    "str",
+    "float",
+    "bool",
+}
 BUILTINS = {
     "True",
     "False",
@@ -21,6 +37,7 @@ BUILTINS = {
     "float",
     "list",
     "set",
+    "bool",
 }
 TYPING = {
     "BinaryIO",
@@ -67,6 +84,11 @@ class TypeHint(metaclass=ABCMeta):
     def __repr__(self) -> str:
         return self.translate()
 
+    def __getitem__(self, item: TypeHint | tuple[TypeHint, ...]) -> Parametrized:
+        if isinstance(item, TypeHint):
+            return Parametrized((item,), self)
+        return Parametrized(item, self)
+
     @abstractmethod
     def translate(self) -> str:
         raise NotImplementedError
@@ -95,6 +117,27 @@ class List(TypeHint):
         return self.type.collect_refs() | TypeRefs(builtins={"list"})
 
 
+class Parametrized(TypeHint):
+    def __init__(
+        self,
+        arguments: tuple[TypeHint, ...],
+        type: TypeHint,
+    ) -> None:
+        self.arguments = arguments
+        self.type = type
+
+    def __getitem__(self, item: TypeHint | tuple[TypeHint, ...]) -> Parametrized:
+        if isinstance(item, Parametrized):
+            return Parametrized((*self.arguments, item), self.type)
+        return super().__getitem__(item)
+
+    def translate(self) -> str:
+        return f"{self.type.translate()}[" + ", ".join(map(repr, self.arguments)) + "]"
+
+    def collect_refs(self) -> TypeRefs:
+        return collect_all_refs(self.arguments) | self.type.collect_refs()
+
+
 class Union(TypeHint):
     def __init__(self, variants: Sequence[TypeHint]) -> None:
         if len(variants) == 0:
@@ -106,10 +149,7 @@ class Union(TypeHint):
         return " | ".join(n.translate() for n in self.variants)
 
     def collect_refs(self) -> TypeRefs:
-        return reduce(
-            lambda lhs, rhs: lhs | rhs,
-            map(lambda x: x.collect_refs(), self.variants),
-        )
+        return collect_all_refs(self.variants)
 
     def __or__(self, rhs: TypeHint) -> Union:
         return Union([*self.variants, rhs])
@@ -123,7 +163,7 @@ class Optional(TypeHint):
         return f"{self.tp.translate()} | None"
 
     def collect_refs(self) -> TypeRefs:
-        return self.tp.collect_refs()
+        return self.tp.collect_refs() | TypeRefs(builtins={"None"})
 
 
 class Ref(TypeHint):

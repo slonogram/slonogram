@@ -19,7 +19,7 @@ class Definition(Statement):
     def __init__(
         self,
         name: str,
-        type: TypeHint,
+        type: TypeHint | None = None,
         assign: str | None = None,
     ) -> None:
         self.name = name
@@ -31,7 +31,11 @@ class Definition(Statement):
             assign = " = " + self.assign
         else:
             assign = ""
-        return f"{self.name}: {self.type.translate()}" + assign
+        r = f"{self.name}"
+
+        if self.type is not None:
+            r += f": {self.type.translate()}"
+        return r + assign
 
 
 class Collection(Statement):

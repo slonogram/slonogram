@@ -26,6 +26,11 @@ class AiohttpSession(Session):
         if args is None:
             args = {}
         if files is not None:
+            for k in args.keys():
+                val = args[k]
+                if not isinstance(val, str):
+                    args[k] = str(val)
+
             args.update(files)  # type: ignore
 
         async with self.session.post(f"/bot{self.token}/{name}", data=args) as response:

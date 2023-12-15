@@ -1,4 +1,13 @@
 from typing import Any, get_origin
+import json
+
+
+def parse_json(s: str) -> Any:
+    return json.loads(s)
+
+
+def dump_json(j: Any) -> str:
+    return json.dumps(j, ensure_ascii=False)
 
 
 def origin_of(of: Any) -> Any:

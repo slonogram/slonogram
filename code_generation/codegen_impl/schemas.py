@@ -39,7 +39,7 @@ def generate_model(model: Model) -> tuple[Statement, TypeRefs]:
         copy_args.append(
             Argument(
                 field_name,
-                hint | Ref("None"),
+                hint.optional,
                 default="None",
             )
         )
@@ -53,7 +53,7 @@ def generate_model(model: Model) -> tuple[Statement, TypeRefs]:
             optional_fields.append(
                 Field(
                     field_name,
-                    hint | Ref("None"),
+                    hint.optional,
                     field.description,
                     default="None",
                 )
