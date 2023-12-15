@@ -1,11 +1,10 @@
 from functools import reduce
-from typing import cast
 from dataclasses import dataclass
 
 from code_generation.library.type_hint import TypeRefs
 from . import indent
 
-from .type_hint import TypeHint, TypeRefs
+from .type_hint import TypeHint
 from .type_hint.known_refs import ANY
 from .statement import Statement
 
@@ -66,9 +65,7 @@ class Function(Statement):
         return self.return_type.collect_refs() | reduce(
             lambda lhs, rhs: lhs | rhs,
             map(
-                lambda x: x.type.collect_refs()
-                if x.type is not None
-                else ANY.collect_refs(),
+                lambda x: x.type.collect_refs() if x.type is not None else TypeRefs(),
                 self.args,
             ),
             TypeRefs(),
