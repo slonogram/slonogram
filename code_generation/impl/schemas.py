@@ -40,6 +40,7 @@ class Order(IntEnum):
 
 
 ELLIPSIS_TYPE = Ref(Source("types"), "EllipsisType")
+ALTER_FN = Ref(Source("slonogram._internal.utils"), "AlterFn")
 
 
 def _helper_methods_for(model: PlainModel) -> Statement:
@@ -51,25 +52,22 @@ def _helper_methods_for(model: PlainModel) -> Statement:
 
     for name, field in model.fields.items():
         typ = field.type if field.required else field.type.optional
-        copy_with_args.append(FunArg(name, field.type.optional, default="None"))
-        copy_with_binds.append(f"{name}={name} if {name} is not None else self.{name}")
+        copy_with_args.append(FunArg(name, typ | ELLIPSIS_TYPE, default="..."))
+        copy_with_binds.append(f"{name}={name} if {name} is not ... else self.{name}")
 
-        alterer_tp = Ref(TYPING, "Callable")[
-            ParamSpec(typ), typ | ELLIPSIS_TYPE
-        ]
+        alterer_tp = ALTER_FN[typ]
         alter_args.append(FunArg(name, alterer_tp | ELLIPSIS_TYPE, default="..."))
 
-        inner_if = (
-            f"_{name} if (_{name} := {name}(self.{name})) is not ... else self.{name}"
+        alter_binds.append(
+            f"{name}=self.{name} if {name} is ... else prefer({name}(self.{name}), self.{name})"
         )
-        alter_binds.append(f"{name}=({inner_if}) if {name} is not ... else self.{name}")
 
     return Collection(
         [
             Function(
                 "alter",
                 Ref(SCHEMAS, model.name),
-                doc="Alters every type with the provided callable, if callable returns None - field left untouched",
+                doc="Alters every type with the provided callable, if callable returns ... - field left untouched",
                 args=[self_arg(), *alter_args],
                 trailing_comma=True,
                 body=[Return(f"{model.name}(%s)" % ", ".join(alter_binds))],
@@ -170,6 +168,7 @@ def generate_schemas(spec: Spec) -> Statement:
     return Collection(
         (
             UseFeature("annotations"),
+            FromImport("slonogram._internal.utils", "prefer"),
             *imports_from_sources,
             *top_level,
             *first_stmts,

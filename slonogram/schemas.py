@@ -4,10 +4,12 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-15 19:51:44.559011
+# Generated at: 2023-12-15 20:12:42.933387
 from __future__ import annotations
+from slonogram._internal.utils import prefer
 from dataclasses import dataclass
-from typing import BinaryIO, TypeAlias, Callable, Any
+from typing import BinaryIO, Any, TypeAlias
+from slonogram._internal.utils import AlterFn
 from types import EllipsisType
 
 
@@ -48,221 +50,129 @@ class Update:
     """Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates. """
 
     def alter(
-        self: Any,
-        update_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        edited_message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        channel_post: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        edited_channel_post: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        inline_query: Callable[[InlineQuery | None], InlineQuery | None | EllipsisType]
-        | EllipsisType = ...,
-        chosen_inline_result: Callable[
-            [ChosenInlineResult | None], ChosenInlineResult | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        callback_query: Callable[
-            [CallbackQuery | None], CallbackQuery | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        shipping_query: Callable[
-            [ShippingQuery | None], ShippingQuery | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        pre_checkout_query: Callable[
-            [PreCheckoutQuery | None], PreCheckoutQuery | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        poll: Callable[[Poll | None], Poll | None | EllipsisType] | EllipsisType = ...,
-        poll_answer: Callable[[PollAnswer | None], PollAnswer | None | EllipsisType]
-        | EllipsisType = ...,
-        my_chat_member: Callable[
-            [ChatMemberUpdated | None], ChatMemberUpdated | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        chat_member: Callable[
-            [ChatMemberUpdated | None], ChatMemberUpdated | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        chat_join_request: Callable[
-            [ChatJoinRequest | None], ChatJoinRequest | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        update_id: AlterFn[int] | EllipsisType = ...,
+        message: AlterFn[Message | None] | EllipsisType = ...,
+        edited_message: AlterFn[Message | None] | EllipsisType = ...,
+        channel_post: AlterFn[Message | None] | EllipsisType = ...,
+        edited_channel_post: AlterFn[Message | None] | EllipsisType = ...,
+        inline_query: AlterFn[InlineQuery | None] | EllipsisType = ...,
+        chosen_inline_result: AlterFn[ChosenInlineResult | None] | EllipsisType = ...,
+        callback_query: AlterFn[CallbackQuery | None] | EllipsisType = ...,
+        shipping_query: AlterFn[ShippingQuery | None] | EllipsisType = ...,
+        pre_checkout_query: AlterFn[PreCheckoutQuery | None] | EllipsisType = ...,
+        poll: AlterFn[Poll | None] | EllipsisType = ...,
+        poll_answer: AlterFn[PollAnswer | None] | EllipsisType = ...,
+        my_chat_member: AlterFn[ChatMemberUpdated | None] | EllipsisType = ...,
+        chat_member: AlterFn[ChatMemberUpdated | None] | EllipsisType = ...,
+        chat_join_request: AlterFn[ChatJoinRequest | None] | EllipsisType = ...,
     ) -> Update:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Update(
-            update_id=(
-                _update_id
-                if (_update_id := update_id(self.update_id)) is not ...
-                else self.update_id
-            )
-            if update_id is not ...
-            else self.update_id,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
-            edited_message=(
-                _edited_message
-                if (_edited_message := edited_message(self.edited_message)) is not ...
-                else self.edited_message
-            )
-            if edited_message is not ...
-            else self.edited_message,
-            channel_post=(
-                _channel_post
-                if (_channel_post := channel_post(self.channel_post)) is not ...
-                else self.channel_post
-            )
-            if channel_post is not ...
-            else self.channel_post,
-            edited_channel_post=(
-                _edited_channel_post
-                if (
-                    _edited_channel_post := edited_channel_post(
-                        self.edited_channel_post
-                    )
-                )
-                is not ...
-                else self.edited_channel_post
-            )
-            if edited_channel_post is not ...
-            else self.edited_channel_post,
-            inline_query=(
-                _inline_query
-                if (_inline_query := inline_query(self.inline_query)) is not ...
-                else self.inline_query
-            )
-            if inline_query is not ...
-            else self.inline_query,
-            chosen_inline_result=(
-                _chosen_inline_result
-                if (
-                    _chosen_inline_result := chosen_inline_result(
-                        self.chosen_inline_result
-                    )
-                )
-                is not ...
-                else self.chosen_inline_result
-            )
-            if chosen_inline_result is not ...
-            else self.chosen_inline_result,
-            callback_query=(
-                _callback_query
-                if (_callback_query := callback_query(self.callback_query)) is not ...
-                else self.callback_query
-            )
-            if callback_query is not ...
-            else self.callback_query,
-            shipping_query=(
-                _shipping_query
-                if (_shipping_query := shipping_query(self.shipping_query)) is not ...
-                else self.shipping_query
-            )
-            if shipping_query is not ...
-            else self.shipping_query,
-            pre_checkout_query=(
-                _pre_checkout_query
-                if (_pre_checkout_query := pre_checkout_query(self.pre_checkout_query))
-                is not ...
-                else self.pre_checkout_query
-            )
-            if pre_checkout_query is not ...
-            else self.pre_checkout_query,
-            poll=(_poll if (_poll := poll(self.poll)) is not ... else self.poll)
-            if poll is not ...
-            else self.poll,
-            poll_answer=(
-                _poll_answer
-                if (_poll_answer := poll_answer(self.poll_answer)) is not ...
-                else self.poll_answer
-            )
-            if poll_answer is not ...
-            else self.poll_answer,
-            my_chat_member=(
-                _my_chat_member
-                if (_my_chat_member := my_chat_member(self.my_chat_member)) is not ...
-                else self.my_chat_member
-            )
-            if my_chat_member is not ...
-            else self.my_chat_member,
-            chat_member=(
-                _chat_member
-                if (_chat_member := chat_member(self.chat_member)) is not ...
-                else self.chat_member
-            )
-            if chat_member is not ...
-            else self.chat_member,
-            chat_join_request=(
-                _chat_join_request
-                if (_chat_join_request := chat_join_request(self.chat_join_request))
-                is not ...
-                else self.chat_join_request
-            )
-            if chat_join_request is not ...
-            else self.chat_join_request,
+            update_id=self.update_id
+            if update_id is ...
+            else prefer(update_id(self.update_id), self.update_id),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
+            edited_message=self.edited_message
+            if edited_message is ...
+            else prefer(edited_message(self.edited_message), self.edited_message),
+            channel_post=self.channel_post
+            if channel_post is ...
+            else prefer(channel_post(self.channel_post), self.channel_post),
+            edited_channel_post=self.edited_channel_post
+            if edited_channel_post is ...
+            else prefer(
+                edited_channel_post(self.edited_channel_post), self.edited_channel_post
+            ),
+            inline_query=self.inline_query
+            if inline_query is ...
+            else prefer(inline_query(self.inline_query), self.inline_query),
+            chosen_inline_result=self.chosen_inline_result
+            if chosen_inline_result is ...
+            else prefer(
+                chosen_inline_result(self.chosen_inline_result),
+                self.chosen_inline_result,
+            ),
+            callback_query=self.callback_query
+            if callback_query is ...
+            else prefer(callback_query(self.callback_query), self.callback_query),
+            shipping_query=self.shipping_query
+            if shipping_query is ...
+            else prefer(shipping_query(self.shipping_query), self.shipping_query),
+            pre_checkout_query=self.pre_checkout_query
+            if pre_checkout_query is ...
+            else prefer(
+                pre_checkout_query(self.pre_checkout_query), self.pre_checkout_query
+            ),
+            poll=self.poll if poll is ... else prefer(poll(self.poll), self.poll),
+            poll_answer=self.poll_answer
+            if poll_answer is ...
+            else prefer(poll_answer(self.poll_answer), self.poll_answer),
+            my_chat_member=self.my_chat_member
+            if my_chat_member is ...
+            else prefer(my_chat_member(self.my_chat_member), self.my_chat_member),
+            chat_member=self.chat_member
+            if chat_member is ...
+            else prefer(chat_member(self.chat_member), self.chat_member),
+            chat_join_request=self.chat_join_request
+            if chat_join_request is ...
+            else prefer(
+                chat_join_request(self.chat_join_request), self.chat_join_request
+            ),
         )
 
     def copy_with(
-        self: Any,
-        update_id: int | None = None,
-        message: Message | None = None,
-        edited_message: Message | None = None,
-        channel_post: Message | None = None,
-        edited_channel_post: Message | None = None,
-        inline_query: InlineQuery | None = None,
-        chosen_inline_result: ChosenInlineResult | None = None,
-        callback_query: CallbackQuery | None = None,
-        shipping_query: ShippingQuery | None = None,
-        pre_checkout_query: PreCheckoutQuery | None = None,
-        poll: Poll | None = None,
-        poll_answer: PollAnswer | None = None,
-        my_chat_member: ChatMemberUpdated | None = None,
-        chat_member: ChatMemberUpdated | None = None,
-        chat_join_request: ChatJoinRequest | None = None,
+        self,
+        update_id: int | EllipsisType = ...,
+        message: Message | None | EllipsisType = ...,
+        edited_message: Message | None | EllipsisType = ...,
+        channel_post: Message | None | EllipsisType = ...,
+        edited_channel_post: Message | None | EllipsisType = ...,
+        inline_query: InlineQuery | None | EllipsisType = ...,
+        chosen_inline_result: ChosenInlineResult | None | EllipsisType = ...,
+        callback_query: CallbackQuery | None | EllipsisType = ...,
+        shipping_query: ShippingQuery | None | EllipsisType = ...,
+        pre_checkout_query: PreCheckoutQuery | None | EllipsisType = ...,
+        poll: Poll | None | EllipsisType = ...,
+        poll_answer: PollAnswer | None | EllipsisType = ...,
+        my_chat_member: ChatMemberUpdated | None | EllipsisType = ...,
+        chat_member: ChatMemberUpdated | None | EllipsisType = ...,
+        chat_join_request: ChatJoinRequest | None | EllipsisType = ...,
     ) -> Update:
         """Replaces some of model's fields with provided ones"""
         return Update(
-            update_id=update_id if update_id is not None else self.update_id,
-            message=message if message is not None else self.message,
+            update_id=update_id if update_id is not ... else self.update_id,
+            message=message if message is not ... else self.message,
             edited_message=edited_message
-            if edited_message is not None
+            if edited_message is not ...
             else self.edited_message,
-            channel_post=channel_post
-            if channel_post is not None
-            else self.channel_post,
+            channel_post=channel_post if channel_post is not ... else self.channel_post,
             edited_channel_post=edited_channel_post
-            if edited_channel_post is not None
+            if edited_channel_post is not ...
             else self.edited_channel_post,
-            inline_query=inline_query
-            if inline_query is not None
-            else self.inline_query,
+            inline_query=inline_query if inline_query is not ... else self.inline_query,
             chosen_inline_result=chosen_inline_result
-            if chosen_inline_result is not None
+            if chosen_inline_result is not ...
             else self.chosen_inline_result,
             callback_query=callback_query
-            if callback_query is not None
+            if callback_query is not ...
             else self.callback_query,
             shipping_query=shipping_query
-            if shipping_query is not None
+            if shipping_query is not ...
             else self.shipping_query,
             pre_checkout_query=pre_checkout_query
-            if pre_checkout_query is not None
+            if pre_checkout_query is not ...
             else self.pre_checkout_query,
-            poll=poll if poll is not None else self.poll,
-            poll_answer=poll_answer if poll_answer is not None else self.poll_answer,
+            poll=poll if poll is not ... else self.poll,
+            poll_answer=poll_answer if poll_answer is not ... else self.poll_answer,
             my_chat_member=my_chat_member
-            if my_chat_member is not None
+            if my_chat_member is not ...
             else self.my_chat_member,
-            chat_member=chat_member if chat_member is not None else self.chat_member,
+            chat_member=chat_member if chat_member is not ... else self.chat_member,
             chat_join_request=chat_join_request
-            if chat_join_request is not None
+            if chat_join_request is not ...
             else self.chat_join_request,
         )
 
@@ -291,144 +201,93 @@ class WebhookInfo:
     """Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
 
     def alter(
-        self: Any,
-        url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        has_custom_certificate: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        pending_update_count: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        ip_address: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        last_error_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        last_error_message: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        last_synchronization_error_date: Callable[
-            [int | None], int | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        max_connections: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        allowed_updates: Callable[[list[str] | None], list[str] | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        url: AlterFn[str] | EllipsisType = ...,
+        has_custom_certificate: AlterFn[bool] | EllipsisType = ...,
+        pending_update_count: AlterFn[int] | EllipsisType = ...,
+        ip_address: AlterFn[str | None] | EllipsisType = ...,
+        last_error_date: AlterFn[int | None] | EllipsisType = ...,
+        last_error_message: AlterFn[str | None] | EllipsisType = ...,
+        last_synchronization_error_date: AlterFn[int | None] | EllipsisType = ...,
+        max_connections: AlterFn[int | None] | EllipsisType = ...,
+        allowed_updates: AlterFn[list[str] | None] | EllipsisType = ...,
     ) -> WebhookInfo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebhookInfo(
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url,
-            has_custom_certificate=(
-                _has_custom_certificate
-                if (
-                    _has_custom_certificate := has_custom_certificate(
-                        self.has_custom_certificate
-                    )
-                )
-                is not ...
-                else self.has_custom_certificate
-            )
-            if has_custom_certificate is not ...
-            else self.has_custom_certificate,
-            pending_update_count=(
-                _pending_update_count
-                if (
-                    _pending_update_count := pending_update_count(
-                        self.pending_update_count
-                    )
-                )
-                is not ...
-                else self.pending_update_count
-            )
-            if pending_update_count is not ...
-            else self.pending_update_count,
-            ip_address=(
-                _ip_address
-                if (_ip_address := ip_address(self.ip_address)) is not ...
-                else self.ip_address
-            )
-            if ip_address is not ...
-            else self.ip_address,
-            last_error_date=(
-                _last_error_date
-                if (_last_error_date := last_error_date(self.last_error_date))
-                is not ...
-                else self.last_error_date
-            )
-            if last_error_date is not ...
-            else self.last_error_date,
-            last_error_message=(
-                _last_error_message
-                if (_last_error_message := last_error_message(self.last_error_message))
-                is not ...
-                else self.last_error_message
-            )
-            if last_error_message is not ...
-            else self.last_error_message,
-            last_synchronization_error_date=(
-                _last_synchronization_error_date
-                if (
-                    _last_synchronization_error_date := last_synchronization_error_date(
-                        self.last_synchronization_error_date
-                    )
-                )
-                is not ...
-                else self.last_synchronization_error_date
-            )
-            if last_synchronization_error_date is not ...
-            else self.last_synchronization_error_date,
-            max_connections=(
-                _max_connections
-                if (_max_connections := max_connections(self.max_connections))
-                is not ...
-                else self.max_connections
-            )
-            if max_connections is not ...
-            else self.max_connections,
-            allowed_updates=(
-                _allowed_updates
-                if (_allowed_updates := allowed_updates(self.allowed_updates))
-                is not ...
-                else self.allowed_updates
-            )
-            if allowed_updates is not ...
-            else self.allowed_updates,
+            url=self.url if url is ... else prefer(url(self.url), self.url),
+            has_custom_certificate=self.has_custom_certificate
+            if has_custom_certificate is ...
+            else prefer(
+                has_custom_certificate(self.has_custom_certificate),
+                self.has_custom_certificate,
+            ),
+            pending_update_count=self.pending_update_count
+            if pending_update_count is ...
+            else prefer(
+                pending_update_count(self.pending_update_count),
+                self.pending_update_count,
+            ),
+            ip_address=self.ip_address
+            if ip_address is ...
+            else prefer(ip_address(self.ip_address), self.ip_address),
+            last_error_date=self.last_error_date
+            if last_error_date is ...
+            else prefer(last_error_date(self.last_error_date), self.last_error_date),
+            last_error_message=self.last_error_message
+            if last_error_message is ...
+            else prefer(
+                last_error_message(self.last_error_message), self.last_error_message
+            ),
+            last_synchronization_error_date=self.last_synchronization_error_date
+            if last_synchronization_error_date is ...
+            else prefer(
+                last_synchronization_error_date(self.last_synchronization_error_date),
+                self.last_synchronization_error_date,
+            ),
+            max_connections=self.max_connections
+            if max_connections is ...
+            else prefer(max_connections(self.max_connections), self.max_connections),
+            allowed_updates=self.allowed_updates
+            if allowed_updates is ...
+            else prefer(allowed_updates(self.allowed_updates), self.allowed_updates),
         )
 
     def copy_with(
-        self: Any,
-        url: str | None = None,
-        has_custom_certificate: bool | None = None,
-        pending_update_count: int | None = None,
-        ip_address: str | None = None,
-        last_error_date: int | None = None,
-        last_error_message: str | None = None,
-        last_synchronization_error_date: int | None = None,
-        max_connections: int | None = None,
-        allowed_updates: list[str] | None = None,
+        self,
+        url: str | EllipsisType = ...,
+        has_custom_certificate: bool | EllipsisType = ...,
+        pending_update_count: int | EllipsisType = ...,
+        ip_address: str | None | EllipsisType = ...,
+        last_error_date: int | None | EllipsisType = ...,
+        last_error_message: str | None | EllipsisType = ...,
+        last_synchronization_error_date: int | None | EllipsisType = ...,
+        max_connections: int | None | EllipsisType = ...,
+        allowed_updates: list[str] | None | EllipsisType = ...,
     ) -> WebhookInfo:
         """Replaces some of model's fields with provided ones"""
         return WebhookInfo(
-            url=url if url is not None else self.url,
+            url=url if url is not ... else self.url,
             has_custom_certificate=has_custom_certificate
-            if has_custom_certificate is not None
+            if has_custom_certificate is not ...
             else self.has_custom_certificate,
             pending_update_count=pending_update_count
-            if pending_update_count is not None
+            if pending_update_count is not ...
             else self.pending_update_count,
-            ip_address=ip_address if ip_address is not None else self.ip_address,
+            ip_address=ip_address if ip_address is not ... else self.ip_address,
             last_error_date=last_error_date
-            if last_error_date is not None
+            if last_error_date is not ...
             else self.last_error_date,
             last_error_message=last_error_message
-            if last_error_message is not None
+            if last_error_message is not ...
             else self.last_error_message,
             last_synchronization_error_date=last_synchronization_error_date
-            if last_synchronization_error_date is not None
+            if last_synchronization_error_date is not ...
             else self.last_synchronization_error_date,
             max_connections=max_connections
-            if max_connections is not None
+            if max_connections is not ...
             else self.max_connections,
             allowed_updates=allowed_updates
-            if allowed_updates is not None
+            if allowed_updates is not ...
             else self.allowed_updates,
         )
 
@@ -461,154 +320,99 @@ class User:
     """Optional. True, if the bot supports inline queries. Returned only in getMe. """
 
     def alter(
-        self: Any,
-        id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        is_bot: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        first_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        last_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        username: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        language_code: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        is_premium: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        added_to_attachment_menu: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_join_groups: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_read_all_group_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        supports_inline_queries: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[int] | EllipsisType = ...,
+        is_bot: AlterFn[bool] | EllipsisType = ...,
+        first_name: AlterFn[str] | EllipsisType = ...,
+        last_name: AlterFn[str | None] | EllipsisType = ...,
+        username: AlterFn[str | None] | EllipsisType = ...,
+        language_code: AlterFn[str | None] | EllipsisType = ...,
+        is_premium: AlterFn[bool | None] | EllipsisType = ...,
+        added_to_attachment_menu: AlterFn[bool | None] | EllipsisType = ...,
+        can_join_groups: AlterFn[bool | None] | EllipsisType = ...,
+        can_read_all_group_messages: AlterFn[bool | None] | EllipsisType = ...,
+        supports_inline_queries: AlterFn[bool | None] | EllipsisType = ...,
     ) -> User:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return User(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            is_bot=(
-                _is_bot if (_is_bot := is_bot(self.is_bot)) is not ... else self.is_bot
-            )
-            if is_bot is not ...
-            else self.is_bot,
-            first_name=(
-                _first_name
-                if (_first_name := first_name(self.first_name)) is not ...
-                else self.first_name
-            )
-            if first_name is not ...
-            else self.first_name,
-            last_name=(
-                _last_name
-                if (_last_name := last_name(self.last_name)) is not ...
-                else self.last_name
-            )
-            if last_name is not ...
-            else self.last_name,
-            username=(
-                _username
-                if (_username := username(self.username)) is not ...
-                else self.username
-            )
-            if username is not ...
-            else self.username,
-            language_code=(
-                _language_code
-                if (_language_code := language_code(self.language_code)) is not ...
-                else self.language_code
-            )
-            if language_code is not ...
-            else self.language_code,
-            is_premium=(
-                _is_premium
-                if (_is_premium := is_premium(self.is_premium)) is not ...
-                else self.is_premium
-            )
-            if is_premium is not ...
-            else self.is_premium,
-            added_to_attachment_menu=(
-                _added_to_attachment_menu
-                if (
-                    _added_to_attachment_menu := added_to_attachment_menu(
-                        self.added_to_attachment_menu
-                    )
-                )
-                is not ...
-                else self.added_to_attachment_menu
-            )
-            if added_to_attachment_menu is not ...
-            else self.added_to_attachment_menu,
-            can_join_groups=(
-                _can_join_groups
-                if (_can_join_groups := can_join_groups(self.can_join_groups))
-                is not ...
-                else self.can_join_groups
-            )
-            if can_join_groups is not ...
-            else self.can_join_groups,
-            can_read_all_group_messages=(
-                _can_read_all_group_messages
-                if (
-                    _can_read_all_group_messages := can_read_all_group_messages(
-                        self.can_read_all_group_messages
-                    )
-                )
-                is not ...
-                else self.can_read_all_group_messages
-            )
-            if can_read_all_group_messages is not ...
-            else self.can_read_all_group_messages,
-            supports_inline_queries=(
-                _supports_inline_queries
-                if (
-                    _supports_inline_queries := supports_inline_queries(
-                        self.supports_inline_queries
-                    )
-                )
-                is not ...
-                else self.supports_inline_queries
-            )
-            if supports_inline_queries is not ...
-            else self.supports_inline_queries,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            is_bot=self.is_bot
+            if is_bot is ...
+            else prefer(is_bot(self.is_bot), self.is_bot),
+            first_name=self.first_name
+            if first_name is ...
+            else prefer(first_name(self.first_name), self.first_name),
+            last_name=self.last_name
+            if last_name is ...
+            else prefer(last_name(self.last_name), self.last_name),
+            username=self.username
+            if username is ...
+            else prefer(username(self.username), self.username),
+            language_code=self.language_code
+            if language_code is ...
+            else prefer(language_code(self.language_code), self.language_code),
+            is_premium=self.is_premium
+            if is_premium is ...
+            else prefer(is_premium(self.is_premium), self.is_premium),
+            added_to_attachment_menu=self.added_to_attachment_menu
+            if added_to_attachment_menu is ...
+            else prefer(
+                added_to_attachment_menu(self.added_to_attachment_menu),
+                self.added_to_attachment_menu,
+            ),
+            can_join_groups=self.can_join_groups
+            if can_join_groups is ...
+            else prefer(can_join_groups(self.can_join_groups), self.can_join_groups),
+            can_read_all_group_messages=self.can_read_all_group_messages
+            if can_read_all_group_messages is ...
+            else prefer(
+                can_read_all_group_messages(self.can_read_all_group_messages),
+                self.can_read_all_group_messages,
+            ),
+            supports_inline_queries=self.supports_inline_queries
+            if supports_inline_queries is ...
+            else prefer(
+                supports_inline_queries(self.supports_inline_queries),
+                self.supports_inline_queries,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        id: int | None = None,
-        is_bot: bool | None = None,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        username: str | None = None,
-        language_code: str | None = None,
-        is_premium: bool | None = None,
-        added_to_attachment_menu: bool | None = None,
-        can_join_groups: bool | None = None,
-        can_read_all_group_messages: bool | None = None,
-        supports_inline_queries: bool | None = None,
+        self,
+        id: int | EllipsisType = ...,
+        is_bot: bool | EllipsisType = ...,
+        first_name: str | EllipsisType = ...,
+        last_name: str | None | EllipsisType = ...,
+        username: str | None | EllipsisType = ...,
+        language_code: str | None | EllipsisType = ...,
+        is_premium: bool | None | EllipsisType = ...,
+        added_to_attachment_menu: bool | None | EllipsisType = ...,
+        can_join_groups: bool | None | EllipsisType = ...,
+        can_read_all_group_messages: bool | None | EllipsisType = ...,
+        supports_inline_queries: bool | None | EllipsisType = ...,
     ) -> User:
         """Replaces some of model's fields with provided ones"""
         return User(
-            id=id if id is not None else self.id,
-            is_bot=is_bot if is_bot is not None else self.is_bot,
-            first_name=first_name if first_name is not None else self.first_name,
-            last_name=last_name if last_name is not None else self.last_name,
-            username=username if username is not None else self.username,
+            id=id if id is not ... else self.id,
+            is_bot=is_bot if is_bot is not ... else self.is_bot,
+            first_name=first_name if first_name is not ... else self.first_name,
+            last_name=last_name if last_name is not ... else self.last_name,
+            username=username if username is not ... else self.username,
             language_code=language_code
-            if language_code is not None
+            if language_code is not ...
             else self.language_code,
-            is_premium=is_premium if is_premium is not None else self.is_premium,
+            is_premium=is_premium if is_premium is not ... else self.is_premium,
             added_to_attachment_menu=added_to_attachment_menu
-            if added_to_attachment_menu is not None
+            if added_to_attachment_menu is not ...
             else self.added_to_attachment_menu,
             can_join_groups=can_join_groups
-            if can_join_groups is not None
+            if can_join_groups is not ...
             else self.can_join_groups,
             can_read_all_group_messages=can_read_all_group_messages
-            if can_read_all_group_messages is not None
+            if can_read_all_group_messages is not ...
             else self.can_read_all_group_messages,
             supports_inline_queries=supports_inline_queries
-            if supports_inline_queries is not None
+            if supports_inline_queries is not ...
             else self.supports_inline_queries,
         )
 
@@ -677,400 +481,244 @@ class Chat:
     """Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat. """
 
     def alter(
-        self: Any,
-        id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        username: Callable[[str | None], str | None | EllipsisType]
+        self,
+        id: AlterFn[int] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        username: AlterFn[str | None] | EllipsisType = ...,
+        first_name: AlterFn[str | None] | EllipsisType = ...,
+        last_name: AlterFn[str | None] | EllipsisType = ...,
+        is_forum: AlterFn[bool | None] | EllipsisType = ...,
+        photo: AlterFn[ChatPhoto | None] | EllipsisType = ...,
+        active_usernames: AlterFn[list[str] | None] | EllipsisType = ...,
+        emoji_status_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        emoji_status_expiration_date: AlterFn[int | None] | EllipsisType = ...,
+        bio: AlterFn[str | None] | EllipsisType = ...,
+        has_private_forwards: AlterFn[bool | None] | EllipsisType = ...,
+        has_restricted_voice_and_video_messages: AlterFn[bool | None]
         | EllipsisType = ...,
-        first_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        last_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        is_forum: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        photo: Callable[[ChatPhoto | None], ChatPhoto | None | EllipsisType]
-        | EllipsisType = ...,
-        active_usernames: Callable[[list[str] | None], list[str] | None | EllipsisType]
-        | EllipsisType = ...,
-        emoji_status_custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        emoji_status_expiration_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        bio: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        has_private_forwards: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        has_restricted_voice_and_video_messages: Callable[
-            [bool | None], bool | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        join_to_send_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        join_by_request: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        invite_link: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        pinned_message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        permissions: Callable[
-            [ChatPermissions | None], ChatPermissions | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        slow_mode_delay: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        message_auto_delete_time: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        has_aggressive_anti_spam_enabled: Callable[
-            [bool | None], bool | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        has_hidden_members: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        has_protected_content: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        sticker_set_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        can_set_sticker_set: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        linked_chat_id: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        location: Callable[[ChatLocation | None], ChatLocation | None | EllipsisType]
-        | EllipsisType = ...,
+        join_to_send_messages: AlterFn[bool | None] | EllipsisType = ...,
+        join_by_request: AlterFn[bool | None] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        invite_link: AlterFn[str | None] | EllipsisType = ...,
+        pinned_message: AlterFn[Message | None] | EllipsisType = ...,
+        permissions: AlterFn[ChatPermissions | None] | EllipsisType = ...,
+        slow_mode_delay: AlterFn[int | None] | EllipsisType = ...,
+        message_auto_delete_time: AlterFn[int | None] | EllipsisType = ...,
+        has_aggressive_anti_spam_enabled: AlterFn[bool | None] | EllipsisType = ...,
+        has_hidden_members: AlterFn[bool | None] | EllipsisType = ...,
+        has_protected_content: AlterFn[bool | None] | EllipsisType = ...,
+        sticker_set_name: AlterFn[str | None] | EllipsisType = ...,
+        can_set_sticker_set: AlterFn[bool | None] | EllipsisType = ...,
+        linked_chat_id: AlterFn[int | None] | EllipsisType = ...,
+        location: AlterFn[ChatLocation | None] | EllipsisType = ...,
     ) -> Chat:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Chat(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            username=(
-                _username
-                if (_username := username(self.username)) is not ...
-                else self.username
-            )
-            if username is not ...
-            else self.username,
-            first_name=(
-                _first_name
-                if (_first_name := first_name(self.first_name)) is not ...
-                else self.first_name
-            )
-            if first_name is not ...
-            else self.first_name,
-            last_name=(
-                _last_name
-                if (_last_name := last_name(self.last_name)) is not ...
-                else self.last_name
-            )
-            if last_name is not ...
-            else self.last_name,
-            is_forum=(
-                _is_forum
-                if (_is_forum := is_forum(self.is_forum)) is not ...
-                else self.is_forum
-            )
-            if is_forum is not ...
-            else self.is_forum,
-            photo=(_photo if (_photo := photo(self.photo)) is not ... else self.photo)
-            if photo is not ...
-            else self.photo,
-            active_usernames=(
-                _active_usernames
-                if (_active_usernames := active_usernames(self.active_usernames))
-                is not ...
-                else self.active_usernames
-            )
-            if active_usernames is not ...
-            else self.active_usernames,
-            emoji_status_custom_emoji_id=(
-                _emoji_status_custom_emoji_id
-                if (
-                    _emoji_status_custom_emoji_id := emoji_status_custom_emoji_id(
-                        self.emoji_status_custom_emoji_id
-                    )
-                )
-                is not ...
-                else self.emoji_status_custom_emoji_id
-            )
-            if emoji_status_custom_emoji_id is not ...
-            else self.emoji_status_custom_emoji_id,
-            emoji_status_expiration_date=(
-                _emoji_status_expiration_date
-                if (
-                    _emoji_status_expiration_date := emoji_status_expiration_date(
-                        self.emoji_status_expiration_date
-                    )
-                )
-                is not ...
-                else self.emoji_status_expiration_date
-            )
-            if emoji_status_expiration_date is not ...
-            else self.emoji_status_expiration_date,
-            bio=(_bio if (_bio := bio(self.bio)) is not ... else self.bio)
-            if bio is not ...
-            else self.bio,
-            has_private_forwards=(
-                _has_private_forwards
-                if (
-                    _has_private_forwards := has_private_forwards(
-                        self.has_private_forwards
-                    )
-                )
-                is not ...
-                else self.has_private_forwards
-            )
-            if has_private_forwards is not ...
-            else self.has_private_forwards,
-            has_restricted_voice_and_video_messages=(
-                _has_restricted_voice_and_video_messages
-                if (
-                    _has_restricted_voice_and_video_messages := has_restricted_voice_and_video_messages(
-                        self.has_restricted_voice_and_video_messages
-                    )
-                )
-                is not ...
-                else self.has_restricted_voice_and_video_messages
-            )
-            if has_restricted_voice_and_video_messages is not ...
-            else self.has_restricted_voice_and_video_messages,
-            join_to_send_messages=(
-                _join_to_send_messages
-                if (
-                    _join_to_send_messages := join_to_send_messages(
-                        self.join_to_send_messages
-                    )
-                )
-                is not ...
-                else self.join_to_send_messages
-            )
-            if join_to_send_messages is not ...
-            else self.join_to_send_messages,
-            join_by_request=(
-                _join_by_request
-                if (_join_by_request := join_by_request(self.join_by_request))
-                is not ...
-                else self.join_by_request
-            )
-            if join_by_request is not ...
-            else self.join_by_request,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            invite_link=(
-                _invite_link
-                if (_invite_link := invite_link(self.invite_link)) is not ...
-                else self.invite_link
-            )
-            if invite_link is not ...
-            else self.invite_link,
-            pinned_message=(
-                _pinned_message
-                if (_pinned_message := pinned_message(self.pinned_message)) is not ...
-                else self.pinned_message
-            )
-            if pinned_message is not ...
-            else self.pinned_message,
-            permissions=(
-                _permissions
-                if (_permissions := permissions(self.permissions)) is not ...
-                else self.permissions
-            )
-            if permissions is not ...
-            else self.permissions,
-            slow_mode_delay=(
-                _slow_mode_delay
-                if (_slow_mode_delay := slow_mode_delay(self.slow_mode_delay))
-                is not ...
-                else self.slow_mode_delay
-            )
-            if slow_mode_delay is not ...
-            else self.slow_mode_delay,
-            message_auto_delete_time=(
-                _message_auto_delete_time
-                if (
-                    _message_auto_delete_time := message_auto_delete_time(
-                        self.message_auto_delete_time
-                    )
-                )
-                is not ...
-                else self.message_auto_delete_time
-            )
-            if message_auto_delete_time is not ...
-            else self.message_auto_delete_time,
-            has_aggressive_anti_spam_enabled=(
-                _has_aggressive_anti_spam_enabled
-                if (
-                    _has_aggressive_anti_spam_enabled := has_aggressive_anti_spam_enabled(
-                        self.has_aggressive_anti_spam_enabled
-                    )
-                )
-                is not ...
-                else self.has_aggressive_anti_spam_enabled
-            )
-            if has_aggressive_anti_spam_enabled is not ...
-            else self.has_aggressive_anti_spam_enabled,
-            has_hidden_members=(
-                _has_hidden_members
-                if (_has_hidden_members := has_hidden_members(self.has_hidden_members))
-                is not ...
-                else self.has_hidden_members
-            )
-            if has_hidden_members is not ...
-            else self.has_hidden_members,
-            has_protected_content=(
-                _has_protected_content
-                if (
-                    _has_protected_content := has_protected_content(
-                        self.has_protected_content
-                    )
-                )
-                is not ...
-                else self.has_protected_content
-            )
-            if has_protected_content is not ...
-            else self.has_protected_content,
-            sticker_set_name=(
-                _sticker_set_name
-                if (_sticker_set_name := sticker_set_name(self.sticker_set_name))
-                is not ...
-                else self.sticker_set_name
-            )
-            if sticker_set_name is not ...
-            else self.sticker_set_name,
-            can_set_sticker_set=(
-                _can_set_sticker_set
-                if (
-                    _can_set_sticker_set := can_set_sticker_set(
-                        self.can_set_sticker_set
-                    )
-                )
-                is not ...
-                else self.can_set_sticker_set
-            )
-            if can_set_sticker_set is not ...
-            else self.can_set_sticker_set,
-            linked_chat_id=(
-                _linked_chat_id
-                if (_linked_chat_id := linked_chat_id(self.linked_chat_id)) is not ...
-                else self.linked_chat_id
-            )
-            if linked_chat_id is not ...
-            else self.linked_chat_id,
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            username=self.username
+            if username is ...
+            else prefer(username(self.username), self.username),
+            first_name=self.first_name
+            if first_name is ...
+            else prefer(first_name(self.first_name), self.first_name),
+            last_name=self.last_name
+            if last_name is ...
+            else prefer(last_name(self.last_name), self.last_name),
+            is_forum=self.is_forum
+            if is_forum is ...
+            else prefer(is_forum(self.is_forum), self.is_forum),
+            photo=self.photo if photo is ... else prefer(photo(self.photo), self.photo),
+            active_usernames=self.active_usernames
+            if active_usernames is ...
+            else prefer(active_usernames(self.active_usernames), self.active_usernames),
+            emoji_status_custom_emoji_id=self.emoji_status_custom_emoji_id
+            if emoji_status_custom_emoji_id is ...
+            else prefer(
+                emoji_status_custom_emoji_id(self.emoji_status_custom_emoji_id),
+                self.emoji_status_custom_emoji_id,
+            ),
+            emoji_status_expiration_date=self.emoji_status_expiration_date
+            if emoji_status_expiration_date is ...
+            else prefer(
+                emoji_status_expiration_date(self.emoji_status_expiration_date),
+                self.emoji_status_expiration_date,
+            ),
+            bio=self.bio if bio is ... else prefer(bio(self.bio), self.bio),
+            has_private_forwards=self.has_private_forwards
+            if has_private_forwards is ...
+            else prefer(
+                has_private_forwards(self.has_private_forwards),
+                self.has_private_forwards,
+            ),
+            has_restricted_voice_and_video_messages=self.has_restricted_voice_and_video_messages
+            if has_restricted_voice_and_video_messages is ...
+            else prefer(
+                has_restricted_voice_and_video_messages(
+                    self.has_restricted_voice_and_video_messages
+                ),
+                self.has_restricted_voice_and_video_messages,
+            ),
+            join_to_send_messages=self.join_to_send_messages
+            if join_to_send_messages is ...
+            else prefer(
+                join_to_send_messages(self.join_to_send_messages),
+                self.join_to_send_messages,
+            ),
+            join_by_request=self.join_by_request
+            if join_by_request is ...
+            else prefer(join_by_request(self.join_by_request), self.join_by_request),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            invite_link=self.invite_link
+            if invite_link is ...
+            else prefer(invite_link(self.invite_link), self.invite_link),
+            pinned_message=self.pinned_message
+            if pinned_message is ...
+            else prefer(pinned_message(self.pinned_message), self.pinned_message),
+            permissions=self.permissions
+            if permissions is ...
+            else prefer(permissions(self.permissions), self.permissions),
+            slow_mode_delay=self.slow_mode_delay
+            if slow_mode_delay is ...
+            else prefer(slow_mode_delay(self.slow_mode_delay), self.slow_mode_delay),
+            message_auto_delete_time=self.message_auto_delete_time
+            if message_auto_delete_time is ...
+            else prefer(
+                message_auto_delete_time(self.message_auto_delete_time),
+                self.message_auto_delete_time,
+            ),
+            has_aggressive_anti_spam_enabled=self.has_aggressive_anti_spam_enabled
+            if has_aggressive_anti_spam_enabled is ...
+            else prefer(
+                has_aggressive_anti_spam_enabled(self.has_aggressive_anti_spam_enabled),
+                self.has_aggressive_anti_spam_enabled,
+            ),
+            has_hidden_members=self.has_hidden_members
+            if has_hidden_members is ...
+            else prefer(
+                has_hidden_members(self.has_hidden_members), self.has_hidden_members
+            ),
+            has_protected_content=self.has_protected_content
+            if has_protected_content is ...
+            else prefer(
+                has_protected_content(self.has_protected_content),
+                self.has_protected_content,
+            ),
+            sticker_set_name=self.sticker_set_name
+            if sticker_set_name is ...
+            else prefer(sticker_set_name(self.sticker_set_name), self.sticker_set_name),
+            can_set_sticker_set=self.can_set_sticker_set
+            if can_set_sticker_set is ...
+            else prefer(
+                can_set_sticker_set(self.can_set_sticker_set), self.can_set_sticker_set
+            ),
+            linked_chat_id=self.linked_chat_id
+            if linked_chat_id is ...
+            else prefer(linked_chat_id(self.linked_chat_id), self.linked_chat_id),
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
         )
 
     def copy_with(
-        self: Any,
-        id: int | None = None,
-        type: str | None = None,
-        title: str | None = None,
-        username: str | None = None,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        is_forum: bool | None = None,
-        photo: ChatPhoto | None = None,
-        active_usernames: list[str] | None = None,
-        emoji_status_custom_emoji_id: str | None = None,
-        emoji_status_expiration_date: int | None = None,
-        bio: str | None = None,
-        has_private_forwards: bool | None = None,
-        has_restricted_voice_and_video_messages: bool | None = None,
-        join_to_send_messages: bool | None = None,
-        join_by_request: bool | None = None,
-        description: str | None = None,
-        invite_link: str | None = None,
-        pinned_message: Message | None = None,
-        permissions: ChatPermissions | None = None,
-        slow_mode_delay: int | None = None,
-        message_auto_delete_time: int | None = None,
-        has_aggressive_anti_spam_enabled: bool | None = None,
-        has_hidden_members: bool | None = None,
-        has_protected_content: bool | None = None,
-        sticker_set_name: str | None = None,
-        can_set_sticker_set: bool | None = None,
-        linked_chat_id: int | None = None,
-        location: ChatLocation | None = None,
+        self,
+        id: int | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        username: str | None | EllipsisType = ...,
+        first_name: str | None | EllipsisType = ...,
+        last_name: str | None | EllipsisType = ...,
+        is_forum: bool | None | EllipsisType = ...,
+        photo: ChatPhoto | None | EllipsisType = ...,
+        active_usernames: list[str] | None | EllipsisType = ...,
+        emoji_status_custom_emoji_id: str | None | EllipsisType = ...,
+        emoji_status_expiration_date: int | None | EllipsisType = ...,
+        bio: str | None | EllipsisType = ...,
+        has_private_forwards: bool | None | EllipsisType = ...,
+        has_restricted_voice_and_video_messages: bool | None | EllipsisType = ...,
+        join_to_send_messages: bool | None | EllipsisType = ...,
+        join_by_request: bool | None | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        invite_link: str | None | EllipsisType = ...,
+        pinned_message: Message | None | EllipsisType = ...,
+        permissions: ChatPermissions | None | EllipsisType = ...,
+        slow_mode_delay: int | None | EllipsisType = ...,
+        message_auto_delete_time: int | None | EllipsisType = ...,
+        has_aggressive_anti_spam_enabled: bool | None | EllipsisType = ...,
+        has_hidden_members: bool | None | EllipsisType = ...,
+        has_protected_content: bool | None | EllipsisType = ...,
+        sticker_set_name: str | None | EllipsisType = ...,
+        can_set_sticker_set: bool | None | EllipsisType = ...,
+        linked_chat_id: int | None | EllipsisType = ...,
+        location: ChatLocation | None | EllipsisType = ...,
     ) -> Chat:
         """Replaces some of model's fields with provided ones"""
         return Chat(
-            id=id if id is not None else self.id,
-            type=type if type is not None else self.type,
-            title=title if title is not None else self.title,
-            username=username if username is not None else self.username,
-            first_name=first_name if first_name is not None else self.first_name,
-            last_name=last_name if last_name is not None else self.last_name,
-            is_forum=is_forum if is_forum is not None else self.is_forum,
-            photo=photo if photo is not None else self.photo,
+            id=id if id is not ... else self.id,
+            type=type if type is not ... else self.type,
+            title=title if title is not ... else self.title,
+            username=username if username is not ... else self.username,
+            first_name=first_name if first_name is not ... else self.first_name,
+            last_name=last_name if last_name is not ... else self.last_name,
+            is_forum=is_forum if is_forum is not ... else self.is_forum,
+            photo=photo if photo is not ... else self.photo,
             active_usernames=active_usernames
-            if active_usernames is not None
+            if active_usernames is not ...
             else self.active_usernames,
             emoji_status_custom_emoji_id=emoji_status_custom_emoji_id
-            if emoji_status_custom_emoji_id is not None
+            if emoji_status_custom_emoji_id is not ...
             else self.emoji_status_custom_emoji_id,
             emoji_status_expiration_date=emoji_status_expiration_date
-            if emoji_status_expiration_date is not None
+            if emoji_status_expiration_date is not ...
             else self.emoji_status_expiration_date,
-            bio=bio if bio is not None else self.bio,
+            bio=bio if bio is not ... else self.bio,
             has_private_forwards=has_private_forwards
-            if has_private_forwards is not None
+            if has_private_forwards is not ...
             else self.has_private_forwards,
             has_restricted_voice_and_video_messages=has_restricted_voice_and_video_messages
-            if has_restricted_voice_and_video_messages is not None
+            if has_restricted_voice_and_video_messages is not ...
             else self.has_restricted_voice_and_video_messages,
             join_to_send_messages=join_to_send_messages
-            if join_to_send_messages is not None
+            if join_to_send_messages is not ...
             else self.join_to_send_messages,
             join_by_request=join_by_request
-            if join_by_request is not None
+            if join_by_request is not ...
             else self.join_by_request,
-            description=description if description is not None else self.description,
-            invite_link=invite_link if invite_link is not None else self.invite_link,
+            description=description if description is not ... else self.description,
+            invite_link=invite_link if invite_link is not ... else self.invite_link,
             pinned_message=pinned_message
-            if pinned_message is not None
+            if pinned_message is not ...
             else self.pinned_message,
-            permissions=permissions if permissions is not None else self.permissions,
+            permissions=permissions if permissions is not ... else self.permissions,
             slow_mode_delay=slow_mode_delay
-            if slow_mode_delay is not None
+            if slow_mode_delay is not ...
             else self.slow_mode_delay,
             message_auto_delete_time=message_auto_delete_time
-            if message_auto_delete_time is not None
+            if message_auto_delete_time is not ...
             else self.message_auto_delete_time,
             has_aggressive_anti_spam_enabled=has_aggressive_anti_spam_enabled
-            if has_aggressive_anti_spam_enabled is not None
+            if has_aggressive_anti_spam_enabled is not ...
             else self.has_aggressive_anti_spam_enabled,
             has_hidden_members=has_hidden_members
-            if has_hidden_members is not None
+            if has_hidden_members is not ...
             else self.has_hidden_members,
             has_protected_content=has_protected_content
-            if has_protected_content is not None
+            if has_protected_content is not ...
             else self.has_protected_content,
             sticker_set_name=sticker_set_name
-            if sticker_set_name is not None
+            if sticker_set_name is not ...
             else self.sticker_set_name,
             can_set_sticker_set=can_set_sticker_set
-            if can_set_sticker_set is not None
+            if can_set_sticker_set is not ...
             else self.can_set_sticker_set,
             linked_chat_id=linked_chat_id
-            if linked_chat_id is not None
+            if linked_chat_id is not ...
             else self.linked_chat_id,
-            location=location if location is not None else self.location,
+            location=location if location is not ... else self.location,
         )
 
 
@@ -1224,980 +872,586 @@ class Message:
     """Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons. """
 
     def alter(
-        self: Any,
-        message_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        message_thread_id: Callable[[int | None], int | None | EllipsisType]
+        self,
+        message_id: AlterFn[int] | EllipsisType = ...,
+        message_thread_id: AlterFn[int | None] | EllipsisType = ...,
+        from_: AlterFn[User | None] | EllipsisType = ...,
+        sender_chat: AlterFn[Chat | None] | EllipsisType = ...,
+        date: AlterFn[int] | EllipsisType = ...,
+        chat: AlterFn[Chat] | EllipsisType = ...,
+        forward_from: AlterFn[User | None] | EllipsisType = ...,
+        forward_from_chat: AlterFn[Chat | None] | EllipsisType = ...,
+        forward_from_message_id: AlterFn[int | None] | EllipsisType = ...,
+        forward_signature: AlterFn[str | None] | EllipsisType = ...,
+        forward_sender_name: AlterFn[str | None] | EllipsisType = ...,
+        forward_date: AlterFn[int | None] | EllipsisType = ...,
+        is_topic_message: AlterFn[bool | None] | EllipsisType = ...,
+        is_automatic_forward: AlterFn[bool | None] | EllipsisType = ...,
+        reply_to_message: AlterFn[Message | None] | EllipsisType = ...,
+        via_bot: AlterFn[User | None] | EllipsisType = ...,
+        edit_date: AlterFn[int | None] | EllipsisType = ...,
+        has_protected_content: AlterFn[bool | None] | EllipsisType = ...,
+        media_group_id: AlterFn[str | None] | EllipsisType = ...,
+        author_signature: AlterFn[str | None] | EllipsisType = ...,
+        text: AlterFn[str | None] | EllipsisType = ...,
+        entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        animation: AlterFn[Animation | None] | EllipsisType = ...,
+        audio: AlterFn[Audio | None] | EllipsisType = ...,
+        document: AlterFn[Document | None] | EllipsisType = ...,
+        photo: AlterFn[list[PhotoSize] | None] | EllipsisType = ...,
+        sticker: AlterFn[Sticker | None] | EllipsisType = ...,
+        story: AlterFn[Story | None] | EllipsisType = ...,
+        video: AlterFn[Video | None] | EllipsisType = ...,
+        video_note: AlterFn[VideoNote | None] | EllipsisType = ...,
+        voice: AlterFn[Voice | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        has_media_spoiler: AlterFn[bool | None] | EllipsisType = ...,
+        contact: AlterFn[Contact | None] | EllipsisType = ...,
+        dice: AlterFn[Dice | None] | EllipsisType = ...,
+        game: AlterFn[Game | None] | EllipsisType = ...,
+        poll: AlterFn[Poll | None] | EllipsisType = ...,
+        venue: AlterFn[Venue | None] | EllipsisType = ...,
+        location: AlterFn[Location | None] | EllipsisType = ...,
+        new_chat_members: AlterFn[list[User] | None] | EllipsisType = ...,
+        left_chat_member: AlterFn[User | None] | EllipsisType = ...,
+        new_chat_title: AlterFn[str | None] | EllipsisType = ...,
+        new_chat_photo: AlterFn[list[PhotoSize] | None] | EllipsisType = ...,
+        delete_chat_photo: AlterFn[bool | None] | EllipsisType = ...,
+        group_chat_created: AlterFn[bool | None] | EllipsisType = ...,
+        supergroup_chat_created: AlterFn[bool | None] | EllipsisType = ...,
+        channel_chat_created: AlterFn[bool | None] | EllipsisType = ...,
+        message_auto_delete_timer_changed: AlterFn[MessageAutoDeleteTimerChanged | None]
         | EllipsisType = ...,
-        from_: Callable[[User | None], User | None | EllipsisType] | EllipsisType = ...,
-        sender_chat: Callable[[Chat | None], Chat | None | EllipsisType]
+        migrate_to_chat_id: AlterFn[int | None] | EllipsisType = ...,
+        migrate_from_chat_id: AlterFn[int | None] | EllipsisType = ...,
+        pinned_message: AlterFn[Message | None] | EllipsisType = ...,
+        invoice: AlterFn[Invoice | None] | EllipsisType = ...,
+        successful_payment: AlterFn[SuccessfulPayment | None] | EllipsisType = ...,
+        user_shared: AlterFn[UserShared | None] | EllipsisType = ...,
+        chat_shared: AlterFn[ChatShared | None] | EllipsisType = ...,
+        connected_website: AlterFn[str | None] | EllipsisType = ...,
+        write_access_allowed: AlterFn[WriteAccessAllowed | None] | EllipsisType = ...,
+        passport_data: AlterFn[PassportData | None] | EllipsisType = ...,
+        proximity_alert_triggered: AlterFn[ProximityAlertTriggered | None]
         | EllipsisType = ...,
-        date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        chat: Callable[[Chat], Chat | EllipsisType] | EllipsisType = ...,
-        forward_from: Callable[[User | None], User | None | EllipsisType]
+        forum_topic_created: AlterFn[ForumTopicCreated | None] | EllipsisType = ...,
+        forum_topic_edited: AlterFn[ForumTopicEdited | None] | EllipsisType = ...,
+        forum_topic_closed: AlterFn[ForumTopicClosed | None] | EllipsisType = ...,
+        forum_topic_reopened: AlterFn[ForumTopicReopened | None] | EllipsisType = ...,
+        general_forum_topic_hidden: AlterFn[GeneralForumTopicHidden | None]
         | EllipsisType = ...,
-        forward_from_chat: Callable[[Chat | None], Chat | None | EllipsisType]
+        general_forum_topic_unhidden: AlterFn[GeneralForumTopicUnhidden | None]
         | EllipsisType = ...,
-        forward_from_message_id: Callable[[int | None], int | None | EllipsisType]
+        video_chat_scheduled: AlterFn[VideoChatScheduled | None] | EllipsisType = ...,
+        video_chat_started: AlterFn[VideoChatStarted | None] | EllipsisType = ...,
+        video_chat_ended: AlterFn[VideoChatEnded | None] | EllipsisType = ...,
+        video_chat_participants_invited: AlterFn[VideoChatParticipantsInvited | None]
         | EllipsisType = ...,
-        forward_signature: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        forward_sender_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        forward_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        is_topic_message: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        is_automatic_forward: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_to_message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        via_bot: Callable[[User | None], User | None | EllipsisType]
-        | EllipsisType = ...,
-        edit_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        has_protected_content: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        media_group_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        author_signature: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        text: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        animation: Callable[[Animation | None], Animation | None | EllipsisType]
-        | EllipsisType = ...,
-        audio: Callable[[Audio | None], Audio | None | EllipsisType]
-        | EllipsisType = ...,
-        document: Callable[[Document | None], Document | None | EllipsisType]
-        | EllipsisType = ...,
-        photo: Callable[[list[PhotoSize] | None], list[PhotoSize] | None | EllipsisType]
-        | EllipsisType = ...,
-        sticker: Callable[[Sticker | None], Sticker | None | EllipsisType]
-        | EllipsisType = ...,
-        story: Callable[[Story | None], Story | None | EllipsisType]
-        | EllipsisType = ...,
-        video: Callable[[Video | None], Video | None | EllipsisType]
-        | EllipsisType = ...,
-        video_note: Callable[[VideoNote | None], VideoNote | None | EllipsisType]
-        | EllipsisType = ...,
-        voice: Callable[[Voice | None], Voice | None | EllipsisType]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        has_media_spoiler: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        contact: Callable[[Contact | None], Contact | None | EllipsisType]
-        | EllipsisType = ...,
-        dice: Callable[[Dice | None], Dice | None | EllipsisType] | EllipsisType = ...,
-        game: Callable[[Game | None], Game | None | EllipsisType] | EllipsisType = ...,
-        poll: Callable[[Poll | None], Poll | None | EllipsisType] | EllipsisType = ...,
-        venue: Callable[[Venue | None], Venue | None | EllipsisType]
-        | EllipsisType = ...,
-        location: Callable[[Location | None], Location | None | EllipsisType]
-        | EllipsisType = ...,
-        new_chat_members: Callable[
-            [list[User] | None], list[User] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        left_chat_member: Callable[[User | None], User | None | EllipsisType]
-        | EllipsisType = ...,
-        new_chat_title: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        new_chat_photo: Callable[
-            [list[PhotoSize] | None], list[PhotoSize] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        delete_chat_photo: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        group_chat_created: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        supergroup_chat_created: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        channel_chat_created: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        message_auto_delete_timer_changed: Callable[
-            [MessageAutoDeleteTimerChanged | None],
-            MessageAutoDeleteTimerChanged | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        migrate_to_chat_id: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        migrate_from_chat_id: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        pinned_message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        invoice: Callable[[Invoice | None], Invoice | None | EllipsisType]
-        | EllipsisType = ...,
-        successful_payment: Callable[
-            [SuccessfulPayment | None], SuccessfulPayment | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        user_shared: Callable[[UserShared | None], UserShared | None | EllipsisType]
-        | EllipsisType = ...,
-        chat_shared: Callable[[ChatShared | None], ChatShared | None | EllipsisType]
-        | EllipsisType = ...,
-        connected_website: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        write_access_allowed: Callable[
-            [WriteAccessAllowed | None], WriteAccessAllowed | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        passport_data: Callable[
-            [PassportData | None], PassportData | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        proximity_alert_triggered: Callable[
-            [ProximityAlertTriggered | None],
-            ProximityAlertTriggered | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        forum_topic_created: Callable[
-            [ForumTopicCreated | None], ForumTopicCreated | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        forum_topic_edited: Callable[
-            [ForumTopicEdited | None], ForumTopicEdited | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        forum_topic_closed: Callable[
-            [ForumTopicClosed | None], ForumTopicClosed | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        forum_topic_reopened: Callable[
-            [ForumTopicReopened | None], ForumTopicReopened | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        general_forum_topic_hidden: Callable[
-            [GeneralForumTopicHidden | None],
-            GeneralForumTopicHidden | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        general_forum_topic_unhidden: Callable[
-            [GeneralForumTopicUnhidden | None],
-            GeneralForumTopicUnhidden | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        video_chat_scheduled: Callable[
-            [VideoChatScheduled | None], VideoChatScheduled | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        video_chat_started: Callable[
-            [VideoChatStarted | None], VideoChatStarted | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        video_chat_ended: Callable[
-            [VideoChatEnded | None], VideoChatEnded | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        video_chat_participants_invited: Callable[
-            [VideoChatParticipantsInvited | None],
-            VideoChatParticipantsInvited | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        web_app_data: Callable[[WebAppData | None], WebAppData | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        web_app_data: AlterFn[WebAppData | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
     ) -> Message:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Message(
-            message_id=(
-                _message_id
-                if (_message_id := message_id(self.message_id)) is not ...
-                else self.message_id
-            )
-            if message_id is not ...
-            else self.message_id,
-            message_thread_id=(
-                _message_thread_id
-                if (_message_thread_id := message_thread_id(self.message_thread_id))
-                is not ...
-                else self.message_thread_id
-            )
-            if message_thread_id is not ...
-            else self.message_thread_id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            sender_chat=(
-                _sender_chat
-                if (_sender_chat := sender_chat(self.sender_chat)) is not ...
-                else self.sender_chat
-            )
-            if sender_chat is not ...
-            else self.sender_chat,
-            date=(_date if (_date := date(self.date)) is not ... else self.date)
-            if date is not ...
-            else self.date,
-            chat=(_chat if (_chat := chat(self.chat)) is not ... else self.chat)
-            if chat is not ...
-            else self.chat,
-            forward_from=(
-                _forward_from
-                if (_forward_from := forward_from(self.forward_from)) is not ...
-                else self.forward_from
-            )
-            if forward_from is not ...
-            else self.forward_from,
-            forward_from_chat=(
-                _forward_from_chat
-                if (_forward_from_chat := forward_from_chat(self.forward_from_chat))
-                is not ...
-                else self.forward_from_chat
-            )
-            if forward_from_chat is not ...
-            else self.forward_from_chat,
-            forward_from_message_id=(
-                _forward_from_message_id
-                if (
-                    _forward_from_message_id := forward_from_message_id(
-                        self.forward_from_message_id
-                    )
-                )
-                is not ...
-                else self.forward_from_message_id
-            )
-            if forward_from_message_id is not ...
-            else self.forward_from_message_id,
-            forward_signature=(
-                _forward_signature
-                if (_forward_signature := forward_signature(self.forward_signature))
-                is not ...
-                else self.forward_signature
-            )
-            if forward_signature is not ...
-            else self.forward_signature,
-            forward_sender_name=(
-                _forward_sender_name
-                if (
-                    _forward_sender_name := forward_sender_name(
-                        self.forward_sender_name
-                    )
-                )
-                is not ...
-                else self.forward_sender_name
-            )
-            if forward_sender_name is not ...
-            else self.forward_sender_name,
-            forward_date=(
-                _forward_date
-                if (_forward_date := forward_date(self.forward_date)) is not ...
-                else self.forward_date
-            )
-            if forward_date is not ...
-            else self.forward_date,
-            is_topic_message=(
-                _is_topic_message
-                if (_is_topic_message := is_topic_message(self.is_topic_message))
-                is not ...
-                else self.is_topic_message
-            )
-            if is_topic_message is not ...
-            else self.is_topic_message,
-            is_automatic_forward=(
-                _is_automatic_forward
-                if (
-                    _is_automatic_forward := is_automatic_forward(
-                        self.is_automatic_forward
-                    )
-                )
-                is not ...
-                else self.is_automatic_forward
-            )
-            if is_automatic_forward is not ...
-            else self.is_automatic_forward,
-            reply_to_message=(
-                _reply_to_message
-                if (_reply_to_message := reply_to_message(self.reply_to_message))
-                is not ...
-                else self.reply_to_message
-            )
-            if reply_to_message is not ...
-            else self.reply_to_message,
-            via_bot=(
-                _via_bot
-                if (_via_bot := via_bot(self.via_bot)) is not ...
-                else self.via_bot
-            )
-            if via_bot is not ...
-            else self.via_bot,
-            edit_date=(
-                _edit_date
-                if (_edit_date := edit_date(self.edit_date)) is not ...
-                else self.edit_date
-            )
-            if edit_date is not ...
-            else self.edit_date,
-            has_protected_content=(
-                _has_protected_content
-                if (
-                    _has_protected_content := has_protected_content(
-                        self.has_protected_content
-                    )
-                )
-                is not ...
-                else self.has_protected_content
-            )
-            if has_protected_content is not ...
-            else self.has_protected_content,
-            media_group_id=(
-                _media_group_id
-                if (_media_group_id := media_group_id(self.media_group_id)) is not ...
-                else self.media_group_id
-            )
-            if media_group_id is not ...
-            else self.media_group_id,
-            author_signature=(
-                _author_signature
-                if (_author_signature := author_signature(self.author_signature))
-                is not ...
-                else self.author_signature
-            )
-            if author_signature is not ...
-            else self.author_signature,
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            entities=(
-                _entities
-                if (_entities := entities(self.entities)) is not ...
-                else self.entities
-            )
-            if entities is not ...
-            else self.entities,
-            animation=(
-                _animation
-                if (_animation := animation(self.animation)) is not ...
-                else self.animation
-            )
-            if animation is not ...
-            else self.animation,
-            audio=(_audio if (_audio := audio(self.audio)) is not ... else self.audio)
-            if audio is not ...
-            else self.audio,
-            document=(
-                _document
-                if (_document := document(self.document)) is not ...
-                else self.document
-            )
-            if document is not ...
-            else self.document,
-            photo=(_photo if (_photo := photo(self.photo)) is not ... else self.photo)
-            if photo is not ...
-            else self.photo,
-            sticker=(
-                _sticker
-                if (_sticker := sticker(self.sticker)) is not ...
-                else self.sticker
-            )
-            if sticker is not ...
-            else self.sticker,
-            story=(_story if (_story := story(self.story)) is not ... else self.story)
-            if story is not ...
-            else self.story,
-            video=(_video if (_video := video(self.video)) is not ... else self.video)
-            if video is not ...
-            else self.video,
-            video_note=(
-                _video_note
-                if (_video_note := video_note(self.video_note)) is not ...
-                else self.video_note
-            )
-            if video_note is not ...
-            else self.video_note,
-            voice=(_voice if (_voice := voice(self.voice)) is not ... else self.voice)
-            if voice is not ...
-            else self.voice,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            has_media_spoiler=(
-                _has_media_spoiler
-                if (_has_media_spoiler := has_media_spoiler(self.has_media_spoiler))
-                is not ...
-                else self.has_media_spoiler
-            )
-            if has_media_spoiler is not ...
-            else self.has_media_spoiler,
-            contact=(
-                _contact
-                if (_contact := contact(self.contact)) is not ...
-                else self.contact
-            )
-            if contact is not ...
-            else self.contact,
-            dice=(_dice if (_dice := dice(self.dice)) is not ... else self.dice)
-            if dice is not ...
-            else self.dice,
-            game=(_game if (_game := game(self.game)) is not ... else self.game)
-            if game is not ...
-            else self.game,
-            poll=(_poll if (_poll := poll(self.poll)) is not ... else self.poll)
-            if poll is not ...
-            else self.poll,
-            venue=(_venue if (_venue := venue(self.venue)) is not ... else self.venue)
-            if venue is not ...
-            else self.venue,
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
-            new_chat_members=(
-                _new_chat_members
-                if (_new_chat_members := new_chat_members(self.new_chat_members))
-                is not ...
-                else self.new_chat_members
-            )
-            if new_chat_members is not ...
-            else self.new_chat_members,
-            left_chat_member=(
-                _left_chat_member
-                if (_left_chat_member := left_chat_member(self.left_chat_member))
-                is not ...
-                else self.left_chat_member
-            )
-            if left_chat_member is not ...
-            else self.left_chat_member,
-            new_chat_title=(
-                _new_chat_title
-                if (_new_chat_title := new_chat_title(self.new_chat_title)) is not ...
-                else self.new_chat_title
-            )
-            if new_chat_title is not ...
-            else self.new_chat_title,
-            new_chat_photo=(
-                _new_chat_photo
-                if (_new_chat_photo := new_chat_photo(self.new_chat_photo)) is not ...
-                else self.new_chat_photo
-            )
-            if new_chat_photo is not ...
-            else self.new_chat_photo,
-            delete_chat_photo=(
-                _delete_chat_photo
-                if (_delete_chat_photo := delete_chat_photo(self.delete_chat_photo))
-                is not ...
-                else self.delete_chat_photo
-            )
-            if delete_chat_photo is not ...
-            else self.delete_chat_photo,
-            group_chat_created=(
-                _group_chat_created
-                if (_group_chat_created := group_chat_created(self.group_chat_created))
-                is not ...
-                else self.group_chat_created
-            )
-            if group_chat_created is not ...
-            else self.group_chat_created,
-            supergroup_chat_created=(
-                _supergroup_chat_created
-                if (
-                    _supergroup_chat_created := supergroup_chat_created(
-                        self.supergroup_chat_created
-                    )
-                )
-                is not ...
-                else self.supergroup_chat_created
-            )
-            if supergroup_chat_created is not ...
-            else self.supergroup_chat_created,
-            channel_chat_created=(
-                _channel_chat_created
-                if (
-                    _channel_chat_created := channel_chat_created(
-                        self.channel_chat_created
-                    )
-                )
-                is not ...
-                else self.channel_chat_created
-            )
-            if channel_chat_created is not ...
-            else self.channel_chat_created,
-            message_auto_delete_timer_changed=(
-                _message_auto_delete_timer_changed
-                if (
-                    _message_auto_delete_timer_changed := message_auto_delete_timer_changed(
-                        self.message_auto_delete_timer_changed
-                    )
-                )
-                is not ...
-                else self.message_auto_delete_timer_changed
-            )
-            if message_auto_delete_timer_changed is not ...
-            else self.message_auto_delete_timer_changed,
-            migrate_to_chat_id=(
-                _migrate_to_chat_id
-                if (_migrate_to_chat_id := migrate_to_chat_id(self.migrate_to_chat_id))
-                is not ...
-                else self.migrate_to_chat_id
-            )
-            if migrate_to_chat_id is not ...
-            else self.migrate_to_chat_id,
-            migrate_from_chat_id=(
-                _migrate_from_chat_id
-                if (
-                    _migrate_from_chat_id := migrate_from_chat_id(
-                        self.migrate_from_chat_id
-                    )
-                )
-                is not ...
-                else self.migrate_from_chat_id
-            )
-            if migrate_from_chat_id is not ...
-            else self.migrate_from_chat_id,
-            pinned_message=(
-                _pinned_message
-                if (_pinned_message := pinned_message(self.pinned_message)) is not ...
-                else self.pinned_message
-            )
-            if pinned_message is not ...
-            else self.pinned_message,
-            invoice=(
-                _invoice
-                if (_invoice := invoice(self.invoice)) is not ...
-                else self.invoice
-            )
-            if invoice is not ...
-            else self.invoice,
-            successful_payment=(
-                _successful_payment
-                if (_successful_payment := successful_payment(self.successful_payment))
-                is not ...
-                else self.successful_payment
-            )
-            if successful_payment is not ...
-            else self.successful_payment,
-            user_shared=(
-                _user_shared
-                if (_user_shared := user_shared(self.user_shared)) is not ...
-                else self.user_shared
-            )
-            if user_shared is not ...
-            else self.user_shared,
-            chat_shared=(
-                _chat_shared
-                if (_chat_shared := chat_shared(self.chat_shared)) is not ...
-                else self.chat_shared
-            )
-            if chat_shared is not ...
-            else self.chat_shared,
-            connected_website=(
-                _connected_website
-                if (_connected_website := connected_website(self.connected_website))
-                is not ...
-                else self.connected_website
-            )
-            if connected_website is not ...
-            else self.connected_website,
-            write_access_allowed=(
-                _write_access_allowed
-                if (
-                    _write_access_allowed := write_access_allowed(
-                        self.write_access_allowed
-                    )
-                )
-                is not ...
-                else self.write_access_allowed
-            )
-            if write_access_allowed is not ...
-            else self.write_access_allowed,
-            passport_data=(
-                _passport_data
-                if (_passport_data := passport_data(self.passport_data)) is not ...
-                else self.passport_data
-            )
-            if passport_data is not ...
-            else self.passport_data,
-            proximity_alert_triggered=(
-                _proximity_alert_triggered
-                if (
-                    _proximity_alert_triggered := proximity_alert_triggered(
-                        self.proximity_alert_triggered
-                    )
-                )
-                is not ...
-                else self.proximity_alert_triggered
-            )
-            if proximity_alert_triggered is not ...
-            else self.proximity_alert_triggered,
-            forum_topic_created=(
-                _forum_topic_created
-                if (
-                    _forum_topic_created := forum_topic_created(
-                        self.forum_topic_created
-                    )
-                )
-                is not ...
-                else self.forum_topic_created
-            )
-            if forum_topic_created is not ...
-            else self.forum_topic_created,
-            forum_topic_edited=(
-                _forum_topic_edited
-                if (_forum_topic_edited := forum_topic_edited(self.forum_topic_edited))
-                is not ...
-                else self.forum_topic_edited
-            )
-            if forum_topic_edited is not ...
-            else self.forum_topic_edited,
-            forum_topic_closed=(
-                _forum_topic_closed
-                if (_forum_topic_closed := forum_topic_closed(self.forum_topic_closed))
-                is not ...
-                else self.forum_topic_closed
-            )
-            if forum_topic_closed is not ...
-            else self.forum_topic_closed,
-            forum_topic_reopened=(
-                _forum_topic_reopened
-                if (
-                    _forum_topic_reopened := forum_topic_reopened(
-                        self.forum_topic_reopened
-                    )
-                )
-                is not ...
-                else self.forum_topic_reopened
-            )
-            if forum_topic_reopened is not ...
-            else self.forum_topic_reopened,
-            general_forum_topic_hidden=(
-                _general_forum_topic_hidden
-                if (
-                    _general_forum_topic_hidden := general_forum_topic_hidden(
-                        self.general_forum_topic_hidden
-                    )
-                )
-                is not ...
-                else self.general_forum_topic_hidden
-            )
-            if general_forum_topic_hidden is not ...
-            else self.general_forum_topic_hidden,
-            general_forum_topic_unhidden=(
-                _general_forum_topic_unhidden
-                if (
-                    _general_forum_topic_unhidden := general_forum_topic_unhidden(
-                        self.general_forum_topic_unhidden
-                    )
-                )
-                is not ...
-                else self.general_forum_topic_unhidden
-            )
-            if general_forum_topic_unhidden is not ...
-            else self.general_forum_topic_unhidden,
-            video_chat_scheduled=(
-                _video_chat_scheduled
-                if (
-                    _video_chat_scheduled := video_chat_scheduled(
-                        self.video_chat_scheduled
-                    )
-                )
-                is not ...
-                else self.video_chat_scheduled
-            )
-            if video_chat_scheduled is not ...
-            else self.video_chat_scheduled,
-            video_chat_started=(
-                _video_chat_started
-                if (_video_chat_started := video_chat_started(self.video_chat_started))
-                is not ...
-                else self.video_chat_started
-            )
-            if video_chat_started is not ...
-            else self.video_chat_started,
-            video_chat_ended=(
-                _video_chat_ended
-                if (_video_chat_ended := video_chat_ended(self.video_chat_ended))
-                is not ...
-                else self.video_chat_ended
-            )
-            if video_chat_ended is not ...
-            else self.video_chat_ended,
-            video_chat_participants_invited=(
-                _video_chat_participants_invited
-                if (
-                    _video_chat_participants_invited := video_chat_participants_invited(
-                        self.video_chat_participants_invited
-                    )
-                )
-                is not ...
-                else self.video_chat_participants_invited
-            )
-            if video_chat_participants_invited is not ...
-            else self.video_chat_participants_invited,
-            web_app_data=(
-                _web_app_data
-                if (_web_app_data := web_app_data(self.web_app_data)) is not ...
-                else self.web_app_data
-            )
-            if web_app_data is not ...
-            else self.web_app_data,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
+            message_id=self.message_id
+            if message_id is ...
+            else prefer(message_id(self.message_id), self.message_id),
+            message_thread_id=self.message_thread_id
+            if message_thread_id is ...
+            else prefer(
+                message_thread_id(self.message_thread_id), self.message_thread_id
+            ),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            sender_chat=self.sender_chat
+            if sender_chat is ...
+            else prefer(sender_chat(self.sender_chat), self.sender_chat),
+            date=self.date if date is ... else prefer(date(self.date), self.date),
+            chat=self.chat if chat is ... else prefer(chat(self.chat), self.chat),
+            forward_from=self.forward_from
+            if forward_from is ...
+            else prefer(forward_from(self.forward_from), self.forward_from),
+            forward_from_chat=self.forward_from_chat
+            if forward_from_chat is ...
+            else prefer(
+                forward_from_chat(self.forward_from_chat), self.forward_from_chat
+            ),
+            forward_from_message_id=self.forward_from_message_id
+            if forward_from_message_id is ...
+            else prefer(
+                forward_from_message_id(self.forward_from_message_id),
+                self.forward_from_message_id,
+            ),
+            forward_signature=self.forward_signature
+            if forward_signature is ...
+            else prefer(
+                forward_signature(self.forward_signature), self.forward_signature
+            ),
+            forward_sender_name=self.forward_sender_name
+            if forward_sender_name is ...
+            else prefer(
+                forward_sender_name(self.forward_sender_name), self.forward_sender_name
+            ),
+            forward_date=self.forward_date
+            if forward_date is ...
+            else prefer(forward_date(self.forward_date), self.forward_date),
+            is_topic_message=self.is_topic_message
+            if is_topic_message is ...
+            else prefer(is_topic_message(self.is_topic_message), self.is_topic_message),
+            is_automatic_forward=self.is_automatic_forward
+            if is_automatic_forward is ...
+            else prefer(
+                is_automatic_forward(self.is_automatic_forward),
+                self.is_automatic_forward,
+            ),
+            reply_to_message=self.reply_to_message
+            if reply_to_message is ...
+            else prefer(reply_to_message(self.reply_to_message), self.reply_to_message),
+            via_bot=self.via_bot
+            if via_bot is ...
+            else prefer(via_bot(self.via_bot), self.via_bot),
+            edit_date=self.edit_date
+            if edit_date is ...
+            else prefer(edit_date(self.edit_date), self.edit_date),
+            has_protected_content=self.has_protected_content
+            if has_protected_content is ...
+            else prefer(
+                has_protected_content(self.has_protected_content),
+                self.has_protected_content,
+            ),
+            media_group_id=self.media_group_id
+            if media_group_id is ...
+            else prefer(media_group_id(self.media_group_id), self.media_group_id),
+            author_signature=self.author_signature
+            if author_signature is ...
+            else prefer(author_signature(self.author_signature), self.author_signature),
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            entities=self.entities
+            if entities is ...
+            else prefer(entities(self.entities), self.entities),
+            animation=self.animation
+            if animation is ...
+            else prefer(animation(self.animation), self.animation),
+            audio=self.audio if audio is ... else prefer(audio(self.audio), self.audio),
+            document=self.document
+            if document is ...
+            else prefer(document(self.document), self.document),
+            photo=self.photo if photo is ... else prefer(photo(self.photo), self.photo),
+            sticker=self.sticker
+            if sticker is ...
+            else prefer(sticker(self.sticker), self.sticker),
+            story=self.story if story is ... else prefer(story(self.story), self.story),
+            video=self.video if video is ... else prefer(video(self.video), self.video),
+            video_note=self.video_note
+            if video_note is ...
+            else prefer(video_note(self.video_note), self.video_note),
+            voice=self.voice if voice is ... else prefer(voice(self.voice), self.voice),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            has_media_spoiler=self.has_media_spoiler
+            if has_media_spoiler is ...
+            else prefer(
+                has_media_spoiler(self.has_media_spoiler), self.has_media_spoiler
+            ),
+            contact=self.contact
+            if contact is ...
+            else prefer(contact(self.contact), self.contact),
+            dice=self.dice if dice is ... else prefer(dice(self.dice), self.dice),
+            game=self.game if game is ... else prefer(game(self.game), self.game),
+            poll=self.poll if poll is ... else prefer(poll(self.poll), self.poll),
+            venue=self.venue if venue is ... else prefer(venue(self.venue), self.venue),
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
+            new_chat_members=self.new_chat_members
+            if new_chat_members is ...
+            else prefer(new_chat_members(self.new_chat_members), self.new_chat_members),
+            left_chat_member=self.left_chat_member
+            if left_chat_member is ...
+            else prefer(left_chat_member(self.left_chat_member), self.left_chat_member),
+            new_chat_title=self.new_chat_title
+            if new_chat_title is ...
+            else prefer(new_chat_title(self.new_chat_title), self.new_chat_title),
+            new_chat_photo=self.new_chat_photo
+            if new_chat_photo is ...
+            else prefer(new_chat_photo(self.new_chat_photo), self.new_chat_photo),
+            delete_chat_photo=self.delete_chat_photo
+            if delete_chat_photo is ...
+            else prefer(
+                delete_chat_photo(self.delete_chat_photo), self.delete_chat_photo
+            ),
+            group_chat_created=self.group_chat_created
+            if group_chat_created is ...
+            else prefer(
+                group_chat_created(self.group_chat_created), self.group_chat_created
+            ),
+            supergroup_chat_created=self.supergroup_chat_created
+            if supergroup_chat_created is ...
+            else prefer(
+                supergroup_chat_created(self.supergroup_chat_created),
+                self.supergroup_chat_created,
+            ),
+            channel_chat_created=self.channel_chat_created
+            if channel_chat_created is ...
+            else prefer(
+                channel_chat_created(self.channel_chat_created),
+                self.channel_chat_created,
+            ),
+            message_auto_delete_timer_changed=self.message_auto_delete_timer_changed
+            if message_auto_delete_timer_changed is ...
+            else prefer(
+                message_auto_delete_timer_changed(
+                    self.message_auto_delete_timer_changed
+                ),
+                self.message_auto_delete_timer_changed,
+            ),
+            migrate_to_chat_id=self.migrate_to_chat_id
+            if migrate_to_chat_id is ...
+            else prefer(
+                migrate_to_chat_id(self.migrate_to_chat_id), self.migrate_to_chat_id
+            ),
+            migrate_from_chat_id=self.migrate_from_chat_id
+            if migrate_from_chat_id is ...
+            else prefer(
+                migrate_from_chat_id(self.migrate_from_chat_id),
+                self.migrate_from_chat_id,
+            ),
+            pinned_message=self.pinned_message
+            if pinned_message is ...
+            else prefer(pinned_message(self.pinned_message), self.pinned_message),
+            invoice=self.invoice
+            if invoice is ...
+            else prefer(invoice(self.invoice), self.invoice),
+            successful_payment=self.successful_payment
+            if successful_payment is ...
+            else prefer(
+                successful_payment(self.successful_payment), self.successful_payment
+            ),
+            user_shared=self.user_shared
+            if user_shared is ...
+            else prefer(user_shared(self.user_shared), self.user_shared),
+            chat_shared=self.chat_shared
+            if chat_shared is ...
+            else prefer(chat_shared(self.chat_shared), self.chat_shared),
+            connected_website=self.connected_website
+            if connected_website is ...
+            else prefer(
+                connected_website(self.connected_website), self.connected_website
+            ),
+            write_access_allowed=self.write_access_allowed
+            if write_access_allowed is ...
+            else prefer(
+                write_access_allowed(self.write_access_allowed),
+                self.write_access_allowed,
+            ),
+            passport_data=self.passport_data
+            if passport_data is ...
+            else prefer(passport_data(self.passport_data), self.passport_data),
+            proximity_alert_triggered=self.proximity_alert_triggered
+            if proximity_alert_triggered is ...
+            else prefer(
+                proximity_alert_triggered(self.proximity_alert_triggered),
+                self.proximity_alert_triggered,
+            ),
+            forum_topic_created=self.forum_topic_created
+            if forum_topic_created is ...
+            else prefer(
+                forum_topic_created(self.forum_topic_created), self.forum_topic_created
+            ),
+            forum_topic_edited=self.forum_topic_edited
+            if forum_topic_edited is ...
+            else prefer(
+                forum_topic_edited(self.forum_topic_edited), self.forum_topic_edited
+            ),
+            forum_topic_closed=self.forum_topic_closed
+            if forum_topic_closed is ...
+            else prefer(
+                forum_topic_closed(self.forum_topic_closed), self.forum_topic_closed
+            ),
+            forum_topic_reopened=self.forum_topic_reopened
+            if forum_topic_reopened is ...
+            else prefer(
+                forum_topic_reopened(self.forum_topic_reopened),
+                self.forum_topic_reopened,
+            ),
+            general_forum_topic_hidden=self.general_forum_topic_hidden
+            if general_forum_topic_hidden is ...
+            else prefer(
+                general_forum_topic_hidden(self.general_forum_topic_hidden),
+                self.general_forum_topic_hidden,
+            ),
+            general_forum_topic_unhidden=self.general_forum_topic_unhidden
+            if general_forum_topic_unhidden is ...
+            else prefer(
+                general_forum_topic_unhidden(self.general_forum_topic_unhidden),
+                self.general_forum_topic_unhidden,
+            ),
+            video_chat_scheduled=self.video_chat_scheduled
+            if video_chat_scheduled is ...
+            else prefer(
+                video_chat_scheduled(self.video_chat_scheduled),
+                self.video_chat_scheduled,
+            ),
+            video_chat_started=self.video_chat_started
+            if video_chat_started is ...
+            else prefer(
+                video_chat_started(self.video_chat_started), self.video_chat_started
+            ),
+            video_chat_ended=self.video_chat_ended
+            if video_chat_ended is ...
+            else prefer(video_chat_ended(self.video_chat_ended), self.video_chat_ended),
+            video_chat_participants_invited=self.video_chat_participants_invited
+            if video_chat_participants_invited is ...
+            else prefer(
+                video_chat_participants_invited(self.video_chat_participants_invited),
+                self.video_chat_participants_invited,
+            ),
+            web_app_data=self.web_app_data
+            if web_app_data is ...
+            else prefer(web_app_data(self.web_app_data), self.web_app_data),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
         )
 
     def copy_with(
-        self: Any,
-        message_id: int | None = None,
-        message_thread_id: int | None = None,
-        from_: User | None = None,
-        sender_chat: Chat | None = None,
-        date: int | None = None,
-        chat: Chat | None = None,
-        forward_from: User | None = None,
-        forward_from_chat: Chat | None = None,
-        forward_from_message_id: int | None = None,
-        forward_signature: str | None = None,
-        forward_sender_name: str | None = None,
-        forward_date: int | None = None,
-        is_topic_message: bool | None = None,
-        is_automatic_forward: bool | None = None,
-        reply_to_message: Message | None = None,
-        via_bot: User | None = None,
-        edit_date: int | None = None,
-        has_protected_content: bool | None = None,
-        media_group_id: str | None = None,
-        author_signature: str | None = None,
-        text: str | None = None,
-        entities: list[MessageEntity] | None = None,
-        animation: Animation | None = None,
-        audio: Audio | None = None,
-        document: Document | None = None,
-        photo: list[PhotoSize] | None = None,
-        sticker: Sticker | None = None,
-        story: Story | None = None,
-        video: Video | None = None,
-        video_note: VideoNote | None = None,
-        voice: Voice | None = None,
-        caption: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        has_media_spoiler: bool | None = None,
-        contact: Contact | None = None,
-        dice: Dice | None = None,
-        game: Game | None = None,
-        poll: Poll | None = None,
-        venue: Venue | None = None,
-        location: Location | None = None,
-        new_chat_members: list[User] | None = None,
-        left_chat_member: User | None = None,
-        new_chat_title: str | None = None,
-        new_chat_photo: list[PhotoSize] | None = None,
-        delete_chat_photo: bool | None = None,
-        group_chat_created: bool | None = None,
-        supergroup_chat_created: bool | None = None,
-        channel_chat_created: bool | None = None,
-        message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged | None = None,
-        migrate_to_chat_id: int | None = None,
-        migrate_from_chat_id: int | None = None,
-        pinned_message: Message | None = None,
-        invoice: Invoice | None = None,
-        successful_payment: SuccessfulPayment | None = None,
-        user_shared: UserShared | None = None,
-        chat_shared: ChatShared | None = None,
-        connected_website: str | None = None,
-        write_access_allowed: WriteAccessAllowed | None = None,
-        passport_data: PassportData | None = None,
-        proximity_alert_triggered: ProximityAlertTriggered | None = None,
-        forum_topic_created: ForumTopicCreated | None = None,
-        forum_topic_edited: ForumTopicEdited | None = None,
-        forum_topic_closed: ForumTopicClosed | None = None,
-        forum_topic_reopened: ForumTopicReopened | None = None,
-        general_forum_topic_hidden: GeneralForumTopicHidden | None = None,
-        general_forum_topic_unhidden: GeneralForumTopicUnhidden | None = None,
-        video_chat_scheduled: VideoChatScheduled | None = None,
-        video_chat_started: VideoChatStarted | None = None,
-        video_chat_ended: VideoChatEnded | None = None,
-        video_chat_participants_invited: VideoChatParticipantsInvited | None = None,
-        web_app_data: WebAppData | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
+        self,
+        message_id: int | EllipsisType = ...,
+        message_thread_id: int | None | EllipsisType = ...,
+        from_: User | None | EllipsisType = ...,
+        sender_chat: Chat | None | EllipsisType = ...,
+        date: int | EllipsisType = ...,
+        chat: Chat | EllipsisType = ...,
+        forward_from: User | None | EllipsisType = ...,
+        forward_from_chat: Chat | None | EllipsisType = ...,
+        forward_from_message_id: int | None | EllipsisType = ...,
+        forward_signature: str | None | EllipsisType = ...,
+        forward_sender_name: str | None | EllipsisType = ...,
+        forward_date: int | None | EllipsisType = ...,
+        is_topic_message: bool | None | EllipsisType = ...,
+        is_automatic_forward: bool | None | EllipsisType = ...,
+        reply_to_message: Message | None | EllipsisType = ...,
+        via_bot: User | None | EllipsisType = ...,
+        edit_date: int | None | EllipsisType = ...,
+        has_protected_content: bool | None | EllipsisType = ...,
+        media_group_id: str | None | EllipsisType = ...,
+        author_signature: str | None | EllipsisType = ...,
+        text: str | None | EllipsisType = ...,
+        entities: list[MessageEntity] | None | EllipsisType = ...,
+        animation: Animation | None | EllipsisType = ...,
+        audio: Audio | None | EllipsisType = ...,
+        document: Document | None | EllipsisType = ...,
+        photo: list[PhotoSize] | None | EllipsisType = ...,
+        sticker: Sticker | None | EllipsisType = ...,
+        story: Story | None | EllipsisType = ...,
+        video: Video | None | EllipsisType = ...,
+        video_note: VideoNote | None | EllipsisType = ...,
+        voice: Voice | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        has_media_spoiler: bool | None | EllipsisType = ...,
+        contact: Contact | None | EllipsisType = ...,
+        dice: Dice | None | EllipsisType = ...,
+        game: Game | None | EllipsisType = ...,
+        poll: Poll | None | EllipsisType = ...,
+        venue: Venue | None | EllipsisType = ...,
+        location: Location | None | EllipsisType = ...,
+        new_chat_members: list[User] | None | EllipsisType = ...,
+        left_chat_member: User | None | EllipsisType = ...,
+        new_chat_title: str | None | EllipsisType = ...,
+        new_chat_photo: list[PhotoSize] | None | EllipsisType = ...,
+        delete_chat_photo: bool | None | EllipsisType = ...,
+        group_chat_created: bool | None | EllipsisType = ...,
+        supergroup_chat_created: bool | None | EllipsisType = ...,
+        channel_chat_created: bool | None | EllipsisType = ...,
+        message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged
+        | None
+        | EllipsisType = ...,
+        migrate_to_chat_id: int | None | EllipsisType = ...,
+        migrate_from_chat_id: int | None | EllipsisType = ...,
+        pinned_message: Message | None | EllipsisType = ...,
+        invoice: Invoice | None | EllipsisType = ...,
+        successful_payment: SuccessfulPayment | None | EllipsisType = ...,
+        user_shared: UserShared | None | EllipsisType = ...,
+        chat_shared: ChatShared | None | EllipsisType = ...,
+        connected_website: str | None | EllipsisType = ...,
+        write_access_allowed: WriteAccessAllowed | None | EllipsisType = ...,
+        passport_data: PassportData | None | EllipsisType = ...,
+        proximity_alert_triggered: ProximityAlertTriggered | None | EllipsisType = ...,
+        forum_topic_created: ForumTopicCreated | None | EllipsisType = ...,
+        forum_topic_edited: ForumTopicEdited | None | EllipsisType = ...,
+        forum_topic_closed: ForumTopicClosed | None | EllipsisType = ...,
+        forum_topic_reopened: ForumTopicReopened | None | EllipsisType = ...,
+        general_forum_topic_hidden: GeneralForumTopicHidden | None | EllipsisType = ...,
+        general_forum_topic_unhidden: GeneralForumTopicUnhidden
+        | None
+        | EllipsisType = ...,
+        video_chat_scheduled: VideoChatScheduled | None | EllipsisType = ...,
+        video_chat_started: VideoChatStarted | None | EllipsisType = ...,
+        video_chat_ended: VideoChatEnded | None | EllipsisType = ...,
+        video_chat_participants_invited: VideoChatParticipantsInvited
+        | None
+        | EllipsisType = ...,
+        web_app_data: WebAppData | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
     ) -> Message:
         """Replaces some of model's fields with provided ones"""
         return Message(
-            message_id=message_id if message_id is not None else self.message_id,
+            message_id=message_id if message_id is not ... else self.message_id,
             message_thread_id=message_thread_id
-            if message_thread_id is not None
+            if message_thread_id is not ...
             else self.message_thread_id,
-            from_=from_ if from_ is not None else self.from_,
-            sender_chat=sender_chat if sender_chat is not None else self.sender_chat,
-            date=date if date is not None else self.date,
-            chat=chat if chat is not None else self.chat,
-            forward_from=forward_from
-            if forward_from is not None
-            else self.forward_from,
+            from_=from_ if from_ is not ... else self.from_,
+            sender_chat=sender_chat if sender_chat is not ... else self.sender_chat,
+            date=date if date is not ... else self.date,
+            chat=chat if chat is not ... else self.chat,
+            forward_from=forward_from if forward_from is not ... else self.forward_from,
             forward_from_chat=forward_from_chat
-            if forward_from_chat is not None
+            if forward_from_chat is not ...
             else self.forward_from_chat,
             forward_from_message_id=forward_from_message_id
-            if forward_from_message_id is not None
+            if forward_from_message_id is not ...
             else self.forward_from_message_id,
             forward_signature=forward_signature
-            if forward_signature is not None
+            if forward_signature is not ...
             else self.forward_signature,
             forward_sender_name=forward_sender_name
-            if forward_sender_name is not None
+            if forward_sender_name is not ...
             else self.forward_sender_name,
-            forward_date=forward_date
-            if forward_date is not None
-            else self.forward_date,
+            forward_date=forward_date if forward_date is not ... else self.forward_date,
             is_topic_message=is_topic_message
-            if is_topic_message is not None
+            if is_topic_message is not ...
             else self.is_topic_message,
             is_automatic_forward=is_automatic_forward
-            if is_automatic_forward is not None
+            if is_automatic_forward is not ...
             else self.is_automatic_forward,
             reply_to_message=reply_to_message
-            if reply_to_message is not None
+            if reply_to_message is not ...
             else self.reply_to_message,
-            via_bot=via_bot if via_bot is not None else self.via_bot,
-            edit_date=edit_date if edit_date is not None else self.edit_date,
+            via_bot=via_bot if via_bot is not ... else self.via_bot,
+            edit_date=edit_date if edit_date is not ... else self.edit_date,
             has_protected_content=has_protected_content
-            if has_protected_content is not None
+            if has_protected_content is not ...
             else self.has_protected_content,
             media_group_id=media_group_id
-            if media_group_id is not None
+            if media_group_id is not ...
             else self.media_group_id,
             author_signature=author_signature
-            if author_signature is not None
+            if author_signature is not ...
             else self.author_signature,
-            text=text if text is not None else self.text,
-            entities=entities if entities is not None else self.entities,
-            animation=animation if animation is not None else self.animation,
-            audio=audio if audio is not None else self.audio,
-            document=document if document is not None else self.document,
-            photo=photo if photo is not None else self.photo,
-            sticker=sticker if sticker is not None else self.sticker,
-            story=story if story is not None else self.story,
-            video=video if video is not None else self.video,
-            video_note=video_note if video_note is not None else self.video_note,
-            voice=voice if voice is not None else self.voice,
-            caption=caption if caption is not None else self.caption,
+            text=text if text is not ... else self.text,
+            entities=entities if entities is not ... else self.entities,
+            animation=animation if animation is not ... else self.animation,
+            audio=audio if audio is not ... else self.audio,
+            document=document if document is not ... else self.document,
+            photo=photo if photo is not ... else self.photo,
+            sticker=sticker if sticker is not ... else self.sticker,
+            story=story if story is not ... else self.story,
+            video=video if video is not ... else self.video,
+            video_note=video_note if video_note is not ... else self.video_note,
+            voice=voice if voice is not ... else self.voice,
+            caption=caption if caption is not ... else self.caption,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
             has_media_spoiler=has_media_spoiler
-            if has_media_spoiler is not None
+            if has_media_spoiler is not ...
             else self.has_media_spoiler,
-            contact=contact if contact is not None else self.contact,
-            dice=dice if dice is not None else self.dice,
-            game=game if game is not None else self.game,
-            poll=poll if poll is not None else self.poll,
-            venue=venue if venue is not None else self.venue,
-            location=location if location is not None else self.location,
+            contact=contact if contact is not ... else self.contact,
+            dice=dice if dice is not ... else self.dice,
+            game=game if game is not ... else self.game,
+            poll=poll if poll is not ... else self.poll,
+            venue=venue if venue is not ... else self.venue,
+            location=location if location is not ... else self.location,
             new_chat_members=new_chat_members
-            if new_chat_members is not None
+            if new_chat_members is not ...
             else self.new_chat_members,
             left_chat_member=left_chat_member
-            if left_chat_member is not None
+            if left_chat_member is not ...
             else self.left_chat_member,
             new_chat_title=new_chat_title
-            if new_chat_title is not None
+            if new_chat_title is not ...
             else self.new_chat_title,
             new_chat_photo=new_chat_photo
-            if new_chat_photo is not None
+            if new_chat_photo is not ...
             else self.new_chat_photo,
             delete_chat_photo=delete_chat_photo
-            if delete_chat_photo is not None
+            if delete_chat_photo is not ...
             else self.delete_chat_photo,
             group_chat_created=group_chat_created
-            if group_chat_created is not None
+            if group_chat_created is not ...
             else self.group_chat_created,
             supergroup_chat_created=supergroup_chat_created
-            if supergroup_chat_created is not None
+            if supergroup_chat_created is not ...
             else self.supergroup_chat_created,
             channel_chat_created=channel_chat_created
-            if channel_chat_created is not None
+            if channel_chat_created is not ...
             else self.channel_chat_created,
             message_auto_delete_timer_changed=message_auto_delete_timer_changed
-            if message_auto_delete_timer_changed is not None
+            if message_auto_delete_timer_changed is not ...
             else self.message_auto_delete_timer_changed,
             migrate_to_chat_id=migrate_to_chat_id
-            if migrate_to_chat_id is not None
+            if migrate_to_chat_id is not ...
             else self.migrate_to_chat_id,
             migrate_from_chat_id=migrate_from_chat_id
-            if migrate_from_chat_id is not None
+            if migrate_from_chat_id is not ...
             else self.migrate_from_chat_id,
             pinned_message=pinned_message
-            if pinned_message is not None
+            if pinned_message is not ...
             else self.pinned_message,
-            invoice=invoice if invoice is not None else self.invoice,
+            invoice=invoice if invoice is not ... else self.invoice,
             successful_payment=successful_payment
-            if successful_payment is not None
+            if successful_payment is not ...
             else self.successful_payment,
-            user_shared=user_shared if user_shared is not None else self.user_shared,
-            chat_shared=chat_shared if chat_shared is not None else self.chat_shared,
+            user_shared=user_shared if user_shared is not ... else self.user_shared,
+            chat_shared=chat_shared if chat_shared is not ... else self.chat_shared,
             connected_website=connected_website
-            if connected_website is not None
+            if connected_website is not ...
             else self.connected_website,
             write_access_allowed=write_access_allowed
-            if write_access_allowed is not None
+            if write_access_allowed is not ...
             else self.write_access_allowed,
             passport_data=passport_data
-            if passport_data is not None
+            if passport_data is not ...
             else self.passport_data,
             proximity_alert_triggered=proximity_alert_triggered
-            if proximity_alert_triggered is not None
+            if proximity_alert_triggered is not ...
             else self.proximity_alert_triggered,
             forum_topic_created=forum_topic_created
-            if forum_topic_created is not None
+            if forum_topic_created is not ...
             else self.forum_topic_created,
             forum_topic_edited=forum_topic_edited
-            if forum_topic_edited is not None
+            if forum_topic_edited is not ...
             else self.forum_topic_edited,
             forum_topic_closed=forum_topic_closed
-            if forum_topic_closed is not None
+            if forum_topic_closed is not ...
             else self.forum_topic_closed,
             forum_topic_reopened=forum_topic_reopened
-            if forum_topic_reopened is not None
+            if forum_topic_reopened is not ...
             else self.forum_topic_reopened,
             general_forum_topic_hidden=general_forum_topic_hidden
-            if general_forum_topic_hidden is not None
+            if general_forum_topic_hidden is not ...
             else self.general_forum_topic_hidden,
             general_forum_topic_unhidden=general_forum_topic_unhidden
-            if general_forum_topic_unhidden is not None
+            if general_forum_topic_unhidden is not ...
             else self.general_forum_topic_unhidden,
             video_chat_scheduled=video_chat_scheduled
-            if video_chat_scheduled is not None
+            if video_chat_scheduled is not ...
             else self.video_chat_scheduled,
             video_chat_started=video_chat_started
-            if video_chat_started is not None
+            if video_chat_started is not ...
             else self.video_chat_started,
             video_chat_ended=video_chat_ended
-            if video_chat_ended is not None
+            if video_chat_ended is not ...
             else self.video_chat_ended,
             video_chat_participants_invited=video_chat_participants_invited
-            if video_chat_participants_invited is not None
+            if video_chat_participants_invited is not ...
             else self.video_chat_participants_invited,
-            web_app_data=web_app_data
-            if web_app_data is not None
-            else self.web_app_data,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            web_app_data=web_app_data if web_app_data is not ... else self.web_app_data,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
         )
 
 
@@ -2209,27 +1463,23 @@ class MessageId:
     """Unique message identifier """
 
     def alter(
-        self: Any,
-        message_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        message_id: AlterFn[int] | EllipsisType = ...,
     ) -> MessageId:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageId(
-            message_id=(
-                _message_id
-                if (_message_id := message_id(self.message_id)) is not ...
-                else self.message_id
-            )
-            if message_id is not ...
-            else self.message_id
+            message_id=self.message_id
+            if message_id is ...
+            else prefer(message_id(self.message_id), self.message_id)
         )
 
     def copy_with(
-        self: Any,
-        message_id: int | None = None,
+        self,
+        message_id: int | EllipsisType = ...,
     ) -> MessageId:
         """Replaces some of model's fields with provided ones"""
         return MessageId(
-            message_id=message_id if message_id is not None else self.message_id
+            message_id=message_id if message_id is not ... else self.message_id
         )
 
 
@@ -2253,75 +1503,54 @@ class MessageEntity:
     """Optional. For "custom_emoji" only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        offset: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        length: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        url: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User | None], User | None | EllipsisType] | EllipsisType = ...,
-        language: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        offset: AlterFn[int] | EllipsisType = ...,
+        length: AlterFn[int] | EllipsisType = ...,
+        url: AlterFn[str | None] | EllipsisType = ...,
+        user: AlterFn[User | None] | EllipsisType = ...,
+        language: AlterFn[str | None] | EllipsisType = ...,
+        custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
     ) -> MessageEntity:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageEntity(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            offset=(
-                _offset if (_offset := offset(self.offset)) is not ... else self.offset
-            )
-            if offset is not ...
-            else self.offset,
-            length=(
-                _length if (_length := length(self.length)) is not ... else self.length
-            )
-            if length is not ...
-            else self.length,
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            language=(
-                _language
-                if (_language := language(self.language)) is not ...
-                else self.language
-            )
-            if language is not ...
-            else self.language,
-            custom_emoji_id=(
-                _custom_emoji_id
-                if (_custom_emoji_id := custom_emoji_id(self.custom_emoji_id))
-                is not ...
-                else self.custom_emoji_id
-            )
-            if custom_emoji_id is not ...
-            else self.custom_emoji_id,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            offset=self.offset
+            if offset is ...
+            else prefer(offset(self.offset), self.offset),
+            length=self.length
+            if length is ...
+            else prefer(length(self.length), self.length),
+            url=self.url if url is ... else prefer(url(self.url), self.url),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            language=self.language
+            if language is ...
+            else prefer(language(self.language), self.language),
+            custom_emoji_id=self.custom_emoji_id
+            if custom_emoji_id is ...
+            else prefer(custom_emoji_id(self.custom_emoji_id), self.custom_emoji_id),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        offset: int | None = None,
-        length: int | None = None,
-        url: str | None = None,
-        user: User | None = None,
-        language: str | None = None,
-        custom_emoji_id: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        offset: int | EllipsisType = ...,
+        length: int | EllipsisType = ...,
+        url: str | None | EllipsisType = ...,
+        user: User | None | EllipsisType = ...,
+        language: str | None | EllipsisType = ...,
+        custom_emoji_id: str | None | EllipsisType = ...,
     ) -> MessageEntity:
         """Replaces some of model's fields with provided ones"""
         return MessageEntity(
-            type=type if type is not None else self.type,
-            offset=offset if offset is not None else self.offset,
-            length=length if length is not None else self.length,
-            url=url if url is not None else self.url,
-            user=user if user is not None else self.user,
-            language=language if language is not None else self.language,
+            type=type if type is not ... else self.type,
+            offset=offset if offset is not ... else self.offset,
+            length=length if length is not ... else self.length,
+            url=url if url is not ... else self.url,
+            user=user if user is not ... else self.user,
+            language=language if language is not ... else self.language,
             custom_emoji_id=custom_emoji_id
-            if custom_emoji_id is not None
+            if custom_emoji_id is not ...
             else self.custom_emoji_id,
         )
 
@@ -2342,64 +1571,47 @@ class PhotoSize:
     """Optional. File size in bytes """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        width: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        width: AlterFn[int] | EllipsisType = ...,
+        height: AlterFn[int] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> PhotoSize:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PhotoSize(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        width: int | EllipsisType = ...,
+        height: int | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> PhotoSize:
         """Replaces some of model's fields with provided ones"""
         return PhotoSize(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            file_size=file_size if file_size is not None else self.file_size,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -2427,107 +1639,71 @@ class Animation:
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        width: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
-        file_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        width: AlterFn[int] | EllipsisType = ...,
+        height: AlterFn[int] | EllipsisType = ...,
+        duration: AlterFn[int] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        file_name: AlterFn[str | None] | EllipsisType = ...,
+        mime_type: AlterFn[str | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> Animation:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Animation(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            file_name=(
-                _file_name
-                if (_file_name := file_name(self.file_name)) is not ...
-                else self.file_name
-            )
-            if file_name is not ...
-            else self.file_name,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            file_name=self.file_name
+            if file_name is ...
+            else prefer(file_name(self.file_name), self.file_name),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        duration: int | None = None,
-        thumbnail: PhotoSize | None = None,
-        file_name: str | None = None,
-        mime_type: str | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        width: int | EllipsisType = ...,
+        height: int | EllipsisType = ...,
+        duration: int | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
+        file_name: str | None | EllipsisType = ...,
+        mime_type: str | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> Animation:
         """Replaces some of model's fields with provided ones"""
         return Animation(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            duration=duration if duration is not None else self.duration,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            file_name=file_name if file_name is not None else self.file_name,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            file_size=file_size if file_size is not None else self.file_size,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            duration=duration if duration is not ... else self.duration,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            file_name=file_name if file_name is not ... else self.file_name,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -2555,110 +1731,71 @@ class Audio:
     """Optional. Thumbnail of the album cover to which the music file belongs """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        performer: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        file_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        duration: AlterFn[int] | EllipsisType = ...,
+        performer: AlterFn[str | None] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        file_name: AlterFn[str | None] | EllipsisType = ...,
+        mime_type: AlterFn[str | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
     ) -> Audio:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Audio(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            performer=(
-                _performer
-                if (_performer := performer(self.performer)) is not ...
-                else self.performer
-            )
-            if performer is not ...
-            else self.performer,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            file_name=(
-                _file_name
-                if (_file_name := file_name(self.file_name)) is not ...
-                else self.file_name
-            )
-            if file_name is not ...
-            else self.file_name,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            performer=self.performer
+            if performer is ...
+            else prefer(performer(self.performer), self.performer),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            file_name=self.file_name
+            if file_name is ...
+            else prefer(file_name(self.file_name), self.file_name),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        duration: int | None = None,
-        performer: str | None = None,
-        title: str | None = None,
-        file_name: str | None = None,
-        mime_type: str | None = None,
-        file_size: int | None = None,
-        thumbnail: PhotoSize | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        duration: int | EllipsisType = ...,
+        performer: str | None | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        file_name: str | None | EllipsisType = ...,
+        mime_type: str | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
     ) -> Audio:
         """Replaces some of model's fields with provided ones"""
         return Audio(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            duration=duration if duration is not None else self.duration,
-            performer=performer if performer is not None else self.performer,
-            title=title if title is not None else self.title,
-            file_name=file_name if file_name is not None else self.file_name,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            file_size=file_size if file_size is not None else self.file_size,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
+            duration=duration if duration is not ... else self.duration,
+            performer=performer if performer is not ... else self.performer,
+            title=title if title is not ... else self.title,
+            file_name=file_name if file_name is not ... else self.file_name,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            file_size=file_size if file_size is not ... else self.file_size,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
         )
 
 
@@ -2680,83 +1817,55 @@ class Document:
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
-        file_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        file_name: AlterFn[str | None] | EllipsisType = ...,
+        mime_type: AlterFn[str | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> Document:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Document(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            file_name=(
-                _file_name
-                if (_file_name := file_name(self.file_name)) is not ...
-                else self.file_name
-            )
-            if file_name is not ...
-            else self.file_name,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            file_name=self.file_name
+            if file_name is ...
+            else prefer(file_name(self.file_name), self.file_name),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        thumbnail: PhotoSize | None = None,
-        file_name: str | None = None,
-        mime_type: str | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
+        file_name: str | None | EllipsisType = ...,
+        mime_type: str | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> Document:
         """Replaces some of model's fields with provided ones"""
         return Document(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            file_name=file_name if file_name is not None else self.file_name,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            file_size=file_size if file_size is not None else self.file_size,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            file_name=file_name if file_name is not ... else self.file_name,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -2765,13 +1874,13 @@ class Story:
     """This object represents a message about a forwarded story in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> Story:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Story()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> Story:
         """Replaces some of model's fields with provided ones"""
         return Story()
@@ -2801,107 +1910,71 @@ class Video:
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        width: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
-        file_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        width: AlterFn[int] | EllipsisType = ...,
+        height: AlterFn[int] | EllipsisType = ...,
+        duration: AlterFn[int] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        file_name: AlterFn[str | None] | EllipsisType = ...,
+        mime_type: AlterFn[str | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> Video:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Video(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            file_name=(
-                _file_name
-                if (_file_name := file_name(self.file_name)) is not ...
-                else self.file_name
-            )
-            if file_name is not ...
-            else self.file_name,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            file_name=self.file_name
+            if file_name is ...
+            else prefer(file_name(self.file_name), self.file_name),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        duration: int | None = None,
-        thumbnail: PhotoSize | None = None,
-        file_name: str | None = None,
-        mime_type: str | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        width: int | EllipsisType = ...,
+        height: int | EllipsisType = ...,
+        duration: int | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
+        file_name: str | None | EllipsisType = ...,
+        mime_type: str | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> Video:
         """Replaces some of model's fields with provided ones"""
         return Video(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            duration=duration if duration is not None else self.duration,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            file_name=file_name if file_name is not None else self.file_name,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            file_size=file_size if file_size is not None else self.file_size,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            duration=duration if duration is not ... else self.duration,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            file_name=file_name if file_name is not ... else self.file_name,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -2923,79 +1996,55 @@ class VideoNote:
     """Optional. File size in bytes """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        length: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        length: AlterFn[int] | EllipsisType = ...,
+        duration: AlterFn[int] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> VideoNote:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoNote(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            length=(
-                _length if (_length := length(self.length)) is not ... else self.length
-            )
-            if length is not ...
-            else self.length,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            length=self.length
+            if length is ...
+            else prefer(length(self.length), self.length),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        length: int | None = None,
-        duration: int | None = None,
-        thumbnail: PhotoSize | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        length: int | EllipsisType = ...,
+        duration: int | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> VideoNote:
         """Replaces some of model's fields with provided ones"""
         return VideoNote(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            length=length if length is not None else self.length,
-            duration=duration if duration is not None else self.duration,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            file_size=file_size if file_size is not None else self.file_size,
+            length=length if length is not ... else self.length,
+            duration=duration if duration is not ... else self.duration,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -3015,71 +2064,49 @@ class Voice:
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        duration: AlterFn[int] | EllipsisType = ...,
+        mime_type: AlterFn[str | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> Voice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Voice(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        duration: int | None = None,
-        mime_type: str | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        duration: int | EllipsisType = ...,
+        mime_type: str | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> Voice:
         """Replaces some of model's fields with provided ones"""
         return Voice(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            duration=duration if duration is not None else self.duration,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            file_size=file_size if file_size is not None else self.file_size,
+            duration=duration if duration is not ... else self.duration,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -3099,66 +2126,45 @@ class Contact:
     """Optional. Additional data about the contact in the form of a vCard """
 
     def alter(
-        self: Any,
-        phone_number: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        first_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        last_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        user_id: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        vcard: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
+        self,
+        phone_number: AlterFn[str] | EllipsisType = ...,
+        first_name: AlterFn[str] | EllipsisType = ...,
+        last_name: AlterFn[str | None] | EllipsisType = ...,
+        user_id: AlterFn[int | None] | EllipsisType = ...,
+        vcard: AlterFn[str | None] | EllipsisType = ...,
     ) -> Contact:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Contact(
-            phone_number=(
-                _phone_number
-                if (_phone_number := phone_number(self.phone_number)) is not ...
-                else self.phone_number
-            )
-            if phone_number is not ...
-            else self.phone_number,
-            first_name=(
-                _first_name
-                if (_first_name := first_name(self.first_name)) is not ...
-                else self.first_name
-            )
-            if first_name is not ...
-            else self.first_name,
-            last_name=(
-                _last_name
-                if (_last_name := last_name(self.last_name)) is not ...
-                else self.last_name
-            )
-            if last_name is not ...
-            else self.last_name,
-            user_id=(
-                _user_id
-                if (_user_id := user_id(self.user_id)) is not ...
-                else self.user_id
-            )
-            if user_id is not ...
-            else self.user_id,
-            vcard=(_vcard if (_vcard := vcard(self.vcard)) is not ... else self.vcard)
-            if vcard is not ...
-            else self.vcard,
+            phone_number=self.phone_number
+            if phone_number is ...
+            else prefer(phone_number(self.phone_number), self.phone_number),
+            first_name=self.first_name
+            if first_name is ...
+            else prefer(first_name(self.first_name), self.first_name),
+            last_name=self.last_name
+            if last_name is ...
+            else prefer(last_name(self.last_name), self.last_name),
+            user_id=self.user_id
+            if user_id is ...
+            else prefer(user_id(self.user_id), self.user_id),
+            vcard=self.vcard if vcard is ... else prefer(vcard(self.vcard), self.vcard),
         )
 
     def copy_with(
-        self: Any,
-        phone_number: str | None = None,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        user_id: int | None = None,
-        vcard: str | None = None,
+        self,
+        phone_number: str | EllipsisType = ...,
+        first_name: str | EllipsisType = ...,
+        last_name: str | None | EllipsisType = ...,
+        user_id: int | None | EllipsisType = ...,
+        vcard: str | None | EllipsisType = ...,
     ) -> Contact:
         """Replaces some of model's fields with provided ones"""
         return Contact(
-            phone_number=phone_number
-            if phone_number is not None
-            else self.phone_number,
-            first_name=first_name if first_name is not None else self.first_name,
-            last_name=last_name if last_name is not None else self.last_name,
-            user_id=user_id if user_id is not None else self.user_id,
-            vcard=vcard if vcard is not None else self.vcard,
+            phone_number=phone_number if phone_number is not ... else self.phone_number,
+            first_name=first_name if first_name is not ... else self.first_name,
+            last_name=last_name if last_name is not ... else self.last_name,
+            user_id=user_id if user_id is not ... else self.user_id,
+            vcard=vcard if vcard is not ... else self.vcard,
         )
 
 
@@ -3172,29 +2178,25 @@ class Dice:
     """Value of the dice, 1-6 for "🎲", "🎯" and "🎳" base emoji, 1-5 for "🏀" and "⚽" base emoji, 1-64 for "🎰" base emoji """
 
     def alter(
-        self: Any,
-        emoji: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        value: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        emoji: AlterFn[str] | EllipsisType = ...,
+        value: AlterFn[int] | EllipsisType = ...,
     ) -> Dice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Dice(
-            emoji=(_emoji if (_emoji := emoji(self.emoji)) is not ... else self.emoji)
-            if emoji is not ...
-            else self.emoji,
-            value=(_value if (_value := value(self.value)) is not ... else self.value)
-            if value is not ...
-            else self.value,
+            emoji=self.emoji if emoji is ... else prefer(emoji(self.emoji), self.emoji),
+            value=self.value if value is ... else prefer(value(self.value), self.value),
         )
 
     def copy_with(
-        self: Any,
-        emoji: str | None = None,
-        value: int | None = None,
+        self,
+        emoji: str | EllipsisType = ...,
+        value: int | EllipsisType = ...,
     ) -> Dice:
         """Replaces some of model's fields with provided ones"""
         return Dice(
-            emoji=emoji if emoji is not None else self.emoji,
-            value=value if value is not None else self.value,
+            emoji=emoji if emoji is not ... else self.emoji,
+            value=value if value is not ... else self.value,
         )
 
 
@@ -3208,33 +2210,27 @@ class PollOption:
     """Number of users that voted for this option """
 
     def alter(
-        self: Any,
-        text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        voter_count: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        text: AlterFn[str] | EllipsisType = ...,
+        voter_count: AlterFn[int] | EllipsisType = ...,
     ) -> PollOption:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PollOption(
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            voter_count=(
-                _voter_count
-                if (_voter_count := voter_count(self.voter_count)) is not ...
-                else self.voter_count
-            )
-            if voter_count is not ...
-            else self.voter_count,
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            voter_count=self.voter_count
+            if voter_count is ...
+            else prefer(voter_count(self.voter_count), self.voter_count),
         )
 
     def copy_with(
-        self: Any,
-        text: str | None = None,
-        voter_count: int | None = None,
+        self,
+        text: str | EllipsisType = ...,
+        voter_count: int | EllipsisType = ...,
     ) -> PollOption:
         """Replaces some of model's fields with provided ones"""
         return PollOption(
-            text=text if text is not None else self.text,
-            voter_count=voter_count if voter_count is not None else self.voter_count,
+            text=text if text is not ... else self.text,
+            voter_count=voter_count if voter_count is not ... else self.voter_count,
         )
 
 
@@ -3252,55 +2248,39 @@ class PollAnswer:
     """Optional. The user that changed the answer to the poll, if the voter isn't anonymous """
 
     def alter(
-        self: Any,
-        poll_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        voter_chat: Callable[[Chat | None], Chat | None | EllipsisType]
-        | EllipsisType = ...,
-        user: Callable[[User | None], User | None | EllipsisType] | EllipsisType = ...,
-        option_ids: Callable[[list[int]], list[int] | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        poll_id: AlterFn[str] | EllipsisType = ...,
+        voter_chat: AlterFn[Chat | None] | EllipsisType = ...,
+        user: AlterFn[User | None] | EllipsisType = ...,
+        option_ids: AlterFn[list[int]] | EllipsisType = ...,
     ) -> PollAnswer:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PollAnswer(
-            poll_id=(
-                _poll_id
-                if (_poll_id := poll_id(self.poll_id)) is not ...
-                else self.poll_id
-            )
-            if poll_id is not ...
-            else self.poll_id,
-            voter_chat=(
-                _voter_chat
-                if (_voter_chat := voter_chat(self.voter_chat)) is not ...
-                else self.voter_chat
-            )
-            if voter_chat is not ...
-            else self.voter_chat,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            option_ids=(
-                _option_ids
-                if (_option_ids := option_ids(self.option_ids)) is not ...
-                else self.option_ids
-            )
-            if option_ids is not ...
-            else self.option_ids,
+            poll_id=self.poll_id
+            if poll_id is ...
+            else prefer(poll_id(self.poll_id), self.poll_id),
+            voter_chat=self.voter_chat
+            if voter_chat is ...
+            else prefer(voter_chat(self.voter_chat), self.voter_chat),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            option_ids=self.option_ids
+            if option_ids is ...
+            else prefer(option_ids(self.option_ids), self.option_ids),
         )
 
     def copy_with(
-        self: Any,
-        poll_id: str | None = None,
-        voter_chat: Chat | None = None,
-        user: User | None = None,
-        option_ids: list[int] | None = None,
+        self,
+        poll_id: str | EllipsisType = ...,
+        voter_chat: Chat | None | EllipsisType = ...,
+        user: User | None | EllipsisType = ...,
+        option_ids: list[int] | EllipsisType = ...,
     ) -> PollAnswer:
         """Replaces some of model's fields with provided ones"""
         return PollAnswer(
-            poll_id=poll_id if poll_id is not None else self.poll_id,
-            voter_chat=voter_chat if voter_chat is not None else self.voter_chat,
-            user=user if user is not None else self.user,
-            option_ids=option_ids if option_ids is not None else self.option_ids,
+            poll_id=poll_id if poll_id is not ... else self.poll_id,
+            voter_chat=voter_chat if voter_chat is not ... else self.voter_chat,
+            user=user if user is not ... else self.user,
+            option_ids=option_ids if option_ids is not ... else self.option_ids,
         )
 
 
@@ -3336,170 +2316,109 @@ class Poll:
     """Optional. Point in time (Unix timestamp) when the poll will be automatically closed """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        question: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        options: Callable[[list[PollOption]], list[PollOption] | EllipsisType]
-        | EllipsisType = ...,
-        total_voter_count: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        is_closed: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        is_anonymous: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        allows_multiple_answers: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        correct_option_id: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        explanation: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        explanation_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        open_period: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        close_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        question: AlterFn[str] | EllipsisType = ...,
+        options: AlterFn[list[PollOption]] | EllipsisType = ...,
+        total_voter_count: AlterFn[int] | EllipsisType = ...,
+        is_closed: AlterFn[bool] | EllipsisType = ...,
+        is_anonymous: AlterFn[bool] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        allows_multiple_answers: AlterFn[bool] | EllipsisType = ...,
+        correct_option_id: AlterFn[int | None] | EllipsisType = ...,
+        explanation: AlterFn[str | None] | EllipsisType = ...,
+        explanation_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        open_period: AlterFn[int | None] | EllipsisType = ...,
+        close_date: AlterFn[int | None] | EllipsisType = ...,
     ) -> Poll:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Poll(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            question=(
-                _question
-                if (_question := question(self.question)) is not ...
-                else self.question
-            )
-            if question is not ...
-            else self.question,
-            options=(
-                _options
-                if (_options := options(self.options)) is not ...
-                else self.options
-            )
-            if options is not ...
-            else self.options,
-            total_voter_count=(
-                _total_voter_count
-                if (_total_voter_count := total_voter_count(self.total_voter_count))
-                is not ...
-                else self.total_voter_count
-            )
-            if total_voter_count is not ...
-            else self.total_voter_count,
-            is_closed=(
-                _is_closed
-                if (_is_closed := is_closed(self.is_closed)) is not ...
-                else self.is_closed
-            )
-            if is_closed is not ...
-            else self.is_closed,
-            is_anonymous=(
-                _is_anonymous
-                if (_is_anonymous := is_anonymous(self.is_anonymous)) is not ...
-                else self.is_anonymous
-            )
-            if is_anonymous is not ...
-            else self.is_anonymous,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            allows_multiple_answers=(
-                _allows_multiple_answers
-                if (
-                    _allows_multiple_answers := allows_multiple_answers(
-                        self.allows_multiple_answers
-                    )
-                )
-                is not ...
-                else self.allows_multiple_answers
-            )
-            if allows_multiple_answers is not ...
-            else self.allows_multiple_answers,
-            correct_option_id=(
-                _correct_option_id
-                if (_correct_option_id := correct_option_id(self.correct_option_id))
-                is not ...
-                else self.correct_option_id
-            )
-            if correct_option_id is not ...
-            else self.correct_option_id,
-            explanation=(
-                _explanation
-                if (_explanation := explanation(self.explanation)) is not ...
-                else self.explanation
-            )
-            if explanation is not ...
-            else self.explanation,
-            explanation_entities=(
-                _explanation_entities
-                if (
-                    _explanation_entities := explanation_entities(
-                        self.explanation_entities
-                    )
-                )
-                is not ...
-                else self.explanation_entities
-            )
-            if explanation_entities is not ...
-            else self.explanation_entities,
-            open_period=(
-                _open_period
-                if (_open_period := open_period(self.open_period)) is not ...
-                else self.open_period
-            )
-            if open_period is not ...
-            else self.open_period,
-            close_date=(
-                _close_date
-                if (_close_date := close_date(self.close_date)) is not ...
-                else self.close_date
-            )
-            if close_date is not ...
-            else self.close_date,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            question=self.question
+            if question is ...
+            else prefer(question(self.question), self.question),
+            options=self.options
+            if options is ...
+            else prefer(options(self.options), self.options),
+            total_voter_count=self.total_voter_count
+            if total_voter_count is ...
+            else prefer(
+                total_voter_count(self.total_voter_count), self.total_voter_count
+            ),
+            is_closed=self.is_closed
+            if is_closed is ...
+            else prefer(is_closed(self.is_closed), self.is_closed),
+            is_anonymous=self.is_anonymous
+            if is_anonymous is ...
+            else prefer(is_anonymous(self.is_anonymous), self.is_anonymous),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            allows_multiple_answers=self.allows_multiple_answers
+            if allows_multiple_answers is ...
+            else prefer(
+                allows_multiple_answers(self.allows_multiple_answers),
+                self.allows_multiple_answers,
+            ),
+            correct_option_id=self.correct_option_id
+            if correct_option_id is ...
+            else prefer(
+                correct_option_id(self.correct_option_id), self.correct_option_id
+            ),
+            explanation=self.explanation
+            if explanation is ...
+            else prefer(explanation(self.explanation), self.explanation),
+            explanation_entities=self.explanation_entities
+            if explanation_entities is ...
+            else prefer(
+                explanation_entities(self.explanation_entities),
+                self.explanation_entities,
+            ),
+            open_period=self.open_period
+            if open_period is ...
+            else prefer(open_period(self.open_period), self.open_period),
+            close_date=self.close_date
+            if close_date is ...
+            else prefer(close_date(self.close_date), self.close_date),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        question: str | None = None,
-        options: list[PollOption] | None = None,
-        total_voter_count: int | None = None,
-        is_closed: bool | None = None,
-        is_anonymous: bool | None = None,
-        type: str | None = None,
-        allows_multiple_answers: bool | None = None,
-        correct_option_id: int | None = None,
-        explanation: str | None = None,
-        explanation_entities: list[MessageEntity] | None = None,
-        open_period: int | None = None,
-        close_date: int | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        question: str | EllipsisType = ...,
+        options: list[PollOption] | EllipsisType = ...,
+        total_voter_count: int | EllipsisType = ...,
+        is_closed: bool | EllipsisType = ...,
+        is_anonymous: bool | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        allows_multiple_answers: bool | EllipsisType = ...,
+        correct_option_id: int | None | EllipsisType = ...,
+        explanation: str | None | EllipsisType = ...,
+        explanation_entities: list[MessageEntity] | None | EllipsisType = ...,
+        open_period: int | None | EllipsisType = ...,
+        close_date: int | None | EllipsisType = ...,
     ) -> Poll:
         """Replaces some of model's fields with provided ones"""
         return Poll(
-            id=id if id is not None else self.id,
-            question=question if question is not None else self.question,
-            options=options if options is not None else self.options,
+            id=id if id is not ... else self.id,
+            question=question if question is not ... else self.question,
+            options=options if options is not ... else self.options,
             total_voter_count=total_voter_count
-            if total_voter_count is not None
+            if total_voter_count is not ...
             else self.total_voter_count,
-            is_closed=is_closed if is_closed is not None else self.is_closed,
-            is_anonymous=is_anonymous
-            if is_anonymous is not None
-            else self.is_anonymous,
-            type=type if type is not None else self.type,
+            is_closed=is_closed if is_closed is not ... else self.is_closed,
+            is_anonymous=is_anonymous if is_anonymous is not ... else self.is_anonymous,
+            type=type if type is not ... else self.type,
             allows_multiple_answers=allows_multiple_answers
-            if allows_multiple_answers is not None
+            if allows_multiple_answers is not ...
             else self.allows_multiple_answers,
             correct_option_id=correct_option_id
-            if correct_option_id is not None
+            if correct_option_id is not ...
             else self.correct_option_id,
-            explanation=explanation if explanation is not None else self.explanation,
+            explanation=explanation if explanation is not ... else self.explanation,
             explanation_entities=explanation_entities
-            if explanation_entities is not None
+            if explanation_entities is not ...
             else self.explanation_entities,
-            open_period=open_period if open_period is not None else self.open_period,
-            close_date=close_date if close_date is not None else self.close_date,
+            open_period=open_period if open_period is not ... else self.open_period,
+            close_date=close_date if close_date is not ... else self.close_date,
         )
 
 
@@ -3521,93 +2440,61 @@ class Location:
     """Optional. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only. """
 
     def alter(
-        self: Any,
-        longitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        latitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        horizontal_accuracy: Callable[[float | None], float | None | EllipsisType]
-        | EllipsisType = ...,
-        live_period: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        heading: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        proximity_alert_radius: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        longitude: AlterFn[float] | EllipsisType = ...,
+        latitude: AlterFn[float] | EllipsisType = ...,
+        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
+        live_period: AlterFn[int | None] | EllipsisType = ...,
+        heading: AlterFn[int | None] | EllipsisType = ...,
+        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
     ) -> Location:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Location(
-            longitude=(
-                _longitude
-                if (_longitude := longitude(self.longitude)) is not ...
-                else self.longitude
-            )
-            if longitude is not ...
-            else self.longitude,
-            latitude=(
-                _latitude
-                if (_latitude := latitude(self.latitude)) is not ...
-                else self.latitude
-            )
-            if latitude is not ...
-            else self.latitude,
-            horizontal_accuracy=(
-                _horizontal_accuracy
-                if (
-                    _horizontal_accuracy := horizontal_accuracy(
-                        self.horizontal_accuracy
-                    )
-                )
-                is not ...
-                else self.horizontal_accuracy
-            )
-            if horizontal_accuracy is not ...
-            else self.horizontal_accuracy,
-            live_period=(
-                _live_period
-                if (_live_period := live_period(self.live_period)) is not ...
-                else self.live_period
-            )
-            if live_period is not ...
-            else self.live_period,
-            heading=(
-                _heading
-                if (_heading := heading(self.heading)) is not ...
-                else self.heading
-            )
-            if heading is not ...
-            else self.heading,
-            proximity_alert_radius=(
-                _proximity_alert_radius
-                if (
-                    _proximity_alert_radius := proximity_alert_radius(
-                        self.proximity_alert_radius
-                    )
-                )
-                is not ...
-                else self.proximity_alert_radius
-            )
-            if proximity_alert_radius is not ...
-            else self.proximity_alert_radius,
+            longitude=self.longitude
+            if longitude is ...
+            else prefer(longitude(self.longitude), self.longitude),
+            latitude=self.latitude
+            if latitude is ...
+            else prefer(latitude(self.latitude), self.latitude),
+            horizontal_accuracy=self.horizontal_accuracy
+            if horizontal_accuracy is ...
+            else prefer(
+                horizontal_accuracy(self.horizontal_accuracy), self.horizontal_accuracy
+            ),
+            live_period=self.live_period
+            if live_period is ...
+            else prefer(live_period(self.live_period), self.live_period),
+            heading=self.heading
+            if heading is ...
+            else prefer(heading(self.heading), self.heading),
+            proximity_alert_radius=self.proximity_alert_radius
+            if proximity_alert_radius is ...
+            else prefer(
+                proximity_alert_radius(self.proximity_alert_radius),
+                self.proximity_alert_radius,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        longitude: float | None = None,
-        latitude: float | None = None,
-        horizontal_accuracy: float | None = None,
-        live_period: int | None = None,
-        heading: int | None = None,
-        proximity_alert_radius: int | None = None,
+        self,
+        longitude: float | EllipsisType = ...,
+        latitude: float | EllipsisType = ...,
+        horizontal_accuracy: float | None | EllipsisType = ...,
+        live_period: int | None | EllipsisType = ...,
+        heading: int | None | EllipsisType = ...,
+        proximity_alert_radius: int | None | EllipsisType = ...,
     ) -> Location:
         """Replaces some of model's fields with provided ones"""
         return Location(
-            longitude=longitude if longitude is not None else self.longitude,
-            latitude=latitude if latitude is not None else self.latitude,
+            longitude=longitude if longitude is not ... else self.longitude,
+            latitude=latitude if latitude is not ... else self.latitude,
             horizontal_accuracy=horizontal_accuracy
-            if horizontal_accuracy is not None
+            if horizontal_accuracy is not ...
             else self.horizontal_accuracy,
-            live_period=live_period if live_period is not None else self.live_period,
-            heading=heading if heading is not None else self.heading,
+            live_period=live_period if live_period is not ... else self.live_period,
+            heading=heading if heading is not ... else self.heading,
             proximity_alert_radius=proximity_alert_radius
-            if proximity_alert_radius is not None
+            if proximity_alert_radius is not ...
             else self.proximity_alert_radius,
         )
 
@@ -3632,97 +2519,66 @@ class Venue:
     """Optional. Google Places type of the venue. (See supported types.) """
 
     def alter(
-        self: Any,
-        location: Callable[[Location], Location | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        address: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        foursquare_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        foursquare_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        location: AlterFn[Location] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        address: AlterFn[str] | EllipsisType = ...,
+        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
+        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
+        google_place_id: AlterFn[str | None] | EllipsisType = ...,
+        google_place_type: AlterFn[str | None] | EllipsisType = ...,
     ) -> Venue:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Venue(
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            address=(
-                _address
-                if (_address := address(self.address)) is not ...
-                else self.address
-            )
-            if address is not ...
-            else self.address,
-            foursquare_id=(
-                _foursquare_id
-                if (_foursquare_id := foursquare_id(self.foursquare_id)) is not ...
-                else self.foursquare_id
-            )
-            if foursquare_id is not ...
-            else self.foursquare_id,
-            foursquare_type=(
-                _foursquare_type
-                if (_foursquare_type := foursquare_type(self.foursquare_type))
-                is not ...
-                else self.foursquare_type
-            )
-            if foursquare_type is not ...
-            else self.foursquare_type,
-            google_place_id=(
-                _google_place_id
-                if (_google_place_id := google_place_id(self.google_place_id))
-                is not ...
-                else self.google_place_id
-            )
-            if google_place_id is not ...
-            else self.google_place_id,
-            google_place_type=(
-                _google_place_type
-                if (_google_place_type := google_place_type(self.google_place_type))
-                is not ...
-                else self.google_place_type
-            )
-            if google_place_type is not ...
-            else self.google_place_type,
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            address=self.address
+            if address is ...
+            else prefer(address(self.address), self.address),
+            foursquare_id=self.foursquare_id
+            if foursquare_id is ...
+            else prefer(foursquare_id(self.foursquare_id), self.foursquare_id),
+            foursquare_type=self.foursquare_type
+            if foursquare_type is ...
+            else prefer(foursquare_type(self.foursquare_type), self.foursquare_type),
+            google_place_id=self.google_place_id
+            if google_place_id is ...
+            else prefer(google_place_id(self.google_place_id), self.google_place_id),
+            google_place_type=self.google_place_type
+            if google_place_type is ...
+            else prefer(
+                google_place_type(self.google_place_type), self.google_place_type
+            ),
         )
 
     def copy_with(
-        self: Any,
-        location: Location | None = None,
-        title: str | None = None,
-        address: str | None = None,
-        foursquare_id: str | None = None,
-        foursquare_type: str | None = None,
-        google_place_id: str | None = None,
-        google_place_type: str | None = None,
+        self,
+        location: Location | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        address: str | EllipsisType = ...,
+        foursquare_id: str | None | EllipsisType = ...,
+        foursquare_type: str | None | EllipsisType = ...,
+        google_place_id: str | None | EllipsisType = ...,
+        google_place_type: str | None | EllipsisType = ...,
     ) -> Venue:
         """Replaces some of model's fields with provided ones"""
         return Venue(
-            location=location if location is not None else self.location,
-            title=title if title is not None else self.title,
-            address=address if address is not None else self.address,
+            location=location if location is not ... else self.location,
+            title=title if title is not ... else self.title,
+            address=address if address is not ... else self.address,
             foursquare_id=foursquare_id
-            if foursquare_id is not None
+            if foursquare_id is not ...
             else self.foursquare_id,
             foursquare_type=foursquare_type
-            if foursquare_type is not None
+            if foursquare_type is not ...
             else self.foursquare_type,
             google_place_id=google_place_id
-            if google_place_id is not None
+            if google_place_id is not ...
             else self.google_place_id,
             google_place_type=google_place_type
-            if google_place_type is not None
+            if google_place_type is not ...
             else self.google_place_type,
         )
 
@@ -3737,33 +2593,27 @@ class WebAppData:
     """Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field. """
 
     def alter(
-        self: Any,
-        data: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        button_text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        data: AlterFn[str] | EllipsisType = ...,
+        button_text: AlterFn[str] | EllipsisType = ...,
     ) -> WebAppData:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebAppData(
-            data=(_data if (_data := data(self.data)) is not ... else self.data)
-            if data is not ...
-            else self.data,
-            button_text=(
-                _button_text
-                if (_button_text := button_text(self.button_text)) is not ...
-                else self.button_text
-            )
-            if button_text is not ...
-            else self.button_text,
+            data=self.data if data is ... else prefer(data(self.data), self.data),
+            button_text=self.button_text
+            if button_text is ...
+            else prefer(button_text(self.button_text), self.button_text),
         )
 
     def copy_with(
-        self: Any,
-        data: str | None = None,
-        button_text: str | None = None,
+        self,
+        data: str | EllipsisType = ...,
+        button_text: str | EllipsisType = ...,
     ) -> WebAppData:
         """Replaces some of model's fields with provided ones"""
         return WebAppData(
-            data=data if data is not None else self.data,
-            button_text=button_text if button_text is not None else self.button_text,
+            data=data if data is not ... else self.data,
+            button_text=button_text if button_text is not ... else self.button_text,
         )
 
 
@@ -3779,47 +2629,35 @@ class ProximityAlertTriggered:
     """The distance between the users """
 
     def alter(
-        self: Any,
-        traveler: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        watcher: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        distance: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        traveler: AlterFn[User] | EllipsisType = ...,
+        watcher: AlterFn[User] | EllipsisType = ...,
+        distance: AlterFn[int] | EllipsisType = ...,
     ) -> ProximityAlertTriggered:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ProximityAlertTriggered(
-            traveler=(
-                _traveler
-                if (_traveler := traveler(self.traveler)) is not ...
-                else self.traveler
-            )
-            if traveler is not ...
-            else self.traveler,
-            watcher=(
-                _watcher
-                if (_watcher := watcher(self.watcher)) is not ...
-                else self.watcher
-            )
-            if watcher is not ...
-            else self.watcher,
-            distance=(
-                _distance
-                if (_distance := distance(self.distance)) is not ...
-                else self.distance
-            )
-            if distance is not ...
-            else self.distance,
+            traveler=self.traveler
+            if traveler is ...
+            else prefer(traveler(self.traveler), self.traveler),
+            watcher=self.watcher
+            if watcher is ...
+            else prefer(watcher(self.watcher), self.watcher),
+            distance=self.distance
+            if distance is ...
+            else prefer(distance(self.distance), self.distance),
         )
 
     def copy_with(
-        self: Any,
-        traveler: User | None = None,
-        watcher: User | None = None,
-        distance: int | None = None,
+        self,
+        traveler: User | EllipsisType = ...,
+        watcher: User | EllipsisType = ...,
+        distance: int | EllipsisType = ...,
     ) -> ProximityAlertTriggered:
         """Replaces some of model's fields with provided ones"""
         return ProximityAlertTriggered(
-            traveler=traveler if traveler is not None else self.traveler,
-            watcher=watcher if watcher is not None else self.watcher,
-            distance=distance if distance is not None else self.distance,
+            traveler=traveler if traveler is not ... else self.traveler,
+            watcher=watcher if watcher is not ... else self.watcher,
+            distance=distance if distance is not ... else self.distance,
         )
 
 
@@ -3831,34 +2669,27 @@ class MessageAutoDeleteTimerChanged:
     """New auto-delete time for messages in the chat; in seconds """
 
     def alter(
-        self: Any,
-        message_auto_delete_time: Callable[[int], int | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        message_auto_delete_time: AlterFn[int] | EllipsisType = ...,
     ) -> MessageAutoDeleteTimerChanged:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageAutoDeleteTimerChanged(
-            message_auto_delete_time=(
-                _message_auto_delete_time
-                if (
-                    _message_auto_delete_time := message_auto_delete_time(
-                        self.message_auto_delete_time
-                    )
-                )
-                is not ...
-                else self.message_auto_delete_time
+            message_auto_delete_time=self.message_auto_delete_time
+            if message_auto_delete_time is ...
+            else prefer(
+                message_auto_delete_time(self.message_auto_delete_time),
+                self.message_auto_delete_time,
             )
-            if message_auto_delete_time is not ...
-            else self.message_auto_delete_time
         )
 
     def copy_with(
-        self: Any,
-        message_auto_delete_time: int | None = None,
+        self,
+        message_auto_delete_time: int | EllipsisType = ...,
     ) -> MessageAutoDeleteTimerChanged:
         """Replaces some of model's fields with provided ones"""
         return MessageAutoDeleteTimerChanged(
             message_auto_delete_time=message_auto_delete_time
-            if message_auto_delete_time is not None
+            if message_auto_delete_time is not ...
             else self.message_auto_delete_time
         )
 
@@ -3875,50 +2706,37 @@ class ForumTopicCreated:
     """Optional. Unique identifier of the custom emoji shown as the topic icon """
 
     def alter(
-        self: Any,
-        name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        icon_color: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        icon_custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        name: AlterFn[str] | EllipsisType = ...,
+        icon_color: AlterFn[int] | EllipsisType = ...,
+        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
     ) -> ForumTopicCreated:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicCreated(
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            icon_color=(
-                _icon_color
-                if (_icon_color := icon_color(self.icon_color)) is not ...
-                else self.icon_color
-            )
-            if icon_color is not ...
-            else self.icon_color,
-            icon_custom_emoji_id=(
-                _icon_custom_emoji_id
-                if (
-                    _icon_custom_emoji_id := icon_custom_emoji_id(
-                        self.icon_custom_emoji_id
-                    )
-                )
-                is not ...
-                else self.icon_custom_emoji_id
-            )
-            if icon_custom_emoji_id is not ...
-            else self.icon_custom_emoji_id,
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            icon_color=self.icon_color
+            if icon_color is ...
+            else prefer(icon_color(self.icon_color), self.icon_color),
+            icon_custom_emoji_id=self.icon_custom_emoji_id
+            if icon_custom_emoji_id is ...
+            else prefer(
+                icon_custom_emoji_id(self.icon_custom_emoji_id),
+                self.icon_custom_emoji_id,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        name: str | None = None,
-        icon_color: int | None = None,
-        icon_custom_emoji_id: str | None = None,
+        self,
+        name: str | EllipsisType = ...,
+        icon_color: int | EllipsisType = ...,
+        icon_custom_emoji_id: str | None | EllipsisType = ...,
     ) -> ForumTopicCreated:
         """Replaces some of model's fields with provided ones"""
         return ForumTopicCreated(
-            name=name if name is not None else self.name,
-            icon_color=icon_color if icon_color is not None else self.icon_color,
+            name=name if name is not ... else self.name,
+            icon_color=icon_color if icon_color is not ... else self.icon_color,
             icon_custom_emoji_id=icon_custom_emoji_id
-            if icon_custom_emoji_id is not None
+            if icon_custom_emoji_id is not ...
             else self.icon_custom_emoji_id,
         )
 
@@ -3928,13 +2746,13 @@ class ForumTopicClosed:
     """This object represents a service message about a forum topic closed in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> ForumTopicClosed:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicClosed()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> ForumTopicClosed:
         """Replaces some of model's fields with provided ones"""
         return ForumTopicClosed()
@@ -3950,40 +2768,31 @@ class ForumTopicEdited:
     """Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed """
 
     def alter(
-        self: Any,
-        name: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        icon_custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        name: AlterFn[str | None] | EllipsisType = ...,
+        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
     ) -> ForumTopicEdited:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicEdited(
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            icon_custom_emoji_id=(
-                _icon_custom_emoji_id
-                if (
-                    _icon_custom_emoji_id := icon_custom_emoji_id(
-                        self.icon_custom_emoji_id
-                    )
-                )
-                is not ...
-                else self.icon_custom_emoji_id
-            )
-            if icon_custom_emoji_id is not ...
-            else self.icon_custom_emoji_id,
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            icon_custom_emoji_id=self.icon_custom_emoji_id
+            if icon_custom_emoji_id is ...
+            else prefer(
+                icon_custom_emoji_id(self.icon_custom_emoji_id),
+                self.icon_custom_emoji_id,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        name: str | None = None,
-        icon_custom_emoji_id: str | None = None,
+        self,
+        name: str | None | EllipsisType = ...,
+        icon_custom_emoji_id: str | None | EllipsisType = ...,
     ) -> ForumTopicEdited:
         """Replaces some of model's fields with provided ones"""
         return ForumTopicEdited(
-            name=name if name is not None else self.name,
+            name=name if name is not ... else self.name,
             icon_custom_emoji_id=icon_custom_emoji_id
-            if icon_custom_emoji_id is not None
+            if icon_custom_emoji_id is not ...
             else self.icon_custom_emoji_id,
         )
 
@@ -3993,13 +2802,13 @@ class ForumTopicReopened:
     """This object represents a service message about a forum topic reopened in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> ForumTopicReopened:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicReopened()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> ForumTopicReopened:
         """Replaces some of model's fields with provided ones"""
         return ForumTopicReopened()
@@ -4010,13 +2819,13 @@ class GeneralForumTopicHidden:
     """This object represents a service message about General forum topic hidden in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> GeneralForumTopicHidden:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return GeneralForumTopicHidden()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> GeneralForumTopicHidden:
         """Replaces some of model's fields with provided ones"""
         return GeneralForumTopicHidden()
@@ -4027,13 +2836,13 @@ class GeneralForumTopicUnhidden:
     """This object represents a service message about General forum topic unhidden in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> GeneralForumTopicUnhidden:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return GeneralForumTopicUnhidden()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> GeneralForumTopicUnhidden:
         """Replaces some of model's fields with provided ones"""
         return GeneralForumTopicUnhidden()
@@ -4049,37 +2858,29 @@ class UserShared:
     """Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means. """
 
     def alter(
-        self: Any,
-        request_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        user_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        request_id: AlterFn[int] | EllipsisType = ...,
+        user_id: AlterFn[int] | EllipsisType = ...,
     ) -> UserShared:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return UserShared(
-            request_id=(
-                _request_id
-                if (_request_id := request_id(self.request_id)) is not ...
-                else self.request_id
-            )
-            if request_id is not ...
-            else self.request_id,
-            user_id=(
-                _user_id
-                if (_user_id := user_id(self.user_id)) is not ...
-                else self.user_id
-            )
-            if user_id is not ...
-            else self.user_id,
+            request_id=self.request_id
+            if request_id is ...
+            else prefer(request_id(self.request_id), self.request_id),
+            user_id=self.user_id
+            if user_id is ...
+            else prefer(user_id(self.user_id), self.user_id),
         )
 
     def copy_with(
-        self: Any,
-        request_id: int | None = None,
-        user_id: int | None = None,
+        self,
+        request_id: int | EllipsisType = ...,
+        user_id: int | EllipsisType = ...,
     ) -> UserShared:
         """Replaces some of model's fields with provided ones"""
         return UserShared(
-            request_id=request_id if request_id is not None else self.request_id,
-            user_id=user_id if user_id is not None else self.user_id,
+            request_id=request_id if request_id is not ... else self.request_id,
+            user_id=user_id if user_id is not ... else self.user_id,
         )
 
 
@@ -4093,37 +2894,29 @@ class ChatShared:
     """Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means. """
 
     def alter(
-        self: Any,
-        request_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        chat_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        request_id: AlterFn[int] | EllipsisType = ...,
+        chat_id: AlterFn[int] | EllipsisType = ...,
     ) -> ChatShared:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatShared(
-            request_id=(
-                _request_id
-                if (_request_id := request_id(self.request_id)) is not ...
-                else self.request_id
-            )
-            if request_id is not ...
-            else self.request_id,
-            chat_id=(
-                _chat_id
-                if (_chat_id := chat_id(self.chat_id)) is not ...
-                else self.chat_id
-            )
-            if chat_id is not ...
-            else self.chat_id,
+            request_id=self.request_id
+            if request_id is ...
+            else prefer(request_id(self.request_id), self.request_id),
+            chat_id=self.chat_id
+            if chat_id is ...
+            else prefer(chat_id(self.chat_id), self.chat_id),
         )
 
     def copy_with(
-        self: Any,
-        request_id: int | None = None,
-        chat_id: int | None = None,
+        self,
+        request_id: int | EllipsisType = ...,
+        chat_id: int | EllipsisType = ...,
     ) -> ChatShared:
         """Replaces some of model's fields with provided ones"""
         return ChatShared(
-            request_id=request_id if request_id is not None else self.request_id,
-            chat_id=chat_id if chat_id is not None else self.chat_id,
+            request_id=request_id if request_id is not ... else self.request_id,
+            chat_id=chat_id if chat_id is not ... else self.chat_id,
         )
 
 
@@ -4139,60 +2932,39 @@ class WriteAccessAllowed:
     """Optional. True, if the access was granted when the bot was added to the attachment or side menu """
 
     def alter(
-        self: Any,
-        from_request: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        web_app_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        from_attachment_menu: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        from_request: AlterFn[bool | None] | EllipsisType = ...,
+        web_app_name: AlterFn[str | None] | EllipsisType = ...,
+        from_attachment_menu: AlterFn[bool | None] | EllipsisType = ...,
     ) -> WriteAccessAllowed:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WriteAccessAllowed(
-            from_request=(
-                _from_request
-                if (_from_request := from_request(self.from_request)) is not ...
-                else self.from_request
-            )
-            if from_request is not ...
-            else self.from_request,
-            web_app_name=(
-                _web_app_name
-                if (_web_app_name := web_app_name(self.web_app_name)) is not ...
-                else self.web_app_name
-            )
-            if web_app_name is not ...
-            else self.web_app_name,
-            from_attachment_menu=(
-                _from_attachment_menu
-                if (
-                    _from_attachment_menu := from_attachment_menu(
-                        self.from_attachment_menu
-                    )
-                )
-                is not ...
-                else self.from_attachment_menu
-            )
-            if from_attachment_menu is not ...
-            else self.from_attachment_menu,
+            from_request=self.from_request
+            if from_request is ...
+            else prefer(from_request(self.from_request), self.from_request),
+            web_app_name=self.web_app_name
+            if web_app_name is ...
+            else prefer(web_app_name(self.web_app_name), self.web_app_name),
+            from_attachment_menu=self.from_attachment_menu
+            if from_attachment_menu is ...
+            else prefer(
+                from_attachment_menu(self.from_attachment_menu),
+                self.from_attachment_menu,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        from_request: bool | None = None,
-        web_app_name: str | None = None,
-        from_attachment_menu: bool | None = None,
+        self,
+        from_request: bool | None | EllipsisType = ...,
+        web_app_name: str | None | EllipsisType = ...,
+        from_attachment_menu: bool | None | EllipsisType = ...,
     ) -> WriteAccessAllowed:
         """Replaces some of model's fields with provided ones"""
         return WriteAccessAllowed(
-            from_request=from_request
-            if from_request is not None
-            else self.from_request,
-            web_app_name=web_app_name
-            if web_app_name is not None
-            else self.web_app_name,
+            from_request=from_request if from_request is not ... else self.from_request,
+            web_app_name=web_app_name if web_app_name is not ... else self.web_app_name,
             from_attachment_menu=from_attachment_menu
-            if from_attachment_menu is not None
+            if from_attachment_menu is not ...
             else self.from_attachment_menu,
         )
 
@@ -4205,27 +2977,23 @@ class VideoChatScheduled:
     """Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator """
 
     def alter(
-        self: Any,
-        start_date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        start_date: AlterFn[int] | EllipsisType = ...,
     ) -> VideoChatScheduled:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatScheduled(
-            start_date=(
-                _start_date
-                if (_start_date := start_date(self.start_date)) is not ...
-                else self.start_date
-            )
-            if start_date is not ...
-            else self.start_date
+            start_date=self.start_date
+            if start_date is ...
+            else prefer(start_date(self.start_date), self.start_date)
         )
 
     def copy_with(
-        self: Any,
-        start_date: int | None = None,
+        self,
+        start_date: int | EllipsisType = ...,
     ) -> VideoChatScheduled:
         """Replaces some of model's fields with provided ones"""
         return VideoChatScheduled(
-            start_date=start_date if start_date is not None else self.start_date
+            start_date=start_date if start_date is not ... else self.start_date
         )
 
 
@@ -4234,13 +3002,13 @@ class VideoChatStarted:
     """This object represents a service message about a video chat started in the chat. Currently holds no information."""
 
     def alter(
-        self: Any,
+        self,
     ) -> VideoChatStarted:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatStarted()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> VideoChatStarted:
         """Replaces some of model's fields with provided ones"""
         return VideoChatStarted()
@@ -4254,27 +3022,23 @@ class VideoChatEnded:
     """Video chat duration in seconds """
 
     def alter(
-        self: Any,
-        duration: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        duration: AlterFn[int] | EllipsisType = ...,
     ) -> VideoChatEnded:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatEnded(
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration)
         )
 
     def copy_with(
-        self: Any,
-        duration: int | None = None,
+        self,
+        duration: int | EllipsisType = ...,
     ) -> VideoChatEnded:
         """Replaces some of model's fields with provided ones"""
         return VideoChatEnded(
-            duration=duration if duration is not None else self.duration
+            duration=duration if duration is not ... else self.duration
         )
 
 
@@ -4286,23 +3050,21 @@ class VideoChatParticipantsInvited:
     """New members that were invited to the video chat """
 
     def alter(
-        self: Any,
-        users: Callable[[list[User]], list[User] | EllipsisType] | EllipsisType = ...,
+        self,
+        users: AlterFn[list[User]] | EllipsisType = ...,
     ) -> VideoChatParticipantsInvited:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatParticipantsInvited(
-            users=(_users if (_users := users(self.users)) is not ... else self.users)
-            if users is not ...
-            else self.users
+            users=self.users if users is ... else prefer(users(self.users), self.users)
         )
 
     def copy_with(
-        self: Any,
-        users: list[User] | None = None,
+        self,
+        users: list[User] | EllipsisType = ...,
     ) -> VideoChatParticipantsInvited:
         """Replaces some of model's fields with provided ones"""
         return VideoChatParticipantsInvited(
-            users=users if users is not None else self.users
+            users=users if users is not ... else self.users
         )
 
 
@@ -4316,36 +3078,29 @@ class UserProfilePhotos:
     """Requested profile pictures (in up to 4 sizes each) """
 
     def alter(
-        self: Any,
-        total_count: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        photos: Callable[[list[list[PhotoSize]]], list[list[PhotoSize]] | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        total_count: AlterFn[int] | EllipsisType = ...,
+        photos: AlterFn[list[list[PhotoSize]]] | EllipsisType = ...,
     ) -> UserProfilePhotos:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return UserProfilePhotos(
-            total_count=(
-                _total_count
-                if (_total_count := total_count(self.total_count)) is not ...
-                else self.total_count
-            )
-            if total_count is not ...
-            else self.total_count,
-            photos=(
-                _photos if (_photos := photos(self.photos)) is not ... else self.photos
-            )
-            if photos is not ...
-            else self.photos,
+            total_count=self.total_count
+            if total_count is ...
+            else prefer(total_count(self.total_count), self.total_count),
+            photos=self.photos
+            if photos is ...
+            else prefer(photos(self.photos), self.photos),
         )
 
     def copy_with(
-        self: Any,
-        total_count: int | None = None,
-        photos: list[list[PhotoSize]] | None = None,
+        self,
+        total_count: int | EllipsisType = ...,
+        photos: list[list[PhotoSize]] | EllipsisType = ...,
     ) -> UserProfilePhotos:
         """Replaces some of model's fields with provided ones"""
         return UserProfilePhotos(
-            total_count=total_count if total_count is not None else self.total_count,
-            photos=photos if photos is not None else self.photos,
+            total_count=total_count if total_count is not ... else self.total_count,
+            photos=photos if photos is not ... else self.photos,
         )
 
 
@@ -4363,61 +3118,43 @@ class File:
     """Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file. """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        file_path: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_path: AlterFn[str | None] | EllipsisType = ...,
     ) -> File:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return File(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
-            file_path=(
-                _file_path
-                if (_file_path := file_path(self.file_path)) is not ...
-                else self.file_path
-            )
-            if file_path is not ...
-            else self.file_path,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
+            file_path=self.file_path
+            if file_path is ...
+            else prefer(file_path(self.file_path), self.file_path),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        file_size: int | None = None,
-        file_path: str | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
+        file_path: str | None | EllipsisType = ...,
     ) -> File:
         """Replaces some of model's fields with provided ones"""
         return File(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            file_size=file_size if file_size is not None else self.file_size,
-            file_path=file_path if file_path is not None else self.file_path,
+            file_size=file_size if file_size is not ... else self.file_size,
+            file_path=file_path if file_path is not ... else self.file_path,
         )
 
 
@@ -4429,22 +3166,20 @@ class WebAppInfo:
     """An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps """
 
     def alter(
-        self: Any,
-        url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        url: AlterFn[str] | EllipsisType = ...,
     ) -> WebAppInfo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebAppInfo(
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url
+            url=self.url if url is ... else prefer(url(self.url), self.url)
         )
 
     def copy_with(
-        self: Any,
-        url: str | None = None,
+        self,
+        url: str | EllipsisType = ...,
     ) -> WebAppInfo:
         """Replaces some of model's fields with provided ones"""
-        return WebAppInfo(url=url if url is not None else self.url)
+        return WebAppInfo(url=url if url is not ... else self.url)
 
 
 @dataclass(frozen=False, slots=True)
@@ -4465,100 +3200,66 @@ class ReplyKeyboardMarkup:
     """Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. Example: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard. """
 
     def alter(
-        self: Any,
-        keyboard: Callable[
-            [list[list[KeyboardButton]]], list[list[KeyboardButton]] | EllipsisType
-        ]
-        | EllipsisType = ...,
-        is_persistent: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        resize_keyboard: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        one_time_keyboard: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        input_field_placeholder: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        selective: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        keyboard: AlterFn[list[list[KeyboardButton]]] | EllipsisType = ...,
+        is_persistent: AlterFn[bool | None] | EllipsisType = ...,
+        resize_keyboard: AlterFn[bool | None] | EllipsisType = ...,
+        one_time_keyboard: AlterFn[bool | None] | EllipsisType = ...,
+        input_field_placeholder: AlterFn[str | None] | EllipsisType = ...,
+        selective: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ReplyKeyboardMarkup:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ReplyKeyboardMarkup(
-            keyboard=(
-                _keyboard
-                if (_keyboard := keyboard(self.keyboard)) is not ...
-                else self.keyboard
-            )
-            if keyboard is not ...
-            else self.keyboard,
-            is_persistent=(
-                _is_persistent
-                if (_is_persistent := is_persistent(self.is_persistent)) is not ...
-                else self.is_persistent
-            )
-            if is_persistent is not ...
-            else self.is_persistent,
-            resize_keyboard=(
-                _resize_keyboard
-                if (_resize_keyboard := resize_keyboard(self.resize_keyboard))
-                is not ...
-                else self.resize_keyboard
-            )
-            if resize_keyboard is not ...
-            else self.resize_keyboard,
-            one_time_keyboard=(
-                _one_time_keyboard
-                if (_one_time_keyboard := one_time_keyboard(self.one_time_keyboard))
-                is not ...
-                else self.one_time_keyboard
-            )
-            if one_time_keyboard is not ...
-            else self.one_time_keyboard,
-            input_field_placeholder=(
-                _input_field_placeholder
-                if (
-                    _input_field_placeholder := input_field_placeholder(
-                        self.input_field_placeholder
-                    )
-                )
-                is not ...
-                else self.input_field_placeholder
-            )
-            if input_field_placeholder is not ...
-            else self.input_field_placeholder,
-            selective=(
-                _selective
-                if (_selective := selective(self.selective)) is not ...
-                else self.selective
-            )
-            if selective is not ...
-            else self.selective,
+            keyboard=self.keyboard
+            if keyboard is ...
+            else prefer(keyboard(self.keyboard), self.keyboard),
+            is_persistent=self.is_persistent
+            if is_persistent is ...
+            else prefer(is_persistent(self.is_persistent), self.is_persistent),
+            resize_keyboard=self.resize_keyboard
+            if resize_keyboard is ...
+            else prefer(resize_keyboard(self.resize_keyboard), self.resize_keyboard),
+            one_time_keyboard=self.one_time_keyboard
+            if one_time_keyboard is ...
+            else prefer(
+                one_time_keyboard(self.one_time_keyboard), self.one_time_keyboard
+            ),
+            input_field_placeholder=self.input_field_placeholder
+            if input_field_placeholder is ...
+            else prefer(
+                input_field_placeholder(self.input_field_placeholder),
+                self.input_field_placeholder,
+            ),
+            selective=self.selective
+            if selective is ...
+            else prefer(selective(self.selective), self.selective),
         )
 
     def copy_with(
-        self: Any,
-        keyboard: list[list[KeyboardButton]] | None = None,
-        is_persistent: bool | None = None,
-        resize_keyboard: bool | None = None,
-        one_time_keyboard: bool | None = None,
-        input_field_placeholder: str | None = None,
-        selective: bool | None = None,
+        self,
+        keyboard: list[list[KeyboardButton]] | EllipsisType = ...,
+        is_persistent: bool | None | EllipsisType = ...,
+        resize_keyboard: bool | None | EllipsisType = ...,
+        one_time_keyboard: bool | None | EllipsisType = ...,
+        input_field_placeholder: str | None | EllipsisType = ...,
+        selective: bool | None | EllipsisType = ...,
     ) -> ReplyKeyboardMarkup:
         """Replaces some of model's fields with provided ones"""
         return ReplyKeyboardMarkup(
-            keyboard=keyboard if keyboard is not None else self.keyboard,
+            keyboard=keyboard if keyboard is not ... else self.keyboard,
             is_persistent=is_persistent
-            if is_persistent is not None
+            if is_persistent is not ...
             else self.is_persistent,
             resize_keyboard=resize_keyboard
-            if resize_keyboard is not None
+            if resize_keyboard is not ...
             else self.resize_keyboard,
             one_time_keyboard=one_time_keyboard
-            if one_time_keyboard is not None
+            if one_time_keyboard is not ...
             else self.one_time_keyboard,
             input_field_placeholder=input_field_placeholder
-            if input_field_placeholder is not None
+            if input_field_placeholder is not ...
             else self.input_field_placeholder,
-            selective=selective if selective is not None else self.selective,
+            selective=selective if selective is not ... else self.selective,
         )
 
 
@@ -4587,110 +3288,61 @@ class KeyboardButton:
     """Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a "web_app_data" service message. Available in private chats only. """
 
     def alter(
-        self: Any,
-        text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        request_user: Callable[
-            [KeyboardButtonRequestUser | None],
-            KeyboardButtonRequestUser | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        request_chat: Callable[
-            [KeyboardButtonRequestChat | None],
-            KeyboardButtonRequestChat | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        request_contact: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        request_location: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        request_poll: Callable[
-            [KeyboardButtonPollType | None],
-            KeyboardButtonPollType | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        web_app: Callable[[WebAppInfo | None], WebAppInfo | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        text: AlterFn[str] | EllipsisType = ...,
+        request_user: AlterFn[KeyboardButtonRequestUser | None] | EllipsisType = ...,
+        request_chat: AlterFn[KeyboardButtonRequestChat | None] | EllipsisType = ...,
+        request_contact: AlterFn[bool | None] | EllipsisType = ...,
+        request_location: AlterFn[bool | None] | EllipsisType = ...,
+        request_poll: AlterFn[KeyboardButtonPollType | None] | EllipsisType = ...,
+        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
     ) -> KeyboardButton:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButton(
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            request_user=(
-                _request_user
-                if (_request_user := request_user(self.request_user)) is not ...
-                else self.request_user
-            )
-            if request_user is not ...
-            else self.request_user,
-            request_chat=(
-                _request_chat
-                if (_request_chat := request_chat(self.request_chat)) is not ...
-                else self.request_chat
-            )
-            if request_chat is not ...
-            else self.request_chat,
-            request_contact=(
-                _request_contact
-                if (_request_contact := request_contact(self.request_contact))
-                is not ...
-                else self.request_contact
-            )
-            if request_contact is not ...
-            else self.request_contact,
-            request_location=(
-                _request_location
-                if (_request_location := request_location(self.request_location))
-                is not ...
-                else self.request_location
-            )
-            if request_location is not ...
-            else self.request_location,
-            request_poll=(
-                _request_poll
-                if (_request_poll := request_poll(self.request_poll)) is not ...
-                else self.request_poll
-            )
-            if request_poll is not ...
-            else self.request_poll,
-            web_app=(
-                _web_app
-                if (_web_app := web_app(self.web_app)) is not ...
-                else self.web_app
-            )
-            if web_app is not ...
-            else self.web_app,
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            request_user=self.request_user
+            if request_user is ...
+            else prefer(request_user(self.request_user), self.request_user),
+            request_chat=self.request_chat
+            if request_chat is ...
+            else prefer(request_chat(self.request_chat), self.request_chat),
+            request_contact=self.request_contact
+            if request_contact is ...
+            else prefer(request_contact(self.request_contact), self.request_contact),
+            request_location=self.request_location
+            if request_location is ...
+            else prefer(request_location(self.request_location), self.request_location),
+            request_poll=self.request_poll
+            if request_poll is ...
+            else prefer(request_poll(self.request_poll), self.request_poll),
+            web_app=self.web_app
+            if web_app is ...
+            else prefer(web_app(self.web_app), self.web_app),
         )
 
     def copy_with(
-        self: Any,
-        text: str | None = None,
-        request_user: KeyboardButtonRequestUser | None = None,
-        request_chat: KeyboardButtonRequestChat | None = None,
-        request_contact: bool | None = None,
-        request_location: bool | None = None,
-        request_poll: KeyboardButtonPollType | None = None,
-        web_app: WebAppInfo | None = None,
+        self,
+        text: str | EllipsisType = ...,
+        request_user: KeyboardButtonRequestUser | None | EllipsisType = ...,
+        request_chat: KeyboardButtonRequestChat | None | EllipsisType = ...,
+        request_contact: bool | None | EllipsisType = ...,
+        request_location: bool | None | EllipsisType = ...,
+        request_poll: KeyboardButtonPollType | None | EllipsisType = ...,
+        web_app: WebAppInfo | None | EllipsisType = ...,
     ) -> KeyboardButton:
         """Replaces some of model's fields with provided ones"""
         return KeyboardButton(
-            text=text if text is not None else self.text,
-            request_user=request_user
-            if request_user is not None
-            else self.request_user,
-            request_chat=request_chat
-            if request_chat is not None
-            else self.request_chat,
+            text=text if text is not ... else self.text,
+            request_user=request_user if request_user is not ... else self.request_user,
+            request_chat=request_chat if request_chat is not ... else self.request_chat,
             request_contact=request_contact
-            if request_contact is not None
+            if request_contact is not ...
             else self.request_contact,
             request_location=request_location
-            if request_location is not None
+            if request_location is not ...
             else self.request_location,
-            request_poll=request_poll
-            if request_poll is not None
-            else self.request_poll,
-            web_app=web_app if web_app is not None else self.web_app,
+            request_poll=request_poll if request_poll is not ... else self.request_poll,
+            web_app=web_app if web_app is not ... else self.web_app,
         )
 
 
@@ -4706,51 +3358,36 @@ class KeyboardButtonRequestUser:
     """Optional. Pass True to request a premium user, pass False to request a non-premium user. If not specified, no additional restrictions are applied. """
 
     def alter(
-        self: Any,
-        request_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        user_is_bot: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        user_is_premium: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        request_id: AlterFn[int] | EllipsisType = ...,
+        user_is_bot: AlterFn[bool | None] | EllipsisType = ...,
+        user_is_premium: AlterFn[bool | None] | EllipsisType = ...,
     ) -> KeyboardButtonRequestUser:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonRequestUser(
-            request_id=(
-                _request_id
-                if (_request_id := request_id(self.request_id)) is not ...
-                else self.request_id
-            )
-            if request_id is not ...
-            else self.request_id,
-            user_is_bot=(
-                _user_is_bot
-                if (_user_is_bot := user_is_bot(self.user_is_bot)) is not ...
-                else self.user_is_bot
-            )
-            if user_is_bot is not ...
-            else self.user_is_bot,
-            user_is_premium=(
-                _user_is_premium
-                if (_user_is_premium := user_is_premium(self.user_is_premium))
-                is not ...
-                else self.user_is_premium
-            )
-            if user_is_premium is not ...
-            else self.user_is_premium,
+            request_id=self.request_id
+            if request_id is ...
+            else prefer(request_id(self.request_id), self.request_id),
+            user_is_bot=self.user_is_bot
+            if user_is_bot is ...
+            else prefer(user_is_bot(self.user_is_bot), self.user_is_bot),
+            user_is_premium=self.user_is_premium
+            if user_is_premium is ...
+            else prefer(user_is_premium(self.user_is_premium), self.user_is_premium),
         )
 
     def copy_with(
-        self: Any,
-        request_id: int | None = None,
-        user_is_bot: bool | None = None,
-        user_is_premium: bool | None = None,
+        self,
+        request_id: int | EllipsisType = ...,
+        user_is_bot: bool | None | EllipsisType = ...,
+        user_is_premium: bool | None | EllipsisType = ...,
     ) -> KeyboardButtonRequestUser:
         """Replaces some of model's fields with provided ones"""
         return KeyboardButtonRequestUser(
-            request_id=request_id if request_id is not None else self.request_id,
-            user_is_bot=user_is_bot if user_is_bot is not None else self.user_is_bot,
+            request_id=request_id if request_id is not ... else self.request_id,
+            user_is_bot=user_is_bot if user_is_bot is not ... else self.user_is_bot,
             user_is_premium=user_is_premium
-            if user_is_premium is not None
+            if user_is_premium is not ...
             else self.user_is_premium,
         )
 
@@ -4777,135 +3414,88 @@ class KeyboardButtonRequestChat:
     """Optional. Pass True to request a chat with the bot as a member. Otherwise, no additional restrictions are applied. """
 
     def alter(
-        self: Any,
-        request_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        chat_is_channel: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        chat_is_forum: Callable[[bool | None], bool | None | EllipsisType]
+        self,
+        request_id: AlterFn[int] | EllipsisType = ...,
+        chat_is_channel: AlterFn[bool] | EllipsisType = ...,
+        chat_is_forum: AlterFn[bool | None] | EllipsisType = ...,
+        chat_has_username: AlterFn[bool | None] | EllipsisType = ...,
+        chat_is_created: AlterFn[bool | None] | EllipsisType = ...,
+        user_administrator_rights: AlterFn[ChatAdministratorRights | None]
         | EllipsisType = ...,
-        chat_has_username: Callable[[bool | None], bool | None | EllipsisType]
+        bot_administrator_rights: AlterFn[ChatAdministratorRights | None]
         | EllipsisType = ...,
-        chat_is_created: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        user_administrator_rights: Callable[
-            [ChatAdministratorRights | None],
-            ChatAdministratorRights | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        bot_administrator_rights: Callable[
-            [ChatAdministratorRights | None],
-            ChatAdministratorRights | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        bot_is_member: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        bot_is_member: AlterFn[bool | None] | EllipsisType = ...,
     ) -> KeyboardButtonRequestChat:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonRequestChat(
-            request_id=(
-                _request_id
-                if (_request_id := request_id(self.request_id)) is not ...
-                else self.request_id
-            )
-            if request_id is not ...
-            else self.request_id,
-            chat_is_channel=(
-                _chat_is_channel
-                if (_chat_is_channel := chat_is_channel(self.chat_is_channel))
-                is not ...
-                else self.chat_is_channel
-            )
-            if chat_is_channel is not ...
-            else self.chat_is_channel,
-            chat_is_forum=(
-                _chat_is_forum
-                if (_chat_is_forum := chat_is_forum(self.chat_is_forum)) is not ...
-                else self.chat_is_forum
-            )
-            if chat_is_forum is not ...
-            else self.chat_is_forum,
-            chat_has_username=(
-                _chat_has_username
-                if (_chat_has_username := chat_has_username(self.chat_has_username))
-                is not ...
-                else self.chat_has_username
-            )
-            if chat_has_username is not ...
-            else self.chat_has_username,
-            chat_is_created=(
-                _chat_is_created
-                if (_chat_is_created := chat_is_created(self.chat_is_created))
-                is not ...
-                else self.chat_is_created
-            )
-            if chat_is_created is not ...
-            else self.chat_is_created,
-            user_administrator_rights=(
-                _user_administrator_rights
-                if (
-                    _user_administrator_rights := user_administrator_rights(
-                        self.user_administrator_rights
-                    )
-                )
-                is not ...
-                else self.user_administrator_rights
-            )
-            if user_administrator_rights is not ...
-            else self.user_administrator_rights,
-            bot_administrator_rights=(
-                _bot_administrator_rights
-                if (
-                    _bot_administrator_rights := bot_administrator_rights(
-                        self.bot_administrator_rights
-                    )
-                )
-                is not ...
-                else self.bot_administrator_rights
-            )
-            if bot_administrator_rights is not ...
-            else self.bot_administrator_rights,
-            bot_is_member=(
-                _bot_is_member
-                if (_bot_is_member := bot_is_member(self.bot_is_member)) is not ...
-                else self.bot_is_member
-            )
-            if bot_is_member is not ...
-            else self.bot_is_member,
+            request_id=self.request_id
+            if request_id is ...
+            else prefer(request_id(self.request_id), self.request_id),
+            chat_is_channel=self.chat_is_channel
+            if chat_is_channel is ...
+            else prefer(chat_is_channel(self.chat_is_channel), self.chat_is_channel),
+            chat_is_forum=self.chat_is_forum
+            if chat_is_forum is ...
+            else prefer(chat_is_forum(self.chat_is_forum), self.chat_is_forum),
+            chat_has_username=self.chat_has_username
+            if chat_has_username is ...
+            else prefer(
+                chat_has_username(self.chat_has_username), self.chat_has_username
+            ),
+            chat_is_created=self.chat_is_created
+            if chat_is_created is ...
+            else prefer(chat_is_created(self.chat_is_created), self.chat_is_created),
+            user_administrator_rights=self.user_administrator_rights
+            if user_administrator_rights is ...
+            else prefer(
+                user_administrator_rights(self.user_administrator_rights),
+                self.user_administrator_rights,
+            ),
+            bot_administrator_rights=self.bot_administrator_rights
+            if bot_administrator_rights is ...
+            else prefer(
+                bot_administrator_rights(self.bot_administrator_rights),
+                self.bot_administrator_rights,
+            ),
+            bot_is_member=self.bot_is_member
+            if bot_is_member is ...
+            else prefer(bot_is_member(self.bot_is_member), self.bot_is_member),
         )
 
     def copy_with(
-        self: Any,
-        request_id: int | None = None,
-        chat_is_channel: bool | None = None,
-        chat_is_forum: bool | None = None,
-        chat_has_username: bool | None = None,
-        chat_is_created: bool | None = None,
-        user_administrator_rights: ChatAdministratorRights | None = None,
-        bot_administrator_rights: ChatAdministratorRights | None = None,
-        bot_is_member: bool | None = None,
+        self,
+        request_id: int | EllipsisType = ...,
+        chat_is_channel: bool | EllipsisType = ...,
+        chat_is_forum: bool | None | EllipsisType = ...,
+        chat_has_username: bool | None | EllipsisType = ...,
+        chat_is_created: bool | None | EllipsisType = ...,
+        user_administrator_rights: ChatAdministratorRights | None | EllipsisType = ...,
+        bot_administrator_rights: ChatAdministratorRights | None | EllipsisType = ...,
+        bot_is_member: bool | None | EllipsisType = ...,
     ) -> KeyboardButtonRequestChat:
         """Replaces some of model's fields with provided ones"""
         return KeyboardButtonRequestChat(
-            request_id=request_id if request_id is not None else self.request_id,
+            request_id=request_id if request_id is not ... else self.request_id,
             chat_is_channel=chat_is_channel
-            if chat_is_channel is not None
+            if chat_is_channel is not ...
             else self.chat_is_channel,
             chat_is_forum=chat_is_forum
-            if chat_is_forum is not None
+            if chat_is_forum is not ...
             else self.chat_is_forum,
             chat_has_username=chat_has_username
-            if chat_has_username is not None
+            if chat_has_username is not ...
             else self.chat_has_username,
             chat_is_created=chat_is_created
-            if chat_is_created is not None
+            if chat_is_created is not ...
             else self.chat_is_created,
             user_administrator_rights=user_administrator_rights
-            if user_administrator_rights is not None
+            if user_administrator_rights is not ...
             else self.user_administrator_rights,
             bot_administrator_rights=bot_administrator_rights
-            if bot_administrator_rights is not None
+            if bot_administrator_rights is not ...
             else self.bot_administrator_rights,
             bot_is_member=bot_is_member
-            if bot_is_member is not None
+            if bot_is_member is not ...
             else self.bot_is_member,
         )
 
@@ -4918,22 +3508,20 @@ class KeyboardButtonPollType:
     """Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type. """
 
     def alter(
-        self: Any,
-        type: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str | None] | EllipsisType = ...,
     ) -> KeyboardButtonPollType:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonPollType(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | None | EllipsisType = ...,
     ) -> KeyboardButtonPollType:
         """Replaces some of model's fields with provided ones"""
-        return KeyboardButtonPollType(type=type if type is not None else self.type)
+        return KeyboardButtonPollType(type=type if type is not ... else self.type)
 
 
 @dataclass(frozen=False, slots=True)
@@ -4946,41 +3534,31 @@ class ReplyKeyboardRemove:
     """Optional. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. Example: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet. """
 
     def alter(
-        self: Any,
-        remove_keyboard: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        selective: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        remove_keyboard: AlterFn[bool] | EllipsisType = ...,
+        selective: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ReplyKeyboardRemove:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ReplyKeyboardRemove(
-            remove_keyboard=(
-                _remove_keyboard
-                if (_remove_keyboard := remove_keyboard(self.remove_keyboard))
-                is not ...
-                else self.remove_keyboard
-            )
-            if remove_keyboard is not ...
-            else self.remove_keyboard,
-            selective=(
-                _selective
-                if (_selective := selective(self.selective)) is not ...
-                else self.selective
-            )
-            if selective is not ...
-            else self.selective,
+            remove_keyboard=self.remove_keyboard
+            if remove_keyboard is ...
+            else prefer(remove_keyboard(self.remove_keyboard), self.remove_keyboard),
+            selective=self.selective
+            if selective is ...
+            else prefer(selective(self.selective), self.selective),
         )
 
     def copy_with(
-        self: Any,
-        remove_keyboard: bool | None = None,
-        selective: bool | None = None,
+        self,
+        remove_keyboard: bool | EllipsisType = ...,
+        selective: bool | None | EllipsisType = ...,
     ) -> ReplyKeyboardRemove:
         """Replaces some of model's fields with provided ones"""
         return ReplyKeyboardRemove(
             remove_keyboard=remove_keyboard
-            if remove_keyboard is not None
+            if remove_keyboard is not ...
             else self.remove_keyboard,
-            selective=selective if selective is not None else self.selective,
+            selective=selective if selective is not ... else self.selective,
         )
 
 
@@ -4994,33 +3572,24 @@ class InlineKeyboardMarkup:
     """Array of button rows, each represented by an Array of InlineKeyboardButton objects """
 
     def alter(
-        self: Any,
-        inline_keyboard: Callable[
-            [list[list[InlineKeyboardButton]]],
-            list[list[InlineKeyboardButton]] | EllipsisType,
-        ]
-        | EllipsisType = ...,
+        self,
+        inline_keyboard: AlterFn[list[list[InlineKeyboardButton]]] | EllipsisType = ...,
     ) -> InlineKeyboardMarkup:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineKeyboardMarkup(
-            inline_keyboard=(
-                _inline_keyboard
-                if (_inline_keyboard := inline_keyboard(self.inline_keyboard))
-                is not ...
-                else self.inline_keyboard
-            )
-            if inline_keyboard is not ...
-            else self.inline_keyboard
+            inline_keyboard=self.inline_keyboard
+            if inline_keyboard is ...
+            else prefer(inline_keyboard(self.inline_keyboard), self.inline_keyboard)
         )
 
     def copy_with(
-        self: Any,
-        inline_keyboard: list[list[InlineKeyboardButton]] | None = None,
+        self,
+        inline_keyboard: list[list[InlineKeyboardButton]] | EllipsisType = ...,
     ) -> InlineKeyboardMarkup:
         """Replaces some of model's fields with provided ones"""
         return InlineKeyboardMarkup(
             inline_keyboard=inline_keyboard
-            if inline_keyboard is not None
+            if inline_keyboard is not ...
             else self.inline_keyboard
         )
 
@@ -5051,144 +3620,92 @@ class InlineKeyboardButton:
     """Optional. Specify True, to send a Pay button. NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages. """
 
     def alter(
-        self: Any,
-        text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        url: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        callback_data: Callable[[str | None], str | None | EllipsisType]
+        self,
+        text: AlterFn[str] | EllipsisType = ...,
+        url: AlterFn[str | None] | EllipsisType = ...,
+        callback_data: AlterFn[str | None] | EllipsisType = ...,
+        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
+        login_url: AlterFn[LoginUrl | None] | EllipsisType = ...,
+        switch_inline_query: AlterFn[str | None] | EllipsisType = ...,
+        switch_inline_query_current_chat: AlterFn[str | None] | EllipsisType = ...,
+        switch_inline_query_chosen_chat: AlterFn[SwitchInlineQueryChosenChat | None]
         | EllipsisType = ...,
-        web_app: Callable[[WebAppInfo | None], WebAppInfo | None | EllipsisType]
-        | EllipsisType = ...,
-        login_url: Callable[[LoginUrl | None], LoginUrl | None | EllipsisType]
-        | EllipsisType = ...,
-        switch_inline_query: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        switch_inline_query_current_chat: Callable[
-            [str | None], str | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        switch_inline_query_chosen_chat: Callable[
-            [SwitchInlineQueryChosenChat | None],
-            SwitchInlineQueryChosenChat | None | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        callback_game: Callable[
-            [CallbackGame | None], CallbackGame | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        pay: Callable[[bool | None], bool | None | EllipsisType] | EllipsisType = ...,
+        callback_game: AlterFn[CallbackGame | None] | EllipsisType = ...,
+        pay: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InlineKeyboardButton:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineKeyboardButton(
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url,
-            callback_data=(
-                _callback_data
-                if (_callback_data := callback_data(self.callback_data)) is not ...
-                else self.callback_data
-            )
-            if callback_data is not ...
-            else self.callback_data,
-            web_app=(
-                _web_app
-                if (_web_app := web_app(self.web_app)) is not ...
-                else self.web_app
-            )
-            if web_app is not ...
-            else self.web_app,
-            login_url=(
-                _login_url
-                if (_login_url := login_url(self.login_url)) is not ...
-                else self.login_url
-            )
-            if login_url is not ...
-            else self.login_url,
-            switch_inline_query=(
-                _switch_inline_query
-                if (
-                    _switch_inline_query := switch_inline_query(
-                        self.switch_inline_query
-                    )
-                )
-                is not ...
-                else self.switch_inline_query
-            )
-            if switch_inline_query is not ...
-            else self.switch_inline_query,
-            switch_inline_query_current_chat=(
-                _switch_inline_query_current_chat
-                if (
-                    _switch_inline_query_current_chat := switch_inline_query_current_chat(
-                        self.switch_inline_query_current_chat
-                    )
-                )
-                is not ...
-                else self.switch_inline_query_current_chat
-            )
-            if switch_inline_query_current_chat is not ...
-            else self.switch_inline_query_current_chat,
-            switch_inline_query_chosen_chat=(
-                _switch_inline_query_chosen_chat
-                if (
-                    _switch_inline_query_chosen_chat := switch_inline_query_chosen_chat(
-                        self.switch_inline_query_chosen_chat
-                    )
-                )
-                is not ...
-                else self.switch_inline_query_chosen_chat
-            )
-            if switch_inline_query_chosen_chat is not ...
-            else self.switch_inline_query_chosen_chat,
-            callback_game=(
-                _callback_game
-                if (_callback_game := callback_game(self.callback_game)) is not ...
-                else self.callback_game
-            )
-            if callback_game is not ...
-            else self.callback_game,
-            pay=(_pay if (_pay := pay(self.pay)) is not ... else self.pay)
-            if pay is not ...
-            else self.pay,
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            url=self.url if url is ... else prefer(url(self.url), self.url),
+            callback_data=self.callback_data
+            if callback_data is ...
+            else prefer(callback_data(self.callback_data), self.callback_data),
+            web_app=self.web_app
+            if web_app is ...
+            else prefer(web_app(self.web_app), self.web_app),
+            login_url=self.login_url
+            if login_url is ...
+            else prefer(login_url(self.login_url), self.login_url),
+            switch_inline_query=self.switch_inline_query
+            if switch_inline_query is ...
+            else prefer(
+                switch_inline_query(self.switch_inline_query), self.switch_inline_query
+            ),
+            switch_inline_query_current_chat=self.switch_inline_query_current_chat
+            if switch_inline_query_current_chat is ...
+            else prefer(
+                switch_inline_query_current_chat(self.switch_inline_query_current_chat),
+                self.switch_inline_query_current_chat,
+            ),
+            switch_inline_query_chosen_chat=self.switch_inline_query_chosen_chat
+            if switch_inline_query_chosen_chat is ...
+            else prefer(
+                switch_inline_query_chosen_chat(self.switch_inline_query_chosen_chat),
+                self.switch_inline_query_chosen_chat,
+            ),
+            callback_game=self.callback_game
+            if callback_game is ...
+            else prefer(callback_game(self.callback_game), self.callback_game),
+            pay=self.pay if pay is ... else prefer(pay(self.pay), self.pay),
         )
 
     def copy_with(
-        self: Any,
-        text: str | None = None,
-        url: str | None = None,
-        callback_data: str | None = None,
-        web_app: WebAppInfo | None = None,
-        login_url: LoginUrl | None = None,
-        switch_inline_query: str | None = None,
-        switch_inline_query_current_chat: str | None = None,
-        switch_inline_query_chosen_chat: SwitchInlineQueryChosenChat | None = None,
-        callback_game: CallbackGame | None = None,
-        pay: bool | None = None,
+        self,
+        text: str | EllipsisType = ...,
+        url: str | None | EllipsisType = ...,
+        callback_data: str | None | EllipsisType = ...,
+        web_app: WebAppInfo | None | EllipsisType = ...,
+        login_url: LoginUrl | None | EllipsisType = ...,
+        switch_inline_query: str | None | EllipsisType = ...,
+        switch_inline_query_current_chat: str | None | EllipsisType = ...,
+        switch_inline_query_chosen_chat: SwitchInlineQueryChosenChat
+        | None
+        | EllipsisType = ...,
+        callback_game: CallbackGame | None | EllipsisType = ...,
+        pay: bool | None | EllipsisType = ...,
     ) -> InlineKeyboardButton:
         """Replaces some of model's fields with provided ones"""
         return InlineKeyboardButton(
-            text=text if text is not None else self.text,
-            url=url if url is not None else self.url,
+            text=text if text is not ... else self.text,
+            url=url if url is not ... else self.url,
             callback_data=callback_data
-            if callback_data is not None
+            if callback_data is not ...
             else self.callback_data,
-            web_app=web_app if web_app is not None else self.web_app,
-            login_url=login_url if login_url is not None else self.login_url,
+            web_app=web_app if web_app is not ... else self.web_app,
+            login_url=login_url if login_url is not ... else self.login_url,
             switch_inline_query=switch_inline_query
-            if switch_inline_query is not None
+            if switch_inline_query is not ...
             else self.switch_inline_query,
             switch_inline_query_current_chat=switch_inline_query_current_chat
-            if switch_inline_query_current_chat is not None
+            if switch_inline_query_current_chat is not ...
             else self.switch_inline_query_current_chat,
             switch_inline_query_chosen_chat=switch_inline_query_chosen_chat
-            if switch_inline_query_chosen_chat is not None
+            if switch_inline_query_chosen_chat is not ...
             else self.switch_inline_query_chosen_chat,
             callback_game=callback_game
-            if callback_game is not None
+            if callback_game is not ...
             else self.callback_game,
-            pay=pay if pay is not None else self.pay,
+            pay=pay if pay is not ... else self.pay,
         )
 
 
@@ -5207,66 +3724,43 @@ class LoginUrl:
     """Optional. Pass True to request the permission for your bot to send messages to the user. """
 
     def alter(
-        self: Any,
-        url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        forward_text: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        bot_username: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        request_write_access: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        url: AlterFn[str] | EllipsisType = ...,
+        forward_text: AlterFn[str | None] | EllipsisType = ...,
+        bot_username: AlterFn[str | None] | EllipsisType = ...,
+        request_write_access: AlterFn[bool | None] | EllipsisType = ...,
     ) -> LoginUrl:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return LoginUrl(
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url,
-            forward_text=(
-                _forward_text
-                if (_forward_text := forward_text(self.forward_text)) is not ...
-                else self.forward_text
-            )
-            if forward_text is not ...
-            else self.forward_text,
-            bot_username=(
-                _bot_username
-                if (_bot_username := bot_username(self.bot_username)) is not ...
-                else self.bot_username
-            )
-            if bot_username is not ...
-            else self.bot_username,
-            request_write_access=(
-                _request_write_access
-                if (
-                    _request_write_access := request_write_access(
-                        self.request_write_access
-                    )
-                )
-                is not ...
-                else self.request_write_access
-            )
-            if request_write_access is not ...
-            else self.request_write_access,
+            url=self.url if url is ... else prefer(url(self.url), self.url),
+            forward_text=self.forward_text
+            if forward_text is ...
+            else prefer(forward_text(self.forward_text), self.forward_text),
+            bot_username=self.bot_username
+            if bot_username is ...
+            else prefer(bot_username(self.bot_username), self.bot_username),
+            request_write_access=self.request_write_access
+            if request_write_access is ...
+            else prefer(
+                request_write_access(self.request_write_access),
+                self.request_write_access,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        url: str | None = None,
-        forward_text: str | None = None,
-        bot_username: str | None = None,
-        request_write_access: bool | None = None,
+        self,
+        url: str | EllipsisType = ...,
+        forward_text: str | None | EllipsisType = ...,
+        bot_username: str | None | EllipsisType = ...,
+        request_write_access: bool | None | EllipsisType = ...,
     ) -> LoginUrl:
         """Replaces some of model's fields with provided ones"""
         return LoginUrl(
-            url=url if url is not None else self.url,
-            forward_text=forward_text
-            if forward_text is not None
-            else self.forward_text,
-            bot_username=bot_username
-            if bot_username is not None
-            else self.bot_username,
+            url=url if url is not ... else self.url,
+            forward_text=forward_text if forward_text is not ... else self.forward_text,
+            bot_username=bot_username if bot_username is not ... else self.bot_username,
             request_write_access=request_write_access
-            if request_write_access is not None
+            if request_write_access is not ...
             else self.request_write_access,
         )
 
@@ -5287,82 +3781,56 @@ class SwitchInlineQueryChosenChat:
     """Optional. True, if channel chats can be chosen """
 
     def alter(
-        self: Any,
-        query: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        allow_user_chats: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        allow_bot_chats: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        allow_group_chats: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        allow_channel_chats: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        query: AlterFn[str | None] | EllipsisType = ...,
+        allow_user_chats: AlterFn[bool | None] | EllipsisType = ...,
+        allow_bot_chats: AlterFn[bool | None] | EllipsisType = ...,
+        allow_group_chats: AlterFn[bool | None] | EllipsisType = ...,
+        allow_channel_chats: AlterFn[bool | None] | EllipsisType = ...,
     ) -> SwitchInlineQueryChosenChat:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SwitchInlineQueryChosenChat(
-            query=(_query if (_query := query(self.query)) is not ... else self.query)
-            if query is not ...
-            else self.query,
-            allow_user_chats=(
-                _allow_user_chats
-                if (_allow_user_chats := allow_user_chats(self.allow_user_chats))
-                is not ...
-                else self.allow_user_chats
-            )
-            if allow_user_chats is not ...
-            else self.allow_user_chats,
-            allow_bot_chats=(
-                _allow_bot_chats
-                if (_allow_bot_chats := allow_bot_chats(self.allow_bot_chats))
-                is not ...
-                else self.allow_bot_chats
-            )
-            if allow_bot_chats is not ...
-            else self.allow_bot_chats,
-            allow_group_chats=(
-                _allow_group_chats
-                if (_allow_group_chats := allow_group_chats(self.allow_group_chats))
-                is not ...
-                else self.allow_group_chats
-            )
-            if allow_group_chats is not ...
-            else self.allow_group_chats,
-            allow_channel_chats=(
-                _allow_channel_chats
-                if (
-                    _allow_channel_chats := allow_channel_chats(
-                        self.allow_channel_chats
-                    )
-                )
-                is not ...
-                else self.allow_channel_chats
-            )
-            if allow_channel_chats is not ...
-            else self.allow_channel_chats,
+            query=self.query if query is ... else prefer(query(self.query), self.query),
+            allow_user_chats=self.allow_user_chats
+            if allow_user_chats is ...
+            else prefer(allow_user_chats(self.allow_user_chats), self.allow_user_chats),
+            allow_bot_chats=self.allow_bot_chats
+            if allow_bot_chats is ...
+            else prefer(allow_bot_chats(self.allow_bot_chats), self.allow_bot_chats),
+            allow_group_chats=self.allow_group_chats
+            if allow_group_chats is ...
+            else prefer(
+                allow_group_chats(self.allow_group_chats), self.allow_group_chats
+            ),
+            allow_channel_chats=self.allow_channel_chats
+            if allow_channel_chats is ...
+            else prefer(
+                allow_channel_chats(self.allow_channel_chats), self.allow_channel_chats
+            ),
         )
 
     def copy_with(
-        self: Any,
-        query: str | None = None,
-        allow_user_chats: bool | None = None,
-        allow_bot_chats: bool | None = None,
-        allow_group_chats: bool | None = None,
-        allow_channel_chats: bool | None = None,
+        self,
+        query: str | None | EllipsisType = ...,
+        allow_user_chats: bool | None | EllipsisType = ...,
+        allow_bot_chats: bool | None | EllipsisType = ...,
+        allow_group_chats: bool | None | EllipsisType = ...,
+        allow_channel_chats: bool | None | EllipsisType = ...,
     ) -> SwitchInlineQueryChosenChat:
         """Replaces some of model's fields with provided ones"""
         return SwitchInlineQueryChosenChat(
-            query=query if query is not None else self.query,
+            query=query if query is not ... else self.query,
             allow_user_chats=allow_user_chats
-            if allow_user_chats is not None
+            if allow_user_chats is not ...
             else self.allow_user_chats,
             allow_bot_chats=allow_bot_chats
-            if allow_bot_chats is not None
+            if allow_bot_chats is not ...
             else self.allow_bot_chats,
             allow_group_chats=allow_group_chats
-            if allow_group_chats is not None
+            if allow_group_chats is not ...
             else self.allow_group_chats,
             allow_channel_chats=allow_channel_chats
-            if allow_channel_chats is not None
+            if allow_channel_chats is not ...
             else self.allow_channel_chats,
         )
 
@@ -5387,85 +3855,60 @@ class CallbackQuery:
     """Optional. Short name of a Game to be returned, serves as the unique identifier for the game """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        message: Callable[[Message | None], Message | None | EllipsisType]
-        | EllipsisType = ...,
-        inline_message_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        chat_instance: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        data: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        game_short_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        message: AlterFn[Message | None] | EllipsisType = ...,
+        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
+        chat_instance: AlterFn[str] | EllipsisType = ...,
+        data: AlterFn[str | None] | EllipsisType = ...,
+        game_short_name: AlterFn[str | None] | EllipsisType = ...,
     ) -> CallbackQuery:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return CallbackQuery(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
-            inline_message_id=(
-                _inline_message_id
-                if (_inline_message_id := inline_message_id(self.inline_message_id))
-                is not ...
-                else self.inline_message_id
-            )
-            if inline_message_id is not ...
-            else self.inline_message_id,
-            chat_instance=(
-                _chat_instance
-                if (_chat_instance := chat_instance(self.chat_instance)) is not ...
-                else self.chat_instance
-            )
-            if chat_instance is not ...
-            else self.chat_instance,
-            data=(_data if (_data := data(self.data)) is not ... else self.data)
-            if data is not ...
-            else self.data,
-            game_short_name=(
-                _game_short_name
-                if (_game_short_name := game_short_name(self.game_short_name))
-                is not ...
-                else self.game_short_name
-            )
-            if game_short_name is not ...
-            else self.game_short_name,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
+            inline_message_id=self.inline_message_id
+            if inline_message_id is ...
+            else prefer(
+                inline_message_id(self.inline_message_id), self.inline_message_id
+            ),
+            chat_instance=self.chat_instance
+            if chat_instance is ...
+            else prefer(chat_instance(self.chat_instance), self.chat_instance),
+            data=self.data if data is ... else prefer(data(self.data), self.data),
+            game_short_name=self.game_short_name
+            if game_short_name is ...
+            else prefer(game_short_name(self.game_short_name), self.game_short_name),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        from_: User | None = None,
-        message: Message | None = None,
-        inline_message_id: str | None = None,
-        chat_instance: str | None = None,
-        data: str | None = None,
-        game_short_name: str | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        message: Message | None | EllipsisType = ...,
+        inline_message_id: str | None | EllipsisType = ...,
+        chat_instance: str | EllipsisType = ...,
+        data: str | None | EllipsisType = ...,
+        game_short_name: str | None | EllipsisType = ...,
     ) -> CallbackQuery:
         """Replaces some of model's fields with provided ones"""
         return CallbackQuery(
-            id=id if id is not None else self.id,
-            from_=from_ if from_ is not None else self.from_,
-            message=message if message is not None else self.message,
+            id=id if id is not ... else self.id,
+            from_=from_ if from_ is not ... else self.from_,
+            message=message if message is not ... else self.message,
             inline_message_id=inline_message_id
-            if inline_message_id is not None
+            if inline_message_id is not ...
             else self.inline_message_id,
             chat_instance=chat_instance
-            if chat_instance is not None
+            if chat_instance is not ...
             else self.chat_instance,
-            data=data if data is not None else self.data,
+            data=data if data is not ... else self.data,
             game_short_name=game_short_name
-            if game_short_name is not None
+            if game_short_name is not ...
             else self.game_short_name,
         )
 
@@ -5482,56 +3925,40 @@ class ForceReply:
     """Optional. Use this parameter if you want to force reply from specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. """
 
     def alter(
-        self: Any,
-        force_reply: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        input_field_placeholder: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        selective: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        force_reply: AlterFn[bool] | EllipsisType = ...,
+        input_field_placeholder: AlterFn[str | None] | EllipsisType = ...,
+        selective: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ForceReply:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForceReply(
-            force_reply=(
-                _force_reply
-                if (_force_reply := force_reply(self.force_reply)) is not ...
-                else self.force_reply
-            )
-            if force_reply is not ...
-            else self.force_reply,
-            input_field_placeholder=(
-                _input_field_placeholder
-                if (
-                    _input_field_placeholder := input_field_placeholder(
-                        self.input_field_placeholder
-                    )
-                )
-                is not ...
-                else self.input_field_placeholder
-            )
-            if input_field_placeholder is not ...
-            else self.input_field_placeholder,
-            selective=(
-                _selective
-                if (_selective := selective(self.selective)) is not ...
-                else self.selective
-            )
-            if selective is not ...
-            else self.selective,
+            force_reply=self.force_reply
+            if force_reply is ...
+            else prefer(force_reply(self.force_reply), self.force_reply),
+            input_field_placeholder=self.input_field_placeholder
+            if input_field_placeholder is ...
+            else prefer(
+                input_field_placeholder(self.input_field_placeholder),
+                self.input_field_placeholder,
+            ),
+            selective=self.selective
+            if selective is ...
+            else prefer(selective(self.selective), self.selective),
         )
 
     def copy_with(
-        self: Any,
-        force_reply: bool | None = None,
-        input_field_placeholder: str | None = None,
-        selective: bool | None = None,
+        self,
+        force_reply: bool | EllipsisType = ...,
+        input_field_placeholder: str | None | EllipsisType = ...,
+        selective: bool | None | EllipsisType = ...,
     ) -> ForceReply:
         """Replaces some of model's fields with provided ones"""
         return ForceReply(
-            force_reply=force_reply if force_reply is not None else self.force_reply,
+            force_reply=force_reply if force_reply is not ... else self.force_reply,
             input_field_placeholder=input_field_placeholder
-            if input_field_placeholder is not None
+            if input_field_placeholder is not ...
             else self.input_field_placeholder,
-            selective=selective if selective is not None else self.selective,
+            selective=selective if selective is not ... else self.selective,
         )
 
 
@@ -5549,68 +3976,51 @@ class ChatPhoto:
     """Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
 
     def alter(
-        self: Any,
-        small_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        small_file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        big_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        big_file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        small_file_id: AlterFn[str] | EllipsisType = ...,
+        small_file_unique_id: AlterFn[str] | EllipsisType = ...,
+        big_file_id: AlterFn[str] | EllipsisType = ...,
+        big_file_unique_id: AlterFn[str] | EllipsisType = ...,
     ) -> ChatPhoto:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatPhoto(
-            small_file_id=(
-                _small_file_id
-                if (_small_file_id := small_file_id(self.small_file_id)) is not ...
-                else self.small_file_id
-            )
-            if small_file_id is not ...
-            else self.small_file_id,
-            small_file_unique_id=(
-                _small_file_unique_id
-                if (
-                    _small_file_unique_id := small_file_unique_id(
-                        self.small_file_unique_id
-                    )
-                )
-                is not ...
-                else self.small_file_unique_id
-            )
-            if small_file_unique_id is not ...
-            else self.small_file_unique_id,
-            big_file_id=(
-                _big_file_id
-                if (_big_file_id := big_file_id(self.big_file_id)) is not ...
-                else self.big_file_id
-            )
-            if big_file_id is not ...
-            else self.big_file_id,
-            big_file_unique_id=(
-                _big_file_unique_id
-                if (_big_file_unique_id := big_file_unique_id(self.big_file_unique_id))
-                is not ...
-                else self.big_file_unique_id
-            )
-            if big_file_unique_id is not ...
-            else self.big_file_unique_id,
+            small_file_id=self.small_file_id
+            if small_file_id is ...
+            else prefer(small_file_id(self.small_file_id), self.small_file_id),
+            small_file_unique_id=self.small_file_unique_id
+            if small_file_unique_id is ...
+            else prefer(
+                small_file_unique_id(self.small_file_unique_id),
+                self.small_file_unique_id,
+            ),
+            big_file_id=self.big_file_id
+            if big_file_id is ...
+            else prefer(big_file_id(self.big_file_id), self.big_file_id),
+            big_file_unique_id=self.big_file_unique_id
+            if big_file_unique_id is ...
+            else prefer(
+                big_file_unique_id(self.big_file_unique_id), self.big_file_unique_id
+            ),
         )
 
     def copy_with(
-        self: Any,
-        small_file_id: str | None = None,
-        small_file_unique_id: str | None = None,
-        big_file_id: str | None = None,
-        big_file_unique_id: str | None = None,
+        self,
+        small_file_id: str | EllipsisType = ...,
+        small_file_unique_id: str | EllipsisType = ...,
+        big_file_id: str | EllipsisType = ...,
+        big_file_unique_id: str | EllipsisType = ...,
     ) -> ChatPhoto:
         """Replaces some of model's fields with provided ones"""
         return ChatPhoto(
             small_file_id=small_file_id
-            if small_file_id is not None
+            if small_file_id is not ...
             else self.small_file_id,
             small_file_unique_id=small_file_unique_id
-            if small_file_unique_id is not None
+            if small_file_unique_id is not ...
             else self.small_file_unique_id,
-            big_file_id=big_file_id if big_file_id is not None else self.big_file_id,
+            big_file_id=big_file_id if big_file_id is not ... else self.big_file_id,
             big_file_unique_id=big_file_unique_id
-            if big_file_unique_id is not None
+            if big_file_unique_id is not ...
             else self.big_file_unique_id,
         )
 
@@ -5639,122 +4049,78 @@ class ChatInviteLink:
     """Optional. Number of pending join requests created using this link """
 
     def alter(
-        self: Any,
-        invite_link: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        creator: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        creates_join_request: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        is_primary: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        is_revoked: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        name: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        expire_date: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        member_limit: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        pending_join_request_count: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        invite_link: AlterFn[str] | EllipsisType = ...,
+        creator: AlterFn[User] | EllipsisType = ...,
+        creates_join_request: AlterFn[bool] | EllipsisType = ...,
+        is_primary: AlterFn[bool] | EllipsisType = ...,
+        is_revoked: AlterFn[bool] | EllipsisType = ...,
+        name: AlterFn[str | None] | EllipsisType = ...,
+        expire_date: AlterFn[int | None] | EllipsisType = ...,
+        member_limit: AlterFn[int | None] | EllipsisType = ...,
+        pending_join_request_count: AlterFn[int | None] | EllipsisType = ...,
     ) -> ChatInviteLink:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatInviteLink(
-            invite_link=(
-                _invite_link
-                if (_invite_link := invite_link(self.invite_link)) is not ...
-                else self.invite_link
-            )
-            if invite_link is not ...
-            else self.invite_link,
-            creator=(
-                _creator
-                if (_creator := creator(self.creator)) is not ...
-                else self.creator
-            )
-            if creator is not ...
-            else self.creator,
-            creates_join_request=(
-                _creates_join_request
-                if (
-                    _creates_join_request := creates_join_request(
-                        self.creates_join_request
-                    )
-                )
-                is not ...
-                else self.creates_join_request
-            )
-            if creates_join_request is not ...
-            else self.creates_join_request,
-            is_primary=(
-                _is_primary
-                if (_is_primary := is_primary(self.is_primary)) is not ...
-                else self.is_primary
-            )
-            if is_primary is not ...
-            else self.is_primary,
-            is_revoked=(
-                _is_revoked
-                if (_is_revoked := is_revoked(self.is_revoked)) is not ...
-                else self.is_revoked
-            )
-            if is_revoked is not ...
-            else self.is_revoked,
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            expire_date=(
-                _expire_date
-                if (_expire_date := expire_date(self.expire_date)) is not ...
-                else self.expire_date
-            )
-            if expire_date is not ...
-            else self.expire_date,
-            member_limit=(
-                _member_limit
-                if (_member_limit := member_limit(self.member_limit)) is not ...
-                else self.member_limit
-            )
-            if member_limit is not ...
-            else self.member_limit,
-            pending_join_request_count=(
-                _pending_join_request_count
-                if (
-                    _pending_join_request_count := pending_join_request_count(
-                        self.pending_join_request_count
-                    )
-                )
-                is not ...
-                else self.pending_join_request_count
-            )
-            if pending_join_request_count is not ...
-            else self.pending_join_request_count,
+            invite_link=self.invite_link
+            if invite_link is ...
+            else prefer(invite_link(self.invite_link), self.invite_link),
+            creator=self.creator
+            if creator is ...
+            else prefer(creator(self.creator), self.creator),
+            creates_join_request=self.creates_join_request
+            if creates_join_request is ...
+            else prefer(
+                creates_join_request(self.creates_join_request),
+                self.creates_join_request,
+            ),
+            is_primary=self.is_primary
+            if is_primary is ...
+            else prefer(is_primary(self.is_primary), self.is_primary),
+            is_revoked=self.is_revoked
+            if is_revoked is ...
+            else prefer(is_revoked(self.is_revoked), self.is_revoked),
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            expire_date=self.expire_date
+            if expire_date is ...
+            else prefer(expire_date(self.expire_date), self.expire_date),
+            member_limit=self.member_limit
+            if member_limit is ...
+            else prefer(member_limit(self.member_limit), self.member_limit),
+            pending_join_request_count=self.pending_join_request_count
+            if pending_join_request_count is ...
+            else prefer(
+                pending_join_request_count(self.pending_join_request_count),
+                self.pending_join_request_count,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        invite_link: str | None = None,
-        creator: User | None = None,
-        creates_join_request: bool | None = None,
-        is_primary: bool | None = None,
-        is_revoked: bool | None = None,
-        name: str | None = None,
-        expire_date: int | None = None,
-        member_limit: int | None = None,
-        pending_join_request_count: int | None = None,
+        self,
+        invite_link: str | EllipsisType = ...,
+        creator: User | EllipsisType = ...,
+        creates_join_request: bool | EllipsisType = ...,
+        is_primary: bool | EllipsisType = ...,
+        is_revoked: bool | EllipsisType = ...,
+        name: str | None | EllipsisType = ...,
+        expire_date: int | None | EllipsisType = ...,
+        member_limit: int | None | EllipsisType = ...,
+        pending_join_request_count: int | None | EllipsisType = ...,
     ) -> ChatInviteLink:
         """Replaces some of model's fields with provided ones"""
         return ChatInviteLink(
-            invite_link=invite_link if invite_link is not None else self.invite_link,
-            creator=creator if creator is not None else self.creator,
+            invite_link=invite_link if invite_link is not ... else self.invite_link,
+            creator=creator if creator is not ... else self.creator,
             creates_join_request=creates_join_request
-            if creates_join_request is not None
+            if creates_join_request is not ...
             else self.creates_join_request,
-            is_primary=is_primary if is_primary is not None else self.is_primary,
-            is_revoked=is_revoked if is_revoked is not None else self.is_revoked,
-            name=name if name is not None else self.name,
-            expire_date=expire_date if expire_date is not None else self.expire_date,
-            member_limit=member_limit
-            if member_limit is not None
-            else self.member_limit,
+            is_primary=is_primary if is_primary is not ... else self.is_primary,
+            is_revoked=is_revoked if is_revoked is not ... else self.is_revoked,
+            name=name if name is not ... else self.name,
+            expire_date=expire_date if expire_date is not ... else self.expire_date,
+            member_limit=member_limit if member_limit is not ... else self.member_limit,
             pending_join_request_count=pending_join_request_count
-            if pending_join_request_count is not None
+            if pending_join_request_count is not ...
             else self.pending_join_request_count,
         )
 
@@ -5795,235 +4161,152 @@ class ChatAdministratorRights:
     """Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only """
 
     def alter(
-        self: Any,
-        is_anonymous: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_manage_chat: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_delete_messages: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_manage_video_chats: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_restrict_members: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_promote_members: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_change_info: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_invite_users: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_post_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_edit_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_pin_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_post_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_edit_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_delete_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_manage_topics: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        is_anonymous: AlterFn[bool] | EllipsisType = ...,
+        can_manage_chat: AlterFn[bool] | EllipsisType = ...,
+        can_delete_messages: AlterFn[bool] | EllipsisType = ...,
+        can_manage_video_chats: AlterFn[bool] | EllipsisType = ...,
+        can_restrict_members: AlterFn[bool] | EllipsisType = ...,
+        can_promote_members: AlterFn[bool] | EllipsisType = ...,
+        can_change_info: AlterFn[bool] | EllipsisType = ...,
+        can_invite_users: AlterFn[bool] | EllipsisType = ...,
+        can_post_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_edit_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_post_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_edit_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_delete_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ChatAdministratorRights:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatAdministratorRights(
-            is_anonymous=(
-                _is_anonymous
-                if (_is_anonymous := is_anonymous(self.is_anonymous)) is not ...
-                else self.is_anonymous
-            )
-            if is_anonymous is not ...
-            else self.is_anonymous,
-            can_manage_chat=(
-                _can_manage_chat
-                if (_can_manage_chat := can_manage_chat(self.can_manage_chat))
-                is not ...
-                else self.can_manage_chat
-            )
-            if can_manage_chat is not ...
-            else self.can_manage_chat,
-            can_delete_messages=(
-                _can_delete_messages
-                if (
-                    _can_delete_messages := can_delete_messages(
-                        self.can_delete_messages
-                    )
-                )
-                is not ...
-                else self.can_delete_messages
-            )
-            if can_delete_messages is not ...
-            else self.can_delete_messages,
-            can_manage_video_chats=(
-                _can_manage_video_chats
-                if (
-                    _can_manage_video_chats := can_manage_video_chats(
-                        self.can_manage_video_chats
-                    )
-                )
-                is not ...
-                else self.can_manage_video_chats
-            )
-            if can_manage_video_chats is not ...
-            else self.can_manage_video_chats,
-            can_restrict_members=(
-                _can_restrict_members
-                if (
-                    _can_restrict_members := can_restrict_members(
-                        self.can_restrict_members
-                    )
-                )
-                is not ...
-                else self.can_restrict_members
-            )
-            if can_restrict_members is not ...
-            else self.can_restrict_members,
-            can_promote_members=(
-                _can_promote_members
-                if (
-                    _can_promote_members := can_promote_members(
-                        self.can_promote_members
-                    )
-                )
-                is not ...
-                else self.can_promote_members
-            )
-            if can_promote_members is not ...
-            else self.can_promote_members,
-            can_change_info=(
-                _can_change_info
-                if (_can_change_info := can_change_info(self.can_change_info))
-                is not ...
-                else self.can_change_info
-            )
-            if can_change_info is not ...
-            else self.can_change_info,
-            can_invite_users=(
-                _can_invite_users
-                if (_can_invite_users := can_invite_users(self.can_invite_users))
-                is not ...
-                else self.can_invite_users
-            )
-            if can_invite_users is not ...
-            else self.can_invite_users,
-            can_post_messages=(
-                _can_post_messages
-                if (_can_post_messages := can_post_messages(self.can_post_messages))
-                is not ...
-                else self.can_post_messages
-            )
-            if can_post_messages is not ...
-            else self.can_post_messages,
-            can_edit_messages=(
-                _can_edit_messages
-                if (_can_edit_messages := can_edit_messages(self.can_edit_messages))
-                is not ...
-                else self.can_edit_messages
-            )
-            if can_edit_messages is not ...
-            else self.can_edit_messages,
-            can_pin_messages=(
-                _can_pin_messages
-                if (_can_pin_messages := can_pin_messages(self.can_pin_messages))
-                is not ...
-                else self.can_pin_messages
-            )
-            if can_pin_messages is not ...
-            else self.can_pin_messages,
-            can_post_stories=(
-                _can_post_stories
-                if (_can_post_stories := can_post_stories(self.can_post_stories))
-                is not ...
-                else self.can_post_stories
-            )
-            if can_post_stories is not ...
-            else self.can_post_stories,
-            can_edit_stories=(
-                _can_edit_stories
-                if (_can_edit_stories := can_edit_stories(self.can_edit_stories))
-                is not ...
-                else self.can_edit_stories
-            )
-            if can_edit_stories is not ...
-            else self.can_edit_stories,
-            can_delete_stories=(
-                _can_delete_stories
-                if (_can_delete_stories := can_delete_stories(self.can_delete_stories))
-                is not ...
-                else self.can_delete_stories
-            )
-            if can_delete_stories is not ...
-            else self.can_delete_stories,
-            can_manage_topics=(
-                _can_manage_topics
-                if (_can_manage_topics := can_manage_topics(self.can_manage_topics))
-                is not ...
-                else self.can_manage_topics
-            )
-            if can_manage_topics is not ...
-            else self.can_manage_topics,
+            is_anonymous=self.is_anonymous
+            if is_anonymous is ...
+            else prefer(is_anonymous(self.is_anonymous), self.is_anonymous),
+            can_manage_chat=self.can_manage_chat
+            if can_manage_chat is ...
+            else prefer(can_manage_chat(self.can_manage_chat), self.can_manage_chat),
+            can_delete_messages=self.can_delete_messages
+            if can_delete_messages is ...
+            else prefer(
+                can_delete_messages(self.can_delete_messages), self.can_delete_messages
+            ),
+            can_manage_video_chats=self.can_manage_video_chats
+            if can_manage_video_chats is ...
+            else prefer(
+                can_manage_video_chats(self.can_manage_video_chats),
+                self.can_manage_video_chats,
+            ),
+            can_restrict_members=self.can_restrict_members
+            if can_restrict_members is ...
+            else prefer(
+                can_restrict_members(self.can_restrict_members),
+                self.can_restrict_members,
+            ),
+            can_promote_members=self.can_promote_members
+            if can_promote_members is ...
+            else prefer(
+                can_promote_members(self.can_promote_members), self.can_promote_members
+            ),
+            can_change_info=self.can_change_info
+            if can_change_info is ...
+            else prefer(can_change_info(self.can_change_info), self.can_change_info),
+            can_invite_users=self.can_invite_users
+            if can_invite_users is ...
+            else prefer(can_invite_users(self.can_invite_users), self.can_invite_users),
+            can_post_messages=self.can_post_messages
+            if can_post_messages is ...
+            else prefer(
+                can_post_messages(self.can_post_messages), self.can_post_messages
+            ),
+            can_edit_messages=self.can_edit_messages
+            if can_edit_messages is ...
+            else prefer(
+                can_edit_messages(self.can_edit_messages), self.can_edit_messages
+            ),
+            can_pin_messages=self.can_pin_messages
+            if can_pin_messages is ...
+            else prefer(can_pin_messages(self.can_pin_messages), self.can_pin_messages),
+            can_post_stories=self.can_post_stories
+            if can_post_stories is ...
+            else prefer(can_post_stories(self.can_post_stories), self.can_post_stories),
+            can_edit_stories=self.can_edit_stories
+            if can_edit_stories is ...
+            else prefer(can_edit_stories(self.can_edit_stories), self.can_edit_stories),
+            can_delete_stories=self.can_delete_stories
+            if can_delete_stories is ...
+            else prefer(
+                can_delete_stories(self.can_delete_stories), self.can_delete_stories
+            ),
+            can_manage_topics=self.can_manage_topics
+            if can_manage_topics is ...
+            else prefer(
+                can_manage_topics(self.can_manage_topics), self.can_manage_topics
+            ),
         )
 
     def copy_with(
-        self: Any,
-        is_anonymous: bool | None = None,
-        can_manage_chat: bool | None = None,
-        can_delete_messages: bool | None = None,
-        can_manage_video_chats: bool | None = None,
-        can_restrict_members: bool | None = None,
-        can_promote_members: bool | None = None,
-        can_change_info: bool | None = None,
-        can_invite_users: bool | None = None,
-        can_post_messages: bool | None = None,
-        can_edit_messages: bool | None = None,
-        can_pin_messages: bool | None = None,
-        can_post_stories: bool | None = None,
-        can_edit_stories: bool | None = None,
-        can_delete_stories: bool | None = None,
-        can_manage_topics: bool | None = None,
+        self,
+        is_anonymous: bool | EllipsisType = ...,
+        can_manage_chat: bool | EllipsisType = ...,
+        can_delete_messages: bool | EllipsisType = ...,
+        can_manage_video_chats: bool | EllipsisType = ...,
+        can_restrict_members: bool | EllipsisType = ...,
+        can_promote_members: bool | EllipsisType = ...,
+        can_change_info: bool | EllipsisType = ...,
+        can_invite_users: bool | EllipsisType = ...,
+        can_post_messages: bool | None | EllipsisType = ...,
+        can_edit_messages: bool | None | EllipsisType = ...,
+        can_pin_messages: bool | None | EllipsisType = ...,
+        can_post_stories: bool | None | EllipsisType = ...,
+        can_edit_stories: bool | None | EllipsisType = ...,
+        can_delete_stories: bool | None | EllipsisType = ...,
+        can_manage_topics: bool | None | EllipsisType = ...,
     ) -> ChatAdministratorRights:
         """Replaces some of model's fields with provided ones"""
         return ChatAdministratorRights(
-            is_anonymous=is_anonymous
-            if is_anonymous is not None
-            else self.is_anonymous,
+            is_anonymous=is_anonymous if is_anonymous is not ... else self.is_anonymous,
             can_manage_chat=can_manage_chat
-            if can_manage_chat is not None
+            if can_manage_chat is not ...
             else self.can_manage_chat,
             can_delete_messages=can_delete_messages
-            if can_delete_messages is not None
+            if can_delete_messages is not ...
             else self.can_delete_messages,
             can_manage_video_chats=can_manage_video_chats
-            if can_manage_video_chats is not None
+            if can_manage_video_chats is not ...
             else self.can_manage_video_chats,
             can_restrict_members=can_restrict_members
-            if can_restrict_members is not None
+            if can_restrict_members is not ...
             else self.can_restrict_members,
             can_promote_members=can_promote_members
-            if can_promote_members is not None
+            if can_promote_members is not ...
             else self.can_promote_members,
             can_change_info=can_change_info
-            if can_change_info is not None
+            if can_change_info is not ...
             else self.can_change_info,
             can_invite_users=can_invite_users
-            if can_invite_users is not None
+            if can_invite_users is not ...
             else self.can_invite_users,
             can_post_messages=can_post_messages
-            if can_post_messages is not None
+            if can_post_messages is not ...
             else self.can_post_messages,
             can_edit_messages=can_edit_messages
-            if can_edit_messages is not None
+            if can_edit_messages is not ...
             else self.can_edit_messages,
             can_pin_messages=can_pin_messages
-            if can_pin_messages is not None
+            if can_pin_messages is not ...
             else self.can_pin_messages,
             can_post_stories=can_post_stories
-            if can_post_stories is not None
+            if can_post_stories is not ...
             else self.can_post_stories,
             can_edit_stories=can_edit_stories
-            if can_edit_stories is not None
+            if can_edit_stories is not ...
             else self.can_edit_stories,
             can_delete_stories=can_delete_stories
-            if can_delete_stories is not None
+            if can_delete_stories is not ...
             else self.can_delete_stories,
             can_manage_topics=can_manage_topics
-            if can_manage_topics is not None
+            if can_manage_topics is not ...
             else self.can_manage_topics,
         )
 
@@ -6042,56 +4325,39 @@ class ChatMemberOwner:
     """Optional. Custom title for this user """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        is_anonymous: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        custom_title: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
+        is_anonymous: AlterFn[bool] | EllipsisType = ...,
+        custom_title: AlterFn[str | None] | EllipsisType = ...,
     ) -> ChatMemberOwner:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberOwner(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            is_anonymous=(
-                _is_anonymous
-                if (_is_anonymous := is_anonymous(self.is_anonymous)) is not ...
-                else self.is_anonymous
-            )
-            if is_anonymous is not ...
-            else self.is_anonymous,
-            custom_title=(
-                _custom_title
-                if (_custom_title := custom_title(self.custom_title)) is not ...
-                else self.custom_title
-            )
-            if custom_title is not ...
-            else self.custom_title,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            is_anonymous=self.is_anonymous
+            if is_anonymous is ...
+            else prefer(is_anonymous(self.is_anonymous), self.is_anonymous),
+            custom_title=self.custom_title
+            if custom_title is ...
+            else prefer(custom_title(self.custom_title), self.custom_title),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
-        is_anonymous: bool | None = None,
-        custom_title: str | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
+        is_anonymous: bool | EllipsisType = ...,
+        custom_title: str | None | EllipsisType = ...,
     ) -> ChatMemberOwner:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberOwner(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
-            is_anonymous=is_anonymous
-            if is_anonymous is not None
-            else self.is_anonymous,
-            custom_title=custom_title
-            if custom_title is not None
-            else self.custom_title,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
+            is_anonymous=is_anonymous if is_anonymous is not ... else self.is_anonymous,
+            custom_title=custom_title if custom_title is not ... else self.custom_title,
         )
 
 
@@ -6139,275 +4405,177 @@ class ChatMemberAdministrator:
     """Optional. Custom title for this user """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        can_be_edited: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        is_anonymous: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_manage_chat: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_delete_messages: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_manage_video_chats: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_restrict_members: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_promote_members: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_change_info: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_invite_users: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_post_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_edit_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_pin_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_post_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_edit_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_delete_stories: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_manage_topics: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        custom_title: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
+        can_be_edited: AlterFn[bool] | EllipsisType = ...,
+        is_anonymous: AlterFn[bool] | EllipsisType = ...,
+        can_manage_chat: AlterFn[bool] | EllipsisType = ...,
+        can_delete_messages: AlterFn[bool] | EllipsisType = ...,
+        can_manage_video_chats: AlterFn[bool] | EllipsisType = ...,
+        can_restrict_members: AlterFn[bool] | EllipsisType = ...,
+        can_promote_members: AlterFn[bool] | EllipsisType = ...,
+        can_change_info: AlterFn[bool] | EllipsisType = ...,
+        can_invite_users: AlterFn[bool] | EllipsisType = ...,
+        can_post_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_edit_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_post_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_edit_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_delete_stories: AlterFn[bool | None] | EllipsisType = ...,
+        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
+        custom_title: AlterFn[str | None] | EllipsisType = ...,
     ) -> ChatMemberAdministrator:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberAdministrator(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            can_be_edited=(
-                _can_be_edited
-                if (_can_be_edited := can_be_edited(self.can_be_edited)) is not ...
-                else self.can_be_edited
-            )
-            if can_be_edited is not ...
-            else self.can_be_edited,
-            is_anonymous=(
-                _is_anonymous
-                if (_is_anonymous := is_anonymous(self.is_anonymous)) is not ...
-                else self.is_anonymous
-            )
-            if is_anonymous is not ...
-            else self.is_anonymous,
-            can_manage_chat=(
-                _can_manage_chat
-                if (_can_manage_chat := can_manage_chat(self.can_manage_chat))
-                is not ...
-                else self.can_manage_chat
-            )
-            if can_manage_chat is not ...
-            else self.can_manage_chat,
-            can_delete_messages=(
-                _can_delete_messages
-                if (
-                    _can_delete_messages := can_delete_messages(
-                        self.can_delete_messages
-                    )
-                )
-                is not ...
-                else self.can_delete_messages
-            )
-            if can_delete_messages is not ...
-            else self.can_delete_messages,
-            can_manage_video_chats=(
-                _can_manage_video_chats
-                if (
-                    _can_manage_video_chats := can_manage_video_chats(
-                        self.can_manage_video_chats
-                    )
-                )
-                is not ...
-                else self.can_manage_video_chats
-            )
-            if can_manage_video_chats is not ...
-            else self.can_manage_video_chats,
-            can_restrict_members=(
-                _can_restrict_members
-                if (
-                    _can_restrict_members := can_restrict_members(
-                        self.can_restrict_members
-                    )
-                )
-                is not ...
-                else self.can_restrict_members
-            )
-            if can_restrict_members is not ...
-            else self.can_restrict_members,
-            can_promote_members=(
-                _can_promote_members
-                if (
-                    _can_promote_members := can_promote_members(
-                        self.can_promote_members
-                    )
-                )
-                is not ...
-                else self.can_promote_members
-            )
-            if can_promote_members is not ...
-            else self.can_promote_members,
-            can_change_info=(
-                _can_change_info
-                if (_can_change_info := can_change_info(self.can_change_info))
-                is not ...
-                else self.can_change_info
-            )
-            if can_change_info is not ...
-            else self.can_change_info,
-            can_invite_users=(
-                _can_invite_users
-                if (_can_invite_users := can_invite_users(self.can_invite_users))
-                is not ...
-                else self.can_invite_users
-            )
-            if can_invite_users is not ...
-            else self.can_invite_users,
-            can_post_messages=(
-                _can_post_messages
-                if (_can_post_messages := can_post_messages(self.can_post_messages))
-                is not ...
-                else self.can_post_messages
-            )
-            if can_post_messages is not ...
-            else self.can_post_messages,
-            can_edit_messages=(
-                _can_edit_messages
-                if (_can_edit_messages := can_edit_messages(self.can_edit_messages))
-                is not ...
-                else self.can_edit_messages
-            )
-            if can_edit_messages is not ...
-            else self.can_edit_messages,
-            can_pin_messages=(
-                _can_pin_messages
-                if (_can_pin_messages := can_pin_messages(self.can_pin_messages))
-                is not ...
-                else self.can_pin_messages
-            )
-            if can_pin_messages is not ...
-            else self.can_pin_messages,
-            can_post_stories=(
-                _can_post_stories
-                if (_can_post_stories := can_post_stories(self.can_post_stories))
-                is not ...
-                else self.can_post_stories
-            )
-            if can_post_stories is not ...
-            else self.can_post_stories,
-            can_edit_stories=(
-                _can_edit_stories
-                if (_can_edit_stories := can_edit_stories(self.can_edit_stories))
-                is not ...
-                else self.can_edit_stories
-            )
-            if can_edit_stories is not ...
-            else self.can_edit_stories,
-            can_delete_stories=(
-                _can_delete_stories
-                if (_can_delete_stories := can_delete_stories(self.can_delete_stories))
-                is not ...
-                else self.can_delete_stories
-            )
-            if can_delete_stories is not ...
-            else self.can_delete_stories,
-            can_manage_topics=(
-                _can_manage_topics
-                if (_can_manage_topics := can_manage_topics(self.can_manage_topics))
-                is not ...
-                else self.can_manage_topics
-            )
-            if can_manage_topics is not ...
-            else self.can_manage_topics,
-            custom_title=(
-                _custom_title
-                if (_custom_title := custom_title(self.custom_title)) is not ...
-                else self.custom_title
-            )
-            if custom_title is not ...
-            else self.custom_title,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            can_be_edited=self.can_be_edited
+            if can_be_edited is ...
+            else prefer(can_be_edited(self.can_be_edited), self.can_be_edited),
+            is_anonymous=self.is_anonymous
+            if is_anonymous is ...
+            else prefer(is_anonymous(self.is_anonymous), self.is_anonymous),
+            can_manage_chat=self.can_manage_chat
+            if can_manage_chat is ...
+            else prefer(can_manage_chat(self.can_manage_chat), self.can_manage_chat),
+            can_delete_messages=self.can_delete_messages
+            if can_delete_messages is ...
+            else prefer(
+                can_delete_messages(self.can_delete_messages), self.can_delete_messages
+            ),
+            can_manage_video_chats=self.can_manage_video_chats
+            if can_manage_video_chats is ...
+            else prefer(
+                can_manage_video_chats(self.can_manage_video_chats),
+                self.can_manage_video_chats,
+            ),
+            can_restrict_members=self.can_restrict_members
+            if can_restrict_members is ...
+            else prefer(
+                can_restrict_members(self.can_restrict_members),
+                self.can_restrict_members,
+            ),
+            can_promote_members=self.can_promote_members
+            if can_promote_members is ...
+            else prefer(
+                can_promote_members(self.can_promote_members), self.can_promote_members
+            ),
+            can_change_info=self.can_change_info
+            if can_change_info is ...
+            else prefer(can_change_info(self.can_change_info), self.can_change_info),
+            can_invite_users=self.can_invite_users
+            if can_invite_users is ...
+            else prefer(can_invite_users(self.can_invite_users), self.can_invite_users),
+            can_post_messages=self.can_post_messages
+            if can_post_messages is ...
+            else prefer(
+                can_post_messages(self.can_post_messages), self.can_post_messages
+            ),
+            can_edit_messages=self.can_edit_messages
+            if can_edit_messages is ...
+            else prefer(
+                can_edit_messages(self.can_edit_messages), self.can_edit_messages
+            ),
+            can_pin_messages=self.can_pin_messages
+            if can_pin_messages is ...
+            else prefer(can_pin_messages(self.can_pin_messages), self.can_pin_messages),
+            can_post_stories=self.can_post_stories
+            if can_post_stories is ...
+            else prefer(can_post_stories(self.can_post_stories), self.can_post_stories),
+            can_edit_stories=self.can_edit_stories
+            if can_edit_stories is ...
+            else prefer(can_edit_stories(self.can_edit_stories), self.can_edit_stories),
+            can_delete_stories=self.can_delete_stories
+            if can_delete_stories is ...
+            else prefer(
+                can_delete_stories(self.can_delete_stories), self.can_delete_stories
+            ),
+            can_manage_topics=self.can_manage_topics
+            if can_manage_topics is ...
+            else prefer(
+                can_manage_topics(self.can_manage_topics), self.can_manage_topics
+            ),
+            custom_title=self.custom_title
+            if custom_title is ...
+            else prefer(custom_title(self.custom_title), self.custom_title),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
-        can_be_edited: bool | None = None,
-        is_anonymous: bool | None = None,
-        can_manage_chat: bool | None = None,
-        can_delete_messages: bool | None = None,
-        can_manage_video_chats: bool | None = None,
-        can_restrict_members: bool | None = None,
-        can_promote_members: bool | None = None,
-        can_change_info: bool | None = None,
-        can_invite_users: bool | None = None,
-        can_post_messages: bool | None = None,
-        can_edit_messages: bool | None = None,
-        can_pin_messages: bool | None = None,
-        can_post_stories: bool | None = None,
-        can_edit_stories: bool | None = None,
-        can_delete_stories: bool | None = None,
-        can_manage_topics: bool | None = None,
-        custom_title: str | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
+        can_be_edited: bool | EllipsisType = ...,
+        is_anonymous: bool | EllipsisType = ...,
+        can_manage_chat: bool | EllipsisType = ...,
+        can_delete_messages: bool | EllipsisType = ...,
+        can_manage_video_chats: bool | EllipsisType = ...,
+        can_restrict_members: bool | EllipsisType = ...,
+        can_promote_members: bool | EllipsisType = ...,
+        can_change_info: bool | EllipsisType = ...,
+        can_invite_users: bool | EllipsisType = ...,
+        can_post_messages: bool | None | EllipsisType = ...,
+        can_edit_messages: bool | None | EllipsisType = ...,
+        can_pin_messages: bool | None | EllipsisType = ...,
+        can_post_stories: bool | None | EllipsisType = ...,
+        can_edit_stories: bool | None | EllipsisType = ...,
+        can_delete_stories: bool | None | EllipsisType = ...,
+        can_manage_topics: bool | None | EllipsisType = ...,
+        custom_title: str | None | EllipsisType = ...,
     ) -> ChatMemberAdministrator:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberAdministrator(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
             can_be_edited=can_be_edited
-            if can_be_edited is not None
+            if can_be_edited is not ...
             else self.can_be_edited,
-            is_anonymous=is_anonymous
-            if is_anonymous is not None
-            else self.is_anonymous,
+            is_anonymous=is_anonymous if is_anonymous is not ... else self.is_anonymous,
             can_manage_chat=can_manage_chat
-            if can_manage_chat is not None
+            if can_manage_chat is not ...
             else self.can_manage_chat,
             can_delete_messages=can_delete_messages
-            if can_delete_messages is not None
+            if can_delete_messages is not ...
             else self.can_delete_messages,
             can_manage_video_chats=can_manage_video_chats
-            if can_manage_video_chats is not None
+            if can_manage_video_chats is not ...
             else self.can_manage_video_chats,
             can_restrict_members=can_restrict_members
-            if can_restrict_members is not None
+            if can_restrict_members is not ...
             else self.can_restrict_members,
             can_promote_members=can_promote_members
-            if can_promote_members is not None
+            if can_promote_members is not ...
             else self.can_promote_members,
             can_change_info=can_change_info
-            if can_change_info is not None
+            if can_change_info is not ...
             else self.can_change_info,
             can_invite_users=can_invite_users
-            if can_invite_users is not None
+            if can_invite_users is not ...
             else self.can_invite_users,
             can_post_messages=can_post_messages
-            if can_post_messages is not None
+            if can_post_messages is not ...
             else self.can_post_messages,
             can_edit_messages=can_edit_messages
-            if can_edit_messages is not None
+            if can_edit_messages is not ...
             else self.can_edit_messages,
             can_pin_messages=can_pin_messages
-            if can_pin_messages is not None
+            if can_pin_messages is not ...
             else self.can_pin_messages,
             can_post_stories=can_post_stories
-            if can_post_stories is not None
+            if can_post_stories is not ...
             else self.can_post_stories,
             can_edit_stories=can_edit_stories
-            if can_edit_stories is not None
+            if can_edit_stories is not ...
             else self.can_edit_stories,
             can_delete_stories=can_delete_stories
-            if can_delete_stories is not None
+            if can_delete_stories is not ...
             else self.can_delete_stories,
             can_manage_topics=can_manage_topics
-            if can_manage_topics is not None
+            if can_manage_topics is not ...
             else self.can_manage_topics,
-            custom_title=custom_title
-            if custom_title is not None
-            else self.custom_title,
+            custom_title=custom_title if custom_title is not ... else self.custom_title,
         )
 
 
@@ -6421,31 +4589,27 @@ class ChatMemberMember:
     """Information about the user """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
     ) -> ChatMemberMember:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberMember(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
     ) -> ChatMemberMember:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberMember(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
         )
 
 
@@ -6491,252 +4655,169 @@ class ChatMemberRestricted:
     """Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        is_member: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_messages: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_audios: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_documents: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_photos: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_videos: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_video_notes: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_send_voice_notes: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_send_polls: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_send_other_messages: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_add_web_page_previews: Callable[[bool], bool | EllipsisType]
-        | EllipsisType = ...,
-        can_change_info: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_invite_users: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_pin_messages: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        can_manage_topics: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        until_date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
+        is_member: AlterFn[bool] | EllipsisType = ...,
+        can_send_messages: AlterFn[bool] | EllipsisType = ...,
+        can_send_audios: AlterFn[bool] | EllipsisType = ...,
+        can_send_documents: AlterFn[bool] | EllipsisType = ...,
+        can_send_photos: AlterFn[bool] | EllipsisType = ...,
+        can_send_videos: AlterFn[bool] | EllipsisType = ...,
+        can_send_video_notes: AlterFn[bool] | EllipsisType = ...,
+        can_send_voice_notes: AlterFn[bool] | EllipsisType = ...,
+        can_send_polls: AlterFn[bool] | EllipsisType = ...,
+        can_send_other_messages: AlterFn[bool] | EllipsisType = ...,
+        can_add_web_page_previews: AlterFn[bool] | EllipsisType = ...,
+        can_change_info: AlterFn[bool] | EllipsisType = ...,
+        can_invite_users: AlterFn[bool] | EllipsisType = ...,
+        can_pin_messages: AlterFn[bool] | EllipsisType = ...,
+        can_manage_topics: AlterFn[bool] | EllipsisType = ...,
+        until_date: AlterFn[int] | EllipsisType = ...,
     ) -> ChatMemberRestricted:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberRestricted(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            is_member=(
-                _is_member
-                if (_is_member := is_member(self.is_member)) is not ...
-                else self.is_member
-            )
-            if is_member is not ...
-            else self.is_member,
-            can_send_messages=(
-                _can_send_messages
-                if (_can_send_messages := can_send_messages(self.can_send_messages))
-                is not ...
-                else self.can_send_messages
-            )
-            if can_send_messages is not ...
-            else self.can_send_messages,
-            can_send_audios=(
-                _can_send_audios
-                if (_can_send_audios := can_send_audios(self.can_send_audios))
-                is not ...
-                else self.can_send_audios
-            )
-            if can_send_audios is not ...
-            else self.can_send_audios,
-            can_send_documents=(
-                _can_send_documents
-                if (_can_send_documents := can_send_documents(self.can_send_documents))
-                is not ...
-                else self.can_send_documents
-            )
-            if can_send_documents is not ...
-            else self.can_send_documents,
-            can_send_photos=(
-                _can_send_photos
-                if (_can_send_photos := can_send_photos(self.can_send_photos))
-                is not ...
-                else self.can_send_photos
-            )
-            if can_send_photos is not ...
-            else self.can_send_photos,
-            can_send_videos=(
-                _can_send_videos
-                if (_can_send_videos := can_send_videos(self.can_send_videos))
-                is not ...
-                else self.can_send_videos
-            )
-            if can_send_videos is not ...
-            else self.can_send_videos,
-            can_send_video_notes=(
-                _can_send_video_notes
-                if (
-                    _can_send_video_notes := can_send_video_notes(
-                        self.can_send_video_notes
-                    )
-                )
-                is not ...
-                else self.can_send_video_notes
-            )
-            if can_send_video_notes is not ...
-            else self.can_send_video_notes,
-            can_send_voice_notes=(
-                _can_send_voice_notes
-                if (
-                    _can_send_voice_notes := can_send_voice_notes(
-                        self.can_send_voice_notes
-                    )
-                )
-                is not ...
-                else self.can_send_voice_notes
-            )
-            if can_send_voice_notes is not ...
-            else self.can_send_voice_notes,
-            can_send_polls=(
-                _can_send_polls
-                if (_can_send_polls := can_send_polls(self.can_send_polls)) is not ...
-                else self.can_send_polls
-            )
-            if can_send_polls is not ...
-            else self.can_send_polls,
-            can_send_other_messages=(
-                _can_send_other_messages
-                if (
-                    _can_send_other_messages := can_send_other_messages(
-                        self.can_send_other_messages
-                    )
-                )
-                is not ...
-                else self.can_send_other_messages
-            )
-            if can_send_other_messages is not ...
-            else self.can_send_other_messages,
-            can_add_web_page_previews=(
-                _can_add_web_page_previews
-                if (
-                    _can_add_web_page_previews := can_add_web_page_previews(
-                        self.can_add_web_page_previews
-                    )
-                )
-                is not ...
-                else self.can_add_web_page_previews
-            )
-            if can_add_web_page_previews is not ...
-            else self.can_add_web_page_previews,
-            can_change_info=(
-                _can_change_info
-                if (_can_change_info := can_change_info(self.can_change_info))
-                is not ...
-                else self.can_change_info
-            )
-            if can_change_info is not ...
-            else self.can_change_info,
-            can_invite_users=(
-                _can_invite_users
-                if (_can_invite_users := can_invite_users(self.can_invite_users))
-                is not ...
-                else self.can_invite_users
-            )
-            if can_invite_users is not ...
-            else self.can_invite_users,
-            can_pin_messages=(
-                _can_pin_messages
-                if (_can_pin_messages := can_pin_messages(self.can_pin_messages))
-                is not ...
-                else self.can_pin_messages
-            )
-            if can_pin_messages is not ...
-            else self.can_pin_messages,
-            can_manage_topics=(
-                _can_manage_topics
-                if (_can_manage_topics := can_manage_topics(self.can_manage_topics))
-                is not ...
-                else self.can_manage_topics
-            )
-            if can_manage_topics is not ...
-            else self.can_manage_topics,
-            until_date=(
-                _until_date
-                if (_until_date := until_date(self.until_date)) is not ...
-                else self.until_date
-            )
-            if until_date is not ...
-            else self.until_date,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            is_member=self.is_member
+            if is_member is ...
+            else prefer(is_member(self.is_member), self.is_member),
+            can_send_messages=self.can_send_messages
+            if can_send_messages is ...
+            else prefer(
+                can_send_messages(self.can_send_messages), self.can_send_messages
+            ),
+            can_send_audios=self.can_send_audios
+            if can_send_audios is ...
+            else prefer(can_send_audios(self.can_send_audios), self.can_send_audios),
+            can_send_documents=self.can_send_documents
+            if can_send_documents is ...
+            else prefer(
+                can_send_documents(self.can_send_documents), self.can_send_documents
+            ),
+            can_send_photos=self.can_send_photos
+            if can_send_photos is ...
+            else prefer(can_send_photos(self.can_send_photos), self.can_send_photos),
+            can_send_videos=self.can_send_videos
+            if can_send_videos is ...
+            else prefer(can_send_videos(self.can_send_videos), self.can_send_videos),
+            can_send_video_notes=self.can_send_video_notes
+            if can_send_video_notes is ...
+            else prefer(
+                can_send_video_notes(self.can_send_video_notes),
+                self.can_send_video_notes,
+            ),
+            can_send_voice_notes=self.can_send_voice_notes
+            if can_send_voice_notes is ...
+            else prefer(
+                can_send_voice_notes(self.can_send_voice_notes),
+                self.can_send_voice_notes,
+            ),
+            can_send_polls=self.can_send_polls
+            if can_send_polls is ...
+            else prefer(can_send_polls(self.can_send_polls), self.can_send_polls),
+            can_send_other_messages=self.can_send_other_messages
+            if can_send_other_messages is ...
+            else prefer(
+                can_send_other_messages(self.can_send_other_messages),
+                self.can_send_other_messages,
+            ),
+            can_add_web_page_previews=self.can_add_web_page_previews
+            if can_add_web_page_previews is ...
+            else prefer(
+                can_add_web_page_previews(self.can_add_web_page_previews),
+                self.can_add_web_page_previews,
+            ),
+            can_change_info=self.can_change_info
+            if can_change_info is ...
+            else prefer(can_change_info(self.can_change_info), self.can_change_info),
+            can_invite_users=self.can_invite_users
+            if can_invite_users is ...
+            else prefer(can_invite_users(self.can_invite_users), self.can_invite_users),
+            can_pin_messages=self.can_pin_messages
+            if can_pin_messages is ...
+            else prefer(can_pin_messages(self.can_pin_messages), self.can_pin_messages),
+            can_manage_topics=self.can_manage_topics
+            if can_manage_topics is ...
+            else prefer(
+                can_manage_topics(self.can_manage_topics), self.can_manage_topics
+            ),
+            until_date=self.until_date
+            if until_date is ...
+            else prefer(until_date(self.until_date), self.until_date),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
-        is_member: bool | None = None,
-        can_send_messages: bool | None = None,
-        can_send_audios: bool | None = None,
-        can_send_documents: bool | None = None,
-        can_send_photos: bool | None = None,
-        can_send_videos: bool | None = None,
-        can_send_video_notes: bool | None = None,
-        can_send_voice_notes: bool | None = None,
-        can_send_polls: bool | None = None,
-        can_send_other_messages: bool | None = None,
-        can_add_web_page_previews: bool | None = None,
-        can_change_info: bool | None = None,
-        can_invite_users: bool | None = None,
-        can_pin_messages: bool | None = None,
-        can_manage_topics: bool | None = None,
-        until_date: int | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
+        is_member: bool | EllipsisType = ...,
+        can_send_messages: bool | EllipsisType = ...,
+        can_send_audios: bool | EllipsisType = ...,
+        can_send_documents: bool | EllipsisType = ...,
+        can_send_photos: bool | EllipsisType = ...,
+        can_send_videos: bool | EllipsisType = ...,
+        can_send_video_notes: bool | EllipsisType = ...,
+        can_send_voice_notes: bool | EllipsisType = ...,
+        can_send_polls: bool | EllipsisType = ...,
+        can_send_other_messages: bool | EllipsisType = ...,
+        can_add_web_page_previews: bool | EllipsisType = ...,
+        can_change_info: bool | EllipsisType = ...,
+        can_invite_users: bool | EllipsisType = ...,
+        can_pin_messages: bool | EllipsisType = ...,
+        can_manage_topics: bool | EllipsisType = ...,
+        until_date: int | EllipsisType = ...,
     ) -> ChatMemberRestricted:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberRestricted(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
-            is_member=is_member if is_member is not None else self.is_member,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
+            is_member=is_member if is_member is not ... else self.is_member,
             can_send_messages=can_send_messages
-            if can_send_messages is not None
+            if can_send_messages is not ...
             else self.can_send_messages,
             can_send_audios=can_send_audios
-            if can_send_audios is not None
+            if can_send_audios is not ...
             else self.can_send_audios,
             can_send_documents=can_send_documents
-            if can_send_documents is not None
+            if can_send_documents is not ...
             else self.can_send_documents,
             can_send_photos=can_send_photos
-            if can_send_photos is not None
+            if can_send_photos is not ...
             else self.can_send_photos,
             can_send_videos=can_send_videos
-            if can_send_videos is not None
+            if can_send_videos is not ...
             else self.can_send_videos,
             can_send_video_notes=can_send_video_notes
-            if can_send_video_notes is not None
+            if can_send_video_notes is not ...
             else self.can_send_video_notes,
             can_send_voice_notes=can_send_voice_notes
-            if can_send_voice_notes is not None
+            if can_send_voice_notes is not ...
             else self.can_send_voice_notes,
             can_send_polls=can_send_polls
-            if can_send_polls is not None
+            if can_send_polls is not ...
             else self.can_send_polls,
             can_send_other_messages=can_send_other_messages
-            if can_send_other_messages is not None
+            if can_send_other_messages is not ...
             else self.can_send_other_messages,
             can_add_web_page_previews=can_add_web_page_previews
-            if can_add_web_page_previews is not None
+            if can_add_web_page_previews is not ...
             else self.can_add_web_page_previews,
             can_change_info=can_change_info
-            if can_change_info is not None
+            if can_change_info is not ...
             else self.can_change_info,
             can_invite_users=can_invite_users
-            if can_invite_users is not None
+            if can_invite_users is not ...
             else self.can_invite_users,
             can_pin_messages=can_pin_messages
-            if can_pin_messages is not None
+            if can_pin_messages is not ...
             else self.can_pin_messages,
             can_manage_topics=can_manage_topics
-            if can_manage_topics is not None
+            if can_manage_topics is not ...
             else self.can_manage_topics,
-            until_date=until_date if until_date is not None else self.until_date,
+            until_date=until_date if until_date is not ... else self.until_date,
         )
 
 
@@ -6750,31 +4831,27 @@ class ChatMemberLeft:
     """Information about the user """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
     ) -> ChatMemberLeft:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberLeft(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
     ) -> ChatMemberLeft:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberLeft(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
         )
 
 
@@ -6790,41 +4867,33 @@ class ChatMemberBanned:
     """Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever """
 
     def alter(
-        self: Any,
-        status: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        until_date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        status: AlterFn[str] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
+        until_date: AlterFn[int] | EllipsisType = ...,
     ) -> ChatMemberBanned:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberBanned(
-            status=(
-                _status if (_status := status(self.status)) is not ... else self.status
-            )
-            if status is not ...
-            else self.status,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            until_date=(
-                _until_date
-                if (_until_date := until_date(self.until_date)) is not ...
-                else self.until_date
-            )
-            if until_date is not ...
-            else self.until_date,
+            status=self.status
+            if status is ...
+            else prefer(status(self.status), self.status),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            until_date=self.until_date
+            if until_date is ...
+            else prefer(until_date(self.until_date), self.until_date),
         )
 
     def copy_with(
-        self: Any,
-        status: str | None = None,
-        user: User | None = None,
-        until_date: int | None = None,
+        self,
+        status: str | EllipsisType = ...,
+        user: User | EllipsisType = ...,
+        until_date: int | EllipsisType = ...,
     ) -> ChatMemberBanned:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberBanned(
-            status=status if status is not None else self.status,
-            user=user if user is not None else self.user,
-            until_date=until_date if until_date is not None else self.until_date,
+            status=status if status is not ... else self.status,
+            user=user if user is not ... else self.user,
+            until_date=until_date if until_date is not ... else self.until_date,
         )
 
 
@@ -6848,93 +4917,61 @@ class ChatMemberUpdated:
     """Optional. True, if the user joined the chat via a chat folder invite link """
 
     def alter(
-        self: Any,
-        chat: Callable[[Chat], Chat | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        old_chat_member: Callable[[ChatMember], ChatMember | EllipsisType]
-        | EllipsisType = ...,
-        new_chat_member: Callable[[ChatMember], ChatMember | EllipsisType]
-        | EllipsisType = ...,
-        invite_link: Callable[
-            [ChatInviteLink | None], ChatInviteLink | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        via_chat_folder_invite_link: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        chat: AlterFn[Chat] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        date: AlterFn[int] | EllipsisType = ...,
+        old_chat_member: AlterFn[ChatMember] | EllipsisType = ...,
+        new_chat_member: AlterFn[ChatMember] | EllipsisType = ...,
+        invite_link: AlterFn[ChatInviteLink | None] | EllipsisType = ...,
+        via_chat_folder_invite_link: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ChatMemberUpdated:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberUpdated(
-            chat=(_chat if (_chat := chat(self.chat)) is not ... else self.chat)
-            if chat is not ...
-            else self.chat,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            date=(_date if (_date := date(self.date)) is not ... else self.date)
-            if date is not ...
-            else self.date,
-            old_chat_member=(
-                _old_chat_member
-                if (_old_chat_member := old_chat_member(self.old_chat_member))
-                is not ...
-                else self.old_chat_member
-            )
-            if old_chat_member is not ...
-            else self.old_chat_member,
-            new_chat_member=(
-                _new_chat_member
-                if (_new_chat_member := new_chat_member(self.new_chat_member))
-                is not ...
-                else self.new_chat_member
-            )
-            if new_chat_member is not ...
-            else self.new_chat_member,
-            invite_link=(
-                _invite_link
-                if (_invite_link := invite_link(self.invite_link)) is not ...
-                else self.invite_link
-            )
-            if invite_link is not ...
-            else self.invite_link,
-            via_chat_folder_invite_link=(
-                _via_chat_folder_invite_link
-                if (
-                    _via_chat_folder_invite_link := via_chat_folder_invite_link(
-                        self.via_chat_folder_invite_link
-                    )
-                )
-                is not ...
-                else self.via_chat_folder_invite_link
-            )
-            if via_chat_folder_invite_link is not ...
-            else self.via_chat_folder_invite_link,
+            chat=self.chat if chat is ... else prefer(chat(self.chat), self.chat),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            date=self.date if date is ... else prefer(date(self.date), self.date),
+            old_chat_member=self.old_chat_member
+            if old_chat_member is ...
+            else prefer(old_chat_member(self.old_chat_member), self.old_chat_member),
+            new_chat_member=self.new_chat_member
+            if new_chat_member is ...
+            else prefer(new_chat_member(self.new_chat_member), self.new_chat_member),
+            invite_link=self.invite_link
+            if invite_link is ...
+            else prefer(invite_link(self.invite_link), self.invite_link),
+            via_chat_folder_invite_link=self.via_chat_folder_invite_link
+            if via_chat_folder_invite_link is ...
+            else prefer(
+                via_chat_folder_invite_link(self.via_chat_folder_invite_link),
+                self.via_chat_folder_invite_link,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        chat: Chat | None = None,
-        from_: User | None = None,
-        date: int | None = None,
-        old_chat_member: ChatMember | None = None,
-        new_chat_member: ChatMember | None = None,
-        invite_link: ChatInviteLink | None = None,
-        via_chat_folder_invite_link: bool | None = None,
+        self,
+        chat: Chat | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        date: int | EllipsisType = ...,
+        old_chat_member: ChatMember | EllipsisType = ...,
+        new_chat_member: ChatMember | EllipsisType = ...,
+        invite_link: ChatInviteLink | None | EllipsisType = ...,
+        via_chat_folder_invite_link: bool | None | EllipsisType = ...,
     ) -> ChatMemberUpdated:
         """Replaces some of model's fields with provided ones"""
         return ChatMemberUpdated(
-            chat=chat if chat is not None else self.chat,
-            from_=from_ if from_ is not None else self.from_,
-            date=date if date is not None else self.date,
+            chat=chat if chat is not ... else self.chat,
+            from_=from_ if from_ is not ... else self.from_,
+            date=date if date is not ... else self.date,
             old_chat_member=old_chat_member
-            if old_chat_member is not None
+            if old_chat_member is not ...
             else self.old_chat_member,
             new_chat_member=new_chat_member
-            if new_chat_member is not None
+            if new_chat_member is not ...
             else self.new_chat_member,
-            invite_link=invite_link if invite_link is not None else self.invite_link,
+            invite_link=invite_link if invite_link is not ... else self.invite_link,
             via_chat_folder_invite_link=via_chat_folder_invite_link
-            if via_chat_folder_invite_link is not None
+            if via_chat_folder_invite_link is not ...
             else self.via_chat_folder_invite_link,
         )
 
@@ -6957,66 +4994,45 @@ class ChatJoinRequest:
     """Optional. Chat invite link that was used by the user to send the join request """
 
     def alter(
-        self: Any,
-        chat: Callable[[Chat], Chat | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        user_chat_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        bio: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        invite_link: Callable[
-            [ChatInviteLink | None], ChatInviteLink | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        chat: AlterFn[Chat] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        user_chat_id: AlterFn[int] | EllipsisType = ...,
+        date: AlterFn[int] | EllipsisType = ...,
+        bio: AlterFn[str | None] | EllipsisType = ...,
+        invite_link: AlterFn[ChatInviteLink | None] | EllipsisType = ...,
     ) -> ChatJoinRequest:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatJoinRequest(
-            chat=(_chat if (_chat := chat(self.chat)) is not ... else self.chat)
-            if chat is not ...
-            else self.chat,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            user_chat_id=(
-                _user_chat_id
-                if (_user_chat_id := user_chat_id(self.user_chat_id)) is not ...
-                else self.user_chat_id
-            )
-            if user_chat_id is not ...
-            else self.user_chat_id,
-            date=(_date if (_date := date(self.date)) is not ... else self.date)
-            if date is not ...
-            else self.date,
-            bio=(_bio if (_bio := bio(self.bio)) is not ... else self.bio)
-            if bio is not ...
-            else self.bio,
-            invite_link=(
-                _invite_link
-                if (_invite_link := invite_link(self.invite_link)) is not ...
-                else self.invite_link
-            )
-            if invite_link is not ...
-            else self.invite_link,
+            chat=self.chat if chat is ... else prefer(chat(self.chat), self.chat),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            user_chat_id=self.user_chat_id
+            if user_chat_id is ...
+            else prefer(user_chat_id(self.user_chat_id), self.user_chat_id),
+            date=self.date if date is ... else prefer(date(self.date), self.date),
+            bio=self.bio if bio is ... else prefer(bio(self.bio), self.bio),
+            invite_link=self.invite_link
+            if invite_link is ...
+            else prefer(invite_link(self.invite_link), self.invite_link),
         )
 
     def copy_with(
-        self: Any,
-        chat: Chat | None = None,
-        from_: User | None = None,
-        user_chat_id: int | None = None,
-        date: int | None = None,
-        bio: str | None = None,
-        invite_link: ChatInviteLink | None = None,
+        self,
+        chat: Chat | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        user_chat_id: int | EllipsisType = ...,
+        date: int | EllipsisType = ...,
+        bio: str | None | EllipsisType = ...,
+        invite_link: ChatInviteLink | None | EllipsisType = ...,
     ) -> ChatJoinRequest:
         """Replaces some of model's fields with provided ones"""
         return ChatJoinRequest(
-            chat=chat if chat is not None else self.chat,
-            from_=from_ if from_ is not None else self.from_,
-            user_chat_id=user_chat_id
-            if user_chat_id is not None
-            else self.user_chat_id,
-            date=date if date is not None else self.date,
-            bio=bio if bio is not None else self.bio,
-            invite_link=invite_link if invite_link is not None else self.invite_link,
+            chat=chat if chat is not ... else self.chat,
+            from_=from_ if from_ is not ... else self.from_,
+            user_chat_id=user_chat_id if user_chat_id is not ... else self.user_chat_id,
+            date=date if date is not ... else self.date,
+            bio=bio if bio is not ... else self.bio,
+            invite_link=invite_link if invite_link is not ... else self.invite_link,
         )
 
 
@@ -7054,227 +5070,146 @@ class ChatPermissions:
     """Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages """
 
     def alter(
-        self: Any,
-        can_send_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_audios: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_documents: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_photos: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_videos: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_video_notes: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_voice_notes: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_polls: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_send_other_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_add_web_page_previews: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_change_info: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_invite_users: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_pin_messages: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        can_manage_topics: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        can_send_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_audios: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_documents: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_photos: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_videos: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_video_notes: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_voice_notes: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_polls: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_other_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_add_web_page_previews: AlterFn[bool | None] | EllipsisType = ...,
+        can_change_info: AlterFn[bool | None] | EllipsisType = ...,
+        can_invite_users: AlterFn[bool | None] | EllipsisType = ...,
+        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
+        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
     ) -> ChatPermissions:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatPermissions(
-            can_send_messages=(
-                _can_send_messages
-                if (_can_send_messages := can_send_messages(self.can_send_messages))
-                is not ...
-                else self.can_send_messages
-            )
-            if can_send_messages is not ...
-            else self.can_send_messages,
-            can_send_audios=(
-                _can_send_audios
-                if (_can_send_audios := can_send_audios(self.can_send_audios))
-                is not ...
-                else self.can_send_audios
-            )
-            if can_send_audios is not ...
-            else self.can_send_audios,
-            can_send_documents=(
-                _can_send_documents
-                if (_can_send_documents := can_send_documents(self.can_send_documents))
-                is not ...
-                else self.can_send_documents
-            )
-            if can_send_documents is not ...
-            else self.can_send_documents,
-            can_send_photos=(
-                _can_send_photos
-                if (_can_send_photos := can_send_photos(self.can_send_photos))
-                is not ...
-                else self.can_send_photos
-            )
-            if can_send_photos is not ...
-            else self.can_send_photos,
-            can_send_videos=(
-                _can_send_videos
-                if (_can_send_videos := can_send_videos(self.can_send_videos))
-                is not ...
-                else self.can_send_videos
-            )
-            if can_send_videos is not ...
-            else self.can_send_videos,
-            can_send_video_notes=(
-                _can_send_video_notes
-                if (
-                    _can_send_video_notes := can_send_video_notes(
-                        self.can_send_video_notes
-                    )
-                )
-                is not ...
-                else self.can_send_video_notes
-            )
-            if can_send_video_notes is not ...
-            else self.can_send_video_notes,
-            can_send_voice_notes=(
-                _can_send_voice_notes
-                if (
-                    _can_send_voice_notes := can_send_voice_notes(
-                        self.can_send_voice_notes
-                    )
-                )
-                is not ...
-                else self.can_send_voice_notes
-            )
-            if can_send_voice_notes is not ...
-            else self.can_send_voice_notes,
-            can_send_polls=(
-                _can_send_polls
-                if (_can_send_polls := can_send_polls(self.can_send_polls)) is not ...
-                else self.can_send_polls
-            )
-            if can_send_polls is not ...
-            else self.can_send_polls,
-            can_send_other_messages=(
-                _can_send_other_messages
-                if (
-                    _can_send_other_messages := can_send_other_messages(
-                        self.can_send_other_messages
-                    )
-                )
-                is not ...
-                else self.can_send_other_messages
-            )
-            if can_send_other_messages is not ...
-            else self.can_send_other_messages,
-            can_add_web_page_previews=(
-                _can_add_web_page_previews
-                if (
-                    _can_add_web_page_previews := can_add_web_page_previews(
-                        self.can_add_web_page_previews
-                    )
-                )
-                is not ...
-                else self.can_add_web_page_previews
-            )
-            if can_add_web_page_previews is not ...
-            else self.can_add_web_page_previews,
-            can_change_info=(
-                _can_change_info
-                if (_can_change_info := can_change_info(self.can_change_info))
-                is not ...
-                else self.can_change_info
-            )
-            if can_change_info is not ...
-            else self.can_change_info,
-            can_invite_users=(
-                _can_invite_users
-                if (_can_invite_users := can_invite_users(self.can_invite_users))
-                is not ...
-                else self.can_invite_users
-            )
-            if can_invite_users is not ...
-            else self.can_invite_users,
-            can_pin_messages=(
-                _can_pin_messages
-                if (_can_pin_messages := can_pin_messages(self.can_pin_messages))
-                is not ...
-                else self.can_pin_messages
-            )
-            if can_pin_messages is not ...
-            else self.can_pin_messages,
-            can_manage_topics=(
-                _can_manage_topics
-                if (_can_manage_topics := can_manage_topics(self.can_manage_topics))
-                is not ...
-                else self.can_manage_topics
-            )
-            if can_manage_topics is not ...
-            else self.can_manage_topics,
+            can_send_messages=self.can_send_messages
+            if can_send_messages is ...
+            else prefer(
+                can_send_messages(self.can_send_messages), self.can_send_messages
+            ),
+            can_send_audios=self.can_send_audios
+            if can_send_audios is ...
+            else prefer(can_send_audios(self.can_send_audios), self.can_send_audios),
+            can_send_documents=self.can_send_documents
+            if can_send_documents is ...
+            else prefer(
+                can_send_documents(self.can_send_documents), self.can_send_documents
+            ),
+            can_send_photos=self.can_send_photos
+            if can_send_photos is ...
+            else prefer(can_send_photos(self.can_send_photos), self.can_send_photos),
+            can_send_videos=self.can_send_videos
+            if can_send_videos is ...
+            else prefer(can_send_videos(self.can_send_videos), self.can_send_videos),
+            can_send_video_notes=self.can_send_video_notes
+            if can_send_video_notes is ...
+            else prefer(
+                can_send_video_notes(self.can_send_video_notes),
+                self.can_send_video_notes,
+            ),
+            can_send_voice_notes=self.can_send_voice_notes
+            if can_send_voice_notes is ...
+            else prefer(
+                can_send_voice_notes(self.can_send_voice_notes),
+                self.can_send_voice_notes,
+            ),
+            can_send_polls=self.can_send_polls
+            if can_send_polls is ...
+            else prefer(can_send_polls(self.can_send_polls), self.can_send_polls),
+            can_send_other_messages=self.can_send_other_messages
+            if can_send_other_messages is ...
+            else prefer(
+                can_send_other_messages(self.can_send_other_messages),
+                self.can_send_other_messages,
+            ),
+            can_add_web_page_previews=self.can_add_web_page_previews
+            if can_add_web_page_previews is ...
+            else prefer(
+                can_add_web_page_previews(self.can_add_web_page_previews),
+                self.can_add_web_page_previews,
+            ),
+            can_change_info=self.can_change_info
+            if can_change_info is ...
+            else prefer(can_change_info(self.can_change_info), self.can_change_info),
+            can_invite_users=self.can_invite_users
+            if can_invite_users is ...
+            else prefer(can_invite_users(self.can_invite_users), self.can_invite_users),
+            can_pin_messages=self.can_pin_messages
+            if can_pin_messages is ...
+            else prefer(can_pin_messages(self.can_pin_messages), self.can_pin_messages),
+            can_manage_topics=self.can_manage_topics
+            if can_manage_topics is ...
+            else prefer(
+                can_manage_topics(self.can_manage_topics), self.can_manage_topics
+            ),
         )
 
     def copy_with(
-        self: Any,
-        can_send_messages: bool | None = None,
-        can_send_audios: bool | None = None,
-        can_send_documents: bool | None = None,
-        can_send_photos: bool | None = None,
-        can_send_videos: bool | None = None,
-        can_send_video_notes: bool | None = None,
-        can_send_voice_notes: bool | None = None,
-        can_send_polls: bool | None = None,
-        can_send_other_messages: bool | None = None,
-        can_add_web_page_previews: bool | None = None,
-        can_change_info: bool | None = None,
-        can_invite_users: bool | None = None,
-        can_pin_messages: bool | None = None,
-        can_manage_topics: bool | None = None,
+        self,
+        can_send_messages: bool | None | EllipsisType = ...,
+        can_send_audios: bool | None | EllipsisType = ...,
+        can_send_documents: bool | None | EllipsisType = ...,
+        can_send_photos: bool | None | EllipsisType = ...,
+        can_send_videos: bool | None | EllipsisType = ...,
+        can_send_video_notes: bool | None | EllipsisType = ...,
+        can_send_voice_notes: bool | None | EllipsisType = ...,
+        can_send_polls: bool | None | EllipsisType = ...,
+        can_send_other_messages: bool | None | EllipsisType = ...,
+        can_add_web_page_previews: bool | None | EllipsisType = ...,
+        can_change_info: bool | None | EllipsisType = ...,
+        can_invite_users: bool | None | EllipsisType = ...,
+        can_pin_messages: bool | None | EllipsisType = ...,
+        can_manage_topics: bool | None | EllipsisType = ...,
     ) -> ChatPermissions:
         """Replaces some of model's fields with provided ones"""
         return ChatPermissions(
             can_send_messages=can_send_messages
-            if can_send_messages is not None
+            if can_send_messages is not ...
             else self.can_send_messages,
             can_send_audios=can_send_audios
-            if can_send_audios is not None
+            if can_send_audios is not ...
             else self.can_send_audios,
             can_send_documents=can_send_documents
-            if can_send_documents is not None
+            if can_send_documents is not ...
             else self.can_send_documents,
             can_send_photos=can_send_photos
-            if can_send_photos is not None
+            if can_send_photos is not ...
             else self.can_send_photos,
             can_send_videos=can_send_videos
-            if can_send_videos is not None
+            if can_send_videos is not ...
             else self.can_send_videos,
             can_send_video_notes=can_send_video_notes
-            if can_send_video_notes is not None
+            if can_send_video_notes is not ...
             else self.can_send_video_notes,
             can_send_voice_notes=can_send_voice_notes
-            if can_send_voice_notes is not None
+            if can_send_voice_notes is not ...
             else self.can_send_voice_notes,
             can_send_polls=can_send_polls
-            if can_send_polls is not None
+            if can_send_polls is not ...
             else self.can_send_polls,
             can_send_other_messages=can_send_other_messages
-            if can_send_other_messages is not None
+            if can_send_other_messages is not ...
             else self.can_send_other_messages,
             can_add_web_page_previews=can_add_web_page_previews
-            if can_add_web_page_previews is not None
+            if can_add_web_page_previews is not ...
             else self.can_add_web_page_previews,
             can_change_info=can_change_info
-            if can_change_info is not None
+            if can_change_info is not ...
             else self.can_change_info,
             can_invite_users=can_invite_users
-            if can_invite_users is not None
+            if can_invite_users is not ...
             else self.can_invite_users,
             can_pin_messages=can_pin_messages
-            if can_pin_messages is not None
+            if can_pin_messages is not ...
             else self.can_pin_messages,
             can_manage_topics=can_manage_topics
-            if can_manage_topics is not None
+            if can_manage_topics is not ...
             else self.can_manage_topics,
         )
 
@@ -7289,37 +5224,29 @@ class ChatLocation:
     """Location address; 1-64 characters, as defined by the chat owner """
 
     def alter(
-        self: Any,
-        location: Callable[[Location], Location | EllipsisType] | EllipsisType = ...,
-        address: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        location: AlterFn[Location] | EllipsisType = ...,
+        address: AlterFn[str] | EllipsisType = ...,
     ) -> ChatLocation:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatLocation(
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
-            address=(
-                _address
-                if (_address := address(self.address)) is not ...
-                else self.address
-            )
-            if address is not ...
-            else self.address,
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
+            address=self.address
+            if address is ...
+            else prefer(address(self.address), self.address),
         )
 
     def copy_with(
-        self: Any,
-        location: Location | None = None,
-        address: str | None = None,
+        self,
+        location: Location | EllipsisType = ...,
+        address: str | EllipsisType = ...,
     ) -> ChatLocation:
         """Replaces some of model's fields with provided ones"""
         return ChatLocation(
-            location=location if location is not None else self.location,
-            address=address if address is not None else self.address,
+            location=location if location is not ... else self.location,
+            address=address if address is not ... else self.address,
         )
 
 
@@ -7337,63 +5264,47 @@ class ForumTopic:
     """Optional. Unique identifier of the custom emoji shown as the topic icon """
 
     def alter(
-        self: Any,
-        message_thread_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        icon_color: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        icon_custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        message_thread_id: AlterFn[int] | EllipsisType = ...,
+        name: AlterFn[str] | EllipsisType = ...,
+        icon_color: AlterFn[int] | EllipsisType = ...,
+        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
     ) -> ForumTopic:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopic(
-            message_thread_id=(
-                _message_thread_id
-                if (_message_thread_id := message_thread_id(self.message_thread_id))
-                is not ...
-                else self.message_thread_id
-            )
-            if message_thread_id is not ...
-            else self.message_thread_id,
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            icon_color=(
-                _icon_color
-                if (_icon_color := icon_color(self.icon_color)) is not ...
-                else self.icon_color
-            )
-            if icon_color is not ...
-            else self.icon_color,
-            icon_custom_emoji_id=(
-                _icon_custom_emoji_id
-                if (
-                    _icon_custom_emoji_id := icon_custom_emoji_id(
-                        self.icon_custom_emoji_id
-                    )
-                )
-                is not ...
-                else self.icon_custom_emoji_id
-            )
-            if icon_custom_emoji_id is not ...
-            else self.icon_custom_emoji_id,
+            message_thread_id=self.message_thread_id
+            if message_thread_id is ...
+            else prefer(
+                message_thread_id(self.message_thread_id), self.message_thread_id
+            ),
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            icon_color=self.icon_color
+            if icon_color is ...
+            else prefer(icon_color(self.icon_color), self.icon_color),
+            icon_custom_emoji_id=self.icon_custom_emoji_id
+            if icon_custom_emoji_id is ...
+            else prefer(
+                icon_custom_emoji_id(self.icon_custom_emoji_id),
+                self.icon_custom_emoji_id,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        message_thread_id: int | None = None,
-        name: str | None = None,
-        icon_color: int | None = None,
-        icon_custom_emoji_id: str | None = None,
+        self,
+        message_thread_id: int | EllipsisType = ...,
+        name: str | EllipsisType = ...,
+        icon_color: int | EllipsisType = ...,
+        icon_custom_emoji_id: str | None | EllipsisType = ...,
     ) -> ForumTopic:
         """Replaces some of model's fields with provided ones"""
         return ForumTopic(
             message_thread_id=message_thread_id
-            if message_thread_id is not None
+            if message_thread_id is not ...
             else self.message_thread_id,
-            name=name if name is not None else self.name,
-            icon_color=icon_color if icon_color is not None else self.icon_color,
+            name=name if name is not ... else self.name,
+            icon_color=icon_color if icon_color is not ... else self.icon_color,
             icon_custom_emoji_id=icon_custom_emoji_id
-            if icon_custom_emoji_id is not None
+            if icon_custom_emoji_id is not ...
             else self.icon_custom_emoji_id,
         )
 
@@ -7408,37 +5319,29 @@ class BotCommand:
     """Description of the command; 1-256 characters. """
 
     def alter(
-        self: Any,
-        command: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        command: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str] | EllipsisType = ...,
     ) -> BotCommand:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommand(
-            command=(
-                _command
-                if (_command := command(self.command)) is not ...
-                else self.command
-            )
-            if command is not ...
-            else self.command,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
+            command=self.command
+            if command is ...
+            else prefer(command(self.command), self.command),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
         )
 
     def copy_with(
-        self: Any,
-        command: str | None = None,
-        description: str | None = None,
+        self,
+        command: str | EllipsisType = ...,
+        description: str | EllipsisType = ...,
     ) -> BotCommand:
         """Replaces some of model's fields with provided ones"""
         return BotCommand(
-            command=command if command is not None else self.command,
-            description=description if description is not None else self.description,
+            command=command if command is not ... else self.command,
+            description=description if description is not ... else self.description,
         )
 
 
@@ -7450,22 +5353,20 @@ class BotCommandScopeDefault:
     """Scope type, must be default """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> BotCommandScopeDefault:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeDefault(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> BotCommandScopeDefault:
         """Replaces some of model's fields with provided ones"""
-        return BotCommandScopeDefault(type=type if type is not None else self.type)
+        return BotCommandScopeDefault(type=type if type is not ... else self.type)
 
 
 @dataclass(frozen=False, slots=True)
@@ -7476,23 +5377,21 @@ class BotCommandScopeAllPrivateChats:
     """Scope type, must be all_private_chats """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllPrivateChats:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllPrivateChats(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> BotCommandScopeAllPrivateChats:
         """Replaces some of model's fields with provided ones"""
         return BotCommandScopeAllPrivateChats(
-            type=type if type is not None else self.type
+            type=type if type is not ... else self.type
         )
 
 
@@ -7504,24 +5403,20 @@ class BotCommandScopeAllGroupChats:
     """Scope type, must be all_group_chats """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllGroupChats:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllGroupChats(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> BotCommandScopeAllGroupChats:
         """Replaces some of model's fields with provided ones"""
-        return BotCommandScopeAllGroupChats(
-            type=type if type is not None else self.type
-        )
+        return BotCommandScopeAllGroupChats(type=type if type is not ... else self.type)
 
 
 @dataclass(frozen=False, slots=True)
@@ -7532,23 +5427,21 @@ class BotCommandScopeAllChatAdministrators:
     """Scope type, must be all_chat_administrators """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllChatAdministrators:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllChatAdministrators(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> BotCommandScopeAllChatAdministrators:
         """Replaces some of model's fields with provided ones"""
         return BotCommandScopeAllChatAdministrators(
-            type=type if type is not None else self.type
+            type=type if type is not ... else self.type
         )
 
 
@@ -7562,33 +5455,27 @@ class BotCommandScopeChat:
     """Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        chat_id: Callable[[int | str], int | str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        chat_id: AlterFn[int | str] | EllipsisType = ...,
     ) -> BotCommandScopeChat:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChat(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            chat_id=(
-                _chat_id
-                if (_chat_id := chat_id(self.chat_id)) is not ...
-                else self.chat_id
-            )
-            if chat_id is not ...
-            else self.chat_id,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            chat_id=self.chat_id
+            if chat_id is ...
+            else prefer(chat_id(self.chat_id), self.chat_id),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        chat_id: int | str | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        chat_id: int | str | EllipsisType = ...,
     ) -> BotCommandScopeChat:
         """Replaces some of model's fields with provided ones"""
         return BotCommandScopeChat(
-            type=type if type is not None else self.type,
-            chat_id=chat_id if chat_id is not None else self.chat_id,
+            type=type if type is not ... else self.type,
+            chat_id=chat_id if chat_id is not ... else self.chat_id,
         )
 
 
@@ -7602,33 +5489,27 @@ class BotCommandScopeChatAdministrators:
     """Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        chat_id: Callable[[int | str], int | str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        chat_id: AlterFn[int | str] | EllipsisType = ...,
     ) -> BotCommandScopeChatAdministrators:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChatAdministrators(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            chat_id=(
-                _chat_id
-                if (_chat_id := chat_id(self.chat_id)) is not ...
-                else self.chat_id
-            )
-            if chat_id is not ...
-            else self.chat_id,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            chat_id=self.chat_id
+            if chat_id is ...
+            else prefer(chat_id(self.chat_id), self.chat_id),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        chat_id: int | str | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        chat_id: int | str | EllipsisType = ...,
     ) -> BotCommandScopeChatAdministrators:
         """Replaces some of model's fields with provided ones"""
         return BotCommandScopeChatAdministrators(
-            type=type if type is not None else self.type,
-            chat_id=chat_id if chat_id is not None else self.chat_id,
+            type=type if type is not ... else self.type,
+            chat_id=chat_id if chat_id is not ... else self.chat_id,
         )
 
 
@@ -7644,43 +5525,33 @@ class BotCommandScopeChatMember:
     """Unique identifier of the target user """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        chat_id: Callable[[int | str], int | str | EllipsisType] | EllipsisType = ...,
-        user_id: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        chat_id: AlterFn[int | str] | EllipsisType = ...,
+        user_id: AlterFn[int] | EllipsisType = ...,
     ) -> BotCommandScopeChatMember:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChatMember(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            chat_id=(
-                _chat_id
-                if (_chat_id := chat_id(self.chat_id)) is not ...
-                else self.chat_id
-            )
-            if chat_id is not ...
-            else self.chat_id,
-            user_id=(
-                _user_id
-                if (_user_id := user_id(self.user_id)) is not ...
-                else self.user_id
-            )
-            if user_id is not ...
-            else self.user_id,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            chat_id=self.chat_id
+            if chat_id is ...
+            else prefer(chat_id(self.chat_id), self.chat_id),
+            user_id=self.user_id
+            if user_id is ...
+            else prefer(user_id(self.user_id), self.user_id),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        chat_id: int | str | None = None,
-        user_id: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        chat_id: int | str | EllipsisType = ...,
+        user_id: int | EllipsisType = ...,
     ) -> BotCommandScopeChatMember:
         """Replaces some of model's fields with provided ones"""
         return BotCommandScopeChatMember(
-            type=type if type is not None else self.type,
-            chat_id=chat_id if chat_id is not None else self.chat_id,
-            user_id=user_id if user_id is not None else self.user_id,
+            type=type if type is not ... else self.type,
+            chat_id=chat_id if chat_id is not ... else self.chat_id,
+            user_id=user_id if user_id is not ... else self.user_id,
         )
 
 
@@ -7692,22 +5563,20 @@ class BotName:
     """The bot's name """
 
     def alter(
-        self: Any,
-        name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        name: AlterFn[str] | EllipsisType = ...,
     ) -> BotName:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotName(
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name
+            name=self.name if name is ... else prefer(name(self.name), self.name)
         )
 
     def copy_with(
-        self: Any,
-        name: str | None = None,
+        self,
+        name: str | EllipsisType = ...,
     ) -> BotName:
         """Replaces some of model's fields with provided ones"""
-        return BotName(name=name if name is not None else self.name)
+        return BotName(name=name if name is not ... else self.name)
 
 
 @dataclass(frozen=False, slots=True)
@@ -7718,27 +5587,23 @@ class BotDescription:
     """The bot's description """
 
     def alter(
-        self: Any,
-        description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        description: AlterFn[str] | EllipsisType = ...,
     ) -> BotDescription:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotDescription(
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description)
         )
 
     def copy_with(
-        self: Any,
-        description: str | None = None,
+        self,
+        description: str | EllipsisType = ...,
     ) -> BotDescription:
         """Replaces some of model's fields with provided ones"""
         return BotDescription(
-            description=description if description is not None else self.description
+            description=description if description is not ... else self.description
         )
 
 
@@ -7750,29 +5615,26 @@ class BotShortDescription:
     """The bot's short description """
 
     def alter(
-        self: Any,
-        short_description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        short_description: AlterFn[str] | EllipsisType = ...,
     ) -> BotShortDescription:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotShortDescription(
-            short_description=(
-                _short_description
-                if (_short_description := short_description(self.short_description))
-                is not ...
-                else self.short_description
+            short_description=self.short_description
+            if short_description is ...
+            else prefer(
+                short_description(self.short_description), self.short_description
             )
-            if short_description is not ...
-            else self.short_description
         )
 
     def copy_with(
-        self: Any,
-        short_description: str | None = None,
+        self,
+        short_description: str | EllipsisType = ...,
     ) -> BotShortDescription:
         """Replaces some of model's fields with provided ones"""
         return BotShortDescription(
             short_description=short_description
-            if short_description is not None
+            if short_description is not ...
             else self.short_description
         )
 
@@ -7785,22 +5647,20 @@ class MenuButtonCommands:
     """Type of the button, must be commands """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> MenuButtonCommands:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonCommands(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> MenuButtonCommands:
         """Replaces some of model's fields with provided ones"""
-        return MenuButtonCommands(type=type if type is not None else self.type)
+        return MenuButtonCommands(type=type if type is not ... else self.type)
 
 
 @dataclass(frozen=False, slots=True)
@@ -7815,39 +5675,31 @@ class MenuButtonWebApp:
     """Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        web_app: Callable[[WebAppInfo], WebAppInfo | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        text: AlterFn[str] | EllipsisType = ...,
+        web_app: AlterFn[WebAppInfo] | EllipsisType = ...,
     ) -> MenuButtonWebApp:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonWebApp(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            web_app=(
-                _web_app
-                if (_web_app := web_app(self.web_app)) is not ...
-                else self.web_app
-            )
-            if web_app is not ...
-            else self.web_app,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            web_app=self.web_app
+            if web_app is ...
+            else prefer(web_app(self.web_app), self.web_app),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        text: str | None = None,
-        web_app: WebAppInfo | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        text: str | EllipsisType = ...,
+        web_app: WebAppInfo | EllipsisType = ...,
     ) -> MenuButtonWebApp:
         """Replaces some of model's fields with provided ones"""
         return MenuButtonWebApp(
-            type=type if type is not None else self.type,
-            text=text if text is not None else self.text,
-            web_app=web_app if web_app is not None else self.web_app,
+            type=type if type is not ... else self.type,
+            text=text if text is not ... else self.text,
+            web_app=web_app if web_app is not ... else self.web_app,
         )
 
 
@@ -7859,22 +5711,20 @@ class MenuButtonDefault:
     """Type of the button, must be default """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
     ) -> MenuButtonDefault:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonDefault(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type
+            type=self.type if type is ... else prefer(type(self.type), self.type)
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
     ) -> MenuButtonDefault:
         """Replaces some of model's fields with provided ones"""
-        return MenuButtonDefault(type=type if type is not None else self.type)
+        return MenuButtonDefault(type=type if type is not ... else self.type)
 
 
 @dataclass(frozen=False, slots=True)
@@ -7887,42 +5737,33 @@ class ResponseParameters:
     """Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated """
 
     def alter(
-        self: Any,
-        migrate_to_chat_id: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        retry_after: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        migrate_to_chat_id: AlterFn[int | None] | EllipsisType = ...,
+        retry_after: AlterFn[int | None] | EllipsisType = ...,
     ) -> ResponseParameters:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ResponseParameters(
-            migrate_to_chat_id=(
-                _migrate_to_chat_id
-                if (_migrate_to_chat_id := migrate_to_chat_id(self.migrate_to_chat_id))
-                is not ...
-                else self.migrate_to_chat_id
-            )
-            if migrate_to_chat_id is not ...
-            else self.migrate_to_chat_id,
-            retry_after=(
-                _retry_after
-                if (_retry_after := retry_after(self.retry_after)) is not ...
-                else self.retry_after
-            )
-            if retry_after is not ...
-            else self.retry_after,
+            migrate_to_chat_id=self.migrate_to_chat_id
+            if migrate_to_chat_id is ...
+            else prefer(
+                migrate_to_chat_id(self.migrate_to_chat_id), self.migrate_to_chat_id
+            ),
+            retry_after=self.retry_after
+            if retry_after is ...
+            else prefer(retry_after(self.retry_after), self.retry_after),
         )
 
     def copy_with(
-        self: Any,
-        migrate_to_chat_id: int | None = None,
-        retry_after: int | None = None,
+        self,
+        migrate_to_chat_id: int | None | EllipsisType = ...,
+        retry_after: int | None | EllipsisType = ...,
     ) -> ResponseParameters:
         """Replaces some of model's fields with provided ones"""
         return ResponseParameters(
             migrate_to_chat_id=migrate_to_chat_id
-            if migrate_to_chat_id is not None
+            if migrate_to_chat_id is not ...
             else self.migrate_to_chat_id,
-            retry_after=retry_after if retry_after is not None else self.retry_after,
+            retry_after=retry_after if retry_after is not ... else self.retry_after,
         )
 
 
@@ -7944,77 +5785,51 @@ class InputMediaPhoto:
     """Optional. Pass True if the photo needs to be covered with a spoiler animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        media: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        has_spoiler: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputMediaPhoto:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaPhoto(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            media=(_media if (_media := media(self.media)) is not ... else self.media)
-            if media is not ...
-            else self.media,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            has_spoiler=(
-                _has_spoiler
-                if (_has_spoiler := has_spoiler(self.has_spoiler)) is not ...
-                else self.has_spoiler
-            )
-            if has_spoiler is not ...
-            else self.has_spoiler,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            media=self.media if media is ... else prefer(media(self.media), self.media),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            has_spoiler=self.has_spoiler
+            if has_spoiler is ...
+            else prefer(has_spoiler(self.has_spoiler), self.has_spoiler),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        media: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        has_spoiler: bool | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        media: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        has_spoiler: bool | None | EllipsisType = ...,
     ) -> InputMediaPhoto:
         """Replaces some of model's fields with provided ones"""
         return InputMediaPhoto(
-            type=type if type is not None else self.type,
-            media=media if media is not None else self.media,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            media=media if media is not ... else self.media,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            has_spoiler=has_spoiler if has_spoiler is not None else self.has_spoiler,
+            has_spoiler=has_spoiler if has_spoiler is not ... else self.has_spoiler,
         )
 
 
@@ -8046,129 +5861,83 @@ class InputMediaVideo:
     """Optional. Pass True if the video needs to be covered with a spoiler animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        media: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[
-            [BinaryIO | str | None], BinaryIO | str | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        width: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        supports_streaming: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        has_spoiler: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[str] | EllipsisType = ...,
+        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        width: AlterFn[int | None] | EllipsisType = ...,
+        height: AlterFn[int | None] | EllipsisType = ...,
+        duration: AlterFn[int | None] | EllipsisType = ...,
+        supports_streaming: AlterFn[bool | None] | EllipsisType = ...,
+        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputMediaVideo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaVideo(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            media=(_media if (_media := media(self.media)) is not ... else self.media)
-            if media is not ...
-            else self.media,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            supports_streaming=(
-                _supports_streaming
-                if (_supports_streaming := supports_streaming(self.supports_streaming))
-                is not ...
-                else self.supports_streaming
-            )
-            if supports_streaming is not ...
-            else self.supports_streaming,
-            has_spoiler=(
-                _has_spoiler
-                if (_has_spoiler := has_spoiler(self.has_spoiler)) is not ...
-                else self.has_spoiler
-            )
-            if has_spoiler is not ...
-            else self.has_spoiler,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            media=self.media if media is ... else prefer(media(self.media), self.media),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            supports_streaming=self.supports_streaming
+            if supports_streaming is ...
+            else prefer(
+                supports_streaming(self.supports_streaming), self.supports_streaming
+            ),
+            has_spoiler=self.has_spoiler
+            if has_spoiler is ...
+            else prefer(has_spoiler(self.has_spoiler), self.has_spoiler),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        media: str | None = None,
-        thumbnail: BinaryIO | str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        duration: int | None = None,
-        supports_streaming: bool | None = None,
-        has_spoiler: bool | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        media: str | EllipsisType = ...,
+        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        width: int | None | EllipsisType = ...,
+        height: int | None | EllipsisType = ...,
+        duration: int | None | EllipsisType = ...,
+        supports_streaming: bool | None | EllipsisType = ...,
+        has_spoiler: bool | None | EllipsisType = ...,
     ) -> InputMediaVideo:
         """Replaces some of model's fields with provided ones"""
         return InputMediaVideo(
-            type=type if type is not None else self.type,
-            media=media if media is not None else self.media,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            media=media if media is not ... else self.media,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            duration=duration if duration is not None else self.duration,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            duration=duration if duration is not ... else self.duration,
             supports_streaming=supports_streaming
-            if supports_streaming is not None
+            if supports_streaming is not ...
             else self.supports_streaming,
-            has_spoiler=has_spoiler if has_spoiler is not None else self.has_spoiler,
+            has_spoiler=has_spoiler if has_spoiler is not ... else self.has_spoiler,
         )
 
 
@@ -8198,115 +5967,73 @@ class InputMediaAnimation:
     """Optional. Pass True if the animation needs to be covered with a spoiler animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        media: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[
-            [BinaryIO | str | None], BinaryIO | str | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        width: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        has_spoiler: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[str] | EllipsisType = ...,
+        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        width: AlterFn[int | None] | EllipsisType = ...,
+        height: AlterFn[int | None] | EllipsisType = ...,
+        duration: AlterFn[int | None] | EllipsisType = ...,
+        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputMediaAnimation:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaAnimation(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            media=(_media if (_media := media(self.media)) is not ... else self.media)
-            if media is not ...
-            else self.media,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            has_spoiler=(
-                _has_spoiler
-                if (_has_spoiler := has_spoiler(self.has_spoiler)) is not ...
-                else self.has_spoiler
-            )
-            if has_spoiler is not ...
-            else self.has_spoiler,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            media=self.media if media is ... else prefer(media(self.media), self.media),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            has_spoiler=self.has_spoiler
+            if has_spoiler is ...
+            else prefer(has_spoiler(self.has_spoiler), self.has_spoiler),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        media: str | None = None,
-        thumbnail: BinaryIO | str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        duration: int | None = None,
-        has_spoiler: bool | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        media: str | EllipsisType = ...,
+        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        width: int | None | EllipsisType = ...,
+        height: int | None | EllipsisType = ...,
+        duration: int | None | EllipsisType = ...,
+        has_spoiler: bool | None | EllipsisType = ...,
     ) -> InputMediaAnimation:
         """Replaces some of model's fields with provided ones"""
         return InputMediaAnimation(
-            type=type if type is not None else self.type,
-            media=media if media is not None else self.media,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            media=media if media is not ... else self.media,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            duration=duration if duration is not None else self.duration,
-            has_spoiler=has_spoiler if has_spoiler is not None else self.has_spoiler,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            duration=duration if duration is not ... else self.duration,
+            has_spoiler=has_spoiler if has_spoiler is not ... else self.has_spoiler,
         )
 
 
@@ -8334,107 +6061,67 @@ class InputMediaAudio:
     """Optional. Title of the audio """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        media: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[
-            [BinaryIO | str | None], BinaryIO | str | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        performer: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[str] | EllipsisType = ...,
+        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        duration: AlterFn[int | None] | EllipsisType = ...,
+        performer: AlterFn[str | None] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
     ) -> InputMediaAudio:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaAudio(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            media=(_media if (_media := media(self.media)) is not ... else self.media)
-            if media is not ...
-            else self.media,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            duration=(
-                _duration
-                if (_duration := duration(self.duration)) is not ...
-                else self.duration
-            )
-            if duration is not ...
-            else self.duration,
-            performer=(
-                _performer
-                if (_performer := performer(self.performer)) is not ...
-                else self.performer
-            )
-            if performer is not ...
-            else self.performer,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            media=self.media if media is ... else prefer(media(self.media), self.media),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            duration=self.duration
+            if duration is ...
+            else prefer(duration(self.duration), self.duration),
+            performer=self.performer
+            if performer is ...
+            else prefer(performer(self.performer), self.performer),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        media: str | None = None,
-        thumbnail: BinaryIO | str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        duration: int | None = None,
-        performer: str | None = None,
-        title: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        media: str | EllipsisType = ...,
+        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        duration: int | None | EllipsisType = ...,
+        performer: str | None | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
     ) -> InputMediaAudio:
         """Replaces some of model's fields with provided ones"""
         return InputMediaAudio(
-            type=type if type is not None else self.type,
-            media=media if media is not None else self.media,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            media=media if media is not ... else self.media,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            duration=duration if duration is not None else self.duration,
-            performer=performer if performer is not None else self.performer,
-            title=title if title is not None else self.title,
+            duration=duration if duration is not ... else self.duration,
+            performer=performer if performer is not ... else self.performer,
+            title=title if title is not ... else self.title,
         )
 
 
@@ -8458,98 +6145,61 @@ class InputMediaDocument:
     """Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album. """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        media: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[
-            [BinaryIO | str | None], BinaryIO | str | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        disable_content_type_detection: Callable[
-            [bool | None], bool | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[str] | EllipsisType = ...,
+        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        disable_content_type_detection: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputMediaDocument:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaDocument(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            media=(_media if (_media := media(self.media)) is not ... else self.media)
-            if media is not ...
-            else self.media,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            disable_content_type_detection=(
-                _disable_content_type_detection
-                if (
-                    _disable_content_type_detection := disable_content_type_detection(
-                        self.disable_content_type_detection
-                    )
-                )
-                is not ...
-                else self.disable_content_type_detection
-            )
-            if disable_content_type_detection is not ...
-            else self.disable_content_type_detection,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            media=self.media if media is ... else prefer(media(self.media), self.media),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            disable_content_type_detection=self.disable_content_type_detection
+            if disable_content_type_detection is ...
+            else prefer(
+                disable_content_type_detection(self.disable_content_type_detection),
+                self.disable_content_type_detection,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        media: str | None = None,
-        thumbnail: BinaryIO | str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        disable_content_type_detection: bool | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        media: str | EllipsisType = ...,
+        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        disable_content_type_detection: bool | None | EllipsisType = ...,
     ) -> InputMediaDocument:
         """Replaces some of model's fields with provided ones"""
         return InputMediaDocument(
-            type=type if type is not None else self.type,
-            media=media if media is not None else self.media,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            media=media if media is not ... else self.media,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
             disable_content_type_detection=disable_content_type_detection
-            if disable_content_type_detection is not None
+            if disable_content_type_detection is not ...
             else self.disable_content_type_detection,
         )
 
@@ -8559,13 +6209,13 @@ class InputFile:
     """This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser."""
 
     def alter(
-        self: Any,
+        self,
     ) -> InputFile:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputFile()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> InputFile:
         """Replaces some of model's fields with provided ones"""
         return InputFile()
@@ -8607,175 +6257,113 @@ class Sticker:
     """Optional. File size in bytes """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        width: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        height: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        is_animated: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        is_video: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
-        emoji: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        set_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        premium_animation: Callable[[File | None], File | None | EllipsisType]
-        | EllipsisType = ...,
-        mask_position: Callable[
-            [MaskPosition | None], MaskPosition | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        custom_emoji_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        needs_repainting: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        file_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        width: AlterFn[int] | EllipsisType = ...,
+        height: AlterFn[int] | EllipsisType = ...,
+        is_animated: AlterFn[bool] | EllipsisType = ...,
+        is_video: AlterFn[bool] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        emoji: AlterFn[str | None] | EllipsisType = ...,
+        set_name: AlterFn[str | None] | EllipsisType = ...,
+        premium_animation: AlterFn[File | None] | EllipsisType = ...,
+        mask_position: AlterFn[MaskPosition | None] | EllipsisType = ...,
+        custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        needs_repainting: AlterFn[bool | None] | EllipsisType = ...,
+        file_size: AlterFn[int | None] | EllipsisType = ...,
     ) -> Sticker:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Sticker(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            width=(_width if (_width := width(self.width)) is not ... else self.width)
-            if width is not ...
-            else self.width,
-            height=(
-                _height if (_height := height(self.height)) is not ... else self.height
-            )
-            if height is not ...
-            else self.height,
-            is_animated=(
-                _is_animated
-                if (_is_animated := is_animated(self.is_animated)) is not ...
-                else self.is_animated
-            )
-            if is_animated is not ...
-            else self.is_animated,
-            is_video=(
-                _is_video
-                if (_is_video := is_video(self.is_video)) is not ...
-                else self.is_video
-            )
-            if is_video is not ...
-            else self.is_video,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
-            emoji=(_emoji if (_emoji := emoji(self.emoji)) is not ... else self.emoji)
-            if emoji is not ...
-            else self.emoji,
-            set_name=(
-                _set_name
-                if (_set_name := set_name(self.set_name)) is not ...
-                else self.set_name
-            )
-            if set_name is not ...
-            else self.set_name,
-            premium_animation=(
-                _premium_animation
-                if (_premium_animation := premium_animation(self.premium_animation))
-                is not ...
-                else self.premium_animation
-            )
-            if premium_animation is not ...
-            else self.premium_animation,
-            mask_position=(
-                _mask_position
-                if (_mask_position := mask_position(self.mask_position)) is not ...
-                else self.mask_position
-            )
-            if mask_position is not ...
-            else self.mask_position,
-            custom_emoji_id=(
-                _custom_emoji_id
-                if (_custom_emoji_id := custom_emoji_id(self.custom_emoji_id))
-                is not ...
-                else self.custom_emoji_id
-            )
-            if custom_emoji_id is not ...
-            else self.custom_emoji_id,
-            needs_repainting=(
-                _needs_repainting
-                if (_needs_repainting := needs_repainting(self.needs_repainting))
-                is not ...
-                else self.needs_repainting
-            )
-            if needs_repainting is not ...
-            else self.needs_repainting,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            width=self.width if width is ... else prefer(width(self.width), self.width),
+            height=self.height
+            if height is ...
+            else prefer(height(self.height), self.height),
+            is_animated=self.is_animated
+            if is_animated is ...
+            else prefer(is_animated(self.is_animated), self.is_animated),
+            is_video=self.is_video
+            if is_video is ...
+            else prefer(is_video(self.is_video), self.is_video),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
+            emoji=self.emoji if emoji is ... else prefer(emoji(self.emoji), self.emoji),
+            set_name=self.set_name
+            if set_name is ...
+            else prefer(set_name(self.set_name), self.set_name),
+            premium_animation=self.premium_animation
+            if premium_animation is ...
+            else prefer(
+                premium_animation(self.premium_animation), self.premium_animation
+            ),
+            mask_position=self.mask_position
+            if mask_position is ...
+            else prefer(mask_position(self.mask_position), self.mask_position),
+            custom_emoji_id=self.custom_emoji_id
+            if custom_emoji_id is ...
+            else prefer(custom_emoji_id(self.custom_emoji_id), self.custom_emoji_id),
+            needs_repainting=self.needs_repainting
+            if needs_repainting is ...
+            else prefer(needs_repainting(self.needs_repainting), self.needs_repainting),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        type: str | None = None,
-        width: int | None = None,
-        height: int | None = None,
-        is_animated: bool | None = None,
-        is_video: bool | None = None,
-        thumbnail: PhotoSize | None = None,
-        emoji: str | None = None,
-        set_name: str | None = None,
-        premium_animation: File | None = None,
-        mask_position: MaskPosition | None = None,
-        custom_emoji_id: str | None = None,
-        needs_repainting: bool | None = None,
-        file_size: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        width: int | EllipsisType = ...,
+        height: int | EllipsisType = ...,
+        is_animated: bool | EllipsisType = ...,
+        is_video: bool | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
+        emoji: str | None | EllipsisType = ...,
+        set_name: str | None | EllipsisType = ...,
+        premium_animation: File | None | EllipsisType = ...,
+        mask_position: MaskPosition | None | EllipsisType = ...,
+        custom_emoji_id: str | None | EllipsisType = ...,
+        needs_repainting: bool | None | EllipsisType = ...,
+        file_size: int | None | EllipsisType = ...,
     ) -> Sticker:
         """Replaces some of model's fields with provided ones"""
         return Sticker(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            type=type if type is not None else self.type,
-            width=width if width is not None else self.width,
-            height=height if height is not None else self.height,
-            is_animated=is_animated if is_animated is not None else self.is_animated,
-            is_video=is_video if is_video is not None else self.is_video,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
-            emoji=emoji if emoji is not None else self.emoji,
-            set_name=set_name if set_name is not None else self.set_name,
+            type=type if type is not ... else self.type,
+            width=width if width is not ... else self.width,
+            height=height if height is not ... else self.height,
+            is_animated=is_animated if is_animated is not ... else self.is_animated,
+            is_video=is_video if is_video is not ... else self.is_video,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
+            emoji=emoji if emoji is not ... else self.emoji,
+            set_name=set_name if set_name is not ... else self.set_name,
             premium_animation=premium_animation
-            if premium_animation is not None
+            if premium_animation is not ...
             else self.premium_animation,
             mask_position=mask_position
-            if mask_position is not None
+            if mask_position is not ...
             else self.mask_position,
             custom_emoji_id=custom_emoji_id
-            if custom_emoji_id is not None
+            if custom_emoji_id is not ...
             else self.custom_emoji_id,
             needs_repainting=needs_repainting
-            if needs_repainting is not None
+            if needs_repainting is not ...
             else self.needs_repainting,
-            file_size=file_size if file_size is not None else self.file_size,
+            file_size=file_size if file_size is not ... else self.file_size,
         )
 
 
@@ -8799,83 +6387,55 @@ class StickerSet:
     """Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format """
 
     def alter(
-        self: Any,
-        name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        sticker_type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        is_animated: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        is_video: Callable[[bool], bool | EllipsisType] | EllipsisType = ...,
-        stickers: Callable[[list[Sticker]], list[Sticker] | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail: Callable[[PhotoSize | None], PhotoSize | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        name: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        sticker_type: AlterFn[str] | EllipsisType = ...,
+        is_animated: AlterFn[bool] | EllipsisType = ...,
+        is_video: AlterFn[bool] | EllipsisType = ...,
+        stickers: AlterFn[list[Sticker]] | EllipsisType = ...,
+        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
     ) -> StickerSet:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return StickerSet(
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            sticker_type=(
-                _sticker_type
-                if (_sticker_type := sticker_type(self.sticker_type)) is not ...
-                else self.sticker_type
-            )
-            if sticker_type is not ...
-            else self.sticker_type,
-            is_animated=(
-                _is_animated
-                if (_is_animated := is_animated(self.is_animated)) is not ...
-                else self.is_animated
-            )
-            if is_animated is not ...
-            else self.is_animated,
-            is_video=(
-                _is_video
-                if (_is_video := is_video(self.is_video)) is not ...
-                else self.is_video
-            )
-            if is_video is not ...
-            else self.is_video,
-            stickers=(
-                _stickers
-                if (_stickers := stickers(self.stickers)) is not ...
-                else self.stickers
-            )
-            if stickers is not ...
-            else self.stickers,
-            thumbnail=(
-                _thumbnail
-                if (_thumbnail := thumbnail(self.thumbnail)) is not ...
-                else self.thumbnail
-            )
-            if thumbnail is not ...
-            else self.thumbnail,
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            sticker_type=self.sticker_type
+            if sticker_type is ...
+            else prefer(sticker_type(self.sticker_type), self.sticker_type),
+            is_animated=self.is_animated
+            if is_animated is ...
+            else prefer(is_animated(self.is_animated), self.is_animated),
+            is_video=self.is_video
+            if is_video is ...
+            else prefer(is_video(self.is_video), self.is_video),
+            stickers=self.stickers
+            if stickers is ...
+            else prefer(stickers(self.stickers), self.stickers),
+            thumbnail=self.thumbnail
+            if thumbnail is ...
+            else prefer(thumbnail(self.thumbnail), self.thumbnail),
         )
 
     def copy_with(
-        self: Any,
-        name: str | None = None,
-        title: str | None = None,
-        sticker_type: str | None = None,
-        is_animated: bool | None = None,
-        is_video: bool | None = None,
-        stickers: list[Sticker] | None = None,
-        thumbnail: PhotoSize | None = None,
+        self,
+        name: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        sticker_type: str | EllipsisType = ...,
+        is_animated: bool | EllipsisType = ...,
+        is_video: bool | EllipsisType = ...,
+        stickers: list[Sticker] | EllipsisType = ...,
+        thumbnail: PhotoSize | None | EllipsisType = ...,
     ) -> StickerSet:
         """Replaces some of model's fields with provided ones"""
         return StickerSet(
-            name=name if name is not None else self.name,
-            title=title if title is not None else self.title,
-            sticker_type=sticker_type
-            if sticker_type is not None
-            else self.sticker_type,
-            is_animated=is_animated if is_animated is not None else self.is_animated,
-            is_video=is_video if is_video is not None else self.is_video,
-            stickers=stickers if stickers is not None else self.stickers,
-            thumbnail=thumbnail if thumbnail is not None else self.thumbnail,
+            name=name if name is not ... else self.name,
+            title=title if title is not ... else self.title,
+            sticker_type=sticker_type if sticker_type is not ... else self.sticker_type,
+            is_animated=is_animated if is_animated is not ... else self.is_animated,
+            is_video=is_video if is_video is not ... else self.is_video,
+            stickers=stickers if stickers is not ... else self.stickers,
+            thumbnail=thumbnail if thumbnail is not ... else self.thumbnail,
         )
 
 
@@ -8893,49 +6453,37 @@ class MaskPosition:
     """Mask scaling coefficient. For example, 2.0 means double size. """
 
     def alter(
-        self: Any,
-        point: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        x_shift: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        y_shift: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        scale: Callable[[float], float | EllipsisType] | EllipsisType = ...,
+        self,
+        point: AlterFn[str] | EllipsisType = ...,
+        x_shift: AlterFn[float] | EllipsisType = ...,
+        y_shift: AlterFn[float] | EllipsisType = ...,
+        scale: AlterFn[float] | EllipsisType = ...,
     ) -> MaskPosition:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MaskPosition(
-            point=(_point if (_point := point(self.point)) is not ... else self.point)
-            if point is not ...
-            else self.point,
-            x_shift=(
-                _x_shift
-                if (_x_shift := x_shift(self.x_shift)) is not ...
-                else self.x_shift
-            )
-            if x_shift is not ...
-            else self.x_shift,
-            y_shift=(
-                _y_shift
-                if (_y_shift := y_shift(self.y_shift)) is not ...
-                else self.y_shift
-            )
-            if y_shift is not ...
-            else self.y_shift,
-            scale=(_scale if (_scale := scale(self.scale)) is not ... else self.scale)
-            if scale is not ...
-            else self.scale,
+            point=self.point if point is ... else prefer(point(self.point), self.point),
+            x_shift=self.x_shift
+            if x_shift is ...
+            else prefer(x_shift(self.x_shift), self.x_shift),
+            y_shift=self.y_shift
+            if y_shift is ...
+            else prefer(y_shift(self.y_shift), self.y_shift),
+            scale=self.scale if scale is ... else prefer(scale(self.scale), self.scale),
         )
 
     def copy_with(
-        self: Any,
-        point: str | None = None,
-        x_shift: float | None = None,
-        y_shift: float | None = None,
-        scale: float | None = None,
+        self,
+        point: str | EllipsisType = ...,
+        x_shift: float | EllipsisType = ...,
+        y_shift: float | EllipsisType = ...,
+        scale: float | EllipsisType = ...,
     ) -> MaskPosition:
         """Replaces some of model's fields with provided ones"""
         return MaskPosition(
-            point=point if point is not None else self.point,
-            x_shift=x_shift if x_shift is not None else self.x_shift,
-            y_shift=y_shift if y_shift is not None else self.y_shift,
-            scale=scale if scale is not None else self.scale,
+            point=point if point is not ... else self.point,
+            x_shift=x_shift if x_shift is not ... else self.x_shift,
+            y_shift=y_shift if y_shift is not ... else self.y_shift,
+            scale=scale if scale is not ... else self.scale,
         )
 
 
@@ -8953,65 +6501,43 @@ class InputSticker:
     """Optional. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For "regular" and "custom_emoji" stickers only. """
 
     def alter(
-        self: Any,
-        sticker: Callable[[BinaryIO | str], BinaryIO | str | EllipsisType]
-        | EllipsisType = ...,
-        emoji_list: Callable[[list[str]], list[str] | EllipsisType]
-        | EllipsisType = ...,
-        mask_position: Callable[
-            [MaskPosition | None], MaskPosition | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        keywords: Callable[[list[str] | None], list[str] | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        sticker: AlterFn[BinaryIO | str] | EllipsisType = ...,
+        emoji_list: AlterFn[list[str]] | EllipsisType = ...,
+        mask_position: AlterFn[MaskPosition | None] | EllipsisType = ...,
+        keywords: AlterFn[list[str] | None] | EllipsisType = ...,
     ) -> InputSticker:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputSticker(
-            sticker=(
-                _sticker
-                if (_sticker := sticker(self.sticker)) is not ...
-                else self.sticker
-            )
-            if sticker is not ...
-            else self.sticker,
-            emoji_list=(
-                _emoji_list
-                if (_emoji_list := emoji_list(self.emoji_list)) is not ...
-                else self.emoji_list
-            )
-            if emoji_list is not ...
-            else self.emoji_list,
-            mask_position=(
-                _mask_position
-                if (_mask_position := mask_position(self.mask_position)) is not ...
-                else self.mask_position
-            )
-            if mask_position is not ...
-            else self.mask_position,
-            keywords=(
-                _keywords
-                if (_keywords := keywords(self.keywords)) is not ...
-                else self.keywords
-            )
-            if keywords is not ...
-            else self.keywords,
+            sticker=self.sticker
+            if sticker is ...
+            else prefer(sticker(self.sticker), self.sticker),
+            emoji_list=self.emoji_list
+            if emoji_list is ...
+            else prefer(emoji_list(self.emoji_list), self.emoji_list),
+            mask_position=self.mask_position
+            if mask_position is ...
+            else prefer(mask_position(self.mask_position), self.mask_position),
+            keywords=self.keywords
+            if keywords is ...
+            else prefer(keywords(self.keywords), self.keywords),
         )
 
     def copy_with(
-        self: Any,
-        sticker: BinaryIO | str | None = None,
-        emoji_list: list[str] | None = None,
-        mask_position: MaskPosition | None = None,
-        keywords: list[str] | None = None,
+        self,
+        sticker: BinaryIO | str | EllipsisType = ...,
+        emoji_list: list[str] | EllipsisType = ...,
+        mask_position: MaskPosition | None | EllipsisType = ...,
+        keywords: list[str] | None | EllipsisType = ...,
     ) -> InputSticker:
         """Replaces some of model's fields with provided ones"""
         return InputSticker(
-            sticker=sticker if sticker is not None else self.sticker,
-            emoji_list=emoji_list if emoji_list is not None else self.emoji_list,
+            sticker=sticker if sticker is not ... else self.sticker,
+            emoji_list=emoji_list if emoji_list is not ... else self.emoji_list,
             mask_position=mask_position
-            if mask_position is not None
+            if mask_position is not ...
             else self.mask_position,
-            keywords=keywords if keywords is not None else self.keywords,
+            keywords=keywords if keywords is not ... else self.keywords,
         )
 
 
@@ -9033,65 +6559,47 @@ class InlineQuery:
     """Optional. Sender location, only for bots that request user location """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        query: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        offset: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        chat_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        location: Callable[[Location | None], Location | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        query: AlterFn[str] | EllipsisType = ...,
+        offset: AlterFn[str] | EllipsisType = ...,
+        chat_type: AlterFn[str | None] | EllipsisType = ...,
+        location: AlterFn[Location | None] | EllipsisType = ...,
     ) -> InlineQuery:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQuery(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            query=(_query if (_query := query(self.query)) is not ... else self.query)
-            if query is not ...
-            else self.query,
-            offset=(
-                _offset if (_offset := offset(self.offset)) is not ... else self.offset
-            )
-            if offset is not ...
-            else self.offset,
-            chat_type=(
-                _chat_type
-                if (_chat_type := chat_type(self.chat_type)) is not ...
-                else self.chat_type
-            )
-            if chat_type is not ...
-            else self.chat_type,
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            query=self.query if query is ... else prefer(query(self.query), self.query),
+            offset=self.offset
+            if offset is ...
+            else prefer(offset(self.offset), self.offset),
+            chat_type=self.chat_type
+            if chat_type is ...
+            else prefer(chat_type(self.chat_type), self.chat_type),
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        from_: User | None = None,
-        query: str | None = None,
-        offset: str | None = None,
-        chat_type: str | None = None,
-        location: Location | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        query: str | EllipsisType = ...,
+        offset: str | EllipsisType = ...,
+        chat_type: str | None | EllipsisType = ...,
+        location: Location | None | EllipsisType = ...,
     ) -> InlineQuery:
         """Replaces some of model's fields with provided ones"""
         return InlineQuery(
-            id=id if id is not None else self.id,
-            from_=from_ if from_ is not None else self.from_,
-            query=query if query is not None else self.query,
-            offset=offset if offset is not None else self.offset,
-            chat_type=chat_type if chat_type is not None else self.chat_type,
-            location=location if location is not None else self.location,
+            id=id if id is not ... else self.id,
+            from_=from_ if from_ is not ... else self.from_,
+            query=query if query is not ... else self.query,
+            offset=offset if offset is not ... else self.offset,
+            chat_type=chat_type if chat_type is not ... else self.chat_type,
+            location=location if location is not ... else self.location,
         )
 
 
@@ -9107,47 +6615,34 @@ class InlineQueryResultsButton:
     """Optional. Deep-linking parameter for the /start message sent to the bot when a user presses the button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed. Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an OAuth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities. """
 
     def alter(
-        self: Any,
-        text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        web_app: Callable[[WebAppInfo | None], WebAppInfo | None | EllipsisType]
-        | EllipsisType = ...,
-        start_parameter: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        text: AlterFn[str] | EllipsisType = ...,
+        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
+        start_parameter: AlterFn[str | None] | EllipsisType = ...,
     ) -> InlineQueryResultsButton:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultsButton(
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            web_app=(
-                _web_app
-                if (_web_app := web_app(self.web_app)) is not ...
-                else self.web_app
-            )
-            if web_app is not ...
-            else self.web_app,
-            start_parameter=(
-                _start_parameter
-                if (_start_parameter := start_parameter(self.start_parameter))
-                is not ...
-                else self.start_parameter
-            )
-            if start_parameter is not ...
-            else self.start_parameter,
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            web_app=self.web_app
+            if web_app is ...
+            else prefer(web_app(self.web_app), self.web_app),
+            start_parameter=self.start_parameter
+            if start_parameter is ...
+            else prefer(start_parameter(self.start_parameter), self.start_parameter),
         )
 
     def copy_with(
-        self: Any,
-        text: str | None = None,
-        web_app: WebAppInfo | None = None,
-        start_parameter: str | None = None,
+        self,
+        text: str | EllipsisType = ...,
+        web_app: WebAppInfo | None | EllipsisType = ...,
+        start_parameter: str | None | EllipsisType = ...,
     ) -> InlineQueryResultsButton:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultsButton(
-            text=text if text is not None else self.text,
-            web_app=web_app if web_app is not None else self.web_app,
+            text=text if text is not ... else self.text,
+            web_app=web_app if web_app is not ... else self.web_app,
             start_parameter=start_parameter
-            if start_parameter is not None
+            if start_parameter is not ...
             else self.start_parameter,
         )
 
@@ -9180,138 +6675,85 @@ class InlineQueryResultArticle:
     """Optional. Thumbnail height """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent], InputMessageContent | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        url: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        hide_url: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        url: AlterFn[str | None] | EllipsisType = ...,
+        hide_url: AlterFn[bool | None] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultArticle:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultArticle(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            url=(_url if (_url := url(self.url)) is not ... else self.url)
-            if url is not ...
-            else self.url,
-            hide_url=(
-                _hide_url
-                if (_hide_url := hide_url(self.hide_url)) is not ...
-                else self.hide_url
-            )
-            if hide_url is not ...
-            else self.hide_url,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_width=(
-                _thumbnail_width
-                if (_thumbnail_width := thumbnail_width(self.thumbnail_width))
-                is not ...
-                else self.thumbnail_width
-            )
-            if thumbnail_width is not ...
-            else self.thumbnail_width,
-            thumbnail_height=(
-                _thumbnail_height
-                if (_thumbnail_height := thumbnail_height(self.thumbnail_height))
-                is not ...
-                else self.thumbnail_height
-            )
-            if thumbnail_height is not ...
-            else self.thumbnail_height,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            url=self.url if url is ... else prefer(url(self.url), self.url),
+            hide_url=self.hide_url
+            if hide_url is ...
+            else prefer(hide_url(self.hide_url), self.hide_url),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_width=self.thumbnail_width
+            if thumbnail_width is ...
+            else prefer(thumbnail_width(self.thumbnail_width), self.thumbnail_width),
+            thumbnail_height=self.thumbnail_height
+            if thumbnail_height is ...
+            else prefer(thumbnail_height(self.thumbnail_height), self.thumbnail_height),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        title: str | None = None,
-        input_message_content: InputMessageContent | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        url: str | None = None,
-        hide_url: bool | None = None,
-        description: str | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_width: int | None = None,
-        thumbnail_height: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        input_message_content: InputMessageContent | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        url: str | None | EllipsisType = ...,
+        hide_url: bool | None | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        thumbnail_url: str | None | EllipsisType = ...,
+        thumbnail_width: int | None | EllipsisType = ...,
+        thumbnail_height: int | None | EllipsisType = ...,
     ) -> InlineQueryResultArticle:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultArticle(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            title=title if title is not None else self.title,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            title=title if title is not ... else self.title,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
-            url=url if url is not None else self.url,
-            hide_url=hide_url if hide_url is not None else self.hide_url,
-            description=description if description is not None else self.description,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
+            url=url if url is not ... else self.url,
+            hide_url=hide_url if hide_url is not ... else self.hide_url,
+            description=description if description is not ... else self.description,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_width=thumbnail_width
-            if thumbnail_width is not None
+            if thumbnail_width is not ...
             else self.thumbnail_width,
             thumbnail_height=thumbnail_height
-            if thumbnail_height is not None
+            if thumbnail_height is not ...
             else self.thumbnail_height,
         )
 
@@ -9348,163 +6790,97 @@ class InlineQueryResultPhoto:
     """Optional. Content of the message to be sent instead of the photo """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        photo_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        photo_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        photo_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        photo_url: AlterFn[str] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str] | EllipsisType = ...,
+        photo_width: AlterFn[int | None] | EllipsisType = ...,
+        photo_height: AlterFn[int | None] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultPhoto:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultPhoto(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            photo_url=(
-                _photo_url
-                if (_photo_url := photo_url(self.photo_url)) is not ...
-                else self.photo_url
-            )
-            if photo_url is not ...
-            else self.photo_url,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            photo_width=(
-                _photo_width
-                if (_photo_width := photo_width(self.photo_width)) is not ...
-                else self.photo_width
-            )
-            if photo_width is not ...
-            else self.photo_width,
-            photo_height=(
-                _photo_height
-                if (_photo_height := photo_height(self.photo_height)) is not ...
-                else self.photo_height
-            )
-            if photo_height is not ...
-            else self.photo_height,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            photo_url=self.photo_url
+            if photo_url is ...
+            else prefer(photo_url(self.photo_url), self.photo_url),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            photo_width=self.photo_width
+            if photo_width is ...
+            else prefer(photo_width(self.photo_width), self.photo_width),
+            photo_height=self.photo_height
+            if photo_height is ...
+            else prefer(photo_height(self.photo_height), self.photo_height),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        photo_url: str | None = None,
-        thumbnail_url: str | None = None,
-        photo_width: int | None = None,
-        photo_height: int | None = None,
-        title: str | None = None,
-        description: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        photo_url: str | EllipsisType = ...,
+        thumbnail_url: str | EllipsisType = ...,
+        photo_width: int | None | EllipsisType = ...,
+        photo_height: int | None | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultPhoto:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultPhoto(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            photo_url=photo_url if photo_url is not None else self.photo_url,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            photo_url=photo_url if photo_url is not ... else self.photo_url,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
-            photo_width=photo_width if photo_width is not None else self.photo_width,
-            photo_height=photo_height
-            if photo_height is not None
-            else self.photo_height,
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            photo_width=photo_width if photo_width is not ... else self.photo_width,
+            photo_height=photo_height if photo_height is not ... else self.photo_height,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -9543,181 +6919,107 @@ class InlineQueryResultGif:
     """Optional. Content of the message to be sent instead of the GIF animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        gif_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        gif_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        gif_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        gif_duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail_mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        gif_url: AlterFn[str] | EllipsisType = ...,
+        gif_width: AlterFn[int | None] | EllipsisType = ...,
+        gif_height: AlterFn[int | None] | EllipsisType = ...,
+        gif_duration: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str] | EllipsisType = ...,
+        thumbnail_mime_type: AlterFn[str | None] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultGif:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultGif(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            gif_url=(
-                _gif_url
-                if (_gif_url := gif_url(self.gif_url)) is not ...
-                else self.gif_url
-            )
-            if gif_url is not ...
-            else self.gif_url,
-            gif_width=(
-                _gif_width
-                if (_gif_width := gif_width(self.gif_width)) is not ...
-                else self.gif_width
-            )
-            if gif_width is not ...
-            else self.gif_width,
-            gif_height=(
-                _gif_height
-                if (_gif_height := gif_height(self.gif_height)) is not ...
-                else self.gif_height
-            )
-            if gif_height is not ...
-            else self.gif_height,
-            gif_duration=(
-                _gif_duration
-                if (_gif_duration := gif_duration(self.gif_duration)) is not ...
-                else self.gif_duration
-            )
-            if gif_duration is not ...
-            else self.gif_duration,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_mime_type=(
-                _thumbnail_mime_type
-                if (
-                    _thumbnail_mime_type := thumbnail_mime_type(
-                        self.thumbnail_mime_type
-                    )
-                )
-                is not ...
-                else self.thumbnail_mime_type
-            )
-            if thumbnail_mime_type is not ...
-            else self.thumbnail_mime_type,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            gif_url=self.gif_url
+            if gif_url is ...
+            else prefer(gif_url(self.gif_url), self.gif_url),
+            gif_width=self.gif_width
+            if gif_width is ...
+            else prefer(gif_width(self.gif_width), self.gif_width),
+            gif_height=self.gif_height
+            if gif_height is ...
+            else prefer(gif_height(self.gif_height), self.gif_height),
+            gif_duration=self.gif_duration
+            if gif_duration is ...
+            else prefer(gif_duration(self.gif_duration), self.gif_duration),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_mime_type=self.thumbnail_mime_type
+            if thumbnail_mime_type is ...
+            else prefer(
+                thumbnail_mime_type(self.thumbnail_mime_type), self.thumbnail_mime_type
+            ),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        gif_url: str | None = None,
-        gif_width: int | None = None,
-        gif_height: int | None = None,
-        gif_duration: int | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_mime_type: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        gif_url: str | EllipsisType = ...,
+        gif_width: int | None | EllipsisType = ...,
+        gif_height: int | None | EllipsisType = ...,
+        gif_duration: int | None | EllipsisType = ...,
+        thumbnail_url: str | EllipsisType = ...,
+        thumbnail_mime_type: str | None | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultGif:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultGif(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            gif_url=gif_url if gif_url is not None else self.gif_url,
-            gif_width=gif_width if gif_width is not None else self.gif_width,
-            gif_height=gif_height if gif_height is not None else self.gif_height,
-            gif_duration=gif_duration
-            if gif_duration is not None
-            else self.gif_duration,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            gif_url=gif_url if gif_url is not ... else self.gif_url,
+            gif_width=gif_width if gif_width is not ... else self.gif_width,
+            gif_height=gif_height if gif_height is not ... else self.gif_height,
+            gif_duration=gif_duration if gif_duration is not ... else self.gif_duration,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_mime_type=thumbnail_mime_type
-            if thumbnail_mime_type is not None
+            if thumbnail_mime_type is not ...
             else self.thumbnail_mime_type,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -9756,183 +7058,109 @@ class InlineQueryResultMpeg4Gif:
     """Optional. Content of the message to be sent instead of the video animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        mpeg4_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        mpeg4_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        mpeg4_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        mpeg4_duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail_mime_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        mpeg4_url: AlterFn[str] | EllipsisType = ...,
+        mpeg4_width: AlterFn[int | None] | EllipsisType = ...,
+        mpeg4_height: AlterFn[int | None] | EllipsisType = ...,
+        mpeg4_duration: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str] | EllipsisType = ...,
+        thumbnail_mime_type: AlterFn[str | None] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultMpeg4Gif:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultMpeg4Gif(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            mpeg4_url=(
-                _mpeg4_url
-                if (_mpeg4_url := mpeg4_url(self.mpeg4_url)) is not ...
-                else self.mpeg4_url
-            )
-            if mpeg4_url is not ...
-            else self.mpeg4_url,
-            mpeg4_width=(
-                _mpeg4_width
-                if (_mpeg4_width := mpeg4_width(self.mpeg4_width)) is not ...
-                else self.mpeg4_width
-            )
-            if mpeg4_width is not ...
-            else self.mpeg4_width,
-            mpeg4_height=(
-                _mpeg4_height
-                if (_mpeg4_height := mpeg4_height(self.mpeg4_height)) is not ...
-                else self.mpeg4_height
-            )
-            if mpeg4_height is not ...
-            else self.mpeg4_height,
-            mpeg4_duration=(
-                _mpeg4_duration
-                if (_mpeg4_duration := mpeg4_duration(self.mpeg4_duration)) is not ...
-                else self.mpeg4_duration
-            )
-            if mpeg4_duration is not ...
-            else self.mpeg4_duration,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_mime_type=(
-                _thumbnail_mime_type
-                if (
-                    _thumbnail_mime_type := thumbnail_mime_type(
-                        self.thumbnail_mime_type
-                    )
-                )
-                is not ...
-                else self.thumbnail_mime_type
-            )
-            if thumbnail_mime_type is not ...
-            else self.thumbnail_mime_type,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            mpeg4_url=self.mpeg4_url
+            if mpeg4_url is ...
+            else prefer(mpeg4_url(self.mpeg4_url), self.mpeg4_url),
+            mpeg4_width=self.mpeg4_width
+            if mpeg4_width is ...
+            else prefer(mpeg4_width(self.mpeg4_width), self.mpeg4_width),
+            mpeg4_height=self.mpeg4_height
+            if mpeg4_height is ...
+            else prefer(mpeg4_height(self.mpeg4_height), self.mpeg4_height),
+            mpeg4_duration=self.mpeg4_duration
+            if mpeg4_duration is ...
+            else prefer(mpeg4_duration(self.mpeg4_duration), self.mpeg4_duration),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_mime_type=self.thumbnail_mime_type
+            if thumbnail_mime_type is ...
+            else prefer(
+                thumbnail_mime_type(self.thumbnail_mime_type), self.thumbnail_mime_type
+            ),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        mpeg4_url: str | None = None,
-        mpeg4_width: int | None = None,
-        mpeg4_height: int | None = None,
-        mpeg4_duration: int | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_mime_type: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        mpeg4_url: str | EllipsisType = ...,
+        mpeg4_width: int | None | EllipsisType = ...,
+        mpeg4_height: int | None | EllipsisType = ...,
+        mpeg4_duration: int | None | EllipsisType = ...,
+        thumbnail_url: str | EllipsisType = ...,
+        thumbnail_mime_type: str | None | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultMpeg4Gif:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultMpeg4Gif(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            mpeg4_url=mpeg4_url if mpeg4_url is not None else self.mpeg4_url,
-            mpeg4_width=mpeg4_width if mpeg4_width is not None else self.mpeg4_width,
-            mpeg4_height=mpeg4_height
-            if mpeg4_height is not None
-            else self.mpeg4_height,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            mpeg4_url=mpeg4_url if mpeg4_url is not ... else self.mpeg4_url,
+            mpeg4_width=mpeg4_width if mpeg4_width is not ... else self.mpeg4_width,
+            mpeg4_height=mpeg4_height if mpeg4_height is not ... else self.mpeg4_height,
             mpeg4_duration=mpeg4_duration
-            if mpeg4_duration is not None
+            if mpeg4_duration is not ...
             else self.mpeg4_duration,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_mime_type=thumbnail_mime_type
-            if thumbnail_mime_type is not None
+            if thumbnail_mime_type is not ...
             else self.thumbnail_mime_type,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -9973,186 +7201,111 @@ class InlineQueryResultVideo:
     """Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video). """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        video_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        mime_type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        thumbnail_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        video_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        video_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        video_duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        video_url: AlterFn[str] | EllipsisType = ...,
+        mime_type: AlterFn[str] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        video_width: AlterFn[int | None] | EllipsisType = ...,
+        video_height: AlterFn[int | None] | EllipsisType = ...,
+        video_duration: AlterFn[int | None] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultVideo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVideo(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            video_url=(
-                _video_url
-                if (_video_url := video_url(self.video_url)) is not ...
-                else self.video_url
-            )
-            if video_url is not ...
-            else self.video_url,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            video_width=(
-                _video_width
-                if (_video_width := video_width(self.video_width)) is not ...
-                else self.video_width
-            )
-            if video_width is not ...
-            else self.video_width,
-            video_height=(
-                _video_height
-                if (_video_height := video_height(self.video_height)) is not ...
-                else self.video_height
-            )
-            if video_height is not ...
-            else self.video_height,
-            video_duration=(
-                _video_duration
-                if (_video_duration := video_duration(self.video_duration)) is not ...
-                else self.video_duration
-            )
-            if video_duration is not ...
-            else self.video_duration,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            video_url=self.video_url
+            if video_url is ...
+            else prefer(video_url(self.video_url), self.video_url),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            video_width=self.video_width
+            if video_width is ...
+            else prefer(video_width(self.video_width), self.video_width),
+            video_height=self.video_height
+            if video_height is ...
+            else prefer(video_height(self.video_height), self.video_height),
+            video_duration=self.video_duration
+            if video_duration is ...
+            else prefer(video_duration(self.video_duration), self.video_duration),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        video_url: str | None = None,
-        mime_type: str | None = None,
-        thumbnail_url: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        video_width: int | None = None,
-        video_height: int | None = None,
-        video_duration: int | None = None,
-        description: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        video_url: str | EllipsisType = ...,
+        mime_type: str | EllipsisType = ...,
+        thumbnail_url: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        video_width: int | None | EllipsisType = ...,
+        video_height: int | None | EllipsisType = ...,
+        video_duration: int | None | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultVideo:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultVideo(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            video_url=video_url if video_url is not None else self.video_url,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            video_url=video_url if video_url is not ... else self.video_url,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            video_width=video_width if video_width is not None else self.video_width,
-            video_height=video_height
-            if video_height is not None
-            else self.video_height,
+            video_width=video_width if video_width is not ... else self.video_width,
+            video_height=video_height if video_height is not ... else self.video_height,
             video_duration=video_duration
-            if video_duration is not None
+            if video_duration is not ...
             else self.video_duration,
-            description=description if description is not None else self.description,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            description=description if description is not ... else self.description,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -10187,140 +7340,85 @@ class InlineQueryResultAudio:
     """Optional. Content of the message to be sent instead of the audio """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        audio_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        performer: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        audio_duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        audio_url: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        performer: AlterFn[str | None] | EllipsisType = ...,
+        audio_duration: AlterFn[int | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultAudio:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultAudio(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            audio_url=(
-                _audio_url
-                if (_audio_url := audio_url(self.audio_url)) is not ...
-                else self.audio_url
-            )
-            if audio_url is not ...
-            else self.audio_url,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            performer=(
-                _performer
-                if (_performer := performer(self.performer)) is not ...
-                else self.performer
-            )
-            if performer is not ...
-            else self.performer,
-            audio_duration=(
-                _audio_duration
-                if (_audio_duration := audio_duration(self.audio_duration)) is not ...
-                else self.audio_duration
-            )
-            if audio_duration is not ...
-            else self.audio_duration,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            audio_url=self.audio_url
+            if audio_url is ...
+            else prefer(audio_url(self.audio_url), self.audio_url),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            performer=self.performer
+            if performer is ...
+            else prefer(performer(self.performer), self.performer),
+            audio_duration=self.audio_duration
+            if audio_duration is ...
+            else prefer(audio_duration(self.audio_duration), self.audio_duration),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        audio_url: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        performer: str | None = None,
-        audio_duration: int | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        audio_url: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        performer: str | None | EllipsisType = ...,
+        audio_duration: int | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultAudio:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultAudio(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            audio_url=audio_url if audio_url is not None else self.audio_url,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            audio_url=audio_url if audio_url is not ... else self.audio_url,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            performer=performer if performer is not None else self.performer,
+            performer=performer if performer is not ... else self.performer,
             audio_duration=audio_duration
-            if audio_duration is not None
+            if audio_duration is not ...
             else self.audio_duration,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -10353,129 +7451,79 @@ class InlineQueryResultVoice:
     """Optional. Content of the message to be sent instead of the voice recording """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        voice_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        voice_duration: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        voice_url: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        voice_duration: AlterFn[int | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultVoice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVoice(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            voice_url=(
-                _voice_url
-                if (_voice_url := voice_url(self.voice_url)) is not ...
-                else self.voice_url
-            )
-            if voice_url is not ...
-            else self.voice_url,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            voice_duration=(
-                _voice_duration
-                if (_voice_duration := voice_duration(self.voice_duration)) is not ...
-                else self.voice_duration
-            )
-            if voice_duration is not ...
-            else self.voice_duration,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            voice_url=self.voice_url
+            if voice_url is ...
+            else prefer(voice_url(self.voice_url), self.voice_url),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            voice_duration=self.voice_duration
+            if voice_duration is ...
+            else prefer(voice_duration(self.voice_duration), self.voice_duration),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        voice_url: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        voice_duration: int | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        voice_url: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        voice_duration: int | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultVoice:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultVoice(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            voice_url=voice_url if voice_url is not None else self.voice_url,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            voice_url=voice_url if voice_url is not ... else self.voice_url,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
             voice_duration=voice_duration
-            if voice_duration is not None
+            if voice_duration is not ...
             else self.voice_duration,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -10516,180 +7564,107 @@ class InlineQueryResultDocument:
     """Optional. Thumbnail height """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        document_url: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        mime_type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        document_url: AlterFn[str] | EllipsisType = ...,
+        mime_type: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultDocument:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultDocument(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            document_url=(
-                _document_url
-                if (_document_url := document_url(self.document_url)) is not ...
-                else self.document_url
-            )
-            if document_url is not ...
-            else self.document_url,
-            mime_type=(
-                _mime_type
-                if (_mime_type := mime_type(self.mime_type)) is not ...
-                else self.mime_type
-            )
-            if mime_type is not ...
-            else self.mime_type,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_width=(
-                _thumbnail_width
-                if (_thumbnail_width := thumbnail_width(self.thumbnail_width))
-                is not ...
-                else self.thumbnail_width
-            )
-            if thumbnail_width is not ...
-            else self.thumbnail_width,
-            thumbnail_height=(
-                _thumbnail_height
-                if (_thumbnail_height := thumbnail_height(self.thumbnail_height))
-                is not ...
-                else self.thumbnail_height
-            )
-            if thumbnail_height is not ...
-            else self.thumbnail_height,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            document_url=self.document_url
+            if document_url is ...
+            else prefer(document_url(self.document_url), self.document_url),
+            mime_type=self.mime_type
+            if mime_type is ...
+            else prefer(mime_type(self.mime_type), self.mime_type),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_width=self.thumbnail_width
+            if thumbnail_width is ...
+            else prefer(thumbnail_width(self.thumbnail_width), self.thumbnail_width),
+            thumbnail_height=self.thumbnail_height
+            if thumbnail_height is ...
+            else prefer(thumbnail_height(self.thumbnail_height), self.thumbnail_height),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        document_url: str | None = None,
-        mime_type: str | None = None,
-        description: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_width: int | None = None,
-        thumbnail_height: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        document_url: str | EllipsisType = ...,
+        mime_type: str | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
+        thumbnail_url: str | None | EllipsisType = ...,
+        thumbnail_width: int | None | EllipsisType = ...,
+        thumbnail_height: int | None | EllipsisType = ...,
     ) -> InlineQueryResultDocument:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultDocument(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            document_url=document_url
-            if document_url is not None
-            else self.document_url,
-            mime_type=mime_type if mime_type is not None else self.mime_type,
-            description=description if description is not None else self.description,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            document_url=document_url if document_url is not ... else self.document_url,
+            mime_type=mime_type if mime_type is not ... else self.mime_type,
+            description=description if description is not ... else self.description,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_width=thumbnail_width
-            if thumbnail_width is not None
+            if thumbnail_width is not ...
             else self.thumbnail_width,
             thumbnail_height=thumbnail_height
-            if thumbnail_height is not None
+            if thumbnail_height is not ...
             else self.thumbnail_height,
         )
 
@@ -10730,187 +7705,114 @@ class InlineQueryResultLocation:
     """Optional. Thumbnail height """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        latitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        longitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        horizontal_accuracy: Callable[[float | None], float | None | EllipsisType]
-        | EllipsisType = ...,
-        live_period: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        heading: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        proximity_alert_radius: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        latitude: AlterFn[float] | EllipsisType = ...,
+        longitude: AlterFn[float] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
+        live_period: AlterFn[int | None] | EllipsisType = ...,
+        heading: AlterFn[int | None] | EllipsisType = ...,
+        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultLocation:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultLocation(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            latitude=(
-                _latitude
-                if (_latitude := latitude(self.latitude)) is not ...
-                else self.latitude
-            )
-            if latitude is not ...
-            else self.latitude,
-            longitude=(
-                _longitude
-                if (_longitude := longitude(self.longitude)) is not ...
-                else self.longitude
-            )
-            if longitude is not ...
-            else self.longitude,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            horizontal_accuracy=(
-                _horizontal_accuracy
-                if (
-                    _horizontal_accuracy := horizontal_accuracy(
-                        self.horizontal_accuracy
-                    )
-                )
-                is not ...
-                else self.horizontal_accuracy
-            )
-            if horizontal_accuracy is not ...
-            else self.horizontal_accuracy,
-            live_period=(
-                _live_period
-                if (_live_period := live_period(self.live_period)) is not ...
-                else self.live_period
-            )
-            if live_period is not ...
-            else self.live_period,
-            heading=(
-                _heading
-                if (_heading := heading(self.heading)) is not ...
-                else self.heading
-            )
-            if heading is not ...
-            else self.heading,
-            proximity_alert_radius=(
-                _proximity_alert_radius
-                if (
-                    _proximity_alert_radius := proximity_alert_radius(
-                        self.proximity_alert_radius
-                    )
-                )
-                is not ...
-                else self.proximity_alert_radius
-            )
-            if proximity_alert_radius is not ...
-            else self.proximity_alert_radius,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_width=(
-                _thumbnail_width
-                if (_thumbnail_width := thumbnail_width(self.thumbnail_width))
-                is not ...
-                else self.thumbnail_width
-            )
-            if thumbnail_width is not ...
-            else self.thumbnail_width,
-            thumbnail_height=(
-                _thumbnail_height
-                if (_thumbnail_height := thumbnail_height(self.thumbnail_height))
-                is not ...
-                else self.thumbnail_height
-            )
-            if thumbnail_height is not ...
-            else self.thumbnail_height,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            latitude=self.latitude
+            if latitude is ...
+            else prefer(latitude(self.latitude), self.latitude),
+            longitude=self.longitude
+            if longitude is ...
+            else prefer(longitude(self.longitude), self.longitude),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            horizontal_accuracy=self.horizontal_accuracy
+            if horizontal_accuracy is ...
+            else prefer(
+                horizontal_accuracy(self.horizontal_accuracy), self.horizontal_accuracy
+            ),
+            live_period=self.live_period
+            if live_period is ...
+            else prefer(live_period(self.live_period), self.live_period),
+            heading=self.heading
+            if heading is ...
+            else prefer(heading(self.heading), self.heading),
+            proximity_alert_radius=self.proximity_alert_radius
+            if proximity_alert_radius is ...
+            else prefer(
+                proximity_alert_radius(self.proximity_alert_radius),
+                self.proximity_alert_radius,
+            ),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_width=self.thumbnail_width
+            if thumbnail_width is ...
+            else prefer(thumbnail_width(self.thumbnail_width), self.thumbnail_width),
+            thumbnail_height=self.thumbnail_height
+            if thumbnail_height is ...
+            else prefer(thumbnail_height(self.thumbnail_height), self.thumbnail_height),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        latitude: float | None = None,
-        longitude: float | None = None,
-        title: str | None = None,
-        horizontal_accuracy: float | None = None,
-        live_period: int | None = None,
-        heading: int | None = None,
-        proximity_alert_radius: int | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_width: int | None = None,
-        thumbnail_height: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        latitude: float | EllipsisType = ...,
+        longitude: float | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        horizontal_accuracy: float | None | EllipsisType = ...,
+        live_period: int | None | EllipsisType = ...,
+        heading: int | None | EllipsisType = ...,
+        proximity_alert_radius: int | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
+        thumbnail_url: str | None | EllipsisType = ...,
+        thumbnail_width: int | None | EllipsisType = ...,
+        thumbnail_height: int | None | EllipsisType = ...,
     ) -> InlineQueryResultLocation:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultLocation(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            latitude=latitude if latitude is not None else self.latitude,
-            longitude=longitude if longitude is not None else self.longitude,
-            title=title if title is not None else self.title,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            latitude=latitude if latitude is not ... else self.latitude,
+            longitude=longitude if longitude is not ... else self.longitude,
+            title=title if title is not ... else self.title,
             horizontal_accuracy=horizontal_accuracy
-            if horizontal_accuracy is not None
+            if horizontal_accuracy is not ...
             else self.horizontal_accuracy,
-            live_period=live_period if live_period is not None else self.live_period,
-            heading=heading if heading is not None else self.heading,
+            live_period=live_period if live_period is not ... else self.live_period,
+            heading=heading if heading is not ... else self.heading,
             proximity_alert_radius=proximity_alert_radius
-            if proximity_alert_radius is not None
+            if proximity_alert_radius is not ...
             else self.proximity_alert_radius,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_width=thumbnail_width
-            if thumbnail_width is not None
+            if thumbnail_width is not ...
             else self.thumbnail_width,
             thumbnail_height=thumbnail_height
-            if thumbnail_height is not None
+            if thumbnail_height is not ...
             else self.thumbnail_height,
         )
 
@@ -10953,195 +7855,121 @@ class InlineQueryResultVenue:
     """Optional. Thumbnail height """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        latitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        longitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        address: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        foursquare_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        foursquare_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        latitude: AlterFn[float] | EllipsisType = ...,
+        longitude: AlterFn[float] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        address: AlterFn[str] | EllipsisType = ...,
+        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
+        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
+        google_place_id: AlterFn[str | None] | EllipsisType = ...,
+        google_place_type: AlterFn[str | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultVenue:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVenue(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            latitude=(
-                _latitude
-                if (_latitude := latitude(self.latitude)) is not ...
-                else self.latitude
-            )
-            if latitude is not ...
-            else self.latitude,
-            longitude=(
-                _longitude
-                if (_longitude := longitude(self.longitude)) is not ...
-                else self.longitude
-            )
-            if longitude is not ...
-            else self.longitude,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            address=(
-                _address
-                if (_address := address(self.address)) is not ...
-                else self.address
-            )
-            if address is not ...
-            else self.address,
-            foursquare_id=(
-                _foursquare_id
-                if (_foursquare_id := foursquare_id(self.foursquare_id)) is not ...
-                else self.foursquare_id
-            )
-            if foursquare_id is not ...
-            else self.foursquare_id,
-            foursquare_type=(
-                _foursquare_type
-                if (_foursquare_type := foursquare_type(self.foursquare_type))
-                is not ...
-                else self.foursquare_type
-            )
-            if foursquare_type is not ...
-            else self.foursquare_type,
-            google_place_id=(
-                _google_place_id
-                if (_google_place_id := google_place_id(self.google_place_id))
-                is not ...
-                else self.google_place_id
-            )
-            if google_place_id is not ...
-            else self.google_place_id,
-            google_place_type=(
-                _google_place_type
-                if (_google_place_type := google_place_type(self.google_place_type))
-                is not ...
-                else self.google_place_type
-            )
-            if google_place_type is not ...
-            else self.google_place_type,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_width=(
-                _thumbnail_width
-                if (_thumbnail_width := thumbnail_width(self.thumbnail_width))
-                is not ...
-                else self.thumbnail_width
-            )
-            if thumbnail_width is not ...
-            else self.thumbnail_width,
-            thumbnail_height=(
-                _thumbnail_height
-                if (_thumbnail_height := thumbnail_height(self.thumbnail_height))
-                is not ...
-                else self.thumbnail_height
-            )
-            if thumbnail_height is not ...
-            else self.thumbnail_height,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            latitude=self.latitude
+            if latitude is ...
+            else prefer(latitude(self.latitude), self.latitude),
+            longitude=self.longitude
+            if longitude is ...
+            else prefer(longitude(self.longitude), self.longitude),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            address=self.address
+            if address is ...
+            else prefer(address(self.address), self.address),
+            foursquare_id=self.foursquare_id
+            if foursquare_id is ...
+            else prefer(foursquare_id(self.foursquare_id), self.foursquare_id),
+            foursquare_type=self.foursquare_type
+            if foursquare_type is ...
+            else prefer(foursquare_type(self.foursquare_type), self.foursquare_type),
+            google_place_id=self.google_place_id
+            if google_place_id is ...
+            else prefer(google_place_id(self.google_place_id), self.google_place_id),
+            google_place_type=self.google_place_type
+            if google_place_type is ...
+            else prefer(
+                google_place_type(self.google_place_type), self.google_place_type
+            ),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_width=self.thumbnail_width
+            if thumbnail_width is ...
+            else prefer(thumbnail_width(self.thumbnail_width), self.thumbnail_width),
+            thumbnail_height=self.thumbnail_height
+            if thumbnail_height is ...
+            else prefer(thumbnail_height(self.thumbnail_height), self.thumbnail_height),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        latitude: float | None = None,
-        longitude: float | None = None,
-        title: str | None = None,
-        address: str | None = None,
-        foursquare_id: str | None = None,
-        foursquare_type: str | None = None,
-        google_place_id: str | None = None,
-        google_place_type: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_width: int | None = None,
-        thumbnail_height: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        latitude: float | EllipsisType = ...,
+        longitude: float | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        address: str | EllipsisType = ...,
+        foursquare_id: str | None | EllipsisType = ...,
+        foursquare_type: str | None | EllipsisType = ...,
+        google_place_id: str | None | EllipsisType = ...,
+        google_place_type: str | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
+        thumbnail_url: str | None | EllipsisType = ...,
+        thumbnail_width: int | None | EllipsisType = ...,
+        thumbnail_height: int | None | EllipsisType = ...,
     ) -> InlineQueryResultVenue:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultVenue(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            latitude=latitude if latitude is not None else self.latitude,
-            longitude=longitude if longitude is not None else self.longitude,
-            title=title if title is not None else self.title,
-            address=address if address is not None else self.address,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            latitude=latitude if latitude is not ... else self.latitude,
+            longitude=longitude if longitude is not ... else self.longitude,
+            title=title if title is not ... else self.title,
+            address=address if address is not ... else self.address,
             foursquare_id=foursquare_id
-            if foursquare_id is not None
+            if foursquare_id is not ...
             else self.foursquare_id,
             foursquare_type=foursquare_type
-            if foursquare_type is not None
+            if foursquare_type is not ...
             else self.foursquare_type,
             google_place_id=google_place_id
-            if google_place_id is not None
+            if google_place_id is not ...
             else self.google_place_id,
             google_place_type=google_place_type
-            if google_place_type is not None
+            if google_place_type is not ...
             else self.google_place_type,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_width=thumbnail_width
-            if thumbnail_width is not None
+            if thumbnail_width is not ...
             else self.thumbnail_width,
             thumbnail_height=thumbnail_height
-            if thumbnail_height is not None
+            if thumbnail_height is not ...
             else self.thumbnail_height,
         )
 
@@ -11176,143 +8004,87 @@ class InlineQueryResultContact:
     """Optional. Thumbnail height """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        phone_number: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        first_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        last_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        vcard: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        thumbnail_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        thumbnail_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        phone_number: AlterFn[str] | EllipsisType = ...,
+        first_name: AlterFn[str] | EllipsisType = ...,
+        last_name: AlterFn[str | None] | EllipsisType = ...,
+        vcard: AlterFn[str | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
+        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
+        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultContact:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultContact(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            phone_number=(
-                _phone_number
-                if (_phone_number := phone_number(self.phone_number)) is not ...
-                else self.phone_number
-            )
-            if phone_number is not ...
-            else self.phone_number,
-            first_name=(
-                _first_name
-                if (_first_name := first_name(self.first_name)) is not ...
-                else self.first_name
-            )
-            if first_name is not ...
-            else self.first_name,
-            last_name=(
-                _last_name
-                if (_last_name := last_name(self.last_name)) is not ...
-                else self.last_name
-            )
-            if last_name is not ...
-            else self.last_name,
-            vcard=(_vcard if (_vcard := vcard(self.vcard)) is not ... else self.vcard)
-            if vcard is not ...
-            else self.vcard,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
-            thumbnail_url=(
-                _thumbnail_url
-                if (_thumbnail_url := thumbnail_url(self.thumbnail_url)) is not ...
-                else self.thumbnail_url
-            )
-            if thumbnail_url is not ...
-            else self.thumbnail_url,
-            thumbnail_width=(
-                _thumbnail_width
-                if (_thumbnail_width := thumbnail_width(self.thumbnail_width))
-                is not ...
-                else self.thumbnail_width
-            )
-            if thumbnail_width is not ...
-            else self.thumbnail_width,
-            thumbnail_height=(
-                _thumbnail_height
-                if (_thumbnail_height := thumbnail_height(self.thumbnail_height))
-                is not ...
-                else self.thumbnail_height
-            )
-            if thumbnail_height is not ...
-            else self.thumbnail_height,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            phone_number=self.phone_number
+            if phone_number is ...
+            else prefer(phone_number(self.phone_number), self.phone_number),
+            first_name=self.first_name
+            if first_name is ...
+            else prefer(first_name(self.first_name), self.first_name),
+            last_name=self.last_name
+            if last_name is ...
+            else prefer(last_name(self.last_name), self.last_name),
+            vcard=self.vcard if vcard is ... else prefer(vcard(self.vcard), self.vcard),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
+            thumbnail_url=self.thumbnail_url
+            if thumbnail_url is ...
+            else prefer(thumbnail_url(self.thumbnail_url), self.thumbnail_url),
+            thumbnail_width=self.thumbnail_width
+            if thumbnail_width is ...
+            else prefer(thumbnail_width(self.thumbnail_width), self.thumbnail_width),
+            thumbnail_height=self.thumbnail_height
+            if thumbnail_height is ...
+            else prefer(thumbnail_height(self.thumbnail_height), self.thumbnail_height),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        phone_number: str | None = None,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        vcard: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
-        thumbnail_url: str | None = None,
-        thumbnail_width: int | None = None,
-        thumbnail_height: int | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        phone_number: str | EllipsisType = ...,
+        first_name: str | EllipsisType = ...,
+        last_name: str | None | EllipsisType = ...,
+        vcard: str | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
+        thumbnail_url: str | None | EllipsisType = ...,
+        thumbnail_width: int | None | EllipsisType = ...,
+        thumbnail_height: int | None | EllipsisType = ...,
     ) -> InlineQueryResultContact:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultContact(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            phone_number=phone_number
-            if phone_number is not None
-            else self.phone_number,
-            first_name=first_name if first_name is not None else self.first_name,
-            last_name=last_name if last_name is not None else self.last_name,
-            vcard=vcard if vcard is not None else self.vcard,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            phone_number=phone_number if phone_number is not ... else self.phone_number,
+            first_name=first_name if first_name is not ... else self.first_name,
+            last_name=last_name if last_name is not ... else self.last_name,
+            vcard=vcard if vcard is not ... else self.vcard,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
             thumbnail_url=thumbnail_url
-            if thumbnail_url is not None
+            if thumbnail_url is not ...
             else self.thumbnail_url,
             thumbnail_width=thumbnail_width
-            if thumbnail_width is not None
+            if thumbnail_width is not ...
             else self.thumbnail_width,
             thumbnail_height=thumbnail_height
-            if thumbnail_height is not None
+            if thumbnail_height is not ...
             else self.thumbnail_height,
         )
 
@@ -11333,57 +8105,39 @@ class InlineQueryResultGame:
     """Optional. Inline keyboard attached to the message """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        game_short_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        game_short_name: AlterFn[str] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
     ) -> InlineQueryResultGame:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultGame(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            game_short_name=(
-                _game_short_name
-                if (_game_short_name := game_short_name(self.game_short_name))
-                is not ...
-                else self.game_short_name
-            )
-            if game_short_name is not ...
-            else self.game_short_name,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            game_short_name=self.game_short_name
+            if game_short_name is ...
+            else prefer(game_short_name(self.game_short_name), self.game_short_name),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        game_short_name: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        game_short_name: str | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
     ) -> InlineQueryResultGame:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultGame(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             game_short_name=game_short_name
-            if game_short_name is not None
+            if game_short_name is not ...
             else self.game_short_name,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
         )
 
 
@@ -11413,129 +8167,79 @@ class InlineQueryResultCachedPhoto:
     """Optional. Content of the message to be sent instead of the photo """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        photo_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        photo_file_id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedPhoto:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedPhoto(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            photo_file_id=(
-                _photo_file_id
-                if (_photo_file_id := photo_file_id(self.photo_file_id)) is not ...
-                else self.photo_file_id
-            )
-            if photo_file_id is not ...
-            else self.photo_file_id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            photo_file_id=self.photo_file_id
+            if photo_file_id is ...
+            else prefer(photo_file_id(self.photo_file_id), self.photo_file_id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        photo_file_id: str | None = None,
-        title: str | None = None,
-        description: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        photo_file_id: str | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedPhoto:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedPhoto(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             photo_file_id=photo_file_id
-            if photo_file_id is not None
+            if photo_file_id is not ...
             else self.photo_file_id,
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -11564,116 +8268,71 @@ class InlineQueryResultCachedGif:
     """Optional. Content of the message to be sent instead of the GIF animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        gif_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        gif_file_id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedGif:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedGif(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            gif_file_id=(
-                _gif_file_id
-                if (_gif_file_id := gif_file_id(self.gif_file_id)) is not ...
-                else self.gif_file_id
-            )
-            if gif_file_id is not ...
-            else self.gif_file_id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            gif_file_id=self.gif_file_id
+            if gif_file_id is ...
+            else prefer(gif_file_id(self.gif_file_id), self.gif_file_id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        gif_file_id: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        gif_file_id: str | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedGif:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedGif(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            gif_file_id=gif_file_id if gif_file_id is not None else self.gif_file_id,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            gif_file_id=gif_file_id if gif_file_id is not ... else self.gif_file_id,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -11702,118 +8361,73 @@ class InlineQueryResultCachedMpeg4Gif:
     """Optional. Content of the message to be sent instead of the video animation """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        mpeg4_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        mpeg4_file_id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedMpeg4Gif:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedMpeg4Gif(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            mpeg4_file_id=(
-                _mpeg4_file_id
-                if (_mpeg4_file_id := mpeg4_file_id(self.mpeg4_file_id)) is not ...
-                else self.mpeg4_file_id
-            )
-            if mpeg4_file_id is not ...
-            else self.mpeg4_file_id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            mpeg4_file_id=self.mpeg4_file_id
+            if mpeg4_file_id is ...
+            else prefer(mpeg4_file_id(self.mpeg4_file_id), self.mpeg4_file_id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        mpeg4_file_id: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        mpeg4_file_id: str | EllipsisType = ...,
+        title: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedMpeg4Gif:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedMpeg4Gif(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             mpeg4_file_id=mpeg4_file_id
-            if mpeg4_file_id is not None
+            if mpeg4_file_id is not ...
             else self.mpeg4_file_id,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -11836,76 +8450,49 @@ class InlineQueryResultCachedSticker:
     """Optional. Content of the message to be sent instead of the sticker """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        sticker_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        sticker_file_id: AlterFn[str] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedSticker:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedSticker(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            sticker_file_id=(
-                _sticker_file_id
-                if (_sticker_file_id := sticker_file_id(self.sticker_file_id))
-                is not ...
-                else self.sticker_file_id
-            )
-            if sticker_file_id is not ...
-            else self.sticker_file_id,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            sticker_file_id=self.sticker_file_id
+            if sticker_file_id is ...
+            else prefer(sticker_file_id(self.sticker_file_id), self.sticker_file_id),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        sticker_file_id: str | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        sticker_file_id: str | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedSticker:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedSticker(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             sticker_file_id=sticker_file_id
-            if sticker_file_id is not None
+            if sticker_file_id is not ...
             else self.sticker_file_id,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -11938,130 +8525,79 @@ class InlineQueryResultCachedDocument:
     """Optional. Content of the message to be sent instead of the file """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        document_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        document_file_id: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedDocument:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedDocument(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            document_file_id=(
-                _document_file_id
-                if (_document_file_id := document_file_id(self.document_file_id))
-                is not ...
-                else self.document_file_id
-            )
-            if document_file_id is not ...
-            else self.document_file_id,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            document_file_id=self.document_file_id
+            if document_file_id is ...
+            else prefer(document_file_id(self.document_file_id), self.document_file_id),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        title: str | None = None,
-        document_file_id: str | None = None,
-        description: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        document_file_id: str | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedDocument:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedDocument(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
-            title=title if title is not None else self.title,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
+            title=title if title is not ... else self.title,
             document_file_id=document_file_id
-            if document_file_id is not None
+            if document_file_id is not ...
             else self.document_file_id,
-            description=description if description is not None else self.description,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            description=description if description is not ... else self.description,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -12092,129 +8628,79 @@ class InlineQueryResultCachedVideo:
     """Optional. Content of the message to be sent instead of the video """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        video_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        video_file_id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str | None] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedVideo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedVideo(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            video_file_id=(
-                _video_file_id
-                if (_video_file_id := video_file_id(self.video_file_id)) is not ...
-                else self.video_file_id
-            )
-            if video_file_id is not ...
-            else self.video_file_id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            video_file_id=self.video_file_id
+            if video_file_id is ...
+            else prefer(video_file_id(self.video_file_id), self.video_file_id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        video_file_id: str | None = None,
-        title: str | None = None,
-        description: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        video_file_id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        description: str | None | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedVideo:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedVideo(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             video_file_id=video_file_id
-            if video_file_id is not None
+            if video_file_id is not ...
             else self.video_file_id,
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -12245,118 +8731,73 @@ class InlineQueryResultCachedVoice:
     """Optional. Content of the message to be sent instead of the voice message """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        voice_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        voice_file_id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedVoice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedVoice(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            voice_file_id=(
-                _voice_file_id
-                if (_voice_file_id := voice_file_id(self.voice_file_id)) is not ...
-                else self.voice_file_id
-            )
-            if voice_file_id is not ...
-            else self.voice_file_id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            voice_file_id=self.voice_file_id
+            if voice_file_id is ...
+            else prefer(voice_file_id(self.voice_file_id), self.voice_file_id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        voice_file_id: str | None = None,
-        title: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        voice_file_id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedVoice:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedVoice(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             voice_file_id=voice_file_id
-            if voice_file_id is not None
+            if voice_file_id is not ...
             else self.voice_file_id,
-            title=title if title is not None else self.title,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            title=title if title is not ... else self.title,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -12385,112 +8826,69 @@ class InlineQueryResultCachedAudio:
     """Optional. Content of the message to be sent instead of the audio """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        audio_file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        caption: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        caption_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        reply_markup: Callable[
-            [InlineKeyboardMarkup | None], InlineKeyboardMarkup | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        input_message_content: Callable[
-            [InputMessageContent | None], InputMessageContent | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        id: AlterFn[str] | EllipsisType = ...,
+        audio_file_id: AlterFn[str] | EllipsisType = ...,
+        caption: AlterFn[str | None] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedAudio:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedAudio(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            audio_file_id=(
-                _audio_file_id
-                if (_audio_file_id := audio_file_id(self.audio_file_id)) is not ...
-                else self.audio_file_id
-            )
-            if audio_file_id is not ...
-            else self.audio_file_id,
-            caption=(
-                _caption
-                if (_caption := caption(self.caption)) is not ...
-                else self.caption
-            )
-            if caption is not ...
-            else self.caption,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            caption_entities=(
-                _caption_entities
-                if (_caption_entities := caption_entities(self.caption_entities))
-                is not ...
-                else self.caption_entities
-            )
-            if caption_entities is not ...
-            else self.caption_entities,
-            reply_markup=(
-                _reply_markup
-                if (_reply_markup := reply_markup(self.reply_markup)) is not ...
-                else self.reply_markup
-            )
-            if reply_markup is not ...
-            else self.reply_markup,
-            input_message_content=(
-                _input_message_content
-                if (
-                    _input_message_content := input_message_content(
-                        self.input_message_content
-                    )
-                )
-                is not ...
-                else self.input_message_content
-            )
-            if input_message_content is not ...
-            else self.input_message_content,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            audio_file_id=self.audio_file_id
+            if audio_file_id is ...
+            else prefer(audio_file_id(self.audio_file_id), self.audio_file_id),
+            caption=self.caption
+            if caption is ...
+            else prefer(caption(self.caption), self.caption),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            caption_entities=self.caption_entities
+            if caption_entities is ...
+            else prefer(caption_entities(self.caption_entities), self.caption_entities),
+            reply_markup=self.reply_markup
+            if reply_markup is ...
+            else prefer(reply_markup(self.reply_markup), self.reply_markup),
+            input_message_content=self.input_message_content
+            if input_message_content is ...
+            else prefer(
+                input_message_content(self.input_message_content),
+                self.input_message_content,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        id: str | None = None,
-        audio_file_id: str | None = None,
-        caption: str | None = None,
-        parse_mode: str | None = None,
-        caption_entities: list[MessageEntity] | None = None,
-        reply_markup: InlineKeyboardMarkup | None = None,
-        input_message_content: InputMessageContent | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        id: str | EllipsisType = ...,
+        audio_file_id: str | EllipsisType = ...,
+        caption: str | None | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        caption_entities: list[MessageEntity] | None | EllipsisType = ...,
+        reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
+        input_message_content: InputMessageContent | None | EllipsisType = ...,
     ) -> InlineQueryResultCachedAudio:
         """Replaces some of model's fields with provided ones"""
         return InlineQueryResultCachedAudio(
-            type=type if type is not None else self.type,
-            id=id if id is not None else self.id,
+            type=type if type is not ... else self.type,
+            id=id if id is not ... else self.id,
             audio_file_id=audio_file_id
-            if audio_file_id is not None
+            if audio_file_id is not ...
             else self.audio_file_id,
-            caption=caption if caption is not None else self.caption,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
+            caption=caption if caption is not ... else self.caption,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
             caption_entities=caption_entities
-            if caption_entities is not None
+            if caption_entities is not ...
             else self.caption_entities,
-            reply_markup=reply_markup
-            if reply_markup is not None
-            else self.reply_markup,
+            reply_markup=reply_markup if reply_markup is not ... else self.reply_markup,
             input_message_content=input_message_content
-            if input_message_content is not None
+            if input_message_content is not ...
             else self.input_message_content,
         )
 
@@ -12509,70 +8907,45 @@ class InputTextMessageContent:
     """Optional. Disables link previews for links in the sent message """
 
     def alter(
-        self: Any,
-        message_text: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        parse_mode: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        disable_web_page_preview: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        message_text: AlterFn[str] | EllipsisType = ...,
+        parse_mode: AlterFn[str | None] | EllipsisType = ...,
+        entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        disable_web_page_preview: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputTextMessageContent:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputTextMessageContent(
-            message_text=(
-                _message_text
-                if (_message_text := message_text(self.message_text)) is not ...
-                else self.message_text
-            )
-            if message_text is not ...
-            else self.message_text,
-            parse_mode=(
-                _parse_mode
-                if (_parse_mode := parse_mode(self.parse_mode)) is not ...
-                else self.parse_mode
-            )
-            if parse_mode is not ...
-            else self.parse_mode,
-            entities=(
-                _entities
-                if (_entities := entities(self.entities)) is not ...
-                else self.entities
-            )
-            if entities is not ...
-            else self.entities,
-            disable_web_page_preview=(
-                _disable_web_page_preview
-                if (
-                    _disable_web_page_preview := disable_web_page_preview(
-                        self.disable_web_page_preview
-                    )
-                )
-                is not ...
-                else self.disable_web_page_preview
-            )
-            if disable_web_page_preview is not ...
-            else self.disable_web_page_preview,
+            message_text=self.message_text
+            if message_text is ...
+            else prefer(message_text(self.message_text), self.message_text),
+            parse_mode=self.parse_mode
+            if parse_mode is ...
+            else prefer(parse_mode(self.parse_mode), self.parse_mode),
+            entities=self.entities
+            if entities is ...
+            else prefer(entities(self.entities), self.entities),
+            disable_web_page_preview=self.disable_web_page_preview
+            if disable_web_page_preview is ...
+            else prefer(
+                disable_web_page_preview(self.disable_web_page_preview),
+                self.disable_web_page_preview,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        message_text: str | None = None,
-        parse_mode: str | None = None,
-        entities: list[MessageEntity] | None = None,
-        disable_web_page_preview: bool | None = None,
+        self,
+        message_text: str | EllipsisType = ...,
+        parse_mode: str | None | EllipsisType = ...,
+        entities: list[MessageEntity] | None | EllipsisType = ...,
+        disable_web_page_preview: bool | None | EllipsisType = ...,
     ) -> InputTextMessageContent:
         """Replaces some of model's fields with provided ones"""
         return InputTextMessageContent(
-            message_text=message_text
-            if message_text is not None
-            else self.message_text,
-            parse_mode=parse_mode if parse_mode is not None else self.parse_mode,
-            entities=entities if entities is not None else self.entities,
+            message_text=message_text if message_text is not ... else self.message_text,
+            parse_mode=parse_mode if parse_mode is not ... else self.parse_mode,
+            entities=entities if entities is not ... else self.entities,
             disable_web_page_preview=disable_web_page_preview
-            if disable_web_page_preview is not None
+            if disable_web_page_preview is not ...
             else self.disable_web_page_preview,
         )
 
@@ -12595,93 +8968,61 @@ class InputLocationMessageContent:
     """Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. """
 
     def alter(
-        self: Any,
-        latitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        longitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        horizontal_accuracy: Callable[[float | None], float | None | EllipsisType]
-        | EllipsisType = ...,
-        live_period: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        heading: Callable[[int | None], int | None | EllipsisType] | EllipsisType = ...,
-        proximity_alert_radius: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        latitude: AlterFn[float] | EllipsisType = ...,
+        longitude: AlterFn[float] | EllipsisType = ...,
+        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
+        live_period: AlterFn[int | None] | EllipsisType = ...,
+        heading: AlterFn[int | None] | EllipsisType = ...,
+        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
     ) -> InputLocationMessageContent:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputLocationMessageContent(
-            latitude=(
-                _latitude
-                if (_latitude := latitude(self.latitude)) is not ...
-                else self.latitude
-            )
-            if latitude is not ...
-            else self.latitude,
-            longitude=(
-                _longitude
-                if (_longitude := longitude(self.longitude)) is not ...
-                else self.longitude
-            )
-            if longitude is not ...
-            else self.longitude,
-            horizontal_accuracy=(
-                _horizontal_accuracy
-                if (
-                    _horizontal_accuracy := horizontal_accuracy(
-                        self.horizontal_accuracy
-                    )
-                )
-                is not ...
-                else self.horizontal_accuracy
-            )
-            if horizontal_accuracy is not ...
-            else self.horizontal_accuracy,
-            live_period=(
-                _live_period
-                if (_live_period := live_period(self.live_period)) is not ...
-                else self.live_period
-            )
-            if live_period is not ...
-            else self.live_period,
-            heading=(
-                _heading
-                if (_heading := heading(self.heading)) is not ...
-                else self.heading
-            )
-            if heading is not ...
-            else self.heading,
-            proximity_alert_radius=(
-                _proximity_alert_radius
-                if (
-                    _proximity_alert_radius := proximity_alert_radius(
-                        self.proximity_alert_radius
-                    )
-                )
-                is not ...
-                else self.proximity_alert_radius
-            )
-            if proximity_alert_radius is not ...
-            else self.proximity_alert_radius,
+            latitude=self.latitude
+            if latitude is ...
+            else prefer(latitude(self.latitude), self.latitude),
+            longitude=self.longitude
+            if longitude is ...
+            else prefer(longitude(self.longitude), self.longitude),
+            horizontal_accuracy=self.horizontal_accuracy
+            if horizontal_accuracy is ...
+            else prefer(
+                horizontal_accuracy(self.horizontal_accuracy), self.horizontal_accuracy
+            ),
+            live_period=self.live_period
+            if live_period is ...
+            else prefer(live_period(self.live_period), self.live_period),
+            heading=self.heading
+            if heading is ...
+            else prefer(heading(self.heading), self.heading),
+            proximity_alert_radius=self.proximity_alert_radius
+            if proximity_alert_radius is ...
+            else prefer(
+                proximity_alert_radius(self.proximity_alert_radius),
+                self.proximity_alert_radius,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        latitude: float | None = None,
-        longitude: float | None = None,
-        horizontal_accuracy: float | None = None,
-        live_period: int | None = None,
-        heading: int | None = None,
-        proximity_alert_radius: int | None = None,
+        self,
+        latitude: float | EllipsisType = ...,
+        longitude: float | EllipsisType = ...,
+        horizontal_accuracy: float | None | EllipsisType = ...,
+        live_period: int | None | EllipsisType = ...,
+        heading: int | None | EllipsisType = ...,
+        proximity_alert_radius: int | None | EllipsisType = ...,
     ) -> InputLocationMessageContent:
         """Replaces some of model's fields with provided ones"""
         return InputLocationMessageContent(
-            latitude=latitude if latitude is not None else self.latitude,
-            longitude=longitude if longitude is not None else self.longitude,
+            latitude=latitude if latitude is not ... else self.latitude,
+            longitude=longitude if longitude is not ... else self.longitude,
             horizontal_accuracy=horizontal_accuracy
-            if horizontal_accuracy is not None
+            if horizontal_accuracy is not ...
             else self.horizontal_accuracy,
-            live_period=live_period if live_period is not None else self.live_period,
-            heading=heading if heading is not None else self.heading,
+            live_period=live_period if live_period is not ... else self.live_period,
+            heading=heading if heading is not ... else self.heading,
             proximity_alert_radius=proximity_alert_radius
-            if proximity_alert_radius is not None
+            if proximity_alert_radius is not ...
             else self.proximity_alert_radius,
         )
 
@@ -12708,107 +9049,72 @@ class InputVenueMessageContent:
     """Optional. Google Places type of the venue. (See supported types.) """
 
     def alter(
-        self: Any,
-        latitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        longitude: Callable[[float], float | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        address: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        foursquare_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        foursquare_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        google_place_type: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        latitude: AlterFn[float] | EllipsisType = ...,
+        longitude: AlterFn[float] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        address: AlterFn[str] | EllipsisType = ...,
+        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
+        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
+        google_place_id: AlterFn[str | None] | EllipsisType = ...,
+        google_place_type: AlterFn[str | None] | EllipsisType = ...,
     ) -> InputVenueMessageContent:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputVenueMessageContent(
-            latitude=(
-                _latitude
-                if (_latitude := latitude(self.latitude)) is not ...
-                else self.latitude
-            )
-            if latitude is not ...
-            else self.latitude,
-            longitude=(
-                _longitude
-                if (_longitude := longitude(self.longitude)) is not ...
-                else self.longitude
-            )
-            if longitude is not ...
-            else self.longitude,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            address=(
-                _address
-                if (_address := address(self.address)) is not ...
-                else self.address
-            )
-            if address is not ...
-            else self.address,
-            foursquare_id=(
-                _foursquare_id
-                if (_foursquare_id := foursquare_id(self.foursquare_id)) is not ...
-                else self.foursquare_id
-            )
-            if foursquare_id is not ...
-            else self.foursquare_id,
-            foursquare_type=(
-                _foursquare_type
-                if (_foursquare_type := foursquare_type(self.foursquare_type))
-                is not ...
-                else self.foursquare_type
-            )
-            if foursquare_type is not ...
-            else self.foursquare_type,
-            google_place_id=(
-                _google_place_id
-                if (_google_place_id := google_place_id(self.google_place_id))
-                is not ...
-                else self.google_place_id
-            )
-            if google_place_id is not ...
-            else self.google_place_id,
-            google_place_type=(
-                _google_place_type
-                if (_google_place_type := google_place_type(self.google_place_type))
-                is not ...
-                else self.google_place_type
-            )
-            if google_place_type is not ...
-            else self.google_place_type,
+            latitude=self.latitude
+            if latitude is ...
+            else prefer(latitude(self.latitude), self.latitude),
+            longitude=self.longitude
+            if longitude is ...
+            else prefer(longitude(self.longitude), self.longitude),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            address=self.address
+            if address is ...
+            else prefer(address(self.address), self.address),
+            foursquare_id=self.foursquare_id
+            if foursquare_id is ...
+            else prefer(foursquare_id(self.foursquare_id), self.foursquare_id),
+            foursquare_type=self.foursquare_type
+            if foursquare_type is ...
+            else prefer(foursquare_type(self.foursquare_type), self.foursquare_type),
+            google_place_id=self.google_place_id
+            if google_place_id is ...
+            else prefer(google_place_id(self.google_place_id), self.google_place_id),
+            google_place_type=self.google_place_type
+            if google_place_type is ...
+            else prefer(
+                google_place_type(self.google_place_type), self.google_place_type
+            ),
         )
 
     def copy_with(
-        self: Any,
-        latitude: float | None = None,
-        longitude: float | None = None,
-        title: str | None = None,
-        address: str | None = None,
-        foursquare_id: str | None = None,
-        foursquare_type: str | None = None,
-        google_place_id: str | None = None,
-        google_place_type: str | None = None,
+        self,
+        latitude: float | EllipsisType = ...,
+        longitude: float | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        address: str | EllipsisType = ...,
+        foursquare_id: str | None | EllipsisType = ...,
+        foursquare_type: str | None | EllipsisType = ...,
+        google_place_id: str | None | EllipsisType = ...,
+        google_place_type: str | None | EllipsisType = ...,
     ) -> InputVenueMessageContent:
         """Replaces some of model's fields with provided ones"""
         return InputVenueMessageContent(
-            latitude=latitude if latitude is not None else self.latitude,
-            longitude=longitude if longitude is not None else self.longitude,
-            title=title if title is not None else self.title,
-            address=address if address is not None else self.address,
+            latitude=latitude if latitude is not ... else self.latitude,
+            longitude=longitude if longitude is not ... else self.longitude,
+            title=title if title is not ... else self.title,
+            address=address if address is not ... else self.address,
             foursquare_id=foursquare_id
-            if foursquare_id is not None
+            if foursquare_id is not ...
             else self.foursquare_id,
             foursquare_type=foursquare_type
-            if foursquare_type is not None
+            if foursquare_type is not ...
             else self.foursquare_type,
             google_place_id=google_place_id
-            if google_place_id is not None
+            if google_place_id is not ...
             else self.google_place_id,
             google_place_type=google_place_type
-            if google_place_type is not None
+            if google_place_type is not ...
             else self.google_place_type,
         )
 
@@ -12827,56 +9133,39 @@ class InputContactMessageContent:
     """Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes """
 
     def alter(
-        self: Any,
-        phone_number: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        first_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        last_name: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        vcard: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
+        self,
+        phone_number: AlterFn[str] | EllipsisType = ...,
+        first_name: AlterFn[str] | EllipsisType = ...,
+        last_name: AlterFn[str | None] | EllipsisType = ...,
+        vcard: AlterFn[str | None] | EllipsisType = ...,
     ) -> InputContactMessageContent:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputContactMessageContent(
-            phone_number=(
-                _phone_number
-                if (_phone_number := phone_number(self.phone_number)) is not ...
-                else self.phone_number
-            )
-            if phone_number is not ...
-            else self.phone_number,
-            first_name=(
-                _first_name
-                if (_first_name := first_name(self.first_name)) is not ...
-                else self.first_name
-            )
-            if first_name is not ...
-            else self.first_name,
-            last_name=(
-                _last_name
-                if (_last_name := last_name(self.last_name)) is not ...
-                else self.last_name
-            )
-            if last_name is not ...
-            else self.last_name,
-            vcard=(_vcard if (_vcard := vcard(self.vcard)) is not ... else self.vcard)
-            if vcard is not ...
-            else self.vcard,
+            phone_number=self.phone_number
+            if phone_number is ...
+            else prefer(phone_number(self.phone_number), self.phone_number),
+            first_name=self.first_name
+            if first_name is ...
+            else prefer(first_name(self.first_name), self.first_name),
+            last_name=self.last_name
+            if last_name is ...
+            else prefer(last_name(self.last_name), self.last_name),
+            vcard=self.vcard if vcard is ... else prefer(vcard(self.vcard), self.vcard),
         )
 
     def copy_with(
-        self: Any,
-        phone_number: str | None = None,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        vcard: str | None = None,
+        self,
+        phone_number: str | EllipsisType = ...,
+        first_name: str | EllipsisType = ...,
+        last_name: str | None | EllipsisType = ...,
+        vcard: str | None | EllipsisType = ...,
     ) -> InputContactMessageContent:
         """Replaces some of model's fields with provided ones"""
         return InputContactMessageContent(
-            phone_number=phone_number
-            if phone_number is not None
-            else self.phone_number,
-            first_name=first_name if first_name is not None else self.first_name,
-            last_name=last_name if last_name is not None else self.last_name,
-            vcard=vcard if vcard is not None else self.vcard,
+            phone_number=phone_number if phone_number is not ... else self.phone_number,
+            first_name=first_name if first_name is not ... else self.first_name,
+            last_name=last_name if last_name is not ... else self.last_name,
+            vcard=vcard if vcard is not ... else self.vcard,
         )
 
 
@@ -12926,269 +9215,165 @@ class InputInvoiceMessageContent:
     """Optional. Pass True if the final price depends on the shipping method """
 
     def alter(
-        self: Any,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        payload: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        provider_token: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        currency: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        prices: Callable[[list[LabeledPrice]], list[LabeledPrice] | EllipsisType]
-        | EllipsisType = ...,
-        max_tip_amount: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        suggested_tip_amounts: Callable[
-            [list[int] | None], list[int] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        provider_data: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        photo_url: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        photo_size: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        photo_width: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        photo_height: Callable[[int | None], int | None | EllipsisType]
-        | EllipsisType = ...,
-        need_name: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        need_phone_number: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        need_email: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        need_shipping_address: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        send_phone_number_to_provider: Callable[
-            [bool | None], bool | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        send_email_to_provider: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
-        is_flexible: Callable[[bool | None], bool | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        title: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str] | EllipsisType = ...,
+        payload: AlterFn[str] | EllipsisType = ...,
+        provider_token: AlterFn[str] | EllipsisType = ...,
+        currency: AlterFn[str] | EllipsisType = ...,
+        prices: AlterFn[list[LabeledPrice]] | EllipsisType = ...,
+        max_tip_amount: AlterFn[int | None] | EllipsisType = ...,
+        suggested_tip_amounts: AlterFn[list[int] | None] | EllipsisType = ...,
+        provider_data: AlterFn[str | None] | EllipsisType = ...,
+        photo_url: AlterFn[str | None] | EllipsisType = ...,
+        photo_size: AlterFn[int | None] | EllipsisType = ...,
+        photo_width: AlterFn[int | None] | EllipsisType = ...,
+        photo_height: AlterFn[int | None] | EllipsisType = ...,
+        need_name: AlterFn[bool | None] | EllipsisType = ...,
+        need_phone_number: AlterFn[bool | None] | EllipsisType = ...,
+        need_email: AlterFn[bool | None] | EllipsisType = ...,
+        need_shipping_address: AlterFn[bool | None] | EllipsisType = ...,
+        send_phone_number_to_provider: AlterFn[bool | None] | EllipsisType = ...,
+        send_email_to_provider: AlterFn[bool | None] | EllipsisType = ...,
+        is_flexible: AlterFn[bool | None] | EllipsisType = ...,
     ) -> InputInvoiceMessageContent:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputInvoiceMessageContent(
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            payload=(
-                _payload
-                if (_payload := payload(self.payload)) is not ...
-                else self.payload
-            )
-            if payload is not ...
-            else self.payload,
-            provider_token=(
-                _provider_token
-                if (_provider_token := provider_token(self.provider_token)) is not ...
-                else self.provider_token
-            )
-            if provider_token is not ...
-            else self.provider_token,
-            currency=(
-                _currency
-                if (_currency := currency(self.currency)) is not ...
-                else self.currency
-            )
-            if currency is not ...
-            else self.currency,
-            prices=(
-                _prices if (_prices := prices(self.prices)) is not ... else self.prices
-            )
-            if prices is not ...
-            else self.prices,
-            max_tip_amount=(
-                _max_tip_amount
-                if (_max_tip_amount := max_tip_amount(self.max_tip_amount)) is not ...
-                else self.max_tip_amount
-            )
-            if max_tip_amount is not ...
-            else self.max_tip_amount,
-            suggested_tip_amounts=(
-                _suggested_tip_amounts
-                if (
-                    _suggested_tip_amounts := suggested_tip_amounts(
-                        self.suggested_tip_amounts
-                    )
-                )
-                is not ...
-                else self.suggested_tip_amounts
-            )
-            if suggested_tip_amounts is not ...
-            else self.suggested_tip_amounts,
-            provider_data=(
-                _provider_data
-                if (_provider_data := provider_data(self.provider_data)) is not ...
-                else self.provider_data
-            )
-            if provider_data is not ...
-            else self.provider_data,
-            photo_url=(
-                _photo_url
-                if (_photo_url := photo_url(self.photo_url)) is not ...
-                else self.photo_url
-            )
-            if photo_url is not ...
-            else self.photo_url,
-            photo_size=(
-                _photo_size
-                if (_photo_size := photo_size(self.photo_size)) is not ...
-                else self.photo_size
-            )
-            if photo_size is not ...
-            else self.photo_size,
-            photo_width=(
-                _photo_width
-                if (_photo_width := photo_width(self.photo_width)) is not ...
-                else self.photo_width
-            )
-            if photo_width is not ...
-            else self.photo_width,
-            photo_height=(
-                _photo_height
-                if (_photo_height := photo_height(self.photo_height)) is not ...
-                else self.photo_height
-            )
-            if photo_height is not ...
-            else self.photo_height,
-            need_name=(
-                _need_name
-                if (_need_name := need_name(self.need_name)) is not ...
-                else self.need_name
-            )
-            if need_name is not ...
-            else self.need_name,
-            need_phone_number=(
-                _need_phone_number
-                if (_need_phone_number := need_phone_number(self.need_phone_number))
-                is not ...
-                else self.need_phone_number
-            )
-            if need_phone_number is not ...
-            else self.need_phone_number,
-            need_email=(
-                _need_email
-                if (_need_email := need_email(self.need_email)) is not ...
-                else self.need_email
-            )
-            if need_email is not ...
-            else self.need_email,
-            need_shipping_address=(
-                _need_shipping_address
-                if (
-                    _need_shipping_address := need_shipping_address(
-                        self.need_shipping_address
-                    )
-                )
-                is not ...
-                else self.need_shipping_address
-            )
-            if need_shipping_address is not ...
-            else self.need_shipping_address,
-            send_phone_number_to_provider=(
-                _send_phone_number_to_provider
-                if (
-                    _send_phone_number_to_provider := send_phone_number_to_provider(
-                        self.send_phone_number_to_provider
-                    )
-                )
-                is not ...
-                else self.send_phone_number_to_provider
-            )
-            if send_phone_number_to_provider is not ...
-            else self.send_phone_number_to_provider,
-            send_email_to_provider=(
-                _send_email_to_provider
-                if (
-                    _send_email_to_provider := send_email_to_provider(
-                        self.send_email_to_provider
-                    )
-                )
-                is not ...
-                else self.send_email_to_provider
-            )
-            if send_email_to_provider is not ...
-            else self.send_email_to_provider,
-            is_flexible=(
-                _is_flexible
-                if (_is_flexible := is_flexible(self.is_flexible)) is not ...
-                else self.is_flexible
-            )
-            if is_flexible is not ...
-            else self.is_flexible,
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            payload=self.payload
+            if payload is ...
+            else prefer(payload(self.payload), self.payload),
+            provider_token=self.provider_token
+            if provider_token is ...
+            else prefer(provider_token(self.provider_token), self.provider_token),
+            currency=self.currency
+            if currency is ...
+            else prefer(currency(self.currency), self.currency),
+            prices=self.prices
+            if prices is ...
+            else prefer(prices(self.prices), self.prices),
+            max_tip_amount=self.max_tip_amount
+            if max_tip_amount is ...
+            else prefer(max_tip_amount(self.max_tip_amount), self.max_tip_amount),
+            suggested_tip_amounts=self.suggested_tip_amounts
+            if suggested_tip_amounts is ...
+            else prefer(
+                suggested_tip_amounts(self.suggested_tip_amounts),
+                self.suggested_tip_amounts,
+            ),
+            provider_data=self.provider_data
+            if provider_data is ...
+            else prefer(provider_data(self.provider_data), self.provider_data),
+            photo_url=self.photo_url
+            if photo_url is ...
+            else prefer(photo_url(self.photo_url), self.photo_url),
+            photo_size=self.photo_size
+            if photo_size is ...
+            else prefer(photo_size(self.photo_size), self.photo_size),
+            photo_width=self.photo_width
+            if photo_width is ...
+            else prefer(photo_width(self.photo_width), self.photo_width),
+            photo_height=self.photo_height
+            if photo_height is ...
+            else prefer(photo_height(self.photo_height), self.photo_height),
+            need_name=self.need_name
+            if need_name is ...
+            else prefer(need_name(self.need_name), self.need_name),
+            need_phone_number=self.need_phone_number
+            if need_phone_number is ...
+            else prefer(
+                need_phone_number(self.need_phone_number), self.need_phone_number
+            ),
+            need_email=self.need_email
+            if need_email is ...
+            else prefer(need_email(self.need_email), self.need_email),
+            need_shipping_address=self.need_shipping_address
+            if need_shipping_address is ...
+            else prefer(
+                need_shipping_address(self.need_shipping_address),
+                self.need_shipping_address,
+            ),
+            send_phone_number_to_provider=self.send_phone_number_to_provider
+            if send_phone_number_to_provider is ...
+            else prefer(
+                send_phone_number_to_provider(self.send_phone_number_to_provider),
+                self.send_phone_number_to_provider,
+            ),
+            send_email_to_provider=self.send_email_to_provider
+            if send_email_to_provider is ...
+            else prefer(
+                send_email_to_provider(self.send_email_to_provider),
+                self.send_email_to_provider,
+            ),
+            is_flexible=self.is_flexible
+            if is_flexible is ...
+            else prefer(is_flexible(self.is_flexible), self.is_flexible),
         )
 
     def copy_with(
-        self: Any,
-        title: str | None = None,
-        description: str | None = None,
-        payload: str | None = None,
-        provider_token: str | None = None,
-        currency: str | None = None,
-        prices: list[LabeledPrice] | None = None,
-        max_tip_amount: int | None = None,
-        suggested_tip_amounts: list[int] | None = None,
-        provider_data: str | None = None,
-        photo_url: str | None = None,
-        photo_size: int | None = None,
-        photo_width: int | None = None,
-        photo_height: int | None = None,
-        need_name: bool | None = None,
-        need_phone_number: bool | None = None,
-        need_email: bool | None = None,
-        need_shipping_address: bool | None = None,
-        send_phone_number_to_provider: bool | None = None,
-        send_email_to_provider: bool | None = None,
-        is_flexible: bool | None = None,
+        self,
+        title: str | EllipsisType = ...,
+        description: str | EllipsisType = ...,
+        payload: str | EllipsisType = ...,
+        provider_token: str | EllipsisType = ...,
+        currency: str | EllipsisType = ...,
+        prices: list[LabeledPrice] | EllipsisType = ...,
+        max_tip_amount: int | None | EllipsisType = ...,
+        suggested_tip_amounts: list[int] | None | EllipsisType = ...,
+        provider_data: str | None | EllipsisType = ...,
+        photo_url: str | None | EllipsisType = ...,
+        photo_size: int | None | EllipsisType = ...,
+        photo_width: int | None | EllipsisType = ...,
+        photo_height: int | None | EllipsisType = ...,
+        need_name: bool | None | EllipsisType = ...,
+        need_phone_number: bool | None | EllipsisType = ...,
+        need_email: bool | None | EllipsisType = ...,
+        need_shipping_address: bool | None | EllipsisType = ...,
+        send_phone_number_to_provider: bool | None | EllipsisType = ...,
+        send_email_to_provider: bool | None | EllipsisType = ...,
+        is_flexible: bool | None | EllipsisType = ...,
     ) -> InputInvoiceMessageContent:
         """Replaces some of model's fields with provided ones"""
         return InputInvoiceMessageContent(
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
-            payload=payload if payload is not None else self.payload,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
+            payload=payload if payload is not ... else self.payload,
             provider_token=provider_token
-            if provider_token is not None
+            if provider_token is not ...
             else self.provider_token,
-            currency=currency if currency is not None else self.currency,
-            prices=prices if prices is not None else self.prices,
+            currency=currency if currency is not ... else self.currency,
+            prices=prices if prices is not ... else self.prices,
             max_tip_amount=max_tip_amount
-            if max_tip_amount is not None
+            if max_tip_amount is not ...
             else self.max_tip_amount,
             suggested_tip_amounts=suggested_tip_amounts
-            if suggested_tip_amounts is not None
+            if suggested_tip_amounts is not ...
             else self.suggested_tip_amounts,
             provider_data=provider_data
-            if provider_data is not None
+            if provider_data is not ...
             else self.provider_data,
-            photo_url=photo_url if photo_url is not None else self.photo_url,
-            photo_size=photo_size if photo_size is not None else self.photo_size,
-            photo_width=photo_width if photo_width is not None else self.photo_width,
-            photo_height=photo_height
-            if photo_height is not None
-            else self.photo_height,
-            need_name=need_name if need_name is not None else self.need_name,
+            photo_url=photo_url if photo_url is not ... else self.photo_url,
+            photo_size=photo_size if photo_size is not ... else self.photo_size,
+            photo_width=photo_width if photo_width is not ... else self.photo_width,
+            photo_height=photo_height if photo_height is not ... else self.photo_height,
+            need_name=need_name if need_name is not ... else self.need_name,
             need_phone_number=need_phone_number
-            if need_phone_number is not None
+            if need_phone_number is not ...
             else self.need_phone_number,
-            need_email=need_email if need_email is not None else self.need_email,
+            need_email=need_email if need_email is not ... else self.need_email,
             need_shipping_address=need_shipping_address
-            if need_shipping_address is not None
+            if need_shipping_address is not ...
             else self.need_shipping_address,
             send_phone_number_to_provider=send_phone_number_to_provider
-            if send_phone_number_to_provider is not None
+            if send_phone_number_to_provider is not ...
             else self.send_phone_number_to_provider,
             send_email_to_provider=send_email_to_provider
-            if send_email_to_provider is not None
+            if send_email_to_provider is not ...
             else self.send_email_to_provider,
-            is_flexible=is_flexible if is_flexible is not None else self.is_flexible,
+            is_flexible=is_flexible if is_flexible is not ... else self.is_flexible,
         )
 
 
@@ -13210,64 +9395,47 @@ class ChosenInlineResult:
     """Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message. """
 
     def alter(
-        self: Any,
-        result_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        location: Callable[[Location | None], Location | None | EllipsisType]
-        | EllipsisType = ...,
-        inline_message_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        query: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        result_id: AlterFn[str] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        location: AlterFn[Location | None] | EllipsisType = ...,
+        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
+        query: AlterFn[str] | EllipsisType = ...,
     ) -> ChosenInlineResult:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChosenInlineResult(
-            result_id=(
-                _result_id
-                if (_result_id := result_id(self.result_id)) is not ...
-                else self.result_id
-            )
-            if result_id is not ...
-            else self.result_id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            location=(
-                _location
-                if (_location := location(self.location)) is not ...
-                else self.location
-            )
-            if location is not ...
-            else self.location,
-            inline_message_id=(
-                _inline_message_id
-                if (_inline_message_id := inline_message_id(self.inline_message_id))
-                is not ...
-                else self.inline_message_id
-            )
-            if inline_message_id is not ...
-            else self.inline_message_id,
-            query=(_query if (_query := query(self.query)) is not ... else self.query)
-            if query is not ...
-            else self.query,
+            result_id=self.result_id
+            if result_id is ...
+            else prefer(result_id(self.result_id), self.result_id),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            location=self.location
+            if location is ...
+            else prefer(location(self.location), self.location),
+            inline_message_id=self.inline_message_id
+            if inline_message_id is ...
+            else prefer(
+                inline_message_id(self.inline_message_id), self.inline_message_id
+            ),
+            query=self.query if query is ... else prefer(query(self.query), self.query),
         )
 
     def copy_with(
-        self: Any,
-        result_id: str | None = None,
-        from_: User | None = None,
-        location: Location | None = None,
-        inline_message_id: str | None = None,
-        query: str | None = None,
+        self,
+        result_id: str | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        location: Location | None | EllipsisType = ...,
+        inline_message_id: str | None | EllipsisType = ...,
+        query: str | EllipsisType = ...,
     ) -> ChosenInlineResult:
         """Replaces some of model's fields with provided ones"""
         return ChosenInlineResult(
-            result_id=result_id if result_id is not None else self.result_id,
-            from_=from_ if from_ is not None else self.from_,
-            location=location if location is not None else self.location,
+            result_id=result_id if result_id is not ... else self.result_id,
+            from_=from_ if from_ is not ... else self.from_,
+            location=location if location is not ... else self.location,
             inline_message_id=inline_message_id
-            if inline_message_id is not None
+            if inline_message_id is not ...
             else self.inline_message_id,
-            query=query if query is not None else self.query,
+            query=query if query is not ... else self.query,
         )
 
 
@@ -13279,30 +9447,26 @@ class SentWebAppMessage:
     """Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. """
 
     def alter(
-        self: Any,
-        inline_message_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
     ) -> SentWebAppMessage:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SentWebAppMessage(
-            inline_message_id=(
-                _inline_message_id
-                if (_inline_message_id := inline_message_id(self.inline_message_id))
-                is not ...
-                else self.inline_message_id
+            inline_message_id=self.inline_message_id
+            if inline_message_id is ...
+            else prefer(
+                inline_message_id(self.inline_message_id), self.inline_message_id
             )
-            if inline_message_id is not ...
-            else self.inline_message_id
         )
 
     def copy_with(
-        self: Any,
-        inline_message_id: str | None = None,
+        self,
+        inline_message_id: str | None | EllipsisType = ...,
     ) -> SentWebAppMessage:
         """Replaces some of model's fields with provided ones"""
         return SentWebAppMessage(
             inline_message_id=inline_message_id
-            if inline_message_id is not None
+            if inline_message_id is not ...
             else self.inline_message_id
         )
 
@@ -13317,31 +9481,27 @@ class LabeledPrice:
     """Price of the product in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). """
 
     def alter(
-        self: Any,
-        label: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        amount: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        label: AlterFn[str] | EllipsisType = ...,
+        amount: AlterFn[int] | EllipsisType = ...,
     ) -> LabeledPrice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return LabeledPrice(
-            label=(_label if (_label := label(self.label)) is not ... else self.label)
-            if label is not ...
-            else self.label,
-            amount=(
-                _amount if (_amount := amount(self.amount)) is not ... else self.amount
-            )
-            if amount is not ...
-            else self.amount,
+            label=self.label if label is ... else prefer(label(self.label), self.label),
+            amount=self.amount
+            if amount is ...
+            else prefer(amount(self.amount), self.amount),
         )
 
     def copy_with(
-        self: Any,
-        label: str | None = None,
-        amount: int | None = None,
+        self,
+        label: str | EllipsisType = ...,
+        amount: int | EllipsisType = ...,
     ) -> LabeledPrice:
         """Replaces some of model's fields with provided ones"""
         return LabeledPrice(
-            label=label if label is not None else self.label,
-            amount=amount if amount is not None else self.amount,
+            label=label if label is not ... else self.label,
+            amount=amount if amount is not ... else self.amount,
         )
 
 
@@ -13361,68 +9521,47 @@ class Invoice:
     """Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). """
 
     def alter(
-        self: Any,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        start_parameter: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        currency: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        total_amount: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        title: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str] | EllipsisType = ...,
+        start_parameter: AlterFn[str] | EllipsisType = ...,
+        currency: AlterFn[str] | EllipsisType = ...,
+        total_amount: AlterFn[int] | EllipsisType = ...,
     ) -> Invoice:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Invoice(
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            start_parameter=(
-                _start_parameter
-                if (_start_parameter := start_parameter(self.start_parameter))
-                is not ...
-                else self.start_parameter
-            )
-            if start_parameter is not ...
-            else self.start_parameter,
-            currency=(
-                _currency
-                if (_currency := currency(self.currency)) is not ...
-                else self.currency
-            )
-            if currency is not ...
-            else self.currency,
-            total_amount=(
-                _total_amount
-                if (_total_amount := total_amount(self.total_amount)) is not ...
-                else self.total_amount
-            )
-            if total_amount is not ...
-            else self.total_amount,
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            start_parameter=self.start_parameter
+            if start_parameter is ...
+            else prefer(start_parameter(self.start_parameter), self.start_parameter),
+            currency=self.currency
+            if currency is ...
+            else prefer(currency(self.currency), self.currency),
+            total_amount=self.total_amount
+            if total_amount is ...
+            else prefer(total_amount(self.total_amount), self.total_amount),
         )
 
     def copy_with(
-        self: Any,
-        title: str | None = None,
-        description: str | None = None,
-        start_parameter: str | None = None,
-        currency: str | None = None,
-        total_amount: int | None = None,
+        self,
+        title: str | EllipsisType = ...,
+        description: str | EllipsisType = ...,
+        start_parameter: str | EllipsisType = ...,
+        currency: str | EllipsisType = ...,
+        total_amount: int | EllipsisType = ...,
     ) -> Invoice:
         """Replaces some of model's fields with provided ones"""
         return Invoice(
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
             start_parameter=start_parameter
-            if start_parameter is not None
+            if start_parameter is not ...
             else self.start_parameter,
-            currency=currency if currency is not None else self.currency,
-            total_amount=total_amount
-            if total_amount is not None
-            else self.total_amount,
+            currency=currency if currency is not ... else self.currency,
+            total_amount=total_amount if total_amount is not ... else self.total_amount,
         )
 
 
@@ -13444,75 +9583,49 @@ class ShippingAddress:
     """Address post code """
 
     def alter(
-        self: Any,
-        country_code: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        state: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        city: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        street_line1: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        street_line2: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        post_code: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        country_code: AlterFn[str] | EllipsisType = ...,
+        state: AlterFn[str] | EllipsisType = ...,
+        city: AlterFn[str] | EllipsisType = ...,
+        street_line1: AlterFn[str] | EllipsisType = ...,
+        street_line2: AlterFn[str] | EllipsisType = ...,
+        post_code: AlterFn[str] | EllipsisType = ...,
     ) -> ShippingAddress:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingAddress(
-            country_code=(
-                _country_code
-                if (_country_code := country_code(self.country_code)) is not ...
-                else self.country_code
-            )
-            if country_code is not ...
-            else self.country_code,
-            state=(_state if (_state := state(self.state)) is not ... else self.state)
-            if state is not ...
-            else self.state,
-            city=(_city if (_city := city(self.city)) is not ... else self.city)
-            if city is not ...
-            else self.city,
-            street_line1=(
-                _street_line1
-                if (_street_line1 := street_line1(self.street_line1)) is not ...
-                else self.street_line1
-            )
-            if street_line1 is not ...
-            else self.street_line1,
-            street_line2=(
-                _street_line2
-                if (_street_line2 := street_line2(self.street_line2)) is not ...
-                else self.street_line2
-            )
-            if street_line2 is not ...
-            else self.street_line2,
-            post_code=(
-                _post_code
-                if (_post_code := post_code(self.post_code)) is not ...
-                else self.post_code
-            )
-            if post_code is not ...
-            else self.post_code,
+            country_code=self.country_code
+            if country_code is ...
+            else prefer(country_code(self.country_code), self.country_code),
+            state=self.state if state is ... else prefer(state(self.state), self.state),
+            city=self.city if city is ... else prefer(city(self.city), self.city),
+            street_line1=self.street_line1
+            if street_line1 is ...
+            else prefer(street_line1(self.street_line1), self.street_line1),
+            street_line2=self.street_line2
+            if street_line2 is ...
+            else prefer(street_line2(self.street_line2), self.street_line2),
+            post_code=self.post_code
+            if post_code is ...
+            else prefer(post_code(self.post_code), self.post_code),
         )
 
     def copy_with(
-        self: Any,
-        country_code: str | None = None,
-        state: str | None = None,
-        city: str | None = None,
-        street_line1: str | None = None,
-        street_line2: str | None = None,
-        post_code: str | None = None,
+        self,
+        country_code: str | EllipsisType = ...,
+        state: str | EllipsisType = ...,
+        city: str | EllipsisType = ...,
+        street_line1: str | EllipsisType = ...,
+        street_line2: str | EllipsisType = ...,
+        post_code: str | EllipsisType = ...,
     ) -> ShippingAddress:
         """Replaces some of model's fields with provided ones"""
         return ShippingAddress(
-            country_code=country_code
-            if country_code is not None
-            else self.country_code,
-            state=state if state is not None else self.state,
-            city=city if city is not None else self.city,
-            street_line1=street_line1
-            if street_line1 is not None
-            else self.street_line1,
-            street_line2=street_line2
-            if street_line2 is not None
-            else self.street_line2,
-            post_code=post_code if post_code is not None else self.post_code,
+            country_code=country_code if country_code is not ... else self.country_code,
+            state=state if state is not ... else self.state,
+            city=city if city is not ... else self.city,
+            street_line1=street_line1 if street_line1 is not ... else self.street_line1,
+            street_line2=street_line2 if street_line2 is not ... else self.street_line2,
+            post_code=post_code if post_code is not ... else self.post_code,
         )
 
 
@@ -13530,57 +9643,38 @@ class OrderInfo:
     """Optional. User shipping address """
 
     def alter(
-        self: Any,
-        name: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        phone_number: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        email: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        shipping_address: Callable[
-            [ShippingAddress | None], ShippingAddress | None | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        name: AlterFn[str | None] | EllipsisType = ...,
+        phone_number: AlterFn[str | None] | EllipsisType = ...,
+        email: AlterFn[str | None] | EllipsisType = ...,
+        shipping_address: AlterFn[ShippingAddress | None] | EllipsisType = ...,
     ) -> OrderInfo:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return OrderInfo(
-            name=(_name if (_name := name(self.name)) is not ... else self.name)
-            if name is not ...
-            else self.name,
-            phone_number=(
-                _phone_number
-                if (_phone_number := phone_number(self.phone_number)) is not ...
-                else self.phone_number
-            )
-            if phone_number is not ...
-            else self.phone_number,
-            email=(_email if (_email := email(self.email)) is not ... else self.email)
-            if email is not ...
-            else self.email,
-            shipping_address=(
-                _shipping_address
-                if (_shipping_address := shipping_address(self.shipping_address))
-                is not ...
-                else self.shipping_address
-            )
-            if shipping_address is not ...
-            else self.shipping_address,
+            name=self.name if name is ... else prefer(name(self.name), self.name),
+            phone_number=self.phone_number
+            if phone_number is ...
+            else prefer(phone_number(self.phone_number), self.phone_number),
+            email=self.email if email is ... else prefer(email(self.email), self.email),
+            shipping_address=self.shipping_address
+            if shipping_address is ...
+            else prefer(shipping_address(self.shipping_address), self.shipping_address),
         )
 
     def copy_with(
-        self: Any,
-        name: str | None = None,
-        phone_number: str | None = None,
-        email: str | None = None,
-        shipping_address: ShippingAddress | None = None,
+        self,
+        name: str | None | EllipsisType = ...,
+        phone_number: str | None | EllipsisType = ...,
+        email: str | None | EllipsisType = ...,
+        shipping_address: ShippingAddress | None | EllipsisType = ...,
     ) -> OrderInfo:
         """Replaces some of model's fields with provided ones"""
         return OrderInfo(
-            name=name if name is not None else self.name,
-            phone_number=phone_number
-            if phone_number is not None
-            else self.phone_number,
-            email=email if email is not None else self.email,
+            name=name if name is not ... else self.name,
+            phone_number=phone_number if phone_number is not ... else self.phone_number,
+            email=email if email is not ... else self.email,
             shipping_address=shipping_address
-            if shipping_address is not None
+            if shipping_address is not ...
             else self.shipping_address,
         )
 
@@ -13597,38 +9691,31 @@ class ShippingOption:
     """List of price portions """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        prices: Callable[[list[LabeledPrice]], list[LabeledPrice] | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        title: AlterFn[str] | EllipsisType = ...,
+        prices: AlterFn[list[LabeledPrice]] | EllipsisType = ...,
     ) -> ShippingOption:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingOption(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            prices=(
-                _prices if (_prices := prices(self.prices)) is not ... else self.prices
-            )
-            if prices is not ...
-            else self.prices,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            prices=self.prices
+            if prices is ...
+            else prefer(prices(self.prices), self.prices),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        title: str | None = None,
-        prices: list[LabeledPrice] | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        title: str | EllipsisType = ...,
+        prices: list[LabeledPrice] | EllipsisType = ...,
     ) -> ShippingOption:
         """Replaces some of model's fields with provided ones"""
         return ShippingOption(
-            id=id if id is not None else self.id,
-            title=title if title is not None else self.title,
-            prices=prices if prices is not None else self.prices,
+            id=id if id is not ... else self.id,
+            title=title if title is not ... else self.title,
+            prices=prices if prices is not ... else self.prices,
         )
 
 
@@ -13652,112 +9739,74 @@ class SuccessfulPayment:
     """Optional. Order information provided by the user """
 
     def alter(
-        self: Any,
-        currency: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        total_amount: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        invoice_payload: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        shipping_option_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        order_info: Callable[[OrderInfo | None], OrderInfo | None | EllipsisType]
-        | EllipsisType = ...,
-        telegram_payment_charge_id: Callable[[str], str | EllipsisType]
-        | EllipsisType = ...,
-        provider_payment_charge_id: Callable[[str], str | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        currency: AlterFn[str] | EllipsisType = ...,
+        total_amount: AlterFn[int] | EllipsisType = ...,
+        invoice_payload: AlterFn[str] | EllipsisType = ...,
+        shipping_option_id: AlterFn[str | None] | EllipsisType = ...,
+        order_info: AlterFn[OrderInfo | None] | EllipsisType = ...,
+        telegram_payment_charge_id: AlterFn[str] | EllipsisType = ...,
+        provider_payment_charge_id: AlterFn[str] | EllipsisType = ...,
     ) -> SuccessfulPayment:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SuccessfulPayment(
-            currency=(
-                _currency
-                if (_currency := currency(self.currency)) is not ...
-                else self.currency
-            )
-            if currency is not ...
-            else self.currency,
-            total_amount=(
-                _total_amount
-                if (_total_amount := total_amount(self.total_amount)) is not ...
-                else self.total_amount
-            )
-            if total_amount is not ...
-            else self.total_amount,
-            invoice_payload=(
-                _invoice_payload
-                if (_invoice_payload := invoice_payload(self.invoice_payload))
-                is not ...
-                else self.invoice_payload
-            )
-            if invoice_payload is not ...
-            else self.invoice_payload,
-            shipping_option_id=(
-                _shipping_option_id
-                if (_shipping_option_id := shipping_option_id(self.shipping_option_id))
-                is not ...
-                else self.shipping_option_id
-            )
-            if shipping_option_id is not ...
-            else self.shipping_option_id,
-            order_info=(
-                _order_info
-                if (_order_info := order_info(self.order_info)) is not ...
-                else self.order_info
-            )
-            if order_info is not ...
-            else self.order_info,
-            telegram_payment_charge_id=(
-                _telegram_payment_charge_id
-                if (
-                    _telegram_payment_charge_id := telegram_payment_charge_id(
-                        self.telegram_payment_charge_id
-                    )
-                )
-                is not ...
-                else self.telegram_payment_charge_id
-            )
-            if telegram_payment_charge_id is not ...
-            else self.telegram_payment_charge_id,
-            provider_payment_charge_id=(
-                _provider_payment_charge_id
-                if (
-                    _provider_payment_charge_id := provider_payment_charge_id(
-                        self.provider_payment_charge_id
-                    )
-                )
-                is not ...
-                else self.provider_payment_charge_id
-            )
-            if provider_payment_charge_id is not ...
-            else self.provider_payment_charge_id,
+            currency=self.currency
+            if currency is ...
+            else prefer(currency(self.currency), self.currency),
+            total_amount=self.total_amount
+            if total_amount is ...
+            else prefer(total_amount(self.total_amount), self.total_amount),
+            invoice_payload=self.invoice_payload
+            if invoice_payload is ...
+            else prefer(invoice_payload(self.invoice_payload), self.invoice_payload),
+            shipping_option_id=self.shipping_option_id
+            if shipping_option_id is ...
+            else prefer(
+                shipping_option_id(self.shipping_option_id), self.shipping_option_id
+            ),
+            order_info=self.order_info
+            if order_info is ...
+            else prefer(order_info(self.order_info), self.order_info),
+            telegram_payment_charge_id=self.telegram_payment_charge_id
+            if telegram_payment_charge_id is ...
+            else prefer(
+                telegram_payment_charge_id(self.telegram_payment_charge_id),
+                self.telegram_payment_charge_id,
+            ),
+            provider_payment_charge_id=self.provider_payment_charge_id
+            if provider_payment_charge_id is ...
+            else prefer(
+                provider_payment_charge_id(self.provider_payment_charge_id),
+                self.provider_payment_charge_id,
+            ),
         )
 
     def copy_with(
-        self: Any,
-        currency: str | None = None,
-        total_amount: int | None = None,
-        invoice_payload: str | None = None,
-        shipping_option_id: str | None = None,
-        order_info: OrderInfo | None = None,
-        telegram_payment_charge_id: str | None = None,
-        provider_payment_charge_id: str | None = None,
+        self,
+        currency: str | EllipsisType = ...,
+        total_amount: int | EllipsisType = ...,
+        invoice_payload: str | EllipsisType = ...,
+        shipping_option_id: str | None | EllipsisType = ...,
+        order_info: OrderInfo | None | EllipsisType = ...,
+        telegram_payment_charge_id: str | EllipsisType = ...,
+        provider_payment_charge_id: str | EllipsisType = ...,
     ) -> SuccessfulPayment:
         """Replaces some of model's fields with provided ones"""
         return SuccessfulPayment(
-            currency=currency if currency is not None else self.currency,
-            total_amount=total_amount
-            if total_amount is not None
-            else self.total_amount,
+            currency=currency if currency is not ... else self.currency,
+            total_amount=total_amount if total_amount is not ... else self.total_amount,
             invoice_payload=invoice_payload
-            if invoice_payload is not None
+            if invoice_payload is not ...
             else self.invoice_payload,
             shipping_option_id=shipping_option_id
-            if shipping_option_id is not None
+            if shipping_option_id is not ...
             else self.shipping_option_id,
-            order_info=order_info if order_info is not None else self.order_info,
+            order_info=order_info if order_info is not ... else self.order_info,
             telegram_payment_charge_id=telegram_payment_charge_id
-            if telegram_payment_charge_id is not None
+            if telegram_payment_charge_id is not ...
             else self.telegram_payment_charge_id,
             provider_payment_charge_id=provider_payment_charge_id
-            if provider_payment_charge_id is not None
+            if provider_payment_charge_id is not ...
             else self.provider_payment_charge_id,
         )
 
@@ -13776,55 +9825,40 @@ class ShippingQuery:
     """User specified shipping address """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        invoice_payload: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        shipping_address: Callable[[ShippingAddress], ShippingAddress | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        invoice_payload: AlterFn[str] | EllipsisType = ...,
+        shipping_address: AlterFn[ShippingAddress] | EllipsisType = ...,
     ) -> ShippingQuery:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingQuery(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            invoice_payload=(
-                _invoice_payload
-                if (_invoice_payload := invoice_payload(self.invoice_payload))
-                is not ...
-                else self.invoice_payload
-            )
-            if invoice_payload is not ...
-            else self.invoice_payload,
-            shipping_address=(
-                _shipping_address
-                if (_shipping_address := shipping_address(self.shipping_address))
-                is not ...
-                else self.shipping_address
-            )
-            if shipping_address is not ...
-            else self.shipping_address,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            invoice_payload=self.invoice_payload
+            if invoice_payload is ...
+            else prefer(invoice_payload(self.invoice_payload), self.invoice_payload),
+            shipping_address=self.shipping_address
+            if shipping_address is ...
+            else prefer(shipping_address(self.shipping_address), self.shipping_address),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        from_: User | None = None,
-        invoice_payload: str | None = None,
-        shipping_address: ShippingAddress | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        invoice_payload: str | EllipsisType = ...,
+        shipping_address: ShippingAddress | EllipsisType = ...,
     ) -> ShippingQuery:
         """Replaces some of model's fields with provided ones"""
         return ShippingQuery(
-            id=id if id is not None else self.id,
-            from_=from_ if from_ is not None else self.from_,
+            id=id if id is not ... else self.id,
+            from_=from_ if from_ is not ... else self.from_,
             invoice_payload=invoice_payload
-            if invoice_payload is not None
+            if invoice_payload is not ...
             else self.invoice_payload,
             shipping_address=shipping_address
-            if shipping_address is not None
+            if shipping_address is not ...
             else self.shipping_address,
         )
 
@@ -13849,89 +9883,61 @@ class PreCheckoutQuery:
     """Optional. Order information provided by the user """
 
     def alter(
-        self: Any,
-        id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        from_: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        currency: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        total_amount: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        invoice_payload: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        shipping_option_id: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        order_info: Callable[[OrderInfo | None], OrderInfo | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        id: AlterFn[str] | EllipsisType = ...,
+        from_: AlterFn[User] | EllipsisType = ...,
+        currency: AlterFn[str] | EllipsisType = ...,
+        total_amount: AlterFn[int] | EllipsisType = ...,
+        invoice_payload: AlterFn[str] | EllipsisType = ...,
+        shipping_option_id: AlterFn[str | None] | EllipsisType = ...,
+        order_info: AlterFn[OrderInfo | None] | EllipsisType = ...,
     ) -> PreCheckoutQuery:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PreCheckoutQuery(
-            id=(_id if (_id := id(self.id)) is not ... else self.id)
-            if id is not ...
-            else self.id,
-            from_=(_from_ if (_from_ := from_(self.from_)) is not ... else self.from_)
-            if from_ is not ...
-            else self.from_,
-            currency=(
-                _currency
-                if (_currency := currency(self.currency)) is not ...
-                else self.currency
-            )
-            if currency is not ...
-            else self.currency,
-            total_amount=(
-                _total_amount
-                if (_total_amount := total_amount(self.total_amount)) is not ...
-                else self.total_amount
-            )
-            if total_amount is not ...
-            else self.total_amount,
-            invoice_payload=(
-                _invoice_payload
-                if (_invoice_payload := invoice_payload(self.invoice_payload))
-                is not ...
-                else self.invoice_payload
-            )
-            if invoice_payload is not ...
-            else self.invoice_payload,
-            shipping_option_id=(
-                _shipping_option_id
-                if (_shipping_option_id := shipping_option_id(self.shipping_option_id))
-                is not ...
-                else self.shipping_option_id
-            )
-            if shipping_option_id is not ...
-            else self.shipping_option_id,
-            order_info=(
-                _order_info
-                if (_order_info := order_info(self.order_info)) is not ...
-                else self.order_info
-            )
-            if order_info is not ...
-            else self.order_info,
+            id=self.id if id is ... else prefer(id(self.id), self.id),
+            from_=self.from_ if from_ is ... else prefer(from_(self.from_), self.from_),
+            currency=self.currency
+            if currency is ...
+            else prefer(currency(self.currency), self.currency),
+            total_amount=self.total_amount
+            if total_amount is ...
+            else prefer(total_amount(self.total_amount), self.total_amount),
+            invoice_payload=self.invoice_payload
+            if invoice_payload is ...
+            else prefer(invoice_payload(self.invoice_payload), self.invoice_payload),
+            shipping_option_id=self.shipping_option_id
+            if shipping_option_id is ...
+            else prefer(
+                shipping_option_id(self.shipping_option_id), self.shipping_option_id
+            ),
+            order_info=self.order_info
+            if order_info is ...
+            else prefer(order_info(self.order_info), self.order_info),
         )
 
     def copy_with(
-        self: Any,
-        id: str | None = None,
-        from_: User | None = None,
-        currency: str | None = None,
-        total_amount: int | None = None,
-        invoice_payload: str | None = None,
-        shipping_option_id: str | None = None,
-        order_info: OrderInfo | None = None,
+        self,
+        id: str | EllipsisType = ...,
+        from_: User | EllipsisType = ...,
+        currency: str | EllipsisType = ...,
+        total_amount: int | EllipsisType = ...,
+        invoice_payload: str | EllipsisType = ...,
+        shipping_option_id: str | None | EllipsisType = ...,
+        order_info: OrderInfo | None | EllipsisType = ...,
     ) -> PreCheckoutQuery:
         """Replaces some of model's fields with provided ones"""
         return PreCheckoutQuery(
-            id=id if id is not None else self.id,
-            from_=from_ if from_ is not None else self.from_,
-            currency=currency if currency is not None else self.currency,
-            total_amount=total_amount
-            if total_amount is not None
-            else self.total_amount,
+            id=id if id is not ... else self.id,
+            from_=from_ if from_ is not ... else self.from_,
+            currency=currency if currency is not ... else self.currency,
+            total_amount=total_amount if total_amount is not ... else self.total_amount,
             invoice_payload=invoice_payload
-            if invoice_payload is not None
+            if invoice_payload is not ...
             else self.invoice_payload,
             shipping_option_id=shipping_option_id
-            if shipping_option_id is not None
+            if shipping_option_id is not ...
             else self.shipping_option_id,
-            order_info=order_info if order_info is not None else self.order_info,
+            order_info=order_info if order_info is not ... else self.order_info,
         )
 
 
@@ -13945,40 +9951,27 @@ class PassportData:
     """Encrypted credentials required to decrypt the data """
 
     def alter(
-        self: Any,
-        data: Callable[
-            [list[EncryptedPassportElement]],
-            list[EncryptedPassportElement] | EllipsisType,
-        ]
-        | EllipsisType = ...,
-        credentials: Callable[
-            [EncryptedCredentials], EncryptedCredentials | EllipsisType
-        ]
-        | EllipsisType = ...,
+        self,
+        data: AlterFn[list[EncryptedPassportElement]] | EllipsisType = ...,
+        credentials: AlterFn[EncryptedCredentials] | EllipsisType = ...,
     ) -> PassportData:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportData(
-            data=(_data if (_data := data(self.data)) is not ... else self.data)
-            if data is not ...
-            else self.data,
-            credentials=(
-                _credentials
-                if (_credentials := credentials(self.credentials)) is not ...
-                else self.credentials
-            )
-            if credentials is not ...
-            else self.credentials,
+            data=self.data if data is ... else prefer(data(self.data), self.data),
+            credentials=self.credentials
+            if credentials is ...
+            else prefer(credentials(self.credentials), self.credentials),
         )
 
     def copy_with(
-        self: Any,
-        data: list[EncryptedPassportElement] | None = None,
-        credentials: EncryptedCredentials | None = None,
+        self,
+        data: list[EncryptedPassportElement] | EllipsisType = ...,
+        credentials: EncryptedCredentials | EllipsisType = ...,
     ) -> PassportData:
         """Replaces some of model's fields with provided ones"""
         return PassportData(
-            data=data if data is not None else self.data,
-            credentials=credentials if credentials is not None else self.credentials,
+            data=data if data is not ... else self.data,
+            credentials=credentials if credentials is not ... else self.credentials,
         )
 
 
@@ -13996,59 +9989,43 @@ class PassportFile:
     """Unix time when the file was uploaded """
 
     def alter(
-        self: Any,
-        file_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_unique_id: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_size: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        file_date: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        file_id: AlterFn[str] | EllipsisType = ...,
+        file_unique_id: AlterFn[str] | EllipsisType = ...,
+        file_size: AlterFn[int] | EllipsisType = ...,
+        file_date: AlterFn[int] | EllipsisType = ...,
     ) -> PassportFile:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportFile(
-            file_id=(
-                _file_id
-                if (_file_id := file_id(self.file_id)) is not ...
-                else self.file_id
-            )
-            if file_id is not ...
-            else self.file_id,
-            file_unique_id=(
-                _file_unique_id
-                if (_file_unique_id := file_unique_id(self.file_unique_id)) is not ...
-                else self.file_unique_id
-            )
-            if file_unique_id is not ...
-            else self.file_unique_id,
-            file_size=(
-                _file_size
-                if (_file_size := file_size(self.file_size)) is not ...
-                else self.file_size
-            )
-            if file_size is not ...
-            else self.file_size,
-            file_date=(
-                _file_date
-                if (_file_date := file_date(self.file_date)) is not ...
-                else self.file_date
-            )
-            if file_date is not ...
-            else self.file_date,
+            file_id=self.file_id
+            if file_id is ...
+            else prefer(file_id(self.file_id), self.file_id),
+            file_unique_id=self.file_unique_id
+            if file_unique_id is ...
+            else prefer(file_unique_id(self.file_unique_id), self.file_unique_id),
+            file_size=self.file_size
+            if file_size is ...
+            else prefer(file_size(self.file_size), self.file_size),
+            file_date=self.file_date
+            if file_date is ...
+            else prefer(file_date(self.file_date), self.file_date),
         )
 
     def copy_with(
-        self: Any,
-        file_id: str | None = None,
-        file_unique_id: str | None = None,
-        file_size: int | None = None,
-        file_date: int | None = None,
+        self,
+        file_id: str | EllipsisType = ...,
+        file_unique_id: str | EllipsisType = ...,
+        file_size: int | EllipsisType = ...,
+        file_date: int | EllipsisType = ...,
     ) -> PassportFile:
         """Replaces some of model's fields with provided ones"""
         return PassportFile(
-            file_id=file_id if file_id is not None else self.file_id,
+            file_id=file_id if file_id is not ... else self.file_id,
             file_unique_id=file_unique_id
-            if file_unique_id is not None
+            if file_unique_id is not ...
             else self.file_unique_id,
-            file_size=file_size if file_size is not None else self.file_size,
-            file_date=file_date if file_date is not None else self.file_date,
+            file_size=file_size if file_size is not ... else self.file_size,
+            file_date=file_date if file_date is not ... else self.file_date,
         )
 
 
@@ -14078,111 +10055,67 @@ class EncryptedPassportElement:
     """Optional. Array of encrypted files with translated versions of documents provided by the user. Available if requested for "passport", "driver_license", "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement", "passport_registration" and "temporary_registration" types. Files can be decrypted and verified using the accompanying EncryptedCredentials. """
 
     def alter(
-        self: Any,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        data: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        phone_number: Callable[[str | None], str | None | EllipsisType]
-        | EllipsisType = ...,
-        email: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        files: Callable[
-            [list[PassportFile] | None], list[PassportFile] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        front_side: Callable[[PassportFile | None], PassportFile | None | EllipsisType]
-        | EllipsisType = ...,
-        reverse_side: Callable[
-            [PassportFile | None], PassportFile | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        selfie: Callable[[PassportFile | None], PassportFile | None | EllipsisType]
-        | EllipsisType = ...,
-        translation: Callable[
-            [list[PassportFile] | None], list[PassportFile] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        type: AlterFn[str] | EllipsisType = ...,
+        data: AlterFn[str | None] | EllipsisType = ...,
+        phone_number: AlterFn[str | None] | EllipsisType = ...,
+        email: AlterFn[str | None] | EllipsisType = ...,
+        files: AlterFn[list[PassportFile] | None] | EllipsisType = ...,
+        front_side: AlterFn[PassportFile | None] | EllipsisType = ...,
+        reverse_side: AlterFn[PassportFile | None] | EllipsisType = ...,
+        selfie: AlterFn[PassportFile | None] | EllipsisType = ...,
+        translation: AlterFn[list[PassportFile] | None] | EllipsisType = ...,
+        hash: AlterFn[str] | EllipsisType = ...,
     ) -> EncryptedPassportElement:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return EncryptedPassportElement(
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            data=(_data if (_data := data(self.data)) is not ... else self.data)
-            if data is not ...
-            else self.data,
-            phone_number=(
-                _phone_number
-                if (_phone_number := phone_number(self.phone_number)) is not ...
-                else self.phone_number
-            )
-            if phone_number is not ...
-            else self.phone_number,
-            email=(_email if (_email := email(self.email)) is not ... else self.email)
-            if email is not ...
-            else self.email,
-            files=(_files if (_files := files(self.files)) is not ... else self.files)
-            if files is not ...
-            else self.files,
-            front_side=(
-                _front_side
-                if (_front_side := front_side(self.front_side)) is not ...
-                else self.front_side
-            )
-            if front_side is not ...
-            else self.front_side,
-            reverse_side=(
-                _reverse_side
-                if (_reverse_side := reverse_side(self.reverse_side)) is not ...
-                else self.reverse_side
-            )
-            if reverse_side is not ...
-            else self.reverse_side,
-            selfie=(
-                _selfie if (_selfie := selfie(self.selfie)) is not ... else self.selfie
-            )
-            if selfie is not ...
-            else self.selfie,
-            translation=(
-                _translation
-                if (_translation := translation(self.translation)) is not ...
-                else self.translation
-            )
-            if translation is not ...
-            else self.translation,
-            hash=(_hash if (_hash := hash(self.hash)) is not ... else self.hash)
-            if hash is not ...
-            else self.hash,
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            data=self.data if data is ... else prefer(data(self.data), self.data),
+            phone_number=self.phone_number
+            if phone_number is ...
+            else prefer(phone_number(self.phone_number), self.phone_number),
+            email=self.email if email is ... else prefer(email(self.email), self.email),
+            files=self.files if files is ... else prefer(files(self.files), self.files),
+            front_side=self.front_side
+            if front_side is ...
+            else prefer(front_side(self.front_side), self.front_side),
+            reverse_side=self.reverse_side
+            if reverse_side is ...
+            else prefer(reverse_side(self.reverse_side), self.reverse_side),
+            selfie=self.selfie
+            if selfie is ...
+            else prefer(selfie(self.selfie), self.selfie),
+            translation=self.translation
+            if translation is ...
+            else prefer(translation(self.translation), self.translation),
+            hash=self.hash if hash is ... else prefer(hash(self.hash), self.hash),
         )
 
     def copy_with(
-        self: Any,
-        type: str | None = None,
-        data: str | None = None,
-        phone_number: str | None = None,
-        email: str | None = None,
-        files: list[PassportFile] | None = None,
-        front_side: PassportFile | None = None,
-        reverse_side: PassportFile | None = None,
-        selfie: PassportFile | None = None,
-        translation: list[PassportFile] | None = None,
-        hash: str | None = None,
+        self,
+        type: str | EllipsisType = ...,
+        data: str | None | EllipsisType = ...,
+        phone_number: str | None | EllipsisType = ...,
+        email: str | None | EllipsisType = ...,
+        files: list[PassportFile] | None | EllipsisType = ...,
+        front_side: PassportFile | None | EllipsisType = ...,
+        reverse_side: PassportFile | None | EllipsisType = ...,
+        selfie: PassportFile | None | EllipsisType = ...,
+        translation: list[PassportFile] | None | EllipsisType = ...,
+        hash: str | EllipsisType = ...,
     ) -> EncryptedPassportElement:
         """Replaces some of model's fields with provided ones"""
         return EncryptedPassportElement(
-            type=type if type is not None else self.type,
-            data=data if data is not None else self.data,
-            phone_number=phone_number
-            if phone_number is not None
-            else self.phone_number,
-            email=email if email is not None else self.email,
-            files=files if files is not None else self.files,
-            front_side=front_side if front_side is not None else self.front_side,
-            reverse_side=reverse_side
-            if reverse_side is not None
-            else self.reverse_side,
-            selfie=selfie if selfie is not None else self.selfie,
-            translation=translation if translation is not None else self.translation,
-            hash=hash if hash is not None else self.hash,
+            type=type if type is not ... else self.type,
+            data=data if data is not ... else self.data,
+            phone_number=phone_number if phone_number is not ... else self.phone_number,
+            email=email if email is not ... else self.email,
+            files=files if files is not ... else self.files,
+            front_side=front_side if front_side is not ... else self.front_side,
+            reverse_side=reverse_side if reverse_side is not ... else self.reverse_side,
+            selfie=selfie if selfie is not ... else self.selfie,
+            translation=translation if translation is not ... else self.translation,
+            hash=hash if hash is not ... else self.hash,
         )
 
 
@@ -14198,37 +10131,31 @@ class EncryptedCredentials:
     """Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption """
 
     def alter(
-        self: Any,
-        data: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        secret: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        data: AlterFn[str] | EllipsisType = ...,
+        hash: AlterFn[str] | EllipsisType = ...,
+        secret: AlterFn[str] | EllipsisType = ...,
     ) -> EncryptedCredentials:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return EncryptedCredentials(
-            data=(_data if (_data := data(self.data)) is not ... else self.data)
-            if data is not ...
-            else self.data,
-            hash=(_hash if (_hash := hash(self.hash)) is not ... else self.hash)
-            if hash is not ...
-            else self.hash,
-            secret=(
-                _secret if (_secret := secret(self.secret)) is not ... else self.secret
-            )
-            if secret is not ...
-            else self.secret,
+            data=self.data if data is ... else prefer(data(self.data), self.data),
+            hash=self.hash if hash is ... else prefer(hash(self.hash), self.hash),
+            secret=self.secret
+            if secret is ...
+            else prefer(secret(self.secret), self.secret),
         )
 
     def copy_with(
-        self: Any,
-        data: str | None = None,
-        hash: str | None = None,
-        secret: str | None = None,
+        self,
+        data: str | EllipsisType = ...,
+        hash: str | EllipsisType = ...,
+        secret: str | EllipsisType = ...,
     ) -> EncryptedCredentials:
         """Replaces some of model's fields with provided ones"""
         return EncryptedCredentials(
-            data=data if data is not None else self.data,
-            hash=hash if hash is not None else self.hash,
-            secret=secret if secret is not None else self.secret,
+            data=data if data is not ... else self.data,
+            hash=hash if hash is not ... else self.hash,
+            secret=secret if secret is not ... else self.secret,
         )
 
 
@@ -14248,61 +10175,45 @@ class PassportElementErrorDataField:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        field_name: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        data_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        field_name: AlterFn[str] | EllipsisType = ...,
+        data_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorDataField:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorDataField(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            field_name=(
-                _field_name
-                if (_field_name := field_name(self.field_name)) is not ...
-                else self.field_name
-            )
-            if field_name is not ...
-            else self.field_name,
-            data_hash=(
-                _data_hash
-                if (_data_hash := data_hash(self.data_hash)) is not ...
-                else self.data_hash
-            )
-            if data_hash is not ...
-            else self.data_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            field_name=self.field_name
+            if field_name is ...
+            else prefer(field_name(self.field_name), self.field_name),
+            data_hash=self.data_hash
+            if data_hash is ...
+            else prefer(data_hash(self.data_hash), self.data_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        field_name: str | None = None,
-        data_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        field_name: str | EllipsisType = ...,
+        data_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorDataField:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorDataField(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            field_name=field_name if field_name is not None else self.field_name,
-            data_hash=data_hash if data_hash is not None else self.data_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            field_name=field_name if field_name is not ... else self.field_name,
+            data_hash=data_hash if data_hash is not ... else self.data_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14320,51 +10231,39 @@ class PassportElementErrorFrontSide:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorFrontSide:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFrontSide(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hash=(
-                _file_hash
-                if (_file_hash := file_hash(self.file_hash)) is not ...
-                else self.file_hash
-            )
-            if file_hash is not ...
-            else self.file_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hash=self.file_hash
+            if file_hash is ...
+            else prefer(file_hash(self.file_hash), self.file_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorFrontSide:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorFrontSide(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hash=file_hash if file_hash is not None else self.file_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hash=file_hash if file_hash is not ... else self.file_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14382,51 +10281,39 @@ class PassportElementErrorReverseSide:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorReverseSide:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorReverseSide(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hash=(
-                _file_hash
-                if (_file_hash := file_hash(self.file_hash)) is not ...
-                else self.file_hash
-            )
-            if file_hash is not ...
-            else self.file_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hash=self.file_hash
+            if file_hash is ...
+            else prefer(file_hash(self.file_hash), self.file_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorReverseSide:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorReverseSide(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hash=file_hash if file_hash is not None else self.file_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hash=file_hash if file_hash is not ... else self.file_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14444,51 +10331,39 @@ class PassportElementErrorSelfie:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorSelfie:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorSelfie(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hash=(
-                _file_hash
-                if (_file_hash := file_hash(self.file_hash)) is not ...
-                else self.file_hash
-            )
-            if file_hash is not ...
-            else self.file_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hash=self.file_hash
+            if file_hash is ...
+            else prefer(file_hash(self.file_hash), self.file_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorSelfie:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorSelfie(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hash=file_hash if file_hash is not None else self.file_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hash=file_hash if file_hash is not ... else self.file_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14506,51 +10381,39 @@ class PassportElementErrorFile:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorFile:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFile(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hash=(
-                _file_hash
-                if (_file_hash := file_hash(self.file_hash)) is not ...
-                else self.file_hash
-            )
-            if file_hash is not ...
-            else self.file_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hash=self.file_hash
+            if file_hash is ...
+            else prefer(file_hash(self.file_hash), self.file_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorFile:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorFile(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hash=file_hash if file_hash is not None else self.file_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hash=file_hash if file_hash is not ... else self.file_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14568,52 +10431,39 @@ class PassportElementErrorFiles:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hashes: Callable[[list[str]], list[str] | EllipsisType]
-        | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hashes: AlterFn[list[str]] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorFiles:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFiles(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hashes=(
-                _file_hashes
-                if (_file_hashes := file_hashes(self.file_hashes)) is not ...
-                else self.file_hashes
-            )
-            if file_hashes is not ...
-            else self.file_hashes,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hashes=self.file_hashes
+            if file_hashes is ...
+            else prefer(file_hashes(self.file_hashes), self.file_hashes),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hashes: list[str] | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hashes: list[str] | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorFiles:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorFiles(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hashes=file_hashes if file_hashes is not None else self.file_hashes,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hashes=file_hashes if file_hashes is not ... else self.file_hashes,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14631,51 +10481,39 @@ class PassportElementErrorTranslationFile:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFile:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorTranslationFile(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hash=(
-                _file_hash
-                if (_file_hash := file_hash(self.file_hash)) is not ...
-                else self.file_hash
-            )
-            if file_hash is not ...
-            else self.file_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hash=self.file_hash
+            if file_hash is ...
+            else prefer(file_hash(self.file_hash), self.file_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFile:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorTranslationFile(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hash=file_hash if file_hash is not None else self.file_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hash=file_hash if file_hash is not ... else self.file_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14693,52 +10531,39 @@ class PassportElementErrorTranslationFiles:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        file_hashes: Callable[[list[str]], list[str] | EllipsisType]
-        | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        file_hashes: AlterFn[list[str]] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFiles:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorTranslationFiles(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            file_hashes=(
-                _file_hashes
-                if (_file_hashes := file_hashes(self.file_hashes)) is not ...
-                else self.file_hashes
-            )
-            if file_hashes is not ...
-            else self.file_hashes,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            file_hashes=self.file_hashes
+            if file_hashes is ...
+            else prefer(file_hashes(self.file_hashes), self.file_hashes),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        file_hashes: list[str] | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        file_hashes: list[str] | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFiles:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorTranslationFiles(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            file_hashes=file_hashes if file_hashes is not None else self.file_hashes,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            file_hashes=file_hashes if file_hashes is not ... else self.file_hashes,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14756,53 +10581,39 @@ class PassportElementErrorUnspecified:
     """Error message """
 
     def alter(
-        self: Any,
-        source: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        type: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        element_hash: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        message: Callable[[str], str | EllipsisType] | EllipsisType = ...,
+        self,
+        source: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[str] | EllipsisType = ...,
+        element_hash: AlterFn[str] | EllipsisType = ...,
+        message: AlterFn[str] | EllipsisType = ...,
     ) -> PassportElementErrorUnspecified:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorUnspecified(
-            source=(
-                _source if (_source := source(self.source)) is not ... else self.source
-            )
-            if source is not ...
-            else self.source,
-            type=(_type if (_type := type(self.type)) is not ... else self.type)
-            if type is not ...
-            else self.type,
-            element_hash=(
-                _element_hash
-                if (_element_hash := element_hash(self.element_hash)) is not ...
-                else self.element_hash
-            )
-            if element_hash is not ...
-            else self.element_hash,
-            message=(
-                _message
-                if (_message := message(self.message)) is not ...
-                else self.message
-            )
-            if message is not ...
-            else self.message,
+            source=self.source
+            if source is ...
+            else prefer(source(self.source), self.source),
+            type=self.type if type is ... else prefer(type(self.type), self.type),
+            element_hash=self.element_hash
+            if element_hash is ...
+            else prefer(element_hash(self.element_hash), self.element_hash),
+            message=self.message
+            if message is ...
+            else prefer(message(self.message), self.message),
         )
 
     def copy_with(
-        self: Any,
-        source: str | None = None,
-        type: str | None = None,
-        element_hash: str | None = None,
-        message: str | None = None,
+        self,
+        source: str | EllipsisType = ...,
+        type: str | EllipsisType = ...,
+        element_hash: str | EllipsisType = ...,
+        message: str | EllipsisType = ...,
     ) -> PassportElementErrorUnspecified:
         """Replaces some of model's fields with provided ones"""
         return PassportElementErrorUnspecified(
-            source=source if source is not None else self.source,
-            type=type if type is not None else self.type,
-            element_hash=element_hash
-            if element_hash is not None
-            else self.element_hash,
-            message=message if message is not None else self.message,
+            source=source if source is not ... else self.source,
+            type=type if type is not ... else self.type,
+            element_hash=element_hash if element_hash is not ... else self.element_hash,
+            message=message if message is not ... else self.message,
         )
 
 
@@ -14824,72 +10635,49 @@ class Game:
     """Optional. Animation that will be displayed in the game message in chats. Upload via BotFather """
 
     def alter(
-        self: Any,
-        title: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        description: Callable[[str], str | EllipsisType] | EllipsisType = ...,
-        photo: Callable[[list[PhotoSize]], list[PhotoSize] | EllipsisType]
-        | EllipsisType = ...,
-        text: Callable[[str | None], str | None | EllipsisType] | EllipsisType = ...,
-        text_entities: Callable[
-            [list[MessageEntity] | None], list[MessageEntity] | None | EllipsisType
-        ]
-        | EllipsisType = ...,
-        animation: Callable[[Animation | None], Animation | None | EllipsisType]
-        | EllipsisType = ...,
+        self,
+        title: AlterFn[str] | EllipsisType = ...,
+        description: AlterFn[str] | EllipsisType = ...,
+        photo: AlterFn[list[PhotoSize]] | EllipsisType = ...,
+        text: AlterFn[str | None] | EllipsisType = ...,
+        text_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
+        animation: AlterFn[Animation | None] | EllipsisType = ...,
     ) -> Game:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Game(
-            title=(_title if (_title := title(self.title)) is not ... else self.title)
-            if title is not ...
-            else self.title,
-            description=(
-                _description
-                if (_description := description(self.description)) is not ...
-                else self.description
-            )
-            if description is not ...
-            else self.description,
-            photo=(_photo if (_photo := photo(self.photo)) is not ... else self.photo)
-            if photo is not ...
-            else self.photo,
-            text=(_text if (_text := text(self.text)) is not ... else self.text)
-            if text is not ...
-            else self.text,
-            text_entities=(
-                _text_entities
-                if (_text_entities := text_entities(self.text_entities)) is not ...
-                else self.text_entities
-            )
-            if text_entities is not ...
-            else self.text_entities,
-            animation=(
-                _animation
-                if (_animation := animation(self.animation)) is not ...
-                else self.animation
-            )
-            if animation is not ...
-            else self.animation,
+            title=self.title if title is ... else prefer(title(self.title), self.title),
+            description=self.description
+            if description is ...
+            else prefer(description(self.description), self.description),
+            photo=self.photo if photo is ... else prefer(photo(self.photo), self.photo),
+            text=self.text if text is ... else prefer(text(self.text), self.text),
+            text_entities=self.text_entities
+            if text_entities is ...
+            else prefer(text_entities(self.text_entities), self.text_entities),
+            animation=self.animation
+            if animation is ...
+            else prefer(animation(self.animation), self.animation),
         )
 
     def copy_with(
-        self: Any,
-        title: str | None = None,
-        description: str | None = None,
-        photo: list[PhotoSize] | None = None,
-        text: str | None = None,
-        text_entities: list[MessageEntity] | None = None,
-        animation: Animation | None = None,
+        self,
+        title: str | EllipsisType = ...,
+        description: str | EllipsisType = ...,
+        photo: list[PhotoSize] | EllipsisType = ...,
+        text: str | None | EllipsisType = ...,
+        text_entities: list[MessageEntity] | None | EllipsisType = ...,
+        animation: Animation | None | EllipsisType = ...,
     ) -> Game:
         """Replaces some of model's fields with provided ones"""
         return Game(
-            title=title if title is not None else self.title,
-            description=description if description is not None else self.description,
-            photo=photo if photo is not None else self.photo,
-            text=text if text is not None else self.text,
+            title=title if title is not ... else self.title,
+            description=description if description is not ... else self.description,
+            photo=photo if photo is not ... else self.photo,
+            text=text if text is not ... else self.text,
             text_entities=text_entities
-            if text_entities is not None
+            if text_entities is not ...
             else self.text_entities,
-            animation=animation if animation is not None else self.animation,
+            animation=animation if animation is not ... else self.animation,
         )
 
 
@@ -14898,13 +10686,13 @@ class CallbackGame:
     """A placeholder, currently holds no information. Use BotFather to set up your game."""
 
     def alter(
-        self: Any,
+        self,
     ) -> CallbackGame:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return CallbackGame()
 
     def copy_with(
-        self: Any,
+        self,
     ) -> CallbackGame:
         """Replaces some of model's fields with provided ones"""
         return CallbackGame()
@@ -14922,39 +10710,31 @@ class GameHighScore:
     """Score """
 
     def alter(
-        self: Any,
-        position: Callable[[int], int | EllipsisType] | EllipsisType = ...,
-        user: Callable[[User], User | EllipsisType] | EllipsisType = ...,
-        score: Callable[[int], int | EllipsisType] | EllipsisType = ...,
+        self,
+        position: AlterFn[int] | EllipsisType = ...,
+        user: AlterFn[User] | EllipsisType = ...,
+        score: AlterFn[int] | EllipsisType = ...,
     ) -> GameHighScore:
-        """Alters every type with the provided callable, if callable returns None - field left untouched"""
+        """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return GameHighScore(
-            position=(
-                _position
-                if (_position := position(self.position)) is not ...
-                else self.position
-            )
-            if position is not ...
-            else self.position,
-            user=(_user if (_user := user(self.user)) is not ... else self.user)
-            if user is not ...
-            else self.user,
-            score=(_score if (_score := score(self.score)) is not ... else self.score)
-            if score is not ...
-            else self.score,
+            position=self.position
+            if position is ...
+            else prefer(position(self.position), self.position),
+            user=self.user if user is ... else prefer(user(self.user), self.user),
+            score=self.score if score is ... else prefer(score(self.score), self.score),
         )
 
     def copy_with(
-        self: Any,
-        position: int | None = None,
-        user: User | None = None,
-        score: int | None = None,
+        self,
+        position: int | EllipsisType = ...,
+        user: User | EllipsisType = ...,
+        score: int | EllipsisType = ...,
     ) -> GameHighScore:
         """Replaces some of model's fields with provided ones"""
         return GameHighScore(
-            position=position if position is not None else self.position,
-            user=user if user is not None else self.user,
-            score=score if score is not None else self.score,
+            position=position if position is not ... else self.position,
+            user=user if user is not ... else self.user,
+            score=score if score is not ... else self.score,
         )
 
 

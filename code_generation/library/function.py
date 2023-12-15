@@ -13,7 +13,7 @@ from .statement import Statement
 @dataclass
 class Argument:
     name: str
-    type: TypeHint = ANY
+    type: TypeHint | None = None
     default: str | None = None
 
     def to_str(self) -> str:
@@ -49,7 +49,7 @@ class Function(Statement):
         self,
         name: str,
         *,
-        type: TypeHint = ANY,
+        type: TypeHint | None = None,
         default: str | None = None,
     ) -> None:
         if self.args and default is None and self.args[-1].default is not None:
