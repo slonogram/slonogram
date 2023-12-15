@@ -1,18 +1,55 @@
 from typing import Sequence
+from functools import reduce
+
+from code_generation.library.type_hint import TypeRefs
 
 from . import indent
 
 from .type_hint import TypeHint
-from .statement import Statement
+from .statement import Statement, collect_from_all_stmts
+
+
+class MultilineComment(Statement):
+    lines: Sequence[str]
+
+    def __init__(self, lines: Sequence[str] | str) -> None:
+        if isinstance(lines, str):
+            self.lines = (lines,)
+        else:
+            self.lines = lines
+
+    def generate(self) -> str:
+        return "\n".join("# " + line for line in self.lines)
+
+
+class UseFeature(Statement):
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def generate(self) -> str:
+        return f"from __future__ import {self.name}"
 
 
 class TypeAlias(Statement):
-    def __init__(self, name: str, alias_to: TypeHint) -> None:
+    def __init__(
+        self,
+        name: str,
+        alias_to: TypeHint,
+        *,
+        doc: str | None = None,
+    ) -> None:
         self.name = name
         self.alias_to = alias_to
+        self.doc = doc
 
     def generate(self) -> str:
-        return f"{self.name}: TypeAlias = {self.alias_to.translate()}"
+        out = f"{self.name}: TypeAlias = {self.alias_to.translate()}"
+        if self.doc is not None:
+            out += "\n" + '"""' + self.doc + '"""'
+        return out
+
+    def collect_refs(self) -> TypeRefs:
+        return self.alias_to.collect_refs() | TypeRefs.typing({"TypeAlias"})
 
 
 class Definition(Statement):
@@ -25,6 +62,11 @@ class Definition(Statement):
         self.name = name
         self.type = type
         self.assign = assign
+
+    def collect_refs(self) -> TypeRefs:
+        if self.type is None:
+            return TypeRefs()
+        return self.type.collect_refs()
 
     def generate(self) -> str:
         if self.assign is not None:
@@ -44,6 +86,13 @@ class Collection(Statement):
 
     def generate(self) -> str:
         return "\n".join(s.generate() for s in self.stmts)
+
+    def collect_refs(self) -> TypeRefs:
+        return reduce(
+            lambda lhs, rhs: lhs | rhs,
+            map(lambda x: x.collect_refs(), self.stmts),
+            TypeRefs(),
+        )
 
 
 class FromImport(Statement):
@@ -89,6 +138,15 @@ class If(Statement):
         self.then = then
         self.elifs = elifs or []
         self.else_ = else_
+
+    def collect_refs(self) -> TypeRefs:
+        refs = self.then.collect_refs() | collect_from_all_stmts(
+            s[1] for s in self.elifs
+        )
+        if self.else_ is not None:
+            refs |= self.else_.collect_refs()
+
+        return refs
 
     def generate(self) -> str:
         out = f"if {self.cond}:\n" + indent(self.then.generate())

@@ -1,15 +1,19 @@
+from functools import reduce
+from typing import cast
+from dataclasses import dataclass
+
+from code_generation.library.type_hint import TypeRefs
 from . import indent
 
-from .type_hint import TypeHint
+from .type_hint import TypeHint, TypeRefs
+from .type_hint.known_refs import ANY
 from .statement import Statement
-
-from dataclasses import dataclass
 
 
 @dataclass
 class Argument:
     name: str
-    type: TypeHint | None = None
+    type: TypeHint = ANY
     default: str | None = None
 
     def to_str(self) -> str:
@@ -45,7 +49,7 @@ class Function(Statement):
         self,
         name: str,
         *,
-        type: TypeHint | None = None,
+        type: TypeHint = ANY,
         default: str | None = None,
     ) -> None:
         if self.args and default is None and self.args[-1].default is not None:
@@ -57,6 +61,18 @@ class Function(Statement):
 
     def __repr__(self) -> str:
         return self.generate()
+
+    def collect_refs(self) -> TypeRefs:
+        return self.return_type.collect_refs() | reduce(
+            lambda lhs, rhs: lhs | rhs,
+            map(
+                lambda x: x.type.collect_refs()
+                if x.type is not None
+                else ANY.collect_refs(),
+                self.args,
+            ),
+            TypeRefs(),
+        )
 
     def generate(self) -> str:
         async_kw = "async " if self.is_async else ""

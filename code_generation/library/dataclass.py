@@ -1,9 +1,14 @@
 from typing import Sequence, Iterable, cast
 
+from ..library.type_hint import TypeRefs, collect_all_refs
+
 from .class_ import Class
 from .statement import Statement
 from .type_hint import TypeHint
+from .type_hint.ref_sources import Source
 from .simple import Decorated
+
+DTC_SOURCE = Source("dataclasses")
 
 
 class Field(Statement):
@@ -18,6 +23,9 @@ class Field(Statement):
         self.type = type
         self.default = default
         self.doc = doc
+
+    def collect_refs(self) -> TypeRefs:
+        return self.type.collect_refs()
 
     def generate(self) -> str:
         out = f"{self.name}: {self.type.translate()}"
@@ -40,7 +48,7 @@ class Dataclass(Statement):
         path: str = "dataclass",
         slots: bool = True,
         frozen: bool = False,
-        tail: Sequence[Statement] | None = None,
+        tail: Statement | None = None,
     ) -> None:
         self.name = name
         self.fields = fields or []
@@ -51,14 +59,24 @@ class Dataclass(Statement):
         self.tail = tail
 
     def generate(self) -> str:
+        body = [
+            *cast(Iterable[Statement], self.fields),
+        ]
+        if self.tail is not None:
+            body.append(self.tail)
         return Decorated(
             f"{self.path}(frozen={self.frozen}, slots={self.slots})",
             Class(
                 self.name,
-                body=[
-                    *cast(Iterable[Statement], self.fields),
-                    *cast(Iterable[Statement], self.tail),
-                ],
+                body=body,
                 doc=self.doc,
             ),
         ).generate()
+
+    def collect_refs(self) -> TypeRefs:
+        refs = TypeRefs({DTC_SOURCE: {"dataclass"}}) | collect_all_refs(
+            map(lambda x: x.type, self.fields)
+        )
+        if self.tail is not None:
+            refs |= self.tail.collect_refs()
+        return refs
