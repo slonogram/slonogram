@@ -5,7 +5,6 @@ from code_generation.library.type_hint import TypeRefs
 from . import indent
 
 from .type_hint import TypeHint
-from .type_hint.known_refs import ANY
 from .statement import Statement
 
 
