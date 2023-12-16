@@ -1,6 +1,12 @@
 from keyword import kwlist
 
 
+def camel_to_pascal(camel: str) -> str:
+    if not camel:
+        return camel
+    return camel[0].upper() + camel[1:]
+
+
 def to_snake_case(camel: str) -> str:
     if not camel:
         return camel

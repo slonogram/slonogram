@@ -2,7 +2,7 @@ from typing import Any, get_origin
 import json
 
 
-def parse_json(s: str) -> Any:
+def parse_json(s: str | bytes) -> Any:
     return json.loads(s)
 
 

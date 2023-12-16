@@ -1,6 +1,8 @@
 from typing import Sequence
+
+from code_generation.library.type_hint import TypeRefs
 from . import indent
-from .statement import Statement
+from .statement import Statement, collect_from_all_stmts
 
 
 class Class(Statement):
@@ -16,6 +18,9 @@ class Class(Statement):
         self.inherits = inherits or []
         self.body = body or []
         self.doc = doc
+
+    def collect_refs(self) -> TypeRefs:
+        return collect_from_all_stmts(self.body or [])
 
     def generate(self) -> str:
         stmts = "\n".join(stmt.generate() for stmt in self.body)

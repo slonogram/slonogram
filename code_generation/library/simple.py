@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Sequence
 from functools import reduce
 
@@ -7,6 +9,32 @@ from . import indent
 
 from .type_hint import TypeHint
 from .statement import Statement, collect_from_all_stmts
+
+
+class AddRefs(Statement):
+    def __init__(self, child: Statement, refs: TypeRefs) -> None:
+        self.child = child
+        self.refs = refs
+
+    def collect_refs(self) -> TypeRefs:
+        return self.child.collect_refs() | self.refs
+
+    def generate(self) -> str:
+        return self.child.generate()
+
+
+class AllExports(Statement):
+    def __init__(self, exports: list[str]) -> None:
+        self.exports = exports
+
+    def create_definition(self) -> Definition:
+        return Definition("__all__", assign="[%s]" % ", ".join(map(repr, self.exports)))
+
+    def generate(self) -> str:
+        return self.create_definition().generate()
+
+    def collect_refs(self) -> TypeRefs:
+        return self.create_definition().collect_refs()
 
 
 class MultilineComment(Statement):

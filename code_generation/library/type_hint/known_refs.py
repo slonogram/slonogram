@@ -13,7 +13,6 @@ FLOAT     = Ref(BUILTINS, "float")
 TRUE      = Ref(BUILTINS, "True")
 FALSE     = Ref(BUILTINS, "False")
 
-BINARY_IO = Ref(TYPING, "BinaryIO")
 ANY       = Ref(TYPING, "Any")
 
 IO_BASE   = Ref(IO, "IOBase")

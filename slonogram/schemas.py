@@ -4,13 +4,14 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-15 21:41:38.655460
+# Generated at: 2023-12-16 11:59:50.816237
 from __future__ import annotations
 from slonogram._internal.utils import prefer
 from dataclasses import dataclass
 from slonogram._internal.utils import AlterFn
 from types import EllipsisType
-from typing import BinaryIO, TypeAlias
+from typing import TypeAlias
+from io import IOBase
 
 
 @dataclass(frozen=False, slots=True)
@@ -5841,7 +5842,7 @@ class InputMediaVideo:
     """Type of the result, must be video """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
-    thumbnail: BinaryIO | str | None = None
+    thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
     """Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
@@ -5864,7 +5865,7 @@ class InputMediaVideo:
         self,
         type: AlterFn[str] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
-        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
         caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
@@ -5911,7 +5912,7 @@ class InputMediaVideo:
         self,
         type: str | EllipsisType = ...,
         media: str | EllipsisType = ...,
-        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
         caption_entities: list[MessageEntity] | None | EllipsisType = ...,
@@ -5949,7 +5950,7 @@ class InputMediaAnimation:
     """Type of the result, must be animation """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
-    thumbnail: BinaryIO | str | None = None
+    thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
     """Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing """
@@ -5970,7 +5971,7 @@ class InputMediaAnimation:
         self,
         type: AlterFn[str] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
-        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
         caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
@@ -6011,7 +6012,7 @@ class InputMediaAnimation:
         self,
         type: str | EllipsisType = ...,
         media: str | EllipsisType = ...,
-        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
         caption_entities: list[MessageEntity] | None | EllipsisType = ...,
@@ -6045,7 +6046,7 @@ class InputMediaAudio:
     """Type of the result, must be audio """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
-    thumbnail: BinaryIO | str | None = None
+    thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
     """Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing """
@@ -6064,7 +6065,7 @@ class InputMediaAudio:
         self,
         type: AlterFn[str] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
-        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
         caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
@@ -6101,7 +6102,7 @@ class InputMediaAudio:
         self,
         type: str | EllipsisType = ...,
         media: str | EllipsisType = ...,
-        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
         caption_entities: list[MessageEntity] | None | EllipsisType = ...,
@@ -6133,7 +6134,7 @@ class InputMediaDocument:
     """Type of the result, must be document """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
-    thumbnail: BinaryIO | str | None = None
+    thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
     """Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
@@ -6148,7 +6149,7 @@ class InputMediaDocument:
         self,
         type: AlterFn[str] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
-        thumbnail: AlterFn[BinaryIO | str | None] | EllipsisType = ...,
+        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
         caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
@@ -6182,7 +6183,7 @@ class InputMediaDocument:
         self,
         type: str | EllipsisType = ...,
         media: str | EllipsisType = ...,
-        thumbnail: BinaryIO | str | None | EllipsisType = ...,
+        thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
         caption_entities: list[MessageEntity] | None | EllipsisType = ...,
@@ -6491,7 +6492,7 @@ class MaskPosition:
 class InputSticker:
     """This object describes a sticker to be added to a sticker set."""
 
-    sticker: BinaryIO | str
+    sticker: IOBase | str
     """The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     emoji_list: list[str]
     """List of 1-20 emoji associated with the sticker """
@@ -6502,7 +6503,7 @@ class InputSticker:
 
     def alter(
         self,
-        sticker: AlterFn[BinaryIO | str] | EllipsisType = ...,
+        sticker: AlterFn[IOBase | str] | EllipsisType = ...,
         emoji_list: AlterFn[list[str]] | EllipsisType = ...,
         mask_position: AlterFn[MaskPosition | None] | EllipsisType = ...,
         keywords: AlterFn[list[str] | None] | EllipsisType = ...,
@@ -6525,7 +6526,7 @@ class InputSticker:
 
     def copy_with(
         self,
-        sticker: BinaryIO | str | EllipsisType = ...,
+        sticker: IOBase | str | EllipsisType = ...,
         emoji_list: list[str] | EllipsisType = ...,
         mask_position: MaskPosition | None | EllipsisType = ...,
         keywords: list[str] | None | EllipsisType = ...,

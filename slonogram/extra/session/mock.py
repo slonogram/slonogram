@@ -1,12 +1,13 @@
-from typing import Any, Awaitable, BinaryIO
-from slonogram.session import AllowedType, Session
+from typing import Any, Awaitable, TypeVar
+from slonogram.session import Session
+
+T = TypeVar("T")
 
 
 class MockSession(Session):
     def call_method(
         self,
         name: str,
-        args: dict[str, AllowedType] | None = None,
-        files: dict[str, BinaryIO] | None = None,
+        args: T,
     ) -> Awaitable[Any]:
         raise NotImplementedError

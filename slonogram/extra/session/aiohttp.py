@@ -1,57 +1,61 @@
-from aiohttp import ClientSession
+from contextlib import asynccontextmanager
+from typing import (
+    Any,
+    AsyncIterator,
+    TypeVar,
+    Callable,
+)
 
-from typing import Any, AsyncIterator, BinaryIO
+from aiohttp import ClientSession
+from adaptix import Retort
+
 from . import BASE_URL
 
+from slonogram.utils import parse_json
 from slonogram.exceptions.api import ApiError, ErrorDetails
+from slonogram.session import Session
 
-from contextlib import asynccontextmanager
-from slonogram.session import AllowedType, Session
+
+T = TypeVar("T")
 
 
 class AiohttpSession(Session):
-    __slots__ = ("token", "session")
+    __slots__ = ("token", "session", "retort")
 
-    def __init__(self, session: ClientSession, token: str) -> None:
+    def __init__(
+        self,
+        session: ClientSession,
+        token: str,
+        retort: Retort,
+    ) -> None:
         self.token = token
         self.session = session
+        self.retort = retort
 
-    async def call_method(
-        self,
-        name: str,
-        args: dict[str, AllowedType] | None = None,
-        files: dict[str, BinaryIO] | None = None,
-    ) -> Any:
-        args: dict[str, Any]  # type: ignore
-        if args is None:
-            args = {}
-        if files is not None:
-            for k in args.keys():
-                val = args[k]
-                if not isinstance(val, str):
-                    args[k] = str(val)
+    async def call_method(self, name: str, args: T) -> Any:
+        data = self.retort.dump(args)
 
-            args.update(files)  # type: ignore
-
-        async with self.session.post(f"/bot{self.token}/{name}", data=args) as response:
-            js = await response.json()
-            if js["ok"]:
-                return js["result"]
+        async with self.session.post(f"/bot{self.token}/{name}", data=data) as response:
+            result = parse_json(await response.read())
+            if result["ok"]:
+                return result["result"]
             raise ApiError(
-                method_name=name,
-                args=args,
-                error=ErrorDetails(
-                    code=js["error_code"], description=js["description"]
+                name,
+                args,
+                ErrorDetails(
+                    result["error_code"],
+                    result["description"],
                 ),
             )
 
 
 @asynccontextmanager
 async def create_session(
-    token: str, base_url: str = BASE_URL
-) -> AsyncIterator[Session]:
+    token: str,
+    base_url: str = BASE_URL,
+) -> AsyncIterator[Callable[[Retort], AiohttpSession]]:
     async with ClientSession(base_url=base_url) as http_session:
-        yield AiohttpSession(http_session, token)
+        yield lambda retort: AiohttpSession(http_session, token, retort)
 
 
 __all__ = ["AiohttpSession", "create_session"]

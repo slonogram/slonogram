@@ -58,19 +58,22 @@ class Dataclass(Statement):
         self.doc = doc
         self.tail = tail
 
-    def generate(self) -> str:
+    def create_class(self) -> Class:
         body = [
             *cast(Iterable[Statement], self.fields),
         ]
         if self.tail is not None:
             body.append(self.tail)
+        return Class(
+            self.name,
+            body=body,
+            doc=self.doc,
+        )
+
+    def generate(self) -> str:
         return Decorated(
             f"{self.path}(frozen={self.frozen}, slots={self.slots})",
-            Class(
-                self.name,
-                body=body,
-                doc=self.doc,
-            ),
+            self.create_class(),
         ).generate()
 
     def collect_refs(self) -> TypeRefs:

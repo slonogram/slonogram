@@ -2,7 +2,7 @@ from typing import Iterable
 from functools import reduce
 from telegram_type_parser import Folder, fold_ex
 
-from ..library.type_hint.ref_sources import BUILTINS, SCHEMAS, TYPING
+from ..library.type_hint.ref_sources import BUILTINS, SCHEMAS, IO
 from ..library.type_hint import Ref, TypeHint
 
 
@@ -26,7 +26,7 @@ class TypeFolder(Folder[TypeHint]):
 
     def ref(self, tp: str) -> TypeHint:
         if tp == "InputFile":
-            return Ref(TYPING, "BinaryIO")
+            return Ref(IO, "IOBase")
 
         return Ref(SCHEMAS, tp)
 

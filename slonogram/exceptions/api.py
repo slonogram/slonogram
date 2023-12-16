@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import Generic, TypeVar
 from dataclasses import dataclass
 
-if TYPE_CHECKING:
-    from ..session import AllowedType
+T = TypeVar("T")
 
 
 @dataclass(slots=True)
@@ -13,13 +12,13 @@ class ErrorDetails:
     description: str
 
 
-class ApiError(Exception):
+class ApiError(Generic[T], Exception):
     __slots__ = ("method_name", "method_args", "error")
 
     def __init__(
         self,
         method_name: str,
-        args: dict[str, AllowedType],
+        args: T,
         error: ErrorDetails,
     ) -> None:
         super().__init__(
