@@ -15,6 +15,12 @@ class Field:
     required: bool
     default: str | None = None
 
+    @property
+    def post_processed_type(self) -> TypeHint:
+        if not self.required:
+            return self.type.optional
+        return self.type
+
 
 @dataclass
 class PlainModel:

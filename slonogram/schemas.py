@@ -4,14 +4,14 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from __future__ import annotations
 from slonogram._internal.utils import prefer
 from dataclasses import dataclass
-from slonogram._internal.utils import AlterFn
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from, AlterFn
 from types import EllipsisType
 from typing import TypeAlias
-from io import IOBase
 
 
 @dataclass(frozen=False, slots=True)
@@ -49,6 +49,9 @@ class Update:
     """Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify "chat_member" in the list of allowed_updates to receive these updates. """
     chat_join_request: ChatJoinRequest | None = None
     """Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -201,6 +204,9 @@ class WebhookInfo:
     allowed_updates: list[str] | None = None
     """Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         url: AlterFn[str] | EllipsisType = ...,
@@ -319,6 +325,9 @@ class User:
     """Optional. True, if privacy mode is disabled for the bot. Returned only in getMe. """
     supports_inline_queries: bool | None = None
     """Optional. True, if the bot supports inline queries. Returned only in getMe. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -480,6 +489,9 @@ class Chat:
     """Optional. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. Returned only in getChat. """
     location: ChatLocation | None = None
     """Optional. For supergroups, the location to which the supergroup is connected. Returned only in getChat. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -871,6 +883,9 @@ class Message:
     """Optional. Service message: data sent by a Web App """
     reply_markup: InlineKeyboardMarkup | None = None
     """Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -1463,6 +1478,9 @@ class MessageId:
     message_id: int
     """Unique message identifier """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         message_id: AlterFn[int] | EllipsisType = ...,
@@ -1502,6 +1520,9 @@ class MessageEntity:
     """Optional. For "pre" only, the programming language of the entity text """
     custom_emoji_id: str | None = None
     """Optional. For "custom_emoji" only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -1571,6 +1592,9 @@ class PhotoSize:
     file_size: int | None = None
     """Optional. File size in bytes """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         file_id: AlterFn[str] | EllipsisType = ...,
@@ -1638,6 +1662,9 @@ class Animation:
     """Optional. MIME type of the file as defined by sender """
     file_size: int | None = None
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -1731,6 +1758,9 @@ class Audio:
     thumbnail: PhotoSize | None = None
     """Optional. Thumbnail of the album cover to which the music file belongs """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         file_id: AlterFn[str] | EllipsisType = ...,
@@ -1817,6 +1847,9 @@ class Document:
     file_size: int | None = None
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         file_id: AlterFn[str] | EllipsisType = ...,
@@ -1874,6 +1907,9 @@ class Document:
 class Story:
     """This object represents a message about a forwarded story in the chat. Currently holds no information."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> Story:
@@ -1909,6 +1945,9 @@ class Video:
     """Optional. MIME type of the file as defined by sender """
     file_size: int | None = None
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -1996,6 +2035,9 @@ class VideoNote:
     file_size: int | None = None
     """Optional. File size in bytes """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         file_id: AlterFn[str] | EllipsisType = ...,
@@ -2064,6 +2106,9 @@ class Voice:
     file_size: int | None = None
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         file_id: AlterFn[str] | EllipsisType = ...,
@@ -2126,6 +2171,9 @@ class Contact:
     vcard: str | None = None
     """Optional. Additional data about the contact in the form of a vCard """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         phone_number: AlterFn[str] | EllipsisType = ...,
@@ -2178,6 +2226,9 @@ class Dice:
     value: int
     """Value of the dice, 1-6 for "🎲", "🎯" and "🎳" base emoji, 1-5 for "🏀" and "⚽" base emoji, 1-64 for "🎰" base emoji """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         emoji: AlterFn[str] | EllipsisType = ...,
@@ -2209,6 +2260,9 @@ class PollOption:
     """Option text, 1-100 characters """
     voter_count: int
     """Number of users that voted for this option """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2247,6 +2301,9 @@ class PollAnswer:
     """Optional. The chat that changed the answer to the poll, if the voter is anonymous """
     user: User | None = None
     """Optional. The user that changed the answer to the poll, if the voter isn't anonymous """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2315,6 +2372,9 @@ class Poll:
     """Optional. Amount of time in seconds the poll will be active after creation """
     close_date: int | None = None
     """Optional. Point in time (Unix timestamp) when the poll will be automatically closed """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2440,6 +2500,9 @@ class Location:
     proximity_alert_radius: int | None = None
     """Optional. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         longitude: AlterFn[float] | EllipsisType = ...,
@@ -2519,6 +2582,9 @@ class Venue:
     google_place_type: str | None = None
     """Optional. Google Places type of the venue. (See supported types.) """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         location: AlterFn[Location] | EllipsisType = ...,
@@ -2593,6 +2659,9 @@ class WebAppData:
     button_text: str
     """Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         data: AlterFn[str] | EllipsisType = ...,
@@ -2628,6 +2697,9 @@ class ProximityAlertTriggered:
     """User that set the alert """
     distance: int
     """The distance between the users """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2669,6 +2741,9 @@ class MessageAutoDeleteTimerChanged:
     message_auto_delete_time: int
     """New auto-delete time for messages in the chat; in seconds """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         message_auto_delete_time: AlterFn[int] | EllipsisType = ...,
@@ -2705,6 +2780,9 @@ class ForumTopicCreated:
     """Color of the topic icon in RGB format """
     icon_custom_emoji_id: str | None = None
     """Optional. Unique identifier of the custom emoji shown as the topic icon """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2746,6 +2824,9 @@ class ForumTopicCreated:
 class ForumTopicClosed:
     """This object represents a service message about a forum topic closed in the chat. Currently holds no information."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> ForumTopicClosed:
@@ -2767,6 +2848,9 @@ class ForumTopicEdited:
     """Optional. New name of the topic, if it was edited """
     icon_custom_emoji_id: str | None = None
     """Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2802,6 +2886,9 @@ class ForumTopicEdited:
 class ForumTopicReopened:
     """This object represents a service message about a forum topic reopened in the chat. Currently holds no information."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> ForumTopicReopened:
@@ -2819,6 +2906,9 @@ class ForumTopicReopened:
 class GeneralForumTopicHidden:
     """This object represents a service message about General forum topic hidden in the chat. Currently holds no information."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> GeneralForumTopicHidden:
@@ -2835,6 +2925,9 @@ class GeneralForumTopicHidden:
 @dataclass(frozen=False, slots=True)
 class GeneralForumTopicUnhidden:
     """This object represents a service message about General forum topic unhidden in the chat. Currently holds no information."""
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2857,6 +2950,9 @@ class UserShared:
     """Identifier of the request """
     user_id: int
     """Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2893,6 +2989,9 @@ class ChatShared:
     """Identifier of the request """
     chat_id: int
     """Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2931,6 +3030,9 @@ class WriteAccessAllowed:
     """Optional. Name of the Web App, if the access was granted when the Web App was launched from a link """
     from_attachment_menu: bool | None = None
     """Optional. True, if the access was granted when the bot was added to the attachment or side menu """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -2977,6 +3079,9 @@ class VideoChatScheduled:
     start_date: int
     """Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         start_date: AlterFn[int] | EllipsisType = ...,
@@ -3002,6 +3107,9 @@ class VideoChatScheduled:
 class VideoChatStarted:
     """This object represents a service message about a video chat started in the chat. Currently holds no information."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> VideoChatStarted:
@@ -3021,6 +3129,9 @@ class VideoChatEnded:
 
     duration: int
     """Video chat duration in seconds """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3050,6 +3161,9 @@ class VideoChatParticipantsInvited:
     users: list[User]
     """New members that were invited to the video chat """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         users: AlterFn[list[User]] | EllipsisType = ...,
@@ -3077,6 +3191,9 @@ class UserProfilePhotos:
     """Total number of profile pictures the target user has """
     photos: list[list[PhotoSize]]
     """Requested profile pictures (in up to 4 sizes each) """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3117,6 +3234,9 @@ class File:
     """Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value. """
     file_path: str | None = None
     """Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3166,6 +3286,9 @@ class WebAppInfo:
     url: str
     """An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         url: AlterFn[str] | EllipsisType = ...,
@@ -3199,6 +3322,9 @@ class ReplyKeyboardMarkup:
     """Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters """
     selective: bool | None = None
     """Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. Example: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3288,6 +3414,9 @@ class KeyboardButton:
     web_app: WebAppInfo | None = None
     """Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a "web_app_data" service message. Available in private chats only. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         text: AlterFn[str] | EllipsisType = ...,
@@ -3358,6 +3487,9 @@ class KeyboardButtonRequestUser:
     user_is_premium: bool | None = None
     """Optional. Pass True to request a premium user, pass False to request a non-premium user. If not specified, no additional restrictions are applied. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         request_id: AlterFn[int] | EllipsisType = ...,
@@ -3413,6 +3545,9 @@ class KeyboardButtonRequestChat:
     """Optional. A JSON-serialized object listing the required administrator rights of the bot in the chat. The rights must be a subset of user_administrator_rights. If not specified, no additional restrictions are applied. """
     bot_is_member: bool | None = None
     """Optional. Pass True to request a chat with the bot as a member. Otherwise, no additional restrictions are applied. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3508,6 +3643,9 @@ class KeyboardButtonPollType:
     type: str | None = None
     """Optional. If quiz is passed, the user will be allowed to create only polls in the quiz mode. If regular is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str | None] | EllipsisType = ...,
@@ -3533,6 +3671,9 @@ class ReplyKeyboardRemove:
     """Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use one_time_keyboard in ReplyKeyboardMarkup) """
     selective: bool | None = None
     """Optional. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. Example: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3571,6 +3712,9 @@ class InlineKeyboardMarkup:
 
     inline_keyboard: list[list[InlineKeyboardButton]]
     """Array of button rows, each represented by an Array of InlineKeyboardButton objects """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3619,6 +3763,9 @@ class InlineKeyboardButton:
     """Optional. Description of the game that will be launched when the user presses the button. NOTE: This type of button must always be the first button in the first row. """
     pay: bool | None = None
     """Optional. Specify True, to send a Pay button. NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3724,6 +3871,9 @@ class LoginUrl:
     request_write_access: bool | None = None
     """Optional. Pass True to request the permission for your bot to send messages to the user. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         url: AlterFn[str] | EllipsisType = ...,
@@ -3780,6 +3930,9 @@ class SwitchInlineQueryChosenChat:
     """Optional. True, if group and supergroup chats can be chosen """
     allow_channel_chats: bool | None = None
     """Optional. True, if channel chats can be chosen """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -3855,6 +4008,9 @@ class CallbackQuery:
     game_short_name: str | None = None
     """Optional. Short name of a Game to be returned, serves as the unique identifier for the game """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         id: AlterFn[str] | EllipsisType = ...,
@@ -3925,6 +4081,9 @@ class ForceReply:
     selective: bool | None = None
     """Optional. Use this parameter if you want to force reply from specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot's message is a reply (has reply_to_message_id), sender of the original message. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         force_reply: AlterFn[bool] | EllipsisType = ...,
@@ -3975,6 +4134,9 @@ class ChatPhoto:
     """File identifier of big (640x640) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed. """
     big_file_unique_id: str
     """Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4048,6 +4210,9 @@ class ChatInviteLink:
     """Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 """
     pending_join_request_count: int | None = None
     """Optional. Number of pending join requests created using this link """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4160,6 +4325,9 @@ class ChatAdministratorRights:
     """Optional. True, if the administrator can delete stories posted by other users; channels only """
     can_manage_topics: bool | None = None
     """Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4325,6 +4493,9 @@ class ChatMemberOwner:
     custom_title: str | None = None
     """Optional. Custom title for this user """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         status: AlterFn[str] | EllipsisType = ...,
@@ -4404,6 +4575,9 @@ class ChatMemberAdministrator:
     """Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only """
     custom_title: str | None = None
     """Optional. Custom title for this user """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4589,6 +4763,9 @@ class ChatMemberMember:
     user: User
     """Information about the user """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         status: AlterFn[str] | EllipsisType = ...,
@@ -4654,6 +4831,9 @@ class ChatMemberRestricted:
     """True, if the user is allowed to create forum topics """
     until_date: int
     """Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4831,6 +5011,9 @@ class ChatMemberLeft:
     user: User
     """Information about the user """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         status: AlterFn[str] | EllipsisType = ...,
@@ -4866,6 +5049,9 @@ class ChatMemberBanned:
     """Information about the user """
     until_date: int
     """Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4916,6 +5102,9 @@ class ChatMemberUpdated:
     """Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only. """
     via_chat_folder_invite_link: bool | None = None
     """Optional. True, if the user joined the chat via a chat folder invite link """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -4994,6 +5183,9 @@ class ChatJoinRequest:
     invite_link: ChatInviteLink | None = None
     """Optional. Chat invite link that was used by the user to send the join request """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         chat: AlterFn[Chat] | EllipsisType = ...,
@@ -5069,6 +5261,9 @@ class ChatPermissions:
     """Optional. True, if the user is allowed to pin messages. Ignored in public supergroups """
     can_manage_topics: bool | None = None
     """Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5224,6 +5419,9 @@ class ChatLocation:
     address: str
     """Location address; 1-64 characters, as defined by the chat owner """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         location: AlterFn[Location] | EllipsisType = ...,
@@ -5263,6 +5461,9 @@ class ForumTopic:
     """Color of the topic icon in RGB format """
     icon_custom_emoji_id: str | None = None
     """Optional. Unique identifier of the custom emoji shown as the topic icon """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5319,6 +5520,9 @@ class BotCommand:
     description: str
     """Description of the command; 1-256 characters. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         command: AlterFn[str] | EllipsisType = ...,
@@ -5353,6 +5557,9 @@ class BotCommandScopeDefault:
     type: str
     """Scope type, must be default """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -5376,6 +5583,9 @@ class BotCommandScopeAllPrivateChats:
 
     type: str
     """Scope type, must be all_private_chats """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5403,6 +5613,9 @@ class BotCommandScopeAllGroupChats:
     type: str
     """Scope type, must be all_group_chats """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -5426,6 +5639,9 @@ class BotCommandScopeAllChatAdministrators:
 
     type: str
     """Scope type, must be all_chat_administrators """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5454,6 +5670,9 @@ class BotCommandScopeChat:
     """Scope type, must be chat """
     chat_id: int | str
     """Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5488,6 +5707,9 @@ class BotCommandScopeChatAdministrators:
     """Scope type, must be chat_administrators """
     chat_id: int | str
     """Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5524,6 +5746,9 @@ class BotCommandScopeChatMember:
     """Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
     user_id: int
     """Unique identifier of the target user """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5563,6 +5788,9 @@ class BotName:
     name: str
     """The bot's name """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         name: AlterFn[str] | EllipsisType = ...,
@@ -5586,6 +5814,9 @@ class BotDescription:
 
     description: str
     """The bot's description """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5614,6 +5845,9 @@ class BotShortDescription:
 
     short_description: str
     """The bot's short description """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5647,6 +5881,9 @@ class MenuButtonCommands:
     type: str
     """Type of the button, must be commands """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -5674,6 +5911,9 @@ class MenuButtonWebApp:
     """Text on the button """
     web_app: WebAppInfo
     """Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5711,6 +5951,9 @@ class MenuButtonDefault:
     type: str
     """Type of the button, must be default """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -5736,6 +5979,9 @@ class ResponseParameters:
     """Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier. """
     retry_after: int | None = None
     """Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5784,6 +6030,9 @@ class InputMediaPhoto:
     """Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
     has_spoiler: bool | None = None
     """Optional. Pass True if the photo needs to be covered with a spoiler animation """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -5860,6 +6109,10 @@ class InputMediaVideo:
     """Optional. Pass True if the uploaded video is suitable for streaming """
     has_spoiler: bool | None = None
     """Optional. Pass True if the video needs to be covered with a spoiler animation """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.thumbnail, IOBase):
+            dest[str(id(self.thumbnail))] = self.thumbnail
 
     def alter(
         self,
@@ -5967,6 +6220,10 @@ class InputMediaAnimation:
     has_spoiler: bool | None = None
     """Optional. Pass True if the animation needs to be covered with a spoiler animation """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.thumbnail, IOBase):
+            dest[str(id(self.thumbnail))] = self.thumbnail
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -6061,6 +6318,10 @@ class InputMediaAudio:
     title: str | None = None
     """Optional. Title of the audio """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.thumbnail, IOBase):
+            dest[str(id(self.thumbnail))] = self.thumbnail
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -6145,6 +6406,10 @@ class InputMediaDocument:
     disable_content_type_detection: bool | None = None
     """Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.thumbnail, IOBase):
+            dest[str(id(self.thumbnail))] = self.thumbnail
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -6209,6 +6474,9 @@ class InputMediaDocument:
 class InputFile:
     """This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> InputFile:
@@ -6256,6 +6524,9 @@ class Sticker:
     """Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places """
     file_size: int | None = None
     """Optional. File size in bytes """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -6387,6 +6658,9 @@ class StickerSet:
     thumbnail: PhotoSize | None = None
     """Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         name: AlterFn[str] | EllipsisType = ...,
@@ -6453,6 +6727,9 @@ class MaskPosition:
     scale: float
     """Mask scaling coefficient. For example, 2.0 means double size. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         point: AlterFn[str] | EllipsisType = ...,
@@ -6500,6 +6777,10 @@ class InputSticker:
     """Optional. Position where the mask should be placed on faces. For "mask" stickers only. """
     keywords: list[str] | None = None
     """Optional. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For "regular" and "custom_emoji" stickers only. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.sticker, IOBase):
+            dest[str(id(self.sticker))] = self.sticker
 
     def alter(
         self,
@@ -6559,6 +6840,9 @@ class InlineQuery:
     location: Location | None = None
     """Optional. Sender location, only for bots that request user location """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         id: AlterFn[str] | EllipsisType = ...,
@@ -6614,6 +6898,9 @@ class InlineQueryResultsButton:
     """Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to switch back to the inline mode using the method switchInlineQuery inside the Web App. """
     start_parameter: str | None = None
     """Optional. Deep-linking parameter for the /start message sent to the bot when a user presses the button. 1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed. Example: An inline bot that sends YouTube videos can ask the user to connect the bot to their YouTube account to adapt search results accordingly. To do this, it displays a 'Connect your YouTube account' button above the results, or even before showing any. The user presses the button, switches to a private chat with the bot and, in doing so, passes a start parameter that instructs the bot to return an OAuth link. Once done, the bot can offer a switch_inline button so that the user can easily return to the chat where they wanted to use the bot's inline capabilities. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -6674,6 +6961,9 @@ class InlineQueryResultArticle:
     """Optional. Thumbnail width """
     thumbnail_height: int | None = None
     """Optional. Thumbnail height """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -6789,6 +7079,9 @@ class InlineQueryResultPhoto:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the photo """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -6918,6 +7211,9 @@ class InlineQueryResultGif:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the GIF animation """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -7057,6 +7353,9 @@ class InlineQueryResultMpeg4Gif:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the video animation """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -7201,6 +7500,9 @@ class InlineQueryResultVideo:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video). """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -7340,6 +7642,9 @@ class InlineQueryResultAudio:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the audio """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -7450,6 +7755,9 @@ class InlineQueryResultVoice:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the voice recording """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -7563,6 +7871,9 @@ class InlineQueryResultDocument:
     """Optional. Thumbnail width """
     thumbnail_height: int | None = None
     """Optional. Thumbnail height """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -7704,6 +8015,9 @@ class InlineQueryResultLocation:
     """Optional. Thumbnail width """
     thumbnail_height: int | None = None
     """Optional. Thumbnail height """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -7855,6 +8169,9 @@ class InlineQueryResultVenue:
     thumbnail_height: int | None = None
     """Optional. Thumbnail height """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8004,6 +8321,9 @@ class InlineQueryResultContact:
     thumbnail_height: int | None = None
     """Optional. Thumbnail height """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8105,6 +8425,9 @@ class InlineQueryResultGame:
     reply_markup: InlineKeyboardMarkup | None = None
     """Optional. Inline keyboard attached to the message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8166,6 +8489,9 @@ class InlineQueryResultCachedPhoto:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the photo """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -8268,6 +8594,9 @@ class InlineQueryResultCachedGif:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the GIF animation """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8361,6 +8690,9 @@ class InlineQueryResultCachedMpeg4Gif:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the video animation """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8450,6 +8782,9 @@ class InlineQueryResultCachedSticker:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the sticker """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8524,6 +8859,9 @@ class InlineQueryResultCachedDocument:
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the file """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -8628,6 +8966,9 @@ class InlineQueryResultCachedVideo:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the video """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8731,6 +9072,9 @@ class InlineQueryResultCachedVoice:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the voice message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8826,6 +9170,9 @@ class InlineQueryResultCachedAudio:
     input_message_content: InputMessageContent | None = None
     """Optional. Content of the message to be sent instead of the audio """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         type: AlterFn[str] | EllipsisType = ...,
@@ -8907,6 +9254,9 @@ class InputTextMessageContent:
     disable_web_page_preview: bool | None = None
     """Optional. Disables link previews for links in the sent message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         message_text: AlterFn[str] | EllipsisType = ...,
@@ -8967,6 +9317,9 @@ class InputLocationMessageContent:
     """Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. """
     proximity_alert_radius: int | None = None
     """Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9048,6 +9401,9 @@ class InputVenueMessageContent:
     """Optional. Google Places identifier of the venue """
     google_place_type: str | None = None
     """Optional. Google Places type of the venue. (See supported types.) """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9133,6 +9489,9 @@ class InputContactMessageContent:
     vcard: str | None = None
     """Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         phone_number: AlterFn[str] | EllipsisType = ...,
@@ -9214,6 +9573,9 @@ class InputInvoiceMessageContent:
     """Optional. Pass True if the user's email address should be sent to provider """
     is_flexible: bool | None = None
     """Optional. Pass True if the final price depends on the shipping method """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9395,6 +9757,9 @@ class ChosenInlineResult:
     inline_message_id: str | None = None
     """Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         result_id: AlterFn[str] | EllipsisType = ...,
@@ -9447,6 +9812,9 @@ class SentWebAppMessage:
     inline_message_id: str | None = None
     """Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         inline_message_id: AlterFn[str | None] | EllipsisType = ...,
@@ -9480,6 +9848,9 @@ class LabeledPrice:
     """Portion label """
     amount: int
     """Price of the product in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9520,6 +9891,9 @@ class Invoice:
     """Three-letter ISO 4217 currency code """
     total_amount: int
     """Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9583,6 +9957,9 @@ class ShippingAddress:
     post_code: str
     """Address post code """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         country_code: AlterFn[str] | EllipsisType = ...,
@@ -9643,6 +10020,9 @@ class OrderInfo:
     shipping_address: ShippingAddress | None = None
     """Optional. User shipping address """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         name: AlterFn[str | None] | EllipsisType = ...,
@@ -9691,6 +10071,9 @@ class ShippingOption:
     prices: list[LabeledPrice]
     """List of price portions """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         id: AlterFn[str] | EllipsisType = ...,
@@ -9738,6 +10121,9 @@ class SuccessfulPayment:
     """Optional. Identifier of the shipping option chosen by the user """
     order_info: OrderInfo | None = None
     """Optional. Order information provided by the user """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9825,6 +10211,9 @@ class ShippingQuery:
     shipping_address: ShippingAddress
     """User specified shipping address """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         id: AlterFn[str] | EllipsisType = ...,
@@ -9882,6 +10271,9 @@ class PreCheckoutQuery:
     """Optional. Identifier of the shipping option chosen by the user """
     order_info: OrderInfo | None = None
     """Optional. Order information provided by the user """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -9951,6 +10343,9 @@ class PassportData:
     credentials: EncryptedCredentials
     """Encrypted credentials required to decrypt the data """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         data: AlterFn[list[EncryptedPassportElement]] | EllipsisType = ...,
@@ -9988,6 +10383,9 @@ class PassportFile:
     """File size in bytes """
     file_date: int
     """Unix time when the file was uploaded """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10054,6 +10452,9 @@ class EncryptedPassportElement:
     """Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available for "passport", "driver_license", "identity_card" and "internal_passport". The file can be decrypted and verified using the accompanying EncryptedCredentials. """
     translation: list[PassportFile] | None = None
     """Optional. Array of encrypted files with translated versions of documents provided by the user. Available if requested for "passport", "driver_license", "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement", "passport_registration" and "temporary_registration" types. Files can be decrypted and verified using the accompanying EncryptedCredentials. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10131,6 +10532,9 @@ class EncryptedCredentials:
     secret: str
     """Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         data: AlterFn[str] | EllipsisType = ...,
@@ -10174,6 +10578,9 @@ class PassportElementErrorDataField:
     """Base64-encoded data hash """
     message: str
     """Error message """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10231,6 +10638,9 @@ class PassportElementErrorFrontSide:
     message: str
     """Error message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         source: AlterFn[str] | EllipsisType = ...,
@@ -10280,6 +10690,9 @@ class PassportElementErrorReverseSide:
     """Base64-encoded hash of the file with the reverse side of the document """
     message: str
     """Error message """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10331,6 +10744,9 @@ class PassportElementErrorSelfie:
     message: str
     """Error message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         source: AlterFn[str] | EllipsisType = ...,
@@ -10380,6 +10796,9 @@ class PassportElementErrorFile:
     """Base64-encoded file hash """
     message: str
     """Error message """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10431,6 +10850,9 @@ class PassportElementErrorFiles:
     message: str
     """Error message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         source: AlterFn[str] | EllipsisType = ...,
@@ -10480,6 +10902,9 @@ class PassportElementErrorTranslationFile:
     """Base64-encoded file hash """
     message: str
     """Error message """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10531,6 +10956,9 @@ class PassportElementErrorTranslationFiles:
     message: str
     """Error message """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         source: AlterFn[str] | EllipsisType = ...,
@@ -10580,6 +11008,9 @@ class PassportElementErrorUnspecified:
     """Base64-encoded element hash """
     message: str
     """Error message """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,
@@ -10635,6 +11066,9 @@ class Game:
     animation: Animation | None = None
     """Optional. Animation that will be displayed in the game message in chats. Upload via BotFather """
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
         title: AlterFn[str] | EllipsisType = ...,
@@ -10686,6 +11120,9 @@ class Game:
 class CallbackGame:
     """A placeholder, currently holds no information. Use BotFather to set up your game."""
 
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
+
     def alter(
         self,
     ) -> CallbackGame:
@@ -10709,6 +11146,9 @@ class GameHighScore:
     """User """
     score: int
     """Score """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
     def alter(
         self,

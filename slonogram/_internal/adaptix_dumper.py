@@ -14,8 +14,10 @@ class MatchFirstLayerOfFields(RequestChecker):
 
 
 def dump_field(field: Any) -> Any:
-    if field is None or isinstance(field, (IOBase, str)):
+    if field is None or isinstance(field, str):
         return field
+    elif isinstance(field, IOBase):
+        return f"attach://{id(field)}"
     elif isinstance(field, bool):
         return "true" if field else "false"
     return dump_json(field)

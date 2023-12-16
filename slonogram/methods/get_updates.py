@@ -4,8 +4,10 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -20,6 +22,9 @@ class GetUpdates:
     """Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only. """
     allowed_updates: list[str] | None = None
     """A JSON-serialized list of the update types you want your bot to receive. For example, specify ["message", "edited_channel_post", "callback_query"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used. Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["GetUpdates"]

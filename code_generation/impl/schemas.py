@@ -31,6 +31,8 @@ from ..library.simple import (
     TypeAlias as CodegenTypeAlias,
 )
 
+from .attachs_collector import generate_collect_attachs
+
 
 class Order(IntEnum):
     TOP_LEVEL = auto()
@@ -42,7 +44,7 @@ ELLIPSIS_TYPE = Ref(Source("types"), "EllipsisType")
 ALTER_FN = Ref(Source("slonogram._internal.utils"), "AlterFn")
 
 
-def _helper_methods_for(model: PlainModel) -> Statement:
+def _helper_methods_for(model: PlainModel, models: dict[str, SpecModel]) -> Statement:
     copy_with_args: list[FunArg] = []
     copy_with_binds: list[str] = []
 
@@ -63,6 +65,10 @@ def _helper_methods_for(model: PlainModel) -> Statement:
 
     return Collection(
         [
+            generate_collect_attachs(
+                map(lambda f: (f.name, f.type), model.fields.values()),
+                models,
+            ),
             Function(
                 "alter",
                 Ref(SCHEMAS, model.name),
@@ -92,7 +98,7 @@ def _enum(model: EnumModel) -> Statement:
     )
 
 
-def _plain(model: PlainModel) -> Statement:
+def _plain(model: PlainModel, models: dict[str, SpecModel]) -> Statement:
     required_fields: list[DtcField] = []
     optional_fields: list[DtcField] = []
 
@@ -119,7 +125,7 @@ def _plain(model: PlainModel) -> Statement:
         name=model.name,
         fields=[*required_fields, *optional_fields],
         doc=model.doc,
-        tail=_helper_methods_for(model),
+        tail=_helper_methods_for(model, models),
     )
 
 
@@ -131,11 +137,13 @@ def _type_alias(model: TypeAlias) -> Statement:
     )
 
 
-def _generate_model(model: SpecModel) -> tuple[Order, Statement]:
+def _generate_model(
+    model: SpecModel, models: dict[str, SpecModel]
+) -> tuple[Order, Statement]:
     if isinstance(model, EnumModel):
         return (Order.FIRST, _enum(model))
     elif isinstance(model, PlainModel):
-        return (Order.FIRST, _plain(model))
+        return (Order.FIRST, _plain(model, models))
     elif isinstance(model, TypeAlias):
         return (Order.LAST, _type_alias(model))
     raise NotImplementedError
@@ -154,7 +162,7 @@ def generate_schemas(spec: Spec) -> Statement:
     }
 
     for model in spec.models.values():
-        order, stmt = _generate_model(model)
+        order, stmt = _generate_model(model, spec.models)
         _dispatch_dict[order].append(stmt)
         refs |= stmt.collect_refs()
 

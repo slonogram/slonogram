@@ -4,15 +4,18 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
 class GetForumTopicIconStickers:
     """Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects."""
 
-    pass
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["GetForumTopicIconStickers"]

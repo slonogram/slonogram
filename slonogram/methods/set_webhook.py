@@ -4,9 +4,10 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -29,6 +30,10 @@ class SetWebhook:
     """Pass True to drop all pending updates """
     secret_token: str | None = None
     """A secret token to be sent in a header "X-Telegram-Bot-Api-Secret-Token" in every webhook request, 1-256 characters. Only characters A-Z, a-z, 0-9, _ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.certificate, IOBase):
+            dest[str(id(self.certificate))] = self.certificate
 
 
 __all__ = ["SetWebhook"]

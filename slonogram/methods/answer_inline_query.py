@@ -4,9 +4,11 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import InlineQueryResult, InlineQueryResultsButton
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -26,6 +28,9 @@ class AnswerInlineQuery:
     """Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes. """
     button: InlineQueryResultsButton | None = None
     """A JSON-serialized object describing a button to be shown above inline query results """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["AnswerInlineQuery"]

@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from io import IOBase
 from typing import (
     Any,
     AsyncIterator,
@@ -13,10 +14,10 @@ from . import BASE_URL
 
 from slonogram.utils import parse_json
 from slonogram.exceptions.api import ApiError, ErrorDetails
-from slonogram.session import Session
+from slonogram.session import CanCollectAttachs, Session
 
 
-T = TypeVar("T")
+T = TypeVar("T", bound=CanCollectAttachs)
 
 
 class AiohttpSession(Session):
@@ -33,7 +34,12 @@ class AiohttpSession(Session):
         self.retort = retort
 
     async def call_method(self, name: str, args: T) -> Any:
+        files: dict[str, IOBase] = {}
+        args.collect_attachs(files)
+
         data = self.retort.dump(args)
+        for attach_id, fp in files.items():
+            data[attach_id] = fp
 
         async with self.session.post(f"/bot{self.token}/{name}", data=data) as response:
             result = parse_json(await response.read())

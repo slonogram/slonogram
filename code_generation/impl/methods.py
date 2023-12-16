@@ -1,7 +1,6 @@
-from typing import Iterable
-
 from ..spec.utils import camel_to_pascal, to_snake_case
 from ..spec.method import Method
+from ..spec.model import SpecModel
 
 from .extended_dataclass import ExtendedDataclass
 
@@ -21,6 +20,8 @@ from ..library.simple import (
     AddRefs,
 )
 
+from .attachs_collector import generate_collect_attachs
+
 
 def generate_imports_for(stmt: Statement) -> list[Statement]:
     return [
@@ -30,10 +31,10 @@ def generate_imports_for(stmt: Statement) -> list[Statement]:
     ]
 
 
-def generate_wrapper(methods: Iterable[Method]) -> Statement:
+def generate_wrapper(methods: dict[str, Method]) -> Statement:
     functions: list[Statement] = []
 
-    for method in methods:
+    for method in methods.values():
         class_name = camel_to_pascal(method.name)
         pkg_name = to_snake_case(method.name)
 
@@ -106,7 +107,7 @@ def generate_wrapper(methods: Iterable[Method]) -> Statement:
     )
 
 
-def generate_method(method: Method) -> ExtendedDataclass:
+def generate_method(method: Method, models: dict[str, SpecModel]) -> ExtendedDataclass:
     required_fields: list[DtcField] = []
     optional_fields: list[DtcField] = []
 
@@ -132,5 +133,17 @@ def generate_method(method: Method) -> ExtendedDataclass:
             camel_to_pascal(method.name),
             [*required_fields, *optional_fields],
             doc=method.doc,
+            tail=generate_collect_attachs(
+                map(
+                    lambda arg: (
+                        arg.name,
+                        arg.type.optional
+                        if not arg.required or arg.default
+                        else arg.type,
+                    ),
+                    method.args,
+                ),
+                models,
+            ),
         )
     )

@@ -4,9 +4,11 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import InputSticker
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -27,6 +29,9 @@ class CreateNewStickerSet:
     """Type of stickers in the set, pass "regular", "mask", or "custom_emoji". By default, a regular sticker set is created. """
     needs_repainting: bool | None = None
     """Pass True if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        collect_attachs_from(self.stickers, dest)
 
 
 __all__ = ["CreateNewStickerSet"]

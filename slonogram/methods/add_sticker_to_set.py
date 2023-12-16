@@ -4,9 +4,11 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import InputSticker
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -19,6 +21,9 @@ class AddStickerToSet:
     """Sticker set name """
     sticker: InputSticker
     """A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        collect_attachs_from(self.sticker, dest)
 
 
 __all__ = ["AddStickerToSet"]

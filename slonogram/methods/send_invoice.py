@@ -4,9 +4,11 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import LabeledPrice, InlineKeyboardMarkup
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -69,6 +71,9 @@ class SendInvoice:
     """Pass True if the message should be sent even if the specified replied-to message is not found """
     reply_markup: InlineKeyboardMarkup | None = None
     """A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button. """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["SendInvoice"]

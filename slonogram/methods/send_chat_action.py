@@ -4,8 +4,10 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -20,6 +22,9 @@ class SendChatAction:
     """Type of action to broadcast. Choose one, depending on what the user is about to receive: typing for text messages, upload_photo for photos, record_video or upload_video for videos, record_voice or upload_voice for voice notes, upload_document for general files, choose_sticker for stickers, find_location for location data, record_video_note or upload_video_note for video notes. """
     message_thread_id: int | None = None
     """Unique identifier for the target message thread; supergroups only """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["SendChatAction"]

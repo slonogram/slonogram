@@ -6,15 +6,19 @@ from abc import ABCMeta, abstractmethod
 
 from code_generation.library.type_hint.ref_sources import TypeRefs
 
-from .ref_sources import TypeRefs, Source, BUILTINS
+from .ref_sources import Source, BUILTINS
+
+
+def reduce_refs(refs: Iterable[TypeRefs]) -> TypeRefs:
+    return reduce(
+        lambda lhs, rhs: lhs | rhs,
+        refs,
+        TypeRefs(),
+    )
 
 
 def collect_all_refs(hints: Iterable[TypeHint]) -> TypeRefs:
-    return reduce(
-        lambda lhs, rhs: lhs | rhs,
-        map(lambda x: x.collect_refs(), hints),
-        TypeRefs(),
-    )
+    return reduce_refs(map(lambda x: x.collect_refs(), hints))
 
 
 class TypeHint(metaclass=ABCMeta):

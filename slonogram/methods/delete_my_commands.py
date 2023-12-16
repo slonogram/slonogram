@@ -4,9 +4,11 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import BotCommandScope
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -17,6 +19,9 @@ class DeleteMyCommands:
     """A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault. """
     language_code: str | None = None
     """A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        pass
 
 
 __all__ = ["DeleteMyCommands"]

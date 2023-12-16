@@ -2,13 +2,21 @@ from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
 from adaptix import Retort
+from io import IOBase
 from typing import (
     Awaitable,
     Any,
+    Protocol,
     TypeVar,
 )
 
-T = TypeVar("T")
+
+class CanCollectAttachs(Protocol):
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        ...
+
+
+T = TypeVar("T", bound=CanCollectAttachs)
 
 
 class Session(metaclass=ABCMeta):

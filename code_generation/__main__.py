@@ -65,7 +65,7 @@ methods_exports: list[str] = []
 for method in spec.methods.values():
     snake_name = to_snake_case(method.name)
     out_path = methods_output / f"{snake_name}.py"
-    generated = impl_methods.generate_method(method)
+    generated = impl_methods.generate_method(method, spec.models)
     imports = impl_methods.generate_imports_for(generated)
 
     methods_exports.append(generated.dtc.name)
@@ -85,6 +85,6 @@ for method in spec.methods.values():
 
 methods_init_body.append(AllExports(methods_exports))
 (internals_path / "api_wrapper.py").write_text(
-    impl_methods.generate_wrapper(spec.methods.values()).generate()
+    impl_methods.generate_wrapper(spec.methods).generate()
 )
 (methods_output / "__init__.py").write_text(_with_header(Collection(methods_init_body)))

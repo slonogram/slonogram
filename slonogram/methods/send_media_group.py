@@ -4,14 +4,16 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 11:59:50.816237
+# Generated at: 2023-12-16 15:47:05.015225
 from dataclasses import dataclass
 from slonogram.schemas import (
-    InputMediaAudio,
     InputMediaVideo,
-    InputMediaDocument,
     InputMediaPhoto,
+    InputMediaAudio,
+    InputMediaDocument,
 )
+from io import IOBase
+from slonogram._internal.utils import collect_attachs_from
 
 
 @dataclass(frozen=False, slots=True)
@@ -34,6 +36,9 @@ class SendMediaGroup:
     """If the messages are a reply, ID of the original message """
     allow_sending_without_reply: bool | None = None
     """Pass True if the message should be sent even if the specified replied-to message is not found """
+
+    def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        collect_attachs_from(self.media, dest)
 
 
 __all__ = ["SendMediaGroup"]
