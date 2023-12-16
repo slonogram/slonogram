@@ -1,6 +1,9 @@
-from typing import Any
+from __future__ import annotations
+from typing import Any, TYPE_CHECKING
 
-from slonogram.dispatching.context import Context
+if TYPE_CHECKING:
+    from slonogram.dispatching.context import Context
+
 from .base import ExtendedFilter
 
 

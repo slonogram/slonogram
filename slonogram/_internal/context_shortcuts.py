@@ -1,17 +1,17 @@
-from typing import TypeVar, Awaitable
+from typing import TypeVar
 
-from .context import AbstractContext
+from slonogram.abstract.context import AbstractContext
+from ._generated_shortcuts import GeneratedShortcuts
 
+from ..filtering.text.state import set_text, grasp_text
 from ..schemas import Message
 
 M = TypeVar("M")
 
 
-class ShortcutsMixin(AbstractContext[M]):
-    def reply(
-        self: AbstractContext[Message],
-        *args,
-        **kwargs,
-    ) -> Awaitable[Message]:
-        """Same as calling `Bot.send_message` with a `context.model.chat.id`"""
-        return self.rpc.send_message(self.model.chat.id, *args, **kwargs)
+class ShortcutsMixin(GeneratedShortcuts[M]):
+    def grasp_text(self: AbstractContext[Message]) -> str | None:
+        return grasp_text(self)
+
+    def set_text(self: AbstractContext[Message], text: str | None) -> None:
+        set_text(self, text)

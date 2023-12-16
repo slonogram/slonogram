@@ -1,15 +1,17 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from typing import Callable, TypeAlias, TypeVar, Generic
 from abc import ABCMeta, abstractmethod
 
-from ..dispatching.context import Context
-from ..dispatching.stash import Stash
+if TYPE_CHECKING:
+    from ..dispatching.context import Context
+    from ..dispatching.stash import Stash
 
 from ..utils import origin_of
 
 M = TypeVar("M", contravariant=True)
-BareFilter: TypeAlias = Callable[[Context[M]], bool]
+BareFilter: TypeAlias = Callable[["Context[M]"], bool]
 
 
 class ExtendedFilter(Generic[M], metaclass=ABCMeta):

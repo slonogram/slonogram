@@ -91,5 +91,5 @@ class Function(Statement):
         return sig + indent(stmts)
 
 
-def self_arg() -> Argument:
-    return Argument("self")
+def self_arg(tp: TypeHint | None = None) -> Argument:
+    return Argument("self", tp)

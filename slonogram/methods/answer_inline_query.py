@@ -4,9 +4,9 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 15:47:05.015225
+# Generated at: 2023-12-16 17:59:35.955291
 from dataclasses import dataclass
-from slonogram.schemas import InlineQueryResult, InlineQueryResultsButton
+from slonogram.schemas import InlineQueryResultsButton, InlineQueryResult
 from io import IOBase
 from slonogram._internal.utils import collect_attachs_from
 

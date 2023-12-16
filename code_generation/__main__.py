@@ -12,6 +12,7 @@ from .impl import (
     schemas as impl_schemas,
     methods as impl_methods,
 )
+from .impl.shortcuts.impl import generate_shortcuts_def
 
 
 parser = ArgumentParser(
@@ -88,3 +89,16 @@ methods_init_body.append(AllExports(methods_exports))
     impl_methods.generate_wrapper(spec.methods).generate()
 )
 (methods_output / "__init__.py").write_text(_with_header(Collection(methods_init_body)))
+
+shortcuts = generate_shortcuts_def(spec.methods)
+
+(internals_path / "_generated_shortcuts.py").write_text(
+    _with_header(
+        Collection(
+            [
+                *impl_methods.generate_imports_for(shortcuts),
+                shortcuts,
+            ]
+        )
+    )
+)

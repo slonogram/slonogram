@@ -38,7 +38,10 @@ class Bot(MethodWrapper):
         self.me = me
 
     @classmethod
-    async def from_session(cls, session_factory: Callable[[Retort], Session]) -> Bot:
+    async def from_session(
+        cls,
+        session_factory: Callable[[Retort], Session],
+    ) -> Bot:
         retort = _extend_retort(_create_retort())
         session = session_factory(retort)
 

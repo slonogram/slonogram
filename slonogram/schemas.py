@@ -4,12 +4,12 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 15:47:05.015225
+# Generated at: 2023-12-16 17:59:35.955291
 from __future__ import annotations
 from slonogram._internal.utils import prefer
 from dataclasses import dataclass
 from io import IOBase
-from slonogram._internal.utils import collect_attachs_from, AlterFn
+from slonogram._internal.utils import AlterFn, collect_attachs_from
 from types import EllipsisType
 from typing import TypeAlias
 

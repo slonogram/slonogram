@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TypeVar
 
 from ..bot import Bot
+
 from .stash import Stash
 
 from .._internal.context_shortcuts import ShortcutsMixin
