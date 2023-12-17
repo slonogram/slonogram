@@ -1,13 +1,14 @@
+from __future__ import annotations
 from typing import (
     Any,
+    overload,
     Awaitable,
     TypeVar,
     ParamSpec,
     Generic,
     TypeAlias,
-    Callable,
-    Concatenate,
     Protocol,
+    Iterable,
 )
 from functools import wraps
 
@@ -37,6 +38,29 @@ class Group(Generic[P]):
 
     def __init__(self, *middlewares: BareMiddleware[M, P]) -> None:
         self.middlewares = middlewares
+
+    @overload
+    def __and__(self, rhs: BareMiddleware[M, P]) -> Group[P]:
+        ...
+
+    @overload
+    def __and__(self, rhs: Iterable[BareMiddleware[M, P]]) -> Group[P]:
+        ...
+
+    @overload
+    def __and__(self, rhs: Group[P]) -> Group[P]:
+        ...
+
+    def __and__(
+        self,
+        rhs: Any,
+    ) -> Group[P]:
+        if isinstance(rhs, Iterable):
+            return Group(*self.middlewares, *rhs)
+        elif isinstance(rhs, Group):
+            return Group(*self.middlewares, *rhs.middlewares)
+
+        return Group(*self.middlewares, rhs)
 
     async def __call__(
         self,
