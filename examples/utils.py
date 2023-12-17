@@ -3,7 +3,6 @@ import asyncio
 from typing import Callable, Coroutine, Any, ParamSpec
 from os import environ
 
-from slonogram.extra.session.aiohttp import create_session_factory
 from slonogram.dispatching import Dispatcher
 from slonogram.bot import Bot
 
@@ -21,7 +20,5 @@ def _sync(c: Callable[P, Coroutine[Any, Any, None]]) -> Callable[P, None]:
 
 @_sync
 async def run_dispatcher(dp: Dispatcher) -> None:
-    async with create_session_factory(environ["BOT_TOKEN"]) as factory:
-        bot = await Bot.from_session(factory)
-
+    async with Bot.from_aiohttp(environ["BOT_TOKEN"]) as bot:
         await poll_for_updates(bot, dp)

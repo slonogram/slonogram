@@ -15,9 +15,7 @@ from slonogram import (
     Context,
 )
 from slonogram.schemas import Message
-
 from slonogram.executors.long_polling import poll_for_updates
-from slonogram.extra.session.aiohttp import create_session_factory
 
 TOKEN = "<your token>"
 marker = HandlerMarker()
@@ -37,10 +35,8 @@ def create_dispatcher() -> Dispatcher:
 
 
 async def main() -> None:
-    async with create_session_factory(TOKEN) as factory:
-        bot = await Bot.from_session(factory)
+    async with Bot.from_aiohttp(TOKEN) as bot:
         await poll_for_updates(bot, create_dispatcher())
-
 
 asyncio.run(main())
 ```
