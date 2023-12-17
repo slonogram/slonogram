@@ -28,7 +28,7 @@ async def start(ctx: Context[Message]) -> None:
 def create_dispatcher() -> Dispatcher:
     # fmt: off
     return (
-        Dispatcher("quickstart")
+        Dispatcher("quickstart") # name is optional, so also can be created as `Dispatcher()`
             .on(Ic.message, start)
     )
     # fmt: on
