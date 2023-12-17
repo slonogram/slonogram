@@ -31,7 +31,6 @@ from ..schemas import (
 from ..bot import Bot
 
 from .interests import InterestCombinator
-from . import interests as Ic
 
 T = TypeVar("T")
 C1 = TypeVar("C1")
@@ -78,11 +77,12 @@ class Dispatcher:
         children: tuple[Dispatcher, ...] = (),
         handlers: DispatcherHandlers | None = None,
         layers: Layers[[], Any] | None = None,
+        stash: Stash | None = None,
     ) -> None:
         self.name = name
         self.children = children
 
-        self.stash = Stash()
+        self.stash = stash or Stash()
         self.handlers = handlers or DispatcherHandlers()
         self.layers = layers or Layers()
 
@@ -111,6 +111,17 @@ class Dispatcher:
             children=f(self.children),
             handlers=self.handlers,
             layers=self.layers,
+        )
+
+    def with_stash(self, stash: Stash, *, make_child: bool = False) -> Dispatcher:
+        if make_child:
+            stash = Stash(stash.types, parent=self.stash)
+        return Dispatcher(
+            self.name,
+            children=self.children,
+            handlers=self.handlers,
+            layers=self.layers,
+            stash=stash,
         )
 
     def child(self, dp: Dispatcher) -> Dispatcher:

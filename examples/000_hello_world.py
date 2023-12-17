@@ -12,12 +12,7 @@ async def start(ctx: Context[Message]) -> None:
 
 
 def create_dispatcher() -> Dispatcher:
-    # fmt: off
-    return (
-        Dispatcher(__name__)
-            .on(Ic.message, start, filter=Command("start"))
-    )
-    # fmt: on
+    return Dispatcher(__name__).on(Ic.message, start, filter=Command("start"))
 
 
 run_dispatcher(create_dispatcher())

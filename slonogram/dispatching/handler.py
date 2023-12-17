@@ -53,7 +53,7 @@ class Handler(Generic[M]):
 
     async def __call__(self, context: Context[M]) -> Activation[M]:
         layers = self.layers
-        subctx = context.with_stash(Stash(context.stash))
+        subctx = context.with_stash(Stash(parent=context.stash))
 
         if layers.prepare is not None:
             await layers.prepare(subctx)

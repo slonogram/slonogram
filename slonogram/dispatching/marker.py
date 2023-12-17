@@ -25,6 +25,24 @@ class HandlerMarker:
         before: SimpleMiddleware[Message] | None = None,
         after: ExcMiddleware[Message] | None = None,
     ) -> _HandlerDeco[Message]:
+        if not variants:
+
+            def parse_from_function_name(raw: RawHandler[Message]) -> Handler[Message]:
+                name = getattr(raw, "__name__", None)
+                if name is None:
+                    raise TypeError(
+                        "Calling command without variants only possible with functions "
+                        "that have the `__name__` dunder"
+                    )
+                return self(
+                    filter=Command(name),
+                    prepare=prepare,
+                    before=before,
+                    after=after,
+                )(raw)
+
+            return parse_from_function_name
+
         assigned_filter: ExtendedFilter[Message] = Command(*variants)
         if filter is not None:
             assigned_filter &= filter

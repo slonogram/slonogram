@@ -23,18 +23,18 @@ async def secret_information(ctx: Context[Message]) -> None:
 
 
 def create_dispatcher() -> Dispatcher:
-    # fmt: off
     return (
         Dispatcher("hierarchical_filters")
-            .on(Ic.message, public)
-            .child(
-                Dispatcher("top_secret")
-                    .on(Ic.message, private)
-                    .on(Ic.message, secret_information)
-                    .filter(lambda ctx: ctx.model.from_.username.casefold() == GRANT_TO_USERNAME)
+        .on(Ic.message, public)
+        .child(
+            Dispatcher("top_secret")
+            .on(Ic.message, private)
+            .on(Ic.message, secret_information)
+            .filter(
+                lambda ctx: ctx.model.from_.username.casefold() == GRANT_TO_USERNAME
             )
+        )
     )
-    # fmt: on
 
 
 run_dispatcher(create_dispatcher())

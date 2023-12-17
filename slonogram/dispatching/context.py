@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import TypeVar
 
 from ..bot import Bot
+from ..abstract.fsm import FSMStorage
 
 from .stash import Stash
 
@@ -22,6 +23,10 @@ class Context(ShortcutsMixin[M]):
         self.stash = stash
         self.model = model
         self.rpc = rpc
+
+    @property
+    def fsm_storage(self) -> FSMStorage:
+        return self.stash[FSMStorage]  # type: ignore
 
     def with_stash(self, stash: Stash) -> Context[M]:
         return Context(stash, self.model, self.rpc)

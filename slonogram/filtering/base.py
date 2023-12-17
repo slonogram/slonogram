@@ -128,7 +128,9 @@ class Scope(ExtendedFilter[M]):
 
     def __call__(self, ctx: Context[M]) -> bool:
         subctx = ctx.with_stash(
-            Stash(ctx.stash, self.stash.types) if self.extend_parent else self.stash
+            Stash(self.stash.types, parent=ctx.stash)
+            if self.extend_parent
+            else self.stash
         )
         return self.filter(subctx)
 

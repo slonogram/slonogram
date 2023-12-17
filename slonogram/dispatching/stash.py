@@ -14,8 +14,9 @@ class Stash:
 
     def __init__(
         self,
+        types: dict[Any, Any] | None = None,
+        *,
         parent: Self | None = None,
-        types: dict[Type[Any], Any] | None = None,
     ) -> None:
         if types is None:
             self.types = {}
@@ -23,6 +24,16 @@ class Stash:
             self.types = types
 
         self.parent = parent
+
+    @classmethod
+    def single(
+        self,
+        type: Any,
+        value: T,
+        *,
+        parent: Stash | None = None,
+    ) -> Stash:
+        return Stash({type: value}, parent=parent)
 
     def __getitem__(self, tp: Type[T]) -> T:
         """Gets item from the stash
