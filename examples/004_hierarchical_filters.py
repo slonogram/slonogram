@@ -7,17 +7,17 @@ GRANT_TO_USERNAME = "s".casefold()
 marker = HandlerMarker()
 
 
-@marker.command("public")
+@marker.command()
 async def public(ctx: Context[Message]) -> None:
     await ctx.reply("Public interface, wow!")
 
 
-@marker.command("private")
+@marker.command()
 async def private(ctx: Context[Message]) -> None:
     await ctx.reply("First private interface")
 
 
-@marker.command("secret_information")
+@marker.command()
 async def secret_information(ctx: Context[Message]) -> None:
     await ctx.reply(f"@{GRANT_TO_USERNAME}, you're the chosen one!")
 

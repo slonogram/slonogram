@@ -16,7 +16,7 @@ async def show_alert(context: Context[CallbackQuery]) -> None:
     await context.alert(text="Marker works!")
 
 
-@marker.command("start")
+@marker.command()
 async def start(context: Context[Message]) -> None:
     await context.reply(
         "Select the button",
