@@ -4,20 +4,21 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-16 17:59:35.955291
+# Generated at: 2023-12-17 08:56:56.806984
 from slonogram.schemas import (
-    MessageEntity,
     ReplyKeyboardMarkup,
-    InputMediaVideo,
-    InputMediaPhoto,
-    InputMediaAudio,
     InputMediaDocument,
-    ForceReply,
     InlineKeyboardMarkup,
+    InputMediaAudio,
+    InputMediaPhoto,
+    CallbackQuery,
     Message,
+    InputMediaVideo,
+    MessageEntity,
+    ForceReply,
     ReplyKeyboardRemove,
 )
-from typing import TypeVar, Awaitable
+from typing import Awaitable, TypeVar
 from slonogram.abstract.context import AbstractContext
 from io import IOBase
 from types import EllipsisType
@@ -552,4 +553,61 @@ class GeneratedShortcuts(AbstractContext[M]):
             else reply_to_message_id,
             allow_sending_without_reply=allow_sending_without_reply,
             reply_markup=reply_markup,
+        )
+
+    def answer_callback(
+        self: AbstractContext[CallbackQuery],
+        callback_query_id: str | EllipsisType = ...,
+        text: str | None = None,
+        show_alert: bool | None = None,
+        url: str | None = None,
+        cache_time: int | None = None,
+    ) -> Awaitable[bool]:
+        """Alias to the `Bot.answer_callback_query` with usable defaults, for more, see `Bot.answer_callback_query` docs"""
+        return self.rpc.answer_callback_query(
+            callback_query_id=self.model.id
+            if callback_query_id is ...
+            else callback_query_id,
+            text=text,
+            show_alert=show_alert,
+            url=url,
+            cache_time=cache_time,
+        )
+
+    def notify(
+        self: AbstractContext[CallbackQuery],
+        callback_query_id: str | EllipsisType = ...,
+        text: str | None = None,
+        show_alert: bool | None = None,
+        url: str | None = None,
+        cache_time: int | None = None,
+    ) -> Awaitable[bool]:
+        """Alias to the `Bot.answer_callback_query` with usable defaults, for more, see `Bot.answer_callback_query` docs"""
+        return self.rpc.answer_callback_query(
+            callback_query_id=self.model.id
+            if callback_query_id is ...
+            else callback_query_id,
+            text=text,
+            show_alert=show_alert,
+            url=url,
+            cache_time=cache_time,
+        )
+
+    def alert(
+        self: AbstractContext[CallbackQuery],
+        callback_query_id: str | EllipsisType = ...,
+        text: str | None = None,
+        show_alert: bool | None | EllipsisType = ...,
+        url: str | None = None,
+        cache_time: int | None = None,
+    ) -> Awaitable[bool]:
+        """Alias to the `Bot.answer_callback_query` with usable defaults, for more, see `Bot.answer_callback_query` docs"""
+        return self.rpc.answer_callback_query(
+            callback_query_id=self.model.id
+            if callback_query_id is ...
+            else callback_query_id,
+            text=text,
+            show_alert=True if show_alert is ... else show_alert,
+            url=url,
+            cache_time=cache_time,
         )

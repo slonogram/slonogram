@@ -1,6 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Any, overload, TypeVar, Iterable, Callable, TypeAlias
+from typing import (
+    Any,
+    overload,
+    TypeVar,
+    Iterable,
+    Callable,
+    TypeAlias,
+)
 
 from .context import Context
 from .layers import Layers
@@ -24,6 +31,7 @@ from ..schemas import (
 from ..bot import Bot
 
 from .interests import InterestCombinator
+from . import interests as Ic
 
 T = TypeVar("T")
 C1 = TypeVar("C1")
@@ -259,10 +267,14 @@ class Dispatcher:
         interests = set[Interest]()
         h = self.handlers
 
-        if h.edited_message:
-            interests.add(Interest.EDITED_MESSAGE)
-        if h.message:
-            interests.add(Interest.MESSAGE)
+        for interest, arr in (
+            (Interest.EDITED_MESSAGE, h.edited_message),
+            (Interest.MESSAGE, h.message),
+            (Interest.CALLBACK_QUERY, h.callback_query),
+            (Interest.INLINE_QUERY, h.inline_query),
+        ):
+            if arr:
+                interests.add(interest)
 
         for child in self.children:
             interests.update(child.collect_interests())

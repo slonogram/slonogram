@@ -1,4 +1,5 @@
 from typing import (
+    Any,
     Awaitable,
     TypeVar,
     ParamSpec,
@@ -6,6 +7,7 @@ from typing import (
     TypeAlias,
     Callable,
     Concatenate,
+    Protocol,
 )
 from functools import wraps
 
@@ -14,7 +16,18 @@ from .dispatching.context import Context
 M = TypeVar("M")
 P = ParamSpec("P")
 
-BareMiddleware: TypeAlias = Callable[Concatenate[Context[M], P], Awaitable[None]]
+
+class BareMiddleware(Protocol[M, P]):
+    def __call__(
+        self,
+        context: Context[M],
+        /,
+        *args: P.args,
+        **kwds: P.kwargs,
+    ) -> Awaitable[None]:
+        ...
+
+
 SimpleMiddleware: TypeAlias = BareMiddleware[M, []]
 ExcMiddleware: TypeAlias = BareMiddleware[M, [Exception | None]]
 

@@ -16,7 +16,7 @@ def prefer(val: Any | EllipsisType, otherwise: Any) -> Any:
 
 
 def collect_attachs_from(
-    obj: CanCollectAttachs | list,
+    obj: CanCollectAttachs | list[Any],
     dest: dict[str, IOBase],
 ) -> None:
     if isinstance(obj, list):

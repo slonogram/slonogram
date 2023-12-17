@@ -8,7 +8,7 @@ from slonogram.utils import dump_json
 
 
 class MatchFirstLayerOfFields(RequestChecker):
-    def check_request(self, mediator: DirectMediator, request: Request) -> None:
+    def check_request(self, mediator: DirectMediator, request: Request[Any]) -> None:
         if len(mediator.request_stack) != 2:
             raise CannotProvide
 

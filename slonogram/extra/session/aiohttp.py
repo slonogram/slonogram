@@ -56,7 +56,7 @@ class AiohttpSession(Session):
 
 
 @asynccontextmanager
-async def create_session(
+async def create_session_factory(
     token: str,
     base_url: str = BASE_URL,
 ) -> AsyncIterator[Callable[[Retort], AiohttpSession]]:
@@ -64,4 +64,4 @@ async def create_session(
         yield lambda retort: AiohttpSession(http_session, token, retort)
 
 
-__all__ = ["AiohttpSession", "create_session"]
+__all__ = ["AiohttpSession", "create_session_factory"]

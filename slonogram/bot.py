@@ -37,6 +37,10 @@ class Bot(MethodWrapper):
 
         self.me = me
 
+    @property
+    def username(self) -> str:
+        return self.me.username  # type: ignore
+
     @classmethod
     async def from_session(
         cls,

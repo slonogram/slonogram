@@ -1,3 +1,16 @@
+setup_dev:
+    poetry install --with docs,test,dev --all-extras
+
+shell:
+    poetry shell
+
+lint_mypy:
+    python -m mypy slonogram                    \
+        --strict                                \
+        --disable-error-code no-any-return
+
+lint: lint_mypy
+
 build:
     rm -f slonogram/schemas.py
     rm -rf slonogram/methods/

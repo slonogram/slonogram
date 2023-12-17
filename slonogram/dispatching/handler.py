@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from typing import TypeVar, Generic, TypeAlias, Callable, Awaitable
+from typing import (
+    TypeVar,
+    Generic,
+    Awaitable,
+    Protocol,
+)
 from dataclasses import dataclass
 
 from .layers import Layers
@@ -9,7 +14,11 @@ from .stash import Stash
 
 
 M = TypeVar("M")
-RawHandler: TypeAlias = Callable[[Context[M]], Awaitable[None]]
+
+
+class RawHandler(Protocol[M]):
+    def __call__(self, context: Context[M], /) -> Awaitable[None]:
+        ...
 
 
 @dataclass(slots=True)

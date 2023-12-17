@@ -1,4 +1,5 @@
 from .dispatching.dispatcher import Dispatcher
+from .dispatching.marker import HandlerMarker
 from .dispatching.context import Context
 from .dispatching import interests as Ic
 
@@ -9,4 +10,5 @@ __all__ = [
     "Ic",
     "Bot",
     "Context",
+    "HandlerMarker",
 ]

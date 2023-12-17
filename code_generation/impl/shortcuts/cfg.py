@@ -1,6 +1,7 @@
 from code_generation.library.type_hint import Ref, TypeHint
 from code_generation.library.type_hint.ref_sources import Source, SCHEMAS
 
+from typing import Any, Protocol
 from dataclasses import dataclass
 
 ABSTRACT_CONTEXT_SRC = Source("slonogram.abstract.context")
@@ -14,19 +15,35 @@ class MethodRef:
     replace_field_value: dict[str, str]
 
 
-_WITH_CHAT = {"chat_id": "self.model.chat.id"}
 M_MESSAGE = Ref(SCHEMAS, "Message")
 M_CALLBACK = Ref(SCHEMAS, "CallbackQuery")
 
 
-def _message_ref(
-    method_name: str,
-    add: dict[str, str] | None = None,
-) -> MethodRef:
-    d = {**_WITH_CHAT, **(add or {})}
-    return MethodRef(ABSTRACT_CONTEXT[M_MESSAGE], method_name, d)
+class _RefTemplate(Protocol):
+    def __call__(self, method_name: str, add: dict[str, str] | None = None, /) -> Any:
+        ...
 
 
+def _template_for(def_tp: TypeHint, def_dict: dict[str, str]) -> _RefTemplate:
+    def inner(
+        method_name: str,
+        add: dict[str, str] | None = None,
+    ) -> MethodRef:
+        return MethodRef(def_tp, method_name, {**def_dict, **(add or {})})
+
+    return inner
+
+
+_message_ref = _template_for(
+    ABSTRACT_CONTEXT[M_MESSAGE], {"chat_id": "self.model.chat.id"}
+)
+_callback_ref = _template_for(
+    ABSTRACT_CONTEXT[M_CALLBACK],
+    {"callback_query_id": "self.model.id"},
+)
+
+
+# fmt: off
 METHOD_CALLS = {
     "send_photo": _message_ref("sendPhoto"),
     "send_audio": _message_ref("sendAudio"),
@@ -43,6 +60,12 @@ METHOD_CALLS = {
     "send_dice": _message_ref("sendDice"),
     "send_action": _message_ref("sendChatAction"),
     "reply": _message_ref(
-        "sendMessage", {"reply_to_message_id": "self.model.message_id"}
+        "sendMessage",
+        {"reply_to_message_id": "self.model.message_id"},
     ),
+
+    "answer_callback": _callback_ref("answerCallbackQuery"),
+    "notify": _callback_ref("answerCallbackQuery"),
+    "alert": _callback_ref("answerCallbackQuery", {"show_alert": "True"}),
 }
+# fmt: on
