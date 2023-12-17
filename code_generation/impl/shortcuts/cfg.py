@@ -17,6 +17,7 @@ class MethodRef:
 
 M_MESSAGE = Ref(SCHEMAS, "Message")
 M_CALLBACK = Ref(SCHEMAS, "CallbackQuery")
+M_INLINE = Ref(SCHEMAS, "InlineQuery")
 
 
 class _RefTemplate(Protocol):
@@ -40,6 +41,9 @@ _message_ref = _template_for(
 _callback_ref = _template_for(
     ABSTRACT_CONTEXT[M_CALLBACK],
     {"callback_query_id": "self.model.id"},
+)
+_inline_ref = _template_for(
+    ABSTRACT_CONTEXT[M_INLINE], {"inline_query_id": "self.model.id"}
 )
 
 
@@ -67,5 +71,7 @@ METHOD_CALLS = {
     "answer_callback": _callback_ref("answerCallbackQuery"),
     "notify": _callback_ref("answerCallbackQuery"),
     "alert": _callback_ref("answerCallbackQuery", {"show_alert": "True"}),
+
+    "answer_inline": _inline_ref("answerInlineQuery"),
 }
 # fmt: on

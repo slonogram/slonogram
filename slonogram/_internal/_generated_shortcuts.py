@@ -4,19 +4,22 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-17 08:56:56.806984
+# Generated at: 2023-12-17 15:06:50.427429
 from slonogram.schemas import (
+    InputMediaAudio,
+    CallbackQuery,
+    InputMediaPhoto,
+    MessageEntity,
+    InlineQueryResult,
+    InputMediaVideo,
+    ForceReply,
+    InlineQueryResultsButton,
+    ReplyKeyboardRemove,
+    InlineQuery,
+    InlineKeyboardMarkup,
     ReplyKeyboardMarkup,
     InputMediaDocument,
-    InlineKeyboardMarkup,
-    InputMediaAudio,
-    InputMediaPhoto,
-    CallbackQuery,
     Message,
-    InputMediaVideo,
-    MessageEntity,
-    ForceReply,
-    ReplyKeyboardRemove,
 )
 from typing import Awaitable, TypeVar
 from slonogram.abstract.context import AbstractContext
@@ -610,4 +613,25 @@ class GeneratedShortcuts(AbstractContext[M]):
             show_alert=True if show_alert is ... else show_alert,
             url=url,
             cache_time=cache_time,
+        )
+
+    def answer_inline(
+        self: AbstractContext[InlineQuery],
+        results: list[InlineQueryResult],
+        inline_query_id: str | EllipsisType = ...,
+        cache_time: int | None = None,
+        is_personal: bool | None = None,
+        next_offset: str | None = None,
+        button: InlineQueryResultsButton | None = None,
+    ) -> Awaitable[bool]:
+        """Alias to the `Bot.answer_inline_query` with usable defaults, for more, see `Bot.answer_inline_query` docs"""
+        return self.rpc.answer_inline_query(
+            inline_query_id=self.model.id
+            if inline_query_id is ...
+            else inline_query_id,
+            results=results,
+            cache_time=cache_time,
+            is_personal=is_personal,
+            next_offset=next_offset,
+            button=button,
         )
