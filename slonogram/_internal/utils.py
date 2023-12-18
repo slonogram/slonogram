@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from types import EllipsisType
 from typing import TYPE_CHECKING
 from io import IOBase
