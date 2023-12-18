@@ -9,16 +9,17 @@ from adaptix import (
     dumper,
     Chain,
     name_mapping,
+    P,
 )
 
 from ._internal.adaptix_dumper import MatchFirstLayerOfFields, dump_field
-from ._internal.api_wrapper import MethodWrapper
+from ._internal.api_wrapper import MethodsWrapper
 
 from .session import Session
 from .schemas import User
 
 
-class Bot(MethodWrapper):
+class Bot(MethodsWrapper):
     """Bot instance. Main telegram API interface.
 
     # Creation
@@ -82,14 +83,14 @@ class Bot(MethodWrapper):
         retort = _extend_retort(_create_retort())
         session = session_factory(retort)
 
-        rpc = MethodWrapper(session, retort)
+        rpc = MethodsWrapper(session, retort)
         return cls(session, await rpc.get_me())
 
 
 def _create_retort() -> Retort:
     return Retort(
         recipe=[
-            name_mapping(omit_default=True),
+            name_mapping(omit_default=~P["type"]),
         ]
     )
 

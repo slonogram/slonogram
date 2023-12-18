@@ -77,7 +77,7 @@ def generate_wrapper(methods: dict[str, Method]) -> Statement:
         )
 
     gen_cls = Class(
-        "MethodWrapper",
+        "MethodsWrapper",
         doc="Wrapper for calling the methods",
         body=[
             Definition("__slots__", assign="('retort', 'session')"),

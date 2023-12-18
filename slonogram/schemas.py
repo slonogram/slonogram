@@ -4,14 +4,14 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-17 15:06:50.427429
+# Generated at: 2023-12-18 07:44:15.244650
 from __future__ import annotations
 from slonogram._internal.utils import prefer
 from dataclasses import dataclass
 from io import IOBase
-from slonogram._internal.utils import collect_attachs_from, AlterFn
+from slonogram._internal.utils import AlterFn, collect_attachs_from
 from types import EllipsisType
-from typing import TypeAlias
+from typing import Literal, TypeAlias
 
 
 @dataclass(frozen=False, slots=True)
@@ -6018,10 +6018,10 @@ class ResponseParameters:
 class InputMediaPhoto:
     """Represents a photo to be sent."""
 
-    type: str
-    """Type of the result, must be photo """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    type: Literal["photo"] = "photo"
+    """Type of the result, must be photo """
     caption: str | None = None
     """Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -6036,7 +6036,7 @@ class InputMediaPhoto:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
@@ -6063,7 +6063,7 @@ class InputMediaPhoto:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["photo"] | EllipsisType = ...,
         media: str | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
@@ -6087,10 +6087,10 @@ class InputMediaPhoto:
 class InputMediaVideo:
     """Represents a video to be sent."""
 
-    type: str
-    """Type of the result, must be video """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    type: Literal["video"] = "video"
+    """Type of the result, must be video """
     thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
@@ -6116,7 +6116,7 @@ class InputMediaVideo:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["video"]] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -6163,7 +6163,7 @@ class InputMediaVideo:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["video"] | EllipsisType = ...,
         media: str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
@@ -6199,10 +6199,10 @@ class InputMediaVideo:
 class InputMediaAnimation:
     """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent."""
 
-    type: str
-    """Type of the result, must be animation """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    type: Literal["animation"] = "animation"
+    """Type of the result, must be animation """
     thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
@@ -6226,7 +6226,7 @@ class InputMediaAnimation:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["animation"]] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -6267,7 +6267,7 @@ class InputMediaAnimation:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["animation"] | EllipsisType = ...,
         media: str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
@@ -6299,10 +6299,10 @@ class InputMediaAnimation:
 class InputMediaAudio:
     """Represents an audio file to be treated as music to be sent."""
 
-    type: str
-    """Type of the result, must be audio """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    type: Literal["audio"] = "audio"
+    """Type of the result, must be audio """
     thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
@@ -6324,7 +6324,7 @@ class InputMediaAudio:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -6361,7 +6361,7 @@ class InputMediaAudio:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["audio"] | EllipsisType = ...,
         media: str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
@@ -6391,10 +6391,10 @@ class InputMediaAudio:
 class InputMediaDocument:
     """Represents a general file to be sent."""
 
-    type: str
-    """Type of the result, must be document """
     media: str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    type: Literal["document"] = "document"
+    """Type of the result, must be document """
     thumbnail: IOBase | str | None = None
     """Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     caption: str | None = None
@@ -6412,7 +6412,7 @@ class InputMediaDocument:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["document"]] | EllipsisType = ...,
         media: AlterFn[str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -6446,7 +6446,7 @@ class InputMediaDocument:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["document"] | EllipsisType = ...,
         media: str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
@@ -6939,14 +6939,14 @@ class InlineQueryResultsButton:
 class InlineQueryResultArticle:
     """Represents a link to an article or web page."""
 
-    type: str
-    """Type of the result, must be article """
     id: str
     """Unique identifier for this result, 1-64 Bytes """
     title: str
     """Title of the result """
     input_message_content: InputMessageContent
     """Content of the message to be sent """
+    type: Literal["article"] = "article"
+    """Type of the result, must be article """
     reply_markup: InlineKeyboardMarkup | None = None
     """Optional. Inline keyboard attached to the message """
     url: str | None = None
@@ -6967,7 +6967,7 @@ class InlineQueryResultArticle:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["article"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
         input_message_content: AlterFn[InputMessageContent] | EllipsisType = ...,
@@ -7013,7 +7013,7 @@ class InlineQueryResultArticle:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["article"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
         input_message_content: InputMessageContent | EllipsisType = ...,
@@ -7053,14 +7053,14 @@ class InlineQueryResultArticle:
 class InlineQueryResultPhoto:
     """Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo."""
 
-    type: str
-    """Type of the result, must be photo """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     photo_url: str
     """A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB """
     thumbnail_url: str
     """URL of the thumbnail for the photo """
+    type: Literal["photo"] = "photo"
+    """Type of the result, must be photo """
     photo_width: int | None = None
     """Optional. Width of the photo """
     photo_height: int | None = None
@@ -7085,7 +7085,7 @@ class InlineQueryResultPhoto:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         photo_url: AlterFn[str] | EllipsisType = ...,
         thumbnail_url: AlterFn[str] | EllipsisType = ...,
@@ -7141,7 +7141,7 @@ class InlineQueryResultPhoto:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["photo"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         photo_url: str | EllipsisType = ...,
         thumbnail_url: str | EllipsisType = ...,
@@ -7183,14 +7183,14 @@ class InlineQueryResultPhoto:
 class InlineQueryResultGif:
     """Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."""
 
-    type: str
-    """Type of the result, must be gif """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     gif_url: str
     """A valid URL for the GIF file. File size must not exceed 1MB """
     thumbnail_url: str
     """URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result """
+    type: Literal["gif"] = "gif"
+    """Type of the result, must be gif """
     gif_width: int | None = None
     """Optional. Width of the GIF """
     gif_height: int | None = None
@@ -7217,7 +7217,7 @@ class InlineQueryResultGif:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["gif"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         gif_url: AlterFn[str] | EllipsisType = ...,
         gif_width: AlterFn[int | None] | EllipsisType = ...,
@@ -7279,7 +7279,7 @@ class InlineQueryResultGif:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["gif"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         gif_url: str | EllipsisType = ...,
         gif_width: int | None | EllipsisType = ...,
@@ -7325,14 +7325,14 @@ class InlineQueryResultGif:
 class InlineQueryResultMpeg4Gif:
     """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."""
 
-    type: str
-    """Type of the result, must be mpeg4_gif """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     mpeg4_url: str
     """A valid URL for the MPEG4 file. File size must not exceed 1MB """
     thumbnail_url: str
     """URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result """
+    type: Literal["mpeg4_gif"] = "mpeg4_gif"
+    """Type of the result, must be mpeg4_gif """
     mpeg4_width: int | None = None
     """Optional. Video width """
     mpeg4_height: int | None = None
@@ -7359,7 +7359,7 @@ class InlineQueryResultMpeg4Gif:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["mpeg4_gif"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         mpeg4_url: AlterFn[str] | EllipsisType = ...,
         mpeg4_width: AlterFn[int | None] | EllipsisType = ...,
@@ -7421,7 +7421,7 @@ class InlineQueryResultMpeg4Gif:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["mpeg4_gif"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         mpeg4_url: str | EllipsisType = ...,
         mpeg4_width: int | None | EllipsisType = ...,
@@ -7469,8 +7469,6 @@ class InlineQueryResultMpeg4Gif:
 class InlineQueryResultVideo:
     """Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video."""
 
-    type: str
-    """Type of the result, must be video """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     video_url: str
@@ -7481,6 +7479,8 @@ class InlineQueryResultVideo:
     """URL of the thumbnail (JPEG only) for the video """
     title: str
     """Title for the result """
+    type: Literal["video"] = "video"
+    """Type of the result, must be video """
     caption: str | None = None
     """Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -7505,7 +7505,7 @@ class InlineQueryResultVideo:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["video"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         video_url: AlterFn[str] | EllipsisType = ...,
         mime_type: AlterFn[str] | EllipsisType = ...,
@@ -7569,7 +7569,7 @@ class InlineQueryResultVideo:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["video"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         video_url: str | EllipsisType = ...,
         mime_type: str | EllipsisType = ...,
@@ -7619,14 +7619,14 @@ class InlineQueryResultAudio:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be audio """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     audio_url: str
     """A valid URL for the audio file """
     title: str
     """Title """
+    type: Literal["audio"] = "audio"
+    """Type of the result, must be audio """
     caption: str | None = None
     """Optional. Caption, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -7647,7 +7647,7 @@ class InlineQueryResultAudio:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         audio_url: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
@@ -7695,7 +7695,7 @@ class InlineQueryResultAudio:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["audio"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         audio_url: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
@@ -7735,14 +7735,14 @@ class InlineQueryResultVoice:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be voice """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     voice_url: str
     """A valid URL for the voice recording """
     title: str
     """Recording title """
+    type: Literal["voice"] = "voice"
+    """Type of the result, must be voice """
     caption: str | None = None
     """Optional. Caption, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -7761,7 +7761,7 @@ class InlineQueryResultVoice:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["voice"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         voice_url: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
@@ -7805,7 +7805,7 @@ class InlineQueryResultVoice:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["voice"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         voice_url: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
@@ -7843,8 +7843,6 @@ class InlineQueryResultDocument:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be document """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     title: str
@@ -7853,6 +7851,8 @@ class InlineQueryResultDocument:
     """A valid URL for the file """
     mime_type: str
     """MIME type of the content of the file, either "application/pdf" or "application/zip" """
+    type: Literal["document"] = "document"
+    """Type of the result, must be document """
     caption: str | None = None
     """Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -7877,7 +7877,7 @@ class InlineQueryResultDocument:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["document"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -7937,7 +7937,7 @@ class InlineQueryResultDocument:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["document"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
@@ -7987,8 +7987,6 @@ class InlineQueryResultLocation:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be location """
     id: str
     """Unique identifier for this result, 1-64 Bytes """
     latitude: float
@@ -7997,6 +7995,8 @@ class InlineQueryResultLocation:
     """Location longitude in degrees """
     title: str
     """Location title """
+    type: Literal["location"] = "location"
+    """Type of the result, must be location """
     horizontal_accuracy: float | None = None
     """Optional. The radius of uncertainty for the location, measured in meters; 0-1500 """
     live_period: int | None = None
@@ -8021,7 +8021,7 @@ class InlineQueryResultLocation:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["location"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         latitude: AlterFn[float] | EllipsisType = ...,
         longitude: AlterFn[float] | EllipsisType = ...,
@@ -8086,7 +8086,7 @@ class InlineQueryResultLocation:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["location"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         latitude: float | EllipsisType = ...,
         longitude: float | EllipsisType = ...,
@@ -8138,8 +8138,6 @@ class InlineQueryResultVenue:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be venue """
     id: str
     """Unique identifier for this result, 1-64 Bytes """
     latitude: float
@@ -8150,6 +8148,8 @@ class InlineQueryResultVenue:
     """Title of the venue """
     address: str
     """Address of the venue """
+    type: Literal["venue"] = "venue"
+    """Type of the result, must be venue """
     foursquare_id: str | None = None
     """Optional. Foursquare identifier of the venue if known """
     foursquare_type: str | None = None
@@ -8174,7 +8174,7 @@ class InlineQueryResultVenue:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["venue"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         latitude: AlterFn[float] | EllipsisType = ...,
         longitude: AlterFn[float] | EllipsisType = ...,
@@ -8240,7 +8240,7 @@ class InlineQueryResultVenue:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["venue"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         latitude: float | EllipsisType = ...,
         longitude: float | EllipsisType = ...,
@@ -8298,14 +8298,14 @@ class InlineQueryResultContact:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be contact """
     id: str
     """Unique identifier for this result, 1-64 Bytes """
     phone_number: str
     """Contact's phone number """
     first_name: str
     """Contact's first name """
+    type: Literal["contact"] = "contact"
+    """Type of the result, must be contact """
     last_name: str | None = None
     """Optional. Contact's last name """
     vcard: str | None = None
@@ -8326,7 +8326,7 @@ class InlineQueryResultContact:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["contact"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         phone_number: AlterFn[str] | EllipsisType = ...,
         first_name: AlterFn[str] | EllipsisType = ...,
@@ -8374,7 +8374,7 @@ class InlineQueryResultContact:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["contact"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         phone_number: str | EllipsisType = ...,
         first_name: str | EllipsisType = ...,
@@ -8416,12 +8416,12 @@ class InlineQueryResultGame:
     Note: This will only work in Telegram versions released after October 1, 2016. Older clients will not display any inline results if a game result is among them.
     """
 
-    type: str
-    """Type of the result, must be game """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     game_short_name: str
     """Short name of the game """
+    type: Literal["game"] = "game"
+    """Type of the result, must be game """
     reply_markup: InlineKeyboardMarkup | None = None
     """Optional. Inline keyboard attached to the message """
 
@@ -8430,7 +8430,7 @@ class InlineQueryResultGame:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["game"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         game_short_name: AlterFn[str] | EllipsisType = ...,
         reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
@@ -8449,7 +8449,7 @@ class InlineQueryResultGame:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["game"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         game_short_name: str | EllipsisType = ...,
         reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
@@ -8469,12 +8469,12 @@ class InlineQueryResultGame:
 class InlineQueryResultCachedPhoto:
     """Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo."""
 
-    type: str
-    """Type of the result, must be photo """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     photo_file_id: str
     """A valid file identifier of the photo """
+    type: Literal["photo"] = "photo"
+    """Type of the result, must be photo """
     title: str | None = None
     """Optional. Title for the result """
     description: str | None = None
@@ -8495,7 +8495,7 @@ class InlineQueryResultCachedPhoto:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         photo_file_id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str | None] | EllipsisType = ...,
@@ -8539,7 +8539,7 @@ class InlineQueryResultCachedPhoto:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["photo"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         photo_file_id: str | EllipsisType = ...,
         title: str | None | EllipsisType = ...,
@@ -8575,12 +8575,12 @@ class InlineQueryResultCachedPhoto:
 class InlineQueryResultCachedGif:
     """Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation."""
 
-    type: str
-    """Type of the result, must be gif """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     gif_file_id: str
     """A valid file identifier for the GIF file """
+    type: Literal["gif"] = "gif"
+    """Type of the result, must be gif """
     title: str | None = None
     """Optional. Title for the result """
     caption: str | None = None
@@ -8599,7 +8599,7 @@ class InlineQueryResultCachedGif:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["gif"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         gif_file_id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str | None] | EllipsisType = ...,
@@ -8639,7 +8639,7 @@ class InlineQueryResultCachedGif:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["gif"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         gif_file_id: str | EllipsisType = ...,
         title: str | None | EllipsisType = ...,
@@ -8671,12 +8671,12 @@ class InlineQueryResultCachedGif:
 class InlineQueryResultCachedMpeg4Gif:
     """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation."""
 
-    type: str
-    """Type of the result, must be mpeg4_gif """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     mpeg4_file_id: str
     """A valid file identifier for the MPEG4 file """
+    type: Literal["mpeg4_gif"] = "mpeg4_gif"
+    """Type of the result, must be mpeg4_gif """
     title: str | None = None
     """Optional. Title for the result """
     caption: str | None = None
@@ -8695,7 +8695,7 @@ class InlineQueryResultCachedMpeg4Gif:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["mpeg4_gif"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         mpeg4_file_id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str | None] | EllipsisType = ...,
@@ -8735,7 +8735,7 @@ class InlineQueryResultCachedMpeg4Gif:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["mpeg4_gif"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         mpeg4_file_id: str | EllipsisType = ...,
         title: str | None | EllipsisType = ...,
@@ -8771,12 +8771,12 @@ class InlineQueryResultCachedSticker:
     Note: This will only work in Telegram versions released after 9 April, 2016 for static stickers and after 06 July, 2019 for animated stickers. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be sticker """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     sticker_file_id: str
     """A valid file identifier of the sticker """
+    type: Literal["sticker"] = "sticker"
+    """Type of the result, must be sticker """
     reply_markup: InlineKeyboardMarkup | None = None
     """Optional. Inline keyboard attached to the message """
     input_message_content: InputMessageContent | None = None
@@ -8787,7 +8787,7 @@ class InlineQueryResultCachedSticker:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["sticker"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         sticker_file_id: AlterFn[str] | EllipsisType = ...,
         reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
@@ -8813,7 +8813,7 @@ class InlineQueryResultCachedSticker:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["sticker"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         sticker_file_id: str | EllipsisType = ...,
         reply_markup: InlineKeyboardMarkup | None | EllipsisType = ...,
@@ -8839,14 +8839,14 @@ class InlineQueryResultCachedDocument:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be document """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     title: str
     """Title for the result """
     document_file_id: str
     """A valid file identifier for the file """
+    type: Literal["document"] = "document"
+    """Type of the result, must be document """
     description: str | None = None
     """Optional. Short description of the result """
     caption: str | None = None
@@ -8865,7 +8865,7 @@ class InlineQueryResultCachedDocument:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["document"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
         document_file_id: AlterFn[str] | EllipsisType = ...,
@@ -8909,7 +8909,7 @@ class InlineQueryResultCachedDocument:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["document"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
         document_file_id: str | EllipsisType = ...,
@@ -8945,14 +8945,14 @@ class InlineQueryResultCachedDocument:
 class InlineQueryResultCachedVideo:
     """Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video."""
 
-    type: str
-    """Type of the result, must be video """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     video_file_id: str
     """A valid file identifier for the video file """
     title: str
     """Title for the result """
+    type: Literal["video"] = "video"
+    """Type of the result, must be video """
     description: str | None = None
     """Optional. Short description of the result """
     caption: str | None = None
@@ -8971,7 +8971,7 @@ class InlineQueryResultCachedVideo:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["video"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         video_file_id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
@@ -9015,7 +9015,7 @@ class InlineQueryResultCachedVideo:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["video"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         video_file_id: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
@@ -9053,14 +9053,14 @@ class InlineQueryResultCachedVoice:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be voice """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     voice_file_id: str
     """A valid file identifier for the voice message """
     title: str
     """Voice message title """
+    type: Literal["voice"] = "voice"
+    """Type of the result, must be voice """
     caption: str | None = None
     """Optional. Caption, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -9077,7 +9077,7 @@ class InlineQueryResultCachedVoice:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["voice"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         voice_file_id: AlterFn[str] | EllipsisType = ...,
         title: AlterFn[str] | EllipsisType = ...,
@@ -9117,7 +9117,7 @@ class InlineQueryResultCachedVoice:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["voice"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         voice_file_id: str | EllipsisType = ...,
         title: str | EllipsisType = ...,
@@ -9153,12 +9153,12 @@ class InlineQueryResultCachedAudio:
     Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
     """
 
-    type: str
-    """Type of the result, must be audio """
     id: str
     """Unique identifier for this result, 1-64 bytes """
     audio_file_id: str
     """A valid file identifier for the audio file """
+    type: Literal["audio"] = "audio"
+    """Type of the result, must be audio """
     caption: str | None = None
     """Optional. Caption, 0-1024 characters after entities parsing """
     parse_mode: str | None = None
@@ -9175,7 +9175,7 @@ class InlineQueryResultCachedAudio:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
         id: AlterFn[str] | EllipsisType = ...,
         audio_file_id: AlterFn[str] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
@@ -9213,7 +9213,7 @@ class InlineQueryResultCachedAudio:
 
     def copy_with(
         self,
-        type: str | EllipsisType = ...,
+        type: Literal["audio"] | EllipsisType = ...,
         id: str | EllipsisType = ...,
         audio_file_id: str | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,

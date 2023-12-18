@@ -1,6 +1,7 @@
 from typing import Any, TypeVar, Callable, Iterable
 
-from ..library.type_hint.ref_sources import SCHEMAS
+from ..library.type_hint.ref_sources import SCHEMAS, TYPING
+from ..library.type_hint import Ref, StrParam
 
 from . import Spec
 
@@ -15,15 +16,22 @@ from .utils import escape_kw
 from .method import Method, Argument
 
 T = TypeVar("T")
+TYPE_MUST_BE = "Type of the result, must be"
 
 
 def _parse_field(d: dict[str, Any]) -> Field:
-    return Field(
+    f = Field(
         name=escape_kw(d["name"]),
         type=fold_types(d["types"]),
         doc=d["description"],
         required=d["required"],
     )
+
+    if f.doc.startswith(TYPE_MUST_BE):
+        must_be_what = f.doc[len(TYPE_MUST_BE) :].lstrip()
+        f.type = Ref(TYPING, "Literal")[StrParam(must_be_what)]
+        f.default = repr(must_be_what)
+    return f
 
 
 def _collect_to_dict(f: Callable[[T], str], values: Iterable[T]) -> dict[str, T]:

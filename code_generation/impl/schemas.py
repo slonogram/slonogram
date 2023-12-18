@@ -103,7 +103,16 @@ def _plain(model: PlainModel, models: dict[str, SpecModel]) -> Statement:
     optional_fields: list[DtcField] = []
 
     for name, field in model.fields.items():
-        if field.required:
+        if field.default is not None:
+            optional_fields.append(
+                DtcField(
+                    name,
+                    field.type,
+                    doc=field.doc,
+                    default=field.default,
+                )
+            )
+        elif field.required:
             required_fields.append(
                 DtcField(
                     name,

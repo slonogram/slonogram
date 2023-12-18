@@ -4,7 +4,7 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-17 15:06:50.427429
+# Generated at: 2023-12-18 07:44:15.244650
 from dataclasses import dataclass
 from slonogram.schemas import PassportElementError
 from io import IOBase

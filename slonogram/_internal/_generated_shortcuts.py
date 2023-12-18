@@ -4,22 +4,22 @@
 # Version: Bot API 6.9
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
-# Generated at: 2023-12-17 15:06:50.427429
+# Generated at: 2023-12-18 07:44:15.244650
 from slonogram.schemas import (
-    InputMediaAudio,
-    CallbackQuery,
-    InputMediaPhoto,
     MessageEntity,
+    InputMediaDocument,
+    InlineQuery,
     InlineQueryResult,
+    InlineKeyboardMarkup,
+    InlineQueryResultsButton,
+    InputMediaPhoto,
     InputMediaVideo,
     ForceReply,
-    InlineQueryResultsButton,
+    InputMediaAudio,
     ReplyKeyboardRemove,
-    InlineQuery,
-    InlineKeyboardMarkup,
-    ReplyKeyboardMarkup,
-    InputMediaDocument,
+    CallbackQuery,
     Message,
+    ReplyKeyboardMarkup,
 )
 from typing import Awaitable, TypeVar
 from slonogram.abstract.context import AbstractContext

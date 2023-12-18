@@ -12,9 +12,9 @@ async def inline(ctx: Context[InlineQuery]) -> None:
     await ctx.answer_inline(
         [
             InlineQueryResultArticle(
-                type="article",
                 id="1",
                 title="First article",
+                description=f"You entered {ctx.model.query}",
                 input_message_content=InputTextMessageContent(message_text="Hello"),
             ),
         ]

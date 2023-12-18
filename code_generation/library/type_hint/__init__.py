@@ -98,6 +98,17 @@ class Union(TypeHint):
         return Union([*self.variants, rhs])
 
 
+class StrParam(TypeHint):
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+    def translate(self) -> str:
+        return repr(self.value)
+
+    def collect_refs(self) -> TypeRefs:
+        return TypeRefs()
+
+
 class Ref(TypeHint):
     def __init__(
         self,

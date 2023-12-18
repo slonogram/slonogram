@@ -1,47 +1,47 @@
 from slonogram.session import Session
 from adaptix import Retort
 from slonogram.schemas import (
-    SentWebAppMessage,
-    ChatInviteLink,
-    MessageEntity,
-    BotShortDescription,
-    BotName,
-    BotCommand,
-    ShippingOption,
-    ForumTopic,
-    InputMediaDocument,
-    InputMedia,
-    GameHighScore,
-    InputMediaAudio,
-    Sticker,
-    InputMediaPhoto,
-    MessageId,
-    Update,
-    InlineQueryResultsButton,
-    PassportElementError,
-    ReplyKeyboardMarkup,
-    LabeledPrice,
-    ChatPermissions,
-    MenuButton,
-    MaskPosition,
-    User,
-    ChatMember,
-    ForceReply,
-    ReplyKeyboardRemove,
-    ChatAdministratorRights,
-    InlineKeyboardMarkup,
-    File,
-    UserProfilePhotos,
-    InlineQueryResult,
-    WebhookInfo,
-    InputMediaVideo,
-    BotDescription,
-    BotCommandScope,
-    StickerSet,
-    InputSticker,
     Poll,
-    Chat,
+    InputMediaDocument,
+    InputMediaPhoto,
+    BotCommand,
+    Sticker,
+    MenuButton,
+    ChatPermissions,
+    ShippingOption,
+    File,
+    InlineQueryResultsButton,
+    InlineKeyboardMarkup,
+    LabeledPrice,
+    InputMediaVideo,
+    PassportElementError,
+    InputMediaAudio,
+    ChatInviteLink,
+    BotCommandScope,
+    ReplyKeyboardRemove,
     Message,
+    ChatMember,
+    UserProfilePhotos,
+    Chat,
+    ForceReply,
+    MessageId,
+    StickerSet,
+    User,
+    InputSticker,
+    BotName,
+    MessageEntity,
+    WebhookInfo,
+    ForumTopic,
+    BotDescription,
+    MaskPosition,
+    InlineQueryResult,
+    ChatAdministratorRights,
+    GameHighScore,
+    BotShortDescription,
+    InputMedia,
+    Update,
+    ReplyKeyboardMarkup,
+    SentWebAppMessage,
 )
 from slonogram.methods.get_updates import GetUpdates
 from io import IOBase
@@ -170,7 +170,7 @@ from slonogram.methods.set_game_score import SetGameScore
 from slonogram.methods.get_game_high_scores import GetGameHighScores
 
 
-class MethodWrapper:
+class MethodsWrapper:
     """Wrapper for calling the methods"""
 
     __slots__ = ("retort", "session")
@@ -2259,4 +2259,4 @@ class MethodWrapper:
         )
 
 
-__all__ = ["MethodWrapper"]
+__all__ = ["MethodsWrapper"]
