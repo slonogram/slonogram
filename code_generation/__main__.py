@@ -39,7 +39,6 @@ header = MultilineComment(
         f"Version: {spec.version}",
         f"Changelog: {spec.changelog}",
         f"Release date: {spec.release_date}",
-        f"Generated at: {datetime.now()!s}",
     ]
 )
 
