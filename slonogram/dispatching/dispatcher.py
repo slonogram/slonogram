@@ -16,7 +16,12 @@ from .layers import Layers
 from .handler import RawHandler, Handler, Activation
 from .stash import Stash
 
-from .._internal.utils import call_alter_nullable, const
+from .._internal.utils import (
+    call_alter_nullable,
+    const,
+    run_after_exc,
+    run_after_strict,
+)
 from ..exceptions.stash import CantReplaceStash
 from ..filtering.base import BareFilter
 from ..middleware import (
@@ -69,26 +74,6 @@ class DispatcherHandlers:
             callback_query=(*self.callback_query, *callback_query),
             inline_query=(*self.inline_query, *inline_query),
         )
-
-
-async def _run_after_exc(
-    exc: Exception,
-    ctx: Context[Any],
-    after: ExcMiddleware[Any] | None,
-) -> Activation[Any]:
-    if after is None:
-        raise exc
-    await after(ctx, exc)
-
-    return Activation.ignored()
-
-
-async def _run_after_strict(
-    ctx: Context[Any],
-    after: ExcMiddleware[Any] | None,
-) -> None:
-    if after is not None:
-        await after(ctx, None)
 
 
 class Dispatcher:
@@ -260,12 +245,12 @@ class Dispatcher:
             try:
                 activation = await child.feed_single(update, bot)
             except Exception as exc:
-                return await _run_after_exc(exc, ctx, after)
+                return await run_after_exc(exc, ctx, after)
 
             if activation.is_activated:
                 break
 
-        await _run_after_strict(ctx, after)
+        await run_after_strict(ctx, after)
         return activation
 
     async def feed_single(self, update: Update, bot: Bot) -> Activation[Any]:
@@ -321,15 +306,15 @@ class Dispatcher:
             if layers.before is not None:
                 await layers.before(context)
         except Exception as exc:
-            return await _run_after_exc(exc, context, after)
+            return await run_after_exc(exc, context, after)
 
         for handler in handlers:
             try:
                 activation = await handler(context)
             except Exception as exc:
-                return await _run_after_exc(exc, context, after)
+                return await run_after_exc(exc, context, after)
             else:
-                await _run_after_strict(context, after)
+                await run_after_strict(context, after)
 
             if activation.is_activated:
                 return activation

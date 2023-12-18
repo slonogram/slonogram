@@ -1,6 +1,12 @@
 from types import EllipsisType
+from typing import TYPE_CHECKING
 from io import IOBase
 from typing import TypeVar, TypeAlias, Callable, Any
+
+if TYPE_CHECKING:
+    from slonogram.dispatching.context import Context
+    from slonogram.dispatching.handler import Activation
+    from slonogram.middleware import ExcMiddleware
 
 from ..session import CanCollectAttachs
 
@@ -17,6 +23,26 @@ def call_alter_nullable(c: Callable[[T], T] | None, value: T) -> T:
 
 def const(v: T) -> Callable[[Any], T]:
     return lambda _: v
+
+
+async def run_after_exc(
+    exc: Exception,
+    ctx: Context[Any],
+    after: ExcMiddleware[Any] | None,
+) -> Activation[Any]:
+    if after is None:
+        raise exc
+    await after(ctx, exc)
+
+    return Activation.ignored()
+
+
+async def run_after_strict(
+    ctx: Context[Any],
+    after: ExcMiddleware[Any] | None,
+) -> None:
+    if after is not None:
+        await after(ctx, None)
 
 
 def prefer(val: Any | EllipsisType, otherwise: Any) -> Any:
