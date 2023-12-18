@@ -7,8 +7,10 @@ from typing import TypeVar, TypeAlias, Callable, Any
 
 if TYPE_CHECKING:
     from slonogram.dispatching.context import Context
-    from slonogram.dispatching.handler import Activation
     from slonogram.middleware import ExcMiddleware
+
+
+from slonogram.dispatching.activation import Activation
 
 from ..session import CanCollectAttachs
 

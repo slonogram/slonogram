@@ -6,11 +6,12 @@ from typing import (
     Awaitable,
     Protocol,
 )
-from dataclasses import dataclass
+
 
 from .layers import Layers
 from .context import Context
 from .stash import Stash
+from .activation import Activation
 
 
 M = TypeVar("M")
@@ -19,23 +20,6 @@ M = TypeVar("M")
 class RawHandler(Protocol[M]):
     def __call__(self, context: Context[M], /) -> Awaitable[None]:
         ...
-
-
-@dataclass(slots=True)
-class Activation(Generic[M]):
-    handler: Handler[M] | None = None
-
-    @classmethod
-    def ignored(cls) -> Activation[M]:
-        return Activation(None)
-
-    @classmethod
-    def activated(cls, handler: Handler[M]) -> Activation[M]:
-        return Activation(handler)
-
-    @property
-    def is_activated(self) -> bool:
-        return self.handler is not None
 
 
 class Handler(Generic[M]):

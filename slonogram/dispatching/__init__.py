@@ -1,7 +1,8 @@
+from .handler import Handler
+from .activation import Activation
+
 from .stash import Stash
 from .context import Context
-from .handler import Handler, Activation
-
 from .dispatcher import Dispatcher
 
 from . import interests as Ic
