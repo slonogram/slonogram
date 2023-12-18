@@ -6,11 +6,11 @@
 # Release date: September 22, 2023
 from dataclasses import dataclass
 from slonogram.schemas import (
+    InlineKeyboardMarkup,
     ReplyKeyboardMarkup,
     ForceReply,
-    MessageEntity,
     ReplyKeyboardRemove,
-    InlineKeyboardMarkup,
+    MessageEntity,
 )
 from io import IOBase
 from slonogram._internal.utils import collect_attachs_from

@@ -5,30 +5,54 @@
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
 from slonogram.schemas import (
-    InlineQuery,
-    InlineQueryResult,
+    InlineKeyboardMarkup,
+    Message,
+    ForceReply,
     InputMediaVideo,
     InputMediaDocument,
     ReplyKeyboardRemove,
-    InlineKeyboardMarkup,
-    InputMediaAudio,
-    InputMediaPhoto,
-    InlineQueryResultsButton,
-    ReplyKeyboardMarkup,
-    Message,
-    ForceReply,
     CallbackQuery,
     MessageEntity,
+    InlineQueryResultsButton,
+    ReplyKeyboardMarkup,
+    InputMediaAudio,
+    InputMediaPhoto,
+    InlineQueryResult,
+    InlineQuery,
 )
 from typing import Awaitable, TypeVar
 from slonogram.abstract.context import AbstractContext
-from io import IOBase
 from types import EllipsisType
+from io import IOBase
 
 M = TypeVar("M")
 
 
 class GeneratedShortcuts(AbstractContext[M]):
+    def send_media_group(
+        self: AbstractContext[Message],
+        media: list[InputMediaAudio]
+        | list[InputMediaDocument]
+        | list[InputMediaPhoto]
+        | list[InputMediaVideo],
+        chat_id: int | str | EllipsisType = ...,
+        message_thread_id: int | None = None,
+        disable_notification: bool | None = None,
+        protect_content: bool | None = None,
+        reply_to_message_id: int | None = None,
+        allow_sending_without_reply: bool | None = None,
+    ) -> Awaitable[list[Message]]:
+        """Alias to the `Bot.send_media_group` with usable defaults, for more, see `Bot.send_media_group` docs"""
+        return self.rpc.send_media_group(
+            chat_id=self.model.chat.id if chat_id is ... else chat_id,
+            message_thread_id=message_thread_id,
+            media=media,
+            disable_notification=disable_notification,
+            protect_content=protect_content,
+            reply_to_message_id=reply_to_message_id,
+            allow_sending_without_reply=allow_sending_without_reply,
+        )
+
     def send_photo(
         self: AbstractContext[Message],
         photo: IOBase | str,
@@ -298,30 +322,6 @@ class GeneratedShortcuts(AbstractContext[M]):
             reply_markup=reply_markup,
         )
 
-    def send_media_group(
-        self: AbstractContext[Message],
-        media: list[InputMediaAudio]
-        | list[InputMediaDocument]
-        | list[InputMediaPhoto]
-        | list[InputMediaVideo],
-        chat_id: int | str | EllipsisType = ...,
-        message_thread_id: int | None = None,
-        disable_notification: bool | None = None,
-        protect_content: bool | None = None,
-        reply_to_message_id: int | None = None,
-        allow_sending_without_reply: bool | None = None,
-    ) -> Awaitable[list[Message]]:
-        """Alias to the `Bot.send_media_group` with usable defaults, for more, see `Bot.send_media_group` docs"""
-        return self.rpc.send_media_group(
-            chat_id=self.model.chat.id if chat_id is ... else chat_id,
-            message_thread_id=message_thread_id,
-            media=media,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            reply_to_message_id=reply_to_message_id,
-            allow_sending_without_reply=allow_sending_without_reply,
-        )
-
     def send_location(
         self: AbstractContext[Message],
         latitude: float,
@@ -555,6 +555,32 @@ class GeneratedShortcuts(AbstractContext[M]):
             else reply_to_message_id,
             allow_sending_without_reply=allow_sending_without_reply,
             reply_markup=reply_markup,
+        )
+
+    def reply_media_group(
+        self: AbstractContext[Message],
+        media: list[InputMediaAudio]
+        | list[InputMediaDocument]
+        | list[InputMediaPhoto]
+        | list[InputMediaVideo],
+        chat_id: int | str | EllipsisType = ...,
+        message_thread_id: int | None = None,
+        disable_notification: bool | None = None,
+        protect_content: bool | None = None,
+        reply_to_message_id: int | None | EllipsisType = ...,
+        allow_sending_without_reply: bool | None = None,
+    ) -> Awaitable[list[Message]]:
+        """Alias to the `Bot.send_media_group` with usable defaults, for more, see `Bot.send_media_group` docs"""
+        return self.rpc.send_media_group(
+            chat_id=self.model.chat.id if chat_id is ... else chat_id,
+            message_thread_id=message_thread_id,
+            media=media,
+            disable_notification=disable_notification,
+            protect_content=protect_content,
+            reply_to_message_id=self.model.message_id
+            if reply_to_message_id is ...
+            else reply_to_message_id,
+            allow_sending_without_reply=allow_sending_without_reply,
         )
 
     def answer_callback(

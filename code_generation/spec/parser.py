@@ -1,6 +1,6 @@
 from typing import Any, TypeVar, Callable, Iterable
 
-from ..library.type_hint.ref_sources import SCHEMAS, TYPING
+from ..library.type_hint.ref_sources import TYPING, IO, BUILTINS
 from ..library.type_hint import Ref, StrParam
 
 from . import Spec
@@ -31,6 +31,8 @@ def _parse_field(d: dict[str, Any]) -> Field:
         must_be_what = f.doc[len(TYPE_MUST_BE) :].lstrip()
         f.type = Ref(TYPING, "Literal")[StrParam(must_be_what)]
         f.default = repr(must_be_what)
+    elif f.name == "media" and f.doc.startswith("File to send."):
+        f.type = Ref(IO, "IOBase") | Ref(BUILTINS, "str")
     return f
 
 

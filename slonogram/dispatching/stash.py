@@ -25,6 +25,9 @@ class Stash:
 
         self.parent = parent
 
+    def __repr__(self) -> str:
+        return f"Stash({self.types!r}, parent={self.parent!r})"
+
     @classmethod
     def single(
         self,

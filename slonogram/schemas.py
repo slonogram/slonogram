@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from io import IOBase
 from slonogram._internal.utils import AlterFn, collect_attachs_from
 from types import EllipsisType
-from typing import Literal, TypeAlias
+from typing import TypeAlias, Literal
 
 
 @dataclass(frozen=False, slots=True)
@@ -6017,7 +6017,7 @@ class ResponseParameters:
 class InputMediaPhoto:
     """Represents a photo to be sent."""
 
-    media: str
+    media: IOBase | str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     type: Literal["photo"] = "photo"
     """Type of the result, must be photo """
@@ -6031,12 +6031,13 @@ class InputMediaPhoto:
     """Optional. Pass True if the photo needs to be covered with a spoiler animation """
 
     def collect_attachs(self, dest: dict[str, IOBase]) -> None:
-        pass
+        if isinstance(self.media, IOBase):
+            dest[str(id(self.media))] = self.media
 
     def alter(
         self,
         type: AlterFn[Literal["photo"]] | EllipsisType = ...,
-        media: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[IOBase | str] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
         caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
@@ -6063,7 +6064,7 @@ class InputMediaPhoto:
     def copy_with(
         self,
         type: Literal["photo"] | EllipsisType = ...,
-        media: str | EllipsisType = ...,
+        media: IOBase | str | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
         caption_entities: list[MessageEntity] | None | EllipsisType = ...,
@@ -6086,7 +6087,7 @@ class InputMediaPhoto:
 class InputMediaVideo:
     """Represents a video to be sent."""
 
-    media: str
+    media: IOBase | str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     type: Literal["video"] = "video"
     """Type of the result, must be video """
@@ -6110,13 +6111,15 @@ class InputMediaVideo:
     """Optional. Pass True if the video needs to be covered with a spoiler animation """
 
     def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.media, IOBase):
+            dest[str(id(self.media))] = self.media
         if isinstance(self.thumbnail, IOBase):
             dest[str(id(self.thumbnail))] = self.thumbnail
 
     def alter(
         self,
         type: AlterFn[Literal["video"]] | EllipsisType = ...,
-        media: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[IOBase | str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
@@ -6163,7 +6166,7 @@ class InputMediaVideo:
     def copy_with(
         self,
         type: Literal["video"] | EllipsisType = ...,
-        media: str | EllipsisType = ...,
+        media: IOBase | str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
@@ -6198,7 +6201,7 @@ class InputMediaVideo:
 class InputMediaAnimation:
     """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent."""
 
-    media: str
+    media: IOBase | str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     type: Literal["animation"] = "animation"
     """Type of the result, must be animation """
@@ -6220,13 +6223,15 @@ class InputMediaAnimation:
     """Optional. Pass True if the animation needs to be covered with a spoiler animation """
 
     def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.media, IOBase):
+            dest[str(id(self.media))] = self.media
         if isinstance(self.thumbnail, IOBase):
             dest[str(id(self.thumbnail))] = self.thumbnail
 
     def alter(
         self,
         type: AlterFn[Literal["animation"]] | EllipsisType = ...,
-        media: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[IOBase | str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
@@ -6267,7 +6272,7 @@ class InputMediaAnimation:
     def copy_with(
         self,
         type: Literal["animation"] | EllipsisType = ...,
-        media: str | EllipsisType = ...,
+        media: IOBase | str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
@@ -6298,7 +6303,7 @@ class InputMediaAnimation:
 class InputMediaAudio:
     """Represents an audio file to be treated as music to be sent."""
 
-    media: str
+    media: IOBase | str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     type: Literal["audio"] = "audio"
     """Type of the result, must be audio """
@@ -6318,13 +6323,15 @@ class InputMediaAudio:
     """Optional. Title of the audio """
 
     def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.media, IOBase):
+            dest[str(id(self.media))] = self.media
         if isinstance(self.thumbnail, IOBase):
             dest[str(id(self.thumbnail))] = self.thumbnail
 
     def alter(
         self,
         type: AlterFn[Literal["audio"]] | EllipsisType = ...,
-        media: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[IOBase | str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
@@ -6361,7 +6368,7 @@ class InputMediaAudio:
     def copy_with(
         self,
         type: Literal["audio"] | EllipsisType = ...,
-        media: str | EllipsisType = ...,
+        media: IOBase | str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,
@@ -6390,7 +6397,7 @@ class InputMediaAudio:
 class InputMediaDocument:
     """Represents a general file to be sent."""
 
-    media: str
+    media: IOBase | str
     """File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
     type: Literal["document"] = "document"
     """Type of the result, must be document """
@@ -6406,13 +6413,15 @@ class InputMediaDocument:
     """Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album. """
 
     def collect_attachs(self, dest: dict[str, IOBase]) -> None:
+        if isinstance(self.media, IOBase):
+            dest[str(id(self.media))] = self.media
         if isinstance(self.thumbnail, IOBase):
             dest[str(id(self.thumbnail))] = self.thumbnail
 
     def alter(
         self,
         type: AlterFn[Literal["document"]] | EllipsisType = ...,
-        media: AlterFn[str] | EllipsisType = ...,
+        media: AlterFn[IOBase | str] | EllipsisType = ...,
         thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
         caption: AlterFn[str | None] | EllipsisType = ...,
         parse_mode: AlterFn[str | None] | EllipsisType = ...,
@@ -6446,7 +6455,7 @@ class InputMediaDocument:
     def copy_with(
         self,
         type: Literal["document"] | EllipsisType = ...,
-        media: str | EllipsisType = ...,
+        media: IOBase | str | EllipsisType = ...,
         thumbnail: IOBase | str | None | EllipsisType = ...,
         caption: str | None | EllipsisType = ...,
         parse_mode: str | None | EllipsisType = ...,

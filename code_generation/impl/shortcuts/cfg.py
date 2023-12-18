@@ -49,6 +49,7 @@ _inline_ref = _template_for(
 
 # fmt: off
 METHOD_CALLS = {
+    "send_media_group": _message_ref("sendMediaGroup"),
     "send_photo": _message_ref("sendPhoto"),
     "send_audio": _message_ref("sendAudio"),
     "send_document": _message_ref("sendDocument"),
@@ -66,6 +67,10 @@ METHOD_CALLS = {
     "reply": _message_ref(
         "sendMessage",
         {"reply_to_message_id": "self.model.message_id"},
+    ),
+    "reply_media_group": _message_ref(
+        "sendMediaGroup",
+        {"reply_to_message_id":"self.model.message_id"}
     ),
 
     "answer_callback": _callback_ref("answerCallbackQuery"),

@@ -90,6 +90,7 @@ class Bot(MethodsWrapper):
 def _create_retort() -> Retort:
     return Retort(
         recipe=[
+            as_is_dumper(IOBase),
             name_mapping(omit_default=~P["type"]),
         ]
     )
@@ -98,7 +99,6 @@ def _create_retort() -> Retort:
 def _extend_retort(retort: Retort) -> Retort:
     return retort.extend(
         recipe=[
-            as_is_dumper(IOBase),
             dumper(
                 MatchFirstLayerOfFields(),
                 dump_field,

@@ -8,6 +8,7 @@ from typing import (
     Callable,
     TypeAlias,
 )
+from enum import IntEnum, auto
 
 from .context import Context
 from .layers import Layers
@@ -37,6 +38,11 @@ C1 = TypeVar("C1")
 M = TypeVar("M")
 
 AlterFn: TypeAlias = Callable[[T], T]
+
+
+class StashRelation(IntEnum):
+    PARENT = auto()
+    CHILD = auto()
 
 
 @dataclass(slots=True, frozen=True)
@@ -113,19 +119,53 @@ class Dispatcher:
             layers=self.layers,
         )
 
-    def with_stash(self, stash: Stash, *, make_child: bool = False) -> Dispatcher:
-        if make_child:
-            stash = Stash(stash.types, parent=self.stash)
+    def with_stash(
+        self,
+        stash: Stash,
+        *,
+        relation: StashRelation | None = StashRelation.CHILD,
+    ) -> Dispatcher:
+        """Creates dispatcher with a new stash.
+
+        :param stash: stash to replace
+        :param relation: controls how new stash relates with the dispatcher's one, there's three variants:
+                         - No relation - specify None
+                         - `StashRelation.PARENT` - specified stash would be parent of the dispatcher's
+                         - `StashRelation.CHILD` - specified stash would be child of the disptacher's
+        """
+        match relation:
+            case StashRelation.CHILD:
+                stash = Stash(stash.types, parent=self.stash)
+            case StashRelation.PARENT:
+                stash = Stash(self.stash.types, parent=stash)
+
         return Dispatcher(
             self.name,
-            children=self.children,
+            children=tuple(
+                child.with_stash(stash, relation=StashRelation.CHILD)
+                for child in self.children
+            ),
             handlers=self.handlers,
             layers=self.layers,
             stash=stash,
         )
 
-    def child(self, dp: Dispatcher) -> Dispatcher:
-        return self.alter_children(lambda head: (*head, dp))
+    def child(
+        self,
+        dp: Dispatcher,
+        *,
+        relation: StashRelation | None = StashRelation.CHILD,
+    ) -> Dispatcher:
+        match relation:
+            case None:
+                f = lambda head: (*head, dp)
+            case StashRelation.PARENT | StashRelation.CHILD:
+                f = lambda head: (
+                    *head,
+                    dp.with_stash(self.stash, relation=relation),
+                )
+
+        return self.alter_children(f)
 
     def prepare(self, prepare: BareMiddleware[Any, []]) -> Dispatcher:
         return self.alter_layers(lambda layers: layers.copy_with(prepare=prepare))

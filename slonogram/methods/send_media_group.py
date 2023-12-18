@@ -6,9 +6,9 @@
 # Release date: September 22, 2023
 from dataclasses import dataclass
 from slonogram.schemas import (
-    InputMediaAudio,
     InputMediaVideo,
     InputMediaPhoto,
+    InputMediaAudio,
     InputMediaDocument,
 )
 from io import IOBase
