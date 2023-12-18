@@ -9,6 +9,16 @@ T = TypeVar("T")
 AlterFn: TypeAlias = Callable[[T], T | EllipsisType]
 
 
+def call_alter_nullable(c: Callable[[T], T] | None, value: T) -> T:
+    if c is None:
+        return value
+    return c(value)
+
+
+def const(v: T) -> Callable[[Any], T]:
+    return lambda _: v
+
+
 def prefer(val: Any | EllipsisType, otherwise: Any) -> Any:
     if val is ...:
         return otherwise

@@ -10,11 +10,14 @@ from typing import (
 )
 from enum import IntEnum, auto
 
+
 from .context import Context
 from .layers import Layers
 from .handler import RawHandler, Handler, Activation
 from .stash import Stash
 
+from .._internal.utils import call_alter_nullable, const
+from ..exceptions.stash import CantReplaceStash
 from ..filtering.base import BareFilter
 from ..middleware import (
     SimpleMiddleware,
@@ -68,6 +71,26 @@ class DispatcherHandlers:
         )
 
 
+async def _run_after_exc(
+    exc: Exception,
+    ctx: Context[Any],
+    after: ExcMiddleware[Any] | None,
+) -> Activation[Any]:
+    if after is None:
+        raise exc
+    await after(ctx, exc)
+
+    return Activation.ignored()
+
+
+async def _run_after_strict(
+    ctx: Context[Any],
+    after: ExcMiddleware[Any] | None,
+) -> None:
+    if after is not None:
+        await after(ctx, None)
+
+
 class Dispatcher:
     __slots__ = (
         "name",
@@ -92,31 +115,19 @@ class Dispatcher:
         self.handlers = handlers or DispatcherHandlers()
         self.layers = layers or Layers()
 
-    def alter_layers(
+    def alter(
         self,
-        f: AlterFn[Layers[[], Any]],
+        layers: AlterFn[Layers[[], Any]] | None = None,
+        handlers: AlterFn[DispatcherHandlers] | None = None,
+        children: AlterFn[tuple[Dispatcher, ...]] | None = None,
+        stash: AlterFn[Stash] | None = None,
     ) -> Dispatcher:
         return Dispatcher(
             self.name,
-            children=self.children,
-            handlers=self.handlers,
-            layers=f(self.layers),
-        )
-
-    def alter_handlers(self, f: AlterFn[DispatcherHandlers]) -> Dispatcher:
-        return Dispatcher(
-            self.name,
-            children=self.children,
-            handlers=f(self.handlers),
-            layers=self.layers,
-        )
-
-    def alter_children(self, f: AlterFn[tuple[Dispatcher, ...]]) -> Dispatcher:
-        return Dispatcher(
-            self.name,
-            children=f(self.children),
-            handlers=self.handlers,
-            layers=self.layers,
+            children=call_alter_nullable(children, self.children),
+            handlers=call_alter_nullable(handlers, self.handlers),
+            layers=call_alter_nullable(layers, self.layers),
+            stash=call_alter_nullable(stash, self.stash),
         )
 
     def with_stash(
@@ -132,29 +143,25 @@ class Dispatcher:
                          - No relation - specify None
                          - `StashRelation.PARENT` - specified stash would be parent of the dispatcher's
                          - `StashRelation.CHILD` - specified stash would be child of the disptacher's
+        :raises slonogram.exceptions.stash.CantReplaceStash: if `Dispatcher` have any children
+
         """
+        if self.children:
+            raise CantReplaceStash()
+
         match relation:
             case StashRelation.CHILD:
                 stash = Stash(stash.types, parent=self.stash)
             case StashRelation.PARENT:
                 stash = Stash(self.stash.types, parent=stash)
 
-        return Dispatcher(
-            self.name,
-            children=tuple(
-                child.with_stash(stash, relation=StashRelation.CHILD)
-                for child in self.children
-            ),
-            handlers=self.handlers,
-            layers=self.layers,
-            stash=stash,
-        )
+        return self.alter(stash=const(stash))
 
     def child(
         self,
         dp: Dispatcher,
         *,
-        relation: StashRelation | None = StashRelation.CHILD,
+        relation: StashRelation | None = StashRelation.PARENT,
     ) -> Dispatcher:
         match relation:
             case None:
@@ -165,22 +172,22 @@ class Dispatcher:
                     dp.with_stash(self.stash, relation=relation),
                 )
 
-        return self.alter_children(f)
+        return self.alter(children=f)
 
     def prepare(self, prepare: BareMiddleware[Any, []]) -> Dispatcher:
-        return self.alter_layers(lambda layers: layers.copy_with(prepare=prepare))
+        return self.alter(layers=lambda layers: layers.copy_with(prepare=prepare))
 
     def before(self, before: BareMiddleware[Any, []]) -> Dispatcher:
-        return self.alter_layers(lambda layers: layers.copy_with(before=before))
+        return self.alter(layers=lambda layers: layers.copy_with(before=before))
 
     def after(
         self,
         after: BareMiddleware[Any, [Exception | None]],
     ) -> Dispatcher:
-        return self.alter_layers(lambda layers: layers.copy_with(after=after))
+        return self.alter(layers=lambda layers: layers.copy_with(after=after))
 
     def filter(self, filter: BareFilter[Any]) -> Dispatcher:
-        return self.alter_layers(lambda layers: layers.copy_with(filter=filter))
+        return self.alter(layers=lambda layers: layers.copy_with(filter=filter))
 
     @overload
     def on(
@@ -229,8 +236,8 @@ class Dispatcher:
             )
         )
 
-        return self.alter_handlers(
-            lambda handlers: handlers.extended_from(
+        return self.alter(
+            handlers=lambda handlers: handlers.extended_from(
                 message=interests.yield_if(Interest.MESSAGE, h),
                 edited_message=interests.yield_if(Interest.EDITED_MESSAGE, h),
                 callback_query=interests.yield_if(Interest.CALLBACK_QUERY, h),
@@ -240,14 +247,26 @@ class Dispatcher:
 
     # Dispatching
 
-    async def dispatch_to_children(self, update: Update, bot: Bot) -> Activation[Any]:
+    async def dispatch_to_children(
+        self,
+        ctx: Context[Any],
+        update: Update,
+        bot: Bot,
+    ) -> Activation[Any]:
+        after = self.layers.after
+        activation: Activation[Any] = Activation.ignored()
+
         for child in self.children:
-            activation = await child.feed_single(update, bot)
+            try:
+                activation = await child.feed_single(update, bot)
+            except Exception as exc:
+                return await _run_after_exc(exc, ctx, after)
 
             if activation.is_activated:
-                return activation
+                break
 
-        return Activation.ignored()
+        await _run_after_strict(ctx, after)
+        return activation
 
     async def feed_single(self, update: Update, bot: Bot) -> Activation[Any]:
         ref = self.handlers
@@ -288,7 +307,9 @@ class Dispatcher:
             raise NotImplementedError
         else:
             return Activation.ignored()
+
         layers = self.layers
+        after = layers.after
 
         try:
             if layers.prepare is not None:
@@ -299,20 +320,25 @@ class Dispatcher:
 
             if layers.before is not None:
                 await layers.before(context)
-
-            for handler in handlers:
-                if (activation := await handler(context)).is_activated:
-                    return activation
         except Exception as exc:
-            if layers.after is None:
-                # TODO: Maybe handling?
-                raise exc
-            await layers.after(context, exc)
-        else:
-            if layers.after is not None:
-                await layers.after(context, None)
+            return await _run_after_exc(exc, context, after)
 
-        return await self.dispatch_to_children(update, bot)
+        for handler in handlers:
+            try:
+                activation = await handler(context)
+            except Exception as exc:
+                return await _run_after_exc(exc, context, after)
+            else:
+                await _run_after_strict(context, after)
+
+            if activation.is_activated:
+                return activation
+
+        return await self.dispatch_to_children(
+            context,
+            update,
+            bot,
+        )
 
     def collect_interests(self) -> set[Interest]:
         interests = set[Interest]()

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from ..exceptions.no_item_in_stash import NoItemInStash
+from ..exceptions.stash import NoItemInStash
 
 from typing import Type, Any, Self, TypeVar, Callable
 
@@ -42,7 +42,7 @@ class Stash:
         """Gets item from the stash
 
         :name tp: type of the value
-        :raises: `slonogram.exceptions.no_item_in_stash.NoItemInStash` if there's no such item in stash
+        :raises: `slonogram.exceptions.stash.NoItemInStash` if there's no such item in stash
 
         :returns: `T`
         """

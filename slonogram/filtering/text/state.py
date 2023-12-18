@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from slonogram.schemas import Message
-from slonogram.exceptions.no_item_in_stash import NoItemInStash
+from slonogram.exceptions.stash import NoItemInStash
 
 if TYPE_CHECKING:
     from slonogram.abstract.context import AbstractContext
