@@ -21,3 +21,9 @@ def dump_field(field: Any) -> Any:
     elif isinstance(field, bool):
         return "true" if field else "false"
     return dump_json(field)
+
+
+__all__ = [
+    "MatchFirstLayerOfFields",
+    "dump_field",
+]

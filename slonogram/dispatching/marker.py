@@ -1,4 +1,13 @@
-from typing import TypeVar, Callable, TypeAlias
+from typing import (
+    TypeVar,
+    Callable,
+    Concatenate,
+    TypeAlias,
+    Generic,
+    Protocol,
+    Awaitable,
+    ParamSpec,
+)
 
 from ..filtering.base import BareFilter, ExtendedFilter
 from ..filtering.text.command import Command
@@ -7,15 +16,35 @@ from ..middleware import SimpleMiddleware, ExcMiddleware
 from ..schemas import Message
 
 from .handler import Handler, RawHandler
+from .context import Context
 from .layers import Layers
 
+T = TypeVar("T", contravariant=True)
 M = TypeVar("M")
-_HandlerDeco: TypeAlias = Callable[[RawHandler[M]], Handler[M]]
+P = ParamSpec("P")
 
 
-class HandlerMarker:
-    def __repr__(self) -> str:
-        return "<Marker>"
+GenericRawHandler: TypeAlias = Callable[Concatenate[Context[M], P], T]
+GenericHandlerDeco: TypeAlias = Callable[[GenericRawHandler[M, P, T]], Handler[M]]
+
+
+class MorphMarker(Protocol[T, P]):
+    def __call__(
+        self,
+        f: GenericRawHandler[M, P, T],
+        /,
+    ) -> RawHandler[M]:
+        ...
+
+
+class GenericMarker(Generic[T, P]):
+    """Generic marker.
+
+    Used to create instances of the :ref:`Handler[M]` from almost any function
+    """
+
+    def __init__(self, morph_marker: MorphMarker[T, P]) -> None:
+        self.morph_marker = morph_marker
 
     def command(
         self,
@@ -24,10 +53,12 @@ class HandlerMarker:
         prepare: SimpleMiddleware[Message] | None = None,
         before: SimpleMiddleware[Message] | None = None,
         after: ExcMiddleware[Message] | None = None,
-    ) -> _HandlerDeco[Message]:
+    ) -> GenericHandlerDeco[Message, P, T]:
         if not variants:
 
-            def parse_from_function_name(raw: RawHandler[Message]) -> Handler[Message]:
+            def parse_from_function_name(
+                raw: GenericRawHandler[Message, P, T]
+            ) -> Handler[Message]:
                 name = getattr(raw, "__name__", None)
                 if name is None:
                     raise TypeError(
@@ -61,10 +92,10 @@ class HandlerMarker:
         prepare: SimpleMiddleware[M] | None = None,
         before: SimpleMiddleware[M] | None = None,
         after: ExcMiddleware[M] | None = None,
-    ) -> _HandlerDeco[M]:
-        def _create(raw: RawHandler[M]) -> Handler[M]:
+    ) -> GenericHandlerDeco[M, P, T]:
+        def _create(raw: GenericRawHandler[M, P, T]) -> Handler[M]:
             return Handler(
-                raw,
+                self.morph_marker(raw),
                 Layers(
                     prepare,
                     before,
@@ -74,3 +105,31 @@ class HandlerMarker:
             )
 
         return _create
+
+
+def _identity(c: GenericRawHandler[M, [], Awaitable[None]]) -> RawHandler[M]:
+    return c
+
+
+# Due to lack of something like
+# impl GenericHandlerMarker[Awaitable[None], []]:
+#     ...
+#
+# I'll use inheritance to give reasonable default (when no morphing is used)
+class HandlerMarker(GenericMarker[Awaitable[None], []]):
+    """:ref:`GenericMarker` specialization only for handlers without additional morphing"""
+
+    def __init__(self) -> None:
+        super().__init__(_identity)
+
+    def __repr__(self) -> str:
+        return "<Marker>"
+
+
+__all__ = [
+    "HandlerMarker",
+    "MorphMarker",
+    "GenericMarker",
+    "GenericRawHandler",
+    "GenericHandlerDeco",
+]
