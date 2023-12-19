@@ -1,5 +1,5 @@
 setup_dev:
-    poetry install --with docs,test,dev --all-extras
+    poetry install --with docs,test,dev,build --all-extras
 
 shell:
     poetry shell
