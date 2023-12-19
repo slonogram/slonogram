@@ -21,4 +21,5 @@ def _sync(c: Callable[P, Coroutine[Any, Any, None]]) -> Callable[P, None]:
 @_sync
 async def run_dispatcher(dp: Dispatcher) -> None:
     async with Bot.from_aiohttp(environ["BOT_TOKEN"]) as bot:
+        await bot.drop_pending_updates()
         await poll_for_updates(bot, dp)

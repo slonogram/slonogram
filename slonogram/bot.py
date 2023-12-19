@@ -12,7 +12,7 @@ from adaptix import (
     P,
 )
 
-from ._internal.adaptix_dumper import MatchFirstLayerOfFields, dump_field
+from ._internal.adaptix import MatchFirstLayerOfFields, dump_field
 from ._internal.api_wrapper import MethodsWrapper
 
 from .session import Session
@@ -85,6 +85,14 @@ class Bot(MethodsWrapper):
 
         rpc = MethodsWrapper(session, retort)
         return cls(session, await rpc.get_me())
+
+    async def drop_pending_updates(self) -> None:
+        """Drops updates from the telegram queue.
+
+        Under the hood it's just call to the :ref:`Bot.delete_webhook`
+        with `drop_pending_updates` parameter set to `True`
+        """
+        await self.delete_webhook(drop_pending_updates=True)
 
 
 def _create_retort() -> Retort:
