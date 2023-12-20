@@ -33,7 +33,7 @@ class AiohttpSession(Session):
         self.session = session
         self.retort = retort
 
-    async def call_method(self, name: str, args: T) -> Any:
+    async def _call_method_impl(self, name: str, args: T) -> Any:
         files: dict[str, IOBase] = {}
         args.collect_attachs(files)
 

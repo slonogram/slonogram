@@ -5,7 +5,7 @@ T = TypeVar("T")
 
 
 class MockSession(Session):
-    def call_method(
+    def _call_method_impl(
         self,
         name: str,
         args: T,

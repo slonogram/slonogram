@@ -28,6 +28,7 @@ async def poll_for_updates(
     feed_fn = dispatcher.feed_single
 
     async with create_task_group() as tg:
+        start_task = tg.start_soon
         while True:
             updates = await bot.get_updates(
                 offset=offset,
@@ -35,12 +36,13 @@ async def poll_for_updates(
                 timeout=timeout,
                 allowed_updates=allowed,
             )
-            if not updates:
+            try:
+                offset = updates[-1].update_id + 1
+            except IndexError:
                 continue
 
             for update in updates:
-                tg.start_soon(feed_fn, update, bot)
-            offset = updates[-1].update_id + 1
+                start_task(feed_fn, update, bot)
 
 
 __all__ = ["poll_for_updates"]

@@ -13,7 +13,7 @@ class ErrorDetails:
 
 
 class ApiError(Generic[T], Exception):
-    __slots__ = ("method_name", "method_args", "error")
+    __slots__ = ("method_name", "method_args", "details")
 
     def __init__(
         self,
