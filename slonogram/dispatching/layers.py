@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Generic, TypeVar, ParamSpec, Concatenate
 
 from ..filtering.base import BareFilter
-from ..middleware import BareMiddleware
+from ..middleware import CtxMiddleware
 
 M = TypeVar("M")
 T = TypeVar("T")
@@ -19,18 +19,18 @@ def _prefer(v: T | None, otherwise: T | None) -> T | None:
 
 @dataclass(frozen=True, slots=True)
 class Layers(Generic[P, M]):
-    prepare: BareMiddleware[M, P] | None = None
+    prepare: CtxMiddleware[M, P] | None = None
 
-    before: BareMiddleware[M, P] | None = None
-    after: BareMiddleware[M, Concatenate[Exception | None, P]] | None = None
+    before: CtxMiddleware[M, P] | None = None
+    after: CtxMiddleware[M, Concatenate[Exception | None, P]] | None = None
 
     filter: BareFilter[M] | None = None
 
     def copy_with(
         self,
-        prepare: BareMiddleware[M, P] | None = None,
-        before: BareMiddleware[M, P] | None = None,
-        after: BareMiddleware[M, Concatenate[Exception | None, P]] | None = None,
+        prepare: CtxMiddleware[M, P] | None = None,
+        before: CtxMiddleware[M, P] | None = None,
+        after: CtxMiddleware[M, Concatenate[Exception | None, P]] | None = None,
         filter: BareFilter[M] | None = None,
     ) -> Layers[P, M]:
         return Layers(

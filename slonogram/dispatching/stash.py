@@ -30,13 +30,13 @@ class Stash:
 
     @classmethod
     def single(
-        self,
+        cls,
         type: Any,
         value: T,
         *,
         parent: Stash | None = None,
     ) -> Stash:
-        return Stash({type: value}, parent=parent)
+        return cls({type: value}, parent=parent)
 
     def __getitem__(self, tp: Type[T]) -> T:
         """Gets item from the stash

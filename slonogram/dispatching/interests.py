@@ -4,13 +4,13 @@ from typing import (
     Generic,
     TypeAlias,
     cast,
+    Literal,
     Any,
 )
 
 
 from ..schemas import Message, CallbackQuery, InlineQuery
 
-from ..types import interest as I
 from ..types.interest import Interest
 
 
@@ -18,9 +18,9 @@ C = TypeVar("C", contravariant=True)
 M = TypeVar("M", covariant=True)
 T = TypeVar("T")
 
-MessageCompat: TypeAlias = I.MessageI | I.EditedMessageI
-CallbackQCompat: TypeAlias = I.CallbackQueryI
-InlineQCompat: TypeAlias = I.InlineQueryI
+MessageCompat: TypeAlias = Literal[Interest.MESSAGE] | Literal[Interest.EDITED_MESSAGE]
+CallbackQCompat: TypeAlias = Literal[Interest.CALLBACK_QUERY]
+InlineQCompat: TypeAlias = Literal[Interest.INLINE_QUERY]
 
 RelaxedCompat: TypeAlias = Interest
 

@@ -26,7 +26,6 @@ from ..exceptions.stash import CantReplaceStash
 from ..filtering.base import BareFilter
 from ..middleware import (
     SimpleMiddleware,
-    BareMiddleware,
     ExcMiddleware,
 )
 
@@ -124,7 +123,9 @@ class Dispatcher:
         """Creates dispatcher with a new stash.
 
         :param stash: stash to replace
-        :param relation: controls how new stash relates with the dispatcher's one, there's three variants:
+        :param relation: controls how new stash relates with the dispatcher's one,
+                         there's three variants:
+
                          - No relation - specify None
                          - `StashRelation.PARENT` - specified stash would be parent of the dispatcher's
                          - `StashRelation.CHILD` - specified stash would be child of the disptacher's
@@ -159,15 +160,15 @@ class Dispatcher:
 
         return self.alter(children=f)
 
-    def prepare(self, prepare: BareMiddleware[Any, []]) -> Dispatcher:
+    def prepare(self, prepare: SimpleMiddleware[Any]) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(prepare=prepare))
 
-    def before(self, before: BareMiddleware[Any, []]) -> Dispatcher:
+    def before(self, before: SimpleMiddleware[Any]) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(before=before))
 
     def after(
         self,
-        after: BareMiddleware[Any, [Exception | None]],
+        after: ExcMiddleware[Any],
     ) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(after=after))
 

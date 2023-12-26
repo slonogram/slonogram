@@ -8,6 +8,7 @@ from typing import (
     Generic,
     TypeAlias,
     Protocol,
+    Concatenate,
     Iterable,
 )
 from functools import wraps
@@ -18,43 +19,44 @@ M = TypeVar("M")
 P = ParamSpec("P")
 
 
-class BareMiddleware(Protocol[M, P]):
+class Middleware(Protocol[P]):
     def __call__(
         self,
-        context: Context[M],
-        /,
         *args: P.args,
         **kwds: P.kwargs,
     ) -> Awaitable[None]:
         ...
 
 
-SimpleMiddleware: TypeAlias = BareMiddleware[M, []]
-ExcMiddleware: TypeAlias = BareMiddleware[M, [Exception | None]]
+CtxMiddleware: TypeAlias = Middleware[Concatenate[Context[M], P]]
+SimpleMiddleware: TypeAlias = CtxMiddleware[M, []]
+ExcMiddleware: TypeAlias = CtxMiddleware[M, [Exception | None]]
 
 
-class Group(Generic[P]):
+class Group(Generic[M, P]):
     __slots__ = ("middlewares",)
 
-    def __init__(self, *middlewares: BareMiddleware[M, P]) -> None:
+    middlewares: tuple[CtxMiddleware[M, P], ...]
+
+    def __init__(self, *middlewares: CtxMiddleware[M, P]) -> None:
         self.middlewares = middlewares
 
     @overload
-    def __and__(self, rhs: BareMiddleware[M, P]) -> Group[P]:
+    def __and__(self, rhs: Group[M, P]) -> Group[M, P]:
         ...
 
     @overload
-    def __and__(self, rhs: Iterable[BareMiddleware[M, P]]) -> Group[P]:
+    def __and__(self, rhs: CtxMiddleware[M, P]) -> Group[M, P]:
         ...
 
     @overload
-    def __and__(self, rhs: Group[P]) -> Group[P]:
+    def __and__(self, rhs: Iterable[CtxMiddleware[M, P]]) -> Group[M, P]:
         ...
 
     def __and__(
         self,
         rhs: Any,
-    ) -> Group[P]:
+    ) -> Group[M, P]:
         if isinstance(rhs, Iterable):
             return Group(*self.middlewares, *rhs)
         elif isinstance(rhs, Group):
@@ -89,7 +91,7 @@ def discard_exc(exc_handler: ExcMiddleware[M]) -> SimpleMiddleware[M]:
 
 
 __all__ = [
-    "BareMiddleware",
+    "CtxMiddleware",
     "SimpleMiddleware",
     "ExcMiddleware",
     "Group",

@@ -5,6 +5,73 @@ description = ""
 authors = ["Nero <nerodono0@gmail.com>"]
 readme = "README.md"
 
+[tool.pylint.MASTER]
+ignore-paths = [
+    "slonogram/schemas.py",
+    "slonogram/methods/",
+    "slonogram/_internal/_generated_shortcuts.py",
+    "slonogram/_internal/api_wrapper.py",
+]
+disable = [
+    # Missing class docstring (TODO)
+    "C0115",
+
+    # Missing module docstring (TODO)
+    "C0114",
+
+    # Missing function or method docstring (TODO)
+    "C0116",
+
+    # Too few public methods
+    "R0903",
+
+    # Unsubscriptable object (poor pylint thinks that type aliases are unsubscriptable)
+    "E1136",
+
+    # Unnecessary "else" after "return". Silly IMHO from pylint
+    "R1705",
+
+    # Too many branches. Really?
+    "R0912",
+
+    # Too many statements. No commentary.
+    "R0915",
+
+    # Too many arguments. Just shut up already.
+    "R0913",
+
+    # Redefining built-in.
+    "W0622",
+
+    # Catching too general exception. This is necessary
+    "W0718",
+
+    # Lambda expression assigned to a variable. Define a function using the "def" keyword instead.
+    # - A: Nope
+    "C3001",
+
+    # Type alias name "CallbackQCompat" doesn't conform to predefined naming style (invalid-name)
+    # :D
+    "C0103",
+
+    # Wrong import position
+    "C0413",
+    "C0411",
+    "C0412",
+    "C0415", # Import outside toplevel
+
+    # Not reflecting variance
+    "C0105",
+
+    # Line too long (TODO), usually in docstrings
+    "C0301",
+
+    # Method was expected to be 'non-async', found it instead as 'async'.
+    # Silly pylint thinks that async def and Awaitable[T] is not compatible
+    "W0236",
+
+]
+
 [tool.poetry.extras]
 aiohttp = ["aiohttp"]
 
@@ -38,6 +105,8 @@ myst-parser = "^2.0.0"
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"
 mypy = "^1.7.1"
+pylint = "^3.0.3"
+isort = "^5.13.2"
 
 [build-system]
 requires = ["poetry-core"]

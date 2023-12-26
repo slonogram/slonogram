@@ -173,8 +173,6 @@ from slonogram.methods.get_game_high_scores import GetGameHighScores
 class MethodsWrapper:
     """Wrapper for calling the methods"""
 
-    __slots__ = ("retort", "session")
-
     def __init__(
         self,
         session: Session,

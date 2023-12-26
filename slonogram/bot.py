@@ -31,7 +31,12 @@ class Bot(MethodsWrapper):
       `slonogram.extra.session.aiohttp` session factory, requires `slonogram[aiohttp]` extra
     """
 
-    __slots__ = ("me", "session")
+    __slots__ = (
+        "me",
+        "session",
+        "retort",
+        "session",
+    )
 
     def __init__(
         self,

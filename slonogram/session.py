@@ -8,6 +8,7 @@ from io import IOBase
 from typing import (
     Awaitable,
     Any,
+    BinaryIO,
     Protocol,
     TypeVar,
 )
@@ -19,6 +20,32 @@ class CanCollectAttachs(Protocol):
 
 
 T = TypeVar("T", bound=CanCollectAttachs)
+
+
+class ApiGate(metaclass=ABCMeta):
+    __slots__ = ("endpoint",)
+
+    def __init__(
+        self,
+        endpoint: str | None = None,
+    ) -> None:
+        self.endpoint = endpoint
+
+    @abstractmethod
+    def call_method(
+        self,
+        name: str,
+        args: dict[str, str],
+        files: dict[str, BinaryIO] | None = None,
+    ) -> Awaitable[Any]:
+        """Calls specified method of telegram api.
+
+        :param name: name of the method
+        :param args: arguments for the method
+
+        :return: Response of the telegram api, directly the `result` payload
+        """
+        raise NotImplementedError
 
 
 class Session(metaclass=ABCMeta):
