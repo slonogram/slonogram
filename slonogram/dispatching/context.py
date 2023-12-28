@@ -1,12 +1,15 @@
 from __future__ import annotations
-from typing import TypeVar
+from typing import TypeVar, TypeAlias, ParamSpec, Concatenate
 
 from .stash import Stash
 
 from ..bot import Bot
+from ..middlewares import Middleware
+from ..utils.typing import MaybeException
 from .._internal.context_shortcuts import ShortcutsMixin
 
 M = TypeVar("M")
+Tail = ParamSpec("Tail")
 
 
 class Context(ShortcutsMixin[M]):
@@ -26,4 +29,11 @@ class Context(ShortcutsMixin[M]):
         return Context(stash, self.model, self.rpc)
 
 
-__all__ = ["Context"]
+CtxMiddleware: TypeAlias = Middleware[Concatenate[Context[M], Tail], None]
+CtxExcMiddleware: TypeAlias = CtxMiddleware[M, [MaybeException]]
+
+__all__ = [
+    "Context",
+    "CtxMiddleware",
+    "CtxExcMiddleware",
+]

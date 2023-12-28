@@ -9,7 +9,6 @@ if TYPE_CHECKING:
 
 
 from ..dispatching.stash import Stash
-from ..utils import origin_of
 
 M = TypeVar("M")
 
@@ -99,9 +98,7 @@ class Not(ExtendedFilter[M]):
         self.filter = pred
 
     def __repr__(self) -> str:
-        if origin_of(self.filter) is not Predicate:
-            return f"~({self.filter!r})"
-        return f"~{self.filter!r}"
+        return f"~({self.filter!r})"
 
     def __call__(self, ctx: Context[M]) -> bool:
         return not self.filter(ctx)

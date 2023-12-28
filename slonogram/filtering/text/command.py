@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from slonogram.utils import extract_from_utf16
+from slonogram.utils.entities import extract_from_utf16
 
 if TYPE_CHECKING:
     from slonogram.dispatching.context import Context

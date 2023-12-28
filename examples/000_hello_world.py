@@ -1,4 +1,3 @@
-import asyncio
 from utils import run_dispatcher
 
 from slonogram import Dispatcher, Context, Ic

@@ -80,7 +80,6 @@ def generate_wrapper(methods: dict[str, Method]) -> Statement:
         "MethodsWrapper",
         doc="Wrapper for calling the methods",
         body=[
-            Definition("__slots__", assign="('retort', 'session')"),
             Function(
                 "__init__",
                 Ref(BUILTINS, "None"),

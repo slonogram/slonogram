@@ -7,9 +7,9 @@
 from dataclasses import dataclass
 from slonogram.schemas import (
     ForceReply,
-    InlineKeyboardMarkup,
     ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
+    InlineKeyboardMarkup,
 )
 from io import IOBase
 from slonogram._internal.utils import collect_attachs_from

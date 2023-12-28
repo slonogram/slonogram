@@ -3,36 +3,27 @@ from __future__ import annotations
 from types import EllipsisType
 from typing import TYPE_CHECKING
 from io import IOBase
-from typing import TypeVar, TypeAlias, Callable, Any
+from typing import (
+    TypeVar,
+    Any,
+    ParamSpec,
+)
 
 if TYPE_CHECKING:
-    from slonogram.dispatching.context import Context
-    from slonogram.middleware import ExcMiddleware
+    from slonogram.dispatching.context import Context, CtxExcMiddleware
 
 
 from slonogram.dispatching.activation import Activation
-
-from ..session import CanCollectAttachs
+from slonogram.session import CanCollectAttachs
 
 T = TypeVar("T")
-
-AlterFn: TypeAlias = Callable[[T], T | EllipsisType]
-
-
-def call_alter_nullable(c: Callable[[T], T] | None, value: T) -> T:
-    if c is None:
-        return value
-    return c(value)
-
-
-def const(v: T) -> Callable[[Any], T]:
-    return lambda _: v
+P = ParamSpec("P")
 
 
 async def run_after_exc(
     exc: Exception,
     ctx: Context[Any],
-    after: ExcMiddleware[Any] | None,
+    after: CtxExcMiddleware[Any] | None,
 ) -> Activation[Any]:
     if after is None:
         raise exc
@@ -43,7 +34,7 @@ async def run_after_exc(
 
 async def run_after_strict(
     ctx: Context[Any],
-    after: ExcMiddleware[Any] | None,
+    after: CtxExcMiddleware[Any] | None,
 ) -> None:
     if after is not None:
         await after(ctx, None)

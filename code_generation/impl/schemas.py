@@ -41,7 +41,7 @@ class Order(IntEnum):
 
 
 ELLIPSIS_TYPE = Ref(Source("types"), "EllipsisType")
-ALTER_FN = Ref(Source("slonogram._internal.utils"), "AlterFn")
+ALTER_FN = Ref(Source("slonogram.utils.hof"), "Alter1")
 
 
 def _helper_methods_for(model: PlainModel, models: dict[str, SpecModel]) -> Statement:
