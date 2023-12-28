@@ -11,24 +11,19 @@ from typing import (
 from enum import IntEnum, auto
 
 
-from .context import Context
+from .context import Context, CtxMiddleware, CtxExcMiddleware
 from .layers import Layers
 from .handler import RawHandler, Handler, Activation
 from .stash import Stash
 
+from ..utils.hof import alter1, Alter1, Const
+
 from .._internal.utils import (
-    call_alter_nullable,
-    const,
     run_after_exc,
     run_after_strict,
 )
 from ..exceptions.stash import CantReplaceStash
 from ..filtering.base import BareFilter
-from ..middleware import (
-    SimpleMiddleware,
-    BareMiddleware,
-    ExcMiddleware,
-)
 
 from ..types.interest import Interest
 from ..schemas import (
@@ -102,17 +97,17 @@ class Dispatcher:
 
     def alter(
         self,
-        layers: AlterFn[Layers[[], Any]] | None = None,
-        handlers: AlterFn[DispatcherHandlers] | None = None,
-        children: AlterFn[tuple[Dispatcher, ...]] | None = None,
-        stash: AlterFn[Stash] | None = None,
+        layers: Alter1[Layers[[], Any]] | None = None,
+        handlers: Alter1[DispatcherHandlers] | None = None,
+        children: Alter1[tuple[Dispatcher, ...]] | None = None,
+        stash: Alter1[Stash] | None = None,
     ) -> Dispatcher:
         return Dispatcher(
             self.name,
-            children=call_alter_nullable(children, self.children),
-            handlers=call_alter_nullable(handlers, self.handlers),
-            layers=call_alter_nullable(layers, self.layers),
-            stash=call_alter_nullable(stash, self.stash),
+            children=alter1(children, self.children),
+            handlers=alter1(handlers, self.handlers),
+            layers=alter1(layers, self.layers),
+            stash=alter1(stash, self.stash),
         )
 
     def with_stash(
@@ -124,7 +119,9 @@ class Dispatcher:
         """Creates dispatcher with a new stash.
 
         :param stash: stash to replace
-        :param relation: controls how new stash relates with the dispatcher's one, there's three variants:
+        :param relation: controls how new stash relates with the dispatcher's one,
+                         there's three variants:
+
                          - No relation - specify None
                          - `StashRelation.PARENT` - specified stash would be parent of the dispatcher's
                          - `StashRelation.CHILD` - specified stash would be child of the disptacher's
@@ -140,7 +137,7 @@ class Dispatcher:
             case StashRelation.PARENT:
                 stash = Stash(self.stash.types, parent=stash)
 
-        return self.alter(stash=const(stash))
+        return self.alter(stash=Const(stash))
 
     def child(
         self,
@@ -150,24 +147,26 @@ class Dispatcher:
     ) -> Dispatcher:
         match relation:
             case None:
-                f = lambda head: (*head, dp)
+
+                def f(head: Any) -> Any:
+                    return *head, dp
+
             case StashRelation.PARENT | StashRelation.CHILD:
-                f = lambda head: (
-                    *head,
-                    dp.with_stash(self.stash, relation=relation),
-                )
+
+                def f(head: Any) -> Any:
+                    return *head, dp.with_stash(self.stash, relation=relation)
 
         return self.alter(children=f)
 
-    def prepare(self, prepare: BareMiddleware[Any, []]) -> Dispatcher:
+    def prepare(self, prepare: CtxMiddleware[Any, []]) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(prepare=prepare))
 
-    def before(self, before: BareMiddleware[Any, []]) -> Dispatcher:
+    def before(self, before: CtxMiddleware[Any, []]) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(before=before))
 
     def after(
         self,
-        after: BareMiddleware[Any, [Exception | None]],
+        after: CtxExcMiddleware[Any],
     ) -> Dispatcher:
         return self.alter(layers=lambda layers: layers.copy_with(after=after))
 
@@ -181,9 +180,9 @@ class Dispatcher:
         handler: RawHandler[M],
         filter: BareFilter[M] | None = None,
         *,
-        prepare: SimpleMiddleware[M] | None = None,
-        before: SimpleMiddleware[M] | None = None,
-        after: ExcMiddleware[M] | None = None,
+        prepare: CtxMiddleware[M, []] | None = None,
+        before: CtxMiddleware[M, []] | None = None,
+        after: CtxExcMiddleware[M] | None = None,
     ) -> Dispatcher:
         ...
 
@@ -202,9 +201,9 @@ class Dispatcher:
         filter: BareFilter[M] | None = None,
         *,
         observer: bool = False,
-        prepare: SimpleMiddleware[M] | None = None,
-        before: SimpleMiddleware[M] | None = None,
-        after: ExcMiddleware[M] | None = None,
+        prepare: CtxMiddleware[M, []] | None = None,
+        before: CtxMiddleware[M, []] | None = None,
+        after: CtxExcMiddleware[M] | None = None,
     ) -> Dispatcher:
         h: Handler[Any] = (
             handler

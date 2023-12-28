@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from typing import Callable, TypeAlias, TypeVar, Generic, Protocol
+from typing import TypeVar, Generic, Protocol
 from abc import ABCMeta, abstractmethod
 
 if TYPE_CHECKING:
-    from ..dispatching.stash import Stash
     from ..dispatching.context import Context
-from ..utils import origin_of
+
+
+from ..dispatching.stash import Stash
 
 M = TypeVar("M")
 
@@ -97,9 +98,7 @@ class Not(ExtendedFilter[M]):
         self.filter = pred
 
     def __repr__(self) -> str:
-        if origin_of(self.filter) is not Predicate:
-            return f"~({self.filter!r})"
-        return f"~{self.filter!r}"
+        return f"~({self.filter!r})"
 
     def __call__(self, ctx: Context[M]) -> bool:
         return not self.filter(ctx)

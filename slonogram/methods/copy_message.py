@@ -6,10 +6,10 @@
 # Release date: September 22, 2023
 from dataclasses import dataclass
 from slonogram.schemas import (
-    InlineKeyboardMarkup,
-    ReplyKeyboardMarkup,
     ForceReply,
+    ReplyKeyboardMarkup,
     ReplyKeyboardRemove,
+    InlineKeyboardMarkup,
     MessageEntity,
 )
 from io import IOBase

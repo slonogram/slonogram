@@ -8,7 +8,8 @@ from __future__ import annotations
 from slonogram._internal.utils import prefer
 from dataclasses import dataclass
 from io import IOBase
-from slonogram._internal.utils import AlterFn, collect_attachs_from
+from slonogram._internal.utils import collect_attachs_from
+from slonogram.utils.hof import Alter1
 from types import EllipsisType
 from typing import TypeAlias, Literal
 
@@ -54,21 +55,21 @@ class Update:
 
     def alter(
         self,
-        update_id: AlterFn[int] | EllipsisType = ...,
-        message: AlterFn[Message | None] | EllipsisType = ...,
-        edited_message: AlterFn[Message | None] | EllipsisType = ...,
-        channel_post: AlterFn[Message | None] | EllipsisType = ...,
-        edited_channel_post: AlterFn[Message | None] | EllipsisType = ...,
-        inline_query: AlterFn[InlineQuery | None] | EllipsisType = ...,
-        chosen_inline_result: AlterFn[ChosenInlineResult | None] | EllipsisType = ...,
-        callback_query: AlterFn[CallbackQuery | None] | EllipsisType = ...,
-        shipping_query: AlterFn[ShippingQuery | None] | EllipsisType = ...,
-        pre_checkout_query: AlterFn[PreCheckoutQuery | None] | EllipsisType = ...,
-        poll: AlterFn[Poll | None] | EllipsisType = ...,
-        poll_answer: AlterFn[PollAnswer | None] | EllipsisType = ...,
-        my_chat_member: AlterFn[ChatMemberUpdated | None] | EllipsisType = ...,
-        chat_member: AlterFn[ChatMemberUpdated | None] | EllipsisType = ...,
-        chat_join_request: AlterFn[ChatJoinRequest | None] | EllipsisType = ...,
+        update_id: Alter1[int] | EllipsisType = ...,
+        message: Alter1[Message | None] | EllipsisType = ...,
+        edited_message: Alter1[Message | None] | EllipsisType = ...,
+        channel_post: Alter1[Message | None] | EllipsisType = ...,
+        edited_channel_post: Alter1[Message | None] | EllipsisType = ...,
+        inline_query: Alter1[InlineQuery | None] | EllipsisType = ...,
+        chosen_inline_result: Alter1[ChosenInlineResult | None] | EllipsisType = ...,
+        callback_query: Alter1[CallbackQuery | None] | EllipsisType = ...,
+        shipping_query: Alter1[ShippingQuery | None] | EllipsisType = ...,
+        pre_checkout_query: Alter1[PreCheckoutQuery | None] | EllipsisType = ...,
+        poll: Alter1[Poll | None] | EllipsisType = ...,
+        poll_answer: Alter1[PollAnswer | None] | EllipsisType = ...,
+        my_chat_member: Alter1[ChatMemberUpdated | None] | EllipsisType = ...,
+        chat_member: Alter1[ChatMemberUpdated | None] | EllipsisType = ...,
+        chat_join_request: Alter1[ChatJoinRequest | None] | EllipsisType = ...,
     ) -> Update:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Update(
@@ -208,15 +209,15 @@ class WebhookInfo:
 
     def alter(
         self,
-        url: AlterFn[str] | EllipsisType = ...,
-        has_custom_certificate: AlterFn[bool] | EllipsisType = ...,
-        pending_update_count: AlterFn[int] | EllipsisType = ...,
-        ip_address: AlterFn[str | None] | EllipsisType = ...,
-        last_error_date: AlterFn[int | None] | EllipsisType = ...,
-        last_error_message: AlterFn[str | None] | EllipsisType = ...,
-        last_synchronization_error_date: AlterFn[int | None] | EllipsisType = ...,
-        max_connections: AlterFn[int | None] | EllipsisType = ...,
-        allowed_updates: AlterFn[list[str] | None] | EllipsisType = ...,
+        url: Alter1[str] | EllipsisType = ...,
+        has_custom_certificate: Alter1[bool] | EllipsisType = ...,
+        pending_update_count: Alter1[int] | EllipsisType = ...,
+        ip_address: Alter1[str | None] | EllipsisType = ...,
+        last_error_date: Alter1[int | None] | EllipsisType = ...,
+        last_error_message: Alter1[str | None] | EllipsisType = ...,
+        last_synchronization_error_date: Alter1[int | None] | EllipsisType = ...,
+        max_connections: Alter1[int | None] | EllipsisType = ...,
+        allowed_updates: Alter1[list[str] | None] | EllipsisType = ...,
     ) -> WebhookInfo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebhookInfo(
@@ -330,17 +331,17 @@ class User:
 
     def alter(
         self,
-        id: AlterFn[int] | EllipsisType = ...,
-        is_bot: AlterFn[bool] | EllipsisType = ...,
-        first_name: AlterFn[str] | EllipsisType = ...,
-        last_name: AlterFn[str | None] | EllipsisType = ...,
-        username: AlterFn[str | None] | EllipsisType = ...,
-        language_code: AlterFn[str | None] | EllipsisType = ...,
-        is_premium: AlterFn[bool | None] | EllipsisType = ...,
-        added_to_attachment_menu: AlterFn[bool | None] | EllipsisType = ...,
-        can_join_groups: AlterFn[bool | None] | EllipsisType = ...,
-        can_read_all_group_messages: AlterFn[bool | None] | EllipsisType = ...,
-        supports_inline_queries: AlterFn[bool | None] | EllipsisType = ...,
+        id: Alter1[int] | EllipsisType = ...,
+        is_bot: Alter1[bool] | EllipsisType = ...,
+        first_name: Alter1[str] | EllipsisType = ...,
+        last_name: Alter1[str | None] | EllipsisType = ...,
+        username: Alter1[str | None] | EllipsisType = ...,
+        language_code: Alter1[str | None] | EllipsisType = ...,
+        is_premium: Alter1[bool | None] | EllipsisType = ...,
+        added_to_attachment_menu: Alter1[bool | None] | EllipsisType = ...,
+        can_join_groups: Alter1[bool | None] | EllipsisType = ...,
+        can_read_all_group_messages: Alter1[bool | None] | EllipsisType = ...,
+        supports_inline_queries: Alter1[bool | None] | EllipsisType = ...,
     ) -> User:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return User(
@@ -494,36 +495,36 @@ class Chat:
 
     def alter(
         self,
-        id: AlterFn[int] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        username: AlterFn[str | None] | EllipsisType = ...,
-        first_name: AlterFn[str | None] | EllipsisType = ...,
-        last_name: AlterFn[str | None] | EllipsisType = ...,
-        is_forum: AlterFn[bool | None] | EllipsisType = ...,
-        photo: AlterFn[ChatPhoto | None] | EllipsisType = ...,
-        active_usernames: AlterFn[list[str] | None] | EllipsisType = ...,
-        emoji_status_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
-        emoji_status_expiration_date: AlterFn[int | None] | EllipsisType = ...,
-        bio: AlterFn[str | None] | EllipsisType = ...,
-        has_private_forwards: AlterFn[bool | None] | EllipsisType = ...,
-        has_restricted_voice_and_video_messages: AlterFn[bool | None]
+        id: Alter1[int] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        username: Alter1[str | None] | EllipsisType = ...,
+        first_name: Alter1[str | None] | EllipsisType = ...,
+        last_name: Alter1[str | None] | EllipsisType = ...,
+        is_forum: Alter1[bool | None] | EllipsisType = ...,
+        photo: Alter1[ChatPhoto | None] | EllipsisType = ...,
+        active_usernames: Alter1[list[str] | None] | EllipsisType = ...,
+        emoji_status_custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
+        emoji_status_expiration_date: Alter1[int | None] | EllipsisType = ...,
+        bio: Alter1[str | None] | EllipsisType = ...,
+        has_private_forwards: Alter1[bool | None] | EllipsisType = ...,
+        has_restricted_voice_and_video_messages: Alter1[bool | None]
         | EllipsisType = ...,
-        join_to_send_messages: AlterFn[bool | None] | EllipsisType = ...,
-        join_by_request: AlterFn[bool | None] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        invite_link: AlterFn[str | None] | EllipsisType = ...,
-        pinned_message: AlterFn[Message | None] | EllipsisType = ...,
-        permissions: AlterFn[ChatPermissions | None] | EllipsisType = ...,
-        slow_mode_delay: AlterFn[int | None] | EllipsisType = ...,
-        message_auto_delete_time: AlterFn[int | None] | EllipsisType = ...,
-        has_aggressive_anti_spam_enabled: AlterFn[bool | None] | EllipsisType = ...,
-        has_hidden_members: AlterFn[bool | None] | EllipsisType = ...,
-        has_protected_content: AlterFn[bool | None] | EllipsisType = ...,
-        sticker_set_name: AlterFn[str | None] | EllipsisType = ...,
-        can_set_sticker_set: AlterFn[bool | None] | EllipsisType = ...,
-        linked_chat_id: AlterFn[int | None] | EllipsisType = ...,
-        location: AlterFn[ChatLocation | None] | EllipsisType = ...,
+        join_to_send_messages: Alter1[bool | None] | EllipsisType = ...,
+        join_by_request: Alter1[bool | None] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        invite_link: Alter1[str | None] | EllipsisType = ...,
+        pinned_message: Alter1[Message | None] | EllipsisType = ...,
+        permissions: Alter1[ChatPermissions | None] | EllipsisType = ...,
+        slow_mode_delay: Alter1[int | None] | EllipsisType = ...,
+        message_auto_delete_time: Alter1[int | None] | EllipsisType = ...,
+        has_aggressive_anti_spam_enabled: Alter1[bool | None] | EllipsisType = ...,
+        has_hidden_members: Alter1[bool | None] | EllipsisType = ...,
+        has_protected_content: Alter1[bool | None] | EllipsisType = ...,
+        sticker_set_name: Alter1[str | None] | EllipsisType = ...,
+        can_set_sticker_set: Alter1[bool | None] | EllipsisType = ...,
+        linked_chat_id: Alter1[int | None] | EllipsisType = ...,
+        location: Alter1[ChatLocation | None] | EllipsisType = ...,
     ) -> Chat:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Chat(
@@ -888,83 +889,83 @@ class Message:
 
     def alter(
         self,
-        message_id: AlterFn[int] | EllipsisType = ...,
-        message_thread_id: AlterFn[int | None] | EllipsisType = ...,
-        from_: AlterFn[User | None] | EllipsisType = ...,
-        sender_chat: AlterFn[Chat | None] | EllipsisType = ...,
-        date: AlterFn[int] | EllipsisType = ...,
-        chat: AlterFn[Chat] | EllipsisType = ...,
-        forward_from: AlterFn[User | None] | EllipsisType = ...,
-        forward_from_chat: AlterFn[Chat | None] | EllipsisType = ...,
-        forward_from_message_id: AlterFn[int | None] | EllipsisType = ...,
-        forward_signature: AlterFn[str | None] | EllipsisType = ...,
-        forward_sender_name: AlterFn[str | None] | EllipsisType = ...,
-        forward_date: AlterFn[int | None] | EllipsisType = ...,
-        is_topic_message: AlterFn[bool | None] | EllipsisType = ...,
-        is_automatic_forward: AlterFn[bool | None] | EllipsisType = ...,
-        reply_to_message: AlterFn[Message | None] | EllipsisType = ...,
-        via_bot: AlterFn[User | None] | EllipsisType = ...,
-        edit_date: AlterFn[int | None] | EllipsisType = ...,
-        has_protected_content: AlterFn[bool | None] | EllipsisType = ...,
-        media_group_id: AlterFn[str | None] | EllipsisType = ...,
-        author_signature: AlterFn[str | None] | EllipsisType = ...,
-        text: AlterFn[str | None] | EllipsisType = ...,
-        entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        animation: AlterFn[Animation | None] | EllipsisType = ...,
-        audio: AlterFn[Audio | None] | EllipsisType = ...,
-        document: AlterFn[Document | None] | EllipsisType = ...,
-        photo: AlterFn[list[PhotoSize] | None] | EllipsisType = ...,
-        sticker: AlterFn[Sticker | None] | EllipsisType = ...,
-        story: AlterFn[Story | None] | EllipsisType = ...,
-        video: AlterFn[Video | None] | EllipsisType = ...,
-        video_note: AlterFn[VideoNote | None] | EllipsisType = ...,
-        voice: AlterFn[Voice | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        has_media_spoiler: AlterFn[bool | None] | EllipsisType = ...,
-        contact: AlterFn[Contact | None] | EllipsisType = ...,
-        dice: AlterFn[Dice | None] | EllipsisType = ...,
-        game: AlterFn[Game | None] | EllipsisType = ...,
-        poll: AlterFn[Poll | None] | EllipsisType = ...,
-        venue: AlterFn[Venue | None] | EllipsisType = ...,
-        location: AlterFn[Location | None] | EllipsisType = ...,
-        new_chat_members: AlterFn[list[User] | None] | EllipsisType = ...,
-        left_chat_member: AlterFn[User | None] | EllipsisType = ...,
-        new_chat_title: AlterFn[str | None] | EllipsisType = ...,
-        new_chat_photo: AlterFn[list[PhotoSize] | None] | EllipsisType = ...,
-        delete_chat_photo: AlterFn[bool | None] | EllipsisType = ...,
-        group_chat_created: AlterFn[bool | None] | EllipsisType = ...,
-        supergroup_chat_created: AlterFn[bool | None] | EllipsisType = ...,
-        channel_chat_created: AlterFn[bool | None] | EllipsisType = ...,
-        message_auto_delete_timer_changed: AlterFn[MessageAutoDeleteTimerChanged | None]
+        message_id: Alter1[int] | EllipsisType = ...,
+        message_thread_id: Alter1[int | None] | EllipsisType = ...,
+        from_: Alter1[User | None] | EllipsisType = ...,
+        sender_chat: Alter1[Chat | None] | EllipsisType = ...,
+        date: Alter1[int] | EllipsisType = ...,
+        chat: Alter1[Chat] | EllipsisType = ...,
+        forward_from: Alter1[User | None] | EllipsisType = ...,
+        forward_from_chat: Alter1[Chat | None] | EllipsisType = ...,
+        forward_from_message_id: Alter1[int | None] | EllipsisType = ...,
+        forward_signature: Alter1[str | None] | EllipsisType = ...,
+        forward_sender_name: Alter1[str | None] | EllipsisType = ...,
+        forward_date: Alter1[int | None] | EllipsisType = ...,
+        is_topic_message: Alter1[bool | None] | EllipsisType = ...,
+        is_automatic_forward: Alter1[bool | None] | EllipsisType = ...,
+        reply_to_message: Alter1[Message | None] | EllipsisType = ...,
+        via_bot: Alter1[User | None] | EllipsisType = ...,
+        edit_date: Alter1[int | None] | EllipsisType = ...,
+        has_protected_content: Alter1[bool | None] | EllipsisType = ...,
+        media_group_id: Alter1[str | None] | EllipsisType = ...,
+        author_signature: Alter1[str | None] | EllipsisType = ...,
+        text: Alter1[str | None] | EllipsisType = ...,
+        entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        animation: Alter1[Animation | None] | EllipsisType = ...,
+        audio: Alter1[Audio | None] | EllipsisType = ...,
+        document: Alter1[Document | None] | EllipsisType = ...,
+        photo: Alter1[list[PhotoSize] | None] | EllipsisType = ...,
+        sticker: Alter1[Sticker | None] | EllipsisType = ...,
+        story: Alter1[Story | None] | EllipsisType = ...,
+        video: Alter1[Video | None] | EllipsisType = ...,
+        video_note: Alter1[VideoNote | None] | EllipsisType = ...,
+        voice: Alter1[Voice | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        has_media_spoiler: Alter1[bool | None] | EllipsisType = ...,
+        contact: Alter1[Contact | None] | EllipsisType = ...,
+        dice: Alter1[Dice | None] | EllipsisType = ...,
+        game: Alter1[Game | None] | EllipsisType = ...,
+        poll: Alter1[Poll | None] | EllipsisType = ...,
+        venue: Alter1[Venue | None] | EllipsisType = ...,
+        location: Alter1[Location | None] | EllipsisType = ...,
+        new_chat_members: Alter1[list[User] | None] | EllipsisType = ...,
+        left_chat_member: Alter1[User | None] | EllipsisType = ...,
+        new_chat_title: Alter1[str | None] | EllipsisType = ...,
+        new_chat_photo: Alter1[list[PhotoSize] | None] | EllipsisType = ...,
+        delete_chat_photo: Alter1[bool | None] | EllipsisType = ...,
+        group_chat_created: Alter1[bool | None] | EllipsisType = ...,
+        supergroup_chat_created: Alter1[bool | None] | EllipsisType = ...,
+        channel_chat_created: Alter1[bool | None] | EllipsisType = ...,
+        message_auto_delete_timer_changed: Alter1[MessageAutoDeleteTimerChanged | None]
         | EllipsisType = ...,
-        migrate_to_chat_id: AlterFn[int | None] | EllipsisType = ...,
-        migrate_from_chat_id: AlterFn[int | None] | EllipsisType = ...,
-        pinned_message: AlterFn[Message | None] | EllipsisType = ...,
-        invoice: AlterFn[Invoice | None] | EllipsisType = ...,
-        successful_payment: AlterFn[SuccessfulPayment | None] | EllipsisType = ...,
-        user_shared: AlterFn[UserShared | None] | EllipsisType = ...,
-        chat_shared: AlterFn[ChatShared | None] | EllipsisType = ...,
-        connected_website: AlterFn[str | None] | EllipsisType = ...,
-        write_access_allowed: AlterFn[WriteAccessAllowed | None] | EllipsisType = ...,
-        passport_data: AlterFn[PassportData | None] | EllipsisType = ...,
-        proximity_alert_triggered: AlterFn[ProximityAlertTriggered | None]
+        migrate_to_chat_id: Alter1[int | None] | EllipsisType = ...,
+        migrate_from_chat_id: Alter1[int | None] | EllipsisType = ...,
+        pinned_message: Alter1[Message | None] | EllipsisType = ...,
+        invoice: Alter1[Invoice | None] | EllipsisType = ...,
+        successful_payment: Alter1[SuccessfulPayment | None] | EllipsisType = ...,
+        user_shared: Alter1[UserShared | None] | EllipsisType = ...,
+        chat_shared: Alter1[ChatShared | None] | EllipsisType = ...,
+        connected_website: Alter1[str | None] | EllipsisType = ...,
+        write_access_allowed: Alter1[WriteAccessAllowed | None] | EllipsisType = ...,
+        passport_data: Alter1[PassportData | None] | EllipsisType = ...,
+        proximity_alert_triggered: Alter1[ProximityAlertTriggered | None]
         | EllipsisType = ...,
-        forum_topic_created: AlterFn[ForumTopicCreated | None] | EllipsisType = ...,
-        forum_topic_edited: AlterFn[ForumTopicEdited | None] | EllipsisType = ...,
-        forum_topic_closed: AlterFn[ForumTopicClosed | None] | EllipsisType = ...,
-        forum_topic_reopened: AlterFn[ForumTopicReopened | None] | EllipsisType = ...,
-        general_forum_topic_hidden: AlterFn[GeneralForumTopicHidden | None]
+        forum_topic_created: Alter1[ForumTopicCreated | None] | EllipsisType = ...,
+        forum_topic_edited: Alter1[ForumTopicEdited | None] | EllipsisType = ...,
+        forum_topic_closed: Alter1[ForumTopicClosed | None] | EllipsisType = ...,
+        forum_topic_reopened: Alter1[ForumTopicReopened | None] | EllipsisType = ...,
+        general_forum_topic_hidden: Alter1[GeneralForumTopicHidden | None]
         | EllipsisType = ...,
-        general_forum_topic_unhidden: AlterFn[GeneralForumTopicUnhidden | None]
+        general_forum_topic_unhidden: Alter1[GeneralForumTopicUnhidden | None]
         | EllipsisType = ...,
-        video_chat_scheduled: AlterFn[VideoChatScheduled | None] | EllipsisType = ...,
-        video_chat_started: AlterFn[VideoChatStarted | None] | EllipsisType = ...,
-        video_chat_ended: AlterFn[VideoChatEnded | None] | EllipsisType = ...,
-        video_chat_participants_invited: AlterFn[VideoChatParticipantsInvited | None]
+        video_chat_scheduled: Alter1[VideoChatScheduled | None] | EllipsisType = ...,
+        video_chat_started: Alter1[VideoChatStarted | None] | EllipsisType = ...,
+        video_chat_ended: Alter1[VideoChatEnded | None] | EllipsisType = ...,
+        video_chat_participants_invited: Alter1[VideoChatParticipantsInvited | None]
         | EllipsisType = ...,
-        web_app_data: AlterFn[WebAppData | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        web_app_data: Alter1[WebAppData | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
     ) -> Message:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Message(
@@ -1482,7 +1483,7 @@ class MessageId:
 
     def alter(
         self,
-        message_id: AlterFn[int] | EllipsisType = ...,
+        message_id: Alter1[int] | EllipsisType = ...,
     ) -> MessageId:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageId(
@@ -1525,13 +1526,13 @@ class MessageEntity:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        offset: AlterFn[int] | EllipsisType = ...,
-        length: AlterFn[int] | EllipsisType = ...,
-        url: AlterFn[str | None] | EllipsisType = ...,
-        user: AlterFn[User | None] | EllipsisType = ...,
-        language: AlterFn[str | None] | EllipsisType = ...,
-        custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        offset: Alter1[int] | EllipsisType = ...,
+        length: Alter1[int] | EllipsisType = ...,
+        url: Alter1[str | None] | EllipsisType = ...,
+        user: Alter1[User | None] | EllipsisType = ...,
+        language: Alter1[str | None] | EllipsisType = ...,
+        custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
     ) -> MessageEntity:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageEntity(
@@ -1596,11 +1597,11 @@ class PhotoSize:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        width: AlterFn[int] | EllipsisType = ...,
-        height: AlterFn[int] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        width: Alter1[int] | EllipsisType = ...,
+        height: Alter1[int] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> PhotoSize:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PhotoSize(
@@ -1667,15 +1668,15 @@ class Animation:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        width: AlterFn[int] | EllipsisType = ...,
-        height: AlterFn[int] | EllipsisType = ...,
-        duration: AlterFn[int] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
-        file_name: AlterFn[str | None] | EllipsisType = ...,
-        mime_type: AlterFn[str | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        width: Alter1[int] | EllipsisType = ...,
+        height: Alter1[int] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
+        file_name: Alter1[str | None] | EllipsisType = ...,
+        mime_type: Alter1[str | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> Animation:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Animation(
@@ -1762,15 +1763,15 @@ class Audio:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        duration: AlterFn[int] | EllipsisType = ...,
-        performer: AlterFn[str | None] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        file_name: AlterFn[str | None] | EllipsisType = ...,
-        mime_type: AlterFn[str | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
+        performer: Alter1[str | None] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        file_name: Alter1[str | None] | EllipsisType = ...,
+        mime_type: Alter1[str | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
     ) -> Audio:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Audio(
@@ -1851,12 +1852,12 @@ class Document:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
-        file_name: AlterFn[str | None] | EllipsisType = ...,
-        mime_type: AlterFn[str | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
+        file_name: Alter1[str | None] | EllipsisType = ...,
+        mime_type: Alter1[str | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> Document:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Document(
@@ -1950,15 +1951,15 @@ class Video:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        width: AlterFn[int] | EllipsisType = ...,
-        height: AlterFn[int] | EllipsisType = ...,
-        duration: AlterFn[int] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
-        file_name: AlterFn[str | None] | EllipsisType = ...,
-        mime_type: AlterFn[str | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        width: Alter1[int] | EllipsisType = ...,
+        height: Alter1[int] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
+        file_name: Alter1[str | None] | EllipsisType = ...,
+        mime_type: Alter1[str | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> Video:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Video(
@@ -2039,12 +2040,12 @@ class VideoNote:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        length: AlterFn[int] | EllipsisType = ...,
-        duration: AlterFn[int] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        length: Alter1[int] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> VideoNote:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoNote(
@@ -2110,11 +2111,11 @@ class Voice:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        duration: AlterFn[int] | EllipsisType = ...,
-        mime_type: AlterFn[str | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
+        mime_type: Alter1[str | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> Voice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Voice(
@@ -2175,11 +2176,11 @@ class Contact:
 
     def alter(
         self,
-        phone_number: AlterFn[str] | EllipsisType = ...,
-        first_name: AlterFn[str] | EllipsisType = ...,
-        last_name: AlterFn[str | None] | EllipsisType = ...,
-        user_id: AlterFn[int | None] | EllipsisType = ...,
-        vcard: AlterFn[str | None] | EllipsisType = ...,
+        phone_number: Alter1[str] | EllipsisType = ...,
+        first_name: Alter1[str] | EllipsisType = ...,
+        last_name: Alter1[str | None] | EllipsisType = ...,
+        user_id: Alter1[int | None] | EllipsisType = ...,
+        vcard: Alter1[str | None] | EllipsisType = ...,
     ) -> Contact:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Contact(
@@ -2230,8 +2231,8 @@ class Dice:
 
     def alter(
         self,
-        emoji: AlterFn[str] | EllipsisType = ...,
-        value: AlterFn[int] | EllipsisType = ...,
+        emoji: Alter1[str] | EllipsisType = ...,
+        value: Alter1[int] | EllipsisType = ...,
     ) -> Dice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Dice(
@@ -2265,8 +2266,8 @@ class PollOption:
 
     def alter(
         self,
-        text: AlterFn[str] | EllipsisType = ...,
-        voter_count: AlterFn[int] | EllipsisType = ...,
+        text: Alter1[str] | EllipsisType = ...,
+        voter_count: Alter1[int] | EllipsisType = ...,
     ) -> PollOption:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PollOption(
@@ -2306,10 +2307,10 @@ class PollAnswer:
 
     def alter(
         self,
-        poll_id: AlterFn[str] | EllipsisType = ...,
-        voter_chat: AlterFn[Chat | None] | EllipsisType = ...,
-        user: AlterFn[User | None] | EllipsisType = ...,
-        option_ids: AlterFn[list[int]] | EllipsisType = ...,
+        poll_id: Alter1[str] | EllipsisType = ...,
+        voter_chat: Alter1[Chat | None] | EllipsisType = ...,
+        user: Alter1[User | None] | EllipsisType = ...,
+        option_ids: Alter1[list[int]] | EllipsisType = ...,
     ) -> PollAnswer:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PollAnswer(
@@ -2377,19 +2378,19 @@ class Poll:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        question: AlterFn[str] | EllipsisType = ...,
-        options: AlterFn[list[PollOption]] | EllipsisType = ...,
-        total_voter_count: AlterFn[int] | EllipsisType = ...,
-        is_closed: AlterFn[bool] | EllipsisType = ...,
-        is_anonymous: AlterFn[bool] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        allows_multiple_answers: AlterFn[bool] | EllipsisType = ...,
-        correct_option_id: AlterFn[int | None] | EllipsisType = ...,
-        explanation: AlterFn[str | None] | EllipsisType = ...,
-        explanation_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        open_period: AlterFn[int | None] | EllipsisType = ...,
-        close_date: AlterFn[int | None] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        question: Alter1[str] | EllipsisType = ...,
+        options: Alter1[list[PollOption]] | EllipsisType = ...,
+        total_voter_count: Alter1[int] | EllipsisType = ...,
+        is_closed: Alter1[bool] | EllipsisType = ...,
+        is_anonymous: Alter1[bool] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        allows_multiple_answers: Alter1[bool] | EllipsisType = ...,
+        correct_option_id: Alter1[int | None] | EllipsisType = ...,
+        explanation: Alter1[str | None] | EllipsisType = ...,
+        explanation_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        open_period: Alter1[int | None] | EllipsisType = ...,
+        close_date: Alter1[int | None] | EllipsisType = ...,
     ) -> Poll:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Poll(
@@ -2504,12 +2505,12 @@ class Location:
 
     def alter(
         self,
-        longitude: AlterFn[float] | EllipsisType = ...,
-        latitude: AlterFn[float] | EllipsisType = ...,
-        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
-        live_period: AlterFn[int | None] | EllipsisType = ...,
-        heading: AlterFn[int | None] | EllipsisType = ...,
-        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
+        longitude: Alter1[float] | EllipsisType = ...,
+        latitude: Alter1[float] | EllipsisType = ...,
+        horizontal_accuracy: Alter1[float | None] | EllipsisType = ...,
+        live_period: Alter1[int | None] | EllipsisType = ...,
+        heading: Alter1[int | None] | EllipsisType = ...,
+        proximity_alert_radius: Alter1[int | None] | EllipsisType = ...,
     ) -> Location:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Location(
@@ -2586,13 +2587,13 @@ class Venue:
 
     def alter(
         self,
-        location: AlterFn[Location] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        address: AlterFn[str] | EllipsisType = ...,
-        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
-        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
-        google_place_id: AlterFn[str | None] | EllipsisType = ...,
-        google_place_type: AlterFn[str | None] | EllipsisType = ...,
+        location: Alter1[Location] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        address: Alter1[str] | EllipsisType = ...,
+        foursquare_id: Alter1[str | None] | EllipsisType = ...,
+        foursquare_type: Alter1[str | None] | EllipsisType = ...,
+        google_place_id: Alter1[str | None] | EllipsisType = ...,
+        google_place_type: Alter1[str | None] | EllipsisType = ...,
     ) -> Venue:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Venue(
@@ -2663,8 +2664,8 @@ class WebAppData:
 
     def alter(
         self,
-        data: AlterFn[str] | EllipsisType = ...,
-        button_text: AlterFn[str] | EllipsisType = ...,
+        data: Alter1[str] | EllipsisType = ...,
+        button_text: Alter1[str] | EllipsisType = ...,
     ) -> WebAppData:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebAppData(
@@ -2702,9 +2703,9 @@ class ProximityAlertTriggered:
 
     def alter(
         self,
-        traveler: AlterFn[User] | EllipsisType = ...,
-        watcher: AlterFn[User] | EllipsisType = ...,
-        distance: AlterFn[int] | EllipsisType = ...,
+        traveler: Alter1[User] | EllipsisType = ...,
+        watcher: Alter1[User] | EllipsisType = ...,
+        distance: Alter1[int] | EllipsisType = ...,
     ) -> ProximityAlertTriggered:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ProximityAlertTriggered(
@@ -2745,7 +2746,7 @@ class MessageAutoDeleteTimerChanged:
 
     def alter(
         self,
-        message_auto_delete_time: AlterFn[int] | EllipsisType = ...,
+        message_auto_delete_time: Alter1[int] | EllipsisType = ...,
     ) -> MessageAutoDeleteTimerChanged:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MessageAutoDeleteTimerChanged(
@@ -2785,9 +2786,9 @@ class ForumTopicCreated:
 
     def alter(
         self,
-        name: AlterFn[str] | EllipsisType = ...,
-        icon_color: AlterFn[int] | EllipsisType = ...,
-        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        name: Alter1[str] | EllipsisType = ...,
+        icon_color: Alter1[int] | EllipsisType = ...,
+        icon_custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
     ) -> ForumTopicCreated:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicCreated(
@@ -2853,8 +2854,8 @@ class ForumTopicEdited:
 
     def alter(
         self,
-        name: AlterFn[str | None] | EllipsisType = ...,
-        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        name: Alter1[str | None] | EllipsisType = ...,
+        icon_custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
     ) -> ForumTopicEdited:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopicEdited(
@@ -2955,8 +2956,8 @@ class UserShared:
 
     def alter(
         self,
-        request_id: AlterFn[int] | EllipsisType = ...,
-        user_id: AlterFn[int] | EllipsisType = ...,
+        request_id: Alter1[int] | EllipsisType = ...,
+        user_id: Alter1[int] | EllipsisType = ...,
     ) -> UserShared:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return UserShared(
@@ -2994,8 +2995,8 @@ class ChatShared:
 
     def alter(
         self,
-        request_id: AlterFn[int] | EllipsisType = ...,
-        chat_id: AlterFn[int] | EllipsisType = ...,
+        request_id: Alter1[int] | EllipsisType = ...,
+        chat_id: Alter1[int] | EllipsisType = ...,
     ) -> ChatShared:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatShared(
@@ -3035,9 +3036,9 @@ class WriteAccessAllowed:
 
     def alter(
         self,
-        from_request: AlterFn[bool | None] | EllipsisType = ...,
-        web_app_name: AlterFn[str | None] | EllipsisType = ...,
-        from_attachment_menu: AlterFn[bool | None] | EllipsisType = ...,
+        from_request: Alter1[bool | None] | EllipsisType = ...,
+        web_app_name: Alter1[str | None] | EllipsisType = ...,
+        from_attachment_menu: Alter1[bool | None] | EllipsisType = ...,
     ) -> WriteAccessAllowed:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WriteAccessAllowed(
@@ -3083,7 +3084,7 @@ class VideoChatScheduled:
 
     def alter(
         self,
-        start_date: AlterFn[int] | EllipsisType = ...,
+        start_date: Alter1[int] | EllipsisType = ...,
     ) -> VideoChatScheduled:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatScheduled(
@@ -3134,7 +3135,7 @@ class VideoChatEnded:
 
     def alter(
         self,
-        duration: AlterFn[int] | EllipsisType = ...,
+        duration: Alter1[int] | EllipsisType = ...,
     ) -> VideoChatEnded:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatEnded(
@@ -3165,7 +3166,7 @@ class VideoChatParticipantsInvited:
 
     def alter(
         self,
-        users: AlterFn[list[User]] | EllipsisType = ...,
+        users: Alter1[list[User]] | EllipsisType = ...,
     ) -> VideoChatParticipantsInvited:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return VideoChatParticipantsInvited(
@@ -3196,8 +3197,8 @@ class UserProfilePhotos:
 
     def alter(
         self,
-        total_count: AlterFn[int] | EllipsisType = ...,
-        photos: AlterFn[list[list[PhotoSize]]] | EllipsisType = ...,
+        total_count: Alter1[int] | EllipsisType = ...,
+        photos: Alter1[list[list[PhotoSize]]] | EllipsisType = ...,
     ) -> UserProfilePhotos:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return UserProfilePhotos(
@@ -3239,10 +3240,10 @@ class File:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
-        file_path: AlterFn[str | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
+        file_path: Alter1[str | None] | EllipsisType = ...,
     ) -> File:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return File(
@@ -3290,7 +3291,7 @@ class WebAppInfo:
 
     def alter(
         self,
-        url: AlterFn[str] | EllipsisType = ...,
+        url: Alter1[str] | EllipsisType = ...,
     ) -> WebAppInfo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return WebAppInfo(
@@ -3327,12 +3328,12 @@ class ReplyKeyboardMarkup:
 
     def alter(
         self,
-        keyboard: AlterFn[list[list[KeyboardButton]]] | EllipsisType = ...,
-        is_persistent: AlterFn[bool | None] | EllipsisType = ...,
-        resize_keyboard: AlterFn[bool | None] | EllipsisType = ...,
-        one_time_keyboard: AlterFn[bool | None] | EllipsisType = ...,
-        input_field_placeholder: AlterFn[str | None] | EllipsisType = ...,
-        selective: AlterFn[bool | None] | EllipsisType = ...,
+        keyboard: Alter1[list[list[KeyboardButton]]] | EllipsisType = ...,
+        is_persistent: Alter1[bool | None] | EllipsisType = ...,
+        resize_keyboard: Alter1[bool | None] | EllipsisType = ...,
+        one_time_keyboard: Alter1[bool | None] | EllipsisType = ...,
+        input_field_placeholder: Alter1[str | None] | EllipsisType = ...,
+        selective: Alter1[bool | None] | EllipsisType = ...,
     ) -> ReplyKeyboardMarkup:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ReplyKeyboardMarkup(
@@ -3418,13 +3419,13 @@ class KeyboardButton:
 
     def alter(
         self,
-        text: AlterFn[str] | EllipsisType = ...,
-        request_user: AlterFn[KeyboardButtonRequestUser | None] | EllipsisType = ...,
-        request_chat: AlterFn[KeyboardButtonRequestChat | None] | EllipsisType = ...,
-        request_contact: AlterFn[bool | None] | EllipsisType = ...,
-        request_location: AlterFn[bool | None] | EllipsisType = ...,
-        request_poll: AlterFn[KeyboardButtonPollType | None] | EllipsisType = ...,
-        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
+        text: Alter1[str] | EllipsisType = ...,
+        request_user: Alter1[KeyboardButtonRequestUser | None] | EllipsisType = ...,
+        request_chat: Alter1[KeyboardButtonRequestChat | None] | EllipsisType = ...,
+        request_contact: Alter1[bool | None] | EllipsisType = ...,
+        request_location: Alter1[bool | None] | EllipsisType = ...,
+        request_poll: Alter1[KeyboardButtonPollType | None] | EllipsisType = ...,
+        web_app: Alter1[WebAppInfo | None] | EllipsisType = ...,
     ) -> KeyboardButton:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButton(
@@ -3491,9 +3492,9 @@ class KeyboardButtonRequestUser:
 
     def alter(
         self,
-        request_id: AlterFn[int] | EllipsisType = ...,
-        user_is_bot: AlterFn[bool | None] | EllipsisType = ...,
-        user_is_premium: AlterFn[bool | None] | EllipsisType = ...,
+        request_id: Alter1[int] | EllipsisType = ...,
+        user_is_bot: Alter1[bool | None] | EllipsisType = ...,
+        user_is_premium: Alter1[bool | None] | EllipsisType = ...,
     ) -> KeyboardButtonRequestUser:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonRequestUser(
@@ -3550,16 +3551,16 @@ class KeyboardButtonRequestChat:
 
     def alter(
         self,
-        request_id: AlterFn[int] | EllipsisType = ...,
-        chat_is_channel: AlterFn[bool] | EllipsisType = ...,
-        chat_is_forum: AlterFn[bool | None] | EllipsisType = ...,
-        chat_has_username: AlterFn[bool | None] | EllipsisType = ...,
-        chat_is_created: AlterFn[bool | None] | EllipsisType = ...,
-        user_administrator_rights: AlterFn[ChatAdministratorRights | None]
+        request_id: Alter1[int] | EllipsisType = ...,
+        chat_is_channel: Alter1[bool] | EllipsisType = ...,
+        chat_is_forum: Alter1[bool | None] | EllipsisType = ...,
+        chat_has_username: Alter1[bool | None] | EllipsisType = ...,
+        chat_is_created: Alter1[bool | None] | EllipsisType = ...,
+        user_administrator_rights: Alter1[ChatAdministratorRights | None]
         | EllipsisType = ...,
-        bot_administrator_rights: AlterFn[ChatAdministratorRights | None]
+        bot_administrator_rights: Alter1[ChatAdministratorRights | None]
         | EllipsisType = ...,
-        bot_is_member: AlterFn[bool | None] | EllipsisType = ...,
+        bot_is_member: Alter1[bool | None] | EllipsisType = ...,
     ) -> KeyboardButtonRequestChat:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonRequestChat(
@@ -3647,7 +3648,7 @@ class KeyboardButtonPollType:
 
     def alter(
         self,
-        type: AlterFn[str | None] | EllipsisType = ...,
+        type: Alter1[str | None] | EllipsisType = ...,
     ) -> KeyboardButtonPollType:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return KeyboardButtonPollType(
@@ -3676,8 +3677,8 @@ class ReplyKeyboardRemove:
 
     def alter(
         self,
-        remove_keyboard: AlterFn[bool] | EllipsisType = ...,
-        selective: AlterFn[bool | None] | EllipsisType = ...,
+        remove_keyboard: Alter1[bool] | EllipsisType = ...,
+        selective: Alter1[bool | None] | EllipsisType = ...,
     ) -> ReplyKeyboardRemove:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ReplyKeyboardRemove(
@@ -3717,7 +3718,7 @@ class InlineKeyboardMarkup:
 
     def alter(
         self,
-        inline_keyboard: AlterFn[list[list[InlineKeyboardButton]]] | EllipsisType = ...,
+        inline_keyboard: Alter1[list[list[InlineKeyboardButton]]] | EllipsisType = ...,
     ) -> InlineKeyboardMarkup:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineKeyboardMarkup(
@@ -3768,17 +3769,17 @@ class InlineKeyboardButton:
 
     def alter(
         self,
-        text: AlterFn[str] | EllipsisType = ...,
-        url: AlterFn[str | None] | EllipsisType = ...,
-        callback_data: AlterFn[str | None] | EllipsisType = ...,
-        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
-        login_url: AlterFn[LoginUrl | None] | EllipsisType = ...,
-        switch_inline_query: AlterFn[str | None] | EllipsisType = ...,
-        switch_inline_query_current_chat: AlterFn[str | None] | EllipsisType = ...,
-        switch_inline_query_chosen_chat: AlterFn[SwitchInlineQueryChosenChat | None]
+        text: Alter1[str] | EllipsisType = ...,
+        url: Alter1[str | None] | EllipsisType = ...,
+        callback_data: Alter1[str | None] | EllipsisType = ...,
+        web_app: Alter1[WebAppInfo | None] | EllipsisType = ...,
+        login_url: Alter1[LoginUrl | None] | EllipsisType = ...,
+        switch_inline_query: Alter1[str | None] | EllipsisType = ...,
+        switch_inline_query_current_chat: Alter1[str | None] | EllipsisType = ...,
+        switch_inline_query_chosen_chat: Alter1[SwitchInlineQueryChosenChat | None]
         | EllipsisType = ...,
-        callback_game: AlterFn[CallbackGame | None] | EllipsisType = ...,
-        pay: AlterFn[bool | None] | EllipsisType = ...,
+        callback_game: Alter1[CallbackGame | None] | EllipsisType = ...,
+        pay: Alter1[bool | None] | EllipsisType = ...,
     ) -> InlineKeyboardButton:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineKeyboardButton(
@@ -3875,10 +3876,10 @@ class LoginUrl:
 
     def alter(
         self,
-        url: AlterFn[str] | EllipsisType = ...,
-        forward_text: AlterFn[str | None] | EllipsisType = ...,
-        bot_username: AlterFn[str | None] | EllipsisType = ...,
-        request_write_access: AlterFn[bool | None] | EllipsisType = ...,
+        url: Alter1[str] | EllipsisType = ...,
+        forward_text: Alter1[str | None] | EllipsisType = ...,
+        bot_username: Alter1[str | None] | EllipsisType = ...,
+        request_write_access: Alter1[bool | None] | EllipsisType = ...,
     ) -> LoginUrl:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return LoginUrl(
@@ -3935,11 +3936,11 @@ class SwitchInlineQueryChosenChat:
 
     def alter(
         self,
-        query: AlterFn[str | None] | EllipsisType = ...,
-        allow_user_chats: AlterFn[bool | None] | EllipsisType = ...,
-        allow_bot_chats: AlterFn[bool | None] | EllipsisType = ...,
-        allow_group_chats: AlterFn[bool | None] | EllipsisType = ...,
-        allow_channel_chats: AlterFn[bool | None] | EllipsisType = ...,
+        query: Alter1[str | None] | EllipsisType = ...,
+        allow_user_chats: Alter1[bool | None] | EllipsisType = ...,
+        allow_bot_chats: Alter1[bool | None] | EllipsisType = ...,
+        allow_group_chats: Alter1[bool | None] | EllipsisType = ...,
+        allow_channel_chats: Alter1[bool | None] | EllipsisType = ...,
     ) -> SwitchInlineQueryChosenChat:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SwitchInlineQueryChosenChat(
@@ -4012,13 +4013,13 @@ class CallbackQuery:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        message: AlterFn[Message | None] | EllipsisType = ...,
-        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
-        chat_instance: AlterFn[str] | EllipsisType = ...,
-        data: AlterFn[str | None] | EllipsisType = ...,
-        game_short_name: AlterFn[str | None] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        message: Alter1[Message | None] | EllipsisType = ...,
+        inline_message_id: Alter1[str | None] | EllipsisType = ...,
+        chat_instance: Alter1[str] | EllipsisType = ...,
+        data: Alter1[str | None] | EllipsisType = ...,
+        game_short_name: Alter1[str | None] | EllipsisType = ...,
     ) -> CallbackQuery:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return CallbackQuery(
@@ -4085,9 +4086,9 @@ class ForceReply:
 
     def alter(
         self,
-        force_reply: AlterFn[bool] | EllipsisType = ...,
-        input_field_placeholder: AlterFn[str | None] | EllipsisType = ...,
-        selective: AlterFn[bool | None] | EllipsisType = ...,
+        force_reply: Alter1[bool] | EllipsisType = ...,
+        input_field_placeholder: Alter1[str | None] | EllipsisType = ...,
+        selective: Alter1[bool | None] | EllipsisType = ...,
     ) -> ForceReply:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForceReply(
@@ -4139,10 +4140,10 @@ class ChatPhoto:
 
     def alter(
         self,
-        small_file_id: AlterFn[str] | EllipsisType = ...,
-        small_file_unique_id: AlterFn[str] | EllipsisType = ...,
-        big_file_id: AlterFn[str] | EllipsisType = ...,
-        big_file_unique_id: AlterFn[str] | EllipsisType = ...,
+        small_file_id: Alter1[str] | EllipsisType = ...,
+        small_file_unique_id: Alter1[str] | EllipsisType = ...,
+        big_file_id: Alter1[str] | EllipsisType = ...,
+        big_file_unique_id: Alter1[str] | EllipsisType = ...,
     ) -> ChatPhoto:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatPhoto(
@@ -4215,15 +4216,15 @@ class ChatInviteLink:
 
     def alter(
         self,
-        invite_link: AlterFn[str] | EllipsisType = ...,
-        creator: AlterFn[User] | EllipsisType = ...,
-        creates_join_request: AlterFn[bool] | EllipsisType = ...,
-        is_primary: AlterFn[bool] | EllipsisType = ...,
-        is_revoked: AlterFn[bool] | EllipsisType = ...,
-        name: AlterFn[str | None] | EllipsisType = ...,
-        expire_date: AlterFn[int | None] | EllipsisType = ...,
-        member_limit: AlterFn[int | None] | EllipsisType = ...,
-        pending_join_request_count: AlterFn[int | None] | EllipsisType = ...,
+        invite_link: Alter1[str] | EllipsisType = ...,
+        creator: Alter1[User] | EllipsisType = ...,
+        creates_join_request: Alter1[bool] | EllipsisType = ...,
+        is_primary: Alter1[bool] | EllipsisType = ...,
+        is_revoked: Alter1[bool] | EllipsisType = ...,
+        name: Alter1[str | None] | EllipsisType = ...,
+        expire_date: Alter1[int | None] | EllipsisType = ...,
+        member_limit: Alter1[int | None] | EllipsisType = ...,
+        pending_join_request_count: Alter1[int | None] | EllipsisType = ...,
     ) -> ChatInviteLink:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatInviteLink(
@@ -4330,21 +4331,21 @@ class ChatAdministratorRights:
 
     def alter(
         self,
-        is_anonymous: AlterFn[bool] | EllipsisType = ...,
-        can_manage_chat: AlterFn[bool] | EllipsisType = ...,
-        can_delete_messages: AlterFn[bool] | EllipsisType = ...,
-        can_manage_video_chats: AlterFn[bool] | EllipsisType = ...,
-        can_restrict_members: AlterFn[bool] | EllipsisType = ...,
-        can_promote_members: AlterFn[bool] | EllipsisType = ...,
-        can_change_info: AlterFn[bool] | EllipsisType = ...,
-        can_invite_users: AlterFn[bool] | EllipsisType = ...,
-        can_post_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_edit_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_post_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_edit_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_delete_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
+        is_anonymous: Alter1[bool] | EllipsisType = ...,
+        can_manage_chat: Alter1[bool] | EllipsisType = ...,
+        can_delete_messages: Alter1[bool] | EllipsisType = ...,
+        can_manage_video_chats: Alter1[bool] | EllipsisType = ...,
+        can_restrict_members: Alter1[bool] | EllipsisType = ...,
+        can_promote_members: Alter1[bool] | EllipsisType = ...,
+        can_change_info: Alter1[bool] | EllipsisType = ...,
+        can_invite_users: Alter1[bool] | EllipsisType = ...,
+        can_post_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_edit_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_pin_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_post_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_edit_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_delete_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_manage_topics: Alter1[bool | None] | EllipsisType = ...,
     ) -> ChatAdministratorRights:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatAdministratorRights(
@@ -4497,10 +4498,10 @@ class ChatMemberOwner:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
-        is_anonymous: AlterFn[bool] | EllipsisType = ...,
-        custom_title: AlterFn[str | None] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
+        is_anonymous: Alter1[bool] | EllipsisType = ...,
+        custom_title: Alter1[str | None] | EllipsisType = ...,
     ) -> ChatMemberOwner:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberOwner(
@@ -4580,25 +4581,25 @@ class ChatMemberAdministrator:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
-        can_be_edited: AlterFn[bool] | EllipsisType = ...,
-        is_anonymous: AlterFn[bool] | EllipsisType = ...,
-        can_manage_chat: AlterFn[bool] | EllipsisType = ...,
-        can_delete_messages: AlterFn[bool] | EllipsisType = ...,
-        can_manage_video_chats: AlterFn[bool] | EllipsisType = ...,
-        can_restrict_members: AlterFn[bool] | EllipsisType = ...,
-        can_promote_members: AlterFn[bool] | EllipsisType = ...,
-        can_change_info: AlterFn[bool] | EllipsisType = ...,
-        can_invite_users: AlterFn[bool] | EllipsisType = ...,
-        can_post_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_edit_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_post_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_edit_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_delete_stories: AlterFn[bool | None] | EllipsisType = ...,
-        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
-        custom_title: AlterFn[str | None] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
+        can_be_edited: Alter1[bool] | EllipsisType = ...,
+        is_anonymous: Alter1[bool] | EllipsisType = ...,
+        can_manage_chat: Alter1[bool] | EllipsisType = ...,
+        can_delete_messages: Alter1[bool] | EllipsisType = ...,
+        can_manage_video_chats: Alter1[bool] | EllipsisType = ...,
+        can_restrict_members: Alter1[bool] | EllipsisType = ...,
+        can_promote_members: Alter1[bool] | EllipsisType = ...,
+        can_change_info: Alter1[bool] | EllipsisType = ...,
+        can_invite_users: Alter1[bool] | EllipsisType = ...,
+        can_post_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_edit_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_pin_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_post_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_edit_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_delete_stories: Alter1[bool | None] | EllipsisType = ...,
+        can_manage_topics: Alter1[bool | None] | EllipsisType = ...,
+        custom_title: Alter1[str | None] | EllipsisType = ...,
     ) -> ChatMemberAdministrator:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberAdministrator(
@@ -4767,8 +4768,8 @@ class ChatMemberMember:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
     ) -> ChatMemberMember:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberMember(
@@ -4836,24 +4837,24 @@ class ChatMemberRestricted:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
-        is_member: AlterFn[bool] | EllipsisType = ...,
-        can_send_messages: AlterFn[bool] | EllipsisType = ...,
-        can_send_audios: AlterFn[bool] | EllipsisType = ...,
-        can_send_documents: AlterFn[bool] | EllipsisType = ...,
-        can_send_photos: AlterFn[bool] | EllipsisType = ...,
-        can_send_videos: AlterFn[bool] | EllipsisType = ...,
-        can_send_video_notes: AlterFn[bool] | EllipsisType = ...,
-        can_send_voice_notes: AlterFn[bool] | EllipsisType = ...,
-        can_send_polls: AlterFn[bool] | EllipsisType = ...,
-        can_send_other_messages: AlterFn[bool] | EllipsisType = ...,
-        can_add_web_page_previews: AlterFn[bool] | EllipsisType = ...,
-        can_change_info: AlterFn[bool] | EllipsisType = ...,
-        can_invite_users: AlterFn[bool] | EllipsisType = ...,
-        can_pin_messages: AlterFn[bool] | EllipsisType = ...,
-        can_manage_topics: AlterFn[bool] | EllipsisType = ...,
-        until_date: AlterFn[int] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
+        is_member: Alter1[bool] | EllipsisType = ...,
+        can_send_messages: Alter1[bool] | EllipsisType = ...,
+        can_send_audios: Alter1[bool] | EllipsisType = ...,
+        can_send_documents: Alter1[bool] | EllipsisType = ...,
+        can_send_photos: Alter1[bool] | EllipsisType = ...,
+        can_send_videos: Alter1[bool] | EllipsisType = ...,
+        can_send_video_notes: Alter1[bool] | EllipsisType = ...,
+        can_send_voice_notes: Alter1[bool] | EllipsisType = ...,
+        can_send_polls: Alter1[bool] | EllipsisType = ...,
+        can_send_other_messages: Alter1[bool] | EllipsisType = ...,
+        can_add_web_page_previews: Alter1[bool] | EllipsisType = ...,
+        can_change_info: Alter1[bool] | EllipsisType = ...,
+        can_invite_users: Alter1[bool] | EllipsisType = ...,
+        can_pin_messages: Alter1[bool] | EllipsisType = ...,
+        can_manage_topics: Alter1[bool] | EllipsisType = ...,
+        until_date: Alter1[int] | EllipsisType = ...,
     ) -> ChatMemberRestricted:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberRestricted(
@@ -5015,8 +5016,8 @@ class ChatMemberLeft:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
     ) -> ChatMemberLeft:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberLeft(
@@ -5054,9 +5055,9 @@ class ChatMemberBanned:
 
     def alter(
         self,
-        status: AlterFn[str] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
-        until_date: AlterFn[int] | EllipsisType = ...,
+        status: Alter1[str] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
+        until_date: Alter1[int] | EllipsisType = ...,
     ) -> ChatMemberBanned:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberBanned(
@@ -5107,13 +5108,13 @@ class ChatMemberUpdated:
 
     def alter(
         self,
-        chat: AlterFn[Chat] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        date: AlterFn[int] | EllipsisType = ...,
-        old_chat_member: AlterFn[ChatMember] | EllipsisType = ...,
-        new_chat_member: AlterFn[ChatMember] | EllipsisType = ...,
-        invite_link: AlterFn[ChatInviteLink | None] | EllipsisType = ...,
-        via_chat_folder_invite_link: AlterFn[bool | None] | EllipsisType = ...,
+        chat: Alter1[Chat] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        date: Alter1[int] | EllipsisType = ...,
+        old_chat_member: Alter1[ChatMember] | EllipsisType = ...,
+        new_chat_member: Alter1[ChatMember] | EllipsisType = ...,
+        invite_link: Alter1[ChatInviteLink | None] | EllipsisType = ...,
+        via_chat_folder_invite_link: Alter1[bool | None] | EllipsisType = ...,
     ) -> ChatMemberUpdated:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatMemberUpdated(
@@ -5187,12 +5188,12 @@ class ChatJoinRequest:
 
     def alter(
         self,
-        chat: AlterFn[Chat] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        user_chat_id: AlterFn[int] | EllipsisType = ...,
-        date: AlterFn[int] | EllipsisType = ...,
-        bio: AlterFn[str | None] | EllipsisType = ...,
-        invite_link: AlterFn[ChatInviteLink | None] | EllipsisType = ...,
+        chat: Alter1[Chat] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        user_chat_id: Alter1[int] | EllipsisType = ...,
+        date: Alter1[int] | EllipsisType = ...,
+        bio: Alter1[str | None] | EllipsisType = ...,
+        invite_link: Alter1[ChatInviteLink | None] | EllipsisType = ...,
     ) -> ChatJoinRequest:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatJoinRequest(
@@ -5266,20 +5267,20 @@ class ChatPermissions:
 
     def alter(
         self,
-        can_send_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_audios: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_documents: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_photos: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_videos: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_video_notes: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_voice_notes: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_polls: AlterFn[bool | None] | EllipsisType = ...,
-        can_send_other_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_add_web_page_previews: AlterFn[bool | None] | EllipsisType = ...,
-        can_change_info: AlterFn[bool | None] | EllipsisType = ...,
-        can_invite_users: AlterFn[bool | None] | EllipsisType = ...,
-        can_pin_messages: AlterFn[bool | None] | EllipsisType = ...,
-        can_manage_topics: AlterFn[bool | None] | EllipsisType = ...,
+        can_send_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_send_audios: Alter1[bool | None] | EllipsisType = ...,
+        can_send_documents: Alter1[bool | None] | EllipsisType = ...,
+        can_send_photos: Alter1[bool | None] | EllipsisType = ...,
+        can_send_videos: Alter1[bool | None] | EllipsisType = ...,
+        can_send_video_notes: Alter1[bool | None] | EllipsisType = ...,
+        can_send_voice_notes: Alter1[bool | None] | EllipsisType = ...,
+        can_send_polls: Alter1[bool | None] | EllipsisType = ...,
+        can_send_other_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_add_web_page_previews: Alter1[bool | None] | EllipsisType = ...,
+        can_change_info: Alter1[bool | None] | EllipsisType = ...,
+        can_invite_users: Alter1[bool | None] | EllipsisType = ...,
+        can_pin_messages: Alter1[bool | None] | EllipsisType = ...,
+        can_manage_topics: Alter1[bool | None] | EllipsisType = ...,
     ) -> ChatPermissions:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatPermissions(
@@ -5423,8 +5424,8 @@ class ChatLocation:
 
     def alter(
         self,
-        location: AlterFn[Location] | EllipsisType = ...,
-        address: AlterFn[str] | EllipsisType = ...,
+        location: Alter1[Location] | EllipsisType = ...,
+        address: Alter1[str] | EllipsisType = ...,
     ) -> ChatLocation:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChatLocation(
@@ -5466,10 +5467,10 @@ class ForumTopic:
 
     def alter(
         self,
-        message_thread_id: AlterFn[int] | EllipsisType = ...,
-        name: AlterFn[str] | EllipsisType = ...,
-        icon_color: AlterFn[int] | EllipsisType = ...,
-        icon_custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
+        message_thread_id: Alter1[int] | EllipsisType = ...,
+        name: Alter1[str] | EllipsisType = ...,
+        icon_color: Alter1[int] | EllipsisType = ...,
+        icon_custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
     ) -> ForumTopic:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ForumTopic(
@@ -5524,8 +5525,8 @@ class BotCommand:
 
     def alter(
         self,
-        command: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str] | EllipsisType = ...,
+        command: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str] | EllipsisType = ...,
     ) -> BotCommand:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommand(
@@ -5561,7 +5562,7 @@ class BotCommandScopeDefault:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> BotCommandScopeDefault:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeDefault(
@@ -5588,7 +5589,7 @@ class BotCommandScopeAllPrivateChats:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllPrivateChats:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllPrivateChats(
@@ -5617,7 +5618,7 @@ class BotCommandScopeAllGroupChats:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllGroupChats:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllGroupChats(
@@ -5644,7 +5645,7 @@ class BotCommandScopeAllChatAdministrators:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> BotCommandScopeAllChatAdministrators:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeAllChatAdministrators(
@@ -5675,8 +5676,8 @@ class BotCommandScopeChat:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        chat_id: AlterFn[int | str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        chat_id: Alter1[int | str] | EllipsisType = ...,
     ) -> BotCommandScopeChat:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChat(
@@ -5712,8 +5713,8 @@ class BotCommandScopeChatAdministrators:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        chat_id: AlterFn[int | str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        chat_id: Alter1[int | str] | EllipsisType = ...,
     ) -> BotCommandScopeChatAdministrators:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChatAdministrators(
@@ -5751,9 +5752,9 @@ class BotCommandScopeChatMember:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        chat_id: AlterFn[int | str] | EllipsisType = ...,
-        user_id: AlterFn[int] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        chat_id: Alter1[int | str] | EllipsisType = ...,
+        user_id: Alter1[int] | EllipsisType = ...,
     ) -> BotCommandScopeChatMember:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotCommandScopeChatMember(
@@ -5792,7 +5793,7 @@ class BotName:
 
     def alter(
         self,
-        name: AlterFn[str] | EllipsisType = ...,
+        name: Alter1[str] | EllipsisType = ...,
     ) -> BotName:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotName(
@@ -5819,7 +5820,7 @@ class BotDescription:
 
     def alter(
         self,
-        description: AlterFn[str] | EllipsisType = ...,
+        description: Alter1[str] | EllipsisType = ...,
     ) -> BotDescription:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotDescription(
@@ -5850,7 +5851,7 @@ class BotShortDescription:
 
     def alter(
         self,
-        short_description: AlterFn[str] | EllipsisType = ...,
+        short_description: Alter1[str] | EllipsisType = ...,
     ) -> BotShortDescription:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return BotShortDescription(
@@ -5885,7 +5886,7 @@ class MenuButtonCommands:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> MenuButtonCommands:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonCommands(
@@ -5916,9 +5917,9 @@ class MenuButtonWebApp:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        text: AlterFn[str] | EllipsisType = ...,
-        web_app: AlterFn[WebAppInfo] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        text: Alter1[str] | EllipsisType = ...,
+        web_app: Alter1[WebAppInfo] | EllipsisType = ...,
     ) -> MenuButtonWebApp:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonWebApp(
@@ -5955,7 +5956,7 @@ class MenuButtonDefault:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
     ) -> MenuButtonDefault:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MenuButtonDefault(
@@ -5984,8 +5985,8 @@ class ResponseParameters:
 
     def alter(
         self,
-        migrate_to_chat_id: AlterFn[int | None] | EllipsisType = ...,
-        retry_after: AlterFn[int | None] | EllipsisType = ...,
+        migrate_to_chat_id: Alter1[int | None] | EllipsisType = ...,
+        retry_after: Alter1[int | None] | EllipsisType = ...,
     ) -> ResponseParameters:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ResponseParameters(
@@ -6036,12 +6037,12 @@ class InputMediaPhoto:
 
     def alter(
         self,
-        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
-        media: AlterFn[IOBase | str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
+        type: Alter1[Literal["photo"]] | EllipsisType = ...,
+        media: Alter1[IOBase | str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        has_spoiler: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputMediaPhoto:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaPhoto(
@@ -6118,17 +6119,17 @@ class InputMediaVideo:
 
     def alter(
         self,
-        type: AlterFn[Literal["video"]] | EllipsisType = ...,
-        media: AlterFn[IOBase | str] | EllipsisType = ...,
-        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        width: AlterFn[int | None] | EllipsisType = ...,
-        height: AlterFn[int | None] | EllipsisType = ...,
-        duration: AlterFn[int | None] | EllipsisType = ...,
-        supports_streaming: AlterFn[bool | None] | EllipsisType = ...,
-        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
+        type: Alter1[Literal["video"]] | EllipsisType = ...,
+        media: Alter1[IOBase | str] | EllipsisType = ...,
+        thumbnail: Alter1[IOBase | str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        width: Alter1[int | None] | EllipsisType = ...,
+        height: Alter1[int | None] | EllipsisType = ...,
+        duration: Alter1[int | None] | EllipsisType = ...,
+        supports_streaming: Alter1[bool | None] | EllipsisType = ...,
+        has_spoiler: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputMediaVideo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaVideo(
@@ -6230,16 +6231,16 @@ class InputMediaAnimation:
 
     def alter(
         self,
-        type: AlterFn[Literal["animation"]] | EllipsisType = ...,
-        media: AlterFn[IOBase | str] | EllipsisType = ...,
-        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        width: AlterFn[int | None] | EllipsisType = ...,
-        height: AlterFn[int | None] | EllipsisType = ...,
-        duration: AlterFn[int | None] | EllipsisType = ...,
-        has_spoiler: AlterFn[bool | None] | EllipsisType = ...,
+        type: Alter1[Literal["animation"]] | EllipsisType = ...,
+        media: Alter1[IOBase | str] | EllipsisType = ...,
+        thumbnail: Alter1[IOBase | str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        width: Alter1[int | None] | EllipsisType = ...,
+        height: Alter1[int | None] | EllipsisType = ...,
+        duration: Alter1[int | None] | EllipsisType = ...,
+        has_spoiler: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputMediaAnimation:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaAnimation(
@@ -6330,15 +6331,15 @@ class InputMediaAudio:
 
     def alter(
         self,
-        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
-        media: AlterFn[IOBase | str] | EllipsisType = ...,
-        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        duration: AlterFn[int | None] | EllipsisType = ...,
-        performer: AlterFn[str | None] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
+        type: Alter1[Literal["audio"]] | EllipsisType = ...,
+        media: Alter1[IOBase | str] | EllipsisType = ...,
+        thumbnail: Alter1[IOBase | str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        duration: Alter1[int | None] | EllipsisType = ...,
+        performer: Alter1[str | None] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
     ) -> InputMediaAudio:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaAudio(
@@ -6420,13 +6421,13 @@ class InputMediaDocument:
 
     def alter(
         self,
-        type: AlterFn[Literal["document"]] | EllipsisType = ...,
-        media: AlterFn[IOBase | str] | EllipsisType = ...,
-        thumbnail: AlterFn[IOBase | str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        disable_content_type_detection: AlterFn[bool | None] | EllipsisType = ...,
+        type: Alter1[Literal["document"]] | EllipsisType = ...,
+        media: Alter1[IOBase | str] | EllipsisType = ...,
+        thumbnail: Alter1[IOBase | str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        disable_content_type_detection: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputMediaDocument:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputMediaDocument(
@@ -6538,21 +6539,21 @@ class Sticker:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        width: AlterFn[int] | EllipsisType = ...,
-        height: AlterFn[int] | EllipsisType = ...,
-        is_animated: AlterFn[bool] | EllipsisType = ...,
-        is_video: AlterFn[bool] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
-        emoji: AlterFn[str | None] | EllipsisType = ...,
-        set_name: AlterFn[str | None] | EllipsisType = ...,
-        premium_animation: AlterFn[File | None] | EllipsisType = ...,
-        mask_position: AlterFn[MaskPosition | None] | EllipsisType = ...,
-        custom_emoji_id: AlterFn[str | None] | EllipsisType = ...,
-        needs_repainting: AlterFn[bool | None] | EllipsisType = ...,
-        file_size: AlterFn[int | None] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        width: Alter1[int] | EllipsisType = ...,
+        height: Alter1[int] | EllipsisType = ...,
+        is_animated: Alter1[bool] | EllipsisType = ...,
+        is_video: Alter1[bool] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
+        emoji: Alter1[str | None] | EllipsisType = ...,
+        set_name: Alter1[str | None] | EllipsisType = ...,
+        premium_animation: Alter1[File | None] | EllipsisType = ...,
+        mask_position: Alter1[MaskPosition | None] | EllipsisType = ...,
+        custom_emoji_id: Alter1[str | None] | EllipsisType = ...,
+        needs_repainting: Alter1[bool | None] | EllipsisType = ...,
+        file_size: Alter1[int | None] | EllipsisType = ...,
     ) -> Sticker:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Sticker(
@@ -6671,13 +6672,13 @@ class StickerSet:
 
     def alter(
         self,
-        name: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        sticker_type: AlterFn[str] | EllipsisType = ...,
-        is_animated: AlterFn[bool] | EllipsisType = ...,
-        is_video: AlterFn[bool] | EllipsisType = ...,
-        stickers: AlterFn[list[Sticker]] | EllipsisType = ...,
-        thumbnail: AlterFn[PhotoSize | None] | EllipsisType = ...,
+        name: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        sticker_type: Alter1[str] | EllipsisType = ...,
+        is_animated: Alter1[bool] | EllipsisType = ...,
+        is_video: Alter1[bool] | EllipsisType = ...,
+        stickers: Alter1[list[Sticker]] | EllipsisType = ...,
+        thumbnail: Alter1[PhotoSize | None] | EllipsisType = ...,
     ) -> StickerSet:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return StickerSet(
@@ -6740,10 +6741,10 @@ class MaskPosition:
 
     def alter(
         self,
-        point: AlterFn[str] | EllipsisType = ...,
-        x_shift: AlterFn[float] | EllipsisType = ...,
-        y_shift: AlterFn[float] | EllipsisType = ...,
-        scale: AlterFn[float] | EllipsisType = ...,
+        point: Alter1[str] | EllipsisType = ...,
+        x_shift: Alter1[float] | EllipsisType = ...,
+        y_shift: Alter1[float] | EllipsisType = ...,
+        scale: Alter1[float] | EllipsisType = ...,
     ) -> MaskPosition:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return MaskPosition(
@@ -6792,10 +6793,10 @@ class InputSticker:
 
     def alter(
         self,
-        sticker: AlterFn[IOBase | str] | EllipsisType = ...,
-        emoji_list: AlterFn[list[str]] | EllipsisType = ...,
-        mask_position: AlterFn[MaskPosition | None] | EllipsisType = ...,
-        keywords: AlterFn[list[str] | None] | EllipsisType = ...,
+        sticker: Alter1[IOBase | str] | EllipsisType = ...,
+        emoji_list: Alter1[list[str]] | EllipsisType = ...,
+        mask_position: Alter1[MaskPosition | None] | EllipsisType = ...,
+        keywords: Alter1[list[str] | None] | EllipsisType = ...,
     ) -> InputSticker:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputSticker(
@@ -6853,12 +6854,12 @@ class InlineQuery:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        query: AlterFn[str] | EllipsisType = ...,
-        offset: AlterFn[str] | EllipsisType = ...,
-        chat_type: AlterFn[str | None] | EllipsisType = ...,
-        location: AlterFn[Location | None] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        query: Alter1[str] | EllipsisType = ...,
+        offset: Alter1[str] | EllipsisType = ...,
+        chat_type: Alter1[str | None] | EllipsisType = ...,
+        location: Alter1[Location | None] | EllipsisType = ...,
     ) -> InlineQuery:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQuery(
@@ -6912,9 +6913,9 @@ class InlineQueryResultsButton:
 
     def alter(
         self,
-        text: AlterFn[str] | EllipsisType = ...,
-        web_app: AlterFn[WebAppInfo | None] | EllipsisType = ...,
-        start_parameter: AlterFn[str | None] | EllipsisType = ...,
+        text: Alter1[str] | EllipsisType = ...,
+        web_app: Alter1[WebAppInfo | None] | EllipsisType = ...,
+        start_parameter: Alter1[str | None] | EllipsisType = ...,
     ) -> InlineQueryResultsButton:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultsButton(
@@ -6975,17 +6976,17 @@ class InlineQueryResultArticle:
 
     def alter(
         self,
-        type: AlterFn[Literal["article"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        url: AlterFn[str | None] | EllipsisType = ...,
-        hide_url: AlterFn[bool | None] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
+        type: Alter1[Literal["article"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        url: Alter1[str | None] | EllipsisType = ...,
+        hide_url: Alter1[bool | None] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_width: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_height: Alter1[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultArticle:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultArticle(
@@ -7093,19 +7094,19 @@ class InlineQueryResultPhoto:
 
     def alter(
         self,
-        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        photo_url: AlterFn[str] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str] | EllipsisType = ...,
-        photo_width: AlterFn[int | None] | EllipsisType = ...,
-        photo_height: AlterFn[int | None] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["photo"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        photo_url: Alter1[str] | EllipsisType = ...,
+        thumbnail_url: Alter1[str] | EllipsisType = ...,
+        photo_width: Alter1[int | None] | EllipsisType = ...,
+        photo_height: Alter1[int | None] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultPhoto:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultPhoto(
@@ -7225,20 +7226,20 @@ class InlineQueryResultGif:
 
     def alter(
         self,
-        type: AlterFn[Literal["gif"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        gif_url: AlterFn[str] | EllipsisType = ...,
-        gif_width: AlterFn[int | None] | EllipsisType = ...,
-        gif_height: AlterFn[int | None] | EllipsisType = ...,
-        gif_duration: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str] | EllipsisType = ...,
-        thumbnail_mime_type: AlterFn[str | None] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["gif"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        gif_url: Alter1[str] | EllipsisType = ...,
+        gif_width: Alter1[int | None] | EllipsisType = ...,
+        gif_height: Alter1[int | None] | EllipsisType = ...,
+        gif_duration: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str] | EllipsisType = ...,
+        thumbnail_mime_type: Alter1[str | None] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultGif:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultGif(
@@ -7367,20 +7368,20 @@ class InlineQueryResultMpeg4Gif:
 
     def alter(
         self,
-        type: AlterFn[Literal["mpeg4_gif"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        mpeg4_url: AlterFn[str] | EllipsisType = ...,
-        mpeg4_width: AlterFn[int | None] | EllipsisType = ...,
-        mpeg4_height: AlterFn[int | None] | EllipsisType = ...,
-        mpeg4_duration: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str] | EllipsisType = ...,
-        thumbnail_mime_type: AlterFn[str | None] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["mpeg4_gif"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        mpeg4_url: Alter1[str] | EllipsisType = ...,
+        mpeg4_width: Alter1[int | None] | EllipsisType = ...,
+        mpeg4_height: Alter1[int | None] | EllipsisType = ...,
+        mpeg4_duration: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str] | EllipsisType = ...,
+        thumbnail_mime_type: Alter1[str | None] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultMpeg4Gif:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultMpeg4Gif(
@@ -7513,21 +7514,21 @@ class InlineQueryResultVideo:
 
     def alter(
         self,
-        type: AlterFn[Literal["video"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        video_url: AlterFn[str] | EllipsisType = ...,
-        mime_type: AlterFn[str] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        video_width: AlterFn[int | None] | EllipsisType = ...,
-        video_height: AlterFn[int | None] | EllipsisType = ...,
-        video_duration: AlterFn[int | None] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["video"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        video_url: Alter1[str] | EllipsisType = ...,
+        mime_type: Alter1[str] | EllipsisType = ...,
+        thumbnail_url: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        video_width: Alter1[int | None] | EllipsisType = ...,
+        video_height: Alter1[int | None] | EllipsisType = ...,
+        video_duration: Alter1[int | None] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultVideo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVideo(
@@ -7655,17 +7656,17 @@ class InlineQueryResultAudio:
 
     def alter(
         self,
-        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        audio_url: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        performer: AlterFn[str | None] | EllipsisType = ...,
-        audio_duration: AlterFn[int | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["audio"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        audio_url: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        performer: Alter1[str | None] | EllipsisType = ...,
+        audio_duration: Alter1[int | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultAudio:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultAudio(
@@ -7769,16 +7770,16 @@ class InlineQueryResultVoice:
 
     def alter(
         self,
-        type: AlterFn[Literal["voice"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        voice_url: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        voice_duration: AlterFn[int | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["voice"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        voice_url: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        voice_duration: Alter1[int | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultVoice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVoice(
@@ -7885,20 +7886,20 @@ class InlineQueryResultDocument:
 
     def alter(
         self,
-        type: AlterFn[Literal["document"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        document_url: AlterFn[str] | EllipsisType = ...,
-        mime_type: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
+        type: Alter1[Literal["document"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        document_url: Alter1[str] | EllipsisType = ...,
+        mime_type: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_width: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_height: Alter1[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultDocument:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultDocument(
@@ -8029,20 +8030,20 @@ class InlineQueryResultLocation:
 
     def alter(
         self,
-        type: AlterFn[Literal["location"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        latitude: AlterFn[float] | EllipsisType = ...,
-        longitude: AlterFn[float] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
-        live_period: AlterFn[int | None] | EllipsisType = ...,
-        heading: AlterFn[int | None] | EllipsisType = ...,
-        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
+        type: Alter1[Literal["location"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        latitude: Alter1[float] | EllipsisType = ...,
+        longitude: Alter1[float] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        horizontal_accuracy: Alter1[float | None] | EllipsisType = ...,
+        live_period: Alter1[int | None] | EllipsisType = ...,
+        heading: Alter1[int | None] | EllipsisType = ...,
+        proximity_alert_radius: Alter1[int | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_width: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_height: Alter1[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultLocation:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultLocation(
@@ -8182,21 +8183,21 @@ class InlineQueryResultVenue:
 
     def alter(
         self,
-        type: AlterFn[Literal["venue"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        latitude: AlterFn[float] | EllipsisType = ...,
-        longitude: AlterFn[float] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        address: AlterFn[str] | EllipsisType = ...,
-        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
-        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
-        google_place_id: AlterFn[str | None] | EllipsisType = ...,
-        google_place_type: AlterFn[str | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
+        type: Alter1[Literal["venue"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        latitude: Alter1[float] | EllipsisType = ...,
+        longitude: Alter1[float] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        address: Alter1[str] | EllipsisType = ...,
+        foursquare_id: Alter1[str | None] | EllipsisType = ...,
+        foursquare_type: Alter1[str | None] | EllipsisType = ...,
+        google_place_id: Alter1[str | None] | EllipsisType = ...,
+        google_place_type: Alter1[str | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_width: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_height: Alter1[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultVenue:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultVenue(
@@ -8334,17 +8335,17 @@ class InlineQueryResultContact:
 
     def alter(
         self,
-        type: AlterFn[Literal["contact"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        phone_number: AlterFn[str] | EllipsisType = ...,
-        first_name: AlterFn[str] | EllipsisType = ...,
-        last_name: AlterFn[str | None] | EllipsisType = ...,
-        vcard: AlterFn[str | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
-        thumbnail_url: AlterFn[str | None] | EllipsisType = ...,
-        thumbnail_width: AlterFn[int | None] | EllipsisType = ...,
-        thumbnail_height: AlterFn[int | None] | EllipsisType = ...,
+        type: Alter1[Literal["contact"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        phone_number: Alter1[str] | EllipsisType = ...,
+        first_name: Alter1[str] | EllipsisType = ...,
+        last_name: Alter1[str | None] | EllipsisType = ...,
+        vcard: Alter1[str | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
+        thumbnail_url: Alter1[str | None] | EllipsisType = ...,
+        thumbnail_width: Alter1[int | None] | EllipsisType = ...,
+        thumbnail_height: Alter1[int | None] | EllipsisType = ...,
     ) -> InlineQueryResultContact:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultContact(
@@ -8438,10 +8439,10 @@ class InlineQueryResultGame:
 
     def alter(
         self,
-        type: AlterFn[Literal["game"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        game_short_name: AlterFn[str] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        type: Alter1[Literal["game"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        game_short_name: Alter1[str] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
     ) -> InlineQueryResultGame:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultGame(
@@ -8503,16 +8504,16 @@ class InlineQueryResultCachedPhoto:
 
     def alter(
         self,
-        type: AlterFn[Literal["photo"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        photo_file_id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["photo"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        photo_file_id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedPhoto:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedPhoto(
@@ -8607,15 +8608,15 @@ class InlineQueryResultCachedGif:
 
     def alter(
         self,
-        type: AlterFn[Literal["gif"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        gif_file_id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["gif"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        gif_file_id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedGif:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedGif(
@@ -8703,15 +8704,15 @@ class InlineQueryResultCachedMpeg4Gif:
 
     def alter(
         self,
-        type: AlterFn[Literal["mpeg4_gif"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        mpeg4_file_id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["mpeg4_gif"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        mpeg4_file_id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedMpeg4Gif:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedMpeg4Gif(
@@ -8795,11 +8796,11 @@ class InlineQueryResultCachedSticker:
 
     def alter(
         self,
-        type: AlterFn[Literal["sticker"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        sticker_file_id: AlterFn[str] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["sticker"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        sticker_file_id: Alter1[str] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedSticker:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedSticker(
@@ -8873,16 +8874,16 @@ class InlineQueryResultCachedDocument:
 
     def alter(
         self,
-        type: AlterFn[Literal["document"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        document_file_id: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["document"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        document_file_id: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedDocument:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedDocument(
@@ -8979,16 +8980,16 @@ class InlineQueryResultCachedVideo:
 
     def alter(
         self,
-        type: AlterFn[Literal["video"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        video_file_id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str | None] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["video"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        video_file_id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str | None] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedVideo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedVideo(
@@ -9085,15 +9086,15 @@ class InlineQueryResultCachedVoice:
 
     def alter(
         self,
-        type: AlterFn[Literal["voice"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        voice_file_id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["voice"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        voice_file_id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedVoice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedVoice(
@@ -9183,14 +9184,14 @@ class InlineQueryResultCachedAudio:
 
     def alter(
         self,
-        type: AlterFn[Literal["audio"]] | EllipsisType = ...,
-        id: AlterFn[str] | EllipsisType = ...,
-        audio_file_id: AlterFn[str] | EllipsisType = ...,
-        caption: AlterFn[str | None] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        caption_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        reply_markup: AlterFn[InlineKeyboardMarkup | None] | EllipsisType = ...,
-        input_message_content: AlterFn[InputMessageContent | None] | EllipsisType = ...,
+        type: Alter1[Literal["audio"]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        audio_file_id: Alter1[str] | EllipsisType = ...,
+        caption: Alter1[str | None] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        caption_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        reply_markup: Alter1[InlineKeyboardMarkup | None] | EllipsisType = ...,
+        input_message_content: Alter1[InputMessageContent | None] | EllipsisType = ...,
     ) -> InlineQueryResultCachedAudio:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InlineQueryResultCachedAudio(
@@ -9267,10 +9268,10 @@ class InputTextMessageContent:
 
     def alter(
         self,
-        message_text: AlterFn[str] | EllipsisType = ...,
-        parse_mode: AlterFn[str | None] | EllipsisType = ...,
-        entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        disable_web_page_preview: AlterFn[bool | None] | EllipsisType = ...,
+        message_text: Alter1[str] | EllipsisType = ...,
+        parse_mode: Alter1[str | None] | EllipsisType = ...,
+        entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        disable_web_page_preview: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputTextMessageContent:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputTextMessageContent(
@@ -9331,12 +9332,12 @@ class InputLocationMessageContent:
 
     def alter(
         self,
-        latitude: AlterFn[float] | EllipsisType = ...,
-        longitude: AlterFn[float] | EllipsisType = ...,
-        horizontal_accuracy: AlterFn[float | None] | EllipsisType = ...,
-        live_period: AlterFn[int | None] | EllipsisType = ...,
-        heading: AlterFn[int | None] | EllipsisType = ...,
-        proximity_alert_radius: AlterFn[int | None] | EllipsisType = ...,
+        latitude: Alter1[float] | EllipsisType = ...,
+        longitude: Alter1[float] | EllipsisType = ...,
+        horizontal_accuracy: Alter1[float | None] | EllipsisType = ...,
+        live_period: Alter1[int | None] | EllipsisType = ...,
+        heading: Alter1[int | None] | EllipsisType = ...,
+        proximity_alert_radius: Alter1[int | None] | EllipsisType = ...,
     ) -> InputLocationMessageContent:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputLocationMessageContent(
@@ -9415,14 +9416,14 @@ class InputVenueMessageContent:
 
     def alter(
         self,
-        latitude: AlterFn[float] | EllipsisType = ...,
-        longitude: AlterFn[float] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        address: AlterFn[str] | EllipsisType = ...,
-        foursquare_id: AlterFn[str | None] | EllipsisType = ...,
-        foursquare_type: AlterFn[str | None] | EllipsisType = ...,
-        google_place_id: AlterFn[str | None] | EllipsisType = ...,
-        google_place_type: AlterFn[str | None] | EllipsisType = ...,
+        latitude: Alter1[float] | EllipsisType = ...,
+        longitude: Alter1[float] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        address: Alter1[str] | EllipsisType = ...,
+        foursquare_id: Alter1[str | None] | EllipsisType = ...,
+        foursquare_type: Alter1[str | None] | EllipsisType = ...,
+        google_place_id: Alter1[str | None] | EllipsisType = ...,
+        google_place_type: Alter1[str | None] | EllipsisType = ...,
     ) -> InputVenueMessageContent:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputVenueMessageContent(
@@ -9502,10 +9503,10 @@ class InputContactMessageContent:
 
     def alter(
         self,
-        phone_number: AlterFn[str] | EllipsisType = ...,
-        first_name: AlterFn[str] | EllipsisType = ...,
-        last_name: AlterFn[str | None] | EllipsisType = ...,
-        vcard: AlterFn[str | None] | EllipsisType = ...,
+        phone_number: Alter1[str] | EllipsisType = ...,
+        first_name: Alter1[str] | EllipsisType = ...,
+        last_name: Alter1[str | None] | EllipsisType = ...,
+        vcard: Alter1[str | None] | EllipsisType = ...,
     ) -> InputContactMessageContent:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputContactMessageContent(
@@ -9587,26 +9588,26 @@ class InputInvoiceMessageContent:
 
     def alter(
         self,
-        title: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str] | EllipsisType = ...,
-        payload: AlterFn[str] | EllipsisType = ...,
-        provider_token: AlterFn[str] | EllipsisType = ...,
-        currency: AlterFn[str] | EllipsisType = ...,
-        prices: AlterFn[list[LabeledPrice]] | EllipsisType = ...,
-        max_tip_amount: AlterFn[int | None] | EllipsisType = ...,
-        suggested_tip_amounts: AlterFn[list[int] | None] | EllipsisType = ...,
-        provider_data: AlterFn[str | None] | EllipsisType = ...,
-        photo_url: AlterFn[str | None] | EllipsisType = ...,
-        photo_size: AlterFn[int | None] | EllipsisType = ...,
-        photo_width: AlterFn[int | None] | EllipsisType = ...,
-        photo_height: AlterFn[int | None] | EllipsisType = ...,
-        need_name: AlterFn[bool | None] | EllipsisType = ...,
-        need_phone_number: AlterFn[bool | None] | EllipsisType = ...,
-        need_email: AlterFn[bool | None] | EllipsisType = ...,
-        need_shipping_address: AlterFn[bool | None] | EllipsisType = ...,
-        send_phone_number_to_provider: AlterFn[bool | None] | EllipsisType = ...,
-        send_email_to_provider: AlterFn[bool | None] | EllipsisType = ...,
-        is_flexible: AlterFn[bool | None] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str] | EllipsisType = ...,
+        payload: Alter1[str] | EllipsisType = ...,
+        provider_token: Alter1[str] | EllipsisType = ...,
+        currency: Alter1[str] | EllipsisType = ...,
+        prices: Alter1[list[LabeledPrice]] | EllipsisType = ...,
+        max_tip_amount: Alter1[int | None] | EllipsisType = ...,
+        suggested_tip_amounts: Alter1[list[int] | None] | EllipsisType = ...,
+        provider_data: Alter1[str | None] | EllipsisType = ...,
+        photo_url: Alter1[str | None] | EllipsisType = ...,
+        photo_size: Alter1[int | None] | EllipsisType = ...,
+        photo_width: Alter1[int | None] | EllipsisType = ...,
+        photo_height: Alter1[int | None] | EllipsisType = ...,
+        need_name: Alter1[bool | None] | EllipsisType = ...,
+        need_phone_number: Alter1[bool | None] | EllipsisType = ...,
+        need_email: Alter1[bool | None] | EllipsisType = ...,
+        need_shipping_address: Alter1[bool | None] | EllipsisType = ...,
+        send_phone_number_to_provider: Alter1[bool | None] | EllipsisType = ...,
+        send_email_to_provider: Alter1[bool | None] | EllipsisType = ...,
+        is_flexible: Alter1[bool | None] | EllipsisType = ...,
     ) -> InputInvoiceMessageContent:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return InputInvoiceMessageContent(
@@ -9770,11 +9771,11 @@ class ChosenInlineResult:
 
     def alter(
         self,
-        result_id: AlterFn[str] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        location: AlterFn[Location | None] | EllipsisType = ...,
-        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
-        query: AlterFn[str] | EllipsisType = ...,
+        result_id: Alter1[str] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        location: Alter1[Location | None] | EllipsisType = ...,
+        inline_message_id: Alter1[str | None] | EllipsisType = ...,
+        query: Alter1[str] | EllipsisType = ...,
     ) -> ChosenInlineResult:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ChosenInlineResult(
@@ -9825,7 +9826,7 @@ class SentWebAppMessage:
 
     def alter(
         self,
-        inline_message_id: AlterFn[str | None] | EllipsisType = ...,
+        inline_message_id: Alter1[str | None] | EllipsisType = ...,
     ) -> SentWebAppMessage:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SentWebAppMessage(
@@ -9862,8 +9863,8 @@ class LabeledPrice:
 
     def alter(
         self,
-        label: AlterFn[str] | EllipsisType = ...,
-        amount: AlterFn[int] | EllipsisType = ...,
+        label: Alter1[str] | EllipsisType = ...,
+        amount: Alter1[int] | EllipsisType = ...,
     ) -> LabeledPrice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return LabeledPrice(
@@ -9905,11 +9906,11 @@ class Invoice:
 
     def alter(
         self,
-        title: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str] | EllipsisType = ...,
-        start_parameter: AlterFn[str] | EllipsisType = ...,
-        currency: AlterFn[str] | EllipsisType = ...,
-        total_amount: AlterFn[int] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str] | EllipsisType = ...,
+        start_parameter: Alter1[str] | EllipsisType = ...,
+        currency: Alter1[str] | EllipsisType = ...,
+        total_amount: Alter1[int] | EllipsisType = ...,
     ) -> Invoice:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Invoice(
@@ -9970,12 +9971,12 @@ class ShippingAddress:
 
     def alter(
         self,
-        country_code: AlterFn[str] | EllipsisType = ...,
-        state: AlterFn[str] | EllipsisType = ...,
-        city: AlterFn[str] | EllipsisType = ...,
-        street_line1: AlterFn[str] | EllipsisType = ...,
-        street_line2: AlterFn[str] | EllipsisType = ...,
-        post_code: AlterFn[str] | EllipsisType = ...,
+        country_code: Alter1[str] | EllipsisType = ...,
+        state: Alter1[str] | EllipsisType = ...,
+        city: Alter1[str] | EllipsisType = ...,
+        street_line1: Alter1[str] | EllipsisType = ...,
+        street_line2: Alter1[str] | EllipsisType = ...,
+        post_code: Alter1[str] | EllipsisType = ...,
     ) -> ShippingAddress:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingAddress(
@@ -10033,10 +10034,10 @@ class OrderInfo:
 
     def alter(
         self,
-        name: AlterFn[str | None] | EllipsisType = ...,
-        phone_number: AlterFn[str | None] | EllipsisType = ...,
-        email: AlterFn[str | None] | EllipsisType = ...,
-        shipping_address: AlterFn[ShippingAddress | None] | EllipsisType = ...,
+        name: Alter1[str | None] | EllipsisType = ...,
+        phone_number: Alter1[str | None] | EllipsisType = ...,
+        email: Alter1[str | None] | EllipsisType = ...,
+        shipping_address: Alter1[ShippingAddress | None] | EllipsisType = ...,
     ) -> OrderInfo:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return OrderInfo(
@@ -10084,9 +10085,9 @@ class ShippingOption:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        title: AlterFn[str] | EllipsisType = ...,
-        prices: AlterFn[list[LabeledPrice]] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        prices: Alter1[list[LabeledPrice]] | EllipsisType = ...,
     ) -> ShippingOption:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingOption(
@@ -10135,13 +10136,13 @@ class SuccessfulPayment:
 
     def alter(
         self,
-        currency: AlterFn[str] | EllipsisType = ...,
-        total_amount: AlterFn[int] | EllipsisType = ...,
-        invoice_payload: AlterFn[str] | EllipsisType = ...,
-        shipping_option_id: AlterFn[str | None] | EllipsisType = ...,
-        order_info: AlterFn[OrderInfo | None] | EllipsisType = ...,
-        telegram_payment_charge_id: AlterFn[str] | EllipsisType = ...,
-        provider_payment_charge_id: AlterFn[str] | EllipsisType = ...,
+        currency: Alter1[str] | EllipsisType = ...,
+        total_amount: Alter1[int] | EllipsisType = ...,
+        invoice_payload: Alter1[str] | EllipsisType = ...,
+        shipping_option_id: Alter1[str | None] | EllipsisType = ...,
+        order_info: Alter1[OrderInfo | None] | EllipsisType = ...,
+        telegram_payment_charge_id: Alter1[str] | EllipsisType = ...,
+        provider_payment_charge_id: Alter1[str] | EllipsisType = ...,
     ) -> SuccessfulPayment:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return SuccessfulPayment(
@@ -10224,10 +10225,10 @@ class ShippingQuery:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        invoice_payload: AlterFn[str] | EllipsisType = ...,
-        shipping_address: AlterFn[ShippingAddress] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        invoice_payload: Alter1[str] | EllipsisType = ...,
+        shipping_address: Alter1[ShippingAddress] | EllipsisType = ...,
     ) -> ShippingQuery:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return ShippingQuery(
@@ -10285,13 +10286,13 @@ class PreCheckoutQuery:
 
     def alter(
         self,
-        id: AlterFn[str] | EllipsisType = ...,
-        from_: AlterFn[User] | EllipsisType = ...,
-        currency: AlterFn[str] | EllipsisType = ...,
-        total_amount: AlterFn[int] | EllipsisType = ...,
-        invoice_payload: AlterFn[str] | EllipsisType = ...,
-        shipping_option_id: AlterFn[str | None] | EllipsisType = ...,
-        order_info: AlterFn[OrderInfo | None] | EllipsisType = ...,
+        id: Alter1[str] | EllipsisType = ...,
+        from_: Alter1[User] | EllipsisType = ...,
+        currency: Alter1[str] | EllipsisType = ...,
+        total_amount: Alter1[int] | EllipsisType = ...,
+        invoice_payload: Alter1[str] | EllipsisType = ...,
+        shipping_option_id: Alter1[str | None] | EllipsisType = ...,
+        order_info: Alter1[OrderInfo | None] | EllipsisType = ...,
     ) -> PreCheckoutQuery:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PreCheckoutQuery(
@@ -10356,8 +10357,8 @@ class PassportData:
 
     def alter(
         self,
-        data: AlterFn[list[EncryptedPassportElement]] | EllipsisType = ...,
-        credentials: AlterFn[EncryptedCredentials] | EllipsisType = ...,
+        data: Alter1[list[EncryptedPassportElement]] | EllipsisType = ...,
+        credentials: Alter1[EncryptedCredentials] | EllipsisType = ...,
     ) -> PassportData:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportData(
@@ -10397,10 +10398,10 @@ class PassportFile:
 
     def alter(
         self,
-        file_id: AlterFn[str] | EllipsisType = ...,
-        file_unique_id: AlterFn[str] | EllipsisType = ...,
-        file_size: AlterFn[int] | EllipsisType = ...,
-        file_date: AlterFn[int] | EllipsisType = ...,
+        file_id: Alter1[str] | EllipsisType = ...,
+        file_unique_id: Alter1[str] | EllipsisType = ...,
+        file_size: Alter1[int] | EllipsisType = ...,
+        file_date: Alter1[int] | EllipsisType = ...,
     ) -> PassportFile:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportFile(
@@ -10466,16 +10467,16 @@ class EncryptedPassportElement:
 
     def alter(
         self,
-        type: AlterFn[str] | EllipsisType = ...,
-        data: AlterFn[str | None] | EllipsisType = ...,
-        phone_number: AlterFn[str | None] | EllipsisType = ...,
-        email: AlterFn[str | None] | EllipsisType = ...,
-        files: AlterFn[list[PassportFile] | None] | EllipsisType = ...,
-        front_side: AlterFn[PassportFile | None] | EllipsisType = ...,
-        reverse_side: AlterFn[PassportFile | None] | EllipsisType = ...,
-        selfie: AlterFn[PassportFile | None] | EllipsisType = ...,
-        translation: AlterFn[list[PassportFile] | None] | EllipsisType = ...,
-        hash: AlterFn[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        data: Alter1[str | None] | EllipsisType = ...,
+        phone_number: Alter1[str | None] | EllipsisType = ...,
+        email: Alter1[str | None] | EllipsisType = ...,
+        files: Alter1[list[PassportFile] | None] | EllipsisType = ...,
+        front_side: Alter1[PassportFile | None] | EllipsisType = ...,
+        reverse_side: Alter1[PassportFile | None] | EllipsisType = ...,
+        selfie: Alter1[PassportFile | None] | EllipsisType = ...,
+        translation: Alter1[list[PassportFile] | None] | EllipsisType = ...,
+        hash: Alter1[str] | EllipsisType = ...,
     ) -> EncryptedPassportElement:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return EncryptedPassportElement(
@@ -10545,9 +10546,9 @@ class EncryptedCredentials:
 
     def alter(
         self,
-        data: AlterFn[str] | EllipsisType = ...,
-        hash: AlterFn[str] | EllipsisType = ...,
-        secret: AlterFn[str] | EllipsisType = ...,
+        data: Alter1[str] | EllipsisType = ...,
+        hash: Alter1[str] | EllipsisType = ...,
+        secret: Alter1[str] | EllipsisType = ...,
     ) -> EncryptedCredentials:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return EncryptedCredentials(
@@ -10592,11 +10593,11 @@ class PassportElementErrorDataField:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        field_name: AlterFn[str] | EllipsisType = ...,
-        data_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        field_name: Alter1[str] | EllipsisType = ...,
+        data_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorDataField:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorDataField(
@@ -10651,10 +10652,10 @@ class PassportElementErrorFrontSide:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorFrontSide:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFrontSide(
@@ -10704,10 +10705,10 @@ class PassportElementErrorReverseSide:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorReverseSide:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorReverseSide(
@@ -10757,10 +10758,10 @@ class PassportElementErrorSelfie:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorSelfie:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorSelfie(
@@ -10810,10 +10811,10 @@ class PassportElementErrorFile:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorFile:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFile(
@@ -10863,10 +10864,10 @@ class PassportElementErrorFiles:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hashes: AlterFn[list[str]] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hashes: Alter1[list[str]] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorFiles:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorFiles(
@@ -10916,10 +10917,10 @@ class PassportElementErrorTranslationFile:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFile:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorTranslationFile(
@@ -10969,10 +10970,10 @@ class PassportElementErrorTranslationFiles:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        file_hashes: AlterFn[list[str]] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        file_hashes: Alter1[list[str]] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorTranslationFiles:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorTranslationFiles(
@@ -11022,10 +11023,10 @@ class PassportElementErrorUnspecified:
 
     def alter(
         self,
-        source: AlterFn[str] | EllipsisType = ...,
-        type: AlterFn[str] | EllipsisType = ...,
-        element_hash: AlterFn[str] | EllipsisType = ...,
-        message: AlterFn[str] | EllipsisType = ...,
+        source: Alter1[str] | EllipsisType = ...,
+        type: Alter1[str] | EllipsisType = ...,
+        element_hash: Alter1[str] | EllipsisType = ...,
+        message: Alter1[str] | EllipsisType = ...,
     ) -> PassportElementErrorUnspecified:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return PassportElementErrorUnspecified(
@@ -11079,12 +11080,12 @@ class Game:
 
     def alter(
         self,
-        title: AlterFn[str] | EllipsisType = ...,
-        description: AlterFn[str] | EllipsisType = ...,
-        photo: AlterFn[list[PhotoSize]] | EllipsisType = ...,
-        text: AlterFn[str | None] | EllipsisType = ...,
-        text_entities: AlterFn[list[MessageEntity] | None] | EllipsisType = ...,
-        animation: AlterFn[Animation | None] | EllipsisType = ...,
+        title: Alter1[str] | EllipsisType = ...,
+        description: Alter1[str] | EllipsisType = ...,
+        photo: Alter1[list[PhotoSize]] | EllipsisType = ...,
+        text: Alter1[str | None] | EllipsisType = ...,
+        text_entities: Alter1[list[MessageEntity] | None] | EllipsisType = ...,
+        animation: Alter1[Animation | None] | EllipsisType = ...,
     ) -> Game:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return Game(
@@ -11160,9 +11161,9 @@ class GameHighScore:
 
     def alter(
         self,
-        position: AlterFn[int] | EllipsisType = ...,
-        user: AlterFn[User] | EllipsisType = ...,
-        score: AlterFn[int] | EllipsisType = ...,
+        position: Alter1[int] | EllipsisType = ...,
+        user: Alter1[User] | EllipsisType = ...,
+        score: Alter1[int] | EllipsisType = ...,
     ) -> GameHighScore:
         """Alters every type with the provided callable, if callable returns ... - field left untouched"""
         return GameHighScore(

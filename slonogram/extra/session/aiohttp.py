@@ -3,65 +3,74 @@ from io import IOBase
 from typing import (
     Any,
     AsyncIterator,
-    TypeVar,
+    cast,
     Callable,
 )
 
 from aiohttp import ClientSession
-from adaptix import Retort
 
-from . import BASE_URL
-
-from slonogram.utils import parse_json
+from slonogram.utils.json import parse_json
 from slonogram.exceptions.api import ApiError, ErrorDetails
-from slonogram.session import CanCollectAttachs, Session
+from slonogram.session.gate import ApiGate, MethodCall
 
 
-T = TypeVar("T", bound=CanCollectAttachs)
-
-
-class AiohttpSession(Session):
-    __slots__ = ("token", "session", "retort")
+class AiohttpGate(ApiGate):
+    __slots__ = (
+        "token",
+        "session",
+        "endpoint",
+    )
 
     def __init__(
         self,
-        session: ClientSession,
+        session_factory: Callable[[str], ClientSession],
         token: str,
-        retort: Retort,
+        *,
+        endpoint: str | None = None,
     ) -> None:
         self.token = token
-        self.session = session
-        self.retort = retort
+        super().__init__(endpoint)
 
-    async def _call_method_impl(self, name: str, args: T) -> Any:
-        files: dict[str, IOBase] = {}
-        args.collect_attachs(files)
+        self.session = session_factory(self.endpoint)
 
-        data = self.retort.dump(args)
-        for attach_id, fp in files.items():
-            data[attach_id] = fp
+    async def call_method(
+        self,
+        call: MethodCall,
+    ) -> Any:
+        data = cast(dict[str, str | IOBase], call.args)
+        data.update(call.files)
 
-        async with self.session.post(f"/bot{self.token}/{name}", data=data) as response:
+        async with self.session.post(
+            f"/bot{self.token}/{call.name}",
+            data=data,
+        ) as response:
             result = parse_json(await response.read())
-            if result["ok"]:
+            try:
                 return result["result"]
-            raise ApiError(
-                name,
-                args,
-                ErrorDetails(
-                    result["error_code"],
-                    result["description"],
-                ),
-            )
+            except KeyError as exc:
+                raise ApiError(
+                    call.name,
+                    call.args,
+                    ErrorDetails(
+                        result["error_code"],
+                        result["description"],
+                    ),
+                ) from exc
 
 
 @asynccontextmanager
-async def create_session_factory(
+async def create_api_gate(
     token: str,
-    base_url: str | None = None,
-) -> AsyncIterator[Callable[[Retort], AiohttpSession]]:
-    async with ClientSession(base_url=base_url or BASE_URL) as http_session:
-        yield lambda retort: AiohttpSession(http_session, token, retort)
+    *,
+    endpoint: str | None = None,
+) -> AsyncIterator[AiohttpGate]:
+    gate = AiohttpGate(
+        session_factory=lambda ep: ClientSession(base_url=ep),
+        token=token,
+        endpoint=endpoint,
+    )
+    async with gate.session:
+        yield gate
 
 
-__all__ = ["AiohttpSession", "create_session_factory"]
+__all__ = ["AiohttpGate", "create_api_gate"]

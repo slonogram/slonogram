@@ -4,7 +4,7 @@ from io import IOBase
 from adaptix import Request, CannotProvide
 from adaptix._internal.provider.request_filtering import RequestChecker, DirectMediator
 
-from slonogram.utils import dump_json
+from slonogram.utils.json import dump_json
 
 
 class MatchFirstLayerOfFields(RequestChecker):

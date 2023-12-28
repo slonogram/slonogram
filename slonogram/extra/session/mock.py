@@ -11,3 +11,6 @@ class MockSession(Session):
         args: T,
     ) -> Awaitable[Any]:
         raise NotImplementedError
+
+
+__all__ = ["MockSession"]

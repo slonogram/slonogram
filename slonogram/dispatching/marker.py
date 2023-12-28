@@ -12,11 +12,10 @@ from typing import (
 from ..filtering.base import BareFilter, ExtendedFilter
 from ..filtering.text.command import Command
 
-from ..middleware import SimpleMiddleware, ExcMiddleware
 from ..schemas import Message
 
 from .handler import Handler, RawHandler
-from .context import Context
+from .context import Context, CtxMiddleware, CtxExcMiddleware
 from .layers import Layers
 
 T = TypeVar("T", contravariant=True)
@@ -50,9 +49,9 @@ class GenericMarker(Generic[T, P]):
         self,
         *variants: str,
         filter: BareFilter[Message] | None = None,
-        prepare: SimpleMiddleware[Message] | None = None,
-        before: SimpleMiddleware[Message] | None = None,
-        after: ExcMiddleware[Message] | None = None,
+        prepare: CtxMiddleware[Message, []] | None = None,
+        before: CtxMiddleware[Message, []] | None = None,
+        after: CtxExcMiddleware[Message] | None = None,
     ) -> GenericHandlerDeco[Message, P, T]:
         if not variants:
 
@@ -89,9 +88,9 @@ class GenericMarker(Generic[T, P]):
         self,
         filter: BareFilter[M] | None = None,
         *,
-        prepare: SimpleMiddleware[M] | None = None,
-        before: SimpleMiddleware[M] | None = None,
-        after: ExcMiddleware[M] | None = None,
+        prepare: CtxMiddleware[M, []] | None = None,
+        before: CtxMiddleware[M, []] | None = None,
+        after: CtxExcMiddleware[M] | None = None,
     ) -> GenericHandlerDeco[M, P, T]:
         def _create(raw: GenericRawHandler[M, P, T]) -> Handler[M]:
             return Handler(

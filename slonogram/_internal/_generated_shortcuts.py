@@ -5,22 +5,22 @@
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
 from slonogram.schemas import (
-    InlineKeyboardMarkup,
-    Message,
     ForceReply,
-    InputMediaVideo,
-    InputMediaDocument,
-    ReplyKeyboardRemove,
-    CallbackQuery,
-    MessageEntity,
-    InlineQueryResultsButton,
-    ReplyKeyboardMarkup,
-    InputMediaAudio,
     InputMediaPhoto,
-    InlineQueryResult,
+    ReplyKeyboardRemove,
+    InlineKeyboardMarkup,
     InlineQuery,
+    InlineQueryResult,
+    CallbackQuery,
+    InputMediaDocument,
+    InputMediaVideo,
+    MessageEntity,
+    ReplyKeyboardMarkup,
+    Message,
+    InputMediaAudio,
+    InlineQueryResultsButton,
 )
-from typing import Awaitable, TypeVar
+from typing import TypeVar, Awaitable
 from slonogram.abstract.context import AbstractContext
 from types import EllipsisType
 from io import IOBase

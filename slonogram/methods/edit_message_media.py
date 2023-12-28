@@ -5,7 +5,7 @@
 # Changelog: https://core.telegram.org/bots/api#september-22-2023
 # Release date: September 22, 2023
 from dataclasses import dataclass
-from slonogram.schemas import InlineKeyboardMarkup, InputMedia
+from slonogram.schemas import InputMedia, InlineKeyboardMarkup
 from io import IOBase
 from slonogram._internal.utils import collect_attachs_from
 
