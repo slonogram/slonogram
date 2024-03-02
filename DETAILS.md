@@ -3,15 +3,15 @@
 every handler could be just a function
 
 ```python
-# Explicit `Activation` would be somehow sidestepped later
-async def handle(context: Context[int]) -> Activation:
+@activate
+async def handle(context: Context[int]) -> None:
     return Activation.ACTIVATED
 
 def ctx(value: int) -> Context[int]:
     # for demonstration purposes
     raise NotImplemented
 
-observer = Wrap(handler).never_activate()
+observer = handler.never_activate()
 # Now this function when calling will always return `Activated.STALLED`
 
 await observer(any_context) == Activation.STALLED
@@ -25,14 +25,14 @@ def is_even(v: int) -> bool:
 def last_digit_is_zero(v: int) -> bool:
     return v % 10 == 0
 
-f = Wrap(handle).filtered(lift(is_even))
+f = handle.filtered(lift(is_even))
 # we can lift is_even, so that lift(is_even) type will be
 # (Context[int]) -> bool instead of (int) -> bool
 
 assert (await f(ctx(10)) == Activation.ACTIVATED)
 
 # Also if you like using operators instead of chained methods
-f = Wrap(handle) & lift(is_even)
+f = handle & lift(is_even)
 
 # By the way, `lift` optionally performs extending `is_even` to the `ExtendedFilter` type
 # Which supports combining filters with binary operators
@@ -41,7 +41,7 @@ f = Wrap(handle) & (lift(is_even) & lift(last_digit_is_zero))
 assert (await f(ctx(10)) == Activation.ACTIVATED)
 
 # Or like that
-f = Wrap(handle) & (lift(is_even) & ~lift(last_digit_is_zero))
+f = handle & (lift(is_even) & ~lift(last_digit_is_zero))
 
 # Number must be even and not divisible by 10
 assert (await f(ctx(12)) == Activation.ACTIVATED)
@@ -54,14 +54,14 @@ def throw(e: Exception) -> NextMiddleware[int]:
         raise e
     return _mw
 
-async def catch_and_print(ctx: Context[int], next: Handler[M]) -> Activation:
+async def catch_and_print(ctx: Context[int], next: Handler[int]) -> Activation:
     try:
         return await next(ctx)
     except Exception as exc:
         print(f"Caught exception {exc} at {next}")
         return Activation.STALLED
 
-f = Wrap(handle) << throw(ValueError("I am the error")) << catch_and_print
+f = handle << throw(ValueError("I am the error")) << catch_and_print
 
 assert (await f(ctx(10)) == Activation.STALLED)
 # Also "Caught exception <...> at <...>" would be printed in the terminal
@@ -77,7 +77,7 @@ assert (await f(ctx(10)) == Activation.STALLED)
 2. We can show user a meaningful error, for example, if some filter matched, but at this state we can definitely say that user **wanted** to use that handler, just screwed up something, exception can be thrown from failed filter and catched, like:
 ```python
 (
-    Wrap(handle)
+    handle
     @ (prefix & word('test') & report & word('123'))
     << catch
 )
