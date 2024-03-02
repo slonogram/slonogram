@@ -1,12 +1,14 @@
 from .base import Middlewared, NextMiddleware
 from .follows import Follows
-from .wrap import Wrap
-from .never_activate import NeverActivate
+from .wrap import Wrap, activate
+from .const import Const
 
 
 __all__ = [
     "Middlewared",
     "NextMiddleware",
     "Follows",
-    "Wrap"
+    "Wrap",
+    "Const",
+    "activate",
 ]

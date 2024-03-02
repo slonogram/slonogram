@@ -10,19 +10,28 @@ from ..handling.handler import Handler
 M = TypeVar("M")
 
 class Middlewared(Handler[M]):
-    def __rshift__(self, rhs: 'NextMiddleware[M]') -> 'Middlewared[M]':
+    def __lshift__(self, rhs: 'NextMiddleware[M]') -> 'Middlewared[M]':
         from .follows import Follows
 
         return Follows(self, rhs)
     
     def __and__(self, filter: Filter[M]) -> 'Middlewared[M]':
         return self.filtered(filter)
-    
-    def never_activate(self) -> 'Middlewared[M]':
-        from .never_activate import NeverActivate
 
-        return NeverActivate(self)
+    def __matmul__(self, filter: Filter[M]) -> 'Middlewared[M]':
+        return self.filtered(filter)
     
+    def const(self, value: Activation) -> 'Middlewared[M]':
+        from .const import Const
+
+        return Const(self, value)
+
+    def never_activate(self) -> 'Middlewared[M]':
+        return self.const(Activation.STALLED)
+
+    def always_activate(self) -> 'Middlewared[M]':
+        return self.const(Activation.ACTIVATED)
+
     def filtered(self, filter: Filter[M]) -> 'Middlewared[M]':
         from .filtered import Filtered
 

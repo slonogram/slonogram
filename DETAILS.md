@@ -61,7 +61,7 @@ async def catch_and_print(ctx: Context[int], next: Handler[M]) -> Activation:
         print(f"Caught exception {exc} at {next}")
         return Activation.STALLED
 
-f = Wrap(handle) >> throw(ValueError("I am the error")) >> catch_and_print
+f = Wrap(handle) << throw(ValueError("I am the error")) << catch_and_print
 
 assert (await f(ctx(10)) == Activation.STALLED)
 # Also "Caught exception <...> at <...>" would be printed in the terminal
@@ -78,8 +78,8 @@ assert (await f(ctx(10)) == Activation.STALLED)
 ```python
 (
     Wrap(handle)
-    .filtered(prefix & word('test') & report & word('123'))
-    >> catch
+    @ (prefix & word('test') & report & word('123'))
+    << catch
 )
 ```
 In this example, `catch` will catch exception like `ScrewedUp` and send useful error message
