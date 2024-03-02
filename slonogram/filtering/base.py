@@ -11,6 +11,11 @@ class Filter(Protocol[M]):
 
 
 class ExtendedFilter(Protocol[M]):
+    def __invert__(self) -> ExtendedFilter[M]:
+        from .not_ import Not
+
+        return Not(self)
+
     def __and__(self, rhs: Filter[M]) -> ExtendedFilter[M]:
         from .and_ import And
 
