@@ -47,5 +47,39 @@ f = Wrap(handle) & (lift(is_even) & ~lift(last_digit_is_zero))
 assert (await f(ctx(12)) == Activation.ACTIVATED)
 assert (await f(ctx(10)) == Activation.STALLED)
 
+# Also we can use middlewares like that
+
+def throw(e: Exception) -> NextMiddleware[int]:
+    async def _mw(context: Context[int]) -> Activation:
+        raise e
+    return _mw
+
+async def catch_and_print(ctx: Context[int], next: Handler[M]) -> Activation:
+    try:
+        return await next(ctx)
+    except Exception as exc:
+        print(f"Caught exception {exc} at {next}")
+        return Activation.STALLED
+
+f = Wrap(handle) >> throw(ValueError("I am the error")) >> catch_and_print
+
+assert (await f(ctx(10)) == Activation.STALLED)
+# Also "Caught exception <...> at <...>" would be printed in the terminal
+# middlewares are executed from right to left, so exact order is:
+# 1. catch_and_print
+# 2. throw(ValueError("I am the error"))
+# 3. Wrap(handle)
 ```
 
+# Benefits
+
+1. Relatively easy conception: handler is just a function, all other abstractions and functionalities are just wrapped around (functionality is just a layer around function) the single handler
+2. We can show user a meaningful error, for example, if some filter matched, but at this state we can definitely say that user **wanted** to use that handler, just screwed up something, exception can be thrown from failed filter and catched, like:
+```python
+(
+    Wrap(handle)
+    .filtered(prefix & word('test') & report & word('123'))
+    >> catch
+)
+```
+In this example, `catch` will catch exception like `ScrewedUp` and send useful error message
