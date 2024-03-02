@@ -1,73 +1,66 @@
-from __future__ import annotations
-from ..exceptions.stash import NoItemInStash
+from typing import (
+    TypeVar,
+    Callable,
+    TypeAlias,
+    Generic,
+    Any,
+)
 
-from typing import Type, Any, Self, TypeVar, Callable
+from ..exceptions.stash import CannotProvide
 
 T = TypeVar("T")
+LazyCreate: TypeAlias = Callable[['Stash'], T]
+DepsMap: TypeAlias = dict[type, Any | 'Lazy[Any]']
+
+class _Sentinel:
+    __slots__ = ()
+_SENTINEL = _Sentinel()
+
+class Lazy(Generic[T]):
+    __slots__ = ('create', )
+
+    def __init__(self, create: LazyCreate[T]) -> None:
+        self.create = create
 
 
 class Stash:
-    __slots__ = ("types", "parent")
-
-    parent: Stash | None
-    types: dict[Type[Any], Any]
+    __slots__ = ('parent', 'dependencies')
 
     def __init__(
         self,
-        types: dict[Any, Any] | None = None,
-        *,
-        parent: Self | None = None,
+        parent: 'Stash | None',
+        dependencies: DepsMap | None = None,
     ) -> None:
-        if types is None:
-            self.types = {}
-        else:
-            self.types = types
-
         self.parent = parent
+        if dependencies is None:
+            self.dependencies = {}
+        else:
+            self.dependencies = dependencies
+    
+    def __getitem__(self, tp: type[T]) -> T:
+        value = self.dependencies.get(tp, _SENTINEL)
 
-    def __repr__(self) -> str:
-        return f"Stash({self.types!r}, parent={self.parent!r})"
-
-    @classmethod
-    def single(
-        self,
-        type: Any,
-        value: T,
-        *,
-        parent: Stash | None = None,
-    ) -> Stash:
-        return Stash({type: value}, parent=parent)
-
-    def __getitem__(self, tp: Type[T]) -> T:
-        """Gets item from the stash
-
-        :name tp: type of the value
-        :raises: `slonogram.exceptions.stash.NoItemInStash` if there's no such item in stash
-
-        :returns: `T`
-        """
-        try:
-            return self.types[tp]  # type: ignore
-        except KeyError as e:
+        if value is _SENTINEL:
             parent = self.parent
             if parent is None:
-                raise NoItemInStash(tp) from e
+                raise CannotProvide(tp)
             return parent[tp]
+        
+        if isinstance(value, Lazy):
+            value = value.create(self)
+            self.dependencies[tp] = value
+        return value
+    
+    def __setitem__(self, key: type[T], value: T) -> None:
+        self.dependencies[key] = value
 
-    def __setitem__(self, tp: Type[T], value: T) -> None:
-        self.types[tp] = value
-
-    def alter(self, tp: Type[T], f: Callable[[T], T]) -> None:
-        """Morphs value with type `tp`
-
-        :name tp: type of the value
-        :name f: morphing function
-
-        :raises: `slonogram.exceptions.no_item_in_stash.NoItemInStash` if there's no such item in stash
-
-        :return: `None`
-        """
-        self[tp] = f(self[tp])
+    def with_parent(self, parent: 'Stash') -> 'Stash':
+        return Stash(parent, self.dependencies)
+    
+    def merge(self, rhs: DepsMap | 'Stash') -> 'Stash':
+        if isinstance(rhs, Stash):
+            rhs = rhs.dependencies
+        return Stash(self.parent, {**self.dependencies, **rhs})
 
 
-__all__ = ["Stash"]
+__all__ = ["Stash", "Lazy"]

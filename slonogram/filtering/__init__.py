@@ -1,15 +1,13 @@
-from .base import Predicate, BareFilter
-from .simple import Const
+from .and_ import And
+from .or_ import Or
+from .base import Filter, ExtendedFilter
+from .predicate import Predicate
 
-from .text import (
-    Command,
-    Regex,
-)
 
 __all__ = [
+    "And",
+    "Or",
+    "Filter",
+    "ExtendedFilter",
     "Predicate",
-    "BareFilter",
-    "Const",
-    "Command",
-    "Regex",
 ]

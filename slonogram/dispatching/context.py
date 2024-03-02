@@ -1,29 +1,22 @@
-from __future__ import annotations
-from typing import TypeVar
+from typing import TypeVar, Generic
 
 from .stash import Stash
-
 from ..bot import Bot
-from .._internal.context_shortcuts import ShortcutsMixin
 
 M = TypeVar("M")
 
-
-class Context(ShortcutsMixin[M]):
-    __slots__ = ("stash", "model", "rpc")
+class Context(Generic[M]):
+    __slots__ = ('bot', 'model', 'stash')
 
     def __init__(
         self,
-        stash: Stash,
+        bot: Bot,
         model: M,
-        rpc: Bot,
+        stash: Stash,
     ) -> None:
-        self.stash = stash
         self.model = model
-        self.rpc = rpc
-
-    def with_stash(self, stash: Stash) -> Context[M]:
-        return Context(stash, self.model, self.rpc)
+        self.stash = stash
+        self.bot = bot
 
 
 __all__ = ["Context"]
