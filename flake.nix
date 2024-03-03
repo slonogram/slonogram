@@ -33,7 +33,9 @@
         in
           {
             devShells.default = pkgs.mkShell {
-              buildInputs = base-pkgs;
+              buildInputs = base-pkgs ++ (with pkgs; [
+                ruff
+              ]);
             };
           }
       );
