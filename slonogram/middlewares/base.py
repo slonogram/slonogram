@@ -14,7 +14,7 @@ class Middlewared(Handler[M]):
         from .follows import Follows
 
         return Follows(self, rhs)
-    
+
     def __and__(self, filter: Filter[M]) -> 'Middlewared[M]':
         return self.filtered(filter)
 
@@ -23,6 +23,9 @@ class Middlewared(Handler[M]):
     
     def const(self, value: Activation) -> 'Middlewared[M]':
         from .const import Const
+
+        if isinstance(self, Const):
+            return Const(self.handler, value)
 
         return Const(self, value)
 

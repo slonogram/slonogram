@@ -10,7 +10,7 @@ from ..exceptions.stash import CannotProvide
 
 T = TypeVar("T")
 LazyCreate: TypeAlias = Callable[['Stash'], T]
-DepsMap: TypeAlias = dict[type, Any | 'Lazy[Any]']
+DepsMap: TypeAlias = dict[type, 'Any | Lazy[Any]']
 
 class _Sentinel:
     __slots__ = ()
@@ -28,7 +28,7 @@ class Stash:
 
     def __init__(
         self,
-        parent: 'Stash | None',
+        parent: 'Stash | None' = None,
         dependencies: DepsMap | None = None,
     ) -> None:
         self.parent = parent
@@ -57,7 +57,7 @@ class Stash:
     def with_parent(self, parent: 'Stash') -> 'Stash':
         return Stash(parent, self.dependencies)
     
-    def merge(self, rhs: DepsMap | 'Stash') -> 'Stash':
+    def merge(self, rhs: 'DepsMap | Stash') -> 'Stash':
         if isinstance(rhs, Stash):
             rhs = rhs.dependencies
         return Stash(self.parent, {**self.dependencies, **rhs})

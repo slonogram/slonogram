@@ -33,14 +33,14 @@ def from_iterable(
     ```python
     f = (
         Wrap(f)
-        >> middleware1
-        >> middleware2
-        >> middleware3
+        << middleware1
+        << middleware2
+        << middleware3
     )
     ```
 
     """
-    return reduce(lambda lhs, rhs: lhs >> rhs, it, Wrap(handler))
+    return reduce(lambda lhs, rhs: lhs << rhs, it, Wrap(handler))
 
 
 __all__ = ["Follows", "from_iterable"]
