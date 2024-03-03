@@ -24,13 +24,16 @@
       (system:
         let pkgs = import nixpkgs { inherit system; };
             python = pkgs.python311;
+
+            base-pkgs = [
+              python
+              pkgs.poetry
+              pkgs.just
+            ];
         in
           {
             devShells.default = pkgs.mkShell {
-              buildInputs = [
-                python
-                pkgs.poetry
-              ];
+              buildInputs = base-pkgs;
             };
           }
       );
