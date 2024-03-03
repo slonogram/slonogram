@@ -1,4 +1,4 @@
-from typing import TypeVar, Awaitable, Callable, TypeAlias
+from typing import TypeVar, Awaitable, Callable, TypeAlias, overload
 from functools import wraps
 
 from ..dispatching.context import Context
@@ -22,10 +22,11 @@ class Wrap(Middlewared[M]):
         return self.function(ctx)
 
 
-def activate(compatible: HandlerCompatible[M]) -> Wrap:
+def activate(compatible: HandlerCompatible[M]) -> Wrap[M]:
     @wraps(compatible)
     async def wrapper(ctx: Context[M]) -> Activation:
-        return Activation.ACTIVATED
+        await compatible(ctx)
+        return Activation(wrapper)
 
     return Wrap(wrapper)
 

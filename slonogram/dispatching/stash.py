@@ -49,7 +49,7 @@ class Stash:
         if isinstance(value, Lazy):
             value = value.create(self)
             self.dependencies[tp] = value
-        return value
+        return value  # type: ignore
     
     def __setitem__(self, key: type[T], value: T) -> None:
         self.dependencies[key] = value

@@ -14,7 +14,7 @@ def ctx(value: int) -> Context[int]:
 observer = handler.never_activate()
 # Now this function when calling will always return `Activated.STALLED`
 
-await observer(any_context) == Activation.STALLED
+await observer(any_context) == Activation.stalled()
 
 # What if we want, say, activate only if filter satisfied?
 # filter also is just a predicate function with signature
@@ -45,7 +45,7 @@ f = handle & (lift(is_even) & ~lift(last_digit_is_zero))
 
 # Number must be even and not divisible by 10
 assert (await f(ctx(12)) == Activation.ACTIVATED)
-assert (await f(ctx(10)) == Activation.STALLED)
+assert (await f(ctx(10)) == Activation.stalled())
 
 # Also we can use middlewares like that
 
@@ -59,11 +59,11 @@ async def catch_and_print(ctx: Context[int], next: Handler[int]) -> Activation:
         return await next(ctx)
     except Exception as exc:
         print(f"Caught exception {exc} at {next}")
-        return Activation.STALLED
+        return Activation.stalled()
 
 f = handle << throw(ValueError("I am the error")) << catch_and_print
 
-assert (await f(ctx(10)) == Activation.STALLED)
+assert (await f(ctx(10)) == Activation.stalled())
 # Also "Caught exception <...> at <...>" would be printed in the terminal
 # middlewares are executed from right to left, so exact order is:
 # 1. catch_and_print

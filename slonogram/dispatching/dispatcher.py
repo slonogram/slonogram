@@ -56,7 +56,12 @@ class Dispatcher(Middlewared[M]):
         context: Context[M],
         /,
     ) -> Activation:
-        raise NotImplemented
+        for handler in self.handlers:
+            activation = await handler(context)
+            if activation:
+                return activation
+
+        return Activation.stalled()
 
 
 __all__ = ["Dispatcher"]

@@ -30,10 +30,10 @@ class Middlewared(Handler[M]):
         return Const(self, value)
 
     def never_activate(self) -> 'Middlewared[M]':
-        return self.const(Activation.STALLED)
+        return self.const(Activation.stalled())
 
     def always_activate(self) -> 'Middlewared[M]':
-        return self.const(Activation.ACTIVATED)
+        return self.const(Activation(self))
 
     def filtered(self, filter: Filter[M]) -> 'Middlewared[M]':
         from .filtered import Filtered

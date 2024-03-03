@@ -22,7 +22,7 @@ class Filtered(Middlewared[M]):
     async def __call__(self, ctx: Context[M], /) -> Activation:
         if self.filter(ctx):
             return await self.handler(ctx)
-        return Activation.STALLED
+        return Activation.stalled()
 
 
 __all__ = ["Filtered"]
