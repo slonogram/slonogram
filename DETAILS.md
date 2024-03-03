@@ -9,7 +9,7 @@ async def handle(context: Context[int]) -> None:
 
 def ctx(value: int) -> Context[int]:
     # for demonstration purposes
-    raise NotImplemented
+    raise NotImplementedError
 
 observer = handler.never_activate()
 # Now this function when calling will always return `Activated.STALLED`

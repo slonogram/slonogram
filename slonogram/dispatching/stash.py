@@ -6,7 +6,7 @@ from typing import (
     Any,
 )
 
-from ..exceptions.stash import CannotProvide
+from ..exceptions.stash import CannotProvideError
 
 T = TypeVar("T")
 LazyCreate: TypeAlias = Callable[['Stash'], T]
@@ -43,7 +43,7 @@ class Stash:
         if value is _SENTINEL:
             parent = self.parent
             if parent is None:
-                raise CannotProvide(tp)
+                raise CannotProvideError(tp)
             return parent[tp]
         
         if isinstance(value, Lazy):

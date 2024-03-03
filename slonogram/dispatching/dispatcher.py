@@ -1,15 +1,14 @@
-from typing import Iterable, TypeVar, TypeAlias
+from typing import TypeVar, TypeAlias
 
 from .stash import Stash
 from .context import Context
 from ..middlewares.base import Middlewared
 from ..handling.handler import Handler
 from ..handling.activation import Activation
-from ..omittable import Omit, Omittable, omitted_or
+from ..omittable import Omittable, omitted_or, OMIT
 from ..altering import alter1, Alterer1
 
 M = TypeVar("M")
-_OMIT = Omit()
 
 _Handlers: TypeAlias = tuple[Handler[M], ...]
 
@@ -25,9 +24,9 @@ class Dispatcher(Middlewared[M]):
 
     def __init__(
         self,
-        handlers: Omittable[_Handlers[M]] = _OMIT,
-        stash: Omittable[Stash] = _OMIT,
-        name: Omittable[str | None] = _OMIT,
+        handlers: Omittable[_Handlers[M]] = OMIT,
+        stash: Omittable[Stash] = OMIT,
+        name: Omittable[str | None] = OMIT,
     ) -> None:
         self.stash = omitted_or(stash, Stash())
         self.handlers = omitted_or(handlers, ())
@@ -35,9 +34,9 @@ class Dispatcher(Middlewared[M]):
 
     def alter(
         self,
-        handlers: Omittable[Alterer1[_Handlers[M]]] = _OMIT,
-        stash: Omittable[Alterer1[Stash]] = _OMIT,
-        name: Omittable[Alterer1[str | None]] = _OMIT,
+        handlers: Omittable[Alterer1[_Handlers[M]]] = OMIT,
+        stash: Omittable[Alterer1[Stash]] = OMIT,
+        name: Omittable[Alterer1[str | None]] = OMIT,
     ) -> 'Dispatcher[M]':
         return Dispatcher[M](
             handlers=alter1(handlers, self.handlers),

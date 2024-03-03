@@ -1,6 +1,5 @@
-from enum import IntEnum
 from dataclasses import dataclass
-from typing import Any, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING, Self
 
 if TYPE_CHECKING:
     from ..handling.handler import Handler
@@ -11,7 +10,7 @@ class Activation:
     handler: 'Handler[Any] | None' = None
 
     @classmethod
-    def stalled(cls) -> 'Activation':
+    def stalled(cls) -> Self:
         return cls(None)
 
     def __bool__(self) -> bool:

@@ -1,4 +1,4 @@
-from typing import TypeAlias, TypeVar, TypeGuard
+from typing import TypeAlias, TypeVar
 
 T = TypeVar("T")
 
@@ -10,6 +10,7 @@ class Omit:
         return False
 
 Omittable: TypeAlias = T | Omit
+OMIT = Omit()
 
 def omitted_or(o: Omittable[T], or_: T) -> T:
     if isinstance(o, Omit):
@@ -18,6 +19,7 @@ def omitted_or(o: Omittable[T], or_: T) -> T:
 
 __all__ = [
     "Omit",
+    "OMIT",
     "Omittable",
     "omitted_or",
 ]

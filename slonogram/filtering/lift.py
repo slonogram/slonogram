@@ -5,27 +5,30 @@ from typing import (
     TypeAlias,
     TypeVar,
 )
+from functools import wraps
 
 from .base import Filter, ExtendedFilter
-from .predicate import Predicate
 from ..dispatching.context import Context
+from .predicate import Predicate
 
 M = TypeVar("M")
 Unlifted: TypeAlias = Callable[[M], bool]
 
 @overload
-def lift(f: Callable[[M], bool], extend: Literal[True]) -> ExtendedFilter[M]:
+def lift(f: Unlifted[M], extend: Literal[True]) -> ExtendedFilter[M]:
     ...
 
 @overload
-def lift(f: Callable[[M], bool], extend: Literal[False]) -> Filter[M]:
+def lift(f: Unlifted[M], extend: Literal[False]) -> Filter[M]:
     ...
 
-def lift(f: Callable[[M], bool], extend: bool = True) -> ExtendedFilter[M] | Filter[M]:
-    new_f: Filter[M] = lambda ctx: f(ctx.model)
+def lift(f: Unlifted[M], extend: bool = True) -> ExtendedFilter[M] | Filter[M]:
+    @wraps(f)
+    def lifted(ctx: Context[M]) -> bool:
+        return f(ctx.model)
 
     if extend:
-        return Predicate(new_f)
-    return new_f
+        return Predicate(lifted)
+    return lifted
 
 __all__ = ["lift"]

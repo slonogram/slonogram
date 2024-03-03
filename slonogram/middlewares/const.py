@@ -1,4 +1,4 @@
-from typing import TypeVar, Callable, TypeAlias, Awaitable
+from typing import TypeVar
 
 from ..handling.activation import Activation
 from ..handling.handler import Handler
@@ -12,11 +12,15 @@ class Const(Middlewared[M]):
 
     def __init__(self, handler: Handler[M], activation: Activation) -> None:
         self.handler = handler
-        self.activation = activation
+
+        if activation:
+            self.activation = Activation(handler)
+        else:
+            self.activation = Activation.stalled()
     
     def __repr__(self) -> str:
         return f"Const({self.handler}, activation={self.activation})"
-    
+
     async def __call__(self, ctx: Context[M], /) -> Activation:
         _ = await self.handler(ctx)
         return self.activation

@@ -9,7 +9,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 anyio = "^4.3.0"
+aiohttp = { version = "^3.9.3", optional = true }
 
+[tool.poetry.extras]
+aiohttp = ["aiohttp"]
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core"]

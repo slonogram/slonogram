@@ -42,7 +42,7 @@ class Middlewared(Handler[M]):
 
     @abstractmethod
     def __repr__(self) -> str:
-        raise NotImplemented
+        raise NotImplementedError
 
 class NextMiddleware(Protocol[M]):
     def __call__(self, ctx: Context[M], next: Handler[M], /) -> Awaitable[Activation]:

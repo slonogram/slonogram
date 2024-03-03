@@ -33,11 +33,11 @@ class ExtendedFilter(Protocol[M]):
 
     @abstractmethod
     def __repr__(self) -> str:
-        raise NotImplemented
+        raise NotImplementedError
 
     @abstractmethod
     def __call__(self, ctx: Context[M], /) -> bool:
-        raise NotImplemented
+        raise NotImplementedError
 
 
 __all__ = ["Filter", "ExtendedFilter"]
