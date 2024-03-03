@@ -51,12 +51,50 @@ class Stash:
             self.dependencies[tp] = value
         return value  # type: ignore
     
+    def shallow_copy(self) -> 'Stash':
+        return Stash(self.parent, self.dependencies)
+    
+    def flatten_in_place(self) -> None:
+        parent = self.parent
+        while parent is not None:
+            self.dependencies.update(parent.dependencies)
+            parent = parent.parent
+
+    def flatten(self) -> 'Stash':
+        copy = Stash(self.parent, self.dependencies.copy())
+        copy.flatten_in_place()
+
+        return copy
+    
+    def __repr__(self) -> str:
+        return f"Stash(parent={self.parent!r}, n_deps={self.dependencies})"
+    
+    def clear(self) -> None:
+        self.dependencies.clear()
+    
     def __setitem__(self, key: type[T], value: T) -> None:
         self.dependencies[key] = value
 
     def with_parent(self, parent: 'Stash') -> 'Stash':
         return Stash(parent, self.dependencies)
     
+    def append(self, stash: 'Stash') -> 'Stash':
+        if self.parent is None:
+            return self.with_parent(stash)
+
+        copy = self.shallow_copy()
+        parent = copy.parent.shallow_copy()  # type: ignore
+
+        while True:
+            if parent.parent is not None:
+                parent.parent = parent.parent.shallow_copy()
+            else:
+                parent.parent = stash
+                break
+
+        return copy
+
+
     def merge(self, rhs: 'DepsMap | Stash') -> 'Stash':
         if isinstance(rhs, Stash):
             rhs = rhs.dependencies

@@ -56,8 +56,20 @@ class Dispatcher(Middlewared[M]):
         context: Context[M],
         /,
     ) -> Activation:
+        new = Context(
+            context.bot,
+            context.model,
+            context.stash.append(self.stash)
+        )
         for handler in self.handlers:
-            activation = await handler(context)
+            old = new.stash
+            new.stash = Stash(old)
+
+            try:
+                activation = await handler(context)
+            finally:
+                new.stash = old
+
             if activation:
                 return activation
 
