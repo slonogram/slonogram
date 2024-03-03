@@ -86,11 +86,11 @@ class Stash:
         parent = copy.parent.shallow_copy()  # type: ignore
 
         while True:
-            if parent.parent is not None:
-                parent.parent = parent.parent.shallow_copy()
-            else:
+            if parent.parent is None:
                 parent.parent = stash
                 break
+            else:
+                parent.parent = parent.parent.shallow_copy()
 
         return copy
 
