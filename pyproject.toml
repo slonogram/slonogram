@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 anyio = "^4.3.0"
+adaptix = { git = "https://github.com/reagento/adaptix.git", rev = "7ca3366" }
 aiohttp = { version = "^3.9.3", optional = true }
 
 [tool.poetry.extras]

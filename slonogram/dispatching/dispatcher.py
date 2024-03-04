@@ -2,6 +2,9 @@ from typing import TypeVar, TypeAlias
 
 from .stash import Stash
 from .context import Context
+
+from ..abstract.interested import Interested
+from ..types.interests import Interests
 from ..middlewares.base import Middlewared
 from ..handling.handler import Handler
 from ..handling.activation import Activation
@@ -12,7 +15,7 @@ M = TypeVar("M")
 
 _Handlers: TypeAlias = tuple[Handler[M], ...]
 
-class Dispatcher(Middlewared[M]):
+class Dispatcher(Middlewared[M], Interested):
     __slots__ = (
         'name',
         'stash',
@@ -49,6 +52,14 @@ class Dispatcher(Middlewared[M]):
 
     def __repr__(self) -> str:
         return f'Dispatcher(name={self.name!r})'
+    
+    def collect_interests(self) -> Interests:
+        interests = Interests(0)
+        for handler in self.handlers:
+            if isinstance(handler, Interested):
+                interests |= handler.collect_interests()
+
+        return interests
 
     async def __call__(
         self,

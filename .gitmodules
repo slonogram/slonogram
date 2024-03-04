@@ -1,0 +1,3 @@
+[submodule "telegram-bot-api-spec"]
+	path = telegram-bot-api-spec
+	url = https://github.com/PaulSonOfLars/telegram-bot-api-spec

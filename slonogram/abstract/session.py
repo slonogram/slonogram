@@ -17,4 +17,8 @@ class Session(Protocol):
         ...
 
 
-__all__ = ["Session", "Params", "FilesMap"]
+__all__ = [
+    "Session",
+    "Params",
+    "FilesMap",
+]
