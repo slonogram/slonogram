@@ -1,0 +1,12 @@
+data:
+  description:
+  - This object represents a service message about a video chat ended in the chat.
+  fields:
+    duration:
+      description: Video chat duration in seconds
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: video_chat_ended.py

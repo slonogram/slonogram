@@ -1,0 +1,44 @@
+data:
+  description:
+  - This object represents changes in the status of a chat member.
+  fields:
+    chat:
+      description: Chat the user belongs to
+      required: true
+      types:
+      - Chat
+    from:
+      description: Performer of the action, which resulted in the change
+      required: true
+      types:
+      - User
+    date:
+      description: Date the change was done in Unix time
+      required: true
+      types:
+      - Integer
+    old_chat_member:
+      description: Previous information about the chat member
+      required: true
+      types:
+      - ChatMember
+    new_chat_member:
+      description: New information about the chat member
+      required: true
+      types:
+      - ChatMember
+    invite_link:
+      description: Optional. Chat invite link, which was used by the user to join
+        the chat; for joining by invite link events only.
+      required: false
+      types:
+      - ChatInviteLink
+    via_chat_folder_invite_link:
+      description: Optional. True, if the user joined the chat via a chat folder invite
+        link
+      required: false
+      types:
+      - Boolean
+  kind: struct
+dirty: false
+file_name: chat_member_updated.py

@@ -1,0 +1,33 @@
+data:
+  description:
+  - This object contains information about the quoted part of a message that is replied
+    to by the given message.
+  fields:
+    text:
+      description: Text of the quoted part of a message that is replied to by the
+        given message
+      required: true
+      types:
+      - String
+    entities:
+      description: Optional. Special entities that appear in the quote. Currently,
+        only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities
+        are kept in quotes.
+      required: false
+      types:
+      - Array of MessageEntity
+    position:
+      description: Approximate quote position in the original message in UTF-16 code
+        units as specified by the sender
+      required: true
+      types:
+      - Integer
+    is_manual:
+      description: Optional. True, if the quote was chosen manually by the message
+        sender. Otherwise, the quote was added automatically by the server.
+      required: false
+      types:
+      - Boolean
+  kind: struct
+dirty: false
+file_name: text_quote.py

@@ -1,0 +1,84 @@
+data:
+  description:
+  - Describes actions that a non-administrator user is allowed to take in a chat.
+  fields:
+    can_send_messages:
+      description: Optional. True, if the user is allowed to send text messages, contacts,
+        giveaways, giveaway winners, invoices, locations and venues
+      required: false
+      types:
+      - Boolean
+    can_send_audios:
+      description: Optional. True, if the user is allowed to send audios
+      required: false
+      types:
+      - Boolean
+    can_send_documents:
+      description: Optional. True, if the user is allowed to send documents
+      required: false
+      types:
+      - Boolean
+    can_send_photos:
+      description: Optional. True, if the user is allowed to send photos
+      required: false
+      types:
+      - Boolean
+    can_send_videos:
+      description: Optional. True, if the user is allowed to send videos
+      required: false
+      types:
+      - Boolean
+    can_send_video_notes:
+      description: Optional. True, if the user is allowed to send video notes
+      required: false
+      types:
+      - Boolean
+    can_send_voice_notes:
+      description: Optional. True, if the user is allowed to send voice notes
+      required: false
+      types:
+      - Boolean
+    can_send_polls:
+      description: Optional. True, if the user is allowed to send polls
+      required: false
+      types:
+      - Boolean
+    can_send_other_messages:
+      description: Optional. True, if the user is allowed to send animations, games,
+        stickers and use inline bots
+      required: false
+      types:
+      - Boolean
+    can_add_web_page_previews:
+      description: Optional. True, if the user is allowed to add web page previews
+        to their messages
+      required: false
+      types:
+      - Boolean
+    can_change_info:
+      description: Optional. True, if the user is allowed to change the chat title,
+        photo and other settings. Ignored in public supergroups
+      required: false
+      types:
+      - Boolean
+    can_invite_users:
+      description: Optional. True, if the user is allowed to invite new users to the
+        chat
+      required: false
+      types:
+      - Boolean
+    can_pin_messages:
+      description: Optional. True, if the user is allowed to pin messages. Ignored
+        in public supergroups
+      required: false
+      types:
+      - Boolean
+    can_manage_topics:
+      description: Optional. True, if the user is allowed to create forum topics.
+        If omitted defaults to the value of can_pin_messages
+      required: false
+      types:
+      - Boolean
+  kind: struct
+dirty: false
+file_name: chat_permissions.py

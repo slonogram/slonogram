@@ -1,0 +1,58 @@
+data:
+  description:
+  - Describes the current status of a webhook.
+  fields:
+    url:
+      description: Webhook URL, may be empty if webhook is not set up
+      required: true
+      types:
+      - String
+    has_custom_certificate:
+      description: True, if a custom certificate was provided for webhook certificate
+        checks
+      required: true
+      types:
+      - Boolean
+    pending_update_count:
+      description: Number of updates awaiting delivery
+      required: true
+      types:
+      - Integer
+    ip_address:
+      description: Optional. Currently used webhook IP address
+      required: false
+      types:
+      - String
+    last_error_date:
+      description: Optional. Unix time for the most recent error that happened when
+        trying to deliver an update via webhook
+      required: false
+      types:
+      - Integer
+    last_error_message:
+      description: Optional. Error message in human-readable format for the most recent
+        error that happened when trying to deliver an update via webhook
+      required: false
+      types:
+      - String
+    last_synchronization_error_date:
+      description: Optional. Unix time of the most recent error that happened when
+        trying to synchronize available updates with Telegram datacenters
+      required: false
+      types:
+      - Integer
+    max_connections:
+      description: Optional. The maximum allowed number of simultaneous HTTPS connections
+        to the webhook for update delivery
+      required: false
+      types:
+      - Integer
+    allowed_updates:
+      description: Optional. A list of update types the bot is subscribed to. Defaults
+        to all update types except chat_member
+      required: false
+      types:
+      - Array of String
+  kind: struct
+dirty: false
+file_name: webhook_info.py

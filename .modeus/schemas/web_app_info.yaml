@@ -1,0 +1,13 @@
+data:
+  description:
+  - Describes a Web App.
+  fields:
+    url:
+      description: An HTTPS URL of a Web App to be opened with additional data as
+        specified in Initializing Web Apps
+      required: true
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: web_app_info.py

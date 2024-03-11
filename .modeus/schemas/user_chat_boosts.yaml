@@ -1,0 +1,12 @@
+data:
+  description:
+  - This object represents a list of boosts added to a chat by a user.
+  fields:
+    boosts:
+      description: The list of boosts added to the chat by the user
+      required: true
+      types:
+      - Array of ChatBoost
+  kind: struct
+dirty: false
+file_name: user_chat_boosts.py

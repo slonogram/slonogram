@@ -1,0 +1,8 @@
+data:
+  description:
+  - This object represents a service message about General forum topic hidden in the
+    chat. Currently holds no information.
+  fields: {}
+  kind: struct
+dirty: false
+file_name: general_forum_topic_hidden.py

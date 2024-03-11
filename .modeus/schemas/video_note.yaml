@@ -1,0 +1,40 @@
+data:
+  description:
+  - This object represents a video message (available in Telegram apps as of v.4.0).
+  fields:
+    file_id:
+      description: Identifier for this file, which can be used to download or reuse
+        the file
+      required: true
+      types:
+      - String
+    file_unique_id:
+      description: Unique identifier for this file, which is supposed to be the same
+        over time and for different bots. Can't be used to download or reuse the file.
+      required: true
+      types:
+      - String
+    length:
+      description: Video width and height (diameter of the video message) as defined
+        by sender
+      required: true
+      types:
+      - Integer
+    duration:
+      description: Duration of the video in seconds as defined by sender
+      required: true
+      types:
+      - Integer
+    thumbnail:
+      description: Optional. Video thumbnail
+      required: false
+      types:
+      - PhotoSize
+    file_size:
+      description: Optional. File size in bytes
+      required: false
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: video_note.py

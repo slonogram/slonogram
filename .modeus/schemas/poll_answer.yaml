@@ -1,0 +1,30 @@
+data:
+  description:
+  - This object represents an answer of a user in a non-anonymous poll.
+  fields:
+    poll_id:
+      description: Unique poll identifier
+      required: true
+      types:
+      - String
+    voter_chat:
+      description: Optional. The chat that changed the answer to the poll, if the
+        voter is anonymous
+      required: false
+      types:
+      - Chat
+    user:
+      description: Optional. The user that changed the answer to the poll, if the
+        voter isn't anonymous
+      required: false
+      types:
+      - User
+    option_ids:
+      description: 0-based identifiers of chosen answer options. May be empty if the
+        vote was retracted.
+      required: true
+      types:
+      - Array of Integer
+  kind: struct
+dirty: false
+file_name: poll_answer.py

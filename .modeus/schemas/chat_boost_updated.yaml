@@ -1,0 +1,17 @@
+data:
+  description:
+  - This object represents a boost added to a chat or changed.
+  fields:
+    chat:
+      description: Chat which was boosted
+      required: true
+      types:
+      - Chat
+    boost:
+      description: Information about the chat boost
+      required: true
+      types:
+      - ChatBoost
+  kind: struct
+dirty: false
+file_name: chat_boost_updated.py

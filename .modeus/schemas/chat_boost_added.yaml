@@ -1,0 +1,12 @@
+data:
+  description:
+  - This object represents a service message about a user boosting a chat.
+  fields:
+    boost_count:
+      description: Number of boosts added by the user
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: chat_boost_added.py

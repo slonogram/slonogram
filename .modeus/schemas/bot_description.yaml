@@ -1,0 +1,12 @@
+data:
+  description:
+  - This object represents the bot's description.
+  fields:
+    description:
+      description: The bot's description
+      required: true
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: bot_description.py

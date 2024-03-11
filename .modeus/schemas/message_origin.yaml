@@ -1,0 +1,107 @@
+data:
+- description:
+  - The message was originally sent by a known user.
+  fields:
+    type:
+      description: Type of the message origin, always "user"
+      required: true
+      types:
+      - String
+    date:
+      description: Date the message was sent originally in Unix time
+      required: true
+      types:
+      - Integer
+    sender_user:
+      description: User that sent the message originally
+      required: true
+      types:
+      - User
+  kind: struct
+- description:
+  - The message was originally sent by an unknown user.
+  fields:
+    type:
+      description: Type of the message origin, always "hidden_user"
+      required: true
+      types:
+      - String
+    date:
+      description: Date the message was sent originally in Unix time
+      required: true
+      types:
+      - Integer
+    sender_user_name:
+      description: Name of the user that sent the message originally
+      required: true
+      types:
+      - String
+  kind: struct
+- description:
+  - The message was originally sent on behalf of a chat to a group chat.
+  fields:
+    type:
+      description: Type of the message origin, always "chat"
+      required: true
+      types:
+      - String
+    date:
+      description: Date the message was sent originally in Unix time
+      required: true
+      types:
+      - Integer
+    sender_chat:
+      description: Chat that sent the message originally
+      required: true
+      types:
+      - Chat
+    author_signature:
+      description: Optional. For messages originally sent by an anonymous chat administrator,
+        original message author signature
+      required: false
+      types:
+      - String
+  kind: struct
+- description:
+  - The message was originally sent to a channel chat.
+  fields:
+    type:
+      description: Type of the message origin, always "channel"
+      required: true
+      types:
+      - String
+    date:
+      description: Date the message was sent originally in Unix time
+      required: true
+      types:
+      - Integer
+    chat:
+      description: Channel chat to which the message was originally sent
+      required: true
+      types:
+      - Chat
+    message_id:
+      description: Unique message identifier inside the chat
+      required: true
+      types:
+      - Integer
+    author_signature:
+      description: Optional. Signature of the original post author
+      required: false
+      types:
+      - String
+  kind: struct
+- description:
+  - This object describes the origin of a message. It can be one of
+  - '- MessageOriginUser'
+  - '- MessageOriginHiddenUser'
+  - '- MessageOriginChat'
+  - '- MessageOriginChannel'
+  kind: type-alias
+  union:
+  - MessageOriginUser
+  - MessageOriginHiddenUser
+  - MessageOriginChat
+  - MessageOriginChannel
+dirty: false
+file_name: message_origin.py

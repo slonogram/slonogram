@@ -1,0 +1,13 @@
+data:
+  description:
+  - Describes an inline message sent by a Web App on behalf of a user.
+  fields:
+    inline_message_id:
+      description: Optional. Identifier of the sent inline message. Available only
+        if there is an inline keyboard attached to the message.
+      required: false
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: sent_web_app_message.py

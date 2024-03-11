@@ -1,0 +1,8 @@
+data:
+  description:
+  - This object represents the contents of a file to be uploaded. Must be posted using
+    multipart/form-data in the usual way that files are uploaded via the browser.
+  fields: {}
+  kind: struct
+dirty: false
+file_name: input_file.py

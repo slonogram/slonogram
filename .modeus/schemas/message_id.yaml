@@ -1,0 +1,12 @@
+data:
+  description:
+  - This object represents a unique message identifier.
+  fields:
+    message_id:
+      description: Unique message identifier
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: message_id.py

@@ -1,0 +1,17 @@
+data:
+  description:
+  - This object represent a user's profile pictures.
+  fields:
+    total_count:
+      description: Total number of profile pictures the target user has
+      required: true
+      types:
+      - Integer
+    photos:
+      description: Requested profile pictures (in up to 4 sizes each)
+      required: true
+      types:
+      - Array of Array of PhotoSize
+  kind: struct
+dirty: false
+file_name: user_profile_photos.py

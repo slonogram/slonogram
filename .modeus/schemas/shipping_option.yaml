@@ -1,0 +1,22 @@
+data:
+  description:
+  - This object represents one shipping option.
+  fields:
+    id:
+      description: Shipping option identifier
+      required: true
+      types:
+      - String
+    title:
+      description: Option title
+      required: true
+      types:
+      - String
+    prices:
+      description: List of price portions
+      required: true
+      types:
+      - Array of LabeledPrice
+  kind: struct
+dirty: false
+file_name: shipping_option.py

@@ -1,0 +1,22 @@
+data:
+  description:
+  - This object represents one row of the high scores table for a game.
+  fields:
+    position:
+      description: Position in high score table for the game
+      required: true
+      types:
+      - Integer
+    user:
+      description: User
+      required: true
+      types:
+      - User
+    score:
+      description: Score
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: game_high_score.py

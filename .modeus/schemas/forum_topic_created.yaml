@@ -1,0 +1,24 @@
+data:
+  description:
+  - This object represents a service message about a new forum topic created in the
+    chat.
+  fields:
+    name:
+      description: Name of the topic
+      required: true
+      types:
+      - String
+    icon_color:
+      description: Color of the topic icon in RGB format
+      required: true
+      types:
+      - Integer
+    icon_custom_emoji_id:
+      description: Optional. Unique identifier of the custom emoji shown as the topic
+        icon
+      required: false
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: forum_topic_created.py

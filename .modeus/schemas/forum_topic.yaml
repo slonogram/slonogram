@@ -1,0 +1,28 @@
+data:
+  description:
+  - This object represents a forum topic.
+  fields:
+    message_thread_id:
+      description: Unique identifier of the forum topic
+      required: true
+      types:
+      - Integer
+    name:
+      description: Name of the topic
+      required: true
+      types:
+      - String
+    icon_color:
+      description: Color of the topic icon in RGB format
+      required: true
+      types:
+      - Integer
+    icon_custom_emoji_id:
+      description: Optional. Unique identifier of the custom emoji shown as the topic
+        icon
+      required: false
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: forum_topic.py

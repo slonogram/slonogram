@@ -1,0 +1,43 @@
+data:
+  description:
+  - This object represents a venue.
+  fields:
+    location:
+      description: Venue location. Can't be a live location
+      required: true
+      types:
+      - Location
+    title:
+      description: Name of the venue
+      required: true
+      types:
+      - String
+    address:
+      description: Address of the venue
+      required: true
+      types:
+      - String
+    foursquare_id:
+      description: Optional. Foursquare identifier of the venue
+      required: false
+      types:
+      - String
+    foursquare_type:
+      description: Optional. Foursquare type of the venue. (For example, "arts_entertainment/default",
+        "arts_entertainment/aquarium" or "food/icecream".)
+      required: false
+      types:
+      - String
+    google_place_id:
+      description: Optional. Google Places identifier of the venue
+      required: false
+      types:
+      - String
+    google_place_type:
+      description: Optional. Google Places type of the venue. (See supported types.)
+      required: false
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: venue.py

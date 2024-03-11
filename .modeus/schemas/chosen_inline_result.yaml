@@ -1,0 +1,37 @@
+data:
+  description:
+  - Represents a result of an inline query that was chosen by the user and sent to
+    their chat partner.
+  - 'Note: It is necessary to enable inline feedback via @BotFather in order to receive
+    these objects in updates.'
+  fields:
+    result_id:
+      description: The unique identifier for the result that was chosen
+      required: true
+      types:
+      - String
+    from:
+      description: The user that chose the result
+      required: true
+      types:
+      - User
+    location:
+      description: Optional. Sender location, only for bots that require user location
+      required: false
+      types:
+      - Location
+    inline_message_id:
+      description: Optional. Identifier of the sent inline message. Available only
+        if there is an inline keyboard attached to the message. Will be also received
+        in callback queries and can be used to edit the message.
+      required: false
+      types:
+      - String
+    query:
+      description: The query that was used to obtain the result
+      required: true
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: chosen_inline_result.py

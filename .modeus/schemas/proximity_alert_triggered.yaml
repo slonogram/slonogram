@@ -1,0 +1,23 @@
+data:
+  description:
+  - This object represents the content of a service message, sent whenever a user
+    in the chat triggers a proximity alert set by another user.
+  fields:
+    traveler:
+      description: User that triggered the alert
+      required: true
+      types:
+      - User
+    watcher:
+      description: User that set the alert
+      required: true
+      types:
+      - User
+    distance:
+      description: The distance between the users
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: proximity_alert_triggered.py

@@ -1,0 +1,27 @@
+data:
+  description:
+  - This object represents a boost removed from a chat.
+  fields:
+    chat:
+      description: Chat which was boosted
+      required: true
+      types:
+      - Chat
+    boost_id:
+      description: Unique identifier of the boost
+      required: true
+      types:
+      - String
+    remove_date:
+      description: Point in time (Unix timestamp) when the boost was removed
+      required: true
+      types:
+      - Integer
+    source:
+      description: Source of the removed boost
+      required: true
+      types:
+      - ChatBoostSource
+  kind: struct
+dirty: false
+file_name: chat_boost_removed.py

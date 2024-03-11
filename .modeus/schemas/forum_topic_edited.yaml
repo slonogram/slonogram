@@ -1,0 +1,18 @@
+data:
+  description:
+  - This object represents a service message about an edited forum topic.
+  fields:
+    name:
+      description: Optional. New name of the topic, if it was edited
+      required: false
+      types:
+      - String
+    icon_custom_emoji_id:
+      description: Optional. New identifier of the custom emoji shown as the topic
+        icon, if it was edited; an empty string if the icon was removed
+      required: false
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: forum_topic_edited.py

@@ -1,0 +1,8 @@
+data:
+  description:
+  - This object represents a service message about the creation of a scheduled giveaway.
+    Currently holds no information.
+  fields: {}
+  kind: struct
+dirty: false
+file_name: giveaway_created.py

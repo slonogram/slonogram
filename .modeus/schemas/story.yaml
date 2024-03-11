@@ -1,0 +1,17 @@
+data:
+  description:
+  - This object represents a story.
+  fields:
+    chat:
+      description: Chat that posted the story
+      required: true
+      types:
+      - Chat
+    id:
+      description: Unique identifier for the story in the chat
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: story.py

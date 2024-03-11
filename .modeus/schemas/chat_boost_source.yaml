@@ -1,0 +1,71 @@
+data:
+- description:
+  - The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram
+    Premium subscription to another user.
+  fields:
+    source:
+      description: Source of the boost, always "premium"
+      required: true
+      types:
+      - String
+    user:
+      description: User that boosted the chat
+      required: true
+      types:
+      - User
+  kind: struct
+- description:
+  - The boost was obtained by the creation of Telegram Premium gift codes to boost
+    a chat. Each such code boosts the chat 4 times for the duration of the corresponding
+    Telegram Premium subscription.
+  fields:
+    source:
+      description: Source of the boost, always "gift_code"
+      required: true
+      types:
+      - String
+    user:
+      description: User for which the gift code was created
+      required: true
+      types:
+      - User
+  kind: struct
+- description:
+  - The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
+    the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+  fields:
+    source:
+      description: Source of the boost, always "giveaway"
+      required: true
+      types:
+      - String
+    giveaway_message_id:
+      description: Identifier of a message in the chat with the giveaway; the message
+        could have been deleted already. May be 0 if the message isn't sent yet.
+      required: true
+      types:
+      - Integer
+    user:
+      description: Optional. User that won the prize in the giveaway if any
+      required: false
+      types:
+      - User
+    is_unclaimed:
+      description: Optional. True, if the giveaway was completed, but there was no
+        user to win the prize
+      required: false
+      types:
+      - Boolean
+  kind: struct
+- description:
+  - This object describes the source of a chat boost. It can be one of
+  - '- ChatBoostSourcePremium'
+  - '- ChatBoostSourceGiftCode'
+  - '- ChatBoostSourceGiveaway'
+  kind: type-alias
+  union:
+  - ChatBoostSourcePremium
+  - ChatBoostSourceGiftCode
+  - ChatBoostSourceGiveaway
+dirty: false
+file_name: chat_boost_source.py

@@ -1,0 +1,27 @@
+data:
+  description:
+  - This object represents information about an order.
+  fields:
+    name:
+      description: Optional. User name
+      required: false
+      types:
+      - String
+    phone_number:
+      description: Optional. User's phone number
+      required: false
+      types:
+      - String
+    email:
+      description: Optional. User email
+      required: false
+      types:
+      - String
+    shipping_address:
+      description: Optional. User shipping address
+      required: false
+      types:
+      - ShippingAddress
+  kind: struct
+dirty: false
+file_name: order_info.py

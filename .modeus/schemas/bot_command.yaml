@@ -1,0 +1,18 @@
+data:
+  description:
+  - This object represents a bot command.
+  fields:
+    command:
+      description: Text of the command; 1-32 characters. Can contain only lowercase
+        English letters, digits and underscores.
+      required: true
+      types:
+      - String
+    description:
+      description: Description of the command; 1-256 characters.
+      required: true
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: bot_command.py

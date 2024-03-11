@@ -1,0 +1,19 @@
+data:
+  description:
+  - This object represents an animated emoji that displays a random value.
+  fields:
+    emoji:
+      description: Emoji on which the dice throw animation is based
+      required: true
+      types:
+      - String
+    value:
+      description: "Value of the dice, 1-6 for \"\U0001F3B2\", \"\U0001F3AF\" and\
+        \ \"\U0001F3B3\" base emoji, 1-5 for \"\U0001F3C0\" and \"\u26BD\" base emoji,\
+        \ 1-64 for \"\U0001F3B0\" base emoji"
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: dice.py

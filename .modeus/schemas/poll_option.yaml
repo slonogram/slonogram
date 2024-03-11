@@ -1,0 +1,17 @@
+data:
+  description:
+  - This object contains information about one answer option in a poll.
+  fields:
+    text:
+      description: Option text, 1-100 characters
+      required: true
+      types:
+      - String
+    voter_count:
+      description: Number of users that voted for this option
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: poll_option.py

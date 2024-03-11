@@ -1,0 +1,7 @@
+data:
+  description:
+  - A placeholder, currently holds no information. Use BotFather to set up your game.
+  fields: {}
+  kind: struct
+dirty: true
+file_name: callback_game.py

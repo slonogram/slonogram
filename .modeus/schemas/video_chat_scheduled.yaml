@@ -1,0 +1,13 @@
+data:
+  description:
+  - This object represents a service message about a video chat scheduled in the chat.
+  fields:
+    start_date:
+      description: Point in time (Unix timestamp) when the video chat is supposed
+        to be started by a chat administrator
+      required: true
+      types:
+      - Integer
+  kind: struct
+dirty: false
+file_name: video_chat_scheduled.py

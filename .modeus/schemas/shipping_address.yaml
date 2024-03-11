@@ -1,0 +1,37 @@
+data:
+  description:
+  - This object represents a shipping address.
+  fields:
+    country_code:
+      description: Two-letter ISO 3166-1 alpha-2 country code
+      required: true
+      types:
+      - String
+    state:
+      description: State, if applicable
+      required: true
+      types:
+      - String
+    city:
+      description: City
+      required: true
+      types:
+      - String
+    street_line1:
+      description: First line for the address
+      required: true
+      types:
+      - String
+    street_line2:
+      description: Second line for the address
+      required: true
+      types:
+      - String
+    post_code:
+      description: Address post code
+      required: true
+      types:
+      - String
+  kind: struct
+dirty: false
+file_name: shipping_address.py

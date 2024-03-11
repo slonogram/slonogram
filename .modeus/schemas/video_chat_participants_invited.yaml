@@ -1,0 +1,13 @@
+data:
+  description:
+  - This object represents a service message about new members invited to a video
+    chat.
+  fields:
+    users:
+      description: New members that were invited to the video chat
+      required: true
+      types:
+      - Array of User
+  kind: struct
+dirty: false
+file_name: video_chat_participants_invited.py

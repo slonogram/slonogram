@@ -1,0 +1,24 @@
+data:
+  description:
+  - This object represents a service message about the completion of a giveaway without
+    public winners.
+  fields:
+    winner_count:
+      description: Number of winners in the giveaway
+      required: true
+      types:
+      - Integer
+    unclaimed_prize_count:
+      description: Optional. Number of undistributed prizes
+      required: false
+      types:
+      - Integer
+    giveaway_message:
+      description: Optional. Message with the giveaway that was completed, if it wasn't
+        deleted
+      required: false
+      types:
+      - Message
+  kind: struct
+dirty: false
+file_name: giveaway_completed.py

@@ -1,0 +1,34 @@
+data:
+  description:
+  - This object represents an inline button that switches the current user to inline
+    mode in a chosen chat, with an optional default inline query.
+  fields:
+    query:
+      description: Optional. The default inline query to be inserted in the input
+        field. If left empty, only the bot's username will be inserted
+      required: false
+      types:
+      - String
+    allow_user_chats:
+      description: Optional. True, if private chats with users can be chosen
+      required: false
+      types:
+      - Boolean
+    allow_bot_chats:
+      description: Optional. True, if private chats with bots can be chosen
+      required: false
+      types:
+      - Boolean
+    allow_group_chats:
+      description: Optional. True, if group and supergroup chats can be chosen
+      required: false
+      types:
+      - Boolean
+    allow_channel_chats:
+      description: Optional. True, if channel chats can be chosen
+      required: false
+      types:
+      - Boolean
+  kind: struct
+dirty: false
+file_name: switch_inline_query_chosen_chat.py
