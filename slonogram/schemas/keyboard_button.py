@@ -46,7 +46,7 @@ class KeyboardButton:
             Alterer1[_keyboard_button_request_users.KeyboardButtonRequestUsers]
         ] = OMIT,
         web_app: Omittable[Alterer1[_web_app_info.WebAppInfo]] = OMIT,
-    ):
+    ) -> KeyboardButton:
         return KeyboardButton(
             text=alter1(text, self.text),
             request_chat=alter1(request_chat, self.request_chat),

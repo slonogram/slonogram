@@ -22,7 +22,7 @@ class InlineQueryResultsButton:
         text: Omittable[Alterer1[str]] = OMIT,
         start_parameter: Omittable[Alterer1[str]] = OMIT,
         web_app: Omittable[Alterer1[_web_app_info.WebAppInfo]] = OMIT,
-    ):
+    ) -> InlineQueryResultsButton:
         return InlineQueryResultsButton(
             text=alter1(text, self.text),
             start_parameter=alter1(start_parameter, self.start_parameter),

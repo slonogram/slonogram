@@ -18,7 +18,7 @@ class InlineKeyboardMarkup:
         inline_keyboard: Omittable[
             Alterer1[list[list[_inline_keyboard_button.InlineKeyboardButton]]]
         ] = OMIT,
-    ):
+    ) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(
             inline_keyboard=alter1(inline_keyboard, self.inline_keyboard),
         )

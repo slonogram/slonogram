@@ -13,7 +13,9 @@ class BotCommandScopeAllChatAdministrators:
     type: str
     """ Scope type, must be all_chat_administrators """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(
+        self, type: Omittable[Alterer1[str]] = OMIT
+    ) -> BotCommandScopeAllChatAdministrators:
         return BotCommandScopeAllChatAdministrators(
             type=alter1(type, self.type),
         )
@@ -27,7 +29,9 @@ class BotCommandScopeAllGroupChats:
     type: str
     """ Scope type, must be all_group_chats """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(
+        self, type: Omittable[Alterer1[str]] = OMIT
+    ) -> BotCommandScopeAllGroupChats:
         return BotCommandScopeAllGroupChats(
             type=alter1(type, self.type),
         )
@@ -41,7 +45,9 @@ class BotCommandScopeAllPrivateChats:
     type: str
     """ Scope type, must be all_private_chats """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(
+        self, type: Omittable[Alterer1[str]] = OMIT
+    ) -> BotCommandScopeAllPrivateChats:
         return BotCommandScopeAllPrivateChats(
             type=alter1(type, self.type),
         )
@@ -61,7 +67,7 @@ class BotCommandScopeChat:
         self,
         chat_id: Omittable[Alterer1[int | str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> BotCommandScopeChat:
         return BotCommandScopeChat(
             chat_id=alter1(chat_id, self.chat_id),
             type=alter1(type, self.type),
@@ -82,7 +88,7 @@ class BotCommandScopeChatAdministrators:
         self,
         chat_id: Omittable[Alterer1[int | str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> BotCommandScopeChatAdministrators:
         return BotCommandScopeChatAdministrators(
             chat_id=alter1(chat_id, self.chat_id),
             type=alter1(type, self.type),
@@ -106,7 +112,7 @@ class BotCommandScopeChatMember:
         chat_id: Omittable[Alterer1[int | str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
         user_id: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> BotCommandScopeChatMember:
         return BotCommandScopeChatMember(
             chat_id=alter1(chat_id, self.chat_id),
             type=alter1(type, self.type),
@@ -122,7 +128,7 @@ class BotCommandScopeDefault:
     type: str
     """ Scope type, must be default """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(self, type: Omittable[Alterer1[str]] = OMIT) -> BotCommandScopeDefault:
         return BotCommandScopeDefault(
             type=alter1(type, self.type),
         )

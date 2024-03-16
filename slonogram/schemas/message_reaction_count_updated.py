@@ -25,7 +25,7 @@ class MessageReactionCountUpdated:
         date: Omittable[Alterer1[int]] = OMIT,
         message_id: Omittable[Alterer1[int]] = OMIT,
         reactions: Omittable[Alterer1[list[_reaction_count.ReactionCount]]] = OMIT,
-    ):
+    ) -> MessageReactionCountUpdated:
         return MessageReactionCountUpdated(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),

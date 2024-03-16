@@ -19,7 +19,7 @@ class ReactionTypeCustomEmoji:
         self,
         custom_emoji_id: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ReactionTypeCustomEmoji:
         return ReactionTypeCustomEmoji(
             custom_emoji_id=alter1(custom_emoji_id, self.custom_emoji_id),
             type=alter1(type, self.type),
@@ -40,7 +40,7 @@ class ReactionTypeEmoji:
         self,
         emoji: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ReactionTypeEmoji:
         return ReactionTypeEmoji(
             emoji=alter1(emoji, self.emoji),
             type=alter1(type, self.type),

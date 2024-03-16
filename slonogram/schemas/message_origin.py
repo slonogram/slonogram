@@ -29,7 +29,7 @@ class MessageOriginChannel:
         message_id: Omittable[Alterer1[int]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
         author_signature: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> MessageOriginChannel:
         return MessageOriginChannel(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),
@@ -59,7 +59,7 @@ class MessageOriginChat:
         sender_chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
         author_signature: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> MessageOriginChat:
         return MessageOriginChat(
             date=alter1(date, self.date),
             sender_chat=alter1(sender_chat, self.sender_chat),
@@ -85,7 +85,7 @@ class MessageOriginHiddenUser:
         date: Omittable[Alterer1[int]] = OMIT,
         sender_user_name: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> MessageOriginHiddenUser:
         return MessageOriginHiddenUser(
             date=alter1(date, self.date),
             sender_user_name=alter1(sender_user_name, self.sender_user_name),
@@ -110,7 +110,7 @@ class MessageOriginUser:
         date: Omittable[Alterer1[int]] = OMIT,
         sender_user: Omittable[Alterer1[_user.User]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> MessageOriginUser:
         return MessageOriginUser(
             date=alter1(date, self.date),
             sender_user=alter1(sender_user, self.sender_user),

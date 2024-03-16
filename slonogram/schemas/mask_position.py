@@ -24,7 +24,7 @@ class MaskPosition:
         scale: Omittable[Alterer1[float]] = OMIT,
         x_shift: Omittable[Alterer1[float]] = OMIT,
         y_shift: Omittable[Alterer1[float]] = OMIT,
-    ):
+    ) -> MaskPosition:
         return MaskPosition(
             point=alter1(point, self.point),
             scale=alter1(scale, self.scale),

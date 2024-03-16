@@ -27,7 +27,7 @@ class Contact:
         last_name: Omittable[Alterer1[str]] = OMIT,
         user_id: Omittable[Alterer1[int]] = OMIT,
         vcard: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Contact:
         return Contact(
             first_name=alter1(first_name, self.first_name),
             phone_number=alter1(phone_number, self.phone_number),

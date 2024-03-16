@@ -27,7 +27,7 @@ class PhotoSize:
         height: Omittable[Alterer1[int]] = OMIT,
         width: Omittable[Alterer1[int]] = OMIT,
         file_size: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> PhotoSize:
         return PhotoSize(
             file_id=alter1(file_id, self.file_id),
             file_unique_id=alter1(file_unique_id, self.file_unique_id),

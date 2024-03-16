@@ -35,7 +35,7 @@ class Game:
         animation: Omittable[Alterer1[_animation.Animation]] = OMIT,
         text: Omittable[Alterer1[str]] = OMIT,
         text_entities: Omittable[Alterer1[list[_message_entity.MessageEntity]]] = OMIT,
-    ):
+    ) -> Game:
         return Game(
             description=alter1(description, self.description),
             photo=alter1(photo, self.photo),

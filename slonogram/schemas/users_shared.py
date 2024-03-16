@@ -18,7 +18,7 @@ class UsersShared:
         self,
         request_id: Omittable[Alterer1[int]] = OMIT,
         user_ids: Omittable[Alterer1[list[int]]] = OMIT,
-    ):
+    ) -> UsersShared:
         return UsersShared(
             request_id=alter1(request_id, self.request_id),
             user_ids=alter1(user_ids, self.user_ids),

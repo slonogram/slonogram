@@ -20,7 +20,7 @@ class ChatBoostSourceGiftCode:
         self,
         source: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatBoostSourceGiftCode:
         return ChatBoostSourceGiftCode(
             source=alter1(source, self.source),
             user=alter1(user, self.user),
@@ -47,7 +47,7 @@ class ChatBoostSourceGiveaway:
         source: Omittable[Alterer1[str]] = OMIT,
         is_unclaimed: Omittable[Alterer1[bool]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatBoostSourceGiveaway:
         return ChatBoostSourceGiveaway(
             giveaway_message_id=alter1(giveaway_message_id, self.giveaway_message_id),
             source=alter1(source, self.source),
@@ -70,7 +70,7 @@ class ChatBoostSourcePremium:
         self,
         source: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatBoostSourcePremium:
         return ChatBoostSourcePremium(
             source=alter1(source, self.source),
             user=alter1(user, self.user),

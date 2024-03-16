@@ -34,7 +34,7 @@ class PreCheckoutQuery:
         total_amount: Omittable[Alterer1[int]] = OMIT,
         order_info: Omittable[Alterer1[_order_info.OrderInfo]] = OMIT,
         shipping_option_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PreCheckoutQuery:
         return PreCheckoutQuery(
             currency=alter1(currency, self.currency),
             from_=alter1(from_, self.from_),

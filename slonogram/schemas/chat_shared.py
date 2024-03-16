@@ -18,7 +18,7 @@ class ChatShared:
         self,
         chat_id: Omittable[Alterer1[int]] = OMIT,
         request_id: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> ChatShared:
         return ChatShared(
             chat_id=alter1(chat_id, self.chat_id),
             request_id=alter1(request_id, self.request_id),

@@ -24,7 +24,7 @@ class File:
         file_unique_id: Omittable[Alterer1[str]] = OMIT,
         file_path: Omittable[Alterer1[str]] = OMIT,
         file_size: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> File:
         return File(
             file_id=alter1(file_id, self.file_id),
             file_unique_id=alter1(file_unique_id, self.file_unique_id),

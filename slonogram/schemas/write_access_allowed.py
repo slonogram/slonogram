@@ -21,7 +21,7 @@ class WriteAccessAllowed:
         from_attachment_menu: Omittable[Alterer1[bool]] = OMIT,
         from_request: Omittable[Alterer1[bool]] = OMIT,
         web_app_name: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> WriteAccessAllowed:
         return WriteAccessAllowed(
             from_attachment_menu=alter1(
                 from_attachment_menu, self.from_attachment_menu

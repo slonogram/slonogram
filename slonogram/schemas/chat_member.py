@@ -71,7 +71,7 @@ class ChatMemberAdministrator:
         can_pin_messages: Omittable[Alterer1[bool]] = OMIT,
         can_post_messages: Omittable[Alterer1[bool]] = OMIT,
         custom_title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ChatMemberAdministrator:
         return ChatMemberAdministrator(
             can_be_edited=alter1(can_be_edited, self.can_be_edited),
             can_change_info=alter1(can_change_info, self.can_change_info),
@@ -116,7 +116,7 @@ class ChatMemberBanned:
         status: Omittable[Alterer1[str]] = OMIT,
         until_date: Omittable[Alterer1[int]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatMemberBanned:
         return ChatMemberBanned(
             status=alter1(status, self.status),
             until_date=alter1(until_date, self.until_date),
@@ -138,7 +138,7 @@ class ChatMemberLeft:
         self,
         status: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatMemberLeft:
         return ChatMemberLeft(
             status=alter1(status, self.status),
             user=alter1(user, self.user),
@@ -159,7 +159,7 @@ class ChatMemberMember:
         self,
         status: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatMemberMember:
         return ChatMemberMember(
             status=alter1(status, self.status),
             user=alter1(user, self.user),
@@ -186,7 +186,7 @@ class ChatMemberOwner:
         status: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
         custom_title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ChatMemberOwner:
         return ChatMemberOwner(
             is_anonymous=alter1(is_anonymous, self.is_anonymous),
             status=alter1(status, self.status),
@@ -257,7 +257,7 @@ class ChatMemberRestricted:
         status: Omittable[Alterer1[str]] = OMIT,
         until_date: Omittable[Alterer1[int]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ChatMemberRestricted:
         return ChatMemberRestricted(
             can_add_web_page_previews=alter1(
                 can_add_web_page_previews, self.can_add_web_page_previews

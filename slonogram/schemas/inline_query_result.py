@@ -55,7 +55,7 @@ class InlineQueryResultArticle:
         thumbnail_url: Omittable[Alterer1[str]] = OMIT,
         thumbnail_width: Omittable[Alterer1[int]] = OMIT,
         url: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultArticle:
         return InlineQueryResultArticle(
             id=alter1(id, self.id),
             input_message_content=alter1(
@@ -120,7 +120,7 @@ class InlineQueryResultAudio:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultAudio:
         return InlineQueryResultAudio(
             audio_url=alter1(audio_url, self.audio_url),
             id=alter1(id, self.id),
@@ -176,7 +176,7 @@ class InlineQueryResultCachedAudio:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedAudio:
         return InlineQueryResultCachedAudio(
             audio_file_id=alter1(audio_file_id, self.audio_file_id),
             id=alter1(id, self.id),
@@ -235,7 +235,7 @@ class InlineQueryResultCachedDocument:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedDocument:
         return InlineQueryResultCachedDocument(
             document_file_id=alter1(document_file_id, self.document_file_id),
             id=alter1(id, self.id),
@@ -293,7 +293,7 @@ class InlineQueryResultCachedGif:
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedGif:
         return InlineQueryResultCachedGif(
             gif_file_id=alter1(gif_file_id, self.gif_file_id),
             id=alter1(id, self.id),
@@ -350,7 +350,7 @@ class InlineQueryResultCachedMpeg4Gif:
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedMpeg4Gif:
         return InlineQueryResultCachedMpeg4Gif(
             id=alter1(id, self.id),
             mpeg4_file_id=alter1(mpeg4_file_id, self.mpeg4_file_id),
@@ -410,7 +410,7 @@ class InlineQueryResultCachedPhoto:
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedPhoto:
         return InlineQueryResultCachedPhoto(
             id=alter1(id, self.id),
             photo_file_id=alter1(photo_file_id, self.photo_file_id),
@@ -454,7 +454,7 @@ class InlineQueryResultCachedSticker:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedSticker:
         return InlineQueryResultCachedSticker(
             id=alter1(id, self.id),
             sticker_file_id=alter1(sticker_file_id, self.sticker_file_id),
@@ -510,7 +510,7 @@ class InlineQueryResultCachedVideo:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedVideo:
         return InlineQueryResultCachedVideo(
             id=alter1(id, self.id),
             title=alter1(title, self.title),
@@ -568,7 +568,7 @@ class InlineQueryResultCachedVoice:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultCachedVoice:
         return InlineQueryResultCachedVoice(
             id=alter1(id, self.id),
             title=alter1(title, self.title),
@@ -629,7 +629,7 @@ class InlineQueryResultContact:
         thumbnail_url: Omittable[Alterer1[str]] = OMIT,
         thumbnail_width: Omittable[Alterer1[int]] = OMIT,
         vcard: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultContact:
         return InlineQueryResultContact(
             first_name=alter1(first_name, self.first_name),
             id=alter1(id, self.id),
@@ -703,7 +703,7 @@ class InlineQueryResultDocument:
         thumbnail_height: Omittable[Alterer1[int]] = OMIT,
         thumbnail_url: Omittable[Alterer1[str]] = OMIT,
         thumbnail_width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InlineQueryResultDocument:
         return InlineQueryResultDocument(
             document_url=alter1(document_url, self.document_url),
             id=alter1(id, self.id),
@@ -746,7 +746,7 @@ class InlineQueryResultGame:
         reply_markup: Omittable[
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
-    ):
+    ) -> InlineQueryResultGame:
         return InlineQueryResultGame(
             game_short_name=alter1(game_short_name, self.game_short_name),
             id=alter1(id, self.id),
@@ -811,7 +811,7 @@ class InlineQueryResultGif:
         ] = OMIT,
         thumbnail_mime_type: Omittable[Alterer1[str]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultGif:
         return InlineQueryResultGif(
             gif_url=alter1(gif_url, self.gif_url),
             id=alter1(id, self.id),
@@ -886,7 +886,7 @@ class InlineQueryResultLocation:
         thumbnail_height: Omittable[Alterer1[int]] = OMIT,
         thumbnail_url: Omittable[Alterer1[str]] = OMIT,
         thumbnail_width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InlineQueryResultLocation:
         return InlineQueryResultLocation(
             id=alter1(id, self.id),
             latitude=alter1(latitude, self.latitude),
@@ -965,7 +965,7 @@ class InlineQueryResultMpeg4Gif:
         ] = OMIT,
         thumbnail_mime_type: Omittable[Alterer1[str]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultMpeg4Gif:
         return InlineQueryResultMpeg4Gif(
             id=alter1(id, self.id),
             mpeg4_url=alter1(mpeg4_url, self.mpeg4_url),
@@ -1039,7 +1039,7 @@ class InlineQueryResultPhoto:
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InlineQueryResultPhoto:
         return InlineQueryResultPhoto(
             id=alter1(id, self.id),
             photo_url=alter1(photo_url, self.photo_url),
@@ -1116,7 +1116,7 @@ class InlineQueryResultVenue:
         thumbnail_height: Omittable[Alterer1[int]] = OMIT,
         thumbnail_url: Omittable[Alterer1[str]] = OMIT,
         thumbnail_width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InlineQueryResultVenue:
         return InlineQueryResultVenue(
             address=alter1(address, self.address),
             id=alter1(id, self.id),
@@ -1197,7 +1197,7 @@ class InlineQueryResultVideo:
         video_duration: Omittable[Alterer1[int]] = OMIT,
         video_height: Omittable[Alterer1[int]] = OMIT,
         video_width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InlineQueryResultVideo:
         return InlineQueryResultVideo(
             id=alter1(id, self.id),
             mime_type=alter1(mime_type, self.mime_type),
@@ -1263,7 +1263,7 @@ class InlineQueryResultVoice:
             Alterer1[_inline_keyboard_markup.InlineKeyboardMarkup]
         ] = OMIT,
         voice_duration: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InlineQueryResultVoice:
         return InlineQueryResultVoice(
             id=alter1(id, self.id),
             title=alter1(title, self.title),

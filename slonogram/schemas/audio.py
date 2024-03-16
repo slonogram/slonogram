@@ -40,7 +40,7 @@ class Audio:
         performer: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Audio:
         return Audio(
             duration=alter1(duration, self.duration),
             file_id=alter1(file_id, self.file_id),

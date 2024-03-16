@@ -13,7 +13,9 @@ class VideoChatParticipantsInvited:
     users: list[_user.User]
     """ New members that were invited to the video chat """
 
-    def alter(self, users: Omittable[Alterer1[list[_user.User]]] = OMIT):
+    def alter(
+        self, users: Omittable[Alterer1[list[_user.User]]] = OMIT
+    ) -> VideoChatParticipantsInvited:
         return VideoChatParticipantsInvited(
             users=alter1(users, self.users),
         )

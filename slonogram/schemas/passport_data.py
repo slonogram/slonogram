@@ -26,7 +26,7 @@ class PassportData:
         data: Omittable[
             Alterer1[list[_encrypted_passport_element.EncryptedPassportElement]]
         ] = OMIT,
-    ):
+    ) -> PassportData:
         return PassportData(
             credentials=alter1(credentials, self.credentials),
             data=alter1(data, self.data),

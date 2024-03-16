@@ -18,7 +18,7 @@ class WebAppData:
         self,
         button_text: Omittable[Alterer1[str]] = OMIT,
         data: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> WebAppData:
         return WebAppData(
             button_text=alter1(button_text, self.button_text),
             data=alter1(data, self.data),

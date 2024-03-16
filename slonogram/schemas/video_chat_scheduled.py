@@ -12,7 +12,7 @@ class VideoChatScheduled:
     start_date: int
     """ Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator """
 
-    def alter(self, start_date: Omittable[Alterer1[int]] = OMIT):
+    def alter(self, start_date: Omittable[Alterer1[int]] = OMIT) -> VideoChatScheduled:
         return VideoChatScheduled(
             start_date=alter1(start_date, self.start_date),
         )

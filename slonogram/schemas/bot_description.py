@@ -12,7 +12,7 @@ class BotDescription:
     description: str
     """ The bot's description """
 
-    def alter(self, description: Omittable[Alterer1[str]] = OMIT):
+    def alter(self, description: Omittable[Alterer1[str]] = OMIT) -> BotDescription:
         return BotDescription(
             description=alter1(description, self.description),
         )

@@ -31,7 +31,7 @@ class Document:
         file_size: Omittable[Alterer1[int]] = OMIT,
         mime_type: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
-    ):
+    ) -> Document:
         return Document(
             file_id=alter1(file_id, self.file_id),
             file_unique_id=alter1(file_unique_id, self.file_unique_id),

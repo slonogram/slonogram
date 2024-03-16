@@ -12,7 +12,7 @@ class MessageId:
     message_id: int
     """ Unique message identifier """
 
-    def alter(self, message_id: Omittable[Alterer1[int]] = OMIT):
+    def alter(self, message_id: Omittable[Alterer1[int]] = OMIT) -> MessageId:
         return MessageId(
             message_id=alter1(message_id, self.message_id),
         )

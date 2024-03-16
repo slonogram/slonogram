@@ -25,7 +25,7 @@ class TextQuote:
         text: Omittable[Alterer1[str]] = OMIT,
         entities: Omittable[Alterer1[list[_message_entity.MessageEntity]]] = OMIT,
         is_manual: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> TextQuote:
         return TextQuote(
             position=alter1(position, self.position),
             text=alter1(text, self.text),

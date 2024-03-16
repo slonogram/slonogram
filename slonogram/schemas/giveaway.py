@@ -37,7 +37,7 @@ class Giveaway:
         only_new_members: Omittable[Alterer1[bool]] = OMIT,
         premium_subscription_month_count: Omittable[Alterer1[int]] = OMIT,
         prize_description: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Giveaway:
         return Giveaway(
             chats=alter1(chats, self.chats),
             winner_count=alter1(winner_count, self.winner_count),

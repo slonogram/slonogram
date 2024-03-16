@@ -34,7 +34,7 @@ class SuccessfulPayment:
         total_amount: Omittable[Alterer1[int]] = OMIT,
         order_info: Omittable[Alterer1[_order_info.OrderInfo]] = OMIT,
         shipping_option_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> SuccessfulPayment:
         return SuccessfulPayment(
             currency=alter1(currency, self.currency),
             invoice_payload=alter1(invoice_payload, self.invoice_payload),

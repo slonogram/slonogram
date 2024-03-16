@@ -19,7 +19,7 @@ class UserProfilePhotos:
         self,
         photos: Omittable[Alterer1[list[list[_photo_size.PhotoSize]]]] = OMIT,
         total_count: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> UserProfilePhotos:
         return UserProfilePhotos(
             photos=alter1(photos, self.photos),
             total_count=alter1(total_count, self.total_count),

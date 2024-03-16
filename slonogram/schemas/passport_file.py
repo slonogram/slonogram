@@ -24,7 +24,7 @@ class PassportFile:
         file_id: Omittable[Alterer1[str]] = OMIT,
         file_size: Omittable[Alterer1[int]] = OMIT,
         file_unique_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportFile:
         return PassportFile(
             file_date=alter1(file_date, self.file_date),
             file_id=alter1(file_id, self.file_id),

@@ -24,7 +24,7 @@ class KeyboardButtonRequestUsers:
         max_quantity: Omittable[Alterer1[int]] = OMIT,
         user_is_bot: Omittable[Alterer1[bool]] = OMIT,
         user_is_premium: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> KeyboardButtonRequestUsers:
         return KeyboardButtonRequestUsers(
             request_id=alter1(request_id, self.request_id),
             max_quantity=alter1(max_quantity, self.max_quantity),

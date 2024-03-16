@@ -21,7 +21,7 @@ class ForumTopicCreated:
         icon_color: Omittable[Alterer1[int]] = OMIT,
         name: Omittable[Alterer1[str]] = OMIT,
         icon_custom_emoji_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ForumTopicCreated:
         return ForumTopicCreated(
             icon_color=alter1(icon_color, self.icon_color),
             name=alter1(name, self.name),

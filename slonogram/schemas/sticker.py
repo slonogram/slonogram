@@ -62,7 +62,7 @@ class Sticker:
         premium_animation: Omittable[Alterer1[_file.File]] = OMIT,
         set_name: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
-    ):
+    ) -> Sticker:
         return Sticker(
             file_id=alter1(file_id, self.file_id),
             file_unique_id=alter1(file_unique_id, self.file_unique_id),

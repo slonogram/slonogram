@@ -25,7 +25,7 @@ class ShippingQuery:
         id: Omittable[Alterer1[str]] = OMIT,
         invoice_payload: Omittable[Alterer1[str]] = OMIT,
         shipping_address: Omittable[Alterer1[_shipping_address.ShippingAddress]] = OMIT,
-    ):
+    ) -> ShippingQuery:
         return ShippingQuery(
             from_=alter1(from_, self.from_),
             id=alter1(id, self.id),

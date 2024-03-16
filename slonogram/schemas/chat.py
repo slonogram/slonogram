@@ -132,7 +132,7 @@ class Chat:
         title: Omittable[Alterer1[str]] = OMIT,
         unrestrict_boost_count: Omittable[Alterer1[int]] = OMIT,
         username: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Chat:
         return Chat(
             id=alter1(id, self.id),
             type=alter1(type, self.type),

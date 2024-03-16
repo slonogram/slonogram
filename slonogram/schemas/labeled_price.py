@@ -18,7 +18,7 @@ class LabeledPrice:
         self,
         amount: Omittable[Alterer1[int]] = OMIT,
         label: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> LabeledPrice:
         return LabeledPrice(
             amount=alter1(amount, self.amount),
             label=alter1(label, self.label),

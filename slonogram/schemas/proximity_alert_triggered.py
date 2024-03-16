@@ -22,7 +22,7 @@ class ProximityAlertTriggered:
         distance: Omittable[Alterer1[int]] = OMIT,
         traveler: Omittable[Alterer1[_user.User]] = OMIT,
         watcher: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> ProximityAlertTriggered:
         return ProximityAlertTriggered(
             distance=alter1(distance, self.distance),
             traveler=alter1(traveler, self.traveler),

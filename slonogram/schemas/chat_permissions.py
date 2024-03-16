@@ -54,7 +54,7 @@ class ChatPermissions:
         can_send_video_notes: Omittable[Alterer1[bool]] = OMIT,
         can_send_videos: Omittable[Alterer1[bool]] = OMIT,
         can_send_voice_notes: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ChatPermissions:
         return ChatPermissions(
             can_add_web_page_previews=alter1(
                 can_add_web_page_previews, self.can_add_web_page_previews

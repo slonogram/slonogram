@@ -34,7 +34,7 @@ class MessageEntity:
         language: Omittable[Alterer1[str]] = OMIT,
         url: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> MessageEntity:
         return MessageEntity(
             length=alter1(length, self.length),
             offset=alter1(offset, self.offset),

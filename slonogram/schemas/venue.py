@@ -34,7 +34,7 @@ class Venue:
         foursquare_type: Omittable[Alterer1[str]] = OMIT,
         google_place_id: Omittable[Alterer1[str]] = OMIT,
         google_place_type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Venue:
         return Venue(
             address=alter1(address, self.address),
             location=alter1(location, self.location),

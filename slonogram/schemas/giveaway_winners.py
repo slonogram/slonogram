@@ -46,7 +46,7 @@ class GiveawayWinners:
         prize_description: Omittable[Alterer1[str]] = OMIT,
         unclaimed_prize_count: Omittable[Alterer1[int]] = OMIT,
         was_refunded: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> GiveawayWinners:
         return GiveawayWinners(
             chat=alter1(chat, self.chat),
             giveaway_message_id=alter1(giveaway_message_id, self.giveaway_message_id),

@@ -18,7 +18,7 @@ class Dice:
         self,
         emoji: Omittable[Alterer1[str]] = OMIT,
         value: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> Dice:
         return Dice(
             emoji=alter1(emoji, self.emoji),
             value=alter1(value, self.value),

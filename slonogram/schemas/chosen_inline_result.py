@@ -29,7 +29,7 @@ class ChosenInlineResult:
         result_id: Omittable[Alterer1[str]] = OMIT,
         inline_message_id: Omittable[Alterer1[str]] = OMIT,
         location: Omittable[Alterer1[_location.Location]] = OMIT,
-    ):
+    ) -> ChosenInlineResult:
         return ChosenInlineResult(
             from_=alter1(from_, self.from_),
             query=alter1(query, self.query),

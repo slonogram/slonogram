@@ -38,7 +38,7 @@ class MessageReactionUpdated:
         old_reaction: Omittable[Alterer1[list[_reaction_type.ReactionType]]] = OMIT,
         actor_chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> MessageReactionUpdated:
         return MessageReactionUpdated(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),

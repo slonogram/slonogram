@@ -22,7 +22,7 @@ class ShippingOption:
         id: Omittable[Alterer1[str]] = OMIT,
         prices: Omittable[Alterer1[list[_labeled_price.LabeledPrice]]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ShippingOption:
         return ShippingOption(
             id=alter1(id, self.id),
             prices=alter1(prices, self.prices),

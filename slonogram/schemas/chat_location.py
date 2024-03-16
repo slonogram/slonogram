@@ -19,7 +19,7 @@ class ChatLocation:
         self,
         address: Omittable[Alterer1[str]] = OMIT,
         location: Omittable[Alterer1[_location.Location]] = OMIT,
-    ):
+    ) -> ChatLocation:
         return ChatLocation(
             address=alter1(address, self.address),
             location=alter1(location, self.location),

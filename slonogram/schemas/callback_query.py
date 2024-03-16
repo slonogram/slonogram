@@ -39,7 +39,7 @@ class CallbackQuery:
         message: Omittable[
             Alterer1[_maybe_inaccessible_message.MaybeInaccessibleMessage]
         ] = OMIT,
-    ):
+    ) -> CallbackQuery:
         return CallbackQuery(
             chat_instance=alter1(chat_instance, self.chat_instance),
             from_=alter1(from_, self.from_),

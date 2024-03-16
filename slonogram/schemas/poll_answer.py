@@ -25,7 +25,7 @@ class PollAnswer:
         poll_id: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
         voter_chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
-    ):
+    ) -> PollAnswer:
         return PollAnswer(
             option_ids=alter1(option_ids, self.option_ids),
             poll_id=alter1(poll_id, self.poll_id),

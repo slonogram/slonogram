@@ -12,7 +12,9 @@ class MessageAutoDeleteTimerChanged:
     message_auto_delete_time: int
     """ New auto-delete time for messages in the chat; in seconds """
 
-    def alter(self, message_auto_delete_time: Omittable[Alterer1[int]] = OMIT):
+    def alter(
+        self, message_auto_delete_time: Omittable[Alterer1[int]] = OMIT
+    ) -> MessageAutoDeleteTimerChanged:
         return MessageAutoDeleteTimerChanged(
             message_auto_delete_time=alter1(
                 message_auto_delete_time, self.message_auto_delete_time

@@ -27,7 +27,7 @@ class Voice:
         file_unique_id: Omittable[Alterer1[str]] = OMIT,
         file_size: Omittable[Alterer1[int]] = OMIT,
         mime_type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> Voice:
         return Voice(
             duration=alter1(duration, self.duration),
             file_id=alter1(file_id, self.file_id),

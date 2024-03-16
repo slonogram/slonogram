@@ -34,7 +34,7 @@ class StickerSet:
         stickers: Omittable[Alterer1[list[_sticker.Sticker]]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
-    ):
+    ) -> StickerSet:
         return StickerSet(
             is_animated=alter1(is_animated, self.is_animated),
             is_video=alter1(is_video, self.is_video),

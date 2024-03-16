@@ -32,6 +32,7 @@ def create_alterer(
         'alter',
         args,
         f"return {self_name}({applies})",
+        ret_annot=self_name
     )
 
 __all__ = ["create_alterer"]

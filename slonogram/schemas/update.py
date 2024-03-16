@@ -102,7 +102,7 @@ class Update:
             Alterer1[_chat_boost_removed.ChatBoostRemoved]
         ] = OMIT,
         shipping_query: Omittable[Alterer1[_shipping_query.ShippingQuery]] = OMIT,
-    ):
+    ) -> Update:
         return Update(
             update_id=alter1(update_id, self.update_id),
             callback_query=alter1(callback_query, self.callback_query),

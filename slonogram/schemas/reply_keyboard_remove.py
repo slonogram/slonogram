@@ -18,7 +18,7 @@ class ReplyKeyboardRemove:
         self,
         remove_keyboard: Omittable[Alterer1[bool]] = OMIT,
         selective: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ReplyKeyboardRemove:
         return ReplyKeyboardRemove(
             remove_keyboard=alter1(remove_keyboard, self.remove_keyboard),
             selective=alter1(selective, self.selective),

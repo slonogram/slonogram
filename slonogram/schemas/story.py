@@ -19,7 +19,7 @@ class Story:
         self,
         chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         id: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> Story:
         return Story(
             chat=alter1(chat, self.chat),
             id=alter1(id, self.id),

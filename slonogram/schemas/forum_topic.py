@@ -24,7 +24,7 @@ class ForumTopic:
         message_thread_id: Omittable[Alterer1[int]] = OMIT,
         name: Omittable[Alterer1[str]] = OMIT,
         icon_custom_emoji_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ForumTopic:
         return ForumTopic(
             icon_color=alter1(icon_color, self.icon_color),
             message_thread_id=alter1(message_thread_id, self.message_thread_id),

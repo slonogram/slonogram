@@ -28,7 +28,7 @@ class PassportElementErrorDataField:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorDataField:
         return PassportElementErrorDataField(
             data_hash=alter1(data_hash, self.data_hash),
             field_name=alter1(field_name, self.field_name),
@@ -58,7 +58,7 @@ class PassportElementErrorFile:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorFile:
         return PassportElementErrorFile(
             file_hash=alter1(file_hash, self.file_hash),
             message=alter1(message, self.message),
@@ -87,7 +87,7 @@ class PassportElementErrorFiles:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorFiles:
         return PassportElementErrorFiles(
             file_hashes=alter1(file_hashes, self.file_hashes),
             message=alter1(message, self.message),
@@ -116,7 +116,7 @@ class PassportElementErrorFrontSide:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorFrontSide:
         return PassportElementErrorFrontSide(
             file_hash=alter1(file_hash, self.file_hash),
             message=alter1(message, self.message),
@@ -145,7 +145,7 @@ class PassportElementErrorReverseSide:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorReverseSide:
         return PassportElementErrorReverseSide(
             file_hash=alter1(file_hash, self.file_hash),
             message=alter1(message, self.message),
@@ -174,7 +174,7 @@ class PassportElementErrorSelfie:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorSelfie:
         return PassportElementErrorSelfie(
             file_hash=alter1(file_hash, self.file_hash),
             message=alter1(message, self.message),
@@ -203,7 +203,7 @@ class PassportElementErrorTranslationFile:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorTranslationFile:
         return PassportElementErrorTranslationFile(
             file_hash=alter1(file_hash, self.file_hash),
             message=alter1(message, self.message),
@@ -232,7 +232,7 @@ class PassportElementErrorTranslationFiles:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorTranslationFiles:
         return PassportElementErrorTranslationFiles(
             file_hashes=alter1(file_hashes, self.file_hashes),
             message=alter1(message, self.message),
@@ -261,7 +261,7 @@ class PassportElementErrorUnspecified:
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> PassportElementErrorUnspecified:
         return PassportElementErrorUnspecified(
             element_hash=alter1(element_hash, self.element_hash),
             message=alter1(message, self.message),

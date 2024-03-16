@@ -41,7 +41,7 @@ class KeyboardButtonRequestChat:
         user_administrator_rights: Omittable[
             Alterer1[_chat_administrator_rights.ChatAdministratorRights]
         ] = OMIT,
-    ):
+    ) -> KeyboardButtonRequestChat:
         return KeyboardButtonRequestChat(
             chat_is_channel=alter1(chat_is_channel, self.chat_is_channel),
             request_id=alter1(request_id, self.request_id),

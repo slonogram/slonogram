@@ -40,7 +40,7 @@ class Animation:
         file_size: Omittable[Alterer1[int]] = OMIT,
         mime_type: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
-    ):
+    ) -> Animation:
         return Animation(
             duration=alter1(duration, self.duration),
             file_id=alter1(file_id, self.file_id),

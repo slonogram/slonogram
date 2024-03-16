@@ -30,7 +30,7 @@ class ShippingAddress:
         state: Omittable[Alterer1[str]] = OMIT,
         street_line1: Omittable[Alterer1[str]] = OMIT,
         street_line2: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ShippingAddress:
         return ShippingAddress(
             city=alter1(city, self.city),
             country_code=alter1(country_code, self.country_code),

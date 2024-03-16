@@ -21,7 +21,7 @@ class ForceReply:
         force_reply: Omittable[Alterer1[bool]] = OMIT,
         input_field_placeholder: Omittable[Alterer1[str]] = OMIT,
         selective: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ForceReply:
         return ForceReply(
             force_reply=alter1(force_reply, self.force_reply),
             input_field_placeholder=alter1(

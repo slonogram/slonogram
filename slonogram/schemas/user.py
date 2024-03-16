@@ -45,7 +45,7 @@ class User:
         last_name: Omittable[Alterer1[str]] = OMIT,
         supports_inline_queries: Omittable[Alterer1[bool]] = OMIT,
         username: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> User:
         return User(
             first_name=alter1(first_name, self.first_name),
             id=alter1(id, self.id),

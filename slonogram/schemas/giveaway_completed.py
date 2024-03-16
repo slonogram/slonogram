@@ -24,7 +24,7 @@ class GiveawayCompleted:
             Alterer1[_maybe_inaccessible_message.Message]
         ] = OMIT,
         unclaimed_prize_count: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> GiveawayCompleted:
         return GiveawayCompleted(
             winner_count=alter1(winner_count, self.winner_count),
             giveaway_message=alter1(giveaway_message, self.giveaway_message),

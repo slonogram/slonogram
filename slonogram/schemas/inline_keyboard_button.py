@@ -50,7 +50,7 @@ class InlineKeyboardButton:
         switch_inline_query_current_chat: Omittable[Alterer1[str]] = OMIT,
         url: Omittable[Alterer1[str]] = OMIT,
         web_app: Omittable[Alterer1[_web_app_info.WebAppInfo]] = OMIT,
-    ):
+    ) -> InlineKeyboardButton:
         return InlineKeyboardButton(
             text=alter1(text, self.text),
             callback_data=alter1(callback_data, self.callback_data),

@@ -18,7 +18,7 @@ class ForumTopicEdited:
         self,
         icon_custom_emoji_id: Omittable[Alterer1[str]] = OMIT,
         name: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ForumTopicEdited:
         return ForumTopicEdited(
             icon_custom_emoji_id=alter1(
                 icon_custom_emoji_id, self.icon_custom_emoji_id

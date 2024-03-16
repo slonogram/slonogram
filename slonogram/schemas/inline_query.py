@@ -31,7 +31,7 @@ class InlineQuery:
         query: Omittable[Alterer1[str]] = OMIT,
         chat_type: Omittable[Alterer1[str]] = OMIT,
         location: Omittable[Alterer1[_location.Location]] = OMIT,
-    ):
+    ) -> InlineQuery:
         return InlineQuery(
             from_=alter1(from_, self.from_),
             id=alter1(id, self.id),

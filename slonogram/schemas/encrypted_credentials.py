@@ -21,7 +21,7 @@ class EncryptedCredentials:
         data: Omittable[Alterer1[str]] = OMIT,
         hash: Omittable[Alterer1[str]] = OMIT,
         secret: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> EncryptedCredentials:
         return EncryptedCredentials(
             data=alter1(data, self.data),
             hash=alter1(hash, self.hash),

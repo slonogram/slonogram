@@ -106,7 +106,7 @@ class ExternalReplyInfo:
         video: Omittable[Alterer1[_video.Video]] = OMIT,
         video_note: Omittable[Alterer1[_video_note.VideoNote]] = OMIT,
         voice: Omittable[Alterer1[_voice.Voice]] = OMIT,
-    ):
+    ) -> ExternalReplyInfo:
         return ExternalReplyInfo(
             origin=alter1(origin, self.origin),
             animation=alter1(animation, self.animation),

@@ -35,7 +35,7 @@ class ChatJoinRequest:
         user_chat_id: Omittable[Alterer1[int]] = OMIT,
         bio: Omittable[Alterer1[str]] = OMIT,
         invite_link: Omittable[Alterer1[_chat_invite_link.ChatInviteLink]] = OMIT,
-    ):
+    ) -> ChatJoinRequest:
         return ChatJoinRequest(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),

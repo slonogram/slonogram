@@ -40,7 +40,7 @@ class ChatInviteLink:
         member_limit: Omittable[Alterer1[int]] = OMIT,
         name: Omittable[Alterer1[str]] = OMIT,
         pending_join_request_count: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> ChatInviteLink:
         return ChatInviteLink(
             creates_join_request=alter1(
                 creates_join_request, self.creates_join_request

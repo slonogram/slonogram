@@ -27,7 +27,7 @@ class LinkPreviewOptions:
         prefer_small_media: Omittable[Alterer1[bool]] = OMIT,
         show_above_text: Omittable[Alterer1[bool]] = OMIT,
         url: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> LinkPreviewOptions:
         return LinkPreviewOptions(
             is_disabled=alter1(is_disabled, self.is_disabled),
             prefer_large_media=alter1(prefer_large_media, self.prefer_large_media),

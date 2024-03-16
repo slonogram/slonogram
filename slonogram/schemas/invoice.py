@@ -27,7 +27,7 @@ class Invoice:
         start_parameter: Omittable[Alterer1[str]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
         total_amount: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> Invoice:
         return Invoice(
             currency=alter1(currency, self.currency),
             description=alter1(description, self.description),

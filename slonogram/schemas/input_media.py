@@ -49,7 +49,7 @@ class InputMediaAnimation:
         parse_mode: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_input_file.InputFile | str]] = OMIT,
         width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InputMediaAnimation:
         return InputMediaAnimation(
             media=alter1(media, self.media),
             type=alter1(type, self.type),
@@ -101,7 +101,7 @@ class InputMediaAudio:
         performer: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_input_file.InputFile | str]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InputMediaAudio:
         return InputMediaAudio(
             media=alter1(media, self.media),
             type=alter1(type, self.type),
@@ -146,7 +146,7 @@ class InputMediaDocument:
         disable_content_type_detection: Omittable[Alterer1[bool]] = OMIT,
         parse_mode: Omittable[Alterer1[str]] = OMIT,
         thumbnail: Omittable[Alterer1[_input_file.InputFile | str]] = OMIT,
-    ):
+    ) -> InputMediaDocument:
         return InputMediaDocument(
             media=alter1(media, self.media),
             type=alter1(type, self.type),
@@ -188,7 +188,7 @@ class InputMediaPhoto:
         ] = OMIT,
         has_spoiler: Omittable[Alterer1[bool]] = OMIT,
         parse_mode: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InputMediaPhoto:
         return InputMediaPhoto(
             media=alter1(media, self.media),
             type=alter1(type, self.type),
@@ -242,7 +242,7 @@ class InputMediaVideo:
         supports_streaming: Omittable[Alterer1[bool]] = OMIT,
         thumbnail: Omittable[Alterer1[_input_file.InputFile | str]] = OMIT,
         width: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InputMediaVideo:
         return InputMediaVideo(
             media=alter1(media, self.media),
             type=alter1(type, self.type),

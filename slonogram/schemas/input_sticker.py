@@ -25,7 +25,7 @@ class InputSticker:
         sticker: Omittable[Alterer1[_input_file.InputFile | str]] = OMIT,
         keywords: Omittable[Alterer1[list[str]]] = OMIT,
         mask_position: Omittable[Alterer1[_mask_position.MaskPosition]] = OMIT,
-    ):
+    ) -> InputSticker:
         return InputSticker(
             emoji_list=alter1(emoji_list, self.emoji_list),
             sticker=alter1(sticker, self.sticker),

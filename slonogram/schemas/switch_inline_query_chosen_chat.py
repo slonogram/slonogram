@@ -27,7 +27,7 @@ class SwitchInlineQueryChosenChat:
         allow_group_chats: Omittable[Alterer1[bool]] = OMIT,
         allow_user_chats: Omittable[Alterer1[bool]] = OMIT,
         query: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> SwitchInlineQueryChosenChat:
         return SwitchInlineQueryChosenChat(
             allow_bot_chats=alter1(allow_bot_chats, self.allow_bot_chats),
             allow_channel_chats=alter1(allow_channel_chats, self.allow_channel_chats),

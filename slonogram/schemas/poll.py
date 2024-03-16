@@ -57,7 +57,7 @@ class Poll:
             Alterer1[list[_message_entity.MessageEntity]]
         ] = OMIT,
         open_period: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> Poll:
         return Poll(
             allows_multiple_answers=alter1(
                 allows_multiple_answers, self.allows_multiple_answers

@@ -25,7 +25,7 @@ class OrderInfo:
         name: Omittable[Alterer1[str]] = OMIT,
         phone_number: Omittable[Alterer1[str]] = OMIT,
         shipping_address: Omittable[Alterer1[_shipping_address.ShippingAddress]] = OMIT,
-    ):
+    ) -> OrderInfo:
         return OrderInfo(
             email=alter1(email, self.email),
             name=alter1(name, self.name),

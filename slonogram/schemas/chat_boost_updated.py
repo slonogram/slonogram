@@ -19,7 +19,7 @@ class ChatBoostUpdated:
         self,
         boost: Omittable[Alterer1[_chat_boost.ChatBoost]] = OMIT,
         chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
-    ):
+    ) -> ChatBoostUpdated:
         return ChatBoostUpdated(
             boost=alter1(boost, self.boost),
             chat=alter1(chat, self.chat),

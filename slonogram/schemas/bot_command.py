@@ -18,7 +18,7 @@ class BotCommand:
         self,
         command: Omittable[Alterer1[str]] = OMIT,
         description: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> BotCommand:
         return BotCommand(
             command=alter1(command, self.command),
             description=alter1(description, self.description),

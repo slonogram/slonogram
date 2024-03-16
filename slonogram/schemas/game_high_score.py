@@ -22,7 +22,7 @@ class GameHighScore:
         position: Omittable[Alterer1[int]] = OMIT,
         score: Omittable[Alterer1[int]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-    ):
+    ) -> GameHighScore:
         return GameHighScore(
             position=alter1(position, self.position),
             score=alter1(score, self.score),

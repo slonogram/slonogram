@@ -39,7 +39,7 @@ class WebhookInfo:
         last_error_message: Omittable[Alterer1[str]] = OMIT,
         last_synchronization_error_date: Omittable[Alterer1[int]] = OMIT,
         max_connections: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> WebhookInfo:
         return WebhookInfo(
             has_custom_certificate=alter1(
                 has_custom_certificate, self.has_custom_certificate

@@ -12,7 +12,7 @@ class VideoChatEnded:
     duration: int
     """ Video chat duration in seconds """
 
-    def alter(self, duration: Omittable[Alterer1[int]] = OMIT):
+    def alter(self, duration: Omittable[Alterer1[int]] = OMIT) -> VideoChatEnded:
         return VideoChatEnded(
             duration=alter1(duration, self.duration),
         )

@@ -25,7 +25,7 @@ class ChatBoost:
         boost_id: Omittable[Alterer1[str]] = OMIT,
         expiration_date: Omittable[Alterer1[int]] = OMIT,
         source: Omittable[Alterer1[_chat_boost_source.ChatBoostSource]] = OMIT,
-    ):
+    ) -> ChatBoost:
         return ChatBoost(
             add_date=alter1(add_date, self.add_date),
             boost_id=alter1(boost_id, self.boost_id),

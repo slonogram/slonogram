@@ -7,7 +7,7 @@ class GiveawayCreated:
     """This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
     Telegram docs: https://core.telegram.org/bots/api#giveawaycreated"""
 
-    def alter(self):
+    def alter(self) -> GiveawayCreated:
         return GiveawayCreated()
 
 

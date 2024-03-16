@@ -43,7 +43,7 @@ class EncryptedPassportElement:
         reverse_side: Omittable[Alterer1[_passport_file.PassportFile]] = OMIT,
         selfie: Omittable[Alterer1[_passport_file.PassportFile]] = OMIT,
         translation: Omittable[Alterer1[list[_passport_file.PassportFile]]] = OMIT,
-    ):
+    ) -> EncryptedPassportElement:
         return EncryptedPassportElement(
             hash=alter1(hash, self.hash),
             type=alter1(type, self.type),

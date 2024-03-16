@@ -30,7 +30,7 @@ class InputContactMessageContent:
         phone_number: Omittable[Alterer1[str]] = OMIT,
         last_name: Omittable[Alterer1[str]] = OMIT,
         vcard: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InputContactMessageContent:
         return InputContactMessageContent(
             first_name=alter1(first_name, self.first_name),
             phone_number=alter1(phone_number, self.phone_number),
@@ -107,7 +107,7 @@ class InputInvoiceMessageContent:
         send_email_to_provider: Omittable[Alterer1[bool]] = OMIT,
         send_phone_number_to_provider: Omittable[Alterer1[bool]] = OMIT,
         suggested_tip_amounts: Omittable[Alterer1[list[int]]] = OMIT,
-    ):
+    ) -> InputInvoiceMessageContent:
         return InputInvoiceMessageContent(
             currency=alter1(currency, self.currency),
             description=alter1(description, self.description),
@@ -166,7 +166,7 @@ class InputLocationMessageContent:
         horizontal_accuracy: Omittable[Alterer1[float]] = OMIT,
         live_period: Omittable[Alterer1[int]] = OMIT,
         proximity_alert_radius: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InputLocationMessageContent:
         return InputLocationMessageContent(
             latitude=alter1(latitude, self.latitude),
             longitude=alter1(longitude, self.longitude),
@@ -201,7 +201,7 @@ class InputTextMessageContent:
             Alterer1[_link_preview_options.LinkPreviewOptions]
         ] = OMIT,
         parse_mode: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InputTextMessageContent:
         return InputTextMessageContent(
             message_text=alter1(message_text, self.message_text),
             entities=alter1(entities, self.entities),
@@ -244,7 +244,7 @@ class InputVenueMessageContent:
         foursquare_type: Omittable[Alterer1[str]] = OMIT,
         google_place_id: Omittable[Alterer1[str]] = OMIT,
         google_place_type: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> InputVenueMessageContent:
         return InputVenueMessageContent(
             address=alter1(address, self.address),
             latitude=alter1(latitude, self.latitude),

@@ -33,7 +33,7 @@ class ReplyKeyboardMarkup:
         one_time_keyboard: Omittable[Alterer1[bool]] = OMIT,
         resize_keyboard: Omittable[Alterer1[bool]] = OMIT,
         selective: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ReplyKeyboardMarkup:
         return ReplyKeyboardMarkup(
             keyboard=alter1(keyboard, self.keyboard),
             input_field_placeholder=alter1(

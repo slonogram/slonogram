@@ -18,7 +18,7 @@ class ResponseParameters:
         self,
         migrate_to_chat_id: Omittable[Alterer1[int]] = OMIT,
         retry_after: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> ResponseParameters:
         return ResponseParameters(
             migrate_to_chat_id=alter1(migrate_to_chat_id, self.migrate_to_chat_id),
             retry_after=alter1(retry_after, self.retry_after),

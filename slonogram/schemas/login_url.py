@@ -25,7 +25,7 @@ class LoginUrl:
         bot_username: Omittable[Alterer1[str]] = OMIT,
         forward_text: Omittable[Alterer1[str]] = OMIT,
         request_write_access: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> LoginUrl:
         return LoginUrl(
             url=alter1(url, self.url),
             bot_username=alter1(bot_username, self.bot_username),

@@ -30,7 +30,7 @@ class Location:
         horizontal_accuracy: Omittable[Alterer1[float]] = OMIT,
         live_period: Omittable[Alterer1[int]] = OMIT,
         proximity_alert_radius: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> Location:
         return Location(
             latitude=alter1(latitude, self.latitude),
             longitude=alter1(longitude, self.longitude),

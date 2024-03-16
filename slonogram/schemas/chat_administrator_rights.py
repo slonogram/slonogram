@@ -57,7 +57,7 @@ class ChatAdministratorRights:
         can_manage_topics: Omittable[Alterer1[bool]] = OMIT,
         can_pin_messages: Omittable[Alterer1[bool]] = OMIT,
         can_post_messages: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ChatAdministratorRights:
         return ChatAdministratorRights(
             can_change_info=alter1(can_change_info, self.can_change_info),
             can_delete_messages=alter1(can_delete_messages, self.can_delete_messages),

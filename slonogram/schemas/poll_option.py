@@ -18,7 +18,7 @@ class PollOption:
         self,
         text: Omittable[Alterer1[str]] = OMIT,
         voter_count: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> PollOption:
         return PollOption(
             text=alter1(text, self.text),
             voter_count=alter1(voter_count, self.voter_count),

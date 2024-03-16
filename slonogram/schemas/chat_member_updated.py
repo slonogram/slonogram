@@ -39,7 +39,7 @@ class ChatMemberUpdated:
         old_chat_member: Omittable[Alterer1[_chat_member.ChatMember]] = OMIT,
         invite_link: Omittable[Alterer1[_chat_invite_link.ChatInviteLink]] = OMIT,
         via_chat_folder_invite_link: Omittable[Alterer1[bool]] = OMIT,
-    ):
+    ) -> ChatMemberUpdated:
         return ChatMemberUpdated(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),

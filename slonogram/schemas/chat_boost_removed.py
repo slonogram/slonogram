@@ -25,7 +25,7 @@ class ChatBoostRemoved:
         chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         remove_date: Omittable[Alterer1[int]] = OMIT,
         source: Omittable[Alterer1[_chat_boost_source.ChatBoostSource]] = OMIT,
-    ):
+    ) -> ChatBoostRemoved:
         return ChatBoostRemoved(
             boost_id=alter1(boost_id, self.boost_id),
             chat=alter1(chat, self.chat),

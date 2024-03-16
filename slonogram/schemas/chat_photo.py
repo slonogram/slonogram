@@ -24,7 +24,7 @@ class ChatPhoto:
         big_file_unique_id: Omittable[Alterer1[str]] = OMIT,
         small_file_id: Omittable[Alterer1[str]] = OMIT,
         small_file_unique_id: Omittable[Alterer1[str]] = OMIT,
-    ):
+    ) -> ChatPhoto:
         return ChatPhoto(
             big_file_id=alter1(big_file_id, self.big_file_id),
             big_file_unique_id=alter1(big_file_unique_id, self.big_file_unique_id),

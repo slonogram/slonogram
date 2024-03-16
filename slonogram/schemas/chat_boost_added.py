@@ -12,7 +12,7 @@ class ChatBoostAdded:
     boost_count: int
     """ Number of boosts added by the user """
 
-    def alter(self, boost_count: Omittable[Alterer1[int]] = OMIT):
+    def alter(self, boost_count: Omittable[Alterer1[int]] = OMIT) -> ChatBoostAdded:
         return ChatBoostAdded(
             boost_count=alter1(boost_count, self.boost_count),
         )

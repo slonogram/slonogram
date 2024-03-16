@@ -12,7 +12,7 @@ class BotName:
     name: str
     """ The bot's name """
 
-    def alter(self, name: Omittable[Alterer1[str]] = OMIT):
+    def alter(self, name: Omittable[Alterer1[str]] = OMIT) -> BotName:
         return BotName(
             name=alter1(name, self.name),
         )

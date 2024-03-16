@@ -34,7 +34,7 @@ class ReplyParameters:
         quote_entities: Omittable[Alterer1[list[_message_entity.MessageEntity]]] = OMIT,
         quote_parse_mode: Omittable[Alterer1[str]] = OMIT,
         quote_position: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> ReplyParameters:
         return ReplyParameters(
             message_id=alter1(message_id, self.message_id),
             allow_sending_without_reply=alter1(

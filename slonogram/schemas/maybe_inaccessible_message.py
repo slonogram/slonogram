@@ -71,7 +71,7 @@ class InaccessibleMessage:
         chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         date: Omittable[Alterer1[int]] = OMIT,
         message_id: Omittable[Alterer1[int]] = OMIT,
-    ):
+    ) -> InaccessibleMessage:
         return InaccessibleMessage(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),
@@ -354,7 +354,7 @@ class Message:
         write_access_allowed: Omittable[
             Alterer1[_write_access_allowed.WriteAccessAllowed]
         ] = OMIT,
-    ):
+    ) -> Message:
         return Message(
             chat=alter1(chat, self.chat),
             date=alter1(date, self.date),

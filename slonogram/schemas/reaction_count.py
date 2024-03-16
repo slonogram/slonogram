@@ -19,7 +19,7 @@ class ReactionCount:
         self,
         total_count: Omittable[Alterer1[int]] = OMIT,
         type: Omittable[Alterer1[_reaction_type.ReactionType]] = OMIT,
-    ):
+    ) -> ReactionCount:
         return ReactionCount(
             total_count=alter1(total_count, self.total_count),
             type=alter1(type, self.type),

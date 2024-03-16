@@ -13,7 +13,9 @@ class UserChatBoosts:
     boosts: list[_chat_boost.ChatBoost]
     """ The list of boosts added to the chat by the user """
 
-    def alter(self, boosts: Omittable[Alterer1[list[_chat_boost.ChatBoost]]] = OMIT):
+    def alter(
+        self, boosts: Omittable[Alterer1[list[_chat_boost.ChatBoost]]] = OMIT
+    ) -> UserChatBoosts:
         return UserChatBoosts(
             boosts=alter1(boosts, self.boosts),
         )

@@ -14,7 +14,7 @@ class MenuButtonCommands:
     type: str
     """ Type of the button, must be commands """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(self, type: Omittable[Alterer1[str]] = OMIT) -> MenuButtonCommands:
         return MenuButtonCommands(
             type=alter1(type, self.type),
         )
@@ -28,7 +28,7 @@ class MenuButtonDefault:
     type: str
     """ Type of the button, must be default """
 
-    def alter(self, type: Omittable[Alterer1[str]] = OMIT):
+    def alter(self, type: Omittable[Alterer1[str]] = OMIT) -> MenuButtonDefault:
         return MenuButtonDefault(
             type=alter1(type, self.type),
         )
@@ -51,7 +51,7 @@ class MenuButtonWebApp:
         text: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
         web_app: Omittable[Alterer1[_web_app_info.WebAppInfo]] = OMIT,
-    ):
+    ) -> MenuButtonWebApp:
         return MenuButtonWebApp(
             text=alter1(text, self.text),
             type=alter1(type, self.type),
