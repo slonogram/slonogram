@@ -1,43 +1,53 @@
 data:
-  description:
-  - This object represents a venue.
-  fields:
-    location:
-      description: Venue location. Can't be a live location
-      required: true
-      types:
-      - Location
-    title:
-      description: Name of the venue
-      required: true
-      types:
-      - String
-    address:
-      description: Address of the venue
-      required: true
-      types:
-      - String
-    foursquare_id:
-      description: Optional. Foursquare identifier of the venue
-      required: false
-      types:
-      - String
-    foursquare_type:
-      description: Optional. Foursquare type of the venue. (For example, "arts_entertainment/default",
-        "arts_entertainment/aquarium" or "food/icecream".)
-      required: false
-      types:
-      - String
-    google_place_id:
-      description: Optional. Google Places identifier of the venue
-      required: false
-      types:
-      - String
-    google_place_type:
-      description: Optional. Google Places type of the venue. (See supported types.)
-      required: false
-      types:
-      - String
-  kind: struct
+  Venue:
+    fields:
+      address:
+        description: Address of the venue
+        name: address
+        required: true
+        types:
+        - String
+      foursquare_id:
+        description: Optional. Foursquare identifier of the venue
+        name: foursquare_id
+        required: false
+        types:
+        - String
+      foursquare_type:
+        description: Optional. Foursquare type of the venue. (For example, "arts_entertainment/default",
+          "arts_entertainment/aquarium" or "food/icecream".)
+        name: foursquare_type
+        required: false
+        types:
+        - String
+      google_place_id:
+        description: Optional. Google Places identifier of the venue
+        name: google_place_id
+        required: false
+        types:
+        - String
+      google_place_type:
+        description: Optional. Google Places type of the venue. (See supported types.)
+        name: google_place_type
+        required: false
+        types:
+        - String
+      location:
+        description: Venue location. Can't be a live location
+        name: location
+        required: true
+        types:
+        - Location
+      title:
+        description: Name of the venue
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents a venue.
+      href: https://core.telegram.org/bots/api#venue
+      name: Venue
 dirty: false
-file_name: venue.py

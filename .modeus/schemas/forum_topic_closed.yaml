@@ -1,8 +1,11 @@
 data:
-  description:
-  - This object represents a service message about a forum topic closed in the chat.
-    Currently holds no information.
-  fields: {}
-  kind: struct
+  ForumTopicClosed:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a forum topic closed in the
+        chat. Currently holds no information.
+      href: https://core.telegram.org/bots/api#forumtopicclosed
+      name: ForumTopicClosed
 dirty: false
-file_name: forum_topic_closed.py

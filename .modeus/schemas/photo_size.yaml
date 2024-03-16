@@ -1,34 +1,43 @@
 data:
-  description:
-  - This object represents one size of a photo or a file / sticker thumbnail.
-  fields:
-    file_id:
-      description: Identifier for this file, which can be used to download or reuse
-        the file
-      required: true
-      types:
-      - String
-    file_unique_id:
-      description: Unique identifier for this file, which is supposed to be the same
-        over time and for different bots. Can't be used to download or reuse the file.
-      required: true
-      types:
-      - String
-    width:
-      description: Photo width
-      required: true
-      types:
-      - Integer
-    height:
-      description: Photo height
-      required: true
-      types:
-      - Integer
-    file_size:
-      description: Optional. File size in bytes
-      required: false
-      types:
-      - Integer
-  kind: struct
+  PhotoSize:
+    fields:
+      file_id:
+        description: Identifier for this file, which can be used to download or reuse
+          the file
+        name: file_id
+        required: true
+        types:
+        - String
+      file_size:
+        description: Optional. File size in bytes
+        name: file_size
+        required: false
+        types:
+        - Integer
+      file_unique_id:
+        description: Unique identifier for this file, which is supposed to be the
+          same over time and for different bots. Can't be used to download or reuse
+          the file.
+        name: file_unique_id
+        required: true
+        types:
+        - String
+      height:
+        description: Photo height
+        name: height
+        required: true
+        types:
+        - Integer
+      width:
+        description: Photo width
+        name: width
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents one size of a photo or a file / sticker thumbnail.
+      href: https://core.telegram.org/bots/api#photosize
+      name: PhotoSize
 dirty: false
-file_name: photo_size.py

@@ -1,8 +1,11 @@
 data:
-  description:
-  - This object represents a service message about a forum topic reopened in the chat.
-    Currently holds no information.
-  fields: {}
-  kind: struct
+  ForumTopicReopened:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a forum topic reopened in the
+        chat. Currently holds no information.
+      href: https://core.telegram.org/bots/api#forumtopicreopened
+      name: ForumTopicReopened
 dirty: false
-file_name: forum_topic_reopened.py

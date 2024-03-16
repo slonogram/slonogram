@@ -1,17 +1,22 @@
 data:
-  description:
-  - This object represents a story.
-  fields:
-    chat:
-      description: Chat that posted the story
-      required: true
-      types:
-      - Chat
-    id:
-      description: Unique identifier for the story in the chat
-      required: true
-      types:
-      - Integer
-  kind: struct
+  Story:
+    fields:
+      chat:
+        description: Chat that posted the story
+        name: chat
+        required: true
+        types:
+        - Chat
+      id:
+        description: Unique identifier for the story in the chat
+        name: id
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a story.
+      href: https://core.telegram.org/bots/api#story
+      name: Story
 dirty: false
-file_name: story.py

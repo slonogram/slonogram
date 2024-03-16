@@ -1,45 +1,55 @@
 data:
-  description:
-  - This object contains information about an incoming pre-checkout query.
-  fields:
-    id:
-      description: Unique query identifier
-      required: true
-      types:
-      - String
-    from:
-      description: User who sent the query
-      required: true
-      types:
-      - User
-    currency:
-      description: Three-letter ISO 4217 currency code
-      required: true
-      types:
-      - String
-    total_amount:
-      description: Total price in the smallest units of the currency (integer, not
-        float/double). For example, for a price of US$ 1.45 pass amount = 145. See
-        the exp parameter in currencies.json, it shows the number of digits past the
-        decimal point for each currency (2 for the majority of currencies).
-      required: true
-      types:
-      - Integer
-    invoice_payload:
-      description: Bot specified invoice payload
-      required: true
-      types:
-      - String
-    shipping_option_id:
-      description: Optional. Identifier of the shipping option chosen by the user
-      required: false
-      types:
-      - String
-    order_info:
-      description: Optional. Order information provided by the user
-      required: false
-      types:
-      - OrderInfo
-  kind: struct
+  PreCheckoutQuery:
+    fields:
+      currency:
+        description: Three-letter ISO 4217 currency code
+        name: currency
+        required: true
+        types:
+        - String
+      from:
+        description: User who sent the query
+        name: from
+        required: true
+        types:
+        - User
+      id:
+        description: Unique query identifier
+        name: id
+        required: true
+        types:
+        - String
+      invoice_payload:
+        description: Bot specified invoice payload
+        name: invoice_payload
+        required: true
+        types:
+        - String
+      order_info:
+        description: Optional. Order information provided by the user
+        name: order_info
+        required: false
+        types:
+        - OrderInfo
+      shipping_option_id:
+        description: Optional. Identifier of the shipping option chosen by the user
+        name: shipping_option_id
+        required: false
+        types:
+        - String
+      total_amount:
+        description: Total price in the smallest units of the currency (integer, not
+          float/double). For example, for a price of US$ 1.45 pass amount = 145. See
+          the exp parameter in currencies.json, it shows the number of digits past
+          the decimal point for each currency (2 for the majority of currencies).
+        name: total_amount
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object contains information about an incoming pre-checkout query.
+      href: https://core.telegram.org/bots/api#precheckoutquery
+      name: PreCheckoutQuery
 dirty: false
-file_name: pre_checkout_query.py

@@ -1,130 +1,159 @@
 data:
-  description:
-  - This object contains information about a message that is being replied to, which
-    may come from another chat or forum topic.
-  fields:
-    origin:
-      description: Origin of the message replied to by the given message
-      required: true
-      types:
-      - MessageOrigin
-    chat:
-      description: Optional. Chat the original message belongs to. Available only
-        if the chat is a supergroup or a channel.
-      required: false
-      types:
-      - Chat
-    message_id:
-      description: Optional. Unique message identifier inside the original chat. Available
-        only if the original chat is a supergroup or a channel.
-      required: false
-      types:
-      - Integer
-    link_preview_options:
-      description: Optional. Options used for link preview generation for the original
-        message, if it is a text message
-      required: false
-      types:
-      - LinkPreviewOptions
-    animation:
-      description: Optional. Message is an animation, information about the animation
-      required: false
-      types:
-      - Animation
-    audio:
-      description: Optional. Message is an audio file, information about the file
-      required: false
-      types:
-      - Audio
-    document:
-      description: Optional. Message is a general file, information about the file
-      required: false
-      types:
-      - Document
-    photo:
-      description: Optional. Message is a photo, available sizes of the photo
-      required: false
-      types:
-      - Array of PhotoSize
-    sticker:
-      description: Optional. Message is a sticker, information about the sticker
-      required: false
-      types:
-      - Sticker
-    story:
-      description: Optional. Message is a forwarded story
-      required: false
-      types:
-      - Story
-    video:
-      description: Optional. Message is a video, information about the video
-      required: false
-      types:
-      - Video
-    video_note:
-      description: Optional. Message is a video note, information about the video
-        message
-      required: false
-      types:
-      - VideoNote
-    voice:
-      description: Optional. Message is a voice message, information about the file
-      required: false
-      types:
-      - Voice
-    has_media_spoiler:
-      description: Optional. True, if the message media is covered by a spoiler animation
-      required: false
-      types:
-      - Boolean
-    contact:
-      description: Optional. Message is a shared contact, information about the contact
-      required: false
-      types:
-      - Contact
-    dice:
-      description: Optional. Message is a dice with random value
-      required: false
-      types:
-      - Dice
-    game:
-      description: 'Optional. Message is a game, information about the game. More
-        about games: https://core.telegram.org/bots/api#games'
-      required: false
-      types:
-      - Game
-    giveaway:
-      description: Optional. Message is a scheduled giveaway, information about the
-        giveaway
-      required: false
-      types:
-      - Giveaway
-    giveaway_winners:
-      description: Optional. A giveaway with public winners was completed
-      required: false
-      types:
-      - GiveawayWinners
-    invoice:
-      description: 'Optional. Message is an invoice for a payment, information about
-        the invoice. More about payments: https://core.telegram.org/bots/api#payments'
-      required: false
-      types:
-      - Invoice
-    location:
-      description: Optional. Message is a shared location, information about the location
-      required: false
-      types:
-      - Location
-    poll:
-      description: Optional. Message is a native poll, information about the poll
-      required: false
-      types:
-      - Poll
-    venue:
-      description: Optional. Message is a venue, information about the venue
-      required: false
-      types:
-      - Venue
-  kind: struct
+  ExternalReplyInfo:
+    fields:
+      animation:
+        description: Optional. Message is an animation, information about the animation
+        name: animation
+        required: false
+        types:
+        - Animation
+      audio:
+        description: Optional. Message is an audio file, information about the file
+        name: audio
+        required: false
+        types:
+        - Audio
+      chat:
+        description: Optional. Chat the original message belongs to. Available only
+          if the chat is a supergroup or a channel.
+        name: chat
+        required: false
+        types:
+        - Chat
+      contact:
+        description: Optional. Message is a shared contact, information about the
+          contact
+        name: contact
+        required: false
+        types:
+        - Contact
+      dice:
+        description: Optional. Message is a dice with random value
+        name: dice
+        required: false
+        types:
+        - Dice
+      document:
+        description: Optional. Message is a general file, information about the file
+        name: document
+        required: false
+        types:
+        - Document
+      game:
+        description: 'Optional. Message is a game, information about the game. More
+          about games: https://core.telegram.org/bots/api#games'
+        name: game
+        required: false
+        types:
+        - Game
+      giveaway:
+        description: Optional. Message is a scheduled giveaway, information about
+          the giveaway
+        name: giveaway
+        required: false
+        types:
+        - Giveaway
+      giveaway_winners:
+        description: Optional. A giveaway with public winners was completed
+        name: giveaway_winners
+        required: false
+        types:
+        - GiveawayWinners
+      has_media_spoiler:
+        description: Optional. True, if the message media is covered by a spoiler
+          animation
+        name: has_media_spoiler
+        required: false
+        types:
+        - Boolean
+      invoice:
+        description: 'Optional. Message is an invoice for a payment, information about
+          the invoice. More about payments: https://core.telegram.org/bots/api#payments'
+        name: invoice
+        required: false
+        types:
+        - Invoice
+      link_preview_options:
+        description: Optional. Options used for link preview generation for the original
+          message, if it is a text message
+        name: link_preview_options
+        required: false
+        types:
+        - LinkPreviewOptions
+      location:
+        description: Optional. Message is a shared location, information about the
+          location
+        name: location
+        required: false
+        types:
+        - Location
+      message_id:
+        description: Optional. Unique message identifier inside the original chat.
+          Available only if the original chat is a supergroup or a channel.
+        name: message_id
+        required: false
+        types:
+        - Integer
+      origin:
+        description: Origin of the message replied to by the given message
+        name: origin
+        required: true
+        types:
+        - MessageOrigin
+      photo:
+        description: Optional. Message is a photo, available sizes of the photo
+        name: photo
+        required: false
+        types:
+        - Array of PhotoSize
+      poll:
+        description: Optional. Message is a native poll, information about the poll
+        name: poll
+        required: false
+        types:
+        - Poll
+      sticker:
+        description: Optional. Message is a sticker, information about the sticker
+        name: sticker
+        required: false
+        types:
+        - Sticker
+      story:
+        description: Optional. Message is a forwarded story
+        name: story
+        required: false
+        types:
+        - Story
+      venue:
+        description: Optional. Message is a venue, information about the venue
+        name: venue
+        required: false
+        types:
+        - Venue
+      video:
+        description: Optional. Message is a video, information about the video
+        name: video
+        required: false
+        types:
+        - Video
+      video_note:
+        description: Optional. Message is a video note, information about the video
+          message
+        name: video_note
+        required: false
+        types:
+        - VideoNote
+      voice:
+        description: Optional. Message is a voice message, information about the file
+        name: voice
+        required: false
+        types:
+        - Voice
+    kind: struct
+    meta:
+      description:
+      - This object contains information about a message that is being replied to,
+        which may come from another chat or forum topic.
+      href: https://core.telegram.org/bots/api#externalreplyinfo
+      name: ExternalReplyInfo
 dirty: false
-file_name: external_reply_info.py

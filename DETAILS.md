@@ -49,7 +49,7 @@ assert (await f(ctx(10)) == Activation.stalled())
 
 # Also we can use middlewares like that
 
-def throw(e: Exception) -> NextMiddleware[int]:
+def throw(e: Exception) -> FollowedMiddleware[int]:
     async def _mw(context: Context[int]) -> Activation:
         raise e
     return _mw

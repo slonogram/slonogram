@@ -15,11 +15,12 @@ M = TypeVar("M")
 
 _Handlers: TypeAlias = tuple[Handler[M], ...]
 
+
 class Dispatcher(Middlewared[M], Interested):
     __slots__ = (
-        'name',
-        'stash',
-        'handlers',
+        "name",
+        "stash",
+        "handlers",
     )
 
     name: str | None
@@ -40,19 +41,19 @@ class Dispatcher(Middlewared[M], Interested):
         handlers: Omittable[Alterer1[_Handlers[M]]] = OMIT,
         stash: Omittable[Alterer1[Stash]] = OMIT,
         name: Omittable[Alterer1[str | None]] = OMIT,
-    ) -> 'Dispatcher[M]':
+    ) -> "Dispatcher[M]":
         return Dispatcher[M](
             handlers=alter1(handlers, self.handlers),
             stash=alter1(stash, self.stash),
             name=alter1(name, self.name),
         )
 
-    def register(self, *handlers: Handler[M]) -> 'Dispatcher[M]':
+    def register(self, *handlers: Handler[M]) -> "Dispatcher[M]":
         return self.alter(handlers=lambda prev: (*prev, *handlers))
 
     def __repr__(self) -> str:
-        return f'Dispatcher(name={self.name!r})'
-    
+        return f"Dispatcher(name={self.name!r})"
+
     def collect_interests(self) -> Interests:
         interests = Interests(0)
         for handler in self.handlers:
@@ -66,11 +67,7 @@ class Dispatcher(Middlewared[M], Interested):
         context: Context[M],
         /,
     ) -> Activation:
-        new = Context(
-            context.bot,
-            context.model,
-            context.stash.append(self.stash)
-        )
+        new = Context(context.bot, context.model, context.stash.append(self.stash))
         for handler in self.handlers:
             old = new.stash
             new.stash = Stash(old)

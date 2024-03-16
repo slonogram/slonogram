@@ -5,8 +5,9 @@ from ..bot import Bot
 
 M = TypeVar("M")
 
+
 class Context(Generic[M]):
-    __slots__ = ('bot', 'model', 'stash')
+    __slots__ = ("bot", "model", "stash")
 
     def __init__(
         self,

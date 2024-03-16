@@ -3,7 +3,8 @@ from argparse import ArgumentParser
 from typing import Literal, TypeAlias, Sequence
 from dataclasses import dataclass
 
-GenerationType: TypeAlias = Literal['type'] | Literal['config']
+GenerationType: TypeAlias = Literal["type"] | Literal["config"]
+
 
 @dataclass(slots=True, frozen=True)
 class Args:
@@ -14,29 +15,26 @@ class Args:
 
 
 PARSER = ArgumentParser(
-    prog='modeus',
-    description='code generation for slonogram',
+    prog="modeus",
+    description="code generation for slonogram",
     add_help=True,
 )
 PARSER.add_argument(
-    '-s',
-    '--spec',
-    type=Path,
-    required=True,
-    help='Where JSON specification is stored'
+    "-s", "--spec", type=Path, required=True, help="Where JSON specification is stored"
 )
 PARSER.add_argument(
-    '-t',
-    '--type',
-    choices=['config', 'code'],
+    "-t",
+    "--type",
+    choices=["config", "code"],
     required=True,
-    help='What type of data needs generation',
+    help="What type of data needs generation",
 )
 PARSER.add_argument(
-    'output',
+    "output",
     type=Path,
-    help='Where store result of generation',
+    help="Where store result of generation",
 )
+
 
 def parse_args(args: Sequence[str]) -> Args:
     ns = PARSER.parse_args(args)

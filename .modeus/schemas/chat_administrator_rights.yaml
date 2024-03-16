@@ -1,93 +1,112 @@
 data:
-  description:
-  - Represents the rights of an administrator in a chat.
-  fields:
-    is_anonymous:
-      description: True, if the user's presence in the chat is hidden
-      required: true
-      types:
-      - Boolean
-    can_manage_chat:
-      description: True, if the administrator can access the chat event log, get boost
-        list, see hidden supergroup and channel members, report spam messages and
-        ignore slow mode. Implied by any other administrator privilege.
-      required: true
-      types:
-      - Boolean
-    can_delete_messages:
-      description: True, if the administrator can delete messages of other users
-      required: true
-      types:
-      - Boolean
-    can_manage_video_chats:
-      description: True, if the administrator can manage video chats
-      required: true
-      types:
-      - Boolean
-    can_restrict_members:
-      description: True, if the administrator can restrict, ban or unban chat members,
-        or access supergroup statistics
-      required: true
-      types:
-      - Boolean
-    can_promote_members:
-      description: True, if the administrator can add new administrators with a subset
-        of their own privileges or demote administrators that they have promoted,
-        directly or indirectly (promoted by administrators that were appointed by
-        the user)
-      required: true
-      types:
-      - Boolean
-    can_change_info:
-      description: True, if the user is allowed to change the chat title, photo and
-        other settings
-      required: true
-      types:
-      - Boolean
-    can_invite_users:
-      description: True, if the user is allowed to invite new users to the chat
-      required: true
-      types:
-      - Boolean
-    can_post_stories:
-      description: True, if the administrator can post stories to the chat
-      required: true
-      types:
-      - Boolean
-    can_edit_stories:
-      description: True, if the administrator can edit stories posted by other users
-      required: true
-      types:
-      - Boolean
-    can_delete_stories:
-      description: True, if the administrator can delete stories posted by other users
-      required: true
-      types:
-      - Boolean
-    can_post_messages:
-      description: Optional. True, if the administrator can post messages in the channel,
-        or access channel statistics; for channels only
-      required: false
-      types:
-      - Boolean
-    can_edit_messages:
-      description: Optional. True, if the administrator can edit messages of other
-        users and can pin messages; for channels only
-      required: false
-      types:
-      - Boolean
-    can_pin_messages:
-      description: Optional. True, if the user is allowed to pin messages; for groups
-        and supergroups only
-      required: false
-      types:
-      - Boolean
-    can_manage_topics:
-      description: Optional. True, if the user is allowed to create, rename, close,
-        and reopen forum topics; for supergroups only
-      required: false
-      types:
-      - Boolean
-  kind: struct
+  ChatAdministratorRights:
+    fields:
+      can_change_info:
+        description: True, if the user is allowed to change the chat title, photo
+          and other settings
+        name: can_change_info
+        required: true
+        types:
+        - Boolean
+      can_delete_messages:
+        description: True, if the administrator can delete messages of other users
+        name: can_delete_messages
+        required: true
+        types:
+        - Boolean
+      can_delete_stories:
+        description: True, if the administrator can delete stories posted by other
+          users
+        name: can_delete_stories
+        required: true
+        types:
+        - Boolean
+      can_edit_messages:
+        description: Optional. True, if the administrator can edit messages of other
+          users and can pin messages; for channels only
+        name: can_edit_messages
+        required: false
+        types:
+        - Boolean
+      can_edit_stories:
+        description: True, if the administrator can edit stories posted by other users
+        name: can_edit_stories
+        required: true
+        types:
+        - Boolean
+      can_invite_users:
+        description: True, if the user is allowed to invite new users to the chat
+        name: can_invite_users
+        required: true
+        types:
+        - Boolean
+      can_manage_chat:
+        description: True, if the administrator can access the chat event log, get
+          boost list, see hidden supergroup and channel members, report spam messages
+          and ignore slow mode. Implied by any other administrator privilege.
+        name: can_manage_chat
+        required: true
+        types:
+        - Boolean
+      can_manage_topics:
+        description: Optional. True, if the user is allowed to create, rename, close,
+          and reopen forum topics; for supergroups only
+        name: can_manage_topics
+        required: false
+        types:
+        - Boolean
+      can_manage_video_chats:
+        description: True, if the administrator can manage video chats
+        name: can_manage_video_chats
+        required: true
+        types:
+        - Boolean
+      can_pin_messages:
+        description: Optional. True, if the user is allowed to pin messages; for groups
+          and supergroups only
+        name: can_pin_messages
+        required: false
+        types:
+        - Boolean
+      can_post_messages:
+        description: Optional. True, if the administrator can post messages in the
+          channel, or access channel statistics; for channels only
+        name: can_post_messages
+        required: false
+        types:
+        - Boolean
+      can_post_stories:
+        description: True, if the administrator can post stories to the chat
+        name: can_post_stories
+        required: true
+        types:
+        - Boolean
+      can_promote_members:
+        description: True, if the administrator can add new administrators with a
+          subset of their own privileges or demote administrators that they have promoted,
+          directly or indirectly (promoted by administrators that were appointed by
+          the user)
+        name: can_promote_members
+        required: true
+        types:
+        - Boolean
+      can_restrict_members:
+        description: True, if the administrator can restrict, ban or unban chat members,
+          or access supergroup statistics
+        name: can_restrict_members
+        required: true
+        types:
+        - Boolean
+      is_anonymous:
+        description: True, if the user's presence in the chat is hidden
+        name: is_anonymous
+        required: true
+        types:
+        - Boolean
+    kind: struct
+    meta:
+      description:
+      - Represents the rights of an administrator in a chat.
+      href: https://core.telegram.org/bots/api#chatadministratorrights
+      name: ChatAdministratorRights
 dirty: false
-file_name: chat_administrator_rights.py

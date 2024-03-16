@@ -1,281 +1,346 @@
 data:
-- description:
-  - Represents the content of a text message to be sent as the result of an inline
-    query.
-  fields:
-    message_text:
-      description: Text of the message to be sent, 1-4096 characters
-      required: true
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the message text. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    entities:
-      description: Optional. List of special entities that appear in message text,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    link_preview_options:
-      description: Optional. Link preview generation options for the message
-      required: false
-      types:
-      - LinkPreviewOptions
-  kind: struct
-- description:
-  - Represents the content of a location message to be sent as the result of an inline
-    query.
-  fields:
-    latitude:
-      description: Latitude of the location in degrees
-      required: true
-      types:
-      - Float
-    longitude:
-      description: Longitude of the location in degrees
-      required: true
-      types:
-      - Float
-    horizontal_accuracy:
-      description: Optional. The radius of uncertainty for the location, measured
-        in meters; 0-1500
-      required: false
-      types:
-      - Float
-    live_period:
-      description: Optional. Period in seconds for which the location can be updated,
-        should be between 60 and 86400.
-      required: false
-      types:
-      - Integer
-    heading:
-      description: Optional. For live locations, a direction in which the user is
-        moving, in degrees. Must be between 1 and 360 if specified.
-      required: false
-      types:
-      - Integer
-    proximity_alert_radius:
-      description: Optional. For live locations, a maximum distance for proximity
-        alerts about approaching another chat member, in meters. Must be between 1
-        and 100000 if specified.
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents the content of a venue message to be sent as the result of an inline
-    query.
-  fields:
-    latitude:
-      description: Latitude of the venue in degrees
-      required: true
-      types:
-      - Float
-    longitude:
-      description: Longitude of the venue in degrees
-      required: true
-      types:
-      - Float
-    title:
-      description: Name of the venue
-      required: true
-      types:
-      - String
-    address:
-      description: Address of the venue
-      required: true
-      types:
-      - String
-    foursquare_id:
-      description: Optional. Foursquare identifier of the venue, if known
-      required: false
-      types:
-      - String
-    foursquare_type:
-      description: Optional. Foursquare type of the venue, if known. (For example,
-        "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".)
-      required: false
-      types:
-      - String
-    google_place_id:
-      description: Optional. Google Places identifier of the venue
-      required: false
-      types:
-      - String
-    google_place_type:
-      description: Optional. Google Places type of the venue. (See supported types.)
-      required: false
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the content of a contact message to be sent as the result of an inline
-    query.
-  fields:
-    phone_number:
-      description: Contact's phone number
-      required: true
-      types:
-      - String
-    first_name:
-      description: Contact's first name
-      required: true
-      types:
-      - String
-    last_name:
-      description: Optional. Contact's last name
-      required: false
-      types:
-      - String
-    vcard:
-      description: Optional. Additional data about the contact in the form of a vCard,
-        0-2048 bytes
-      required: false
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the content of an invoice message to be sent as the result of an inline
-    query.
-  fields:
-    title:
-      description: Product name, 1-32 characters
-      required: true
-      types:
-      - String
-    description:
-      description: Product description, 1-255 characters
-      required: true
-      types:
-      - String
-    payload:
-      description: Bot-defined invoice payload, 1-128 bytes. This will not be displayed
-        to the user, use for your internal processes.
-      required: true
-      types:
-      - String
-    provider_token:
-      description: Payment provider token, obtained via @BotFather
-      required: true
-      types:
-      - String
-    currency:
-      description: Three-letter ISO 4217 currency code, see more on currencies
-      required: true
-      types:
-      - String
-    prices:
-      description: Price breakdown, a JSON-serialized list of components (e.g. product
-        price, tax, discount, delivery cost, delivery tax, bonus, etc.)
-      required: true
-      types:
-      - Array of LabeledPrice
-    max_tip_amount:
-      description: Optional. The maximum accepted amount for tips in the smallest
-        units of the currency (integer, not float/double). For example, for a maximum
-        tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json,
-        it shows the number of digits past the decimal point for each currency (2
-        for the majority of currencies). Defaults to 0
-      required: false
-      types:
-      - Integer
-    suggested_tip_amounts:
-      description: Optional. A JSON-serialized array of suggested amounts of tip in
-        the smallest units of the currency (integer, not float/double). At most 4
-        suggested tip amounts can be specified. The suggested tip amounts must be
-        positive, passed in a strictly increased order and must not exceed max_tip_amount.
-      required: false
-      types:
-      - Array of Integer
-    provider_data:
-      description: Optional. A JSON-serialized object for data about the invoice,
-        which will be shared with the payment provider. A detailed description of
-        the required fields should be provided by the payment provider.
-      required: false
-      types:
-      - String
-    photo_url:
-      description: Optional. URL of the product photo for the invoice. Can be a photo
-        of the goods or a marketing image for a service.
-      required: false
-      types:
-      - String
-    photo_size:
-      description: Optional. Photo size in bytes
-      required: false
-      types:
-      - Integer
-    photo_width:
-      description: Optional. Photo width
-      required: false
-      types:
-      - Integer
-    photo_height:
-      description: Optional. Photo height
-      required: false
-      types:
-      - Integer
-    need_name:
-      description: Optional. Pass True if you require the user's full name to complete
-        the order
-      required: false
-      types:
-      - Boolean
-    need_phone_number:
-      description: Optional. Pass True if you require the user's phone number to complete
-        the order
-      required: false
-      types:
-      - Boolean
-    need_email:
-      description: Optional. Pass True if you require the user's email address to
-        complete the order
-      required: false
-      types:
-      - Boolean
-    need_shipping_address:
-      description: Optional. Pass True if you require the user's shipping address
-        to complete the order
-      required: false
-      types:
-      - Boolean
-    send_phone_number_to_provider:
-      description: Optional. Pass True if the user's phone number should be sent to
-        provider
-      required: false
-      types:
-      - Boolean
-    send_email_to_provider:
-      description: Optional. Pass True if the user's email address should be sent
-        to provider
-      required: false
-      types:
-      - Boolean
-    is_flexible:
-      description: Optional. Pass True if the final price depends on the shipping
-        method
-      required: false
-      types:
-      - Boolean
-  kind: struct
-- description:
-  - 'This object represents the content of a message to be sent as a result of an
-    inline query. Telegram clients currently support the following 5 types:'
-  - '- InputTextMessageContent'
-  - '- InputLocationMessageContent'
-  - '- InputVenueMessageContent'
-  - '- InputContactMessageContent'
-  - '- InputInvoiceMessageContent'
-  kind: type-alias
-  union:
-  - InputTextMessageContent
-  - InputLocationMessageContent
-  - InputVenueMessageContent
-  - InputContactMessageContent
-  - InputInvoiceMessageContent
+  InputContactMessageContent:
+    fields:
+      first_name:
+        description: Contact's first name
+        name: first_name
+        required: true
+        types:
+        - String
+      last_name:
+        description: Optional. Contact's last name
+        name: last_name
+        required: false
+        types:
+        - String
+      phone_number:
+        description: Contact's phone number
+        name: phone_number
+        required: true
+        types:
+        - String
+      vcard:
+        description: Optional. Additional data about the contact in the form of a
+          vCard, 0-2048 bytes
+        name: vcard
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the content of a contact message to be sent as the result of an
+        inline query.
+      href: https://core.telegram.org/bots/api#inputcontactmessagecontent
+      name: InputContactMessageContent
+  InputInvoiceMessageContent:
+    fields:
+      currency:
+        description: Three-letter ISO 4217 currency code, see more on currencies
+        name: currency
+        required: true
+        types:
+        - String
+      description:
+        description: Product description, 1-255 characters
+        name: description
+        required: true
+        types:
+        - String
+      is_flexible:
+        description: Optional. Pass True if the final price depends on the shipping
+          method
+        name: is_flexible
+        required: false
+        types:
+        - Boolean
+      max_tip_amount:
+        description: Optional. The maximum accepted amount for tips in the smallest
+          units of the currency (integer, not float/double). For example, for a maximum
+          tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json,
+          it shows the number of digits past the decimal point for each currency (2
+          for the majority of currencies). Defaults to 0
+        name: max_tip_amount
+        required: false
+        types:
+        - Integer
+      need_email:
+        description: Optional. Pass True if you require the user's email address to
+          complete the order
+        name: need_email
+        required: false
+        types:
+        - Boolean
+      need_name:
+        description: Optional. Pass True if you require the user's full name to complete
+          the order
+        name: need_name
+        required: false
+        types:
+        - Boolean
+      need_phone_number:
+        description: Optional. Pass True if you require the user's phone number to
+          complete the order
+        name: need_phone_number
+        required: false
+        types:
+        - Boolean
+      need_shipping_address:
+        description: Optional. Pass True if you require the user's shipping address
+          to complete the order
+        name: need_shipping_address
+        required: false
+        types:
+        - Boolean
+      payload:
+        description: Bot-defined invoice payload, 1-128 bytes. This will not be displayed
+          to the user, use for your internal processes.
+        name: payload
+        required: true
+        types:
+        - String
+      photo_height:
+        description: Optional. Photo height
+        name: photo_height
+        required: false
+        types:
+        - Integer
+      photo_size:
+        description: Optional. Photo size in bytes
+        name: photo_size
+        required: false
+        types:
+        - Integer
+      photo_url:
+        description: Optional. URL of the product photo for the invoice. Can be a
+          photo of the goods or a marketing image for a service.
+        name: photo_url
+        required: false
+        types:
+        - String
+      photo_width:
+        description: Optional. Photo width
+        name: photo_width
+        required: false
+        types:
+        - Integer
+      prices:
+        description: Price breakdown, a JSON-serialized list of components (e.g. product
+          price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+        name: prices
+        required: true
+        types:
+        - Array of LabeledPrice
+      provider_data:
+        description: Optional. A JSON-serialized object for data about the invoice,
+          which will be shared with the payment provider. A detailed description of
+          the required fields should be provided by the payment provider.
+        name: provider_data
+        required: false
+        types:
+        - String
+      provider_token:
+        description: Payment provider token, obtained via @BotFather
+        name: provider_token
+        required: true
+        types:
+        - String
+      send_email_to_provider:
+        description: Optional. Pass True if the user's email address should be sent
+          to provider
+        name: send_email_to_provider
+        required: false
+        types:
+        - Boolean
+      send_phone_number_to_provider:
+        description: Optional. Pass True if the user's phone number should be sent
+          to provider
+        name: send_phone_number_to_provider
+        required: false
+        types:
+        - Boolean
+      suggested_tip_amounts:
+        description: Optional. A JSON-serialized array of suggested amounts of tip
+          in the smallest units of the currency (integer, not float/double). At most
+          4 suggested tip amounts can be specified. The suggested tip amounts must
+          be positive, passed in a strictly increased order and must not exceed max_tip_amount.
+        name: suggested_tip_amounts
+        required: false
+        types:
+        - Array of Integer
+      title:
+        description: Product name, 1-32 characters
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the content of an invoice message to be sent as the result of an
+        inline query.
+      href: https://core.telegram.org/bots/api#inputinvoicemessagecontent
+      name: InputInvoiceMessageContent
+  InputLocationMessageContent:
+    fields:
+      heading:
+        description: Optional. For live locations, a direction in which the user is
+          moving, in degrees. Must be between 1 and 360 if specified.
+        name: heading
+        required: false
+        types:
+        - Integer
+      horizontal_accuracy:
+        description: Optional. The radius of uncertainty for the location, measured
+          in meters; 0-1500
+        name: horizontal_accuracy
+        required: false
+        types:
+        - Float
+      latitude:
+        description: Latitude of the location in degrees
+        name: latitude
+        required: true
+        types:
+        - Float
+      live_period:
+        description: Optional. Period in seconds for which the location can be updated,
+          should be between 60 and 86400.
+        name: live_period
+        required: false
+        types:
+        - Integer
+      longitude:
+        description: Longitude of the location in degrees
+        name: longitude
+        required: true
+        types:
+        - Float
+      proximity_alert_radius:
+        description: Optional. For live locations, a maximum distance for proximity
+          alerts about approaching another chat member, in meters. Must be between
+          1 and 100000 if specified.
+        name: proximity_alert_radius
+        required: false
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents the content of a location message to be sent as the result of an
+        inline query.
+      href: https://core.telegram.org/bots/api#inputlocationmessagecontent
+      name: InputLocationMessageContent
+  InputMessageContent:
+    kind: type-alias
+    meta:
+      description:
+      - 'This object represents the content of a message to be sent as a result of
+        an inline query. Telegram clients currently support the following 5 types:'
+      - '- InputTextMessageContent'
+      - '- InputLocationMessageContent'
+      - '- InputVenueMessageContent'
+      - '- InputContactMessageContent'
+      - '- InputInvoiceMessageContent'
+      href: https://core.telegram.org/bots/api#inputmessagecontent
+      name: InputMessageContent
+    union:
+    - InputTextMessageContent
+    - InputLocationMessageContent
+    - InputVenueMessageContent
+    - InputContactMessageContent
+    - InputInvoiceMessageContent
+  InputTextMessageContent:
+    fields:
+      entities:
+        description: Optional. List of special entities that appear in message text,
+          which can be specified instead of parse_mode
+        name: entities
+        required: false
+        types:
+        - Array of MessageEntity
+      link_preview_options:
+        description: Optional. Link preview generation options for the message
+        name: link_preview_options
+        required: false
+        types:
+        - LinkPreviewOptions
+      message_text:
+        description: Text of the message to be sent, 1-4096 characters
+        name: message_text
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the message text. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the content of a text message to be sent as the result of an inline
+        query.
+      href: https://core.telegram.org/bots/api#inputtextmessagecontent
+      name: InputTextMessageContent
+  InputVenueMessageContent:
+    fields:
+      address:
+        description: Address of the venue
+        name: address
+        required: true
+        types:
+        - String
+      foursquare_id:
+        description: Optional. Foursquare identifier of the venue, if known
+        name: foursquare_id
+        required: false
+        types:
+        - String
+      foursquare_type:
+        description: Optional. Foursquare type of the venue, if known. (For example,
+          "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".)
+        name: foursquare_type
+        required: false
+        types:
+        - String
+      google_place_id:
+        description: Optional. Google Places identifier of the venue
+        name: google_place_id
+        required: false
+        types:
+        - String
+      google_place_type:
+        description: Optional. Google Places type of the venue. (See supported types.)
+        name: google_place_type
+        required: false
+        types:
+        - String
+      latitude:
+        description: Latitude of the venue in degrees
+        name: latitude
+        required: true
+        types:
+        - Float
+      longitude:
+        description: Longitude of the venue in degrees
+        name: longitude
+        required: true
+        types:
+        - Float
+      title:
+        description: Name of the venue
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the content of a venue message to be sent as the result of an inline
+        query.
+      href: https://core.telegram.org/bots/api#inputvenuemessagecontent
+      name: InputVenueMessageContent
 dirty: false
-file_name: input_message_content.py

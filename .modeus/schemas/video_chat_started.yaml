@@ -1,8 +1,11 @@
 data:
-  description:
-  - This object represents a service message about a video chat started in the chat.
-    Currently holds no information.
-  fields: {}
-  kind: struct
+  VideoChatStarted:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a video chat started in the
+        chat. Currently holds no information.
+      href: https://core.telegram.org/bots/api#videochatstarted
+      name: VideoChatStarted
 dirty: false
-file_name: video_chat_started.py

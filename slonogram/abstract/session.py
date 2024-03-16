@@ -6,6 +6,7 @@ Key: TypeAlias = str
 Params: TypeAlias = dict[Key, Scalar]
 FilesMap: TypeAlias = dict[Key, BinaryIO]
 
+
 class Session(Protocol):
     def __call__(
         self,

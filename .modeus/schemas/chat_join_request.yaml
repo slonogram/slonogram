@@ -1,44 +1,53 @@
 data:
-  description:
-  - Represents a join request sent to a chat.
-  fields:
-    chat:
-      description: Chat to which the request was sent
-      required: true
-      types:
-      - Chat
-    from:
-      description: User that sent the join request
-      required: true
-      types:
-      - User
-    user_chat_id:
-      description: Identifier of a private chat with the user who sent the join request.
-        This number may have more than 32 significant bits and some programming languages
-        may have difficulty/silent defects in interpreting it. But it has at most
-        52 significant bits, so a 64-bit integer or double-precision float type are
-        safe for storing this identifier. The bot can use this identifier for 5 minutes
-        to send messages until the join request is processed, assuming no other administrator
-        contacted the user.
-      required: true
-      types:
-      - Integer
-    date:
-      description: Date the request was sent in Unix time
-      required: true
-      types:
-      - Integer
-    bio:
-      description: Optional. Bio of the user.
-      required: false
-      types:
-      - String
-    invite_link:
-      description: Optional. Chat invite link that was used by the user to send the
-        join request
-      required: false
-      types:
-      - ChatInviteLink
-  kind: struct
+  ChatJoinRequest:
+    fields:
+      bio:
+        description: Optional. Bio of the user.
+        name: bio
+        required: false
+        types:
+        - String
+      chat:
+        description: Chat to which the request was sent
+        name: chat
+        required: true
+        types:
+        - Chat
+      date:
+        description: Date the request was sent in Unix time
+        name: date
+        required: true
+        types:
+        - Integer
+      from:
+        description: User that sent the join request
+        name: from
+        required: true
+        types:
+        - User
+      invite_link:
+        description: Optional. Chat invite link that was used by the user to send
+          the join request
+        name: invite_link
+        required: false
+        types:
+        - ChatInviteLink
+      user_chat_id:
+        description: Identifier of a private chat with the user who sent the join
+          request. This number may have more than 32 significant bits and some programming
+          languages may have difficulty/silent defects in interpreting it. But it
+          has at most 52 significant bits, so a 64-bit integer or double-precision
+          float type are safe for storing this identifier. The bot can use this identifier
+          for 5 minutes to send messages until the join request is processed, assuming
+          no other administrator contacted the user.
+        name: user_chat_id
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents a join request sent to a chat.
+      href: https://core.telegram.org/bots/api#chatjoinrequest
+      name: ChatJoinRequest
 dirty: false
-file_name: chat_join_request.py

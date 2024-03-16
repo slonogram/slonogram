@@ -1,12 +1,16 @@
 data:
-  description:
-  - This object represents a unique message identifier.
-  fields:
-    message_id:
-      description: Unique message identifier
-      required: true
-      types:
-      - Integer
-  kind: struct
+  MessageId:
+    fields:
+      message_id:
+        description: Unique message identifier
+        name: message_id
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a unique message identifier.
+      href: https://core.telegram.org/bots/api#messageid
+      name: MessageId
 dirty: false
-file_name: message_id.py

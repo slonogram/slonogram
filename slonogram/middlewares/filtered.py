@@ -9,16 +9,17 @@ from .base import Middlewared
 
 M = TypeVar("M")
 
+
 class Filtered(Middlewared[M]):
-    __slots__ = ('filter', 'handler')
+    __slots__ = ("filter", "handler")
 
     def __init__(self, handler: Handler[M], filter: Filter[M]) -> None:
         self.filter = filter
         self.handler = handler
-    
+
     def __repr__(self) -> str:
         return f"Filtered({self.handler}, filter={self.filter})"
-    
+
     async def __call__(self, ctx: Context[M], /) -> Activation:
         if self.filter(ctx):
             return await self.handler(ctx)

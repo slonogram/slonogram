@@ -1,22 +1,28 @@
 data:
-  description:
-  - This object represents one shipping option.
-  fields:
-    id:
-      description: Shipping option identifier
-      required: true
-      types:
-      - String
-    title:
-      description: Option title
-      required: true
-      types:
-      - String
-    prices:
-      description: List of price portions
-      required: true
-      types:
-      - Array of LabeledPrice
-  kind: struct
+  ShippingOption:
+    fields:
+      id:
+        description: Shipping option identifier
+        name: id
+        required: true
+        types:
+        - String
+      prices:
+        description: List of price portions
+        name: prices
+        required: true
+        types:
+        - Array of LabeledPrice
+      title:
+        description: Option title
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents one shipping option.
+      href: https://core.telegram.org/bots/api#shippingoption
+      name: ShippingOption
 dirty: false
-file_name: shipping_option.py

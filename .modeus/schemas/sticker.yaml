@@ -1,91 +1,110 @@
 data:
-  description:
-  - This object represents a sticker.
-  fields:
-    file_id:
-      description: Identifier for this file, which can be used to download or reuse
-        the file
-      required: true
-      types:
-      - String
-    file_unique_id:
-      description: Unique identifier for this file, which is supposed to be the same
-        over time and for different bots. Can't be used to download or reuse the file.
-      required: true
-      types:
-      - String
-    type:
-      description: Type of the sticker, currently one of "regular", "mask", "custom_emoji".
-        The type of the sticker is independent from its format, which is determined
-        by the fields is_animated and is_video.
-      required: true
-      types:
-      - String
-    width:
-      description: Sticker width
-      required: true
-      types:
-      - Integer
-    height:
-      description: Sticker height
-      required: true
-      types:
-      - Integer
-    is_animated:
-      description: True, if the sticker is animated
-      required: true
-      types:
-      - Boolean
-    is_video:
-      description: True, if the sticker is a video sticker
-      required: true
-      types:
-      - Boolean
-    thumbnail:
-      description: Optional. Sticker thumbnail in the .WEBP or .JPG format
-      required: false
-      types:
-      - PhotoSize
-    emoji:
-      description: Optional. Emoji associated with the sticker
-      required: false
-      types:
-      - String
-    set_name:
-      description: Optional. Name of the sticker set to which the sticker belongs
-      required: false
-      types:
-      - String
-    premium_animation:
-      description: Optional. For premium regular stickers, premium animation for the
-        sticker
-      required: false
-      types:
-      - File
-    mask_position:
-      description: Optional. For mask stickers, the position where the mask should
-        be placed
-      required: false
-      types:
-      - MaskPosition
-    custom_emoji_id:
-      description: Optional. For custom emoji stickers, unique identifier of the custom
-        emoji
-      required: false
-      types:
-      - String
-    needs_repainting:
-      description: Optional. True, if the sticker must be repainted to a text color
-        in messages, the color of the Telegram Premium badge in emoji status, white
-        color on chat photos, or another appropriate color in other places
-      required: false
-      types:
-      - Boolean
-    file_size:
-      description: Optional. File size in bytes
-      required: false
-      types:
-      - Integer
-  kind: struct
+  Sticker:
+    fields:
+      custom_emoji_id:
+        description: Optional. For custom emoji stickers, unique identifier of the
+          custom emoji
+        name: custom_emoji_id
+        required: false
+        types:
+        - String
+      emoji:
+        description: Optional. Emoji associated with the sticker
+        name: emoji
+        required: false
+        types:
+        - String
+      file_id:
+        description: Identifier for this file, which can be used to download or reuse
+          the file
+        name: file_id
+        required: true
+        types:
+        - String
+      file_size:
+        description: Optional. File size in bytes
+        name: file_size
+        required: false
+        types:
+        - Integer
+      file_unique_id:
+        description: Unique identifier for this file, which is supposed to be the
+          same over time and for different bots. Can't be used to download or reuse
+          the file.
+        name: file_unique_id
+        required: true
+        types:
+        - String
+      height:
+        description: Sticker height
+        name: height
+        required: true
+        types:
+        - Integer
+      is_animated:
+        description: True, if the sticker is animated
+        name: is_animated
+        required: true
+        types:
+        - Boolean
+      is_video:
+        description: True, if the sticker is a video sticker
+        name: is_video
+        required: true
+        types:
+        - Boolean
+      mask_position:
+        description: Optional. For mask stickers, the position where the mask should
+          be placed
+        name: mask_position
+        required: false
+        types:
+        - MaskPosition
+      needs_repainting:
+        description: Optional. True, if the sticker must be repainted to a text color
+          in messages, the color of the Telegram Premium badge in emoji status, white
+          color on chat photos, or another appropriate color in other places
+        name: needs_repainting
+        required: false
+        types:
+        - Boolean
+      premium_animation:
+        description: Optional. For premium regular stickers, premium animation for
+          the sticker
+        name: premium_animation
+        required: false
+        types:
+        - File
+      set_name:
+        description: Optional. Name of the sticker set to which the sticker belongs
+        name: set_name
+        required: false
+        types:
+        - String
+      thumbnail:
+        description: Optional. Sticker thumbnail in the .WEBP or .JPG format
+        name: thumbnail
+        required: false
+        types:
+        - PhotoSize
+      type:
+        description: Type of the sticker, currently one of "regular", "mask", "custom_emoji".
+          The type of the sticker is independent from its format, which is determined
+          by the fields is_animated and is_video.
+        name: type
+        required: true
+        types:
+        - String
+      width:
+        description: Sticker width
+        name: width
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a sticker.
+      href: https://core.telegram.org/bots/api#sticker
+      name: Sticker
 dirty: false
-file_name: sticker.py

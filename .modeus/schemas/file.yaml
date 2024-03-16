@@ -1,36 +1,44 @@
 data:
-  description:
-  - This object represents a file ready to be downloaded. The file can be downloaded
-    via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed
-    that the link will be valid for at least 1 hour. When the link expires, a new
-    one can be requested by calling getFile.
-  fields:
-    file_id:
-      description: Identifier for this file, which can be used to download or reuse
-        the file
-      required: true
-      types:
-      - String
-    file_unique_id:
-      description: Unique identifier for this file, which is supposed to be the same
-        over time and for different bots. Can't be used to download or reuse the file.
-      required: true
-      types:
-      - String
-    file_size:
-      description: Optional. File size in bytes. It can be bigger than 2^31 and some
-        programming languages may have difficulty/silent defects in interpreting it.
-        But it has at most 52 significant bits, so a signed 64-bit integer or double-precision
-        float type are safe for storing this value.
-      required: false
-      types:
-      - Integer
-    file_path:
-      description: Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path>
-        to get the file.
-      required: false
-      types:
-      - String
-  kind: struct
+  File:
+    fields:
+      file_id:
+        description: Identifier for this file, which can be used to download or reuse
+          the file
+        name: file_id
+        required: true
+        types:
+        - String
+      file_path:
+        description: Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path>
+          to get the file.
+        name: file_path
+        required: false
+        types:
+        - String
+      file_size:
+        description: Optional. File size in bytes. It can be bigger than 2^31 and
+          some programming languages may have difficulty/silent defects in interpreting
+          it. But it has at most 52 significant bits, so a signed 64-bit integer or
+          double-precision float type are safe for storing this value.
+        name: file_size
+        required: false
+        types:
+        - Integer
+      file_unique_id:
+        description: Unique identifier for this file, which is supposed to be the
+          same over time and for different bots. Can't be used to download or reuse
+          the file.
+        name: file_unique_id
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents a file ready to be downloaded. The file can be downloaded
+        via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed
+        that the link will be valid for at least 1 hour. When the link expires, a
+        new one can be requested by calling getFile.
+      href: https://core.telegram.org/bots/api#file
+      name: File
 dirty: false
-file_name: file.py

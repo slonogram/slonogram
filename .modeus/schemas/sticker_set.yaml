@@ -1,43 +1,54 @@
 data:
-  description:
-  - This object represents a sticker set.
-  fields:
-    name:
-      description: Sticker set name
-      required: true
-      types:
-      - String
-    title:
-      description: Sticker set title
-      required: true
-      types:
-      - String
-    sticker_type:
-      description: Type of stickers in the set, currently one of "regular", "mask",
-        "custom_emoji"
-      required: true
-      types:
-      - String
-    is_animated:
-      description: True, if the sticker set contains animated stickers
-      required: true
-      types:
-      - Boolean
-    is_video:
-      description: True, if the sticker set contains video stickers
-      required: true
-      types:
-      - Boolean
-    stickers:
-      description: List of all set stickers
-      required: true
-      types:
-      - Array of Sticker
-    thumbnail:
-      description: Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format
-      required: false
-      types:
-      - PhotoSize
-  kind: struct
+  StickerSet:
+    fields:
+      is_animated:
+        description: True, if the sticker set contains animated stickers
+        name: is_animated
+        required: true
+        types:
+        - Boolean
+      is_video:
+        description: True, if the sticker set contains video stickers
+        name: is_video
+        required: true
+        types:
+        - Boolean
+      name:
+        description: Sticker set name
+        name: name
+        required: true
+        types:
+        - String
+      sticker_type:
+        description: Type of stickers in the set, currently one of "regular", "mask",
+          "custom_emoji"
+        name: sticker_type
+        required: true
+        types:
+        - String
+      stickers:
+        description: List of all set stickers
+        name: stickers
+        required: true
+        types:
+        - Array of Sticker
+      thumbnail:
+        description: Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM
+          format
+        name: thumbnail
+        required: false
+        types:
+        - PhotoSize
+      title:
+        description: Sticker set title
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents a sticker set.
+      href: https://core.telegram.org/bots/api#stickerset
+      name: StickerSet
 dirty: false
-file_name: sticker_set.py

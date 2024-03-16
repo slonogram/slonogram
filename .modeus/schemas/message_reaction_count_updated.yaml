@@ -1,27 +1,34 @@
 data:
-  description:
-  - This object represents reaction changes on a message with anonymous reactions.
-  fields:
-    chat:
-      description: The chat containing the message
-      required: true
-      types:
-      - Chat
-    message_id:
-      description: Unique message identifier inside the chat
-      required: true
-      types:
-      - Integer
-    date:
-      description: Date of the change in Unix time
-      required: true
-      types:
-      - Integer
-    reactions:
-      description: List of reactions that are present on the message
-      required: true
-      types:
-      - Array of ReactionCount
-  kind: struct
+  MessageReactionCountUpdated:
+    fields:
+      chat:
+        description: The chat containing the message
+        name: chat
+        required: true
+        types:
+        - Chat
+      date:
+        description: Date of the change in Unix time
+        name: date
+        required: true
+        types:
+        - Integer
+      message_id:
+        description: Unique message identifier inside the chat
+        name: message_id
+        required: true
+        types:
+        - Integer
+      reactions:
+        description: List of reactions that are present on the message
+        name: reactions
+        required: true
+        types:
+        - Array of ReactionCount
+    kind: struct
+    meta:
+      description:
+      - This object represents reaction changes on a message with anonymous reactions.
+      href: https://core.telegram.org/bots/api#messagereactioncountupdated
+      name: MessageReactionCountUpdated
 dirty: false
-file_name: message_reaction_count_updated.py

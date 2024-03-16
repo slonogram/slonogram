@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 @dataclass(slots=True)
 class Activation:
-    handler: 'Handler[Any] | None' = None
+    handler: "Handler[Any] | None" = None
 
     @classmethod
     def stalled(cls) -> Self:
@@ -16,5 +16,5 @@ class Activation:
     def __bool__(self) -> bool:
         return self.handler is not None
 
-__all__ = ["Activation"]
 
+__all__ = ["Activation"]

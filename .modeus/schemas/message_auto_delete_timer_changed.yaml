@@ -1,12 +1,17 @@
 data:
-  description:
-  - This object represents a service message about a change in auto-delete timer settings.
-  fields:
-    message_auto_delete_time:
-      description: New auto-delete time for messages in the chat; in seconds
-      required: true
-      types:
-      - Integer
-  kind: struct
+  MessageAutoDeleteTimerChanged:
+    fields:
+      message_auto_delete_time:
+        description: New auto-delete time for messages in the chat; in seconds
+        name: message_auto_delete_time
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a change in auto-delete timer
+        settings.
+      href: https://core.telegram.org/bots/api#messageautodeletetimerchanged
+      name: MessageAutoDeleteTimerChanged
 dirty: false
-file_name: message_auto_delete_timer_changed.py

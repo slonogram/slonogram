@@ -1,306 +1,382 @@
 data:
-- description:
-  - Represents a chat member that owns the chat and has all administrator privileges.
-  fields:
-    status:
-      description: The member's status in the chat, always "creator"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-    is_anonymous:
-      description: True, if the user's presence in the chat is hidden
-      required: true
-      types:
-      - Boolean
-    custom_title:
-      description: Optional. Custom title for this user
-      required: false
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents a chat member that has some additional privileges.
-  fields:
-    status:
-      description: The member's status in the chat, always "administrator"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-    can_be_edited:
-      description: True, if the bot is allowed to edit administrator privileges of
-        that user
-      required: true
-      types:
-      - Boolean
-    is_anonymous:
-      description: True, if the user's presence in the chat is hidden
-      required: true
-      types:
-      - Boolean
-    can_manage_chat:
-      description: True, if the administrator can access the chat event log, get boost
-        list, see hidden supergroup and channel members, report spam messages and
-        ignore slow mode. Implied by any other administrator privilege.
-      required: true
-      types:
-      - Boolean
-    can_delete_messages:
-      description: True, if the administrator can delete messages of other users
-      required: true
-      types:
-      - Boolean
-    can_manage_video_chats:
-      description: True, if the administrator can manage video chats
-      required: true
-      types:
-      - Boolean
-    can_restrict_members:
-      description: True, if the administrator can restrict, ban or unban chat members,
-        or access supergroup statistics
-      required: true
-      types:
-      - Boolean
-    can_promote_members:
-      description: True, if the administrator can add new administrators with a subset
-        of their own privileges or demote administrators that they have promoted,
-        directly or indirectly (promoted by administrators that were appointed by
-        the user)
-      required: true
-      types:
-      - Boolean
-    can_change_info:
-      description: True, if the user is allowed to change the chat title, photo and
-        other settings
-      required: true
-      types:
-      - Boolean
-    can_invite_users:
-      description: True, if the user is allowed to invite new users to the chat
-      required: true
-      types:
-      - Boolean
-    can_post_stories:
-      description: True, if the administrator can post stories to the chat
-      required: true
-      types:
-      - Boolean
-    can_edit_stories:
-      description: True, if the administrator can edit stories posted by other users
-      required: true
-      types:
-      - Boolean
-    can_delete_stories:
-      description: True, if the administrator can delete stories posted by other users
-      required: true
-      types:
-      - Boolean
-    can_post_messages:
-      description: Optional. True, if the administrator can post messages in the channel,
-        or access channel statistics; for channels only
-      required: false
-      types:
-      - Boolean
-    can_edit_messages:
-      description: Optional. True, if the administrator can edit messages of other
-        users and can pin messages; for channels only
-      required: false
-      types:
-      - Boolean
-    can_pin_messages:
-      description: Optional. True, if the user is allowed to pin messages; for groups
-        and supergroups only
-      required: false
-      types:
-      - Boolean
-    can_manage_topics:
-      description: Optional. True, if the user is allowed to create, rename, close,
-        and reopen forum topics; for supergroups only
-      required: false
-      types:
-      - Boolean
-    custom_title:
-      description: Optional. Custom title for this user
-      required: false
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents a chat member that has no additional privileges or restrictions.
-  fields:
-    status:
-      description: The member's status in the chat, always "member"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-  kind: struct
-- description:
-  - Represents a chat member that is under certain restrictions in the chat. Supergroups
-    only.
-  fields:
-    status:
-      description: The member's status in the chat, always "restricted"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-    is_member:
-      description: True, if the user is a member of the chat at the moment of the
-        request
-      required: true
-      types:
-      - Boolean
-    can_send_messages:
-      description: True, if the user is allowed to send text messages, contacts, giveaways,
-        giveaway winners, invoices, locations and venues
-      required: true
-      types:
-      - Boolean
-    can_send_audios:
-      description: True, if the user is allowed to send audios
-      required: true
-      types:
-      - Boolean
-    can_send_documents:
-      description: True, if the user is allowed to send documents
-      required: true
-      types:
-      - Boolean
-    can_send_photos:
-      description: True, if the user is allowed to send photos
-      required: true
-      types:
-      - Boolean
-    can_send_videos:
-      description: True, if the user is allowed to send videos
-      required: true
-      types:
-      - Boolean
-    can_send_video_notes:
-      description: True, if the user is allowed to send video notes
-      required: true
-      types:
-      - Boolean
-    can_send_voice_notes:
-      description: True, if the user is allowed to send voice notes
-      required: true
-      types:
-      - Boolean
-    can_send_polls:
-      description: True, if the user is allowed to send polls
-      required: true
-      types:
-      - Boolean
-    can_send_other_messages:
-      description: True, if the user is allowed to send animations, games, stickers
-        and use inline bots
-      required: true
-      types:
-      - Boolean
-    can_add_web_page_previews:
-      description: True, if the user is allowed to add web page previews to their
-        messages
-      required: true
-      types:
-      - Boolean
-    can_change_info:
-      description: True, if the user is allowed to change the chat title, photo and
-        other settings
-      required: true
-      types:
-      - Boolean
-    can_invite_users:
-      description: True, if the user is allowed to invite new users to the chat
-      required: true
-      types:
-      - Boolean
-    can_pin_messages:
-      description: True, if the user is allowed to pin messages
-      required: true
-      types:
-      - Boolean
-    can_manage_topics:
-      description: True, if the user is allowed to create forum topics
-      required: true
-      types:
-      - Boolean
-    until_date:
-      description: Date when restrictions will be lifted for this user; Unix time.
-        If 0, then the user is restricted forever
-      required: true
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a chat member that isn't currently a member of the chat, but may join
-    it themselves.
-  fields:
-    status:
-      description: The member's status in the chat, always "left"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-  kind: struct
-- description:
-  - Represents a chat member that was banned in the chat and can't return to the chat
-    or view chat messages.
-  fields:
-    status:
-      description: The member's status in the chat, always "kicked"
-      required: true
-      types:
-      - String
-    user:
-      description: Information about the user
-      required: true
-      types:
-      - User
-    until_date:
-      description: Date when restrictions will be lifted for this user; Unix time.
-        If 0, then the user is banned forever
-      required: true
-      types:
-      - Integer
-  kind: struct
-- description:
-  - 'This object contains information about one member of a chat. Currently, the following
-    6 types of chat members are supported:'
-  - '- ChatMemberOwner'
-  - '- ChatMemberAdministrator'
-  - '- ChatMemberMember'
-  - '- ChatMemberRestricted'
-  - '- ChatMemberLeft'
-  - '- ChatMemberBanned'
-  kind: type-alias
-  union:
-  - ChatMemberOwner
-  - ChatMemberAdministrator
-  - ChatMemberMember
-  - ChatMemberRestricted
-  - ChatMemberLeft
-  - ChatMemberBanned
+  ChatMember:
+    kind: type-alias
+    meta:
+      description:
+      - 'This object contains information about one member of a chat. Currently, the
+        following 6 types of chat members are supported:'
+      - '- ChatMemberOwner'
+      - '- ChatMemberAdministrator'
+      - '- ChatMemberMember'
+      - '- ChatMemberRestricted'
+      - '- ChatMemberLeft'
+      - '- ChatMemberBanned'
+      href: https://core.telegram.org/bots/api#chatmember
+      name: ChatMember
+    union:
+    - ChatMemberOwner
+    - ChatMemberAdministrator
+    - ChatMemberMember
+    - ChatMemberRestricted
+    - ChatMemberLeft
+    - ChatMemberBanned
+  ChatMemberAdministrator:
+    fields:
+      can_be_edited:
+        description: True, if the bot is allowed to edit administrator privileges
+          of that user
+        name: can_be_edited
+        required: true
+        types:
+        - Boolean
+      can_change_info:
+        description: True, if the user is allowed to change the chat title, photo
+          and other settings
+        name: can_change_info
+        required: true
+        types:
+        - Boolean
+      can_delete_messages:
+        description: True, if the administrator can delete messages of other users
+        name: can_delete_messages
+        required: true
+        types:
+        - Boolean
+      can_delete_stories:
+        description: True, if the administrator can delete stories posted by other
+          users
+        name: can_delete_stories
+        required: true
+        types:
+        - Boolean
+      can_edit_messages:
+        description: Optional. True, if the administrator can edit messages of other
+          users and can pin messages; for channels only
+        name: can_edit_messages
+        required: false
+        types:
+        - Boolean
+      can_edit_stories:
+        description: True, if the administrator can edit stories posted by other users
+        name: can_edit_stories
+        required: true
+        types:
+        - Boolean
+      can_invite_users:
+        description: True, if the user is allowed to invite new users to the chat
+        name: can_invite_users
+        required: true
+        types:
+        - Boolean
+      can_manage_chat:
+        description: True, if the administrator can access the chat event log, get
+          boost list, see hidden supergroup and channel members, report spam messages
+          and ignore slow mode. Implied by any other administrator privilege.
+        name: can_manage_chat
+        required: true
+        types:
+        - Boolean
+      can_manage_topics:
+        description: Optional. True, if the user is allowed to create, rename, close,
+          and reopen forum topics; for supergroups only
+        name: can_manage_topics
+        required: false
+        types:
+        - Boolean
+      can_manage_video_chats:
+        description: True, if the administrator can manage video chats
+        name: can_manage_video_chats
+        required: true
+        types:
+        - Boolean
+      can_pin_messages:
+        description: Optional. True, if the user is allowed to pin messages; for groups
+          and supergroups only
+        name: can_pin_messages
+        required: false
+        types:
+        - Boolean
+      can_post_messages:
+        description: Optional. True, if the administrator can post messages in the
+          channel, or access channel statistics; for channels only
+        name: can_post_messages
+        required: false
+        types:
+        - Boolean
+      can_post_stories:
+        description: True, if the administrator can post stories to the chat
+        name: can_post_stories
+        required: true
+        types:
+        - Boolean
+      can_promote_members:
+        description: True, if the administrator can add new administrators with a
+          subset of their own privileges or demote administrators that they have promoted,
+          directly or indirectly (promoted by administrators that were appointed by
+          the user)
+        name: can_promote_members
+        required: true
+        types:
+        - Boolean
+      can_restrict_members:
+        description: True, if the administrator can restrict, ban or unban chat members,
+          or access supergroup statistics
+        name: can_restrict_members
+        required: true
+        types:
+        - Boolean
+      custom_title:
+        description: Optional. Custom title for this user
+        name: custom_title
+        required: false
+        types:
+        - String
+      is_anonymous:
+        description: True, if the user's presence in the chat is hidden
+        name: is_anonymous
+        required: true
+        types:
+        - Boolean
+      status:
+        description: The member's status in the chat, always "administrator"
+        name: status
+        required: true
+        types:
+        - String
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that has some additional privileges.
+      href: https://core.telegram.org/bots/api#chatmemberadministrator
+      name: ChatMemberAdministrator
+  ChatMemberBanned:
+    fields:
+      status:
+        description: The member's status in the chat, always "kicked"
+        name: status
+        required: true
+        types:
+        - String
+      until_date:
+        description: Date when restrictions will be lifted for this user; Unix time.
+          If 0, then the user is banned forever
+        name: until_date
+        required: true
+        types:
+        - Integer
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that was banned in the chat and can't return to the
+        chat or view chat messages.
+      href: https://core.telegram.org/bots/api#chatmemberbanned
+      name: ChatMemberBanned
+  ChatMemberLeft:
+    fields:
+      status:
+        description: The member's status in the chat, always "left"
+        name: status
+        required: true
+        types:
+        - String
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that isn't currently a member of the chat, but may
+        join it themselves.
+      href: https://core.telegram.org/bots/api#chatmemberleft
+      name: ChatMemberLeft
+  ChatMemberMember:
+    fields:
+      status:
+        description: The member's status in the chat, always "member"
+        name: status
+        required: true
+        types:
+        - String
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that has no additional privileges or restrictions.
+      href: https://core.telegram.org/bots/api#chatmembermember
+      name: ChatMemberMember
+  ChatMemberOwner:
+    fields:
+      custom_title:
+        description: Optional. Custom title for this user
+        name: custom_title
+        required: false
+        types:
+        - String
+      is_anonymous:
+        description: True, if the user's presence in the chat is hidden
+        name: is_anonymous
+        required: true
+        types:
+        - Boolean
+      status:
+        description: The member's status in the chat, always "creator"
+        name: status
+        required: true
+        types:
+        - String
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that owns the chat and has all administrator privileges.
+      href: https://core.telegram.org/bots/api#chatmemberowner
+      name: ChatMemberOwner
+  ChatMemberRestricted:
+    fields:
+      can_add_web_page_previews:
+        description: True, if the user is allowed to add web page previews to their
+          messages
+        name: can_add_web_page_previews
+        required: true
+        types:
+        - Boolean
+      can_change_info:
+        description: True, if the user is allowed to change the chat title, photo
+          and other settings
+        name: can_change_info
+        required: true
+        types:
+        - Boolean
+      can_invite_users:
+        description: True, if the user is allowed to invite new users to the chat
+        name: can_invite_users
+        required: true
+        types:
+        - Boolean
+      can_manage_topics:
+        description: True, if the user is allowed to create forum topics
+        name: can_manage_topics
+        required: true
+        types:
+        - Boolean
+      can_pin_messages:
+        description: True, if the user is allowed to pin messages
+        name: can_pin_messages
+        required: true
+        types:
+        - Boolean
+      can_send_audios:
+        description: True, if the user is allowed to send audios
+        name: can_send_audios
+        required: true
+        types:
+        - Boolean
+      can_send_documents:
+        description: True, if the user is allowed to send documents
+        name: can_send_documents
+        required: true
+        types:
+        - Boolean
+      can_send_messages:
+        description: True, if the user is allowed to send text messages, contacts,
+          giveaways, giveaway winners, invoices, locations and venues
+        name: can_send_messages
+        required: true
+        types:
+        - Boolean
+      can_send_other_messages:
+        description: True, if the user is allowed to send animations, games, stickers
+          and use inline bots
+        name: can_send_other_messages
+        required: true
+        types:
+        - Boolean
+      can_send_photos:
+        description: True, if the user is allowed to send photos
+        name: can_send_photos
+        required: true
+        types:
+        - Boolean
+      can_send_polls:
+        description: True, if the user is allowed to send polls
+        name: can_send_polls
+        required: true
+        types:
+        - Boolean
+      can_send_video_notes:
+        description: True, if the user is allowed to send video notes
+        name: can_send_video_notes
+        required: true
+        types:
+        - Boolean
+      can_send_videos:
+        description: True, if the user is allowed to send videos
+        name: can_send_videos
+        required: true
+        types:
+        - Boolean
+      can_send_voice_notes:
+        description: True, if the user is allowed to send voice notes
+        name: can_send_voice_notes
+        required: true
+        types:
+        - Boolean
+      is_member:
+        description: True, if the user is a member of the chat at the moment of the
+          request
+        name: is_member
+        required: true
+        types:
+        - Boolean
+      status:
+        description: The member's status in the chat, always "restricted"
+        name: status
+        required: true
+        types:
+        - String
+      until_date:
+        description: Date when restrictions will be lifted for this user; Unix time.
+          If 0, then the user is restricted forever
+        name: until_date
+        required: true
+        types:
+        - Integer
+      user:
+        description: Information about the user
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - Represents a chat member that is under certain restrictions in the chat. Supergroups
+        only.
+      href: https://core.telegram.org/bots/api#chatmemberrestricted
+      name: ChatMemberRestricted
 dirty: false
-file_name: chat_member.py

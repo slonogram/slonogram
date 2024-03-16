@@ -1,28 +1,35 @@
 data:
-  description:
-  - This object contains information about a chat boost.
-  fields:
-    boost_id:
-      description: Unique identifier of the boost
-      required: true
-      types:
-      - String
-    add_date:
-      description: Point in time (Unix timestamp) when the chat was boosted
-      required: true
-      types:
-      - Integer
-    expiration_date:
-      description: Point in time (Unix timestamp) when the boost will automatically
-        expire, unless the booster's Telegram Premium subscription is prolonged
-      required: true
-      types:
-      - Integer
-    source:
-      description: Source of the added boost
-      required: true
-      types:
-      - ChatBoostSource
-  kind: struct
+  ChatBoost:
+    fields:
+      add_date:
+        description: Point in time (Unix timestamp) when the chat was boosted
+        name: add_date
+        required: true
+        types:
+        - Integer
+      boost_id:
+        description: Unique identifier of the boost
+        name: boost_id
+        required: true
+        types:
+        - String
+      expiration_date:
+        description: Point in time (Unix timestamp) when the boost will automatically
+          expire, unless the booster's Telegram Premium subscription is prolonged
+        name: expiration_date
+        required: true
+        types:
+        - Integer
+      source:
+        description: Source of the added boost
+        name: source
+        required: true
+        types:
+        - ChatBoostSource
+    kind: struct
+    meta:
+      description:
+      - This object contains information about a chat boost.
+      href: https://core.telegram.org/bots/api#chatboost
+      name: ChatBoost
 dirty: false
-file_name: chat_boost.py

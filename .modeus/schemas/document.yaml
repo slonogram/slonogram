@@ -1,43 +1,53 @@
 data:
-  description:
-  - This object represents a general file (as opposed to photos, voice messages and
-    audio files).
-  fields:
-    file_id:
-      description: Identifier for this file, which can be used to download or reuse
-        the file
-      required: true
-      types:
-      - String
-    file_unique_id:
-      description: Unique identifier for this file, which is supposed to be the same
-        over time and for different bots. Can't be used to download or reuse the file.
-      required: true
-      types:
-      - String
-    thumbnail:
-      description: Optional. Document thumbnail as defined by sender
-      required: false
-      types:
-      - PhotoSize
-    file_name:
-      description: Optional. Original filename as defined by sender
-      required: false
-      types:
-      - String
-    mime_type:
-      description: Optional. MIME type of the file as defined by sender
-      required: false
-      types:
-      - String
-    file_size:
-      description: Optional. File size in bytes. It can be bigger than 2^31 and some
-        programming languages may have difficulty/silent defects in interpreting it.
-        But it has at most 52 significant bits, so a signed 64-bit integer or double-precision
-        float type are safe for storing this value.
-      required: false
-      types:
-      - Integer
-  kind: struct
+  Document:
+    fields:
+      file_id:
+        description: Identifier for this file, which can be used to download or reuse
+          the file
+        name: file_id
+        required: true
+        types:
+        - String
+      file_name:
+        description: Optional. Original filename as defined by sender
+        name: file_name
+        required: false
+        types:
+        - String
+      file_size:
+        description: Optional. File size in bytes. It can be bigger than 2^31 and
+          some programming languages may have difficulty/silent defects in interpreting
+          it. But it has at most 52 significant bits, so a signed 64-bit integer or
+          double-precision float type are safe for storing this value.
+        name: file_size
+        required: false
+        types:
+        - Integer
+      file_unique_id:
+        description: Unique identifier for this file, which is supposed to be the
+          same over time and for different bots. Can't be used to download or reuse
+          the file.
+        name: file_unique_id
+        required: true
+        types:
+        - String
+      mime_type:
+        description: Optional. MIME type of the file as defined by sender
+        name: mime_type
+        required: false
+        types:
+        - String
+      thumbnail:
+        description: Optional. Document thumbnail as defined by sender
+        name: thumbnail
+        required: false
+        types:
+        - PhotoSize
+    kind: struct
+    meta:
+      description:
+      - This object represents a general file (as opposed to photos, voice messages
+        and audio files).
+      href: https://core.telegram.org/bots/api#document
+      name: Document
 dirty: false
-file_name: document.py

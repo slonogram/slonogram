@@ -91,10 +91,10 @@ async def main() -> None:
     stash = Stash()
     dp = (
         Dispatcher[str](name="CLI")
-            .register(activate(help) & word("help"))
-            .register(activate(say) & word("say"))
-            .register(activate(evaluate) & word("eval"))
-            .register(activate(not_found))
+        .register(activate(help) & word("help"))
+        .register(activate(say) & word("say"))
+        .register(activate(evaluate) & word("eval"))
+        .register(activate(not_found))
         << handle_exception
     )
 

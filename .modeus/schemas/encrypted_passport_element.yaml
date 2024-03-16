@@ -1,81 +1,94 @@
 data:
-  description:
-  - Describes documents or other Telegram Passport elements shared with the bot by
-    the user.
-  fields:
-    type:
-      description: Element type. One of "personal_details", "passport", "driver_license",
-        "identity_card", "internal_passport", "address", "utility_bill", "bank_statement",
-        "rental_agreement", "passport_registration", "temporary_registration", "phone_number",
-        "email".
-      required: true
-      types:
-      - String
-    data:
-      description: Optional. Base64-encoded encrypted Telegram Passport element data
-        provided by the user; available only for "personal_details", "passport", "driver_license",
-        "identity_card", "internal_passport" and "address" types. Can be decrypted
-        and verified using the accompanying EncryptedCredentials.
-      required: false
-      types:
-      - String
-    phone_number:
-      description: Optional. User's verified phone number; available only for "phone_number"
-        type
-      required: false
-      types:
-      - String
-    email:
-      description: Optional. User's verified email address; available only for "email"
-        type
-      required: false
-      types:
-      - String
-    files:
-      description: Optional. Array of encrypted files with documents provided by the
-        user; available only for "utility_bill", "bank_statement", "rental_agreement",
-        "passport_registration" and "temporary_registration" types. Files can be decrypted
-        and verified using the accompanying EncryptedCredentials.
-      required: false
-      types:
-      - Array of PassportFile
-    front_side:
-      description: Optional. Encrypted file with the front side of the document, provided
-        by the user; available only for "passport", "driver_license", "identity_card"
-        and "internal_passport". The file can be decrypted and verified using the
-        accompanying EncryptedCredentials.
-      required: false
-      types:
-      - PassportFile
-    reverse_side:
-      description: Optional. Encrypted file with the reverse side of the document,
-        provided by the user; available only for "driver_license" and "identity_card".
-        The file can be decrypted and verified using the accompanying EncryptedCredentials.
-      required: false
-      types:
-      - PassportFile
-    selfie:
-      description: Optional. Encrypted file with the selfie of the user holding a
-        document, provided by the user; available if requested for "passport", "driver_license",
-        "identity_card" and "internal_passport". The file can be decrypted and verified
-        using the accompanying EncryptedCredentials.
-      required: false
-      types:
-      - PassportFile
-    translation:
-      description: Optional. Array of encrypted files with translated versions of
-        documents provided by the user; available if requested for "passport", "driver_license",
-        "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement",
-        "passport_registration" and "temporary_registration" types. Files can be decrypted
-        and verified using the accompanying EncryptedCredentials.
-      required: false
-      types:
-      - Array of PassportFile
-    hash:
-      description: Base64-encoded element hash for using in PassportElementErrorUnspecified
-      required: true
-      types:
-      - String
-  kind: struct
+  EncryptedPassportElement:
+    fields:
+      data:
+        description: Optional. Base64-encoded encrypted Telegram Passport element
+          data provided by the user; available only for "personal_details", "passport",
+          "driver_license", "identity_card", "internal_passport" and "address" types.
+          Can be decrypted and verified using the accompanying EncryptedCredentials.
+        name: data
+        required: false
+        types:
+        - String
+      email:
+        description: Optional. User's verified email address; available only for "email"
+          type
+        name: email
+        required: false
+        types:
+        - String
+      files:
+        description: Optional. Array of encrypted files with documents provided by
+          the user; available only for "utility_bill", "bank_statement", "rental_agreement",
+          "passport_registration" and "temporary_registration" types. Files can be
+          decrypted and verified using the accompanying EncryptedCredentials.
+        name: files
+        required: false
+        types:
+        - Array of PassportFile
+      front_side:
+        description: Optional. Encrypted file with the front side of the document,
+          provided by the user; available only for "passport", "driver_license", "identity_card"
+          and "internal_passport". The file can be decrypted and verified using the
+          accompanying EncryptedCredentials.
+        name: front_side
+        required: false
+        types:
+        - PassportFile
+      hash:
+        description: Base64-encoded element hash for using in PassportElementErrorUnspecified
+        name: hash
+        required: true
+        types:
+        - String
+      phone_number:
+        description: Optional. User's verified phone number; available only for "phone_number"
+          type
+        name: phone_number
+        required: false
+        types:
+        - String
+      reverse_side:
+        description: Optional. Encrypted file with the reverse side of the document,
+          provided by the user; available only for "driver_license" and "identity_card".
+          The file can be decrypted and verified using the accompanying EncryptedCredentials.
+        name: reverse_side
+        required: false
+        types:
+        - PassportFile
+      selfie:
+        description: Optional. Encrypted file with the selfie of the user holding
+          a document, provided by the user; available if requested for "passport",
+          "driver_license", "identity_card" and "internal_passport". The file can
+          be decrypted and verified using the accompanying EncryptedCredentials.
+        name: selfie
+        required: false
+        types:
+        - PassportFile
+      translation:
+        description: Optional. Array of encrypted files with translated versions of
+          documents provided by the user; available if requested for "passport", "driver_license",
+          "identity_card", "internal_passport", "utility_bill", "bank_statement",
+          "rental_agreement", "passport_registration" and "temporary_registration"
+          types. Files can be decrypted and verified using the accompanying EncryptedCredentials.
+        name: translation
+        required: false
+        types:
+        - Array of PassportFile
+      type:
+        description: Element type. One of "personal_details", "passport", "driver_license",
+          "identity_card", "internal_passport", "address", "utility_bill", "bank_statement",
+          "rental_agreement", "passport_registration", "temporary_registration", "phone_number",
+          "email".
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes documents or other Telegram Passport elements shared with the bot
+        by the user.
+      href: https://core.telegram.org/bots/api#encryptedpassportelement
+      name: EncryptedPassportElement
 dirty: false
-file_name: encrypted_passport_element.py

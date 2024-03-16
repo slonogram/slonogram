@@ -1,30 +1,37 @@
 data:
-  description:
-  - This object represents an answer of a user in a non-anonymous poll.
-  fields:
-    poll_id:
-      description: Unique poll identifier
-      required: true
-      types:
-      - String
-    voter_chat:
-      description: Optional. The chat that changed the answer to the poll, if the
-        voter is anonymous
-      required: false
-      types:
-      - Chat
-    user:
-      description: Optional. The user that changed the answer to the poll, if the
-        voter isn't anonymous
-      required: false
-      types:
-      - User
-    option_ids:
-      description: 0-based identifiers of chosen answer options. May be empty if the
-        vote was retracted.
-      required: true
-      types:
-      - Array of Integer
-  kind: struct
+  PollAnswer:
+    fields:
+      option_ids:
+        description: 0-based identifiers of chosen answer options. May be empty if
+          the vote was retracted.
+        name: option_ids
+        required: true
+        types:
+        - Array of Integer
+      poll_id:
+        description: Unique poll identifier
+        name: poll_id
+        required: true
+        types:
+        - String
+      user:
+        description: Optional. The user that changed the answer to the poll, if the
+          voter isn't anonymous
+        name: user
+        required: false
+        types:
+        - User
+      voter_chat:
+        description: Optional. The chat that changed the answer to the poll, if the
+          voter is anonymous
+        name: voter_chat
+        required: false
+        types:
+        - Chat
+    kind: struct
+    meta:
+      description:
+      - This object represents an answer of a user in a non-anonymous poll.
+      href: https://core.telegram.org/bots/api#pollanswer
+      name: PollAnswer
 dirty: false
-file_name: poll_answer.py

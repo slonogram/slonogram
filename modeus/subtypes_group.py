@@ -1,37 +1,33 @@
-from dataclasses import dataclass
 from .spec import Type
 
+def _set(
+    to: dict[str, dict[str, Type]],
+    key1: str,
+    key2: str,
+    value: Type,
+) -> None:
+    if key1 in to:
+        to[key1][key2] = value
+    else:
+        to[key1] = {key2: value}
 
-@dataclass(slots=True, frozen=True)
-class SubtypesGrouped:
-    subtyped: dict[str, dict[str, Type]]
-    free: dict[str, Type]
+def group_by_subtype(input: dict[str, Type]) -> dict[str, dict[str, Type]]:
+    groups: dict[str, dict[str, Type]] = {}
+
+    for type_name, desc in input.items():
+        if desc.subtype_of:
+            if len(desc.subtype_of) != 1:
+                raise NotImplementedError(f"Number of parent types != 0 ({type_name!r})")
+
+            parent = desc.subtype_of[0]
+            _set(groups, parent, type_name, desc)
+        elif not desc.subtypes:
+            groups[type_name] = {type_name: desc}
+        elif desc.subtypes:
+            _set(groups, type_name, type_name, desc)
+
+    return groups
 
 
-def group_by_subtype(types: dict[str, Type]) -> SubtypesGrouped:
-    subtyped: dict[str, dict[str, Type]] = {}
-    free: dict[str, Type] = {}
-    parents: set[str] = set()
+__all__ = ["group_by_subtype"]
 
-    for name, tp in types.items():
-        if len(tp.subtype_of) > 1:
-            raise NotImplementedError(f'Type {name!r} has more subtype_of than one: {tp!r}')
-        elif tp.subtype_of:
-            parent = tp.subtype_of[0]
-            if parent not in subtyped:
-                parents.add(parent)
-                subtyped[parent] = {name: tp}
-            else:
-                subtyped[parent][name] = tp
-        else:
-            free[name] = tp
-
-    return SubtypesGrouped(
-        subtyped,
-        {k:v for k, v in free.items() if k not in parents}
-    )
-
-__all__ = [
-    "SubtypesGrouped",
-    "group_by_subtype",
-]

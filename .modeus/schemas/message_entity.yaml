@@ -1,53 +1,63 @@
 data:
-  description:
-  - This object represents one special entity in a text message. For example, hashtags,
-    usernames, URLs, etc.
-  fields:
-    type:
-      description: Type of the entity. Currently, can be "mention" (@username), "hashtag"
-        (#hashtag), "cashtag" ($USD), "bot_command" (/start@jobs_bot), "url" (https://telegram.org),
-        "email" (do-not-reply@telegram.org), "phone_number" (+1-212-555-0123), "bold"
-        (bold text), "italic" (italic text), "underline" (underlined text), "strikethrough"
-        (strikethrough text), "spoiler" (spoiler message), "blockquote" (block quotation),
-        "code" (monowidth string), "pre" (monowidth block), "text_link" (for clickable
-        text URLs), "text_mention" (for users without usernames), "custom_emoji" (for
-        inline custom emoji stickers)
-      required: true
-      types:
-      - String
-    offset:
-      description: Offset in UTF-16 code units to the start of the entity
-      required: true
-      types:
-      - Integer
-    length:
-      description: Length of the entity in UTF-16 code units
-      required: true
-      types:
-      - Integer
-    url:
-      description: Optional. For "text_link" only, URL that will be opened after user
-        taps on the text
-      required: false
-      types:
-      - String
-    user:
-      description: Optional. For "text_mention" only, the mentioned user
-      required: false
-      types:
-      - User
-    language:
-      description: Optional. For "pre" only, the programming language of the entity
-        text
-      required: false
-      types:
-      - String
-    custom_emoji_id:
-      description: Optional. For "custom_emoji" only, unique identifier of the custom
-        emoji. Use getCustomEmojiStickers to get full information about the sticker
-      required: false
-      types:
-      - String
-  kind: struct
+  MessageEntity:
+    fields:
+      custom_emoji_id:
+        description: Optional. For "custom_emoji" only, unique identifier of the custom
+          emoji. Use getCustomEmojiStickers to get full information about the sticker
+        name: custom_emoji_id
+        required: false
+        types:
+        - String
+      language:
+        description: Optional. For "pre" only, the programming language of the entity
+          text
+        name: language
+        required: false
+        types:
+        - String
+      length:
+        description: Length of the entity in UTF-16 code units
+        name: length
+        required: true
+        types:
+        - Integer
+      offset:
+        description: Offset in UTF-16 code units to the start of the entity
+        name: offset
+        required: true
+        types:
+        - Integer
+      type:
+        description: Type of the entity. Currently, can be "mention" (@username),
+          "hashtag" (#hashtag), "cashtag" ($USD), "bot_command" (/start@jobs_bot),
+          "url" (https://telegram.org), "email" (do-not-reply@telegram.org), "phone_number"
+          (+1-212-555-0123), "bold" (bold text), "italic" (italic text), "underline"
+          (underlined text), "strikethrough" (strikethrough text), "spoiler" (spoiler
+          message), "blockquote" (block quotation), "code" (monowidth string), "pre"
+          (monowidth block), "text_link" (for clickable text URLs), "text_mention"
+          (for users without usernames), "custom_emoji" (for inline custom emoji stickers)
+        name: type
+        required: true
+        types:
+        - String
+      url:
+        description: Optional. For "text_link" only, URL that will be opened after
+          user taps on the text
+        name: url
+        required: false
+        types:
+        - String
+      user:
+        description: Optional. For "text_mention" only, the mentioned user
+        name: user
+        required: false
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - This object represents one special entity in a text message. For example,
+        hashtags, usernames, URLs, etc.
+      href: https://core.telegram.org/bots/api#messageentity
+      name: MessageEntity
 dirty: false
-file_name: message_entity.py

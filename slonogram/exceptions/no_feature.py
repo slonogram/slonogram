@@ -6,4 +6,5 @@ class NoFeatureError(Exception):
             f"{message}, perhaps you forgot to add {feature!r} in the dependency extra?"
         )
 
+
 __all__ = ["NoFeatureError"]

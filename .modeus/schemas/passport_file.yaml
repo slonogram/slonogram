@@ -1,30 +1,39 @@
 data:
-  description:
-  - This object represents a file uploaded to Telegram Passport. Currently all Telegram
-    Passport files are in JPEG format when decrypted and don't exceed 10MB.
-  fields:
-    file_id:
-      description: Identifier for this file, which can be used to download or reuse
-        the file
-      required: true
-      types:
-      - String
-    file_unique_id:
-      description: Unique identifier for this file, which is supposed to be the same
-        over time and for different bots. Can't be used to download or reuse the file.
-      required: true
-      types:
-      - String
-    file_size:
-      description: File size in bytes
-      required: true
-      types:
-      - Integer
-    file_date:
-      description: Unix time when the file was uploaded
-      required: true
-      types:
-      - Integer
-  kind: struct
+  PassportFile:
+    fields:
+      file_date:
+        description: Unix time when the file was uploaded
+        name: file_date
+        required: true
+        types:
+        - Integer
+      file_id:
+        description: Identifier for this file, which can be used to download or reuse
+          the file
+        name: file_id
+        required: true
+        types:
+        - String
+      file_size:
+        description: File size in bytes
+        name: file_size
+        required: true
+        types:
+        - Integer
+      file_unique_id:
+        description: Unique identifier for this file, which is supposed to be the
+          same over time and for different bots. Can't be used to download or reuse
+          the file.
+        name: file_unique_id
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents a file uploaded to Telegram Passport. Currently all
+        Telegram Passport files are in JPEG format when decrypted and don't exceed
+        10MB.
+      href: https://core.telegram.org/bots/api#passportfile
+      name: PassportFile
 dirty: false
-file_name: passport_file.py

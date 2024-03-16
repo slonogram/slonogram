@@ -1,13 +1,17 @@
 data:
-  description:
-  - Describes a Web App.
-  fields:
-    url:
-      description: An HTTPS URL of a Web App to be opened with additional data as
-        specified in Initializing Web Apps
-      required: true
-      types:
-      - String
-  kind: struct
+  WebAppInfo:
+    fields:
+      url:
+        description: An HTTPS URL of a Web App to be opened with additional data as
+          specified in Initializing Web Apps
+        name: url
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes a Web App.
+      href: https://core.telegram.org/bots/api#webappinfo
+      name: WebAppInfo
 dirty: false
-file_name: web_app_info.py

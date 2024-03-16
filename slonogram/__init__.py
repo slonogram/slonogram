@@ -1,5 +1,5 @@
 from .bot import Bot
-from .middlewares import activate
+from .middlewares.wrap import activate
 
 from .dispatching.context import Context
 from .dispatching.stash import Stash

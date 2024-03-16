@@ -1,12 +1,16 @@
 data:
-  description:
-  - This object represents the bot's name.
-  fields:
-    name:
-      description: The bot's name
-      required: true
-      types:
-      - String
-  kind: struct
+  BotName:
+    fields:
+      name:
+        description: The bot's name
+        name: name
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents the bot's name.
+      href: https://core.telegram.org/bots/api#botname
+      name: BotName
 dirty: false
-file_name: bot_name.py

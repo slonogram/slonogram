@@ -1,1315 +1,1616 @@
 data:
-- description:
-  - Represents a link to an article or web page.
-  fields:
-    type:
-      description: Type of the result, must be article
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 Bytes
-      required: true
-      types:
-      - String
-    title:
-      description: Title of the result
-      required: true
-      types:
-      - String
-    input_message_content:
-      description: Content of the message to be sent
-      required: true
-      types:
-      - InputMessageContent
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    url:
-      description: Optional. URL of the result
-      required: false
-      types:
-      - String
-    hide_url:
-      description: Optional. Pass True if you don't want the URL to be shown in the
-        message
-      required: false
-      types:
-      - Boolean
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    thumbnail_url:
-      description: Optional. Url of the thumbnail for the result
-      required: false
-      types:
-      - String
-    thumbnail_width:
-      description: Optional. Thumbnail width
-      required: false
-      types:
-      - Integer
-    thumbnail_height:
-      description: Optional. Thumbnail height
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a link to a photo. By default, this photo will be sent by the user
-    with optional caption. Alternatively, you can use input_message_content to send
-    a message with the specified content instead of the photo.
-  fields:
-    type:
-      description: Type of the result, must be photo
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    photo_url:
-      description: A valid URL of the photo. Photo must be in JPEG format. Photo size
-        must not exceed 5MB
-      required: true
-      types:
-      - String
-    thumbnail_url:
-      description: URL of the thumbnail for the photo
-      required: true
-      types:
-      - String
-    photo_width:
-      description: Optional. Width of the photo
-      required: false
-      types:
-      - Integer
-    photo_height:
-      description: Optional. Height of the photo
-      required: false
-      types:
-      - Integer
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the photo to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the photo caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the photo
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to an animated GIF file. By default, this animated GIF file
-    will be sent by the user with optional caption. Alternatively, you can use input_message_content
-    to send a message with the specified content instead of the animation.
-  fields:
-    type:
-      description: Type of the result, must be gif
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    gif_url:
-      description: A valid URL for the GIF file. File size must not exceed 1MB
-      required: true
-      types:
-      - String
-    gif_width:
-      description: Optional. Width of the GIF
-      required: false
-      types:
-      - Integer
-    gif_height:
-      description: Optional. Height of the GIF
-      required: false
-      types:
-      - Integer
-    gif_duration:
-      description: Optional. Duration of the GIF in seconds
-      required: false
-      types:
-      - Integer
-    thumbnail_url:
-      description: URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for
-        the result
-      required: true
-      types:
-      - String
-    thumbnail_mime_type:
-      description: Optional. MIME type of the thumbnail, must be one of "image/jpeg",
-        "image/gif", or "video/mp4". Defaults to "image/jpeg"
-      required: false
-      types:
-      - String
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the GIF file to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the GIF
-        animation
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
-    By default, this animated MPEG-4 file will be sent by the user with optional caption.
-    Alternatively, you can use input_message_content to send a message with the specified
-    content instead of the animation.
-  fields:
-    type:
-      description: Type of the result, must be mpeg4_gif
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    mpeg4_url:
-      description: A valid URL for the MPEG4 file. File size must not exceed 1MB
-      required: true
-      types:
-      - String
-    mpeg4_width:
-      description: Optional. Video width
-      required: false
-      types:
-      - Integer
-    mpeg4_height:
-      description: Optional. Video height
-      required: false
-      types:
-      - Integer
-    mpeg4_duration:
-      description: Optional. Video duration in seconds
-      required: false
-      types:
-      - Integer
-    thumbnail_url:
-      description: URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for
-        the result
-      required: true
-      types:
-      - String
-    thumbnail_mime_type:
-      description: Optional. MIME type of the thumbnail, must be one of "image/jpeg",
-        "image/gif", or "video/mp4". Defaults to "image/jpeg"
-      required: false
-      types:
-      - String
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the video
-        animation
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a page containing an embedded video player or a video file.
-    By default, this video file will be sent by the user with an optional caption.
-    Alternatively, you can use input_message_content to send a message with the specified
-    content instead of the video.
-  fields:
-    type:
-      description: Type of the result, must be video
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    video_url:
-      description: A valid URL for the embedded video player or video file
-      required: true
-      types:
-      - String
-    mime_type:
-      description: MIME type of the content of the video URL, "text/html" or "video/mp4"
-      required: true
-      types:
-      - String
-    thumbnail_url:
-      description: URL of the thumbnail (JPEG only) for the video
-      required: true
-      types:
-      - String
-    title:
-      description: Title for the result
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the video to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the video caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    video_width:
-      description: Optional. Video width
-      required: false
-      types:
-      - Integer
-    video_height:
-      description: Optional. Video height
-      required: false
-      types:
-      - Integer
-    video_duration:
-      description: Optional. Video duration in seconds
-      required: false
-      types:
-      - Integer
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the video.
-        This field is required if InlineQueryResultVideo is used to send an HTML-page
-        as a result (e.g., a YouTube video).
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to an MP3 audio file. By default, this audio file will be sent
-    by the user. Alternatively, you can use input_message_content to send a message
-    with the specified content instead of the audio.
-  fields:
-    type:
-      description: Type of the result, must be audio
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    audio_url:
-      description: A valid URL for the audio file
-      required: true
-      types:
-      - String
-    title:
-      description: Title
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption, 0-1024 characters after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the audio caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    performer:
-      description: Optional. Performer
-      required: false
-      types:
-      - String
-    audio_duration:
-      description: Optional. Audio duration in seconds
-      required: false
-      types:
-      - Integer
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the audio
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a voice recording in an .OGG container encoded with OPUS.
-    By default, this voice recording will be sent by the user. Alternatively, you
-    can use input_message_content to send a message with the specified content instead
-    of the the voice message.
-  fields:
-    type:
-      description: Type of the result, must be voice
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    voice_url:
-      description: A valid URL for the voice recording
-      required: true
-      types:
-      - String
-    title:
-      description: Recording title
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption, 0-1024 characters after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the voice message caption.
-        See formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    voice_duration:
-      description: Optional. Recording duration in seconds
-      required: false
-      types:
-      - Integer
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the voice
-        recording
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a file. By default, this file will be sent by the user with
-    an optional caption. Alternatively, you can use input_message_content to send
-    a message with the specified content instead of the file. Currently, only .PDF
-    and .ZIP files can be sent using this method.
-  fields:
-    type:
-      description: Type of the result, must be document
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    title:
-      description: Title for the result
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the document to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the document caption. See
-        formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    document_url:
-      description: A valid URL for the file
-      required: true
-      types:
-      - String
-    mime_type:
-      description: MIME type of the content of the file, either "application/pdf"
-        or "application/zip"
-      required: true
-      types:
-      - String
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the file
-      required: false
-      types:
-      - InputMessageContent
-    thumbnail_url:
-      description: Optional. URL of the thumbnail (JPEG only) for the file
-      required: false
-      types:
-      - String
-    thumbnail_width:
-      description: Optional. Thumbnail width
-      required: false
-      types:
-      - Integer
-    thumbnail_height:
-      description: Optional. Thumbnail height
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a location on a map. By default, the location will be sent by the user.
-    Alternatively, you can use input_message_content to send a message with the specified
-    content instead of the location.
-  fields:
-    type:
-      description: Type of the result, must be location
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 Bytes
-      required: true
-      types:
-      - String
-    latitude:
-      description: Location latitude in degrees
-      required: true
-      types:
-      - Float
-    longitude:
-      description: Location longitude in degrees
-      required: true
-      types:
-      - Float
-    title:
-      description: Location title
-      required: true
-      types:
-      - String
-    horizontal_accuracy:
-      description: Optional. The radius of uncertainty for the location, measured
-        in meters; 0-1500
-      required: false
-      types:
-      - Float
-    live_period:
-      description: Optional. Period in seconds for which the location can be updated,
-        should be between 60 and 86400.
-      required: false
-      types:
-      - Integer
-    heading:
-      description: Optional. For live locations, a direction in which the user is
-        moving, in degrees. Must be between 1 and 360 if specified.
-      required: false
-      types:
-      - Integer
-    proximity_alert_radius:
-      description: Optional. For live locations, a maximum distance for proximity
-        alerts about approaching another chat member, in meters. Must be between 1
-        and 100000 if specified.
-      required: false
-      types:
-      - Integer
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the location
-      required: false
-      types:
-      - InputMessageContent
-    thumbnail_url:
-      description: Optional. Url of the thumbnail for the result
-      required: false
-      types:
-      - String
-    thumbnail_width:
-      description: Optional. Thumbnail width
-      required: false
-      types:
-      - Integer
-    thumbnail_height:
-      description: Optional. Thumbnail height
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a venue. By default, the venue will be sent by the user. Alternatively,
-    you can use input_message_content to send a message with the specified content
-    instead of the venue.
-  fields:
-    type:
-      description: Type of the result, must be venue
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 Bytes
-      required: true
-      types:
-      - String
-    latitude:
-      description: Latitude of the venue location in degrees
-      required: true
-      types:
-      - Float
-    longitude:
-      description: Longitude of the venue location in degrees
-      required: true
-      types:
-      - Float
-    title:
-      description: Title of the venue
-      required: true
-      types:
-      - String
-    address:
-      description: Address of the venue
-      required: true
-      types:
-      - String
-    foursquare_id:
-      description: Optional. Foursquare identifier of the venue if known
-      required: false
-      types:
-      - String
-    foursquare_type:
-      description: Optional. Foursquare type of the venue, if known. (For example,
-        "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".)
-      required: false
-      types:
-      - String
-    google_place_id:
-      description: Optional. Google Places identifier of the venue
-      required: false
-      types:
-      - String
-    google_place_type:
-      description: Optional. Google Places type of the venue. (See supported types.)
-      required: false
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the venue
-      required: false
-      types:
-      - InputMessageContent
-    thumbnail_url:
-      description: Optional. Url of the thumbnail for the result
-      required: false
-      types:
-      - String
-    thumbnail_width:
-      description: Optional. Thumbnail width
-      required: false
-      types:
-      - Integer
-    thumbnail_height:
-      description: Optional. Thumbnail height
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a contact with a phone number. By default, this contact will be sent
-    by the user. Alternatively, you can use input_message_content to send a message
-    with the specified content instead of the contact.
-  fields:
-    type:
-      description: Type of the result, must be contact
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 Bytes
-      required: true
-      types:
-      - String
-    phone_number:
-      description: Contact's phone number
-      required: true
-      types:
-      - String
-    first_name:
-      description: Contact's first name
-      required: true
-      types:
-      - String
-    last_name:
-      description: Optional. Contact's last name
-      required: false
-      types:
-      - String
-    vcard:
-      description: Optional. Additional data about the contact in the form of a vCard,
-        0-2048 bytes
-      required: false
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the contact
-      required: false
-      types:
-      - InputMessageContent
-    thumbnail_url:
-      description: Optional. Url of the thumbnail for the result
-      required: false
-      types:
-      - String
-    thumbnail_width:
-      description: Optional. Thumbnail width
-      required: false
-      types:
-      - Integer
-    thumbnail_height:
-      description: Optional. Thumbnail height
-      required: false
-      types:
-      - Integer
-  kind: struct
-- description:
-  - Represents a Game.
-  fields:
-    type:
-      description: Type of the result, must be game
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    game_short_name:
-      description: Short name of the game
-      required: true
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-  kind: struct
-- description:
-  - Represents a link to a photo stored on the Telegram servers. By default, this
-    photo will be sent by the user with an optional caption. Alternatively, you can
-    use input_message_content to send a message with the specified content instead
-    of the photo.
-  fields:
-    type:
-      description: Type of the result, must be photo
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    photo_file_id:
-      description: A valid file identifier of the photo
-      required: true
-      types:
-      - String
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the photo to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the photo caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the photo
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to an animated GIF file stored on the Telegram servers. By default,
-    this animated GIF file will be sent by the user with an optional caption. Alternatively,
-    you can use input_message_content to send a message with specified content instead
-    of the animation.
-  fields:
-    type:
-      description: Type of the result, must be gif
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    gif_file_id:
-      description: A valid file identifier for the GIF file
-      required: true
-      types:
-      - String
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the GIF file to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the GIF
-        animation
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a video animation (H.264/MPEG-4 AVC video without sound)
-    stored on the Telegram servers. By default, this animated MPEG-4 file will be
-    sent by the user with an optional caption. Alternatively, you can use input_message_content
-    to send a message with the specified content instead of the animation.
-  fields:
-    type:
-      description: Type of the result, must be mpeg4_gif
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    mpeg4_file_id:
-      description: A valid file identifier for the MPEG4 file
-      required: true
-      types:
-      - String
-    title:
-      description: Optional. Title for the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the video
-        animation
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a sticker stored on the Telegram servers. By default, this
-    sticker will be sent by the user. Alternatively, you can use input_message_content
-    to send a message with the specified content instead of the sticker.
-  fields:
-    type:
-      description: Type of the result, must be sticker
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    sticker_file_id:
-      description: A valid file identifier of the sticker
-      required: true
-      types:
-      - String
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the sticker
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a file stored on the Telegram servers. By default, this file
-    will be sent by the user with an optional caption. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of
-    the file.
-  fields:
-    type:
-      description: Type of the result, must be document
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    title:
-      description: Title for the result
-      required: true
-      types:
-      - String
-    document_file_id:
-      description: A valid file identifier for the file
-      required: true
-      types:
-      - String
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the document to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the document caption. See
-        formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the file
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a video file stored on the Telegram servers. By default,
-    this video file will be sent by the user with an optional caption. Alternatively,
-    you can use input_message_content to send a message with the specified content
-    instead of the video.
-  fields:
-    type:
-      description: Type of the result, must be video
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    video_file_id:
-      description: A valid file identifier for the video file
-      required: true
-      types:
-      - String
-    title:
-      description: Title for the result
-      required: true
-      types:
-      - String
-    description:
-      description: Optional. Short description of the result
-      required: false
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the video to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the video caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the video
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to a voice message stored on the Telegram servers. By default,
-    this voice message will be sent by the user. Alternatively, you can use input_message_content
-    to send a message with the specified content instead of the voice message.
-  fields:
-    type:
-      description: Type of the result, must be voice
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    voice_file_id:
-      description: A valid file identifier for the voice message
-      required: true
-      types:
-      - String
-    title:
-      description: Voice message title
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption, 0-1024 characters after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the voice message caption.
-        See formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the voice
-        message
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - Represents a link to an MP3 audio file stored on the Telegram servers. By default,
-    this audio file will be sent by the user. Alternatively, you can use input_message_content
-    to send a message with the specified content instead of the audio.
-  fields:
-    type:
-      description: Type of the result, must be audio
-      required: true
-      types:
-      - String
-    id:
-      description: Unique identifier for this result, 1-64 bytes
-      required: true
-      types:
-      - String
-    audio_file_id:
-      description: A valid file identifier for the audio file
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption, 0-1024 characters after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the audio caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    reply_markup:
-      description: Optional. Inline keyboard attached to the message
-      required: false
-      types:
-      - InlineKeyboardMarkup
-    input_message_content:
-      description: Optional. Content of the message to be sent instead of the audio
-      required: false
-      types:
-      - InputMessageContent
-  kind: struct
-- description:
-  - 'This object represents one result of an inline query. Telegram clients currently
-    support results of the following 20 types:'
-  - '- InlineQueryResultCachedAudio'
-  - '- InlineQueryResultCachedDocument'
-  - '- InlineQueryResultCachedGif'
-  - '- InlineQueryResultCachedMpeg4Gif'
-  - '- InlineQueryResultCachedPhoto'
-  - '- InlineQueryResultCachedSticker'
-  - '- InlineQueryResultCachedVideo'
-  - '- InlineQueryResultCachedVoice'
-  - '- InlineQueryResultArticle'
-  - '- InlineQueryResultAudio'
-  - '- InlineQueryResultContact'
-  - '- InlineQueryResultGame'
-  - '- InlineQueryResultDocument'
-  - '- InlineQueryResultGif'
-  - '- InlineQueryResultLocation'
-  - '- InlineQueryResultMpeg4Gif'
-  - '- InlineQueryResultPhoto'
-  - '- InlineQueryResultVenue'
-  - '- InlineQueryResultVideo'
-  - '- InlineQueryResultVoice'
-  - 'Note: All URLs passed in inline query results will be available to end users
-    and therefore must be assumed to be public.'
-  kind: type-alias
-  union:
-  - InlineQueryResultArticle
-  - InlineQueryResultPhoto
-  - InlineQueryResultGif
-  - InlineQueryResultMpeg4Gif
-  - InlineQueryResultVideo
-  - InlineQueryResultAudio
-  - InlineQueryResultVoice
-  - InlineQueryResultDocument
-  - InlineQueryResultLocation
-  - InlineQueryResultVenue
-  - InlineQueryResultContact
-  - InlineQueryResultGame
-  - InlineQueryResultCachedPhoto
-  - InlineQueryResultCachedGif
-  - InlineQueryResultCachedMpeg4Gif
-  - InlineQueryResultCachedSticker
-  - InlineQueryResultCachedDocument
-  - InlineQueryResultCachedVideo
-  - InlineQueryResultCachedVoice
-  - InlineQueryResultCachedAudio
+  InlineQueryResult:
+    kind: type-alias
+    meta:
+      description:
+      - 'This object represents one result of an inline query. Telegram clients currently
+        support results of the following 20 types:'
+      - '- InlineQueryResultCachedAudio'
+      - '- InlineQueryResultCachedDocument'
+      - '- InlineQueryResultCachedGif'
+      - '- InlineQueryResultCachedMpeg4Gif'
+      - '- InlineQueryResultCachedPhoto'
+      - '- InlineQueryResultCachedSticker'
+      - '- InlineQueryResultCachedVideo'
+      - '- InlineQueryResultCachedVoice'
+      - '- InlineQueryResultArticle'
+      - '- InlineQueryResultAudio'
+      - '- InlineQueryResultContact'
+      - '- InlineQueryResultGame'
+      - '- InlineQueryResultDocument'
+      - '- InlineQueryResultGif'
+      - '- InlineQueryResultLocation'
+      - '- InlineQueryResultMpeg4Gif'
+      - '- InlineQueryResultPhoto'
+      - '- InlineQueryResultVenue'
+      - '- InlineQueryResultVideo'
+      - '- InlineQueryResultVoice'
+      - 'Note: All URLs passed in inline query results will be available to end users
+        and therefore must be assumed to be public.'
+      href: https://core.telegram.org/bots/api#inlinequeryresult
+      name: InlineQueryResult
+    union:
+    - InlineQueryResultCachedAudio
+    - InlineQueryResultCachedDocument
+    - InlineQueryResultCachedGif
+    - InlineQueryResultCachedMpeg4Gif
+    - InlineQueryResultCachedPhoto
+    - InlineQueryResultCachedSticker
+    - InlineQueryResultCachedVideo
+    - InlineQueryResultCachedVoice
+    - InlineQueryResultArticle
+    - InlineQueryResultAudio
+    - InlineQueryResultContact
+    - InlineQueryResultGame
+    - InlineQueryResultDocument
+    - InlineQueryResultGif
+    - InlineQueryResultLocation
+    - InlineQueryResultMpeg4Gif
+    - InlineQueryResultPhoto
+    - InlineQueryResultVenue
+    - InlineQueryResultVideo
+    - InlineQueryResultVoice
+  InlineQueryResultArticle:
+    fields:
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      hide_url:
+        description: Optional. Pass True if you don't want the URL to be shown in
+          the message
+        name: hide_url
+        required: false
+        types:
+        - Boolean
+      id:
+        description: Unique identifier for this result, 1-64 Bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Content of the message to be sent
+        name: input_message_content
+        required: true
+        types:
+        - InputMessageContent
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_height:
+        description: Optional. Thumbnail height
+        name: thumbnail_height
+        required: false
+        types:
+        - Integer
+      thumbnail_url:
+        description: Optional. Url of the thumbnail for the result
+        name: thumbnail_url
+        required: false
+        types:
+        - String
+      thumbnail_width:
+        description: Optional. Thumbnail width
+        name: thumbnail_width
+        required: false
+        types:
+        - Integer
+      title:
+        description: Title of the result
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be article
+        name: type
+        required: true
+        types:
+        - String
+      url:
+        description: Optional. URL of the result
+        name: url
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to an article or web page.
+      href: https://core.telegram.org/bots/api#inlinequeryresultarticle
+      name: InlineQueryResultArticle
+  InlineQueryResultAudio:
+    fields:
+      audio_duration:
+        description: Optional. Audio duration in seconds
+        name: audio_duration
+        required: false
+        types:
+        - Integer
+      audio_url:
+        description: A valid URL for the audio file
+        name: audio_url
+        required: true
+        types:
+        - String
+      caption:
+        description: Optional. Caption, 0-1024 characters after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the audio
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the audio caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      performer:
+        description: Optional. Performer
+        name: performer
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Title
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be audio
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to an MP3 audio file. By default, this audio file will be
+        sent by the user. Alternatively, you can use input_message_content to send
+        a message with the specified content instead of the audio.
+      href: https://core.telegram.org/bots/api#inlinequeryresultaudio
+      name: InlineQueryResultAudio
+  InlineQueryResultCachedAudio:
+    fields:
+      audio_file_id:
+        description: A valid file identifier for the audio file
+        name: audio_file_id
+        required: true
+        types:
+        - String
+      caption:
+        description: Optional. Caption, 0-1024 characters after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the audio
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the audio caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      type:
+        description: Type of the result, must be audio
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to an MP3 audio file stored on the Telegram servers. By
+        default, this audio file will be sent by the user. Alternatively, you can
+        use input_message_content to send a message with the specified content instead
+        of the audio.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
+      name: InlineQueryResultCachedAudio
+  InlineQueryResultCachedDocument:
+    fields:
+      caption:
+        description: Optional. Caption of the document to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      document_file_id:
+        description: A valid file identifier for the file
+        name: document_file_id
+        required: true
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the file
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the document caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Title for the result
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be document
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a file stored on the Telegram servers. By default, this
+        file will be sent by the user with an optional caption. Alternatively, you
+        can use input_message_content to send a message with the specified content
+        instead of the file.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
+      name: InlineQueryResultCachedDocument
+  InlineQueryResultCachedGif:
+    fields:
+      caption:
+        description: Optional. Caption of the GIF file to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      gif_file_id:
+        description: A valid file identifier for the GIF file
+        name: gif_file_id
+        required: true
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the GIF
+          animation
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the caption. See formatting
+          options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be gif
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to an animated GIF file stored on the Telegram servers.
+        By default, this animated GIF file will be sent by the user with an optional
+        caption. Alternatively, you can use input_message_content to send a message
+        with specified content instead of the animation.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedgif
+      name: InlineQueryResultCachedGif
+  InlineQueryResultCachedMpeg4Gif:
+    fields:
+      caption:
+        description: Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the video
+          animation
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      mpeg4_file_id:
+        description: A valid file identifier for the MPEG4 file
+        name: mpeg4_file_id
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the caption. See formatting
+          options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be mpeg4_gif
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a video animation (H.264/MPEG-4 AVC video without sound)
+        stored on the Telegram servers. By default, this animated MPEG-4 file will
+        be sent by the user with an optional caption. Alternatively, you can use input_message_content
+        to send a message with the specified content instead of the animation.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif
+      name: InlineQueryResultCachedMpeg4Gif
+  InlineQueryResultCachedPhoto:
+    fields:
+      caption:
+        description: Optional. Caption of the photo to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the photo
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the photo caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      photo_file_id:
+        description: A valid file identifier of the photo
+        name: photo_file_id
+        required: true
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be photo
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a photo stored on the Telegram servers. By default, this
+        photo will be sent by the user with an optional caption. Alternatively, you
+        can use input_message_content to send a message with the specified content
+        instead of the photo.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
+      name: InlineQueryResultCachedPhoto
+  InlineQueryResultCachedSticker:
+    fields:
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the sticker
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      sticker_file_id:
+        description: A valid file identifier of the sticker
+        name: sticker_file_id
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be sticker
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a sticker stored on the Telegram servers. By default,
+        this sticker will be sent by the user. Alternatively, you can use input_message_content
+        to send a message with the specified content instead of the sticker.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
+      name: InlineQueryResultCachedSticker
+  InlineQueryResultCachedVideo:
+    fields:
+      caption:
+        description: Optional. Caption of the video to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the video
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the video caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Title for the result
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be video
+        name: type
+        required: true
+        types:
+        - String
+      video_file_id:
+        description: A valid file identifier for the video file
+        name: video_file_id
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a video file stored on the Telegram servers. By default,
+        this video file will be sent by the user with an optional caption. Alternatively,
+        you can use input_message_content to send a message with the specified content
+        instead of the video.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
+      name: InlineQueryResultCachedVideo
+  InlineQueryResultCachedVoice:
+    fields:
+      caption:
+        description: Optional. Caption, 0-1024 characters after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the voice
+          message
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the voice message caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Voice message title
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be voice
+        name: type
+        required: true
+        types:
+        - String
+      voice_file_id:
+        description: A valid file identifier for the voice message
+        name: voice_file_id
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a voice message stored on the Telegram servers. By default,
+        this voice message will be sent by the user. Alternatively, you can use input_message_content
+        to send a message with the specified content instead of the voice message.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
+      name: InlineQueryResultCachedVoice
+  InlineQueryResultContact:
+    fields:
+      first_name:
+        description: Contact's first name
+        name: first_name
+        required: true
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 Bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the contact
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      last_name:
+        description: Optional. Contact's last name
+        name: last_name
+        required: false
+        types:
+        - String
+      phone_number:
+        description: Contact's phone number
+        name: phone_number
+        required: true
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_height:
+        description: Optional. Thumbnail height
+        name: thumbnail_height
+        required: false
+        types:
+        - Integer
+      thumbnail_url:
+        description: Optional. Url of the thumbnail for the result
+        name: thumbnail_url
+        required: false
+        types:
+        - String
+      thumbnail_width:
+        description: Optional. Thumbnail width
+        name: thumbnail_width
+        required: false
+        types:
+        - Integer
+      type:
+        description: Type of the result, must be contact
+        name: type
+        required: true
+        types:
+        - String
+      vcard:
+        description: Optional. Additional data about the contact in the form of a
+          vCard, 0-2048 bytes
+        name: vcard
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a contact with a phone number. By default, this contact will be
+        sent by the user. Alternatively, you can use input_message_content to send
+        a message with the specified content instead of the contact.
+      href: https://core.telegram.org/bots/api#inlinequeryresultcontact
+      name: InlineQueryResultContact
+  InlineQueryResultDocument:
+    fields:
+      caption:
+        description: Optional. Caption of the document to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      document_url:
+        description: A valid URL for the file
+        name: document_url
+        required: true
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the file
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      mime_type:
+        description: MIME type of the content of the file, either "application/pdf"
+          or "application/zip"
+        name: mime_type
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the document caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_height:
+        description: Optional. Thumbnail height
+        name: thumbnail_height
+        required: false
+        types:
+        - Integer
+      thumbnail_url:
+        description: Optional. URL of the thumbnail (JPEG only) for the file
+        name: thumbnail_url
+        required: false
+        types:
+        - String
+      thumbnail_width:
+        description: Optional. Thumbnail width
+        name: thumbnail_width
+        required: false
+        types:
+        - Integer
+      title:
+        description: Title for the result
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be document
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a file. By default, this file will be sent by the user
+        with an optional caption. Alternatively, you can use input_message_content
+        to send a message with the specified content instead of the file. Currently,
+        only .PDF and .ZIP files can be sent using this method.
+      href: https://core.telegram.org/bots/api#inlinequeryresultdocument
+      name: InlineQueryResultDocument
+  InlineQueryResultGame:
+    fields:
+      game_short_name:
+        description: Short name of the game
+        name: game_short_name
+        required: true
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      type:
+        description: Type of the result, must be game
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a Game.
+      href: https://core.telegram.org/bots/api#inlinequeryresultgame
+      name: InlineQueryResultGame
+  InlineQueryResultGif:
+    fields:
+      caption:
+        description: Optional. Caption of the GIF file to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      gif_duration:
+        description: Optional. Duration of the GIF in seconds
+        name: gif_duration
+        required: false
+        types:
+        - Integer
+      gif_height:
+        description: Optional. Height of the GIF
+        name: gif_height
+        required: false
+        types:
+        - Integer
+      gif_url:
+        description: A valid URL for the GIF file. File size must not exceed 1MB
+        name: gif_url
+        required: true
+        types:
+        - String
+      gif_width:
+        description: Optional. Width of the GIF
+        name: gif_width
+        required: false
+        types:
+        - Integer
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the GIF
+          animation
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the caption. See formatting
+          options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_mime_type:
+        description: Optional. MIME type of the thumbnail, must be one of "image/jpeg",
+          "image/gif", or "video/mp4". Defaults to "image/jpeg"
+        name: thumbnail_mime_type
+        required: false
+        types:
+        - String
+      thumbnail_url:
+        description: URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail
+          for the result
+        name: thumbnail_url
+        required: true
+        types:
+        - String
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be gif
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to an animated GIF file. By default, this animated GIF file
+        will be sent by the user with optional caption. Alternatively, you can use
+        input_message_content to send a message with the specified content instead
+        of the animation.
+      href: https://core.telegram.org/bots/api#inlinequeryresultgif
+      name: InlineQueryResultGif
+  InlineQueryResultLocation:
+    fields:
+      heading:
+        description: Optional. For live locations, a direction in which the user is
+          moving, in degrees. Must be between 1 and 360 if specified.
+        name: heading
+        required: false
+        types:
+        - Integer
+      horizontal_accuracy:
+        description: Optional. The radius of uncertainty for the location, measured
+          in meters; 0-1500
+        name: horizontal_accuracy
+        required: false
+        types:
+        - Float
+      id:
+        description: Unique identifier for this result, 1-64 Bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the location
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      latitude:
+        description: Location latitude in degrees
+        name: latitude
+        required: true
+        types:
+        - Float
+      live_period:
+        description: Optional. Period in seconds for which the location can be updated,
+          should be between 60 and 86400.
+        name: live_period
+        required: false
+        types:
+        - Integer
+      longitude:
+        description: Location longitude in degrees
+        name: longitude
+        required: true
+        types:
+        - Float
+      proximity_alert_radius:
+        description: Optional. For live locations, a maximum distance for proximity
+          alerts about approaching another chat member, in meters. Must be between
+          1 and 100000 if specified.
+        name: proximity_alert_radius
+        required: false
+        types:
+        - Integer
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_height:
+        description: Optional. Thumbnail height
+        name: thumbnail_height
+        required: false
+        types:
+        - Integer
+      thumbnail_url:
+        description: Optional. Url of the thumbnail for the result
+        name: thumbnail_url
+        required: false
+        types:
+        - String
+      thumbnail_width:
+        description: Optional. Thumbnail width
+        name: thumbnail_width
+        required: false
+        types:
+        - Integer
+      title:
+        description: Location title
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be location
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a location on a map. By default, the location will be sent by the
+        user. Alternatively, you can use input_message_content to send a message with
+        the specified content instead of the location.
+      href: https://core.telegram.org/bots/api#inlinequeryresultlocation
+      name: InlineQueryResultLocation
+  InlineQueryResultMpeg4Gif:
+    fields:
+      caption:
+        description: Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the video
+          animation
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      mpeg4_duration:
+        description: Optional. Video duration in seconds
+        name: mpeg4_duration
+        required: false
+        types:
+        - Integer
+      mpeg4_height:
+        description: Optional. Video height
+        name: mpeg4_height
+        required: false
+        types:
+        - Integer
+      mpeg4_url:
+        description: A valid URL for the MPEG4 file. File size must not exceed 1MB
+        name: mpeg4_url
+        required: true
+        types:
+        - String
+      mpeg4_width:
+        description: Optional. Video width
+        name: mpeg4_width
+        required: false
+        types:
+        - Integer
+      parse_mode:
+        description: Optional. Mode for parsing entities in the caption. See formatting
+          options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_mime_type:
+        description: Optional. MIME type of the thumbnail, must be one of "image/jpeg",
+          "image/gif", or "video/mp4". Defaults to "image/jpeg"
+        name: thumbnail_mime_type
+        required: false
+        types:
+        - String
+      thumbnail_url:
+        description: URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail
+          for the result
+        name: thumbnail_url
+        required: true
+        types:
+        - String
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be mpeg4_gif
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
+        By default, this animated MPEG-4 file will be sent by the user with optional
+        caption. Alternatively, you can use input_message_content to send a message
+        with the specified content instead of the animation.
+      href: https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
+      name: InlineQueryResultMpeg4Gif
+  InlineQueryResultPhoto:
+    fields:
+      caption:
+        description: Optional. Caption of the photo to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the photo
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the photo caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      photo_height:
+        description: Optional. Height of the photo
+        name: photo_height
+        required: false
+        types:
+        - Integer
+      photo_url:
+        description: A valid URL of the photo. Photo must be in JPEG format. Photo
+          size must not exceed 5MB
+        name: photo_url
+        required: true
+        types:
+        - String
+      photo_width:
+        description: Optional. Width of the photo
+        name: photo_width
+        required: false
+        types:
+        - Integer
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_url:
+        description: URL of the thumbnail for the photo
+        name: thumbnail_url
+        required: true
+        types:
+        - String
+      title:
+        description: Optional. Title for the result
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be photo
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a photo. By default, this photo will be sent by the user
+        with optional caption. Alternatively, you can use input_message_content to
+        send a message with the specified content instead of the photo.
+      href: https://core.telegram.org/bots/api#inlinequeryresultphoto
+      name: InlineQueryResultPhoto
+  InlineQueryResultVenue:
+    fields:
+      address:
+        description: Address of the venue
+        name: address
+        required: true
+        types:
+        - String
+      foursquare_id:
+        description: Optional. Foursquare identifier of the venue if known
+        name: foursquare_id
+        required: false
+        types:
+        - String
+      foursquare_type:
+        description: Optional. Foursquare type of the venue, if known. (For example,
+          "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".)
+        name: foursquare_type
+        required: false
+        types:
+        - String
+      google_place_id:
+        description: Optional. Google Places identifier of the venue
+        name: google_place_id
+        required: false
+        types:
+        - String
+      google_place_type:
+        description: Optional. Google Places type of the venue. (See supported types.)
+        name: google_place_type
+        required: false
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 Bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the venue
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      latitude:
+        description: Latitude of the venue location in degrees
+        name: latitude
+        required: true
+        types:
+        - Float
+      longitude:
+        description: Longitude of the venue location in degrees
+        name: longitude
+        required: true
+        types:
+        - Float
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_height:
+        description: Optional. Thumbnail height
+        name: thumbnail_height
+        required: false
+        types:
+        - Integer
+      thumbnail_url:
+        description: Optional. Url of the thumbnail for the result
+        name: thumbnail_url
+        required: false
+        types:
+        - String
+      thumbnail_width:
+        description: Optional. Thumbnail width
+        name: thumbnail_width
+        required: false
+        types:
+        - Integer
+      title:
+        description: Title of the venue
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be venue
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a venue. By default, the venue will be sent by the user. Alternatively,
+        you can use input_message_content to send a message with the specified content
+        instead of the venue.
+      href: https://core.telegram.org/bots/api#inlinequeryresultvenue
+      name: InlineQueryResultVenue
+  InlineQueryResultVideo:
+    fields:
+      caption:
+        description: Optional. Caption of the video to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      description:
+        description: Optional. Short description of the result
+        name: description
+        required: false
+        types:
+        - String
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the video.
+          This field is required if InlineQueryResultVideo is used to send an HTML-page
+          as a result (e.g., a YouTube video).
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      mime_type:
+        description: MIME type of the content of the video URL, "text/html" or "video/mp4"
+        name: mime_type
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the video caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      thumbnail_url:
+        description: URL of the thumbnail (JPEG only) for the video
+        name: thumbnail_url
+        required: true
+        types:
+        - String
+      title:
+        description: Title for the result
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be video
+        name: type
+        required: true
+        types:
+        - String
+      video_duration:
+        description: Optional. Video duration in seconds
+        name: video_duration
+        required: false
+        types:
+        - Integer
+      video_height:
+        description: Optional. Video height
+        name: video_height
+        required: false
+        types:
+        - Integer
+      video_url:
+        description: A valid URL for the embedded video player or video file
+        name: video_url
+        required: true
+        types:
+        - String
+      video_width:
+        description: Optional. Video width
+        name: video_width
+        required: false
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a page containing an embedded video player or a video
+        file. By default, this video file will be sent by the user with an optional
+        caption. Alternatively, you can use input_message_content to send a message
+        with the specified content instead of the video.
+      href: https://core.telegram.org/bots/api#inlinequeryresultvideo
+      name: InlineQueryResultVideo
+  InlineQueryResultVoice:
+    fields:
+      caption:
+        description: Optional. Caption, 0-1024 characters after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique identifier for this result, 1-64 bytes
+        name: id
+        required: true
+        types:
+        - String
+      input_message_content:
+        description: Optional. Content of the message to be sent instead of the voice
+          recording
+        name: input_message_content
+        required: false
+        types:
+        - InputMessageContent
+      parse_mode:
+        description: Optional. Mode for parsing entities in the voice message caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      reply_markup:
+        description: Optional. Inline keyboard attached to the message
+        name: reply_markup
+        required: false
+        types:
+        - InlineKeyboardMarkup
+      title:
+        description: Recording title
+        name: title
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the result, must be voice
+        name: type
+        required: true
+        types:
+        - String
+      voice_duration:
+        description: Optional. Recording duration in seconds
+        name: voice_duration
+        required: false
+        types:
+        - Integer
+      voice_url:
+        description: A valid URL for the voice recording
+        name: voice_url
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a link to a voice recording in an .OGG container encoded with OPUS.
+        By default, this voice recording will be sent by the user. Alternatively,
+        you can use input_message_content to send a message with the specified content
+        instead of the the voice message.
+      href: https://core.telegram.org/bots/api#inlinequeryresultvoice
+      name: InlineQueryResultVoice
 dirty: false
-file_name: inline_query_result.py

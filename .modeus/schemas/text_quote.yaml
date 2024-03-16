@@ -1,33 +1,40 @@
 data:
-  description:
-  - This object contains information about the quoted part of a message that is replied
-    to by the given message.
-  fields:
-    text:
-      description: Text of the quoted part of a message that is replied to by the
-        given message
-      required: true
-      types:
-      - String
-    entities:
-      description: Optional. Special entities that appear in the quote. Currently,
-        only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities
-        are kept in quotes.
-      required: false
-      types:
-      - Array of MessageEntity
-    position:
-      description: Approximate quote position in the original message in UTF-16 code
-        units as specified by the sender
-      required: true
-      types:
-      - Integer
-    is_manual:
-      description: Optional. True, if the quote was chosen manually by the message
-        sender. Otherwise, the quote was added automatically by the server.
-      required: false
-      types:
-      - Boolean
-  kind: struct
+  TextQuote:
+    fields:
+      entities:
+        description: Optional. Special entities that appear in the quote. Currently,
+          only bold, italic, underline, strikethrough, spoiler, and custom_emoji entities
+          are kept in quotes.
+        name: entities
+        required: false
+        types:
+        - Array of MessageEntity
+      is_manual:
+        description: Optional. True, if the quote was chosen manually by the message
+          sender. Otherwise, the quote was added automatically by the server.
+        name: is_manual
+        required: false
+        types:
+        - Boolean
+      position:
+        description: Approximate quote position in the original message in UTF-16
+          code units as specified by the sender
+        name: position
+        required: true
+        types:
+        - Integer
+      text:
+        description: Text of the quoted part of a message that is replied to by the
+          given message
+        name: text
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object contains information about the quoted part of a message that is
+        replied to by the given message.
+      href: https://core.telegram.org/bots/api#textquote
+      name: TextQuote
 dirty: false
-file_name: text_quote.py

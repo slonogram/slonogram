@@ -1,27 +1,34 @@
 data:
-  description:
-  - This object contains information about an incoming shipping query.
-  fields:
-    id:
-      description: Unique query identifier
-      required: true
-      types:
-      - String
-    from:
-      description: User who sent the query
-      required: true
-      types:
-      - User
-    invoice_payload:
-      description: Bot specified invoice payload
-      required: true
-      types:
-      - String
-    shipping_address:
-      description: User specified shipping address
-      required: true
-      types:
-      - ShippingAddress
-  kind: struct
+  ShippingQuery:
+    fields:
+      from:
+        description: User who sent the query
+        name: from
+        required: true
+        types:
+        - User
+      id:
+        description: Unique query identifier
+        name: id
+        required: true
+        types:
+        - String
+      invoice_payload:
+        description: Bot specified invoice payload
+        name: invoice_payload
+        required: true
+        types:
+        - String
+      shipping_address:
+        description: User specified shipping address
+        name: shipping_address
+        required: true
+        types:
+        - ShippingAddress
+    kind: struct
+    meta:
+      description:
+      - This object contains information about an incoming shipping query.
+      href: https://core.telegram.org/bots/api#shippingquery
+      name: ShippingQuery
 dirty: false
-file_name: shipping_query.py

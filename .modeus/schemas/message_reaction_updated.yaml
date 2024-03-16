@@ -1,44 +1,55 @@
 data:
-  description:
-  - This object represents a change of a reaction on a message performed by a user.
-  fields:
-    chat:
-      description: The chat containing the message the user reacted to
-      required: true
-      types:
-      - Chat
-    message_id:
-      description: Unique identifier of the message inside the chat
-      required: true
-      types:
-      - Integer
-    user:
-      description: Optional. The user that changed the reaction, if the user isn't
-        anonymous
-      required: false
-      types:
-      - User
-    actor_chat:
-      description: Optional. The chat on behalf of which the reaction was changed,
-        if the user is anonymous
-      required: false
-      types:
-      - Chat
-    date:
-      description: Date of the change in Unix time
-      required: true
-      types:
-      - Integer
-    old_reaction:
-      description: Previous list of reaction types that were set by the user
-      required: true
-      types:
-      - Array of ReactionType
-    new_reaction:
-      description: New list of reaction types that have been set by the user
-      required: true
-      types:
-      - Array of ReactionType
-  kind: struct
+  MessageReactionUpdated:
+    fields:
+      actor_chat:
+        description: Optional. The chat on behalf of which the reaction was changed,
+          if the user is anonymous
+        name: actor_chat
+        required: false
+        types:
+        - Chat
+      chat:
+        description: The chat containing the message the user reacted to
+        name: chat
+        required: true
+        types:
+        - Chat
+      date:
+        description: Date of the change in Unix time
+        name: date
+        required: true
+        types:
+        - Integer
+      message_id:
+        description: Unique identifier of the message inside the chat
+        name: message_id
+        required: true
+        types:
+        - Integer
+      new_reaction:
+        description: New list of reaction types that have been set by the user
+        name: new_reaction
+        required: true
+        types:
+        - Array of ReactionType
+      old_reaction:
+        description: Previous list of reaction types that were set by the user
+        name: old_reaction
+        required: true
+        types:
+        - Array of ReactionType
+      user:
+        description: Optional. The user that changed the reaction, if the user isn't
+          anonymous
+        name: user
+        required: false
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - This object represents a change of a reaction on a message performed by a
+        user.
+      href: https://core.telegram.org/bots/api#messagereactionupdated
+      name: MessageReactionUpdated
 dirty: false
-file_name: message_reaction_updated.py

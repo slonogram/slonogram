@@ -7,12 +7,12 @@ M = TypeVar("M")
 
 
 class And(ExtendedFilter[M]):
-    __slots__ = ('lhs', 'rhs')
+    __slots__ = ("lhs", "rhs")
 
     def __init__(self, lhs: Filter[M], rhs: Filter[M]) -> None:
         self.lhs = lhs
         self.rhs = rhs
-    
+
     def __repr__(self) -> str:
         return f"And({self.lhs!r}, {self.rhs!r})"
 

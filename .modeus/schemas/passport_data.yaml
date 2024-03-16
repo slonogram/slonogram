@@ -1,18 +1,23 @@
 data:
-  description:
-  - Describes Telegram Passport data shared with the bot by the user.
-  fields:
-    data:
-      description: Array with information about documents and other Telegram Passport
-        elements that was shared with the bot
-      required: true
-      types:
-      - Array of EncryptedPassportElement
-    credentials:
-      description: Encrypted credentials required to decrypt the data
-      required: true
-      types:
-      - EncryptedCredentials
-  kind: struct
+  PassportData:
+    fields:
+      credentials:
+        description: Encrypted credentials required to decrypt the data
+        name: credentials
+        required: true
+        types:
+        - EncryptedCredentials
+      data:
+        description: Array with information about documents and other Telegram Passport
+          elements that was shared with the bot
+        name: data
+        required: true
+        types:
+        - Array of EncryptedPassportElement
+    kind: struct
+    meta:
+      description:
+      - Describes Telegram Passport data shared with the bot by the user.
+      href: https://core.telegram.org/bots/api#passportdata
+      name: PassportData
 dirty: false
-file_name: passport_data.py

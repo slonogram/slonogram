@@ -1,4 +1,5 @@
-from ..abstract.session import Session
+from typing_extensions import Any, Awaitable
+from ..abstract.session import FilesMap, Params, Session
 from ..consts import DEFAULT_BASE_URL
 from ..omittable import (
     Omittable,
@@ -14,7 +15,8 @@ try:
 except ImportError as e:
     from ..exceptions.no_feature import NoFeatureError
 
-    raise NoFeatureError('aiohttp', 'Failed to import `aiohttp` package') from e
+    raise NoFeatureError("aiohttp", "Failed to import `aiohttp` package") from e
+
 
 class AiohttpSession(Session):
     def __init__(
@@ -23,13 +25,24 @@ class AiohttpSession(Session):
     ) -> None:
         self.client = client
 
+    async def __call__(
+        self,
+        name: str,
+        params: Params,
+        files: FilesMap,
+        /
+    ) -> Awaitable[Any]:
+        raise NotImplementedError
+
     @classmethod
     @asynccontextmanager
     async def from_options(
         cls,
         base_url: Omittable[str] = OMIT,
     ) -> AsyncIterator[Self]:
-        async with ClientSession(base_url=omitted_or(base_url, DEFAULT_BASE_URL)) as raw_session:
+        async with ClientSession(
+            base_url=omitted_or(base_url, DEFAULT_BASE_URL)
+        ) as raw_session:
             session = cls(raw_session)
             yield session
             await session.finalize()

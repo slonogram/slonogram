@@ -1,0 +1,19 @@
+from __future__ import annotations
+from slonogram._internal.utils import model
+from slonogram.schemas import user as _user
+from slonogram.omittable import OMIT, Omittable
+from slonogram.altering import Alterer1, alter1
+
+
+@model
+class VideoChatParticipantsInvited:
+    users: list[_user.User]
+    """ New members that were invited to the video chat """
+
+    def alter(self, users: Omittable[Alterer1[list[_user.User]]] = OMIT):
+        return VideoChatParticipantsInvited(
+            users=alter1(users, self.users),
+        )
+
+
+__all__ = ["VideoChatParticipantsInvited"]

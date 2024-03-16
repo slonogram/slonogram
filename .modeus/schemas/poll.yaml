@@ -1,78 +1,94 @@
 data:
-  description:
-  - This object contains information about a poll.
-  fields:
-    id:
-      description: Unique poll identifier
-      required: true
-      types:
-      - String
-    question:
-      description: Poll question, 1-300 characters
-      required: true
-      types:
-      - String
-    options:
-      description: List of poll options
-      required: true
-      types:
-      - Array of PollOption
-    total_voter_count:
-      description: Total number of users that voted in the poll
-      required: true
-      types:
-      - Integer
-    is_closed:
-      description: True, if the poll is closed
-      required: true
-      types:
-      - Boolean
-    is_anonymous:
-      description: True, if the poll is anonymous
-      required: true
-      types:
-      - Boolean
-    type:
-      description: Poll type, currently can be "regular" or "quiz"
-      required: true
-      types:
-      - String
-    allows_multiple_answers:
-      description: True, if the poll allows multiple answers
-      required: true
-      types:
-      - Boolean
-    correct_option_id:
-      description: Optional. 0-based identifier of the correct answer option. Available
-        only for polls in the quiz mode, which are closed, or was sent (not forwarded)
-        by the bot or to the private chat with the bot.
-      required: false
-      types:
-      - Integer
-    explanation:
-      description: Optional. Text that is shown when a user chooses an incorrect answer
-        or taps on the lamp icon in a quiz-style poll, 0-200 characters
-      required: false
-      types:
-      - String
-    explanation_entities:
-      description: Optional. Special entities like usernames, URLs, bot commands,
-        etc. that appear in the explanation
-      required: false
-      types:
-      - Array of MessageEntity
-    open_period:
-      description: Optional. Amount of time in seconds the poll will be active after
-        creation
-      required: false
-      types:
-      - Integer
-    close_date:
-      description: Optional. Point in time (Unix timestamp) when the poll will be
-        automatically closed
-      required: false
-      types:
-      - Integer
-  kind: struct
+  Poll:
+    fields:
+      allows_multiple_answers:
+        description: True, if the poll allows multiple answers
+        name: allows_multiple_answers
+        required: true
+        types:
+        - Boolean
+      close_date:
+        description: Optional. Point in time (Unix timestamp) when the poll will be
+          automatically closed
+        name: close_date
+        required: false
+        types:
+        - Integer
+      correct_option_id:
+        description: Optional. 0-based identifier of the correct answer option. Available
+          only for polls in the quiz mode, which are closed, or was sent (not forwarded)
+          by the bot or to the private chat with the bot.
+        name: correct_option_id
+        required: false
+        types:
+        - Integer
+      explanation:
+        description: Optional. Text that is shown when a user chooses an incorrect
+          answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
+        name: explanation
+        required: false
+        types:
+        - String
+      explanation_entities:
+        description: Optional. Special entities like usernames, URLs, bot commands,
+          etc. that appear in the explanation
+        name: explanation_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      id:
+        description: Unique poll identifier
+        name: id
+        required: true
+        types:
+        - String
+      is_anonymous:
+        description: True, if the poll is anonymous
+        name: is_anonymous
+        required: true
+        types:
+        - Boolean
+      is_closed:
+        description: True, if the poll is closed
+        name: is_closed
+        required: true
+        types:
+        - Boolean
+      open_period:
+        description: Optional. Amount of time in seconds the poll will be active after
+          creation
+        name: open_period
+        required: false
+        types:
+        - Integer
+      options:
+        description: List of poll options
+        name: options
+        required: true
+        types:
+        - Array of PollOption
+      question:
+        description: Poll question, 1-300 characters
+        name: question
+        required: true
+        types:
+        - String
+      total_voter_count:
+        description: Total number of users that voted in the poll
+        name: total_voter_count
+        required: true
+        types:
+        - Integer
+      type:
+        description: Poll type, currently can be "regular" or "quiz"
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object contains information about a poll.
+      href: https://core.telegram.org/bots/api#poll
+      name: Poll
 dirty: false
-file_name: poll.py

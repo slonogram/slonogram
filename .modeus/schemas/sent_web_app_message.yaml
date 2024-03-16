@@ -1,13 +1,17 @@
 data:
-  description:
-  - Describes an inline message sent by a Web App on behalf of a user.
-  fields:
-    inline_message_id:
-      description: Optional. Identifier of the sent inline message. Available only
-        if there is an inline keyboard attached to the message.
-      required: false
-      types:
-      - String
-  kind: struct
+  SentWebAppMessage:
+    fields:
+      inline_message_id:
+        description: Optional. Identifier of the sent inline message. Available only
+          if there is an inline keyboard attached to the message.
+        name: inline_message_id
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes an inline message sent by a Web App on behalf of a user.
+      href: https://core.telegram.org/bots/api#sentwebappmessage
+      name: SentWebAppMessage
 dirty: false
-file_name: sent_web_app_message.py

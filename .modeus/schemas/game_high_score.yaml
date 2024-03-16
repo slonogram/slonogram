@@ -1,22 +1,28 @@
 data:
-  description:
-  - This object represents one row of the high scores table for a game.
-  fields:
-    position:
-      description: Position in high score table for the game
-      required: true
-      types:
-      - Integer
-    user:
-      description: User
-      required: true
-      types:
-      - User
-    score:
-      description: Score
-      required: true
-      types:
-      - Integer
-  kind: struct
+  GameHighScore:
+    fields:
+      position:
+        description: Position in high score table for the game
+        name: position
+        required: true
+        types:
+        - Integer
+      score:
+        description: Score
+        name: score
+        required: true
+        types:
+        - Integer
+      user:
+        description: User
+        name: user
+        required: true
+        types:
+        - User
+    kind: struct
+    meta:
+      description:
+      - This object represents one row of the high scores table for a game.
+      href: https://core.telegram.org/bots/api#gamehighscore
+      name: GameHighScore
 dirty: false
-file_name: game_high_score.py

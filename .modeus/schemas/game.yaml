@@ -1,43 +1,52 @@
 data:
-  description:
-  - This object represents a game. Use BotFather to create and edit games, their short
-    names will act as unique identifiers.
-  fields:
-    title:
-      description: Title of the game
-      required: true
-      types:
-      - String
-    description:
-      description: Description of the game
-      required: true
-      types:
-      - String
-    photo:
-      description: Photo that will be displayed in the game message in chats.
-      required: true
-      types:
-      - Array of PhotoSize
-    text:
-      description: Optional. Brief description of the game or high scores included
-        in the game message. Can be automatically edited to include current high scores
-        for the game when the bot calls setGameScore, or manually edited using editMessageText.
-        0-4096 characters.
-      required: false
-      types:
-      - String
-    text_entities:
-      description: Optional. Special entities that appear in text, such as usernames,
-        URLs, bot commands, etc.
-      required: false
-      types:
-      - Array of MessageEntity
-    animation:
-      description: Optional. Animation that will be displayed in the game message
-        in chats. Upload via BotFather
-      required: false
-      types:
-      - Animation
-  kind: struct
+  Game:
+    fields:
+      animation:
+        description: Optional. Animation that will be displayed in the game message
+          in chats. Upload via BotFather
+        name: animation
+        required: false
+        types:
+        - Animation
+      description:
+        description: Description of the game
+        name: description
+        required: true
+        types:
+        - String
+      photo:
+        description: Photo that will be displayed in the game message in chats.
+        name: photo
+        required: true
+        types:
+        - Array of PhotoSize
+      text:
+        description: Optional. Brief description of the game or high scores included
+          in the game message. Can be automatically edited to include current high
+          scores for the game when the bot calls setGameScore, or manually edited
+          using editMessageText. 0-4096 characters.
+        name: text
+        required: false
+        types:
+        - String
+      text_entities:
+        description: Optional. Special entities that appear in text, such as usernames,
+          URLs, bot commands, etc.
+        name: text_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      title:
+        description: Title of the game
+        name: title
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - This object represents a game. Use BotFather to create and edit games, their
+        short names will act as unique identifiers.
+      href: https://core.telegram.org/bots/api#game
+      name: Game
 dirty: false
-file_name: game.py

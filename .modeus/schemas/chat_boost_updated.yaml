@@ -1,17 +1,22 @@
 data:
-  description:
-  - This object represents a boost added to a chat or changed.
-  fields:
-    chat:
-      description: Chat which was boosted
-      required: true
-      types:
-      - Chat
-    boost:
-      description: Information about the chat boost
-      required: true
-      types:
-      - ChatBoost
-  kind: struct
+  ChatBoostUpdated:
+    fields:
+      boost:
+        description: Information about the chat boost
+        name: boost
+        required: true
+        types:
+        - ChatBoost
+      chat:
+        description: Chat which was boosted
+        name: chat
+        required: true
+        types:
+        - Chat
+    kind: struct
+    meta:
+      description:
+      - This object represents a boost added to a chat or changed.
+      href: https://core.telegram.org/bots/api#chatboostupdated
+      name: ChatBoostUpdated
 dirty: false
-file_name: chat_boost_updated.py

@@ -1,44 +1,54 @@
 data:
-  description:
-  - This object represents changes in the status of a chat member.
-  fields:
-    chat:
-      description: Chat the user belongs to
-      required: true
-      types:
-      - Chat
-    from:
-      description: Performer of the action, which resulted in the change
-      required: true
-      types:
-      - User
-    date:
-      description: Date the change was done in Unix time
-      required: true
-      types:
-      - Integer
-    old_chat_member:
-      description: Previous information about the chat member
-      required: true
-      types:
-      - ChatMember
-    new_chat_member:
-      description: New information about the chat member
-      required: true
-      types:
-      - ChatMember
-    invite_link:
-      description: Optional. Chat invite link, which was used by the user to join
-        the chat; for joining by invite link events only.
-      required: false
-      types:
-      - ChatInviteLink
-    via_chat_folder_invite_link:
-      description: Optional. True, if the user joined the chat via a chat folder invite
-        link
-      required: false
-      types:
-      - Boolean
-  kind: struct
+  ChatMemberUpdated:
+    fields:
+      chat:
+        description: Chat the user belongs to
+        name: chat
+        required: true
+        types:
+        - Chat
+      date:
+        description: Date the change was done in Unix time
+        name: date
+        required: true
+        types:
+        - Integer
+      from:
+        description: Performer of the action, which resulted in the change
+        name: from
+        required: true
+        types:
+        - User
+      invite_link:
+        description: Optional. Chat invite link, which was used by the user to join
+          the chat; for joining by invite link events only.
+        name: invite_link
+        required: false
+        types:
+        - ChatInviteLink
+      new_chat_member:
+        description: New information about the chat member
+        name: new_chat_member
+        required: true
+        types:
+        - ChatMember
+      old_chat_member:
+        description: Previous information about the chat member
+        name: old_chat_member
+        required: true
+        types:
+        - ChatMember
+      via_chat_folder_invite_link:
+        description: Optional. True, if the user joined the chat via a chat folder
+          invite link
+        name: via_chat_folder_invite_link
+        required: false
+        types:
+        - Boolean
+    kind: struct
+    meta:
+      description:
+      - This object represents changes in the status of a chat member.
+      href: https://core.telegram.org/bots/api#chatmemberupdated
+      name: ChatMemberUpdated
 dirty: false
-file_name: chat_member_updated.py

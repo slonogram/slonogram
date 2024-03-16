@@ -1,326 +1,392 @@
 data:
-- description:
-  - Represents a photo to be sent.
-  fields:
-    type:
-      description: Type of the result, must be photo
-      required: true
-      types:
-      - String
-    media:
-      description: 'File to send. Pass a file_id to send a file that exists on the
-        Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
-        from the Internet, or pass "attach://<file_attach_name>" to upload a new one
-        using multipart/form-data under <file_attach_name> name. More information
-        on Sending Files: https://core.telegram.org/bots/api#sending-files'
-      required: true
-      types:
-      - String
-    caption:
-      description: Optional. Caption of the photo to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the photo caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    has_spoiler:
-      description: Optional. Pass True if the photo needs to be covered with a spoiler
-        animation
-      required: false
-      types:
-      - Boolean
-  kind: struct
-- description:
-  - Represents a video to be sent.
-  fields:
-    type:
-      description: Type of the result, must be video
-      required: true
-      types:
-      - String
-    media:
-      description: 'File to send. Pass a file_id to send a file that exists on the
-        Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
-        from the Internet, or pass "attach://<file_attach_name>" to upload a new one
-        using multipart/form-data under <file_attach_name> name. More information
-        on Sending Files: https://core.telegram.org/bots/api#sending-files'
-      required: true
-      types:
-      - String
-    thumbnail:
-      description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
-        generation for the file is supported server-side. The thumbnail should be
-        in JPEG format and less than 200 kB in size. A thumbnail''s width and height
-        should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
-        Thumbnails can''t be reused and can be only uploaded as a new file, so you
-        can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
-        multipart/form-data under <file_attach_name>. More information on Sending
-        Files: https://core.telegram.org/bots/api#sending-files'
-      required: false
-      types:
-      - InputFile
-      - String
-    caption:
-      description: Optional. Caption of the video to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the video caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    width:
-      description: Optional. Video width
-      required: false
-      types:
-      - Integer
-    height:
-      description: Optional. Video height
-      required: false
-      types:
-      - Integer
-    duration:
-      description: Optional. Video duration in seconds
-      required: false
-      types:
-      - Integer
-    supports_streaming:
-      description: Optional. Pass True if the uploaded video is suitable for streaming
-      required: false
-      types:
-      - Boolean
-    has_spoiler:
-      description: Optional. Pass True if the video needs to be covered with a spoiler
-        animation
-      required: false
-      types:
-      - Boolean
-  kind: struct
-- description:
-  - Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to
-    be sent.
-  fields:
-    type:
-      description: Type of the result, must be animation
-      required: true
-      types:
-      - String
-    media:
-      description: 'File to send. Pass a file_id to send a file that exists on the
-        Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
-        from the Internet, or pass "attach://<file_attach_name>" to upload a new one
-        using multipart/form-data under <file_attach_name> name. More information
-        on Sending Files: https://core.telegram.org/bots/api#sending-files'
-      required: true
-      types:
-      - String
-    thumbnail:
-      description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
-        generation for the file is supported server-side. The thumbnail should be
-        in JPEG format and less than 200 kB in size. A thumbnail''s width and height
-        should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
-        Thumbnails can''t be reused and can be only uploaded as a new file, so you
-        can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
-        multipart/form-data under <file_attach_name>. More information on Sending
-        Files: https://core.telegram.org/bots/api#sending-files'
-      required: false
-      types:
-      - InputFile
-      - String
-    caption:
-      description: Optional. Caption of the animation to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the animation caption. See
-        formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    width:
-      description: Optional. Animation width
-      required: false
-      types:
-      - Integer
-    height:
-      description: Optional. Animation height
-      required: false
-      types:
-      - Integer
-    duration:
-      description: Optional. Animation duration in seconds
-      required: false
-      types:
-      - Integer
-    has_spoiler:
-      description: Optional. Pass True if the animation needs to be covered with a
-        spoiler animation
-      required: false
-      types:
-      - Boolean
-  kind: struct
-- description:
-  - Represents an audio file to be treated as music to be sent.
-  fields:
-    type:
-      description: Type of the result, must be audio
-      required: true
-      types:
-      - String
-    media:
-      description: 'File to send. Pass a file_id to send a file that exists on the
-        Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
-        from the Internet, or pass "attach://<file_attach_name>" to upload a new one
-        using multipart/form-data under <file_attach_name> name. More information
-        on Sending Files: https://core.telegram.org/bots/api#sending-files'
-      required: true
-      types:
-      - String
-    thumbnail:
-      description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
-        generation for the file is supported server-side. The thumbnail should be
-        in JPEG format and less than 200 kB in size. A thumbnail''s width and height
-        should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
-        Thumbnails can''t be reused and can be only uploaded as a new file, so you
-        can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
-        multipart/form-data under <file_attach_name>. More information on Sending
-        Files: https://core.telegram.org/bots/api#sending-files'
-      required: false
-      types:
-      - InputFile
-      - String
-    caption:
-      description: Optional. Caption of the audio to be sent, 0-1024 characters after
-        entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the audio caption. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    duration:
-      description: Optional. Duration of the audio in seconds
-      required: false
-      types:
-      - Integer
-    performer:
-      description: Optional. Performer of the audio
-      required: false
-      types:
-      - String
-    title:
-      description: Optional. Title of the audio
-      required: false
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents a general file to be sent.
-  fields:
-    type:
-      description: Type of the result, must be document
-      required: true
-      types:
-      - String
-    media:
-      description: 'File to send. Pass a file_id to send a file that exists on the
-        Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
-        from the Internet, or pass "attach://<file_attach_name>" to upload a new one
-        using multipart/form-data under <file_attach_name> name. More information
-        on Sending Files: https://core.telegram.org/bots/api#sending-files'
-      required: true
-      types:
-      - String
-    thumbnail:
-      description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
-        generation for the file is supported server-side. The thumbnail should be
-        in JPEG format and less than 200 kB in size. A thumbnail''s width and height
-        should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
-        Thumbnails can''t be reused and can be only uploaded as a new file, so you
-        can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
-        multipart/form-data under <file_attach_name>. More information on Sending
-        Files: https://core.telegram.org/bots/api#sending-files'
-      required: false
-      types:
-      - InputFile
-      - String
-    caption:
-      description: Optional. Caption of the document to be sent, 0-1024 characters
-        after entities parsing
-      required: false
-      types:
-      - String
-    parse_mode:
-      description: Optional. Mode for parsing entities in the document caption. See
-        formatting options for more details.
-      required: false
-      types:
-      - String
-    caption_entities:
-      description: Optional. List of special entities that appear in the caption,
-        which can be specified instead of parse_mode
-      required: false
-      types:
-      - Array of MessageEntity
-    disable_content_type_detection:
-      description: Optional. Disables automatic server-side content type detection
-        for files uploaded using multipart/form-data. Always True, if the document
-        is sent as part of an album.
-      required: false
-      types:
-      - Boolean
-  kind: struct
-- description:
-  - This object represents the content of a media message to be sent. It should be
-    one of
-  - '- InputMediaAnimation'
-  - '- InputMediaDocument'
-  - '- InputMediaAudio'
-  - '- InputMediaPhoto'
-  - '- InputMediaVideo'
-  kind: type-alias
-  union:
-  - InputMediaPhoto
-  - InputMediaVideo
-  - InputMediaAnimation
-  - InputMediaAudio
-  - InputMediaDocument
+  InputMedia:
+    kind: type-alias
+    meta:
+      description:
+      - This object represents the content of a media message to be sent. It should
+        be one of
+      - '- InputMediaAnimation'
+      - '- InputMediaDocument'
+      - '- InputMediaAudio'
+      - '- InputMediaPhoto'
+      - '- InputMediaVideo'
+      href: https://core.telegram.org/bots/api#inputmedia
+      name: InputMedia
+    union:
+    - InputMediaAnimation
+    - InputMediaDocument
+    - InputMediaAudio
+    - InputMediaPhoto
+    - InputMediaVideo
+  InputMediaAnimation:
+    fields:
+      caption:
+        description: Optional. Caption of the animation to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      duration:
+        description: Optional. Animation duration in seconds
+        name: duration
+        required: false
+        types:
+        - Integer
+      has_spoiler:
+        description: Optional. Pass True if the animation needs to be covered with
+          a spoiler animation
+        name: has_spoiler
+        required: false
+        types:
+        - Boolean
+      height:
+        description: Optional. Animation height
+        name: height
+        required: false
+        types:
+        - Integer
+      media:
+        description: 'File to send. Pass a file_id to send a file that exists on the
+          Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
+          from the Internet, or pass "attach://<file_attach_name>" to upload a new
+          one using multipart/form-data under <file_attach_name> name. More information
+          on Sending Files: https://core.telegram.org/bots/api#sending-files'
+        name: media
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the animation caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      thumbnail:
+        description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
+          generation for the file is supported server-side. The thumbnail should be
+          in JPEG format and less than 200 kB in size. A thumbnail''s width and height
+          should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
+          Thumbnails can''t be reused and can be only uploaded as a new file, so you
+          can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
+          multipart/form-data under <file_attach_name>. More information on Sending
+          Files: https://core.telegram.org/bots/api#sending-files'
+        name: thumbnail
+        required: false
+        types:
+        - InputFile
+        - String
+      type:
+        description: Type of the result, must be animation
+        name: type
+        required: true
+        types:
+        - String
+      width:
+        description: Optional. Animation width
+        name: width
+        required: false
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound)
+        to be sent.
+      href: https://core.telegram.org/bots/api#inputmediaanimation
+      name: InputMediaAnimation
+  InputMediaAudio:
+    fields:
+      caption:
+        description: Optional. Caption of the audio to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      duration:
+        description: Optional. Duration of the audio in seconds
+        name: duration
+        required: false
+        types:
+        - Integer
+      media:
+        description: 'File to send. Pass a file_id to send a file that exists on the
+          Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
+          from the Internet, or pass "attach://<file_attach_name>" to upload a new
+          one using multipart/form-data under <file_attach_name> name. More information
+          on Sending Files: https://core.telegram.org/bots/api#sending-files'
+        name: media
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the audio caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      performer:
+        description: Optional. Performer of the audio
+        name: performer
+        required: false
+        types:
+        - String
+      thumbnail:
+        description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
+          generation for the file is supported server-side. The thumbnail should be
+          in JPEG format and less than 200 kB in size. A thumbnail''s width and height
+          should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
+          Thumbnails can''t be reused and can be only uploaded as a new file, so you
+          can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
+          multipart/form-data under <file_attach_name>. More information on Sending
+          Files: https://core.telegram.org/bots/api#sending-files'
+        name: thumbnail
+        required: false
+        types:
+        - InputFile
+        - String
+      title:
+        description: Optional. Title of the audio
+        name: title
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be audio
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents an audio file to be treated as music to be sent.
+      href: https://core.telegram.org/bots/api#inputmediaaudio
+      name: InputMediaAudio
+  InputMediaDocument:
+    fields:
+      caption:
+        description: Optional. Caption of the document to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      disable_content_type_detection:
+        description: Optional. Disables automatic server-side content type detection
+          for files uploaded using multipart/form-data. Always True, if the document
+          is sent as part of an album.
+        name: disable_content_type_detection
+        required: false
+        types:
+        - Boolean
+      media:
+        description: 'File to send. Pass a file_id to send a file that exists on the
+          Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
+          from the Internet, or pass "attach://<file_attach_name>" to upload a new
+          one using multipart/form-data under <file_attach_name> name. More information
+          on Sending Files: https://core.telegram.org/bots/api#sending-files'
+        name: media
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the document caption.
+          See formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      thumbnail:
+        description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
+          generation for the file is supported server-side. The thumbnail should be
+          in JPEG format and less than 200 kB in size. A thumbnail''s width and height
+          should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
+          Thumbnails can''t be reused and can be only uploaded as a new file, so you
+          can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
+          multipart/form-data under <file_attach_name>. More information on Sending
+          Files: https://core.telegram.org/bots/api#sending-files'
+        name: thumbnail
+        required: false
+        types:
+        - InputFile
+        - String
+      type:
+        description: Type of the result, must be document
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a general file to be sent.
+      href: https://core.telegram.org/bots/api#inputmediadocument
+      name: InputMediaDocument
+  InputMediaPhoto:
+    fields:
+      caption:
+        description: Optional. Caption of the photo to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      has_spoiler:
+        description: Optional. Pass True if the photo needs to be covered with a spoiler
+          animation
+        name: has_spoiler
+        required: false
+        types:
+        - Boolean
+      media:
+        description: 'File to send. Pass a file_id to send a file that exists on the
+          Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
+          from the Internet, or pass "attach://<file_attach_name>" to upload a new
+          one using multipart/form-data under <file_attach_name> name. More information
+          on Sending Files: https://core.telegram.org/bots/api#sending-files'
+        name: media
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the photo caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      type:
+        description: Type of the result, must be photo
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a photo to be sent.
+      href: https://core.telegram.org/bots/api#inputmediaphoto
+      name: InputMediaPhoto
+  InputMediaVideo:
+    fields:
+      caption:
+        description: Optional. Caption of the video to be sent, 0-1024 characters
+          after entities parsing
+        name: caption
+        required: false
+        types:
+        - String
+      caption_entities:
+        description: Optional. List of special entities that appear in the caption,
+          which can be specified instead of parse_mode
+        name: caption_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      duration:
+        description: Optional. Video duration in seconds
+        name: duration
+        required: false
+        types:
+        - Integer
+      has_spoiler:
+        description: Optional. Pass True if the video needs to be covered with a spoiler
+          animation
+        name: has_spoiler
+        required: false
+        types:
+        - Boolean
+      height:
+        description: Optional. Video height
+        name: height
+        required: false
+        types:
+        - Integer
+      media:
+        description: 'File to send. Pass a file_id to send a file that exists on the
+          Telegram servers (recommended), pass an HTTP URL for Telegram to get a file
+          from the Internet, or pass "attach://<file_attach_name>" to upload a new
+          one using multipart/form-data under <file_attach_name> name. More information
+          on Sending Files: https://core.telegram.org/bots/api#sending-files'
+        name: media
+        required: true
+        types:
+        - String
+      parse_mode:
+        description: Optional. Mode for parsing entities in the video caption. See
+          formatting options for more details.
+        name: parse_mode
+        required: false
+        types:
+        - String
+      supports_streaming:
+        description: Optional. Pass True if the uploaded video is suitable for streaming
+        name: supports_streaming
+        required: false
+        types:
+        - Boolean
+      thumbnail:
+        description: 'Optional. Thumbnail of the file sent; can be ignored if thumbnail
+          generation for the file is supported server-side. The thumbnail should be
+          in JPEG format and less than 200 kB in size. A thumbnail''s width and height
+          should not exceed 320. Ignored if the file is not uploaded using multipart/form-data.
+          Thumbnails can''t be reused and can be only uploaded as a new file, so you
+          can pass "attach://<file_attach_name>" if the thumbnail was uploaded using
+          multipart/form-data under <file_attach_name>. More information on Sending
+          Files: https://core.telegram.org/bots/api#sending-files'
+        name: thumbnail
+        required: false
+        types:
+        - InputFile
+        - String
+      type:
+        description: Type of the result, must be video
+        name: type
+        required: true
+        types:
+        - String
+      width:
+        description: Optional. Video width
+        name: width
+        required: false
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents a video to be sent.
+      href: https://core.telegram.org/bots/api#inputmediavideo
+      name: InputMediaVideo
 dirty: false
-file_name: input_media.py

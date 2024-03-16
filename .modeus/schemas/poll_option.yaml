@@ -1,17 +1,22 @@
 data:
-  description:
-  - This object contains information about one answer option in a poll.
-  fields:
-    text:
-      description: Option text, 1-100 characters
-      required: true
-      types:
-      - String
-    voter_count:
-      description: Number of users that voted for this option
-      required: true
-      types:
-      - Integer
-  kind: struct
+  PollOption:
+    fields:
+      text:
+        description: Option text, 1-100 characters
+        name: text
+        required: true
+        types:
+        - String
+      voter_count:
+        description: Number of users that voted for this option
+        name: voter_count
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object contains information about one answer option in a poll.
+      href: https://core.telegram.org/bots/api#polloption
+      name: PollOption
 dirty: false
-file_name: poll_option.py

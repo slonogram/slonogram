@@ -1,12 +1,16 @@
 data:
-  description:
-  - This object represents a service message about a video chat ended in the chat.
-  fields:
-    duration:
-      description: Video chat duration in seconds
-      required: true
-      types:
-      - Integer
-  kind: struct
+  VideoChatEnded:
+    fields:
+      duration:
+        description: Video chat duration in seconds
+        name: duration
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a video chat ended in the chat.
+      href: https://core.telegram.org/bots/api#videochatended
+      name: VideoChatEnded
 dirty: false
-file_name: video_chat_ended.py

@@ -7,8 +7,9 @@ from .base import Middlewared
 
 M = TypeVar("M")
 
+
 class Const(Middlewared[M]):
-    __slots__ = ('handler', 'activation')
+    __slots__ = ("handler", "activation")
 
     def __init__(self, handler: Handler[M], activation: Activation) -> None:
         self.handler = handler
@@ -17,7 +18,7 @@ class Const(Middlewared[M]):
             self.activation = Activation(handler)
         else:
             self.activation = Activation.stalled()
-    
+
     def __repr__(self) -> str:
         return f"Const({self.handler}, activation={self.activation})"
 

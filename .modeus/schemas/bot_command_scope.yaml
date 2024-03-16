@@ -1,114 +1,157 @@
 data:
-- description:
-  - Represents the default scope of bot commands. Default commands are used if no
-    commands with a narrower scope are specified for the user.
-  fields:
-    type:
-      description: Scope type, must be default
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering all private chats.
-  fields:
-    type:
-      description: Scope type, must be all_private_chats
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering all group and supergroup chats.
-  fields:
-    type:
-      description: Scope type, must be all_group_chats
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering all group and supergroup chat administrators.
-  fields:
-    type:
-      description: Scope type, must be all_chat_administrators
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering a specific chat.
-  fields:
-    type:
-      description: Scope type, must be chat
-      required: true
-      types:
-      - String
-    chat_id:
-      description: Unique identifier for the target chat or username of the target
-        supergroup (in the format @supergroupusername)
-      required: true
-      types:
-      - Integer
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering all administrators of a specific
-    group or supergroup chat.
-  fields:
-    type:
-      description: Scope type, must be chat_administrators
-      required: true
-      types:
-      - String
-    chat_id:
-      description: Unique identifier for the target chat or username of the target
-        supergroup (in the format @supergroupusername)
-      required: true
-      types:
-      - Integer
-      - String
-  kind: struct
-- description:
-  - Represents the scope of bot commands, covering a specific member of a group or
-    supergroup chat.
-  fields:
-    type:
-      description: Scope type, must be chat_member
-      required: true
-      types:
-      - String
-    chat_id:
-      description: Unique identifier for the target chat or username of the target
-        supergroup (in the format @supergroupusername)
-      required: true
-      types:
-      - Integer
-      - String
-    user_id:
-      description: Unique identifier of the target user
-      required: true
-      types:
-      - Integer
-  kind: struct
-- description:
-  - 'This object represents the scope to which bot commands are applied. Currently,
-    the following 7 scopes are supported:'
-  - '- BotCommandScopeDefault'
-  - '- BotCommandScopeAllPrivateChats'
-  - '- BotCommandScopeAllGroupChats'
-  - '- BotCommandScopeAllChatAdministrators'
-  - '- BotCommandScopeChat'
-  - '- BotCommandScopeChatAdministrators'
-  - '- BotCommandScopeChatMember'
-  kind: type-alias
-  union:
-  - BotCommandScopeDefault
-  - BotCommandScopeAllPrivateChats
-  - BotCommandScopeAllGroupChats
-  - BotCommandScopeAllChatAdministrators
-  - BotCommandScopeChat
-  - BotCommandScopeChatAdministrators
-  - BotCommandScopeChatMember
+  BotCommandScope:
+    kind: type-alias
+    meta:
+      description:
+      - 'This object represents the scope to which bot commands are applied. Currently,
+        the following 7 scopes are supported:'
+      - '- BotCommandScopeDefault'
+      - '- BotCommandScopeAllPrivateChats'
+      - '- BotCommandScopeAllGroupChats'
+      - '- BotCommandScopeAllChatAdministrators'
+      - '- BotCommandScopeChat'
+      - '- BotCommandScopeChatAdministrators'
+      - '- BotCommandScopeChatMember'
+      href: https://core.telegram.org/bots/api#botcommandscope
+      name: BotCommandScope
+    union:
+    - BotCommandScopeDefault
+    - BotCommandScopeAllPrivateChats
+    - BotCommandScopeAllGroupChats
+    - BotCommandScopeAllChatAdministrators
+    - BotCommandScopeChat
+    - BotCommandScopeChatAdministrators
+    - BotCommandScopeChatMember
+  BotCommandScopeAllChatAdministrators:
+    fields:
+      type:
+        description: Scope type, must be all_chat_administrators
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering all group and supergroup chat
+        administrators.
+      href: https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
+      name: BotCommandScopeAllChatAdministrators
+  BotCommandScopeAllGroupChats:
+    fields:
+      type:
+        description: Scope type, must be all_group_chats
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering all group and supergroup chats.
+      href: https://core.telegram.org/bots/api#botcommandscopeallgroupchats
+      name: BotCommandScopeAllGroupChats
+  BotCommandScopeAllPrivateChats:
+    fields:
+      type:
+        description: Scope type, must be all_private_chats
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering all private chats.
+      href: https://core.telegram.org/bots/api#botcommandscopeallprivatechats
+      name: BotCommandScopeAllPrivateChats
+  BotCommandScopeChat:
+    fields:
+      chat_id:
+        description: Unique identifier for the target chat or username of the target
+          supergroup (in the format @supergroupusername)
+        name: chat_id
+        required: true
+        types:
+        - Integer
+        - String
+      type:
+        description: Scope type, must be chat
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering a specific chat.
+      href: https://core.telegram.org/bots/api#botcommandscopechat
+      name: BotCommandScopeChat
+  BotCommandScopeChatAdministrators:
+    fields:
+      chat_id:
+        description: Unique identifier for the target chat or username of the target
+          supergroup (in the format @supergroupusername)
+        name: chat_id
+        required: true
+        types:
+        - Integer
+        - String
+      type:
+        description: Scope type, must be chat_administrators
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering all administrators of a specific
+        group or supergroup chat.
+      href: https://core.telegram.org/bots/api#botcommandscopechatadministrators
+      name: BotCommandScopeChatAdministrators
+  BotCommandScopeChatMember:
+    fields:
+      chat_id:
+        description: Unique identifier for the target chat or username of the target
+          supergroup (in the format @supergroupusername)
+        name: chat_id
+        required: true
+        types:
+        - Integer
+        - String
+      type:
+        description: Scope type, must be chat_member
+        name: type
+        required: true
+        types:
+        - String
+      user_id:
+        description: Unique identifier of the target user
+        name: user_id
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Represents the scope of bot commands, covering a specific member of a group
+        or supergroup chat.
+      href: https://core.telegram.org/bots/api#botcommandscopechatmember
+      name: BotCommandScopeChatMember
+  BotCommandScopeDefault:
+    fields:
+      type:
+        description: Scope type, must be default
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents the default scope of bot commands. Default commands are used if
+        no commands with a narrower scope are specified for the user.
+      href: https://core.telegram.org/bots/api#botcommandscopedefault
+      name: BotCommandScopeDefault
 dirty: false
-file_name: bot_command_scope.py

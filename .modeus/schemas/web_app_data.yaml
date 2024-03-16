@@ -1,19 +1,24 @@
 data:
-  description:
-  - Describes data sent from a Web App to the bot.
-  fields:
-    data:
-      description: The data. Be aware that a bad client can send arbitrary data in
-        this field.
-      required: true
-      types:
-      - String
-    button_text:
-      description: Text of the web_app keyboard button from which the Web App was
-        opened. Be aware that a bad client can send arbitrary data in this field.
-      required: true
-      types:
-      - String
-  kind: struct
+  WebAppData:
+    fields:
+      button_text:
+        description: Text of the web_app keyboard button from which the Web App was
+          opened. Be aware that a bad client can send arbitrary data in this field.
+        name: button_text
+        required: true
+        types:
+        - String
+      data:
+        description: The data. Be aware that a bad client can send arbitrary data
+          in this field.
+        name: data
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes data sent from a Web App to the bot.
+      href: https://core.telegram.org/bots/api#webappdata
+      name: WebAppData
 dirty: false
-file_name: web_app_data.py

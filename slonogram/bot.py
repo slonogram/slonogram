@@ -16,9 +16,8 @@ class Bot:
     ) -> AsyncIterator[Self]:
         from .extra.aiohttp import AiohttpSession
 
-        async with AiohttpSession.from_options(
-            base_url=base_url
-        ) as session:
+        async with AiohttpSession.from_options(base_url=base_url) as session:
             yield cls(session)
+
 
 __all__ = ["Bot"]

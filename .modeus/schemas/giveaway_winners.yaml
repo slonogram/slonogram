@@ -1,68 +1,82 @@
 data:
-  description:
-  - This object represents a message about the completion of a giveaway with public
-    winners.
-  fields:
-    chat:
-      description: The chat that created the giveaway
-      required: true
-      types:
-      - Chat
-    giveaway_message_id:
-      description: Identifier of the message with the giveaway in the chat
-      required: true
-      types:
-      - Integer
-    winners_selection_date:
-      description: Point in time (Unix timestamp) when winners of the giveaway were
-        selected
-      required: true
-      types:
-      - Integer
-    winner_count:
-      description: Total number of winners in the giveaway
-      required: true
-      types:
-      - Integer
-    winners:
-      description: List of up to 100 winners of the giveaway
-      required: true
-      types:
-      - Array of User
-    additional_chat_count:
-      description: Optional. The number of other chats the user had to join in order
-        to be eligible for the giveaway
-      required: false
-      types:
-      - Integer
-    premium_subscription_month_count:
-      description: Optional. The number of months the Telegram Premium subscription
-        won from the giveaway will be active for
-      required: false
-      types:
-      - Integer
-    unclaimed_prize_count:
-      description: Optional. Number of undistributed prizes
-      required: false
-      types:
-      - Integer
-    only_new_members:
-      description: Optional. True, if only users who had joined the chats after the
-        giveaway started were eligible to win
-      required: false
-      types:
-      - Boolean
-    was_refunded:
-      description: Optional. True, if the giveaway was canceled because the payment
-        for it was refunded
-      required: false
-      types:
-      - Boolean
-    prize_description:
-      description: Optional. Description of additional giveaway prize
-      required: false
-      types:
-      - String
-  kind: struct
+  GiveawayWinners:
+    fields:
+      additional_chat_count:
+        description: Optional. The number of other chats the user had to join in order
+          to be eligible for the giveaway
+        name: additional_chat_count
+        required: false
+        types:
+        - Integer
+      chat:
+        description: The chat that created the giveaway
+        name: chat
+        required: true
+        types:
+        - Chat
+      giveaway_message_id:
+        description: Identifier of the message with the giveaway in the chat
+        name: giveaway_message_id
+        required: true
+        types:
+        - Integer
+      only_new_members:
+        description: Optional. True, if only users who had joined the chats after
+          the giveaway started were eligible to win
+        name: only_new_members
+        required: false
+        types:
+        - Boolean
+      premium_subscription_month_count:
+        description: Optional. The number of months the Telegram Premium subscription
+          won from the giveaway will be active for
+        name: premium_subscription_month_count
+        required: false
+        types:
+        - Integer
+      prize_description:
+        description: Optional. Description of additional giveaway prize
+        name: prize_description
+        required: false
+        types:
+        - String
+      unclaimed_prize_count:
+        description: Optional. Number of undistributed prizes
+        name: unclaimed_prize_count
+        required: false
+        types:
+        - Integer
+      was_refunded:
+        description: Optional. True, if the giveaway was canceled because the payment
+          for it was refunded
+        name: was_refunded
+        required: false
+        types:
+        - Boolean
+      winner_count:
+        description: Total number of winners in the giveaway
+        name: winner_count
+        required: true
+        types:
+        - Integer
+      winners:
+        description: List of up to 100 winners of the giveaway
+        name: winners
+        required: true
+        types:
+        - Array of User
+      winners_selection_date:
+        description: Point in time (Unix timestamp) when winners of the giveaway were
+          selected
+        name: winners_selection_date
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a message about the completion of a giveaway with public
+        winners.
+      href: https://core.telegram.org/bots/api#giveawaywinners
+      name: GiveawayWinners
 dirty: false
-file_name: giveaway_winners.py

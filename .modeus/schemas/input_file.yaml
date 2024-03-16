@@ -1,8 +1,12 @@
 data:
-  description:
-  - This object represents the contents of a file to be uploaded. Must be posted using
-    multipart/form-data in the usual way that files are uploaded via the browser.
-  fields: {}
-  kind: struct
+  InputFile:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents the contents of a file to be uploaded. Must be posted
+        using multipart/form-data in the usual way that files are uploaded via the
+        browser.
+      href: https://core.telegram.org/bots/api#inputfile
+      name: InputFile
 dirty: false
-file_name: input_file.py

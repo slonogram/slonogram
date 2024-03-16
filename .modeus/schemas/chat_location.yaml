@@ -1,18 +1,23 @@
 data:
-  description:
-  - Represents a location to which a chat is connected.
-  fields:
-    location:
-      description: The location to which the supergroup is connected. Can't be a live
-        location.
-      required: true
-      types:
-      - Location
-    address:
-      description: Location address; 1-64 characters, as defined by the chat owner
-      required: true
-      types:
-      - String
-  kind: struct
+  ChatLocation:
+    fields:
+      address:
+        description: Location address; 1-64 characters, as defined by the chat owner
+        name: address
+        required: true
+        types:
+        - String
+      location:
+        description: The location to which the supergroup is connected. Can't be a
+          live location.
+        name: location
+        required: true
+        types:
+        - Location
+    kind: struct
+    meta:
+      description:
+      - Represents a location to which a chat is connected.
+      href: https://core.telegram.org/bots/api#chatlocation
+      name: ChatLocation
 dirty: false
-file_name: chat_location.py

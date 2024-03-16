@@ -1,24 +1,30 @@
 data:
-  description:
-  - This object represents a service message about the completion of a giveaway without
-    public winners.
-  fields:
-    winner_count:
-      description: Number of winners in the giveaway
-      required: true
-      types:
-      - Integer
-    unclaimed_prize_count:
-      description: Optional. Number of undistributed prizes
-      required: false
-      types:
-      - Integer
-    giveaway_message:
-      description: Optional. Message with the giveaway that was completed, if it wasn't
-        deleted
-      required: false
-      types:
-      - Message
-  kind: struct
+  GiveawayCompleted:
+    fields:
+      giveaway_message:
+        description: Optional. Message with the giveaway that was completed, if it
+          wasn't deleted
+        name: giveaway_message
+        required: false
+        types:
+        - Message
+      unclaimed_prize_count:
+        description: Optional. Number of undistributed prizes
+        name: unclaimed_prize_count
+        required: false
+        types:
+        - Integer
+      winner_count:
+        description: Number of winners in the giveaway
+        name: winner_count
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about the completion of a giveaway
+        without public winners.
+      href: https://core.telegram.org/bots/api#giveawaycompleted
+      name: GiveawayCompleted
 dirty: false
-file_name: giveaway_completed.py

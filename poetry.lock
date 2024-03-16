@@ -151,6 +151,17 @@ test = ["anyio[trio]", "coverage[toml] (>=7)", "exceptiongroup (>=1.2.0)", "hypo
 trio = ["trio (>=0.23)"]
 
 [[package]]
+name = "argparse"
+version = "1.4.0"
+description = "Python command-line parsing library"
+optional = false
+python-versions = "*"
+files = [
+    {file = "argparse-1.4.0-py2.py3-none-any.whl", hash = "sha256:c31647edb69fd3d465a847ea3157d37bed1f95f19760b11a47aa91c04b666314"},
+    {file = "argparse-1.4.0.tar.gz", hash = "sha256:62b089a55be1d8949cd2bc7e0df0bddb9e028faefc8c32038cc84862aefdd6e4"},
+]
+
+[[package]]
 name = "attrs"
 version = "23.2.0"
 description = "Classes Without Boilerplate"
@@ -423,6 +434,19 @@ files = [
 ]
 
 [[package]]
+name = "pyron"
+version = "0.2"
+description = "The DRY Python package builder"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyron-0.2.tar.gz", hash = "sha256:162c6876e2d66ef71fe481142545fb990c632740454344ef1446d3cf3ee8964b"},
+]
+
+[package.dependencies]
+argparse = "*"
+
+[[package]]
 name = "pyyaml"
 version = "6.0.1"
 description = "YAML parser and emitter for Python"
@@ -624,4 +648,4 @@ aiohttp = ["aiohttp"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "cfb0b7c37884111ee2ea20733cf442b38a8b8033a9cd96cc60559312f1388bc5"
+content-hash = "c29d6b7bdf98fa16c4a621e967de2585673a7f9411d10502f45e92973b21394d"

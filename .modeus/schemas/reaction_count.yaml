@@ -1,18 +1,23 @@
 data:
-  description:
-  - Represents a reaction added to a message along with the number of times it was
-    added.
-  fields:
-    type:
-      description: Type of the reaction
-      required: true
-      types:
-      - ReactionType
-    total_count:
-      description: Number of times the reaction was added
-      required: true
-      types:
-      - Integer
-  kind: struct
+  ReactionCount:
+    fields:
+      total_count:
+        description: Number of times the reaction was added
+        name: total_count
+        required: true
+        types:
+        - Integer
+      type:
+        description: Type of the reaction
+        name: type
+        required: true
+        types:
+        - ReactionType
+    kind: struct
+    meta:
+      description:
+      - Represents a reaction added to a message along with the number of times it
+        was added.
+      href: https://core.telegram.org/bots/api#reactioncount
+      name: ReactionCount
 dirty: false
-file_name: reaction_count.py

@@ -1,35 +1,48 @@
-from typing import Literal, TypeAlias as TAlias
+from typing import Literal, TypeAlias as TAlias, Protocol
 from dataclasses import dataclass
 
 from ..spec import Field
 
+class HasMeta(Protocol):
+    meta: 'Meta'
+
 @dataclass
-class Described:
+class Meta:
+    name: str
     description: list[str]
+    href: str
+
 
 @dataclass(slots=True)
-class Struct(Described):
+class Struct:
+    meta: Meta
     fields: dict[str, Field]
 
-    kind: Literal['struct'] = 'struct'
+    kind: Literal["struct"] = "struct"
+
 
 @dataclass(slots=True)
-class TypeAlias(Described):
+class TypeAlias:
+    meta: Meta
     union: list[str]
 
-    kind: Literal['type-alias'] = 'type-alias'
+    kind: Literal["type-alias"] = "type-alias"
+
 
 @dataclass(slots=True)
-class Enum(Described):
+class Enum:
+    meta: Meta
     variants: dict[str, str]
 
-    kind: Literal['enum'] = 'enum'
+    kind: Literal["enum"] = "enum"
 
-AnyType: TAlias = Struct | TypeAlias | Enum 
+
+AnyType: TAlias = Struct | TypeAlias | Enum
 
 __all__ = [
     "Struct",
     "TypeAlias",
     "Enum",
     "AnyType",
+    "Meta",
 ]

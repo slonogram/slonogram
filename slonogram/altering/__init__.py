@@ -4,9 +4,11 @@ from ..omittable import Omittable, Omit
 
 T = TypeVar("T")
 
+
 class Alterer1(Protocol[T]):
     def __call__(self, value: T, /) -> T:
         ...
+
 
 def alter1(alterer: Omittable[Alterer1[T]], otherwise: T) -> T:
     if isinstance(alterer, Omit):

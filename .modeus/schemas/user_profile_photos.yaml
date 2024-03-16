@@ -1,17 +1,22 @@
 data:
-  description:
-  - This object represent a user's profile pictures.
-  fields:
-    total_count:
-      description: Total number of profile pictures the target user has
-      required: true
-      types:
-      - Integer
-    photos:
-      description: Requested profile pictures (in up to 4 sizes each)
-      required: true
-      types:
-      - Array of Array of PhotoSize
-  kind: struct
+  UserProfilePhotos:
+    fields:
+      photos:
+        description: Requested profile pictures (in up to 4 sizes each)
+        name: photos
+        required: true
+        types:
+        - Array of Array of PhotoSize
+      total_count:
+        description: Total number of profile pictures the target user has
+        name: total_count
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represent a user's profile pictures.
+      href: https://core.telegram.org/bots/api#userprofilephotos
+      name: UserProfilePhotos
 dirty: false
-file_name: user_profile_photos.py

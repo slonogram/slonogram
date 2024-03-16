@@ -1,55 +1,70 @@
 data:
-- description:
-  - The reaction is based on an emoji.
-  fields:
-    type:
-      description: Type of the reaction, always "emoji"
-      required: true
-      types:
-      - String
-    emoji:
-      description: "Reaction emoji. Currently, it can be one of \"\U0001F44D\", \"\
-        \U0001F44E\", \"\u2764\", \"\U0001F525\", \"\U0001F970\", \"\U0001F44F\",\
-        \ \"\U0001F601\", \"\U0001F914\", \"\U0001F92F\", \"\U0001F631\", \"\U0001F92C\
-        \", \"\U0001F622\", \"\U0001F389\", \"\U0001F929\", \"\U0001F92E\", \"\U0001F4A9\
-        \", \"\U0001F64F\", \"\U0001F44C\", \"\U0001F54A\", \"\U0001F921\", \"\U0001F971\
-        \", \"\U0001F974\", \"\U0001F60D\", \"\U0001F433\", \"\u2764\u200D\U0001F525\
-        \", \"\U0001F31A\", \"\U0001F32D\", \"\U0001F4AF\", \"\U0001F923\", \"\u26A1\
-        \", \"\U0001F34C\", \"\U0001F3C6\", \"\U0001F494\", \"\U0001F928\", \"\U0001F610\
-        \", \"\U0001F353\", \"\U0001F37E\", \"\U0001F48B\", \"\U0001F595\", \"\U0001F608\
-        \", \"\U0001F634\", \"\U0001F62D\", \"\U0001F913\", \"\U0001F47B\", \"\U0001F468\
-        \u200D\U0001F4BB\", \"\U0001F440\", \"\U0001F383\", \"\U0001F648\", \"\U0001F607\
-        \", \"\U0001F628\", \"\U0001F91D\", \"\u270D\", \"\U0001F917\", \"\U0001FAE1\
-        \", \"\U0001F385\", \"\U0001F384\", \"\u2603\", \"\U0001F485\", \"\U0001F92A\
-        \", \"\U0001F5FF\", \"\U0001F192\", \"\U0001F498\", \"\U0001F649\", \"\U0001F984\
-        \", \"\U0001F618\", \"\U0001F48A\", \"\U0001F64A\", \"\U0001F60E\", \"\U0001F47E\
-        \", \"\U0001F937\u200D\u2642\", \"\U0001F937\", \"\U0001F937\u200D\u2640\"\
-        , \"\U0001F621\""
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - The reaction is based on a custom emoji.
-  fields:
-    type:
-      description: Type of the reaction, always "custom_emoji"
-      required: true
-      types:
-      - String
-    custom_emoji_id:
-      description: Custom emoji identifier
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - This object describes the type of a reaction. Currently, it can be one of
-  - '- ReactionTypeEmoji'
-  - '- ReactionTypeCustomEmoji'
-  kind: type-alias
-  union:
-  - ReactionTypeEmoji
-  - ReactionTypeCustomEmoji
+  ReactionType:
+    kind: type-alias
+    meta:
+      description:
+      - This object describes the type of a reaction. Currently, it can be one of
+      - '- ReactionTypeEmoji'
+      - '- ReactionTypeCustomEmoji'
+      href: https://core.telegram.org/bots/api#reactiontype
+      name: ReactionType
+    union:
+    - ReactionTypeEmoji
+    - ReactionTypeCustomEmoji
+  ReactionTypeCustomEmoji:
+    fields:
+      custom_emoji_id:
+        description: Custom emoji identifier
+        name: custom_emoji_id
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the reaction, always "custom_emoji"
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - The reaction is based on a custom emoji.
+      href: https://core.telegram.org/bots/api#reactiontypecustomemoji
+      name: ReactionTypeCustomEmoji
+  ReactionTypeEmoji:
+    fields:
+      emoji:
+        description: "Reaction emoji. Currently, it can be one of \"\U0001F44D\",\
+          \ \"\U0001F44E\", \"\u2764\", \"\U0001F525\", \"\U0001F970\", \"\U0001F44F\
+          \", \"\U0001F601\", \"\U0001F914\", \"\U0001F92F\", \"\U0001F631\", \"\U0001F92C\
+          \", \"\U0001F622\", \"\U0001F389\", \"\U0001F929\", \"\U0001F92E\", \"\U0001F4A9\
+          \", \"\U0001F64F\", \"\U0001F44C\", \"\U0001F54A\", \"\U0001F921\", \"\U0001F971\
+          \", \"\U0001F974\", \"\U0001F60D\", \"\U0001F433\", \"\u2764\u200D\U0001F525\
+          \", \"\U0001F31A\", \"\U0001F32D\", \"\U0001F4AF\", \"\U0001F923\", \"\u26A1\
+          \", \"\U0001F34C\", \"\U0001F3C6\", \"\U0001F494\", \"\U0001F928\", \"\U0001F610\
+          \", \"\U0001F353\", \"\U0001F37E\", \"\U0001F48B\", \"\U0001F595\", \"\U0001F608\
+          \", \"\U0001F634\", \"\U0001F62D\", \"\U0001F913\", \"\U0001F47B\", \"\U0001F468\
+          \u200D\U0001F4BB\", \"\U0001F440\", \"\U0001F383\", \"\U0001F648\", \"\U0001F607\
+          \", \"\U0001F628\", \"\U0001F91D\", \"\u270D\", \"\U0001F917\", \"\U0001FAE1\
+          \", \"\U0001F385\", \"\U0001F384\", \"\u2603\", \"\U0001F485\", \"\U0001F92A\
+          \", \"\U0001F5FF\", \"\U0001F192\", \"\U0001F498\", \"\U0001F649\", \"\U0001F984\
+          \", \"\U0001F618\", \"\U0001F48A\", \"\U0001F64A\", \"\U0001F60E\", \"\U0001F47E\
+          \", \"\U0001F937\u200D\u2642\", \"\U0001F937\", \"\U0001F937\u200D\u2640\
+          \", \"\U0001F621\""
+        name: emoji
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the reaction, always "emoji"
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - The reaction is based on an emoji.
+      href: https://core.telegram.org/bots/api#reactiontypeemoji
+      name: ReactionTypeEmoji
 dirty: false
-file_name: reaction_type.py

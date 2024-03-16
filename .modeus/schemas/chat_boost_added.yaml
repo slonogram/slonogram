@@ -1,12 +1,16 @@
 data:
-  description:
-  - This object represents a service message about a user boosting a chat.
-  fields:
-    boost_count:
-      description: Number of boosts added by the user
-      required: true
-      types:
-      - Integer
-  kind: struct
+  ChatBoostAdded:
+    fields:
+      boost_count:
+        description: Number of boosts added by the user
+        name: boost_count
+        required: true
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about a user boosting a chat.
+      href: https://core.telegram.org/bots/api#chatboostadded
+      name: ChatBoostAdded
 dirty: false
-file_name: chat_boost_added.py

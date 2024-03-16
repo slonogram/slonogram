@@ -1,8 +1,11 @@
 data:
-  description:
-  - This object represents a service message about General forum topic unhidden in
-    the chat. Currently holds no information.
-  fields: {}
-  kind: struct
+  GeneralForumTopicUnhidden:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about General forum topic unhidden
+        in the chat. Currently holds no information.
+      href: https://core.telegram.org/bots/api#generalforumtopicunhidden
+      name: GeneralForumTopicUnhidden
 dirty: false
-file_name: general_forum_topic_unhidden.py

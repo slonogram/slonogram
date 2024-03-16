@@ -1,38 +1,46 @@
 data:
-  description:
-  - Describes the options used for link preview generation.
-  fields:
-    is_disabled:
-      description: Optional. True, if the link preview is disabled
-      required: false
-      types:
-      - Boolean
-    url:
-      description: Optional. URL to use for the link preview. If empty, then the first
-        URL found in the message text will be used
-      required: false
-      types:
-      - String
-    prefer_small_media:
-      description: Optional. True, if the media in the link preview is supposed to
-        be shrunk; ignored if the URL isn't explicitly specified or media size change
-        isn't supported for the preview
-      required: false
-      types:
-      - Boolean
-    prefer_large_media:
-      description: Optional. True, if the media in the link preview is supposed to
-        be enlarged; ignored if the URL isn't explicitly specified or media size change
-        isn't supported for the preview
-      required: false
-      types:
-      - Boolean
-    show_above_text:
-      description: Optional. True, if the link preview must be shown above the message
-        text; otherwise, the link preview will be shown below the message text
-      required: false
-      types:
-      - Boolean
-  kind: struct
+  LinkPreviewOptions:
+    fields:
+      is_disabled:
+        description: Optional. True, if the link preview is disabled
+        name: is_disabled
+        required: false
+        types:
+        - Boolean
+      prefer_large_media:
+        description: Optional. True, if the media in the link preview is supposed
+          to be enlarged; ignored if the URL isn't explicitly specified or media size
+          change isn't supported for the preview
+        name: prefer_large_media
+        required: false
+        types:
+        - Boolean
+      prefer_small_media:
+        description: Optional. True, if the media in the link preview is supposed
+          to be shrunk; ignored if the URL isn't explicitly specified or media size
+          change isn't supported for the preview
+        name: prefer_small_media
+        required: false
+        types:
+        - Boolean
+      show_above_text:
+        description: Optional. True, if the link preview must be shown above the message
+          text; otherwise, the link preview will be shown below the message text
+        name: show_above_text
+        required: false
+        types:
+        - Boolean
+      url:
+        description: Optional. URL to use for the link preview. If empty, then the
+          first URL found in the message text will be used
+        name: url
+        required: false
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes the options used for link preview generation.
+      href: https://core.telegram.org/bots/api#linkpreviewoptions
+      name: LinkPreviewOptions
 dirty: false
-file_name: link_preview_options.py

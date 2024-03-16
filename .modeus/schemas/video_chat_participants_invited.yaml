@@ -1,13 +1,17 @@
 data:
-  description:
-  - This object represents a service message about new members invited to a video
-    chat.
-  fields:
-    users:
-      description: New members that were invited to the video chat
-      required: true
-      types:
-      - Array of User
-  kind: struct
+  VideoChatParticipantsInvited:
+    fields:
+      users:
+        description: New members that were invited to the video chat
+        name: users
+        required: true
+        types:
+        - Array of User
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about new members invited to a video
+        chat.
+      href: https://core.telegram.org/bots/api#videochatparticipantsinvited
+      name: VideoChatParticipantsInvited
 dirty: false
-file_name: video_chat_participants_invited.py

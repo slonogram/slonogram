@@ -1,54 +1,65 @@
 data:
-  description:
-  - Describes reply parameters for the message that is being sent.
-  fields:
-    message_id:
-      description: Identifier of the message that will be replied to in the current
-        chat, or in the chat chat_id if it is specified
-      required: true
-      types:
-      - Integer
-    chat_id:
-      description: Optional. If the message to be replied to is from a different chat,
-        unique identifier for the chat or username of the channel (in the format @channelusername)
-      required: false
-      types:
-      - Integer
-      - String
-    allow_sending_without_reply:
-      description: Optional. Pass True if the message should be sent even if the specified
-        message to be replied to is not found; can be used only for replies in the
-        same chat and forum topic.
-      required: false
-      types:
-      - Boolean
-    quote:
-      description: Optional. Quoted part of the message to be replied to; 0-1024 characters
-        after entities parsing. The quote must be an exact substring of the message
-        to be replied to, including bold, italic, underline, strikethrough, spoiler,
-        and custom_emoji entities. The message will fail to send if the quote isn't
-        found in the original message.
-      required: false
-      types:
-      - String
-    quote_parse_mode:
-      description: Optional. Mode for parsing entities in the quote. See formatting
-        options for more details.
-      required: false
-      types:
-      - String
-    quote_entities:
-      description: Optional. A JSON-serialized list of special entities that appear
-        in the quote. It can be specified instead of quote_parse_mode.
-      required: false
-      types:
-      - Array of MessageEntity
-    quote_position:
-      description: Optional. Position of the quote in the original message in UTF-16
-        code units
-      required: false
-      types:
-      - Integer
-  kind: struct
+  ReplyParameters:
+    fields:
+      allow_sending_without_reply:
+        description: Optional. Pass True if the message should be sent even if the
+          specified message to be replied to is not found; can be used only for replies
+          in the same chat and forum topic.
+        name: allow_sending_without_reply
+        required: false
+        types:
+        - Boolean
+      chat_id:
+        description: Optional. If the message to be replied to is from a different
+          chat, unique identifier for the chat or username of the channel (in the
+          format @channelusername)
+        name: chat_id
+        required: false
+        types:
+        - Integer
+        - String
+      message_id:
+        description: Identifier of the message that will be replied to in the current
+          chat, or in the chat chat_id if it is specified
+        name: message_id
+        required: true
+        types:
+        - Integer
+      quote:
+        description: Optional. Quoted part of the message to be replied to; 0-1024
+          characters after entities parsing. The quote must be an exact substring
+          of the message to be replied to, including bold, italic, underline, strikethrough,
+          spoiler, and custom_emoji entities. The message will fail to send if the
+          quote isn't found in the original message.
+        name: quote
+        required: false
+        types:
+        - String
+      quote_entities:
+        description: Optional. A JSON-serialized list of special entities that appear
+          in the quote. It can be specified instead of quote_parse_mode.
+        name: quote_entities
+        required: false
+        types:
+        - Array of MessageEntity
+      quote_parse_mode:
+        description: Optional. Mode for parsing entities in the quote. See formatting
+          options for more details.
+        name: quote_parse_mode
+        required: false
+        types:
+        - String
+      quote_position:
+        description: Optional. Position of the quote in the original message in UTF-16
+          code units
+        name: quote_position
+        required: false
+        types:
+        - Integer
+    kind: struct
+    meta:
+      description:
+      - Describes reply parameters for the message that is being sent.
+      href: https://core.telegram.org/bots/api#replyparameters
+      name: ReplyParameters
 dirty: false
-file_name: reply_parameters.py

@@ -1,8 +1,11 @@
 data:
-  description:
-  - This object represents a service message about the creation of a scheduled giveaway.
-    Currently holds no information.
-  fields: {}
-  kind: struct
+  GiveawayCreated:
+    fields: {}
+    kind: struct
+    meta:
+      description:
+      - This object represents a service message about the creation of a scheduled
+        giveaway. Currently holds no information.
+      href: https://core.telegram.org/bots/api#giveawaycreated
+      name: GiveawayCreated
 dirty: false
-file_name: giveaway_created.py

@@ -1,27 +1,34 @@
 data:
-  description:
-  - This object represents information about an order.
-  fields:
-    name:
-      description: Optional. User name
-      required: false
-      types:
-      - String
-    phone_number:
-      description: Optional. User's phone number
-      required: false
-      types:
-      - String
-    email:
-      description: Optional. User email
-      required: false
-      types:
-      - String
-    shipping_address:
-      description: Optional. User shipping address
-      required: false
-      types:
-      - ShippingAddress
-  kind: struct
+  OrderInfo:
+    fields:
+      email:
+        description: Optional. User email
+        name: email
+        required: false
+        types:
+        - String
+      name:
+        description: Optional. User name
+        name: name
+        required: false
+        types:
+        - String
+      phone_number:
+        description: Optional. User's phone number
+        name: phone_number
+        required: false
+        types:
+        - String
+      shipping_address:
+        description: Optional. User shipping address
+        name: shipping_address
+        required: false
+        types:
+        - ShippingAddress
+    kind: struct
+    meta:
+      description:
+      - This object represents information about an order.
+      href: https://core.telegram.org/bots/api#orderinfo
+      name: OrderInfo
 dirty: false
-file_name: order_info.py

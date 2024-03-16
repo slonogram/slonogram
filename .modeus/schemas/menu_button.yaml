@@ -1,56 +1,76 @@
 data:
-- description:
-  - Represents a menu button, which opens the bot's list of commands.
-  fields:
-    type:
-      description: Type of the button, must be commands
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - Represents a menu button, which launches a Web App.
-  fields:
-    type:
-      description: Type of the button, must be web_app
-      required: true
-      types:
-      - String
-    text:
-      description: Text on the button
-      required: true
-      types:
-      - String
-    web_app:
-      description: Description of the Web App that will be launched when the user
-        presses the button. The Web App will be able to send an arbitrary message
-        on behalf of the user using the method answerWebAppQuery.
-      required: true
-      types:
-      - WebAppInfo
-  kind: struct
-- description:
-  - Describes that no specific value for the menu button was set.
-  fields:
-    type:
-      description: Type of the button, must be default
-      required: true
-      types:
-      - String
-  kind: struct
-- description:
-  - This object describes the bot's menu button in a private chat. It should be one
-    of
-  - '- MenuButtonCommands'
-  - '- MenuButtonWebApp'
-  - '- MenuButtonDefault'
-  - If a menu button other than MenuButtonDefault is set for a private chat, then
-    it is applied in the chat. Otherwise the default menu button is applied. By default,
-    the menu button opens the list of bot commands.
-  kind: type-alias
-  union:
-  - MenuButtonCommands
-  - MenuButtonWebApp
-  - MenuButtonDefault
+  MenuButton:
+    kind: type-alias
+    meta:
+      description:
+      - This object describes the bot's menu button in a private chat. It should be
+        one of
+      - '- MenuButtonCommands'
+      - '- MenuButtonWebApp'
+      - '- MenuButtonDefault'
+      - If a menu button other than MenuButtonDefault is set for a private chat, then
+        it is applied in the chat. Otherwise the default menu button is applied. By
+        default, the menu button opens the list of bot commands.
+      href: https://core.telegram.org/bots/api#menubutton
+      name: MenuButton
+    union:
+    - MenuButtonCommands
+    - MenuButtonWebApp
+    - MenuButtonDefault
+  MenuButtonCommands:
+    fields:
+      type:
+        description: Type of the button, must be commands
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Represents a menu button, which opens the bot's list of commands.
+      href: https://core.telegram.org/bots/api#menubuttoncommands
+      name: MenuButtonCommands
+  MenuButtonDefault:
+    fields:
+      type:
+        description: Type of the button, must be default
+        name: type
+        required: true
+        types:
+        - String
+    kind: struct
+    meta:
+      description:
+      - Describes that no specific value for the menu button was set.
+      href: https://core.telegram.org/bots/api#menubuttondefault
+      name: MenuButtonDefault
+  MenuButtonWebApp:
+    fields:
+      text:
+        description: Text on the button
+        name: text
+        required: true
+        types:
+        - String
+      type:
+        description: Type of the button, must be web_app
+        name: type
+        required: true
+        types:
+        - String
+      web_app:
+        description: Description of the Web App that will be launched when the user
+          presses the button. The Web App will be able to send an arbitrary message
+          on behalf of the user using the method answerWebAppQuery.
+        name: web_app
+        required: true
+        types:
+        - WebAppInfo
+    kind: struct
+    meta:
+      description:
+      - Represents a menu button, which launches a Web App.
+      href: https://core.telegram.org/bots/api#menubuttonwebapp
+      name: MenuButtonWebApp
 dirty: false
-file_name: menu_button.py

@@ -1,14 +1,18 @@
 data:
-  description:
-  - This object represents an inline keyboard that appears right next to the message
-    it belongs to.
-  fields:
-    inline_keyboard:
-      description: Array of button rows, each represented by an Array of InlineKeyboardButton
-        objects
-      required: true
-      types:
-      - Array of Array of InlineKeyboardButton
-  kind: struct
+  InlineKeyboardMarkup:
+    fields:
+      inline_keyboard:
+        description: Array of button rows, each represented by an Array of InlineKeyboardButton
+          objects
+        name: inline_keyboard
+        required: true
+        types:
+        - Array of Array of InlineKeyboardButton
+    kind: struct
+    meta:
+      description:
+      - This object represents an inline keyboard that appears right next to the message
+        it belongs to.
+      href: https://core.telegram.org/bots/api#inlinekeyboardmarkup
+      name: InlineKeyboardMarkup
 dirty: false
-file_name: inline_keyboard_markup.py
