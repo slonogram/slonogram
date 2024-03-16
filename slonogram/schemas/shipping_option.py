@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ShippingOption:
+    """This object represents one shipping option.
+    Telegram docs: https://core.telegram.org/bots/api#shippingoption"""
+
     id: str
     """ Shipping option identifier """
     prices: list[_labeled_price.LabeledPrice]

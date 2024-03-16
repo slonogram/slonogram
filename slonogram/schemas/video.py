@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Video:
+    """This object represents a video file.
+    Telegram docs: https://core.telegram.org/bots/api#video"""
+
     duration: int
     """ Duration of the video in seconds as defined by sender """
     file_id: str

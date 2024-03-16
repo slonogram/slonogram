@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ShippingAddress:
+    """This object represents a shipping address.
+    Telegram docs: https://core.telegram.org/bots/api#shippingaddress"""
+
     city: str
     """ City """
     country_code: str

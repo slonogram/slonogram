@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class SwitchInlineQueryChosenChat:
+    """This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
+    Telegram docs: https://core.telegram.org/bots/api#switchinlinequerychosenchat"""
+
     allow_bot_chats: bool
     """ Optional. True, if private chats with bots can be chosen """
     allow_channel_chats: bool

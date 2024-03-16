@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class PreCheckoutQuery:
+    """This object contains information about an incoming pre-checkout query.
+    Telegram docs: https://core.telegram.org/bots/api#precheckoutquery"""
+
     currency: str
     """ Three-letter ISO 4217 currency code """
     from_: _user.User

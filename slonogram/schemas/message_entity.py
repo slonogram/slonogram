@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MessageEntity:
+    """This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+    Telegram docs: https://core.telegram.org/bots/api#messageentity"""
+
     custom_emoji_id: str
     """ Optional. For "custom_emoji" only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker """
     language: str

@@ -11,6 +11,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MessageReactionUpdated:
+    """This object represents a change of a reaction on a message performed by a user.
+    Telegram docs: https://core.telegram.org/bots/api#messagereactionupdated"""
+
     actor_chat: _chat.Chat
     """ Optional. The chat on behalf of which the reaction was changed, if the user is anonymous """
     chat: _chat.Chat

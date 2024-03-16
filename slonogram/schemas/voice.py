@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Voice:
+    """This object represents a voice note.
+    Telegram docs: https://core.telegram.org/bots/api#voice"""
+
     duration: int
     """ Duration of the audio in seconds as defined by sender """
     file_id: str

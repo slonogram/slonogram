@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class UserChatBoosts:
+    """This object represents a list of boosts added to a chat by a user.
+    Telegram docs: https://core.telegram.org/bots/api#userchatboosts"""
+
     boosts: list[_chat_boost.ChatBoost]
     """ The list of boosts added to the chat by the user """
 

@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class GameHighScore:
+    """This object represents one row of the high scores table for a game.
+    Telegram docs: https://core.telegram.org/bots/api#gamehighscore"""
+
     position: int
     """ Position in high score table for the game """
     score: int

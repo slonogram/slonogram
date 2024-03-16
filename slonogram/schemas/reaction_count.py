@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ReactionCount:
+    """Represents a reaction added to a message along with the number of times it was added.
+    Telegram docs: https://core.telegram.org/bots/api#reactioncount"""
+
     total_count: int
     """ Number of times the reaction was added """
     type: _reaction_type.ReactionType

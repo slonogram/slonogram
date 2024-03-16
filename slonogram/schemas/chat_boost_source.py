@@ -8,6 +8,9 @@ from typing import TypeAlias
 
 @model
 class ChatBoostSourceGiftCode:
+    """The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcegiftcode"""
+
     source: str
     """ Source of the boost, always "gift_code" """
     user: _user.User
@@ -26,6 +29,9 @@ class ChatBoostSourceGiftCode:
 
 @model
 class ChatBoostSourceGiveaway:
+    """The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcegiveaway"""
+
     giveaway_message_id: int
     """ Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet. """
     is_unclaimed: bool
@@ -52,6 +58,9 @@ class ChatBoostSourceGiveaway:
 
 @model
 class ChatBoostSourcePremium:
+    """The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
+    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcepremium"""
+
     source: str
     """ Source of the boost, always "premium" """
     user: _user.User

@@ -12,6 +12,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatMemberUpdated:
+    """This object represents changes in the status of a chat member.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberupdated"""
+
     chat: _chat.Chat
     """ Chat the user belongs to """
     date: int

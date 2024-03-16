@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class PhotoSize:
+    """This object represents one size of a photo or a file / sticker thumbnail.
+    Telegram docs: https://core.telegram.org/bots/api#photosize"""
+
     file_id: str
     """ Identifier for this file, which can be used to download or reuse the file """
     file_size: int

@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatPermissions:
+    """Describes actions that a non-administrator user is allowed to take in a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chatpermissions"""
+
     can_add_web_page_previews: bool
     """ Optional. True, if the user is allowed to add web page previews to their messages """
     can_change_info: bool

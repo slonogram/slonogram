@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatBoost:
+    """This object contains information about a chat boost.
+    Telegram docs: https://core.telegram.org/bots/api#chatboost"""
+
     add_date: int
     """ Point in time (Unix timestamp) when the chat was boosted """
     boost_id: str

@@ -10,6 +10,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class PassportData:
+    """Describes Telegram Passport data shared with the bot by the user.
+    Telegram docs: https://core.telegram.org/bots/api#passportdata"""
+
     credentials: _encrypted_credentials.EncryptedCredentials
     """ Encrypted credentials required to decrypt the data """
     data: list[_encrypted_passport_element.EncryptedPassportElement]

@@ -10,6 +10,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class CallbackQuery:
+    """This object represents an incoming callback query from a callback button in an inline keyboard. If the button that originated the query was attached to a message sent by the bot, the field message will be present. If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present. Exactly one of the fields data or game_short_name will be present.
+    Telegram docs: https://core.telegram.org/bots/api#callbackquery"""
+
     chat_instance: str
     """ Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in games. """
     data: str

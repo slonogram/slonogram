@@ -8,6 +8,9 @@ from typing import TypeAlias
 
 @model
 class MessageOriginChannel:
+    """The message was originally sent to a channel chat.
+    Telegram docs: https://core.telegram.org/bots/api#messageoriginchannel"""
+
     author_signature: str
     """ Optional. Signature of the original post author """
     chat: _chat.Chat
@@ -38,6 +41,9 @@ class MessageOriginChannel:
 
 @model
 class MessageOriginChat:
+    """The message was originally sent on behalf of a chat to a group chat.
+    Telegram docs: https://core.telegram.org/bots/api#messageoriginchat"""
+
     author_signature: str
     """ Optional. For messages originally sent by an anonymous chat administrator, original message author signature """
     date: int
@@ -64,6 +70,9 @@ class MessageOriginChat:
 
 @model
 class MessageOriginHiddenUser:
+    """The message was originally sent by an unknown user.
+    Telegram docs: https://core.telegram.org/bots/api#messageoriginhiddenuser"""
+
     date: int
     """ Date the message was sent originally in Unix time """
     sender_user_name: str
@@ -86,6 +95,9 @@ class MessageOriginHiddenUser:
 
 @model
 class MessageOriginUser:
+    """The message was originally sent by a known user.
+    Telegram docs: https://core.telegram.org/bots/api#messageoriginuser"""
+
     date: int
     """ Date the message was sent originally in Unix time """
     sender_user: _user.User

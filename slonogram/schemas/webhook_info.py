@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class WebhookInfo:
+    """Describes the current status of a webhook.
+    Telegram docs: https://core.telegram.org/bots/api#webhookinfo"""
+
     allowed_updates: list[str]
     """ Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
     has_custom_certificate: bool

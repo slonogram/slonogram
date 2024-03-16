@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatLocation:
+    """Represents a location to which a chat is connected.
+    Telegram docs: https://core.telegram.org/bots/api#chatlocation"""
+
     address: str
     """ Location address; 1-64 characters, as defined by the chat owner """
     location: _location.Location

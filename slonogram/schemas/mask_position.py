@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MaskPosition:
+    """This object describes the position on faces where a mask should be placed by default.
+    Telegram docs: https://core.telegram.org/bots/api#maskposition"""
+
     point: str
     """ The part of the face relative to which the mask should be placed. One of "forehead", "eyes", "mouth", or "chin". """
     scale: float

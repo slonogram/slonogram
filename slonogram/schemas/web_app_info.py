@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class WebAppInfo:
+    """Describes a Web App.
+    Telegram docs: https://core.telegram.org/bots/api#webappinfo"""
+
     url: str
     """ An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps """
 

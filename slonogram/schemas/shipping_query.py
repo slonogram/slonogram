@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ShippingQuery:
+    """This object contains information about an incoming shipping query.
+    Telegram docs: https://core.telegram.org/bots/api#shippingquery"""
+
     from_: _user.User
     """ User who sent the query """
     id: str

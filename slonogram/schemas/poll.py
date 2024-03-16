@@ -10,6 +10,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Poll:
+    """This object contains information about a poll.
+    Telegram docs: https://core.telegram.org/bots/api#poll"""
+
     allows_multiple_answers: bool
     """ True, if the poll allows multiple answers """
     close_date: int

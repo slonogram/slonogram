@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Dice:
+    """This object represents an animated emoji that displays a random value.
+    Telegram docs: https://core.telegram.org/bots/api#dice"""
+
     emoji: str
     """ Emoji on which the dice throw animation is based """
     value: int

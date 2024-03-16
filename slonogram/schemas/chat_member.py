@@ -8,6 +8,9 @@ from typing import TypeAlias
 
 @model
 class ChatMemberAdministrator:
+    """Represents a chat member that has some additional privileges.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberadministrator"""
+
     can_be_edited: bool
     """ True, if the bot is allowed to edit administrator privileges of that user """
     can_change_info: bool
@@ -98,6 +101,9 @@ class ChatMemberAdministrator:
 
 @model
 class ChatMemberBanned:
+    """Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberbanned"""
+
     status: str
     """ The member's status in the chat, always "kicked" """
     until_date: int
@@ -120,6 +126,9 @@ class ChatMemberBanned:
 
 @model
 class ChatMemberLeft:
+    """Represents a chat member that isn't currently a member of the chat, but may join it themselves.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberleft"""
+
     status: str
     """ The member's status in the chat, always "left" """
     user: _user.User
@@ -138,6 +147,9 @@ class ChatMemberLeft:
 
 @model
 class ChatMemberMember:
+    """Represents a chat member that has no additional privileges or restrictions.
+    Telegram docs: https://core.telegram.org/bots/api#chatmembermember"""
+
     status: str
     """ The member's status in the chat, always "member" """
     user: _user.User
@@ -156,6 +168,9 @@ class ChatMemberMember:
 
 @model
 class ChatMemberOwner:
+    """Represents a chat member that owns the chat and has all administrator privileges.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberowner"""
+
     custom_title: str
     """ Optional. Custom title for this user """
     is_anonymous: bool
@@ -182,6 +197,9 @@ class ChatMemberOwner:
 
 @model
 class ChatMemberRestricted:
+    """Represents a chat member that is under certain restrictions in the chat. Supergroups only.
+    Telegram docs: https://core.telegram.org/bots/api#chatmemberrestricted"""
+
     can_add_web_page_previews: bool
     """ True, if the user is allowed to add web page previews to their messages """
     can_change_info: bool

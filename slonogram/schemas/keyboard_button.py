@@ -12,6 +12,10 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class KeyboardButton:
+    """This object represents one button of the reply keyboard. For simple text buttons, String can be used instead of this object to specify the button text. The optional fields web_app, request_users, request_chat, request_contact, request_location, and request_poll are mutually exclusive.
+    Note: request_users and request_chat options will only work in Telegram versions released after 3 February, 2023. Older clients will display unsupported message.
+    Telegram docs: https://core.telegram.org/bots/api#keyboardbutton"""
+
     request_chat: _keyboard_button_request_chat.KeyboardButtonRequestChat
     """ Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a "chat_shared" service message. Available in private chats only. """
     request_contact: bool

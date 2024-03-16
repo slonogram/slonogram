@@ -26,6 +26,7 @@ def _run_type(parser: TypeParser, tracker: Tracker, tp: AnyType) -> str:
     if isinstance(tp, Struct):
         return create_dataclass(
             tp.meta.name,
+            '\n'.join(tp.meta.description) + f"\nTelegram docs: {tp.meta.href}",
             list(tp.fields.values()),
             parser,
             tracker,

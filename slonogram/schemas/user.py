@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class User:
+    """This object represents a Telegram user or bot.
+    Telegram docs: https://core.telegram.org/bots/api#user"""
+
     added_to_attachment_menu: bool
     """ Optional. True, if this user added the bot to the attachment menu """
     can_join_groups: bool

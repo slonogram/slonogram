@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatAdministratorRights:
+    """Represents the rights of an administrator in a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chatadministratorrights"""
+
     can_change_info: bool
     """ True, if the user is allowed to change the chat title, photo and other settings """
     can_delete_messages: bool

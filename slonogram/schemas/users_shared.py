@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class UsersShared:
+    """This object contains information about the users whose identifiers were shared with the bot using a KeyboardButtonRequestUsers button.
+    Telegram docs: https://core.telegram.org/bots/api#usersshared"""
+
     request_id: int
     """ Identifier of the request """
     user_ids: list[int]

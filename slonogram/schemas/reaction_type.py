@@ -7,6 +7,9 @@ from typing import TypeAlias
 
 @model
 class ReactionTypeCustomEmoji:
+    """The reaction is based on a custom emoji.
+    Telegram docs: https://core.telegram.org/bots/api#reactiontypecustomemoji"""
+
     custom_emoji_id: str
     """ Custom emoji identifier """
     type: str
@@ -25,6 +28,9 @@ class ReactionTypeCustomEmoji:
 
 @model
 class ReactionTypeEmoji:
+    """The reaction is based on an emoji.
+    Telegram docs: https://core.telegram.org/bots/api#reactiontypeemoji"""
+
     emoji: str
     """ Reaction emoji. Currently, it can be one of "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡" """
     type: str

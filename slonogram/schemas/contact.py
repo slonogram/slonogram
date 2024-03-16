@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Contact:
+    """This object represents a phone contact.
+    Telegram docs: https://core.telegram.org/bots/api#contact"""
+
     first_name: str
     """ Contact's first name """
     last_name: str

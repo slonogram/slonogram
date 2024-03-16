@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Venue:
+    """This object represents a venue.
+    Telegram docs: https://core.telegram.org/bots/api#venue"""
+
     address: str
     """ Address of the venue """
     foursquare_id: str

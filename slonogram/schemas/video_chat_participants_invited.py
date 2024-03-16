@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class VideoChatParticipantsInvited:
+    """This object represents a service message about new members invited to a video chat.
+    Telegram docs: https://core.telegram.org/bots/api#videochatparticipantsinvited"""
+
     users: list[_user.User]
     """ New members that were invited to the video chat """
 

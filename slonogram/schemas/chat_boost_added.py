@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatBoostAdded:
+    """This object represents a service message about a user boosting a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chatboostadded"""
+
     boost_count: int
     """ Number of boosts added by the user """
 

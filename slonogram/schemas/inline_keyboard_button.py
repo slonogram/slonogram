@@ -12,6 +12,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class InlineKeyboardButton:
+    """This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
+    Telegram docs: https://core.telegram.org/bots/api#inlinekeyboardbutton"""
+
     callback_data: str
     """ Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes """
     callback_game: _callback_game.CallbackGame

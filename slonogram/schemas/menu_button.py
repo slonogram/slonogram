@@ -8,6 +8,9 @@ from typing import TypeAlias
 
 @model
 class MenuButtonCommands:
+    """Represents a menu button, which opens the bot's list of commands.
+    Telegram docs: https://core.telegram.org/bots/api#menubuttoncommands"""
+
     type: str
     """ Type of the button, must be commands """
 
@@ -19,6 +22,9 @@ class MenuButtonCommands:
 
 @model
 class MenuButtonDefault:
+    """Describes that no specific value for the menu button was set.
+    Telegram docs: https://core.telegram.org/bots/api#menubuttondefault"""
+
     type: str
     """ Type of the button, must be default """
 
@@ -30,6 +36,9 @@ class MenuButtonDefault:
 
 @model
 class MenuButtonWebApp:
+    """Represents a menu button, which launches a Web App.
+    Telegram docs: https://core.telegram.org/bots/api#menubuttonwebapp"""
+
     text: str
     """ Text on the button """
     type: str

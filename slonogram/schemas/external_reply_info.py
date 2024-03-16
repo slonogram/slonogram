@@ -29,6 +29,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ExternalReplyInfo:
+    """This object contains information about a message that is being replied to, which may come from another chat or forum topic.
+    Telegram docs: https://core.telegram.org/bots/api#externalreplyinfo"""
+
     animation: _animation.Animation
     """ Optional. Message is an animation, information about the animation """
     audio: _audio.Audio

@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ForumTopic:
+    """This object represents a forum topic.
+    Telegram docs: https://core.telegram.org/bots/api#forumtopic"""
+
     icon_color: int
     """ Color of the topic icon in RGB format """
     icon_custom_emoji_id: str

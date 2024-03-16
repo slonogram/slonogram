@@ -11,6 +11,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Sticker:
+    """This object represents a sticker.
+    Telegram docs: https://core.telegram.org/bots/api#sticker"""
+
     custom_emoji_id: str
     """ Optional. For custom emoji stickers, unique identifier of the custom emoji """
     emoji: str

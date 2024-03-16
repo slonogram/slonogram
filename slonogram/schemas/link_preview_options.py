@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class LinkPreviewOptions:
+    """Describes the options used for link preview generation.
+    Telegram docs: https://core.telegram.org/bots/api#linkpreviewoptions"""
+
     is_disabled: bool
     """ Optional. True, if the link preview is disabled """
     prefer_large_media: bool

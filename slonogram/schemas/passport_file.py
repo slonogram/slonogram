@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class PassportFile:
+    """This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
+    Telegram docs: https://core.telegram.org/bots/api#passportfile"""
+
     file_date: int
     """ Unix time when the file was uploaded """
     file_id: str

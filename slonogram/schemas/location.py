@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Location:
+    """This object represents a point on the map.
+    Telegram docs: https://core.telegram.org/bots/api#location"""
+
     heading: int
     """ Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only. """
     horizontal_accuracy: float

@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class SuccessfulPayment:
+    """This object contains basic information about a successful payment.
+    Telegram docs: https://core.telegram.org/bots/api#successfulpayment"""
+
     currency: str
     """ Three-letter ISO 4217 currency code """
     invoice_payload: str

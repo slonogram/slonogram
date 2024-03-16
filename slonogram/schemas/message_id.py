@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MessageId:
+    """This object represents a unique message identifier.
+    Telegram docs: https://core.telegram.org/bots/api#messageid"""
+
     message_id: int
     """ Unique message identifier """
 

@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ReplyKeyboardMarkup:
+    """This object represents a custom keyboard with reply options (see Introduction to bots for details and examples).
+    Telegram docs: https://core.telegram.org/bots/api#replykeyboardmarkup"""
+
     input_field_placeholder: str
     """ Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters """
     is_persistent: bool

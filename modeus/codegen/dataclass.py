@@ -9,6 +9,7 @@ from .altering import create_alterer
 
 def create_dataclass(
     name: str,
+    docs: str,
     fields: Sequence[Field],
     type_parser: TypeParser,
     tracker: Tracker = no_tracking,
@@ -29,6 +30,8 @@ def create_dataclass(
     return (
         "@model\n"
         f"class {name}:\n"
+        + indent(f'""" {docs} """')
+        + '\n'
         + indent(out_fields)
         + indent(out_methods)
     )

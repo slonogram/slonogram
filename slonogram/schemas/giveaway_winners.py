@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class GiveawayWinners:
+    """This object represents a message about the completion of a giveaway with public winners.
+    Telegram docs: https://core.telegram.org/bots/api#giveawaywinners"""
+
     additional_chat_count: int
     """ Optional. The number of other chats the user had to join in order to be eligible for the giveaway """
     chat: _chat.Chat

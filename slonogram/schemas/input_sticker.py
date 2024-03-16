@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class InputSticker:
+    """This object describes a sticker to be added to a sticker set.
+    Telegram docs: https://core.telegram.org/bots/api#inputsticker"""
+
     emoji_list: list[str]
     """ List of 1-20 emoji associated with the sticker """
     keywords: list[str]

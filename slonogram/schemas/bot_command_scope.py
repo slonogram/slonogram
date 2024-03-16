@@ -7,6 +7,9 @@ from typing import TypeAlias
 
 @model
 class BotCommandScopeAllChatAdministrators:
+    """Represents the scope of bot commands, covering all group and supergroup chat administrators.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallchatadministrators"""
+
     type: str
     """ Scope type, must be all_chat_administrators """
 
@@ -18,6 +21,9 @@ class BotCommandScopeAllChatAdministrators:
 
 @model
 class BotCommandScopeAllGroupChats:
+    """Represents the scope of bot commands, covering all group and supergroup chats.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallgroupchats"""
+
     type: str
     """ Scope type, must be all_group_chats """
 
@@ -29,6 +35,9 @@ class BotCommandScopeAllGroupChats:
 
 @model
 class BotCommandScopeAllPrivateChats:
+    """Represents the scope of bot commands, covering all private chats.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallprivatechats"""
+
     type: str
     """ Scope type, must be all_private_chats """
 
@@ -40,6 +49,9 @@ class BotCommandScopeAllPrivateChats:
 
 @model
 class BotCommandScopeChat:
+    """Represents the scope of bot commands, covering a specific chat.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechat"""
+
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
     type: str
@@ -58,6 +70,9 @@ class BotCommandScopeChat:
 
 @model
 class BotCommandScopeChatAdministrators:
+    """Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechatadministrators"""
+
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
     type: str
@@ -76,6 +91,9 @@ class BotCommandScopeChatAdministrators:
 
 @model
 class BotCommandScopeChatMember:
+    """Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechatmember"""
+
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
     type: str
@@ -98,6 +116,9 @@ class BotCommandScopeChatMember:
 
 @model
 class BotCommandScopeDefault:
+    """Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
+    Telegram docs: https://core.telegram.org/bots/api#botcommandscopedefault"""
+
     type: str
     """ Scope type, must be default """
 

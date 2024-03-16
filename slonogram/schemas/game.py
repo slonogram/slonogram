@@ -11,6 +11,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Game:
+    """This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
+    Telegram docs: https://core.telegram.org/bots/api#game"""
+
     animation: _animation.Animation
     """ Optional. Animation that will be displayed in the game message in chats. Upload via BotFather """
     description: str

@@ -11,6 +11,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatJoinRequest:
+    """Represents a join request sent to a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chatjoinrequest"""
+
     bio: str
     """ Optional. Bio of the user. """
     chat: _chat.Chat

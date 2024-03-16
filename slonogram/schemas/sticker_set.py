@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class StickerSet:
+    """This object represents a sticker set.
+    Telegram docs: https://core.telegram.org/bots/api#stickerset"""
+
     is_animated: bool
     """ True, if the sticker set contains animated stickers """
     is_video: bool

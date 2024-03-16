@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MessageReactionCountUpdated:
+    """This object represents reaction changes on a message with anonymous reactions.
+    Telegram docs: https://core.telegram.org/bots/api#messagereactioncountupdated"""
+
     chat: _chat.Chat
     """ The chat containing the message """
     date: int

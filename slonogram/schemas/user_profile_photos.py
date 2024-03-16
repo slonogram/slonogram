@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class UserProfilePhotos:
+    """This object represent a user's profile pictures.
+    Telegram docs: https://core.telegram.org/bots/api#userprofilephotos"""
+
     photos: list[list[_photo_size.PhotoSize]]
     """ Requested profile pictures (in up to 4 sizes each) """
     total_count: int

@@ -12,6 +12,9 @@ from typing import TypeAlias
 
 @model
 class InlineQueryResultArticle:
+    """Represents a link to an article or web page.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultarticle"""
+
     description: str
     """ Optional. Short description of the result """
     hide_url: bool
@@ -72,6 +75,9 @@ class InlineQueryResultArticle:
 
 @model
 class InlineQueryResultAudio:
+    """Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultaudio"""
+
     audio_duration: int
     """ Optional. Audio duration in seconds """
     audio_url: str
@@ -134,6 +140,9 @@ class InlineQueryResultAudio:
 
 @model
 class InlineQueryResultCachedAudio:
+    """Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedaudio"""
+
     audio_file_id: str
     """ A valid file identifier for the audio file """
     caption: str
@@ -184,6 +193,9 @@ class InlineQueryResultCachedAudio:
 
 @model
 class InlineQueryResultCachedDocument:
+    """Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcacheddocument"""
+
     caption: str
     """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -242,6 +254,9 @@ class InlineQueryResultCachedDocument:
 
 @model
 class InlineQueryResultCachedGif:
+    """Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedgif"""
+
     caption: str
     """ Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -296,6 +311,9 @@ class InlineQueryResultCachedGif:
 
 @model
 class InlineQueryResultCachedMpeg4Gif:
+    """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif"""
+
     caption: str
     """ Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -350,6 +368,9 @@ class InlineQueryResultCachedMpeg4Gif:
 
 @model
 class InlineQueryResultCachedPhoto:
+    """Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedphoto"""
+
     caption: str
     """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -408,6 +429,9 @@ class InlineQueryResultCachedPhoto:
 
 @model
 class InlineQueryResultCachedSticker:
+    """Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedsticker"""
+
     id: str
     """ Unique identifier for this result, 1-64 bytes """
     input_message_content: _input_message_content.InputMessageContent
@@ -444,6 +468,9 @@ class InlineQueryResultCachedSticker:
 
 @model
 class InlineQueryResultCachedVideo:
+    """Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedvideo"""
+
     caption: str
     """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -502,6 +529,9 @@ class InlineQueryResultCachedVideo:
 
 @model
 class InlineQueryResultCachedVoice:
+    """Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcachedvoice"""
+
     caption: str
     """ Optional. Caption, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -556,6 +586,9 @@ class InlineQueryResultCachedVoice:
 
 @model
 class InlineQueryResultContact:
+    """Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultcontact"""
+
     first_name: str
     """ Contact's first name """
     id: str
@@ -616,6 +649,9 @@ class InlineQueryResultContact:
 
 @model
 class InlineQueryResultDocument:
+    """Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultdocument"""
+
     caption: str
     """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -690,6 +726,9 @@ class InlineQueryResultDocument:
 
 @model
 class InlineQueryResultGame:
+    """Represents a Game.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultgame"""
+
     game_short_name: str
     """ Short name of the game """
     id: str
@@ -718,6 +757,9 @@ class InlineQueryResultGame:
 
 @model
 class InlineQueryResultGif:
+    """Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultgif"""
+
     caption: str
     """ Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -792,6 +834,9 @@ class InlineQueryResultGif:
 
 @model
 class InlineQueryResultLocation:
+    """Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultlocation"""
+
     heading: int
     """ Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. """
     horizontal_accuracy: float
@@ -866,6 +911,9 @@ class InlineQueryResultLocation:
 
 @model
 class InlineQueryResultMpeg4Gif:
+    """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif"""
+
     caption: str
     """ Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -940,6 +988,9 @@ class InlineQueryResultMpeg4Gif:
 
 @model
 class InlineQueryResultPhoto:
+    """Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultphoto"""
+
     caption: str
     """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -1010,6 +1061,9 @@ class InlineQueryResultPhoto:
 
 @model
 class InlineQueryResultVenue:
+    """Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultvenue"""
+
     address: str
     """ Address of the venue """
     foursquare_id: str
@@ -1086,6 +1140,9 @@ class InlineQueryResultVenue:
 
 @model
 class InlineQueryResultVideo:
+    """Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultvideo"""
+
     caption: str
     """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -1164,6 +1221,9 @@ class InlineQueryResultVideo:
 
 @model
 class InlineQueryResultVoice:
+    """Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
+    Telegram docs: https://core.telegram.org/bots/api#inlinequeryresultvoice"""
+
     caption: str
     """ Optional. Caption, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]

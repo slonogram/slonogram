@@ -12,6 +12,9 @@ from typing import TypeAlias
 
 @model
 class InputContactMessageContent:
+    """Represents the content of a contact message to be sent as the result of an inline query.
+    Telegram docs: https://core.telegram.org/bots/api#inputcontactmessagecontent"""
+
     first_name: str
     """ Contact's first name """
     last_name: str
@@ -38,6 +41,9 @@ class InputContactMessageContent:
 
 @model
 class InputInvoiceMessageContent:
+    """Represents the content of an invoice message to be sent as the result of an inline query.
+    Telegram docs: https://core.telegram.org/bots/api#inputinvoicemessagecontent"""
+
     currency: str
     """ Three-letter ISO 4217 currency code, see more on currencies """
     description: str
@@ -136,6 +142,9 @@ class InputInvoiceMessageContent:
 
 @model
 class InputLocationMessageContent:
+    """Represents the content of a location message to be sent as the result of an inline query.
+    Telegram docs: https://core.telegram.org/bots/api#inputlocationmessagecontent"""
+
     heading: int
     """ Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. """
     horizontal_accuracy: float
@@ -172,6 +181,9 @@ class InputLocationMessageContent:
 
 @model
 class InputTextMessageContent:
+    """Represents the content of a text message to be sent as the result of an inline query.
+    Telegram docs: https://core.telegram.org/bots/api#inputtextmessagecontent"""
+
     entities: list[_message_entity.MessageEntity]
     """ Optional. List of special entities that appear in message text, which can be specified instead of parse_mode """
     link_preview_options: _link_preview_options.LinkPreviewOptions
@@ -202,6 +214,9 @@ class InputTextMessageContent:
 
 @model
 class InputVenueMessageContent:
+    """Represents the content of a venue message to be sent as the result of an inline query.
+    Telegram docs: https://core.telegram.org/bots/api#inputvenuemessagecontent"""
+
     address: str
     """ Address of the venue """
     foursquare_id: str

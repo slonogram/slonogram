@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ProximityAlertTriggered:
+    """This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.
+    Telegram docs: https://core.telegram.org/bots/api#proximityalerttriggered"""
+
     distance: int
     """ The distance between the users """
     traveler: _user.User

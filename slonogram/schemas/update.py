@@ -22,6 +22,10 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Update:
+    """This object represents an incoming update.
+    At most one of the optional parameters can be present in any given update.
+    Telegram docs: https://core.telegram.org/bots/api#update"""
+
     callback_query: _callback_query.CallbackQuery
     """ Optional. New incoming callback query """
     channel_post: _maybe_inaccessible_message.Message

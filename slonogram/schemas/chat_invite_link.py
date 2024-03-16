@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChatInviteLink:
+    """Represents an invite link for a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chatinvitelink"""
+
     creates_join_request: bool
     """ True, if users joining the chat via the link need to be approved by chat administrators """
     creator: _user.User

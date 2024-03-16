@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class GiveawayCompleted:
+    """This object represents a service message about the completion of a giveaway without public winners.
+    Telegram docs: https://core.telegram.org/bots/api#giveawaycompleted"""
+
     giveaway_message: _maybe_inaccessible_message.Message
     """ Optional. Message with the giveaway that was completed, if it wasn't deleted """
     unclaimed_prize_count: int

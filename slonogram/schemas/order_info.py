@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class OrderInfo:
+    """This object represents information about an order.
+    Telegram docs: https://core.telegram.org/bots/api#orderinfo"""
+
     email: str
     """ Optional. User email """
     name: str

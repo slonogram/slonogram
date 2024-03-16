@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class EncryptedPassportElement:
+    """Describes documents or other Telegram Passport elements shared with the bot by the user.
+    Telegram docs: https://core.telegram.org/bots/api#encryptedpassportelement"""
+
     data: str
     """ Optional. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for "personal_details", "passport", "driver_license", "identity_card", "internal_passport" and "address" types. Can be decrypted and verified using the accompanying EncryptedCredentials. """
     email: str

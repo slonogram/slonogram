@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Animation:
+    """This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+    Telegram docs: https://core.telegram.org/bots/api#animation"""
+
     duration: int
     """ Duration of the video in seconds as defined by sender """
     file_id: str

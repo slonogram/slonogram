@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class KeyboardButtonRequestChat:
+    """This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed. More about requesting chats: https://core.telegram.org/bots/features#chat-and-user-selection
+    Telegram docs: https://core.telegram.org/bots/api#keyboardbuttonrequestchat"""
+
     bot_administrator_rights: _chat_administrator_rights.ChatAdministratorRights
     """ Optional. A JSON-serialized object listing the required administrator rights of the bot in the chat. The rights must be a subset of user_administrator_rights. If not specified, no additional restrictions are applied. """
     bot_is_member: bool

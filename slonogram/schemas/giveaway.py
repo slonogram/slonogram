@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Giveaway:
+    """This object represents a message about a scheduled giveaway.
+    Telegram docs: https://core.telegram.org/bots/api#giveaway"""
+
     chats: list[_chat.Chat]
     """ The list of chats which the user must join to participate in the giveaway """
     country_codes: list[str]

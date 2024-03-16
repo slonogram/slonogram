@@ -11,6 +11,9 @@ from typing import TypeAlias
 
 @model
 class InputMediaAnimation:
+    """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
+    Telegram docs: https://core.telegram.org/bots/api#inputmediaanimation"""
+
     caption: str
     """ Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -63,6 +66,9 @@ class InputMediaAnimation:
 
 @model
 class InputMediaAudio:
+    """Represents an audio file to be treated as music to be sent.
+    Telegram docs: https://core.telegram.org/bots/api#inputmediaaudio"""
+
     caption: str
     """ Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -111,6 +117,9 @@ class InputMediaAudio:
 
 @model
 class InputMediaDocument:
+    """Represents a general file to be sent.
+    Telegram docs: https://core.telegram.org/bots/api#inputmediadocument"""
+
     caption: str
     """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -153,6 +162,9 @@ class InputMediaDocument:
 
 @model
 class InputMediaPhoto:
+    """Represents a photo to be sent.
+    Telegram docs: https://core.telegram.org/bots/api#inputmediaphoto"""
+
     caption: str
     """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]
@@ -189,6 +201,9 @@ class InputMediaPhoto:
 
 @model
 class InputMediaVideo:
+    """Represents a video to be sent.
+    Telegram docs: https://core.telegram.org/bots/api#inputmediavideo"""
+
     caption: str
     """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
     caption_entities: list[_message_entity.MessageEntity]

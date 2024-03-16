@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ReplyParameters:
+    """Describes reply parameters for the message that is being sent.
+    Telegram docs: https://core.telegram.org/bots/api#replyparameters"""
+
     allow_sending_without_reply: bool
     """ Optional. Pass True if the message should be sent even if the specified message to be replied to is not found; can be used only for replies in the same chat and forum topic. """
     chat_id: int | str

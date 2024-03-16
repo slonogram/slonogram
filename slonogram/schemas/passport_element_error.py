@@ -7,6 +7,9 @@ from typing import TypeAlias
 
 @model
 class PassportElementErrorDataField:
+    """Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrordatafield"""
+
     data_hash: str
     """ Base64-encoded data hash """
     field_name: str
@@ -37,6 +40,9 @@ class PassportElementErrorDataField:
 
 @model
 class PassportElementErrorFile:
+    """Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfile"""
+
     file_hash: str
     """ Base64-encoded file hash """
     message: str
@@ -63,6 +69,9 @@ class PassportElementErrorFile:
 
 @model
 class PassportElementErrorFiles:
+    """Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfiles"""
+
     file_hashes: list[str]
     """ List of base64-encoded file hashes """
     message: str
@@ -89,6 +98,9 @@ class PassportElementErrorFiles:
 
 @model
 class PassportElementErrorFrontSide:
+    """Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfrontside"""
+
     file_hash: str
     """ Base64-encoded hash of the file with the front side of the document """
     message: str
@@ -115,6 +127,9 @@ class PassportElementErrorFrontSide:
 
 @model
 class PassportElementErrorReverseSide:
+    """Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorreverseside"""
+
     file_hash: str
     """ Base64-encoded hash of the file with the reverse side of the document """
     message: str
@@ -141,6 +156,9 @@ class PassportElementErrorReverseSide:
 
 @model
 class PassportElementErrorSelfie:
+    """Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorselfie"""
+
     file_hash: str
     """ Base64-encoded hash of the file with the selfie """
     message: str
@@ -167,6 +185,9 @@ class PassportElementErrorSelfie:
 
 @model
 class PassportElementErrorTranslationFile:
+    """Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrortranslationfile"""
+
     file_hash: str
     """ Base64-encoded file hash """
     message: str
@@ -193,6 +214,9 @@ class PassportElementErrorTranslationFile:
 
 @model
 class PassportElementErrorTranslationFiles:
+    """Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrortranslationfiles"""
+
     file_hashes: list[str]
     """ List of base64-encoded file hashes """
     message: str
@@ -219,6 +243,9 @@ class PassportElementErrorTranslationFiles:
 
 @model
 class PassportElementErrorUnspecified:
+    """Represents an issue in an unspecified place. The error is considered resolved when new data is added.
+    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorunspecified"""
+
     element_hash: str
     """ Base64-encoded element hash """
     message: str

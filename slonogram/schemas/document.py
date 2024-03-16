@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Document:
+    """This object represents a general file (as opposed to photos, voice messages and audio files).
+    Telegram docs: https://core.telegram.org/bots/api#document"""
+
     file_id: str
     """ Identifier for this file, which can be used to download or reuse the file """
     file_name: str

@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class MessageAutoDeleteTimerChanged:
+    """This object represents a service message about a change in auto-delete timer settings.
+    Telegram docs: https://core.telegram.org/bots/api#messageautodeletetimerchanged"""
+
     message_auto_delete_time: int
     """ New auto-delete time for messages in the chat; in seconds """
 

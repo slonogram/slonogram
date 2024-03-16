@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class BotDescription:
+    """This object represents the bot's description.
+    Telegram docs: https://core.telegram.org/bots/api#botdescription"""
+
     description: str
     """ The bot's description """
 

@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Story:
+    """This object represents a story.
+    Telegram docs: https://core.telegram.org/bots/api#story"""
+
     chat: _chat.Chat
     """ Chat that posted the story """
     id: int

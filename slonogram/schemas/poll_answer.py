@@ -7,6 +7,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class PollAnswer:
+    """This object represents an answer of a user in a non-anonymous poll.
+    Telegram docs: https://core.telegram.org/bots/api#pollanswer"""
+
     option_ids: list[int]
     """ 0-based identifiers of chosen answer options. May be empty if the vote was retracted. """
     poll_id: str

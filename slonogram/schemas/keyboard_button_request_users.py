@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class KeyboardButtonRequestUsers:
+    """This object defines the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users: https://core.telegram.org/bots/features#chat-and-user-selection
+    Telegram docs: https://core.telegram.org/bots/api#keyboardbuttonrequestusers"""
+
     max_quantity: int
     """ Optional. The maximum number of users to be selected; 1-10. Defaults to 1. """
     request_id: int

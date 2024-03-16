@@ -13,6 +13,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class Chat:
+    """This object represents a chat.
+    Telegram docs: https://core.telegram.org/bots/api#chat"""
+
     accent_color_id: int
     """ Optional. Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See accent colors for more details. Returned only in getChat. Always returned in getChat. """
     active_usernames: list[str]

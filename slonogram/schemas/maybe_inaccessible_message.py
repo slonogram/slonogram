@@ -56,6 +56,9 @@ from typing import TypeAlias
 
 @model
 class InaccessibleMessage:
+    """This object describes a message that was deleted or is otherwise inaccessible to the bot.
+    Telegram docs: https://core.telegram.org/bots/api#inaccessiblemessage"""
+
     chat: _chat.Chat
     """ Chat the message belonged to """
     date: int
@@ -78,6 +81,9 @@ class InaccessibleMessage:
 
 @model
 class Message:
+    """This object represents a message.
+    Telegram docs: https://core.telegram.org/bots/api#message"""
+
     animation: _animation.Animation
     """ Optional. Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set """
     audio: _audio.Audio

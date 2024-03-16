@@ -7,6 +7,10 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class ChosenInlineResult:
+    """Represents a result of an inline query that was chosen by the user and sent to their chat partner.
+    Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates.
+    Telegram docs: https://core.telegram.org/bots/api#choseninlineresult"""
+
     from_: _user.User
     """ The user that chose the result """
     inline_message_id: str

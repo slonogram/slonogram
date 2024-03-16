@@ -6,6 +6,9 @@ from slonogram.altering import Alterer1, alter1
 
 @model
 class File:
+    """This object represents a file ready to be downloaded. The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
+    Telegram docs: https://core.telegram.org/bots/api#file"""
+
     file_id: str
     """ Identifier for this file, which can be used to download or reuse the file """
     file_path: str
