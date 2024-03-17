@@ -1,37 +1,28 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import (
     poll_option as _poll_option,
     message_entity as _message_entity,
 )
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class Poll:
     """This object contains information about a poll.
-    Telegram docs: https://core.telegram.org/bots/api#poll"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#poll"""
 
     allows_multiple_answers: bool
     """ True, if the poll allows multiple answers """
-    close_date: int
-    """ Optional. Point in time (Unix timestamp) when the poll will be automatically closed """
-    correct_option_id: int
-    """ Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot. """
-    explanation: str
-    """ Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters """
-    explanation_entities: list[_message_entity.MessageEntity]
-    """ Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation """
     id: str
     """ Unique poll identifier """
     is_anonymous: bool
     """ True, if the poll is anonymous """
     is_closed: bool
     """ True, if the poll is closed """
-    open_period: int
-    """ Optional. Amount of time in seconds the poll will be active after creation """
-    options: list[_poll_option.PollOption]
+    options: tuple[_poll_option.PollOption, ...]
     """ List of poll options """
     question: str
     """ Poll question, 1-300 characters """
@@ -39,6 +30,16 @@ class Poll:
     """ Total number of users that voted in the poll """
     type: str
     """ Poll type, currently can be "regular" or "quiz" """
+    close_date: int | None = None
+    """ Optional. Point in time (Unix timestamp) when the poll will be automatically closed """
+    correct_option_id: int | None = None
+    """ Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot. """
+    explanation: str | None = None
+    """ Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters """
+    explanation_entities: tuple[_message_entity.MessageEntity, ...] | None = None
+    """ Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation """
+    open_period: int | None = None
+    """ Optional. Amount of time in seconds the poll will be active after creation """
 
     def alter(
         self,
@@ -46,17 +47,17 @@ class Poll:
         id: Omittable[Alterer1[str]] = OMIT,
         is_anonymous: Omittable[Alterer1[bool]] = OMIT,
         is_closed: Omittable[Alterer1[bool]] = OMIT,
-        options: Omittable[Alterer1[list[_poll_option.PollOption]]] = OMIT,
+        options: Omittable[Alterer1[tuple[_poll_option.PollOption, ...]]] = OMIT,
         question: Omittable[Alterer1[str]] = OMIT,
         total_voter_count: Omittable[Alterer1[int]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
-        close_date: Omittable[Alterer1[int]] = OMIT,
-        correct_option_id: Omittable[Alterer1[int]] = OMIT,
-        explanation: Omittable[Alterer1[str]] = OMIT,
+        close_date: Omittable[Alterer1[int | None]] = OMIT,
+        correct_option_id: Omittable[Alterer1[int | None]] = OMIT,
+        explanation: Omittable[Alterer1[str | None]] = OMIT,
         explanation_entities: Omittable[
-            Alterer1[list[_message_entity.MessageEntity]]
+            Alterer1[tuple[_message_entity.MessageEntity, ...] | None]
         ] = OMIT,
-        open_period: Omittable[Alterer1[int]] = OMIT,
+        open_period: Omittable[Alterer1[int | None]] = OMIT,
     ) -> Poll:
         return Poll(
             allows_multiple_answers=alter1(

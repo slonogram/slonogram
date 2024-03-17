@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import location as _location
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatLocation:
     """Represents a location to which a chat is connected.
-    Telegram docs: https://core.telegram.org/bots/api#chatlocation"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatlocation"""
 
     address: str
     """ Location address; 1-64 characters, as defined by the chat owner """

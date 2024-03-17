@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatPhoto:
     """This object represents a chat photo.
-    Telegram docs: https://core.telegram.org/bots/api#chatphoto"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatphoto"""
 
     big_file_id: str
     """ File identifier of big (640x640) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed. """

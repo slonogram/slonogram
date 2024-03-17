@@ -1,5 +1,5 @@
 from ..spec import Field
-from ..type_parser import TypeParser, parse_union
+from ..typing.parser import TypeParser, parse_union
 
 from ..utils import escape_kw
 
@@ -9,9 +9,14 @@ def create_field(
 ) -> str:
     tp = parse_union(type_parser, field.types)
     name = escape_kw(field.name)
+    rest = ""
+
+    if not field.required:
+        tp += " | None"
+        rest = " = None"
 
     return (
-        f"{name}: {tp}\n"
+        f"{name}: {tp}{rest}\n"
         f"''' {field.description} '''"
     )
 

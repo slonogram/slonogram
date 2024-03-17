@@ -1,6 +1,8 @@
 from typing import Sequence
 
-from ..type_parser import TypeParser, Tracker, no_tracking
+from ..typing.tracking import Tracker
+from ..typing.parser import TypeParser
+
 from ..spec import Field
 from ..utils import indent
 
@@ -12,14 +14,12 @@ def create_dataclass(
     docs: str,
     fields: Sequence[Field],
     type_parser: TypeParser,
-    tracker: Tracker = no_tracking,
+    tracker: Tracker,
 ) -> str:
-    tracker('slonogram._internal.utils', 'model')
-
     out_fields = ""
     out_methods = ""
 
-    for field in fields:
+    for field in sorted(fields, key=lambda field: field.required, reverse=True):
         out_fields += create_field(field, type_parser) + '\n'
 
     out_methods += create_alterer(name, fields, type_parser, tracker=tracker) + '\n'
@@ -28,7 +28,7 @@ def create_dataclass(
         out_fields = "pass"
 
     return (
-        "@model\n"
+        f"@{tracker('slonogram._internal.utils', 'model')}\n"
         f"class {name}:\n"
         + indent(f'""" {docs} """')
         + '\n'

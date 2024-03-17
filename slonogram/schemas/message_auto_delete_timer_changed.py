@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class MessageAutoDeleteTimerChanged:
     """This object represents a service message about a change in auto-delete timer settings.
-    Telegram docs: https://core.telegram.org/bots/api#messageautodeletetimerchanged"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#messageautodeletetimerchanged"""
 
     message_auto_delete_time: int
     """ New auto-delete time for messages in the chat; in seconds """

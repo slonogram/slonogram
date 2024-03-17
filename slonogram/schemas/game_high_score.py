@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class GameHighScore:
     """This object represents one row of the high scores table for a game.
-    Telegram docs: https://core.telegram.org/bots/api#gamehighscore"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#gamehighscore"""
 
     position: int
     """ Position in high score table for the game """

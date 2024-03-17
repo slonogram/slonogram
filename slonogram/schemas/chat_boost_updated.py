@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.schemas import chat as _chat, chat_boost as _chat_boost
-from slonogram.omittable import OMIT, Omittable
+from slonogram.schemas import chat_boost as _chat_boost, chat as _chat
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatBoostUpdated:
     """This object represents a boost added to a chat or changed.
-    Telegram docs: https://core.telegram.org/bots/api#chatboostupdated"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatboostupdated"""
 
     boost: _chat_boost.ChatBoost
     """ Information about the chat boost """

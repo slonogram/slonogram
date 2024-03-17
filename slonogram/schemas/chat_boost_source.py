@@ -1,15 +1,16 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from typing import TypeAlias
 
 
 @model
 class ChatBoostSourceGiftCode:
     """The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
-    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcegiftcode"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatboostsourcegiftcode"""
 
     source: str
     """ Source of the boost, always "gift_code" """
@@ -30,23 +31,24 @@ class ChatBoostSourceGiftCode:
 @model
 class ChatBoostSourceGiveaway:
     """The boost was obtained by the creation of a Telegram Premium giveaway. This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
-    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcegiveaway"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatboostsourcegiveaway"""
 
     giveaway_message_id: int
     """ Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet. """
-    is_unclaimed: bool
-    """ Optional. True, if the giveaway was completed, but there was no user to win the prize """
     source: str
     """ Source of the boost, always "giveaway" """
-    user: _user.User
+    is_unclaimed: bool | None = None
+    """ Optional. True, if the giveaway was completed, but there was no user to win the prize """
+    user: _user.User | None = None
     """ Optional. User that won the prize in the giveaway if any """
 
     def alter(
         self,
         giveaway_message_id: Omittable[Alterer1[int]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
-        is_unclaimed: Omittable[Alterer1[bool]] = OMIT,
-        user: Omittable[Alterer1[_user.User]] = OMIT,
+        is_unclaimed: Omittable[Alterer1[bool | None]] = OMIT,
+        user: Omittable[Alterer1[_user.User | None]] = OMIT,
     ) -> ChatBoostSourceGiveaway:
         return ChatBoostSourceGiveaway(
             giveaway_message_id=alter1(giveaway_message_id, self.giveaway_message_id),
@@ -59,7 +61,8 @@ class ChatBoostSourceGiveaway:
 @model
 class ChatBoostSourcePremium:
     """The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
-    Telegram docs: https://core.telegram.org/bots/api#chatboostsourcepremium"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatboostsourcepremium"""
 
     source: str
     """ Source of the boost, always "premium" """
@@ -80,9 +83,15 @@ class ChatBoostSourcePremium:
 ChatBoostSource: TypeAlias = (
     ChatBoostSourcePremium | ChatBoostSourceGiftCode | ChatBoostSourceGiveaway
 )
+""" This object describes the source of a chat boost. It can be one of
+- ChatBoostSourcePremium
+- ChatBoostSourceGiftCode
+- ChatBoostSourceGiveaway
+
+Telegram documentation: https://core.telegram.org/bots/api#chatboostsource """
 __all__ = [
+    "ChatBoostSource",
     "ChatBoostSourceGiftCode",
     "ChatBoostSourceGiveaway",
     "ChatBoostSourcePremium",
-    "ChatBoostSource",
 ]

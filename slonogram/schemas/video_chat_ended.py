@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class VideoChatEnded:
     """This object represents a service message about a video chat ended in the chat.
-    Telegram docs: https://core.telegram.org/bots/api#videochatended"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#videochatended"""
 
     duration: int
     """ Video chat duration in seconds """

@@ -1,44 +1,45 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class WebhookInfo:
     """Describes the current status of a webhook.
-    Telegram docs: https://core.telegram.org/bots/api#webhookinfo"""
 
-    allowed_updates: list[str]
-    """ Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
+    Telegram documentation: https://core.telegram.org/bots/api#webhookinfo"""
+
     has_custom_certificate: bool
     """ True, if a custom certificate was provided for webhook certificate checks """
-    ip_address: str
-    """ Optional. Currently used webhook IP address """
-    last_error_date: int
-    """ Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook """
-    last_error_message: str
-    """ Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook """
-    last_synchronization_error_date: int
-    """ Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters """
-    max_connections: int
-    """ Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery """
     pending_update_count: int
     """ Number of updates awaiting delivery """
     url: str
     """ Webhook URL, may be empty if webhook is not set up """
+    allowed_updates: tuple[str, ...] | None = None
+    """ Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
+    ip_address: str | None = None
+    """ Optional. Currently used webhook IP address """
+    last_error_date: int | None = None
+    """ Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook """
+    last_error_message: str | None = None
+    """ Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook """
+    last_synchronization_error_date: int | None = None
+    """ Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters """
+    max_connections: int | None = None
+    """ Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery """
 
     def alter(
         self,
         has_custom_certificate: Omittable[Alterer1[bool]] = OMIT,
         pending_update_count: Omittable[Alterer1[int]] = OMIT,
         url: Omittable[Alterer1[str]] = OMIT,
-        allowed_updates: Omittable[Alterer1[list[str]]] = OMIT,
-        ip_address: Omittable[Alterer1[str]] = OMIT,
-        last_error_date: Omittable[Alterer1[int]] = OMIT,
-        last_error_message: Omittable[Alterer1[str]] = OMIT,
-        last_synchronization_error_date: Omittable[Alterer1[int]] = OMIT,
-        max_connections: Omittable[Alterer1[int]] = OMIT,
+        allowed_updates: Omittable[Alterer1[tuple[str, ...] | None]] = OMIT,
+        ip_address: Omittable[Alterer1[str | None]] = OMIT,
+        last_error_date: Omittable[Alterer1[int | None]] = OMIT,
+        last_error_message: Omittable[Alterer1[str | None]] = OMIT,
+        last_synchronization_error_date: Omittable[Alterer1[int | None]] = OMIT,
+        max_connections: Omittable[Alterer1[int | None]] = OMIT,
     ) -> WebhookInfo:
         return WebhookInfo(
             has_custom_certificate=alter1(

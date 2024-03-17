@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import chat_boost_source as _chat_boost_source
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatBoost:
     """This object contains information about a chat boost.
-    Telegram docs: https://core.telegram.org/bots/api#chatboost"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatboost"""
 
     add_date: int
     """ Point in time (Unix timestamp) when the chat was boosted """

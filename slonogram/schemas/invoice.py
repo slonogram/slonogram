@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class Invoice:
     """This object contains basic information about an invoice.
-    Telegram docs: https://core.telegram.org/bots/api#invoice"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#invoice"""
 
     currency: str
     """ Three-letter ISO 4217 currency code """

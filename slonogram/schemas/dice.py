@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class Dice:
     """This object represents an animated emoji that displays a random value.
-    Telegram docs: https://core.telegram.org/bots/api#dice"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#dice"""
 
     emoji: str
     """ Emoji on which the dice throw animation is based """

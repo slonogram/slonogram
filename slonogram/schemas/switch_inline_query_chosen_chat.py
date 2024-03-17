@@ -1,32 +1,33 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class SwitchInlineQueryChosenChat:
     """This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
-    Telegram docs: https://core.telegram.org/bots/api#switchinlinequerychosenchat"""
 
-    allow_bot_chats: bool
+    Telegram documentation: https://core.telegram.org/bots/api#switchinlinequerychosenchat"""
+
+    allow_bot_chats: bool | None = None
     """ Optional. True, if private chats with bots can be chosen """
-    allow_channel_chats: bool
+    allow_channel_chats: bool | None = None
     """ Optional. True, if channel chats can be chosen """
-    allow_group_chats: bool
+    allow_group_chats: bool | None = None
     """ Optional. True, if group and supergroup chats can be chosen """
-    allow_user_chats: bool
+    allow_user_chats: bool | None = None
     """ Optional. True, if private chats with users can be chosen """
-    query: str
+    query: str | None = None
     """ Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted """
 
     def alter(
         self,
-        allow_bot_chats: Omittable[Alterer1[bool]] = OMIT,
-        allow_channel_chats: Omittable[Alterer1[bool]] = OMIT,
-        allow_group_chats: Omittable[Alterer1[bool]] = OMIT,
-        allow_user_chats: Omittable[Alterer1[bool]] = OMIT,
-        query: Omittable[Alterer1[str]] = OMIT,
+        allow_bot_chats: Omittable[Alterer1[bool | None]] = OMIT,
+        allow_channel_chats: Omittable[Alterer1[bool | None]] = OMIT,
+        allow_group_chats: Omittable[Alterer1[bool | None]] = OMIT,
+        allow_user_chats: Omittable[Alterer1[bool | None]] = OMIT,
+        query: Omittable[Alterer1[str | None]] = OMIT,
     ) -> SwitchInlineQueryChosenChat:
         return SwitchInlineQueryChosenChat(
             allow_bot_chats=alter1(allow_bot_chats, self.allow_bot_chats),

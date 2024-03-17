@@ -1,15 +1,16 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from typing import TypeAlias
 
 
 @model
 class ChatMemberAdministrator:
     """Represents a chat member that has some additional privileges.
-    Telegram docs: https://core.telegram.org/bots/api#chatmemberadministrator"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatmemberadministrator"""
 
     can_be_edited: bool
     """ True, if the bot is allowed to edit administrator privileges of that user """
@@ -19,36 +20,36 @@ class ChatMemberAdministrator:
     """ True, if the administrator can delete messages of other users """
     can_delete_stories: bool
     """ True, if the administrator can delete stories posted by other users """
-    can_edit_messages: bool
-    """ Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only """
     can_edit_stories: bool
     """ True, if the administrator can edit stories posted by other users """
     can_invite_users: bool
     """ True, if the user is allowed to invite new users to the chat """
     can_manage_chat: bool
     """ True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege. """
-    can_manage_topics: bool
-    """ Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only """
     can_manage_video_chats: bool
     """ True, if the administrator can manage video chats """
-    can_pin_messages: bool
-    """ Optional. True, if the user is allowed to pin messages; for groups and supergroups only """
-    can_post_messages: bool
-    """ Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only """
     can_post_stories: bool
     """ True, if the administrator can post stories to the chat """
     can_promote_members: bool
     """ True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user) """
     can_restrict_members: bool
     """ True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics """
-    custom_title: str
-    """ Optional. Custom title for this user """
     is_anonymous: bool
     """ True, if the user's presence in the chat is hidden """
     status: str
     """ The member's status in the chat, always "administrator" """
     user: _user.User
     """ Information about the user """
+    can_edit_messages: bool | None = None
+    """ Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only """
+    can_manage_topics: bool | None = None
+    """ Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only """
+    can_pin_messages: bool | None = None
+    """ Optional. True, if the user is allowed to pin messages; for groups and supergroups only """
+    can_post_messages: bool | None = None
+    """ Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only """
+    custom_title: str | None = None
+    """ Optional. Custom title for this user """
 
     def alter(
         self,
@@ -66,11 +67,11 @@ class ChatMemberAdministrator:
         is_anonymous: Omittable[Alterer1[bool]] = OMIT,
         status: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-        can_edit_messages: Omittable[Alterer1[bool]] = OMIT,
-        can_manage_topics: Omittable[Alterer1[bool]] = OMIT,
-        can_pin_messages: Omittable[Alterer1[bool]] = OMIT,
-        can_post_messages: Omittable[Alterer1[bool]] = OMIT,
-        custom_title: Omittable[Alterer1[str]] = OMIT,
+        can_edit_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        can_manage_topics: Omittable[Alterer1[bool | None]] = OMIT,
+        can_pin_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        can_post_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        custom_title: Omittable[Alterer1[str | None]] = OMIT,
     ) -> ChatMemberAdministrator:
         return ChatMemberAdministrator(
             can_be_edited=alter1(can_be_edited, self.can_be_edited),
@@ -102,7 +103,8 @@ class ChatMemberAdministrator:
 @model
 class ChatMemberBanned:
     """Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
-    Telegram docs: https://core.telegram.org/bots/api#chatmemberbanned"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatmemberbanned"""
 
     status: str
     """ The member's status in the chat, always "kicked" """
@@ -127,7 +129,8 @@ class ChatMemberBanned:
 @model
 class ChatMemberLeft:
     """Represents a chat member that isn't currently a member of the chat, but may join it themselves.
-    Telegram docs: https://core.telegram.org/bots/api#chatmemberleft"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatmemberleft"""
 
     status: str
     """ The member's status in the chat, always "left" """
@@ -148,7 +151,8 @@ class ChatMemberLeft:
 @model
 class ChatMemberMember:
     """Represents a chat member that has no additional privileges or restrictions.
-    Telegram docs: https://core.telegram.org/bots/api#chatmembermember"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatmembermember"""
 
     status: str
     """ The member's status in the chat, always "member" """
@@ -169,23 +173,24 @@ class ChatMemberMember:
 @model
 class ChatMemberOwner:
     """Represents a chat member that owns the chat and has all administrator privileges.
-    Telegram docs: https://core.telegram.org/bots/api#chatmemberowner"""
 
-    custom_title: str
-    """ Optional. Custom title for this user """
+    Telegram documentation: https://core.telegram.org/bots/api#chatmemberowner"""
+
     is_anonymous: bool
     """ True, if the user's presence in the chat is hidden """
     status: str
     """ The member's status in the chat, always "creator" """
     user: _user.User
     """ Information about the user """
+    custom_title: str | None = None
+    """ Optional. Custom title for this user """
 
     def alter(
         self,
         is_anonymous: Omittable[Alterer1[bool]] = OMIT,
         status: Omittable[Alterer1[str]] = OMIT,
         user: Omittable[Alterer1[_user.User]] = OMIT,
-        custom_title: Omittable[Alterer1[str]] = OMIT,
+        custom_title: Omittable[Alterer1[str | None]] = OMIT,
     ) -> ChatMemberOwner:
         return ChatMemberOwner(
             is_anonymous=alter1(is_anonymous, self.is_anonymous),
@@ -198,7 +203,8 @@ class ChatMemberOwner:
 @model
 class ChatMemberRestricted:
     """Represents a chat member that is under certain restrictions in the chat. Supergroups only.
-    Telegram docs: https://core.telegram.org/bots/api#chatmemberrestricted"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatmemberrestricted"""
 
     can_add_web_page_previews: bool
     """ True, if the user is allowed to add web page previews to their messages """
@@ -296,12 +302,21 @@ ChatMember: TypeAlias = (
     | ChatMemberLeft
     | ChatMemberBanned
 )
+""" This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:
+- ChatMemberOwner
+- ChatMemberAdministrator
+- ChatMemberMember
+- ChatMemberRestricted
+- ChatMemberLeft
+- ChatMemberBanned
+
+Telegram documentation: https://core.telegram.org/bots/api#chatmember """
 __all__ = [
+    "ChatMember",
     "ChatMemberAdministrator",
     "ChatMemberBanned",
     "ChatMemberLeft",
     "ChatMemberMember",
     "ChatMemberOwner",
     "ChatMemberRestricted",
-    "ChatMember",
 ]

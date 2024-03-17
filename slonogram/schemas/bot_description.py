@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class BotDescription:
     """This object represents the bot's description.
-    Telegram docs: https://core.telegram.org/bots/api#botdescription"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botdescription"""
 
     description: str
     """ The bot's description """

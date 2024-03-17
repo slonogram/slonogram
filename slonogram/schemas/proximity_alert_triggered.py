@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ProximityAlertTriggered:
     """This object represents the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.
-    Telegram docs: https://core.telegram.org/bots/api#proximityalerttriggered"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#proximityalerttriggered"""
 
     distance: int
     """ The distance between the users """

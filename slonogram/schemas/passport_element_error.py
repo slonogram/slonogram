@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from typing import TypeAlias
 
 
 @model
 class PassportElementErrorDataField:
     """Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrordatafield"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrordatafield"""
 
     data_hash: str
     """ Base64-encoded data hash """
@@ -41,7 +42,8 @@ class PassportElementErrorDataField:
 @model
 class PassportElementErrorFile:
     """Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfile"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfile"""
 
     file_hash: str
     """ Base64-encoded file hash """
@@ -70,9 +72,10 @@ class PassportElementErrorFile:
 @model
 class PassportElementErrorFiles:
     """Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfiles"""
 
-    file_hashes: list[str]
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfiles"""
+
+    file_hashes: tuple[str, ...]
     """ List of base64-encoded file hashes """
     message: str
     """ Error message """
@@ -83,7 +86,7 @@ class PassportElementErrorFiles:
 
     def alter(
         self,
-        file_hashes: Omittable[Alterer1[list[str]]] = OMIT,
+        file_hashes: Omittable[Alterer1[tuple[str, ...]]] = OMIT,
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
@@ -99,7 +102,8 @@ class PassportElementErrorFiles:
 @model
 class PassportElementErrorFrontSide:
     """Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorfrontside"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfrontside"""
 
     file_hash: str
     """ Base64-encoded hash of the file with the front side of the document """
@@ -128,7 +132,8 @@ class PassportElementErrorFrontSide:
 @model
 class PassportElementErrorReverseSide:
     """Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorreverseside"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorreverseside"""
 
     file_hash: str
     """ Base64-encoded hash of the file with the reverse side of the document """
@@ -157,7 +162,8 @@ class PassportElementErrorReverseSide:
 @model
 class PassportElementErrorSelfie:
     """Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorselfie"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorselfie"""
 
     file_hash: str
     """ Base64-encoded hash of the file with the selfie """
@@ -186,7 +192,8 @@ class PassportElementErrorSelfie:
 @model
 class PassportElementErrorTranslationFile:
     """Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrortranslationfile"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrortranslationfile"""
 
     file_hash: str
     """ Base64-encoded file hash """
@@ -215,9 +222,10 @@ class PassportElementErrorTranslationFile:
 @model
 class PassportElementErrorTranslationFiles:
     """Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrortranslationfiles"""
 
-    file_hashes: list[str]
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrortranslationfiles"""
+
+    file_hashes: tuple[str, ...]
     """ List of base64-encoded file hashes """
     message: str
     """ Error message """
@@ -228,7 +236,7 @@ class PassportElementErrorTranslationFiles:
 
     def alter(
         self,
-        file_hashes: Omittable[Alterer1[list[str]]] = OMIT,
+        file_hashes: Omittable[Alterer1[tuple[str, ...]]] = OMIT,
         message: Omittable[Alterer1[str]] = OMIT,
         source: Omittable[Alterer1[str]] = OMIT,
         type: Omittable[Alterer1[str]] = OMIT,
@@ -244,7 +252,8 @@ class PassportElementErrorTranslationFiles:
 @model
 class PassportElementErrorUnspecified:
     """Represents an issue in an unspecified place. The error is considered resolved when new data is added.
-    Telegram docs: https://core.telegram.org/bots/api#passportelementerrorunspecified"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorunspecified"""
 
     element_hash: str
     """ Base64-encoded element hash """
@@ -281,7 +290,20 @@ PassportElementError: TypeAlias = (
     | PassportElementErrorTranslationFiles
     | PassportElementErrorUnspecified
 )
+""" This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:
+- PassportElementErrorDataField
+- PassportElementErrorFrontSide
+- PassportElementErrorReverseSide
+- PassportElementErrorSelfie
+- PassportElementErrorFile
+- PassportElementErrorFiles
+- PassportElementErrorTranslationFile
+- PassportElementErrorTranslationFiles
+- PassportElementErrorUnspecified
+
+Telegram documentation: https://core.telegram.org/bots/api#passportelementerror """
 __all__ = [
+    "PassportElementError",
     "PassportElementErrorDataField",
     "PassportElementErrorFile",
     "PassportElementErrorFiles",
@@ -291,5 +313,4 @@ __all__ = [
     "PassportElementErrorTranslationFile",
     "PassportElementErrorTranslationFiles",
     "PassportElementErrorUnspecified",
-    "PassportElementError",
 ]

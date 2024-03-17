@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class BotCommand:
     """This object represents a bot command.
-    Telegram docs: https://core.telegram.org/bots/api#botcommand"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommand"""
 
     command: str
     """ Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores. """

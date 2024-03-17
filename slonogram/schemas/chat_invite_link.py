@@ -1,32 +1,33 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatInviteLink:
     """Represents an invite link for a chat.
-    Telegram docs: https://core.telegram.org/bots/api#chatinvitelink"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#chatinvitelink"""
 
     creates_join_request: bool
     """ True, if users joining the chat via the link need to be approved by chat administrators """
     creator: _user.User
     """ Creator of the link """
-    expire_date: int
-    """ Optional. Point in time (Unix timestamp) when the link will expire or has been expired """
     invite_link: str
     """ The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with "...". """
     is_primary: bool
     """ True, if the link is primary """
     is_revoked: bool
     """ True, if the link is revoked """
-    member_limit: int
+    expire_date: int | None = None
+    """ Optional. Point in time (Unix timestamp) when the link will expire or has been expired """
+    member_limit: int | None = None
     """ Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999 """
-    name: str
+    name: str | None = None
     """ Optional. Invite link name """
-    pending_join_request_count: int
+    pending_join_request_count: int | None = None
     """ Optional. Number of pending join requests created using this link """
 
     def alter(
@@ -36,10 +37,10 @@ class ChatInviteLink:
         invite_link: Omittable[Alterer1[str]] = OMIT,
         is_primary: Omittable[Alterer1[bool]] = OMIT,
         is_revoked: Omittable[Alterer1[bool]] = OMIT,
-        expire_date: Omittable[Alterer1[int]] = OMIT,
-        member_limit: Omittable[Alterer1[int]] = OMIT,
-        name: Omittable[Alterer1[str]] = OMIT,
-        pending_join_request_count: Omittable[Alterer1[int]] = OMIT,
+        expire_date: Omittable[Alterer1[int | None]] = OMIT,
+        member_limit: Omittable[Alterer1[int | None]] = OMIT,
+        name: Omittable[Alterer1[str | None]] = OMIT,
+        pending_join_request_count: Omittable[Alterer1[int | None]] = OMIT,
     ) -> ChatInviteLink:
         return ChatInviteLink(
             creates_join_request=alter1(

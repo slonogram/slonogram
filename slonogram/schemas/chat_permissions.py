@@ -1,59 +1,60 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ChatPermissions:
     """Describes actions that a non-administrator user is allowed to take in a chat.
-    Telegram docs: https://core.telegram.org/bots/api#chatpermissions"""
 
-    can_add_web_page_previews: bool
+    Telegram documentation: https://core.telegram.org/bots/api#chatpermissions"""
+
+    can_add_web_page_previews: bool | None = None
     """ Optional. True, if the user is allowed to add web page previews to their messages """
-    can_change_info: bool
+    can_change_info: bool | None = None
     """ Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups """
-    can_invite_users: bool
+    can_invite_users: bool | None = None
     """ Optional. True, if the user is allowed to invite new users to the chat """
-    can_manage_topics: bool
+    can_manage_topics: bool | None = None
     """ Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages """
-    can_pin_messages: bool
+    can_pin_messages: bool | None = None
     """ Optional. True, if the user is allowed to pin messages. Ignored in public supergroups """
-    can_send_audios: bool
+    can_send_audios: bool | None = None
     """ Optional. True, if the user is allowed to send audios """
-    can_send_documents: bool
+    can_send_documents: bool | None = None
     """ Optional. True, if the user is allowed to send documents """
-    can_send_messages: bool
+    can_send_messages: bool | None = None
     """ Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues """
-    can_send_other_messages: bool
+    can_send_other_messages: bool | None = None
     """ Optional. True, if the user is allowed to send animations, games, stickers and use inline bots """
-    can_send_photos: bool
+    can_send_photos: bool | None = None
     """ Optional. True, if the user is allowed to send photos """
-    can_send_polls: bool
+    can_send_polls: bool | None = None
     """ Optional. True, if the user is allowed to send polls """
-    can_send_video_notes: bool
+    can_send_video_notes: bool | None = None
     """ Optional. True, if the user is allowed to send video notes """
-    can_send_videos: bool
+    can_send_videos: bool | None = None
     """ Optional. True, if the user is allowed to send videos """
-    can_send_voice_notes: bool
+    can_send_voice_notes: bool | None = None
     """ Optional. True, if the user is allowed to send voice notes """
 
     def alter(
         self,
-        can_add_web_page_previews: Omittable[Alterer1[bool]] = OMIT,
-        can_change_info: Omittable[Alterer1[bool]] = OMIT,
-        can_invite_users: Omittable[Alterer1[bool]] = OMIT,
-        can_manage_topics: Omittable[Alterer1[bool]] = OMIT,
-        can_pin_messages: Omittable[Alterer1[bool]] = OMIT,
-        can_send_audios: Omittable[Alterer1[bool]] = OMIT,
-        can_send_documents: Omittable[Alterer1[bool]] = OMIT,
-        can_send_messages: Omittable[Alterer1[bool]] = OMIT,
-        can_send_other_messages: Omittable[Alterer1[bool]] = OMIT,
-        can_send_photos: Omittable[Alterer1[bool]] = OMIT,
-        can_send_polls: Omittable[Alterer1[bool]] = OMIT,
-        can_send_video_notes: Omittable[Alterer1[bool]] = OMIT,
-        can_send_videos: Omittable[Alterer1[bool]] = OMIT,
-        can_send_voice_notes: Omittable[Alterer1[bool]] = OMIT,
+        can_add_web_page_previews: Omittable[Alterer1[bool | None]] = OMIT,
+        can_change_info: Omittable[Alterer1[bool | None]] = OMIT,
+        can_invite_users: Omittable[Alterer1[bool | None]] = OMIT,
+        can_manage_topics: Omittable[Alterer1[bool | None]] = OMIT,
+        can_pin_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_audios: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_documents: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_other_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_photos: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_polls: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_video_notes: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_videos: Omittable[Alterer1[bool | None]] = OMIT,
+        can_send_voice_notes: Omittable[Alterer1[bool | None]] = OMIT,
     ) -> ChatPermissions:
         return ChatPermissions(
             can_add_web_page_previews=alter1(

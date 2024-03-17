@@ -1,22 +1,27 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import inline_keyboard_button as _inline_keyboard_button
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class InlineKeyboardMarkup:
     """This object represents an inline keyboard that appears right next to the message it belongs to.
-    Telegram docs: https://core.telegram.org/bots/api#inlinekeyboardmarkup"""
 
-    inline_keyboard: list[list[_inline_keyboard_button.InlineKeyboardButton]]
+    Telegram documentation: https://core.telegram.org/bots/api#inlinekeyboardmarkup"""
+
+    inline_keyboard: tuple[
+        tuple[_inline_keyboard_button.InlineKeyboardButton, ...], ...
+    ]
     """ Array of button rows, each represented by an Array of InlineKeyboardButton objects """
 
     def alter(
         self,
         inline_keyboard: Omittable[
-            Alterer1[list[list[_inline_keyboard_button.InlineKeyboardButton]]]
+            Alterer1[
+                tuple[tuple[_inline_keyboard_button.InlineKeyboardButton, ...], ...]
+            ]
         ] = OMIT,
     ) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup(

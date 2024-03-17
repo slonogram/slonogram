@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from typing import TypeAlias
 
 
 @model
 class BotCommandScopeAllChatAdministrators:
     """Represents the scope of bot commands, covering all group and supergroup chat administrators.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallchatadministrators"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallchatadministrators"""
 
     type: str
     """ Scope type, must be all_chat_administrators """
@@ -24,7 +25,8 @@ class BotCommandScopeAllChatAdministrators:
 @model
 class BotCommandScopeAllGroupChats:
     """Represents the scope of bot commands, covering all group and supergroup chats.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallgroupchats"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallgroupchats"""
 
     type: str
     """ Scope type, must be all_group_chats """
@@ -40,7 +42,8 @@ class BotCommandScopeAllGroupChats:
 @model
 class BotCommandScopeAllPrivateChats:
     """Represents the scope of bot commands, covering all private chats.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopeallprivatechats"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallprivatechats"""
 
     type: str
     """ Scope type, must be all_private_chats """
@@ -56,7 +59,8 @@ class BotCommandScopeAllPrivateChats:
 @model
 class BotCommandScopeChat:
     """Represents the scope of bot commands, covering a specific chat.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechat"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechat"""
 
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
@@ -77,7 +81,8 @@ class BotCommandScopeChat:
 @model
 class BotCommandScopeChatAdministrators:
     """Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechatadministrators"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechatadministrators"""
 
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
@@ -98,7 +103,8 @@ class BotCommandScopeChatAdministrators:
 @model
 class BotCommandScopeChatMember:
     """Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopechatmember"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechatmember"""
 
     chat_id: int | str
     """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
@@ -123,7 +129,8 @@ class BotCommandScopeChatMember:
 @model
 class BotCommandScopeDefault:
     """Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
-    Telegram docs: https://core.telegram.org/bots/api#botcommandscopedefault"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopedefault"""
 
     type: str
     """ Scope type, must be default """
@@ -143,7 +150,18 @@ BotCommandScope: TypeAlias = (
     | BotCommandScopeChatAdministrators
     | BotCommandScopeChatMember
 )
+""" This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
+- BotCommandScopeDefault
+- BotCommandScopeAllPrivateChats
+- BotCommandScopeAllGroupChats
+- BotCommandScopeAllChatAdministrators
+- BotCommandScopeChat
+- BotCommandScopeChatAdministrators
+- BotCommandScopeChatMember
+
+Telegram documentation: https://core.telegram.org/bots/api#botcommandscope """
 __all__ = [
+    "BotCommandScope",
     "BotCommandScopeAllChatAdministrators",
     "BotCommandScopeAllGroupChats",
     "BotCommandScopeAllPrivateChats",
@@ -151,5 +169,4 @@ __all__ = [
     "BotCommandScopeChatAdministrators",
     "BotCommandScopeChatMember",
     "BotCommandScopeDefault",
-    "BotCommandScope",
 ]

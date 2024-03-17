@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from typing import TypeAlias
 
 
 @model
 class ReactionTypeCustomEmoji:
     """The reaction is based on a custom emoji.
-    Telegram docs: https://core.telegram.org/bots/api#reactiontypecustomemoji"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#reactiontypecustomemoji"""
 
     custom_emoji_id: str
     """ Custom emoji identifier """
@@ -29,7 +30,8 @@ class ReactionTypeCustomEmoji:
 @model
 class ReactionTypeEmoji:
     """The reaction is based on an emoji.
-    Telegram docs: https://core.telegram.org/bots/api#reactiontypeemoji"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#reactiontypeemoji"""
 
     emoji: str
     """ Reaction emoji. Currently, it can be one of "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡" """
@@ -48,4 +50,9 @@ class ReactionTypeEmoji:
 
 
 ReactionType: TypeAlias = ReactionTypeEmoji | ReactionTypeCustomEmoji
-__all__ = ["ReactionTypeCustomEmoji", "ReactionTypeEmoji", "ReactionType"]
+""" This object describes the type of a reaction. Currently, it can be one of
+- ReactionTypeEmoji
+- ReactionTypeCustomEmoji
+
+Telegram documentation: https://core.telegram.org/bots/api#reactiontype """
+__all__ = ["ReactionType", "ReactionTypeCustomEmoji", "ReactionTypeEmoji"]

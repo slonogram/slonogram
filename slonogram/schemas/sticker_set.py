@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.schemas import photo_size as _photo_size, sticker as _sticker
-from slonogram.omittable import OMIT, Omittable
+from slonogram.schemas import sticker as _sticker, photo_size as _photo_size
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class StickerSet:
     """This object represents a sticker set.
-    Telegram docs: https://core.telegram.org/bots/api#stickerset"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#stickerset"""
 
     is_animated: bool
     """ True, if the sticker set contains animated stickers """
@@ -18,12 +19,12 @@ class StickerSet:
     """ Sticker set name """
     sticker_type: str
     """ Type of stickers in the set, currently one of "regular", "mask", "custom_emoji" """
-    stickers: list[_sticker.Sticker]
+    stickers: tuple[_sticker.Sticker, ...]
     """ List of all set stickers """
-    thumbnail: _photo_size.PhotoSize
-    """ Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format """
     title: str
     """ Sticker set title """
+    thumbnail: _photo_size.PhotoSize | None = None
+    """ Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format """
 
     def alter(
         self,
@@ -31,9 +32,9 @@ class StickerSet:
         is_video: Omittable[Alterer1[bool]] = OMIT,
         name: Omittable[Alterer1[str]] = OMIT,
         sticker_type: Omittable[Alterer1[str]] = OMIT,
-        stickers: Omittable[Alterer1[list[_sticker.Sticker]]] = OMIT,
+        stickers: Omittable[Alterer1[tuple[_sticker.Sticker, ...]]] = OMIT,
         title: Omittable[Alterer1[str]] = OMIT,
-        thumbnail: Omittable[Alterer1[_photo_size.PhotoSize]] = OMIT,
+        thumbnail: Omittable[Alterer1[_photo_size.PhotoSize | None]] = OMIT,
     ) -> StickerSet:
         return StickerSet(
             is_animated=alter1(is_animated, self.is_animated),

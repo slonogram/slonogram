@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.schemas import shipping_address as _shipping_address, user as _user
-from slonogram.omittable import OMIT, Omittable
+from slonogram.schemas import user as _user, shipping_address as _shipping_address
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ShippingQuery:
     """This object contains information about an incoming shipping query.
-    Telegram docs: https://core.telegram.org/bots/api#shippingquery"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#shippingquery"""
 
     from_: _user.User
     """ User who sent the query """

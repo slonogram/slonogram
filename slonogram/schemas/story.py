@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import chat as _chat
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class Story:
     """This object represents a story.
-    Telegram docs: https://core.telegram.org/bots/api#story"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#story"""
 
     chat: _chat.Chat
     """ Chat that posted the story """

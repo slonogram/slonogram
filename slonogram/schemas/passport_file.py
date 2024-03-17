@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class PassportFile:
     """This object represents a file uploaded to Telegram Passport. Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
-    Telegram docs: https://core.telegram.org/bots/api#passportfile"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#passportfile"""
 
     file_date: int
     """ Unix time when the file was uploaded """

@@ -1,7 +1,7 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 from slonogram.schemas import web_app_info as _web_app_info
 from typing import TypeAlias
 
@@ -9,7 +9,8 @@ from typing import TypeAlias
 @model
 class MenuButtonCommands:
     """Represents a menu button, which opens the bot's list of commands.
-    Telegram docs: https://core.telegram.org/bots/api#menubuttoncommands"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#menubuttoncommands"""
 
     type: str
     """ Type of the button, must be commands """
@@ -23,7 +24,8 @@ class MenuButtonCommands:
 @model
 class MenuButtonDefault:
     """Describes that no specific value for the menu button was set.
-    Telegram docs: https://core.telegram.org/bots/api#menubuttondefault"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#menubuttondefault"""
 
     type: str
     """ Type of the button, must be default """
@@ -37,7 +39,8 @@ class MenuButtonDefault:
 @model
 class MenuButtonWebApp:
     """Represents a menu button, which launches a Web App.
-    Telegram docs: https://core.telegram.org/bots/api#menubuttonwebapp"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#menubuttonwebapp"""
 
     text: str
     """ Text on the button """
@@ -60,4 +63,11 @@ class MenuButtonWebApp:
 
 
 MenuButton: TypeAlias = MenuButtonCommands | MenuButtonWebApp | MenuButtonDefault
-__all__ = ["MenuButtonCommands", "MenuButtonDefault", "MenuButtonWebApp", "MenuButton"]
+""" This object describes the bot's menu button in a private chat. It should be one of
+- MenuButtonCommands
+- MenuButtonWebApp
+- MenuButtonDefault
+If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat. Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
+
+Telegram documentation: https://core.telegram.org/bots/api#menubutton """
+__all__ = ["MenuButton", "MenuButtonCommands", "MenuButtonDefault", "MenuButtonWebApp"]

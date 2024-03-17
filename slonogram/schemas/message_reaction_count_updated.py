@@ -1,14 +1,15 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
 from slonogram.schemas import chat as _chat, reaction_count as _reaction_count
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class MessageReactionCountUpdated:
     """This object represents reaction changes on a message with anonymous reactions.
-    Telegram docs: https://core.telegram.org/bots/api#messagereactioncountupdated"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#messagereactioncountupdated"""
 
     chat: _chat.Chat
     """ The chat containing the message """
@@ -16,7 +17,7 @@ class MessageReactionCountUpdated:
     """ Date of the change in Unix time """
     message_id: int
     """ Unique message identifier inside the chat """
-    reactions: list[_reaction_count.ReactionCount]
+    reactions: tuple[_reaction_count.ReactionCount, ...]
     """ List of reactions that are present on the message """
 
     def alter(
@@ -24,7 +25,9 @@ class MessageReactionCountUpdated:
         chat: Omittable[Alterer1[_chat.Chat]] = OMIT,
         date: Omittable[Alterer1[int]] = OMIT,
         message_id: Omittable[Alterer1[int]] = OMIT,
-        reactions: Omittable[Alterer1[list[_reaction_count.ReactionCount]]] = OMIT,
+        reactions: Omittable[
+            Alterer1[tuple[_reaction_count.ReactionCount, ...]]
+        ] = OMIT,
     ) -> MessageReactionCountUpdated:
         return MessageReactionCountUpdated(
             chat=alter1(chat, self.chat),

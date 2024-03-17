@@ -1,35 +1,36 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class User:
     """This object represents a Telegram user or bot.
-    Telegram docs: https://core.telegram.org/bots/api#user"""
 
-    added_to_attachment_menu: bool
-    """ Optional. True, if this user added the bot to the attachment menu """
-    can_join_groups: bool
-    """ Optional. True, if the bot can be invited to groups. Returned only in getMe. """
-    can_read_all_group_messages: bool
-    """ Optional. True, if privacy mode is disabled for the bot. Returned only in getMe. """
+    Telegram documentation: https://core.telegram.org/bots/api#user"""
+
     first_name: str
     """ User's or bot's first name """
     id: int
     """ Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. """
     is_bot: bool
     """ True, if this user is a bot """
-    is_premium: bool
+    added_to_attachment_menu: bool | None = None
+    """ Optional. True, if this user added the bot to the attachment menu """
+    can_join_groups: bool | None = None
+    """ Optional. True, if the bot can be invited to groups. Returned only in getMe. """
+    can_read_all_group_messages: bool | None = None
+    """ Optional. True, if privacy mode is disabled for the bot. Returned only in getMe. """
+    is_premium: bool | None = None
     """ Optional. True, if this user is a Telegram Premium user """
-    language_code: str
+    language_code: str | None = None
     """ Optional. IETF language tag of the user's language """
-    last_name: str
+    last_name: str | None = None
     """ Optional. User's or bot's last name """
-    supports_inline_queries: bool
+    supports_inline_queries: bool | None = None
     """ Optional. True, if the bot supports inline queries. Returned only in getMe. """
-    username: str
+    username: str | None = None
     """ Optional. User's or bot's username """
 
     def alter(
@@ -37,14 +38,14 @@ class User:
         first_name: Omittable[Alterer1[str]] = OMIT,
         id: Omittable[Alterer1[int]] = OMIT,
         is_bot: Omittable[Alterer1[bool]] = OMIT,
-        added_to_attachment_menu: Omittable[Alterer1[bool]] = OMIT,
-        can_join_groups: Omittable[Alterer1[bool]] = OMIT,
-        can_read_all_group_messages: Omittable[Alterer1[bool]] = OMIT,
-        is_premium: Omittable[Alterer1[bool]] = OMIT,
-        language_code: Omittable[Alterer1[str]] = OMIT,
-        last_name: Omittable[Alterer1[str]] = OMIT,
-        supports_inline_queries: Omittable[Alterer1[bool]] = OMIT,
-        username: Omittable[Alterer1[str]] = OMIT,
+        added_to_attachment_menu: Omittable[Alterer1[bool | None]] = OMIT,
+        can_join_groups: Omittable[Alterer1[bool | None]] = OMIT,
+        can_read_all_group_messages: Omittable[Alterer1[bool | None]] = OMIT,
+        is_premium: Omittable[Alterer1[bool | None]] = OMIT,
+        language_code: Omittable[Alterer1[str | None]] = OMIT,
+        last_name: Omittable[Alterer1[str | None]] = OMIT,
+        supports_inline_queries: Omittable[Alterer1[bool | None]] = OMIT,
+        username: Omittable[Alterer1[str | None]] = OMIT,
     ) -> User:
         return User(
             first_name=alter1(first_name, self.first_name),

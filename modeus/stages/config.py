@@ -1,4 +1,5 @@
 from pathlib import Path
+from shutil import rmtree
 
 from ..spec import Type
 from ..config.type import AnyType, Struct, TypeAlias, Meta
@@ -7,6 +8,10 @@ from ..config import RevisedConfig, try_load_revised, dump_revised
 from ..utils import to_snake_case
 
 def run(group: dict[str, dict[str, Type]], schemas_out: Path) -> None:
+    print(f"Removing {schemas_out}...")
+    rmtree(schemas_out, ignore_errors=True)
+    schemas_out.mkdir(parents=True)
+
     for parent, tps in group.items():
         entries: dict[str, AnyType] = {}
         snake_name = to_snake_case(parent)

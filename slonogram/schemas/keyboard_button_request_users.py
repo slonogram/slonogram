@@ -1,29 +1,30 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class KeyboardButtonRequestUsers:
     """This object defines the criteria used to request suitable users. The identifiers of the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users: https://core.telegram.org/bots/features#chat-and-user-selection
-    Telegram docs: https://core.telegram.org/bots/api#keyboardbuttonrequestusers"""
 
-    max_quantity: int
-    """ Optional. The maximum number of users to be selected; 1-10. Defaults to 1. """
+    Telegram documentation: https://core.telegram.org/bots/api#keyboardbuttonrequestusers"""
+
     request_id: int
     """ Signed 32-bit identifier of the request that will be received back in the UsersShared object. Must be unique within the message """
-    user_is_bot: bool
+    max_quantity: int | None = None
+    """ Optional. The maximum number of users to be selected; 1-10. Defaults to 1. """
+    user_is_bot: bool | None = None
     """ Optional. Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied. """
-    user_is_premium: bool
+    user_is_premium: bool | None = None
     """ Optional. Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied. """
 
     def alter(
         self,
         request_id: Omittable[Alterer1[int]] = OMIT,
-        max_quantity: Omittable[Alterer1[int]] = OMIT,
-        user_is_bot: Omittable[Alterer1[bool]] = OMIT,
-        user_is_premium: Omittable[Alterer1[bool]] = OMIT,
+        max_quantity: Omittable[Alterer1[int | None]] = OMIT,
+        user_is_bot: Omittable[Alterer1[bool | None]] = OMIT,
+        user_is_premium: Omittable[Alterer1[bool | None]] = OMIT,
     ) -> KeyboardButtonRequestUsers:
         return KeyboardButtonRequestUsers(
             request_id=alter1(request_id, self.request_id),

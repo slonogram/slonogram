@@ -1,13 +1,14 @@
 from __future__ import annotations
-from slonogram._internal.utils import model
-from slonogram.omittable import OMIT, Omittable
+from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
+from slonogram._internal.utils import model
 
 
 @model
 class ShippingAddress:
     """This object represents a shipping address.
-    Telegram docs: https://core.telegram.org/bots/api#shippingaddress"""
+
+    Telegram documentation: https://core.telegram.org/bots/api#shippingaddress"""
 
     city: str
     """ City """
