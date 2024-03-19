@@ -1,27 +1,31 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ShippingAddress:
-    """This object represents a shipping address.
-
-    Telegram documentation: https://core.telegram.org/bots/api#shippingaddress"""
+    """This object represents a shipping address.  Telegram documentation:
+    https://core.telegram.org/bots/api#shippingaddress"""
 
     city: str
-    """ City """
+    """City"""
     country_code: str
-    """ Two-letter ISO 3166-1 alpha-2 country code """
+    """Two-letter ISO 3166-1 alpha-2 country code"""
     post_code: str
-    """ Address post code """
+    """Address post code"""
     state: str
-    """ State, if applicable """
+    """State, if applicable"""
     street_line1: str
-    """ First line for the address """
+    """First line for the address"""
     street_line2: str
-    """ Second line for the address """
+    """Second line for the address"""
 
     def alter(
         self,

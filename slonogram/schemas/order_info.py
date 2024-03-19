@@ -1,24 +1,28 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import shipping_address as _shipping_address
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class OrderInfo:
-    """This object represents information about an order.
-
-    Telegram documentation: https://core.telegram.org/bots/api#orderinfo"""
+    """This object represents information about an order.  Telegram
+    documentation: https://core.telegram.org/bots/api#orderinfo"""
 
     email: str | None = None
-    """ Optional. User email """
+    """Optional. User email"""
     name: str | None = None
-    """ Optional. User name """
+    """Optional. User name"""
     phone_number: str | None = None
-    """ Optional. User's phone number """
+    """Optional. User's phone number"""
     shipping_address: _shipping_address.ShippingAddress | None = None
-    """ Optional. User shipping address """
+    """Optional. User shipping address"""
 
     def alter(
         self,

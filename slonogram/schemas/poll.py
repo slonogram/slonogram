@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     poll_option as _poll_option,
@@ -5,41 +10,46 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Poll:
-    """This object contains information about a poll.
-
-    Telegram documentation: https://core.telegram.org/bots/api#poll"""
+    """This object contains information about a poll.  Telegram
+    documentation: https://core.telegram.org/bots/api#poll"""
 
     allows_multiple_answers: bool
-    """ True, if the poll allows multiple answers """
+    """True, if the poll allows multiple answers"""
     id: str
-    """ Unique poll identifier """
+    """Unique poll identifier"""
     is_anonymous: bool
-    """ True, if the poll is anonymous """
+    """True, if the poll is anonymous"""
     is_closed: bool
-    """ True, if the poll is closed """
+    """True, if the poll is closed"""
     options: tuple[_poll_option.PollOption, ...]
-    """ List of poll options """
+    """List of poll options"""
     question: str
-    """ Poll question, 1-300 characters """
+    """Poll question, 1-300 characters"""
     total_voter_count: int
-    """ Total number of users that voted in the poll """
+    """Total number of users that voted in the poll"""
     type: str
-    """ Poll type, currently can be "regular" or "quiz" """
+    """Poll type, currently can be "regular" or "quiz" """
     close_date: int | None = None
-    """ Optional. Point in time (Unix timestamp) when the poll will be automatically closed """
+    """Optional. Point in time (Unix timestamp) when the poll will be
+    automatically closed"""
     correct_option_id: int | None = None
-    """ Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot. """
+    """Optional. 0-based identifier of the correct answer option. Available
+    only for polls in the quiz mode, which are closed, or was sent (not
+    forwarded) by the bot or to the private chat with the bot."""
     explanation: str | None = None
-    """ Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters """
+    """Optional. Text that is shown when a user chooses an incorrect answer
+    or taps on the lamp icon in a quiz-style poll, 0-200 characters"""
     explanation_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. Special entities like usernames, URLs, bot commands, etc. that appear in the explanation """
+    """Optional. Special entities like usernames, URLs, bot commands, etc.
+    that appear in the explanation"""
     open_period: int | None = None
-    """ Optional. Amount of time in seconds the poll will be active after creation """
+    """Optional. Amount of time in seconds the poll will be active after
+    creation"""
 
     def alter(
         self,

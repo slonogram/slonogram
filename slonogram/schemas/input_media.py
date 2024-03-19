@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     message_entity as _message_entity,
@@ -5,36 +10,53 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class InputMediaAnimation:
-    """Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputmediaanimation"""
+    """Represents an animation file (GIF or H.264/MPEG-4 AVC video without
+    sound) to be sent.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputmediaanimation"""
 
     media: str
-    """ File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """File to send. Pass a file_id to send a file that exists on the
+    Telegram servers (recommended), pass an HTTP URL for Telegram to get a
+    file from the Internet, or pass "attach://<file_attach_name>" to
+    upload a new one using multipart/form-data under <file_attach_name>
+    name. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     type: str
-    """ Type of the result, must be animation """
+    """Type of the result, must be animation"""
     caption: str | None = None
-    """ Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the animation to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     duration: int | None = None
-    """ Optional. Animation duration in seconds """
+    """Optional. Animation duration in seconds"""
     has_spoiler: bool | None = None
-    """ Optional. Pass True if the animation needs to be covered with a spoiler animation """
+    """Optional. Pass True if the animation needs to be covered with a
+    spoiler animation"""
     height: int | None = None
-    """ Optional. Animation height """
+    """Optional. Animation height"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the animation caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the animation caption. See
+    formatting options for more details."""
     thumbnail: _input_file.InputFile | str | None = None
-    """ Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """Optional. Thumbnail of the file sent; can be ignored if thumbnail
+    generation for the file is supported server-side. The thumbnail should
+    be in JPEG format and less than 200 kB in size. A thumbnail's width
+    and height should not exceed 320. Ignored if the file is not uploaded
+    using multipart/form-data. Thumbnails can't be reused and can be only
+    uploaded as a new file, so you can pass "attach://<file_attach_name>"
+    if the thumbnail was uploaded using multipart/form-data under
+    <file_attach_name>. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     width: int | None = None
-    """ Optional. Animation width """
+    """Optional. Animation width"""
 
     def alter(
         self,
@@ -65,30 +87,45 @@ class InputMediaAnimation:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputMediaAudio:
-    """Represents an audio file to be treated as music to be sent.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputmediaaudio"""
+    """Represents an audio file to be treated as music to be sent.  Telegram
+    documentation: https://core.telegram.org/bots/api#inputmediaaudio"""
 
     media: str
-    """ File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """File to send. Pass a file_id to send a file that exists on the
+    Telegram servers (recommended), pass an HTTP URL for Telegram to get a
+    file from the Internet, or pass "attach://<file_attach_name>" to
+    upload a new one using multipart/form-data under <file_attach_name>
+    name. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     type: str
-    """ Type of the result, must be audio """
+    """Type of the result, must be audio"""
     caption: str | None = None
-    """ Optional. Caption of the audio to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the audio to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     duration: int | None = None
-    """ Optional. Duration of the audio in seconds """
+    """Optional. Duration of the audio in seconds"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the audio caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the audio caption. See
+    formatting options for more details."""
     performer: str | None = None
-    """ Optional. Performer of the audio """
+    """Optional. Performer of the audio"""
     thumbnail: _input_file.InputFile | str | None = None
-    """ Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """Optional. Thumbnail of the file sent; can be ignored if thumbnail
+    generation for the file is supported server-side. The thumbnail should
+    be in JPEG format and less than 200 kB in size. A thumbnail's width
+    and height should not exceed 320. Ignored if the file is not uploaded
+    using multipart/form-data. Thumbnails can't be reused and can be only
+    uploaded as a new file, so you can pass "attach://<file_attach_name>"
+    if the thumbnail was uploaded using multipart/form-data under
+    <file_attach_name>. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     title: str | None = None
-    """ Optional. Title of the audio """
+    """Optional. Title of the audio"""
 
     def alter(
         self,
@@ -117,26 +154,43 @@ class InputMediaAudio:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputMediaDocument:
-    """Represents a general file to be sent.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputmediadocument"""
+    """Represents a general file to be sent.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputmediadocument"""
 
     media: str
-    """ File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """File to send. Pass a file_id to send a file that exists on the
+    Telegram servers (recommended), pass an HTTP URL for Telegram to get a
+    file from the Internet, or pass "attach://<file_attach_name>" to
+    upload a new one using multipart/form-data under <file_attach_name>
+    name. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     type: str
-    """ Type of the result, must be document """
+    """Type of the result, must be document"""
     caption: str | None = None
-    """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the document to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     disable_content_type_detection: bool | None = None
-    """ Optional. Disables automatic server-side content type detection for files uploaded using multipart/form-data. Always True, if the document is sent as part of an album. """
+    """Optional. Disables automatic server-side content type detection for
+    files uploaded using multipart/form-data. Always True, if the document
+    is sent as part of an album."""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the document caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the document caption. See
+    formatting options for more details."""
     thumbnail: _input_file.InputFile | str | None = None
-    """ Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """Optional. Thumbnail of the file sent; can be ignored if thumbnail
+    generation for the file is supported server-side. The thumbnail should
+    be in JPEG format and less than 200 kB in size. A thumbnail's width
+    and height should not exceed 320. Ignored if the file is not uploaded
+    using multipart/form-data. Thumbnails can't be reused and can be only
+    uploaded as a new file, so you can pass "attach://<file_attach_name>"
+    if the thumbnail was uploaded using multipart/form-data under
+    <file_attach_name>. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
 
     def alter(
         self,
@@ -163,24 +217,32 @@ class InputMediaDocument:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputMediaPhoto:
-    """Represents a photo to be sent.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputmediaphoto"""
+    """Represents a photo to be sent.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputmediaphoto"""
 
     media: str
-    """ File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """File to send. Pass a file_id to send a file that exists on the
+    Telegram servers (recommended), pass an HTTP URL for Telegram to get a
+    file from the Internet, or pass "attach://<file_attach_name>" to
+    upload a new one using multipart/form-data under <file_attach_name>
+    name. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     type: str
-    """ Type of the result, must be photo """
+    """Type of the result, must be photo"""
     caption: str | None = None
-    """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the photo to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     has_spoiler: bool | None = None
-    """ Optional. Pass True if the photo needs to be covered with a spoiler animation """
+    """Optional. Pass True if the photo needs to be covered with a spoiler
+    animation"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the photo caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the photo caption. See
+    formatting options for more details."""
 
     def alter(
         self,
@@ -203,34 +265,50 @@ class InputMediaPhoto:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputMediaVideo:
-    """Represents a video to be sent.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputmediavideo"""
+    """Represents a video to be sent.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputmediavideo"""
 
     media: str
-    """ File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """File to send. Pass a file_id to send a file that exists on the
+    Telegram servers (recommended), pass an HTTP URL for Telegram to get a
+    file from the Internet, or pass "attach://<file_attach_name>" to
+    upload a new one using multipart/form-data under <file_attach_name>
+    name. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     type: str
-    """ Type of the result, must be video """
+    """Type of the result, must be video"""
     caption: str | None = None
-    """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the video to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     duration: int | None = None
-    """ Optional. Video duration in seconds """
+    """Optional. Video duration in seconds"""
     has_spoiler: bool | None = None
-    """ Optional. Pass True if the video needs to be covered with a spoiler animation """
+    """Optional. Pass True if the video needs to be covered with a spoiler
+    animation"""
     height: int | None = None
-    """ Optional. Video height """
+    """Optional. Video height"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the video caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the video caption. See
+    formatting options for more details."""
     supports_streaming: bool | None = None
-    """ Optional. Pass True if the uploaded video is suitable for streaming """
+    """Optional. Pass True if the uploaded video is suitable for streaming"""
     thumbnail: _input_file.InputFile | str | None = None
-    """ Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://<file_attach_name>" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files """
+    """Optional. Thumbnail of the file sent; can be ignored if thumbnail
+    generation for the file is supported server-side. The thumbnail should
+    be in JPEG format and less than 200 kB in size. A thumbnail's width
+    and height should not exceed 320. Ignored if the file is not uploaded
+    using multipart/form-data. Thumbnails can't be reused and can be only
+    uploaded as a new file, so you can pass "attach://<file_attach_name>"
+    if the thumbnail was uploaded using multipart/form-data under
+    <file_attach_name>. More information on Sending Files:
+    https://core.telegram.org/bots/api#sending-files"""
     width: int | None = None
-    """ Optional. Video width """
+    """Optional. Video width"""
 
     def alter(
         self,

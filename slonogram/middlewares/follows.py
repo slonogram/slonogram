@@ -7,6 +7,7 @@ from ..dispatching.context import Context
 from .base import FollowedMiddleware, Middlewared
 
 from .wrap import Wrap
+from .utils import unwrap
 
 M = TypeVar("M")
 
@@ -15,7 +16,7 @@ class Follows(Middlewared[M]):
     __slots__ = ("follower", "after")
 
     def __init__(self, follower: Handler[M], after: FollowedMiddleware[M]) -> None:
-        self.follower = follower
+        self.follower = unwrap(follower)
         self.after = after
 
     def __call__(self, ctx: Context[M], /) -> Awaitable[Activation]:

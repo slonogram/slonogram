@@ -22,7 +22,7 @@ class Struct:
 
 
 @dataclass(slots=True)
-class TypeAlias:
+class TaggedUnion:
     meta: Meta
     union: list[str]
 
@@ -37,11 +37,11 @@ class Enum:
     kind: Literal["enum"] = "enum"
 
 
-AnyType: TAlias = Struct | TypeAlias | Enum
+AnyType: TAlias = Struct | TaggedUnion | Enum
 
 __all__ = [
     "Struct",
-    "TypeAlias",
+    "TaggedUnion",
     "Enum",
     "AnyType",
     "Meta",

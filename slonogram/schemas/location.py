@@ -1,27 +1,35 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Location:
-    """This object represents a point on the map.
-
-    Telegram documentation: https://core.telegram.org/bots/api#location"""
+    """This object represents a point on the map.  Telegram documentation:
+    https://core.telegram.org/bots/api#location"""
 
     latitude: float
-    """ Latitude as defined by sender """
+    """Latitude as defined by sender"""
     longitude: float
-    """ Longitude as defined by sender """
+    """Longitude as defined by sender"""
     heading: int | None = None
-    """ Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only. """
+    """Optional. The direction in which user is moving, in degrees; 1-360.
+    For active live locations only."""
     horizontal_accuracy: float | None = None
-    """ Optional. The radius of uncertainty for the location, measured in meters; 0-1500 """
+    """Optional. The radius of uncertainty for the location, measured in
+    meters; 0-1500"""
     live_period: int | None = None
-    """ Optional. Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only. """
+    """Optional. Time relative to the message sending date, during which the
+    location can be updated; in seconds. For active live locations only."""
     proximity_alert_radius: int | None = None
-    """ Optional. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only. """
+    """Optional. The maximum distance for proximity alerts about approaching
+    another chat member, in meters. For sent live locations only."""
 
     def alter(
         self,

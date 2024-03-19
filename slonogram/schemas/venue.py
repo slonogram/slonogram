@@ -1,30 +1,36 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import location as _location
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Venue:
-    """This object represents a venue.
-
-    Telegram documentation: https://core.telegram.org/bots/api#venue"""
+    """This object represents a venue.  Telegram documentation:
+    https://core.telegram.org/bots/api#venue"""
 
     address: str
-    """ Address of the venue """
+    """Address of the venue"""
     location: _location.Location
-    """ Venue location. Can't be a live location """
+    """Venue location. Can't be a live location"""
     title: str
-    """ Name of the venue """
+    """Name of the venue"""
     foursquare_id: str | None = None
-    """ Optional. Foursquare identifier of the venue """
+    """Optional. Foursquare identifier of the venue"""
     foursquare_type: str | None = None
-    """ Optional. Foursquare type of the venue. (For example, "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".) """
+    """Optional. Foursquare type of the venue. (For example,
+    "arts_entertainment/default", "arts_entertainment/aquarium" or
+    "food/icecream".)"""
     google_place_id: str | None = None
-    """ Optional. Google Places identifier of the venue """
+    """Optional. Google Places identifier of the venue"""
     google_place_type: str | None = None
-    """ Optional. Google Places type of the venue. (See supported types.) """
+    """Optional. Google Places type of the venue. (See supported types.)"""
 
     def alter(
         self,

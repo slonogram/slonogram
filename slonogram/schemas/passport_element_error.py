@@ -1,26 +1,34 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorDataField:
-    """Represents an issue in one of the data fields that was provided by the user. The error is considered resolved when the field's value changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrordatafield"""
+    """Represents an issue in one of the data fields that was provided by the
+    user. The error is considered resolved when the field's value changes.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrordatafield"""
 
     data_hash: str
-    """ Base64-encoded data hash """
+    """Base64-encoded data hash"""
     field_name: str
-    """ Name of the data field which has the error """
+    """Name of the data field which has the error"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be data """
+    """Error source, must be data"""
     type: str
-    """ The section of the user's Telegram Passport which has the error, one of "personal_details", "passport", "driver_license", "identity_card", "internal_passport", "address" """
+    """The section of the user's Telegram Passport which has the error, one
+    of "personal_details", "passport", "driver_license", "identity_card",
+    "internal_passport", "address" """
 
     def alter(
         self,
@@ -39,20 +47,23 @@ class PassportElementErrorDataField:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorFile:
-    """Represents an issue with a document scan. The error is considered resolved when the file with the document scan changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfile"""
+    """Represents an issue with a document scan. The error is considered
+    resolved when the file with the document scan changes.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#passportelementerrorfile"""
 
     file_hash: str
-    """ Base64-encoded file hash """
+    """Base64-encoded file hash"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be file """
+    """Error source, must be file"""
     type: str
-    """ The section of the user's Telegram Passport which has the issue, one of "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration" """
+    """The section of the user's Telegram Passport which has the issue, one
+    of "utility_bill", "bank_statement", "rental_agreement",
+    "passport_registration", "temporary_registration" """
 
     def alter(
         self,
@@ -69,20 +80,23 @@ class PassportElementErrorFile:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorFiles:
-    """Represents an issue with a list of scans. The error is considered resolved when the list of files containing the scans changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfiles"""
+    """Represents an issue with a list of scans. The error is considered
+    resolved when the list of files containing the scans changes.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrorfiles"""
 
     file_hashes: tuple[str, ...]
-    """ List of base64-encoded file hashes """
+    """List of base64-encoded file hashes"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be files """
+    """Error source, must be files"""
     type: str
-    """ The section of the user's Telegram Passport which has the issue, one of "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration" """
+    """The section of the user's Telegram Passport which has the issue, one
+    of "utility_bill", "bank_statement", "rental_agreement",
+    "passport_registration", "temporary_registration" """
 
     def alter(
         self,
@@ -99,20 +113,22 @@ class PassportElementErrorFiles:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorFrontSide:
-    """Represents an issue with the front side of a document. The error is considered resolved when the file with the front side of the document changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorfrontside"""
+    """Represents an issue with the front side of a document. The error is
+    considered resolved when the file with the front side of the document
+    changes.  Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrorfrontside"""
 
     file_hash: str
-    """ Base64-encoded hash of the file with the front side of the document """
+    """Base64-encoded hash of the file with the front side of the document"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be front_side """
+    """Error source, must be front_side"""
     type: str
-    """ The section of the user's Telegram Passport which has the issue, one of "passport", "driver_license", "identity_card", "internal_passport" """
+    """The section of the user's Telegram Passport which has the issue, one
+    of "passport", "driver_license", "identity_card", "internal_passport" """
 
     def alter(
         self,
@@ -129,20 +145,22 @@ class PassportElementErrorFrontSide:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorReverseSide:
-    """Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorreverseside"""
+    """Represents an issue with the reverse side of a document. The error is
+    considered resolved when the file with reverse side of the document
+    changes.  Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrorreverseside"""
 
     file_hash: str
-    """ Base64-encoded hash of the file with the reverse side of the document """
+    """Base64-encoded hash of the file with the reverse side of the document"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be reverse_side """
+    """Error source, must be reverse_side"""
     type: str
-    """ The section of the user's Telegram Passport which has the issue, one of "driver_license", "identity_card" """
+    """The section of the user's Telegram Passport which has the issue, one
+    of "driver_license", "identity_card" """
 
     def alter(
         self,
@@ -159,20 +177,22 @@ class PassportElementErrorReverseSide:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorSelfie:
-    """Represents an issue with the selfie with a document. The error is considered resolved when the file with the selfie changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorselfie"""
+    """Represents an issue with the selfie with a document. The error is
+    considered resolved when the file with the selfie changes.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#passportelementerrorselfie"""
 
     file_hash: str
-    """ Base64-encoded hash of the file with the selfie """
+    """Base64-encoded hash of the file with the selfie"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be selfie """
+    """Error source, must be selfie"""
     type: str
-    """ The section of the user's Telegram Passport which has the issue, one of "passport", "driver_license", "identity_card", "internal_passport" """
+    """The section of the user's Telegram Passport which has the issue, one
+    of "passport", "driver_license", "identity_card", "internal_passport" """
 
     def alter(
         self,
@@ -189,20 +209,24 @@ class PassportElementErrorSelfie:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorTranslationFile:
-    """Represents an issue with one of the files that constitute the translation of a document. The error is considered resolved when the file changes.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrortranslationfile"""
+    """Represents an issue with one of the files that constitute the
+    translation of a document. The error is considered resolved when the
+    file changes.  Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrortranslationfile"""
 
     file_hash: str
-    """ Base64-encoded file hash """
+    """Base64-encoded file hash"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be translation_file """
+    """Error source, must be translation_file"""
     type: str
-    """ Type of element of the user's Telegram Passport which has the issue, one of "passport", "driver_license", "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration" """
+    """Type of element of the user's Telegram Passport which has the issue,
+    one of "passport", "driver_license", "identity_card",
+    "internal_passport", "utility_bill", "bank_statement",
+    "rental_agreement", "passport_registration", "temporary_registration" """
 
     def alter(
         self,
@@ -219,20 +243,24 @@ class PassportElementErrorTranslationFile:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorTranslationFiles:
-    """Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrortranslationfiles"""
+    """Represents an issue with the translated version of a document. The
+    error is considered resolved when a file with the document translation
+    change.  Telegram documentation: https://core.telegram.org/bots/api#pa
+    ssportelementerrortranslationfiles"""
 
     file_hashes: tuple[str, ...]
-    """ List of base64-encoded file hashes """
+    """List of base64-encoded file hashes"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be translation_files """
+    """Error source, must be translation_files"""
     type: str
-    """ Type of element of the user's Telegram Passport which has the issue, one of "passport", "driver_license", "identity_card", "internal_passport", "utility_bill", "bank_statement", "rental_agreement", "passport_registration", "temporary_registration" """
+    """Type of element of the user's Telegram Passport which has the issue,
+    one of "passport", "driver_license", "identity_card",
+    "internal_passport", "utility_bill", "bank_statement",
+    "rental_agreement", "passport_registration", "temporary_registration" """
 
     def alter(
         self,
@@ -249,20 +277,20 @@ class PassportElementErrorTranslationFiles:
         )
 
 
-@model
+@dataclass(slots=True)
 class PassportElementErrorUnspecified:
-    """Represents an issue in an unspecified place. The error is considered resolved when new data is added.
-
-    Telegram documentation: https://core.telegram.org/bots/api#passportelementerrorunspecified"""
+    """Represents an issue in an unspecified place. The error is considered
+    resolved when new data is added.  Telegram documentation:
+    https://core.telegram.org/bots/api#passportelementerrorunspecified"""
 
     element_hash: str
-    """ Base64-encoded element hash """
+    """Base64-encoded element hash"""
     message: str
-    """ Error message """
+    """Error message"""
     source: str
-    """ Error source, must be unspecified """
+    """Error source, must be unspecified"""
     type: str
-    """ Type of element of the user's Telegram Passport which has the issue """
+    """Type of element of the user's Telegram Passport which has the issue"""
 
     def alter(
         self,

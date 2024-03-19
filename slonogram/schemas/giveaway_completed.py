@@ -1,22 +1,28 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import maybe_inaccessible_message as _maybe_inaccessible_message
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class GiveawayCompleted:
-    """This object represents a service message about the completion of a giveaway without public winners.
-
-    Telegram documentation: https://core.telegram.org/bots/api#giveawaycompleted"""
+    """This object represents a service message about the completion of a
+    giveaway without public winners.  Telegram documentation:
+    https://core.telegram.org/bots/api#giveawaycompleted"""
 
     winner_count: int
-    """ Number of winners in the giveaway """
+    """Number of winners in the giveaway"""
     giveaway_message: _maybe_inaccessible_message.Message | None = None
-    """ Optional. Message with the giveaway that was completed, if it wasn't deleted """
+    """Optional. Message with the giveaway that was completed, if it wasn't
+    deleted"""
     unclaimed_prize_count: int | None = None
-    """ Optional. Number of undistributed prizes """
+    """Optional. Number of undistributed prizes"""
 
     def alter(
         self,

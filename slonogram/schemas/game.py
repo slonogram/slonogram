@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     photo_size as _photo_size,
@@ -6,27 +11,32 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Game:
-    """This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
-
-    Telegram documentation: https://core.telegram.org/bots/api#game"""
+    """This object represents a game. Use BotFather to create and edit games,
+    their short names will act as unique identifiers.  Telegram
+    documentation: https://core.telegram.org/bots/api#game"""
 
     description: str
-    """ Description of the game """
+    """Description of the game"""
     photo: tuple[_photo_size.PhotoSize, ...]
-    """ Photo that will be displayed in the game message in chats. """
+    """Photo that will be displayed in the game message in chats."""
     title: str
-    """ Title of the game """
+    """Title of the game"""
     animation: _animation.Animation | None = None
-    """ Optional. Animation that will be displayed in the game message in chats. Upload via BotFather """
+    """Optional. Animation that will be displayed in the game message in
+    chats. Upload via BotFather"""
     text: str | None = None
-    """ Optional. Brief description of the game or high scores included in the game message. Can be automatically edited to include current high scores for the game when the bot calls setGameScore, or manually edited using editMessageText. 0-4096 characters. """
+    """Optional. Brief description of the game or high scores included in the
+    game message. Can be automatically edited to include current high
+    scores for the game when the bot calls setGameScore, or manually
+    edited using editMessageText. 0-4096 characters."""
     text_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc. """
+    """Optional. Special entities that appear in text, such as usernames,
+    URLs, bot commands, etc."""
 
     def alter(
         self,

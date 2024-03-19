@@ -1,27 +1,35 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import user as _user, location as _location
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChosenInlineResult:
-    """Represents a result of an inline query that was chosen by the user and sent to their chat partner.
-    Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates.
-
-    Telegram documentation: https://core.telegram.org/bots/api#choseninlineresult"""
+    """Represents a result of an inline query that was chosen by the user and
+    sent to their chat partner. Note: It is necessary to enable inline
+    feedback via @BotFather in order to receive these objects in updates.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#choseninlineresult"""
 
     from_: _user.User
-    """ The user that chose the result """
+    """The user that chose the result"""
     query: str
-    """ The query that was used to obtain the result """
+    """The query that was used to obtain the result"""
     result_id: str
-    """ The unique identifier for the result that was chosen """
+    """The unique identifier for the result that was chosen"""
     inline_message_id: str | None = None
-    """ Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message. Will be also received in callback queries and can be used to edit the message. """
+    """Optional. Identifier of the sent inline message. Available only if
+    there is an inline keyboard attached to the message. Will be also
+    received in callback queries and can be used to edit the message."""
     location: _location.Location | None = None
-    """ Optional. Sender location, only for bots that require user location """
+    """Optional. Sender location, only for bots that require user location"""
 
     def alter(
         self,

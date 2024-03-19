@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     message_origin as _message_origin,
@@ -24,61 +29,68 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ExternalReplyInfo:
-    """This object contains information about a message that is being replied to, which may come from another chat or forum topic.
-
-    Telegram documentation: https://core.telegram.org/bots/api#externalreplyinfo"""
+    """This object contains information about a message that is being replied
+    to, which may come from another chat or forum topic.  Telegram
+    documentation: https://core.telegram.org/bots/api#externalreplyinfo"""
 
     origin: _message_origin.MessageOrigin
-    """ Origin of the message replied to by the given message """
+    """Origin of the message replied to by the given message"""
     animation: _animation.Animation | None = None
-    """ Optional. Message is an animation, information about the animation """
+    """Optional. Message is an animation, information about the animation"""
     audio: _audio.Audio | None = None
-    """ Optional. Message is an audio file, information about the file """
+    """Optional. Message is an audio file, information about the file"""
     chat: _chat.Chat | None = None
-    """ Optional. Chat the original message belongs to. Available only if the chat is a supergroup or a channel. """
+    """Optional. Chat the original message belongs to. Available only if the
+    chat is a supergroup or a channel."""
     contact: _contact.Contact | None = None
-    """ Optional. Message is a shared contact, information about the contact """
+    """Optional. Message is a shared contact, information about the contact"""
     dice: _dice.Dice | None = None
-    """ Optional. Message is a dice with random value """
+    """Optional. Message is a dice with random value"""
     document: _document.Document | None = None
-    """ Optional. Message is a general file, information about the file """
+    """Optional. Message is a general file, information about the file"""
     game: _game.Game | None = None
-    """ Optional. Message is a game, information about the game. More about games: https://core.telegram.org/bots/api#games """
+    """Optional. Message is a game, information about the game. More about
+    games: https://core.telegram.org/bots/api#games"""
     giveaway: _giveaway.Giveaway | None = None
-    """ Optional. Message is a scheduled giveaway, information about the giveaway """
+    """Optional. Message is a scheduled giveaway, information about the
+    giveaway"""
     giveaway_winners: _giveaway_winners.GiveawayWinners | None = None
-    """ Optional. A giveaway with public winners was completed """
+    """Optional. A giveaway with public winners was completed"""
     has_media_spoiler: bool | None = None
-    """ Optional. True, if the message media is covered by a spoiler animation """
+    """Optional. True, if the message media is covered by a spoiler animation"""
     invoice: _invoice.Invoice | None = None
-    """ Optional. Message is an invoice for a payment, information about the invoice. More about payments: https://core.telegram.org/bots/api#payments """
+    """Optional. Message is an invoice for a payment, information about the
+    invoice. More about payments:
+    https://core.telegram.org/bots/api#payments"""
     link_preview_options: _link_preview_options.LinkPreviewOptions | None = None
-    """ Optional. Options used for link preview generation for the original message, if it is a text message """
+    """Optional. Options used for link preview generation for the original
+    message, if it is a text message"""
     location: _location.Location | None = None
-    """ Optional. Message is a shared location, information about the location """
+    """Optional. Message is a shared location, information about the location"""
     message_id: int | None = None
-    """ Optional. Unique message identifier inside the original chat. Available only if the original chat is a supergroup or a channel. """
+    """Optional. Unique message identifier inside the original chat.
+    Available only if the original chat is a supergroup or a channel."""
     photo: tuple[_photo_size.PhotoSize, ...] | None = None
-    """ Optional. Message is a photo, available sizes of the photo """
+    """Optional. Message is a photo, available sizes of the photo"""
     poll: _poll.Poll | None = None
-    """ Optional. Message is a native poll, information about the poll """
+    """Optional. Message is a native poll, information about the poll"""
     sticker: _sticker.Sticker | None = None
-    """ Optional. Message is a sticker, information about the sticker """
+    """Optional. Message is a sticker, information about the sticker"""
     story: _story.Story | None = None
-    """ Optional. Message is a forwarded story """
+    """Optional. Message is a forwarded story"""
     venue: _venue.Venue | None = None
-    """ Optional. Message is a venue, information about the venue """
+    """Optional. Message is a venue, information about the venue"""
     video: _video.Video | None = None
-    """ Optional. Message is a video, information about the video """
+    """Optional. Message is a video, information about the video"""
     video_note: _video_note.VideoNote | None = None
-    """ Optional. Message is a video note, information about the video message """
+    """Optional. Message is a video note, information about the video message"""
     voice: _voice.Voice | None = None
-    """ Optional. Message is a voice message, information about the file """
+    """Optional. Message is a voice message, information about the file"""
 
     def alter(
         self,

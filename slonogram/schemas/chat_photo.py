@@ -1,23 +1,35 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChatPhoto:
-    """This object represents a chat photo.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatphoto"""
+    """This object represents a chat photo.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatphoto"""
 
     big_file_id: str
-    """ File identifier of big (640x640) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed. """
+    """File identifier of big (640x640) chat photo. This file_id can be used
+    only for photo download and only for as long as the photo is not
+    changed."""
     big_file_unique_id: str
-    """ Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
+    """Unique file identifier of big (640x640) chat photo, which is supposed
+    to be the same over time and for different bots. Can't be used to
+    download or reuse the file."""
     small_file_id: str
-    """ File identifier of small (160x160) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed. """
+    """File identifier of small (160x160) chat photo. This file_id can be
+    used only for photo download and only for as long as the photo is not
+    changed."""
     small_file_unique_id: str
-    """ Unique file identifier of small (160x160) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
+    """Unique file identifier of small (160x160) chat photo, which is
+    supposed to be the same over time and for different bots. Can't be
+    used to download or reuse the file."""
 
     def alter(
         self,

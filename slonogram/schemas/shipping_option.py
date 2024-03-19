@@ -1,22 +1,26 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import labeled_price as _labeled_price
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ShippingOption:
-    """This object represents one shipping option.
-
-    Telegram documentation: https://core.telegram.org/bots/api#shippingoption"""
+    """This object represents one shipping option.  Telegram documentation:
+    https://core.telegram.org/bots/api#shippingoption"""
 
     id: str
-    """ Shipping option identifier """
+    """Shipping option identifier"""
     prices: tuple[_labeled_price.LabeledPrice, ...]
-    """ List of price portions """
+    """List of price portions"""
     title: str
-    """ Option title """
+    """Option title"""
 
     def alter(
         self,

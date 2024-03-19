@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     mask_position as _mask_position,
@@ -6,45 +11,55 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Sticker:
-    """This object represents a sticker.
-
-    Telegram documentation: https://core.telegram.org/bots/api#sticker"""
+    """This object represents a sticker.  Telegram documentation:
+    https://core.telegram.org/bots/api#sticker"""
 
     file_id: str
-    """ Identifier for this file, which can be used to download or reuse the file """
+    """Identifier for this file, which can be used to download or reuse the
+    file"""
     file_unique_id: str
-    """ Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
+    """Unique identifier for this file, which is supposed to be the same over
+    time and for different bots. Can't be used to download or reuse the
+    file."""
     height: int
-    """ Sticker height """
+    """Sticker height"""
     is_animated: bool
-    """ True, if the sticker is animated """
+    """True, if the sticker is animated"""
     is_video: bool
-    """ True, if the sticker is a video sticker """
+    """True, if the sticker is a video sticker"""
     type: str
-    """ Type of the sticker, currently one of "regular", "mask", "custom_emoji". The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video. """
+    """Type of the sticker, currently one of "regular", "mask",
+    "custom_emoji". The type of the sticker is independent from its
+    format, which is determined by the fields is_animated and is_video."""
     width: int
-    """ Sticker width """
+    """Sticker width"""
     custom_emoji_id: str | None = None
-    """ Optional. For custom emoji stickers, unique identifier of the custom emoji """
+    """Optional. For custom emoji stickers, unique identifier of the custom
+    emoji"""
     emoji: str | None = None
-    """ Optional. Emoji associated with the sticker """
+    """Optional. Emoji associated with the sticker"""
     file_size: int | None = None
-    """ Optional. File size in bytes """
+    """Optional. File size in bytes"""
     mask_position: _mask_position.MaskPosition | None = None
-    """ Optional. For mask stickers, the position where the mask should be placed """
+    """Optional. For mask stickers, the position where the mask should be
+    placed"""
     needs_repainting: bool | None = None
-    """ Optional. True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places """
+    """Optional. True, if the sticker must be repainted to a text color in
+    messages, the color of the Telegram Premium badge in emoji status,
+    white color on chat photos, or another appropriate color in other
+    places"""
     premium_animation: _file.File | None = None
-    """ Optional. For premium regular stickers, premium animation for the sticker """
+    """Optional. For premium regular stickers, premium animation for the
+    sticker"""
     set_name: str | None = None
-    """ Optional. Name of the sticker set to which the sticker belongs """
+    """Optional. Name of the sticker set to which the sticker belongs"""
     thumbnail: _photo_size.PhotoSize | None = None
-    """ Optional. Sticker thumbnail in the .WEBP or .JPG format """
+    """Optional. Sticker thumbnail in the .WEBP or .JPG format"""
 
     def alter(
         self,

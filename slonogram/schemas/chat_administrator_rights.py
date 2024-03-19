@@ -1,45 +1,61 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChatAdministratorRights:
-    """Represents the rights of an administrator in a chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatadministratorrights"""
+    """Represents the rights of an administrator in a chat.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#chatadministratorrights"""
 
     can_change_info: bool
-    """ True, if the user is allowed to change the chat title, photo and other settings """
+    """True, if the user is allowed to change the chat title, photo and other
+    settings"""
     can_delete_messages: bool
-    """ True, if the administrator can delete messages of other users """
+    """True, if the administrator can delete messages of other users"""
     can_delete_stories: bool
-    """ True, if the administrator can delete stories posted by other users """
+    """True, if the administrator can delete stories posted by other users"""
     can_edit_stories: bool
-    """ True, if the administrator can edit stories posted by other users """
+    """True, if the administrator can edit stories posted by other users"""
     can_invite_users: bool
-    """ True, if the user is allowed to invite new users to the chat """
+    """True, if the user is allowed to invite new users to the chat"""
     can_manage_chat: bool
-    """ True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege. """
+    """True, if the administrator can access the chat event log, get boost
+    list, see hidden supergroup and channel members, report spam messages
+    and ignore slow mode. Implied by any other administrator privilege."""
     can_manage_video_chats: bool
-    """ True, if the administrator can manage video chats """
+    """True, if the administrator can manage video chats"""
     can_post_stories: bool
-    """ True, if the administrator can post stories to the chat """
+    """True, if the administrator can post stories to the chat"""
     can_promote_members: bool
-    """ True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user) """
+    """True, if the administrator can add new administrators with a subset of
+    their own privileges or demote administrators that they have promoted,
+    directly or indirectly (promoted by administrators that were appointed
+    by the user)"""
     can_restrict_members: bool
-    """ True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics """
+    """True, if the administrator can restrict, ban or unban chat members, or
+    access supergroup statistics"""
     is_anonymous: bool
-    """ True, if the user's presence in the chat is hidden """
+    """True, if the user's presence in the chat is hidden"""
     can_edit_messages: bool | None = None
-    """ Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only """
+    """Optional. True, if the administrator can edit messages of other users
+    and can pin messages; for channels only"""
     can_manage_topics: bool | None = None
-    """ Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only """
+    """Optional. True, if the user is allowed to create, rename, close, and
+    reopen forum topics; for supergroups only"""
     can_pin_messages: bool | None = None
-    """ Optional. True, if the user is allowed to pin messages; for groups and supergroups only """
+    """Optional. True, if the user is allowed to pin messages; for groups and
+    supergroups only"""
     can_post_messages: bool | None = None
-    """ Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only """
+    """Optional. True, if the administrator can post messages in the channel,
+    or access channel statistics; for channels only"""
 
     def alter(
         self,

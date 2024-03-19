@@ -1,10 +1,10 @@
 from typing import Protocol, runtime_checkable
-from ..types.interests import Interests
+from ..types.interest import Interest
 
 
 @runtime_checkable
 class Interested(Protocol):
-    def collect_interests(self) -> Interests:
+    def collect_interests(self) -> set[Interest]:
         raise NotImplementedError
 
 

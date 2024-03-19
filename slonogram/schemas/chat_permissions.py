@@ -1,43 +1,54 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChatPermissions:
-    """Describes actions that a non-administrator user is allowed to take in a chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatpermissions"""
+    """Describes actions that a non-administrator user is allowed to take in
+    a chat.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatpermissions"""
 
     can_add_web_page_previews: bool | None = None
-    """ Optional. True, if the user is allowed to add web page previews to their messages """
+    """Optional. True, if the user is allowed to add web page previews to
+    their messages"""
     can_change_info: bool | None = None
-    """ Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups """
+    """Optional. True, if the user is allowed to change the chat title, photo
+    and other settings. Ignored in public supergroups"""
     can_invite_users: bool | None = None
-    """ Optional. True, if the user is allowed to invite new users to the chat """
+    """Optional. True, if the user is allowed to invite new users to the chat"""
     can_manage_topics: bool | None = None
-    """ Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages """
+    """Optional. True, if the user is allowed to create forum topics. If
+    omitted defaults to the value of can_pin_messages"""
     can_pin_messages: bool | None = None
-    """ Optional. True, if the user is allowed to pin messages. Ignored in public supergroups """
+    """Optional. True, if the user is allowed to pin messages. Ignored in
+    public supergroups"""
     can_send_audios: bool | None = None
-    """ Optional. True, if the user is allowed to send audios """
+    """Optional. True, if the user is allowed to send audios"""
     can_send_documents: bool | None = None
-    """ Optional. True, if the user is allowed to send documents """
+    """Optional. True, if the user is allowed to send documents"""
     can_send_messages: bool | None = None
-    """ Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues """
+    """Optional. True, if the user is allowed to send text messages,
+    contacts, giveaways, giveaway winners, invoices, locations and venues"""
     can_send_other_messages: bool | None = None
-    """ Optional. True, if the user is allowed to send animations, games, stickers and use inline bots """
+    """Optional. True, if the user is allowed to send animations, games,
+    stickers and use inline bots"""
     can_send_photos: bool | None = None
-    """ Optional. True, if the user is allowed to send photos """
+    """Optional. True, if the user is allowed to send photos"""
     can_send_polls: bool | None = None
-    """ Optional. True, if the user is allowed to send polls """
+    """Optional. True, if the user is allowed to send polls"""
     can_send_video_notes: bool | None = None
-    """ Optional. True, if the user is allowed to send video notes """
+    """Optional. True, if the user is allowed to send video notes"""
     can_send_videos: bool | None = None
-    """ Optional. True, if the user is allowed to send videos """
+    """Optional. True, if the user is allowed to send videos"""
     can_send_voice_notes: bool | None = None
-    """ Optional. True, if the user is allowed to send voice notes """
+    """Optional. True, if the user is allowed to send voice notes"""
 
     def alter(
         self,

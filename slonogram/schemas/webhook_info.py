@@ -1,33 +1,43 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class WebhookInfo:
-    """Describes the current status of a webhook.
-
-    Telegram documentation: https://core.telegram.org/bots/api#webhookinfo"""
+    """Describes the current status of a webhook.  Telegram documentation:
+    https://core.telegram.org/bots/api#webhookinfo"""
 
     has_custom_certificate: bool
-    """ True, if a custom certificate was provided for webhook certificate checks """
+    """True, if a custom certificate was provided for webhook certificate
+    checks"""
     pending_update_count: int
-    """ Number of updates awaiting delivery """
+    """Number of updates awaiting delivery"""
     url: str
-    """ Webhook URL, may be empty if webhook is not set up """
+    """Webhook URL, may be empty if webhook is not set up"""
     allowed_updates: tuple[str, ...] | None = None
-    """ Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member """
+    """Optional. A list of update types the bot is subscribed to. Defaults to
+    all update types except chat_member"""
     ip_address: str | None = None
-    """ Optional. Currently used webhook IP address """
+    """Optional. Currently used webhook IP address"""
     last_error_date: int | None = None
-    """ Optional. Unix time for the most recent error that happened when trying to deliver an update via webhook """
+    """Optional. Unix time for the most recent error that happened when
+    trying to deliver an update via webhook"""
     last_error_message: str | None = None
-    """ Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook """
+    """Optional. Error message in human-readable format for the most recent
+    error that happened when trying to deliver an update via webhook"""
     last_synchronization_error_date: int | None = None
-    """ Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters """
+    """Optional. Unix time of the most recent error that happened when trying
+    to synchronize available updates with Telegram datacenters"""
     max_connections: int | None = None
-    """ Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery """
+    """Optional. The maximum allowed number of simultaneous HTTPS connections
+    to the webhook for update delivery"""
 
     def alter(
         self,

@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     chat as _chat,
@@ -6,29 +11,31 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class MessageReactionUpdated:
-    """This object represents a change of a reaction on a message performed by a user.
-
-    Telegram documentation: https://core.telegram.org/bots/api#messagereactionupdated"""
+    """This object represents a change of a reaction on a message performed
+    by a user.  Telegram documentation:
+    https://core.telegram.org/bots/api#messagereactionupdated"""
 
     chat: _chat.Chat
-    """ The chat containing the message the user reacted to """
+    """The chat containing the message the user reacted to"""
     date: int
-    """ Date of the change in Unix time """
+    """Date of the change in Unix time"""
     message_id: int
-    """ Unique identifier of the message inside the chat """
+    """Unique identifier of the message inside the chat"""
     new_reaction: tuple[_reaction_type.ReactionType, ...]
-    """ New list of reaction types that have been set by the user """
+    """New list of reaction types that have been set by the user"""
     old_reaction: tuple[_reaction_type.ReactionType, ...]
-    """ Previous list of reaction types that were set by the user """
+    """Previous list of reaction types that were set by the user"""
     actor_chat: _chat.Chat | None = None
-    """ Optional. The chat on behalf of which the reaction was changed, if the user is anonymous """
+    """Optional. The chat on behalf of which the reaction was changed, if the
+    user is anonymous"""
     user: _user.User | None = None
-    """ Optional. The user that changed the reaction, if the user isn't anonymous """
+    """Optional. The user that changed the reaction, if the user isn't
+    anonymous"""
 
     def alter(
         self,

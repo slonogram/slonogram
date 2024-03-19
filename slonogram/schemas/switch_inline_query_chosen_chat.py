@@ -1,25 +1,32 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class SwitchInlineQueryChosenChat:
-    """This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#switchinlinequerychosenchat"""
+    """This object represents an inline button that switches the current user
+    to inline mode in a chosen chat, with an optional default inline
+    query.  Telegram documentation:
+    https://core.telegram.org/bots/api#switchinlinequerychosenchat"""
 
     allow_bot_chats: bool | None = None
-    """ Optional. True, if private chats with bots can be chosen """
+    """Optional. True, if private chats with bots can be chosen"""
     allow_channel_chats: bool | None = None
-    """ Optional. True, if channel chats can be chosen """
+    """Optional. True, if channel chats can be chosen"""
     allow_group_chats: bool | None = None
-    """ Optional. True, if group and supergroup chats can be chosen """
+    """Optional. True, if group and supergroup chats can be chosen"""
     allow_user_chats: bool | None = None
-    """ Optional. True, if private chats with users can be chosen """
+    """Optional. True, if private chats with users can be chosen"""
     query: str | None = None
-    """ Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted """
+    """Optional. The default inline query to be inserted in the input field.
+    If left empty, only the bot's username will be inserted"""
 
     def alter(
         self,

@@ -2,7 +2,7 @@ from pathlib import Path
 from shutil import rmtree
 
 from ..spec import Type
-from ..config.type import AnyType, Struct, TypeAlias, Meta
+from ..config.type import AnyType, Struct, TaggedUnion, Meta
 from ..config import RevisedConfig, try_load_revised, dump_revised
 
 from ..utils import to_snake_case
@@ -34,7 +34,7 @@ def run(group: dict[str, dict[str, Type]], schemas_out: Path) -> None:
             )
             entry: AnyType
             if tp.subtypes:
-                entry = TypeAlias(
+                entry = TaggedUnion(
                     meta=meta,
                     union=tp.subtypes,
                 )

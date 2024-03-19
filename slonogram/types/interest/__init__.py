@@ -1,7 +1,6 @@
-from enum import IntFlag, auto
+from enum import StrEnum, auto
 
-
-class Interests(IntFlag):
+class Interest(StrEnum):
     MESSAGE = auto()
     EDITED_MESSAGE = auto()
     CHANNEL_POST = auto()
@@ -22,4 +21,4 @@ class Interests(IntFlag):
     REMOVED_CHAT_BOOST = auto()
 
 
-__all__ = ["Interests"]
+__all__ = ["Interest"]

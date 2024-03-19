@@ -1,25 +1,33 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Contact:
-    """This object represents a phone contact.
-
-    Telegram documentation: https://core.telegram.org/bots/api#contact"""
+    """This object represents a phone contact.  Telegram documentation:
+    https://core.telegram.org/bots/api#contact"""
 
     first_name: str
-    """ Contact's first name """
+    """Contact's first name"""
     phone_number: str
-    """ Contact's phone number """
+    """Contact's phone number"""
     last_name: str | None = None
-    """ Optional. Contact's last name """
+    """Optional. Contact's last name"""
     user_id: int | None = None
-    """ Optional. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. """
+    """Optional. Contact's user identifier in Telegram. This number may have
+    more than 32 significant bits and some programming languages may have
+    difficulty/silent defects in interpreting it. But it has at most 52
+    significant bits, so a 64-bit integer or double-precision float type
+    are safe for storing this identifier."""
     vcard: str | None = None
-    """ Optional. Additional data about the contact in the form of a vCard """
+    """Optional. Additional data about the contact in the form of a vCard"""
 
     def alter(
         self,

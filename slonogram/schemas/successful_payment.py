@@ -1,30 +1,39 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import order_info as _order_info
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class SuccessfulPayment:
     """This object contains basic information about a successful payment.
-
-    Telegram documentation: https://core.telegram.org/bots/api#successfulpayment"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#successfulpayment"""
 
     currency: str
-    """ Three-letter ISO 4217 currency code """
+    """Three-letter ISO 4217 currency code"""
     invoice_payload: str
-    """ Bot specified invoice payload """
+    """Bot specified invoice payload"""
     provider_payment_charge_id: str
-    """ Provider payment identifier """
+    """Provider payment identifier"""
     telegram_payment_charge_id: str
-    """ Telegram payment identifier """
+    """Telegram payment identifier"""
     total_amount: int
-    """ Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). """
+    """Total price in the smallest units of the currency (integer, not
+    float/double). For example, for a price of US$ 1.45 pass amount = 145.
+    See the exp parameter in currencies.json, it shows the number of
+    digits past the decimal point for each currency (2 for the majority of
+    currencies)."""
     order_info: _order_info.OrderInfo | None = None
-    """ Optional. Order information provided by the user """
+    """Optional. Order information provided by the user"""
     shipping_option_id: str | None = None
-    """ Optional. Identifier of the shipping option chosen by the user """
+    """Optional. Identifier of the shipping option chosen by the user"""
 
     def alter(
         self,

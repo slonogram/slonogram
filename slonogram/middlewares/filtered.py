@@ -4,6 +4,8 @@ from ..filtering.base import Filter
 from ..dispatching.context import Context
 from ..handling.activation import Activation
 from ..handling.handler import Handler
+
+from .utils import unwrap
 from .base import Middlewared
 
 
@@ -15,7 +17,7 @@ class Filtered(Middlewared[M]):
 
     def __init__(self, handler: Handler[M], filter: Filter[M]) -> None:
         self.filter = filter
-        self.handler = handler
+        self.handler = unwrap(handler)
 
     def __repr__(self) -> str:
         return f"Filtered({self.handler}, filter={self.filter})"

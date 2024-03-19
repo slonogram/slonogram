@@ -1,19 +1,24 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class BotCommand:
-    """This object represents a bot command.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommand"""
+    """This object represents a bot command.  Telegram documentation:
+    https://core.telegram.org/bots/api#botcommand"""
 
     command: str
-    """ Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores. """
+    """Text of the command; 1-32 characters. Can contain only lowercase
+    English letters, digits and underscores."""
     description: str
-    """ Description of the command; 1-256 characters. """
+    """Description of the command; 1-256 characters."""
 
     def alter(
         self,

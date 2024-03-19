@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from slonogram.schemas.login_url import LoginUrl
 from slonogram.schemas.chat_photo import ChatPhoto
 from slonogram.schemas.message_entity import MessageEntity

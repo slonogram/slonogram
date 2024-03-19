@@ -1,7 +1,12 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from slonogram.schemas import (
     labeled_price as _labeled_price,
     message_entity as _message_entity,
@@ -10,20 +15,21 @@ from slonogram.schemas import (
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class InputContactMessageContent:
-    """Represents the content of a contact message to be sent as the result of an inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputcontactmessagecontent"""
+    """Represents the content of a contact message to be sent as the result
+    of an inline query.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputcontactmessagecontent"""
 
     first_name: str
-    """ Contact's first name """
+    """Contact's first name"""
     phone_number: str
-    """ Contact's phone number """
+    """Contact's phone number"""
     last_name: str | None = None
-    """ Optional. Contact's last name """
+    """Optional. Contact's last name"""
     vcard: str | None = None
-    """ Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes """
+    """Optional. Additional data about the contact in the form of a vCard,
+    0-2048 bytes"""
 
     def alter(
         self,
@@ -40,52 +46,72 @@ class InputContactMessageContent:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputInvoiceMessageContent:
-    """Represents the content of an invoice message to be sent as the result of an inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputinvoicemessagecontent"""
+    """Represents the content of an invoice message to be sent as the result
+    of an inline query.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputinvoicemessagecontent"""
 
     currency: str
-    """ Three-letter ISO 4217 currency code, see more on currencies """
+    """Three-letter ISO 4217 currency code, see more on currencies"""
     description: str
-    """ Product description, 1-255 characters """
+    """Product description, 1-255 characters"""
     payload: str
-    """ Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes. """
+    """Bot-defined invoice payload, 1-128 bytes. This will not be displayed
+    to the user, use for your internal processes."""
     prices: tuple[_labeled_price.LabeledPrice, ...]
-    """ Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.) """
+    """Price breakdown, a JSON-serialized list of components (e.g. product
+    price, tax, discount, delivery cost, delivery tax, bonus, etc.)"""
     provider_token: str
-    """ Payment provider token, obtained via @BotFather """
+    """Payment provider token, obtained via @BotFather"""
     title: str
-    """ Product name, 1-32 characters """
+    """Product name, 1-32 characters"""
     is_flexible: bool | None = None
-    """ Optional. Pass True if the final price depends on the shipping method """
+    """Optional. Pass True if the final price depends on the shipping method"""
     max_tip_amount: int | None = None
-    """ Optional. The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0 """
+    """Optional. The maximum accepted amount for tips in the smallest units
+    of the currency (integer, not float/double). For example, for a
+    maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp
+    parameter in currencies.json, it shows the number of digits past the
+    decimal point for each currency (2 for the majority of currencies).
+    Defaults to 0"""
     need_email: bool | None = None
-    """ Optional. Pass True if you require the user's email address to complete the order """
+    """Optional. Pass True if you require the user's email address to
+    complete the order"""
     need_name: bool | None = None
-    """ Optional. Pass True if you require the user's full name to complete the order """
+    """Optional. Pass True if you require the user's full name to complete
+    the order"""
     need_phone_number: bool | None = None
-    """ Optional. Pass True if you require the user's phone number to complete the order """
+    """Optional. Pass True if you require the user's phone number to complete
+    the order"""
     need_shipping_address: bool | None = None
-    """ Optional. Pass True if you require the user's shipping address to complete the order """
+    """Optional. Pass True if you require the user's shipping address to
+    complete the order"""
     photo_height: int | None = None
-    """ Optional. Photo height """
+    """Optional. Photo height"""
     photo_size: int | None = None
-    """ Optional. Photo size in bytes """
+    """Optional. Photo size in bytes"""
     photo_url: str | None = None
-    """ Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. """
+    """Optional. URL of the product photo for the invoice. Can be a photo of
+    the goods or a marketing image for a service."""
     photo_width: int | None = None
-    """ Optional. Photo width """
+    """Optional. Photo width"""
     provider_data: str | None = None
-    """ Optional. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider. """
+    """Optional. A JSON-serialized object for data about the invoice, which
+    will be shared with the payment provider. A detailed description of
+    the required fields should be provided by the payment provider."""
     send_email_to_provider: bool | None = None
-    """ Optional. Pass True if the user's email address should be sent to provider """
+    """Optional. Pass True if the user's email address should be sent to
+    provider"""
     send_phone_number_to_provider: bool | None = None
-    """ Optional. Pass True if the user's phone number should be sent to provider """
+    """Optional. Pass True if the user's phone number should be sent to
+    provider"""
     suggested_tip_amounts: tuple[int, ...] | None = None
-    """ Optional. A JSON-serialized array of suggested amounts of tip in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount. """
+    """Optional. A JSON-serialized array of suggested amounts of tip in the
+    smallest units of the currency (integer, not float/double). At most 4
+    suggested tip amounts can be specified. The suggested tip amounts must
+    be positive, passed in a strictly increased order and must not exceed
+    max_tip_amount."""
 
     def alter(
         self,
@@ -142,24 +168,29 @@ class InputInvoiceMessageContent:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputLocationMessageContent:
-    """Represents the content of a location message to be sent as the result of an inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputlocationmessagecontent"""
+    """Represents the content of a location message to be sent as the result
+    of an inline query.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputlocationmessagecontent"""
 
     latitude: float
-    """ Latitude of the location in degrees """
+    """Latitude of the location in degrees"""
     longitude: float
-    """ Longitude of the location in degrees """
+    """Longitude of the location in degrees"""
     heading: int | None = None
-    """ Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. """
+    """Optional. For live locations, a direction in which the user is moving,
+    in degrees. Must be between 1 and 360 if specified."""
     horizontal_accuracy: float | None = None
-    """ Optional. The radius of uncertainty for the location, measured in meters; 0-1500 """
+    """Optional. The radius of uncertainty for the location, measured in
+    meters; 0-1500"""
     live_period: int | None = None
-    """ Optional. Period in seconds for which the location can be updated, should be between 60 and 86400. """
+    """Optional. Period in seconds for which the location can be updated,
+    should be between 60 and 86400."""
     proximity_alert_radius: int | None = None
-    """ Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. """
+    """Optional. For live locations, a maximum distance for proximity alerts
+    about approaching another chat member, in meters. Must be between 1
+    and 100000 if specified."""
 
     def alter(
         self,
@@ -182,20 +213,22 @@ class InputLocationMessageContent:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputTextMessageContent:
-    """Represents the content of a text message to be sent as the result of an inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputtextmessagecontent"""
+    """Represents the content of a text message to be sent as the result of
+    an inline query.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputtextmessagecontent"""
 
     message_text: str
-    """ Text of the message to be sent, 1-4096 characters """
+    """Text of the message to be sent, 1-4096 characters"""
     entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in message text, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in message text, which
+    can be specified instead of parse_mode"""
     link_preview_options: _link_preview_options.LinkPreviewOptions | None = None
-    """ Optional. Link preview generation options for the message """
+    """Optional. Link preview generation options for the message"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the message text. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the message text. See
+    formatting options for more details."""
 
     def alter(
         self,
@@ -218,28 +251,30 @@ class InputTextMessageContent:
         )
 
 
-@model
+@dataclass(slots=True)
 class InputVenueMessageContent:
-    """Represents the content of a venue message to be sent as the result of an inline query.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inputvenuemessagecontent"""
+    """Represents the content of a venue message to be sent as the result of
+    an inline query.  Telegram documentation:
+    https://core.telegram.org/bots/api#inputvenuemessagecontent"""
 
     address: str
-    """ Address of the venue """
+    """Address of the venue"""
     latitude: float
-    """ Latitude of the venue in degrees """
+    """Latitude of the venue in degrees"""
     longitude: float
-    """ Longitude of the venue in degrees """
+    """Longitude of the venue in degrees"""
     title: str
-    """ Name of the venue """
+    """Name of the venue"""
     foursquare_id: str | None = None
-    """ Optional. Foursquare identifier of the venue, if known """
+    """Optional. Foursquare identifier of the venue, if known"""
     foursquare_type: str | None = None
-    """ Optional. Foursquare type of the venue, if known. (For example, "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".) """
+    """Optional. Foursquare type of the venue, if known. (For example,
+    "arts_entertainment/default", "arts_entertainment/aquarium" or
+    "food/icecream".)"""
     google_place_id: str | None = None
-    """ Optional. Google Places identifier of the venue """
+    """Optional. Google Places identifier of the venue"""
     google_place_type: str | None = None
-    """ Optional. Google Places type of the venue. (See supported types.) """
+    """Optional. Google Places type of the venue. (See supported types.)"""
 
     def alter(
         self,

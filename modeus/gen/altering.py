@@ -7,6 +7,8 @@ from ..typing.tracking import Tracker
 from ..typing.parser import TypeParser, parse_union
 
 from .argument import arg
+from .type_hint import parametrize
+from .control_flow import create_return
 from .function import create_function
 
 def create_alterer(
@@ -24,10 +26,12 @@ def create_alterer(
         if not field.required:
             type_ += ' | None'
 
-        tp = "{omittable}[{alterer1}[{type}]]".format(
-            omittable=tracker('slonogram.omittable', 'Omittable'),
-            alterer1=tracker('slonogram.altering', 'Alterer1'),
-            type=type_,
+        tp = parametrize(
+            tracker('slonogram.omittable', 'Omittable'),
+            parametrize(
+                tracker('slonogram.altering', 'Alterer1'),
+                type_
+            ),
         )
 
         args.append(arg(name, tp, default=tracker('slonogram.omittable', 'OMIT')))
@@ -39,7 +43,7 @@ def create_alterer(
     return create_function(
         'alter',
         args,
-        f"return {self_name}({applies})",
+        create_return(f"{self_name}({applies})"),
         ret_annot=self_name
     )
 

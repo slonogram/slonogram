@@ -1,20 +1,24 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import chat as _chat
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class Story:
-    """This object represents a story.
-
-    Telegram documentation: https://core.telegram.org/bots/api#story"""
+    """This object represents a story.  Telegram documentation:
+    https://core.telegram.org/bots/api#story"""
 
     chat: _chat.Chat
-    """ Chat that posted the story """
+    """Chat that posted the story"""
     id: int
-    """ Unique identifier for the story in the chat """
+    """Unique identifier for the story in the chat"""
 
     def alter(
         self,

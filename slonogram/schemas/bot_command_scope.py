@@ -1,18 +1,23 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeAllChatAdministrators:
-    """Represents the scope of bot commands, covering all group and supergroup chat administrators.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallchatadministrators"""
+    """Represents the scope of bot commands, covering all group and
+    supergroup chat administrators.  Telegram documentation: https://core.
+    telegram.org/bots/api#botcommandscopeallchatadministrators"""
 
     type: str
-    """ Scope type, must be all_chat_administrators """
+    """Scope type, must be all_chat_administrators"""
 
     def alter(
         self, type: Omittable[Alterer1[str]] = OMIT
@@ -22,14 +27,14 @@ class BotCommandScopeAllChatAdministrators:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeAllGroupChats:
-    """Represents the scope of bot commands, covering all group and supergroup chats.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallgroupchats"""
+    """Represents the scope of bot commands, covering all group and
+    supergroup chats.  Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopeallgroupchats"""
 
     type: str
-    """ Scope type, must be all_group_chats """
+    """Scope type, must be all_group_chats"""
 
     def alter(
         self, type: Omittable[Alterer1[str]] = OMIT
@@ -39,14 +44,14 @@ class BotCommandScopeAllGroupChats:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeAllPrivateChats:
     """Represents the scope of bot commands, covering all private chats.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopeallprivatechats"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopeallprivatechats"""
 
     type: str
-    """ Scope type, must be all_private_chats """
+    """Scope type, must be all_private_chats"""
 
     def alter(
         self, type: Omittable[Alterer1[str]] = OMIT
@@ -56,16 +61,17 @@ class BotCommandScopeAllPrivateChats:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeChat:
     """Represents the scope of bot commands, covering a specific chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechat"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopechat"""
 
     chat_id: int | str
-    """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
+    """Unique identifier for the target chat or username of the target
+    supergroup (in the format @supergroupusername)"""
     type: str
-    """ Scope type, must be chat """
+    """Scope type, must be chat"""
 
     def alter(
         self,
@@ -78,16 +84,17 @@ class BotCommandScopeChat:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeChatAdministrators:
-    """Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechatadministrators"""
+    """Represents the scope of bot commands, covering all administrators of a
+    specific group or supergroup chat.  Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopechatadministrators"""
 
     chat_id: int | str
-    """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
+    """Unique identifier for the target chat or username of the target
+    supergroup (in the format @supergroupusername)"""
     type: str
-    """ Scope type, must be chat_administrators """
+    """Scope type, must be chat_administrators"""
 
     def alter(
         self,
@@ -100,18 +107,19 @@ class BotCommandScopeChatAdministrators:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeChatMember:
-    """Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopechatmember"""
+    """Represents the scope of bot commands, covering a specific member of a
+    group or supergroup chat.  Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopechatmember"""
 
     chat_id: int | str
-    """ Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername) """
+    """Unique identifier for the target chat or username of the target
+    supergroup (in the format @supergroupusername)"""
     type: str
-    """ Scope type, must be chat_member """
+    """Scope type, must be chat_member"""
     user_id: int
-    """ Unique identifier of the target user """
+    """Unique identifier of the target user"""
 
     def alter(
         self,
@@ -126,14 +134,15 @@ class BotCommandScopeChatMember:
         )
 
 
-@model
+@dataclass(slots=True)
 class BotCommandScopeDefault:
-    """Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user.
-
-    Telegram documentation: https://core.telegram.org/bots/api#botcommandscopedefault"""
+    """Represents the default scope of bot commands. Default commands are
+    used if no commands with a narrower scope are specified for the user.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#botcommandscopedefault"""
 
     type: str
-    """ Scope type, must be default """
+    """Scope type, must be default"""
 
     def alter(self, type: Omittable[Alterer1[str]] = OMIT) -> BotCommandScopeDefault:
         return BotCommandScopeDefault(

@@ -1,30 +1,35 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import sticker as _sticker, photo_size as _photo_size
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class StickerSet:
-    """This object represents a sticker set.
-
-    Telegram documentation: https://core.telegram.org/bots/api#stickerset"""
+    """This object represents a sticker set.  Telegram documentation:
+    https://core.telegram.org/bots/api#stickerset"""
 
     is_animated: bool
-    """ True, if the sticker set contains animated stickers """
+    """True, if the sticker set contains animated stickers"""
     is_video: bool
-    """ True, if the sticker set contains video stickers """
+    """True, if the sticker set contains video stickers"""
     name: str
-    """ Sticker set name """
+    """Sticker set name"""
     sticker_type: str
-    """ Type of stickers in the set, currently one of "regular", "mask", "custom_emoji" """
+    """Type of stickers in the set, currently one of "regular", "mask",
+    "custom_emoji" """
     stickers: tuple[_sticker.Sticker, ...]
-    """ List of all set stickers """
+    """List of all set stickers"""
     title: str
-    """ Sticker set title """
+    """Sticker set title"""
     thumbnail: _photo_size.PhotoSize | None = None
-    """ Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format """
+    """Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format"""
 
     def alter(
         self,

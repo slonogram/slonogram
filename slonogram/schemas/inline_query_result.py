@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     input_message_content as _input_message_content,
@@ -6,38 +11,38 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultArticle:
-    """Represents a link to an article or web page.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultarticle"""
+    """Represents a link to an article or web page.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultarticle"""
 
     id: str
-    """ Unique identifier for this result, 1-64 Bytes """
+    """Unique identifier for this result, 1-64 Bytes"""
     input_message_content: _input_message_content.InputMessageContent
-    """ Content of the message to be sent """
+    """Content of the message to be sent"""
     title: str
-    """ Title of the result """
+    """Title of the result"""
     type: str
-    """ Type of the result, must be article """
+    """Type of the result, must be article"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     hide_url: bool | None = None
-    """ Optional. Pass True if you don't want the URL to be shown in the message """
+    """Optional. Pass True if you don't want the URL to be shown in the
+    message"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_height: int | None = None
-    """ Optional. Thumbnail height """
+    """Optional. Thumbnail height"""
     thumbnail_url: str | None = None
-    """ Optional. Url of the thumbnail for the result """
+    """Optional. Url of the thumbnail for the result"""
     thumbnail_width: int | None = None
-    """ Optional. Thumbnail width """
+    """Optional. Thumbnail width"""
     url: str | None = None
-    """ Optional. URL of the result """
+    """Optional. URL of the result"""
 
     def alter(
         self,
@@ -74,34 +79,38 @@ class InlineQueryResultArticle:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultAudio:
-    """Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultaudio"""
+    """Represents a link to an MP3 audio file. By default, this audio file
+    will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content
+    instead of the audio.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultaudio"""
 
     audio_url: str
-    """ A valid URL for the audio file """
+    """A valid URL for the audio file"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     title: str
-    """ Title """
+    """Title"""
     type: str
-    """ Type of the result, must be audio """
+    """Type of the result, must be audio"""
     audio_duration: int | None = None
-    """ Optional. Audio duration in seconds """
+    """Optional. Audio duration in seconds"""
     caption: str | None = None
-    """ Optional. Caption, 0-1024 characters after entities parsing """
+    """Optional. Caption, 0-1024 characters after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the audio """
+    """Optional. Content of the message to be sent instead of the audio"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the audio caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the audio caption. See
+    formatting options for more details."""
     performer: str | None = None
-    """ Optional. Performer """
+    """Optional. Performer"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -140,28 +149,32 @@ class InlineQueryResultAudio:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedAudio:
-    """Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedaudio"""
+    """Represents a link to an MP3 audio file stored on the Telegram servers.
+    By default, this audio file will be sent by the user. Alternatively,
+    you can use input_message_content to send a message with the specified
+    content instead of the audio.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedaudio"""
 
     audio_file_id: str
-    """ A valid file identifier for the audio file """
+    """A valid file identifier for the audio file"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     type: str
-    """ Type of the result, must be audio """
+    """Type of the result, must be audio"""
     caption: str | None = None
-    """ Optional. Caption, 0-1024 characters after entities parsing """
+    """Optional. Caption, 0-1024 characters after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the audio """
+    """Optional. Content of the message to be sent instead of the audio"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the audio caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the audio caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -194,32 +207,38 @@ class InlineQueryResultCachedAudio:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedDocument:
-    """Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcacheddocument"""
+    """Represents a link to a file stored on the Telegram servers. By
+    default, this file will be sent by the user with an optional caption.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the file.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcacheddocument"""
 
     document_file_id: str
-    """ A valid file identifier for the file """
+    """A valid file identifier for the file"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     title: str
-    """ Title for the result """
+    """Title for the result"""
     type: str
-    """ Type of the result, must be document """
+    """Type of the result, must be document"""
     caption: str | None = None
-    """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the document to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the file """
+    """Optional. Content of the message to be sent instead of the file"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the document caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the document caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -256,30 +275,37 @@ class InlineQueryResultCachedDocument:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedGif:
-    """Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedgif"""
+    """Represents a link to an animated GIF file stored on the Telegram
+    servers. By default, this animated GIF file will be sent by the user
+    with an optional caption. Alternatively, you can use
+    input_message_content to send a message with specified content instead
+    of the animation.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedgif"""
 
     gif_file_id: str
-    """ A valid file identifier for the GIF file """
+    """A valid file identifier for the GIF file"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     type: str
-    """ Type of the result, must be gif """
+    """Type of the result, must be gif"""
     caption: str | None = None
-    """ Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the GIF file to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the GIF animation """
+    """Optional. Content of the message to be sent instead of the GIF
+    animation"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the caption. See formatting
+    options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -314,30 +340,38 @@ class InlineQueryResultCachedGif:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedMpeg4Gif:
-    """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers. By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif"""
+    """Represents a link to a video animation (H.264/MPEG-4 AVC video without
+    sound) stored on the Telegram servers. By default, this animated
+    MPEG-4 file will be sent by the user with an optional caption.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the animation.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     mpeg4_file_id: str
-    """ A valid file identifier for the MPEG4 file """
+    """A valid file identifier for the MPEG4 file"""
     type: str
-    """ Type of the result, must be mpeg4_gif """
+    """Type of the result, must be mpeg4_gif"""
     caption: str | None = None
-    """ Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
+    after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the video animation """
+    """Optional. Content of the message to be sent instead of the video
+    animation"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the caption. See formatting
+    options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -372,32 +406,38 @@ class InlineQueryResultCachedMpeg4Gif:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedPhoto:
-    """Represents a link to a photo stored on the Telegram servers. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedphoto"""
+    """Represents a link to a photo stored on the Telegram servers. By
+    default, this photo will be sent by the user with an optional caption.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the photo.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedphoto"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     photo_file_id: str
-    """ A valid file identifier of the photo """
+    """A valid file identifier of the photo"""
     type: str
-    """ Type of the result, must be photo """
+    """Type of the result, must be photo"""
     caption: str | None = None
-    """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the photo to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the photo """
+    """Optional. Content of the message to be sent instead of the photo"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the photo caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the photo caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -434,22 +474,24 @@ class InlineQueryResultCachedPhoto:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedSticker:
-    """Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedsticker"""
+    """Represents a link to a sticker stored on the Telegram servers. By
+    default, this sticker will be sent by the user. Alternatively, you can
+    use input_message_content to send a message with the specified content
+    instead of the sticker.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedsticker"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     sticker_file_id: str
-    """ A valid file identifier of the sticker """
+    """A valid file identifier of the sticker"""
     type: str
-    """ Type of the result, must be sticker """
+    """Type of the result, must be sticker"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the sticker """
+    """Optional. Content of the message to be sent instead of the sticker"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -474,32 +516,38 @@ class InlineQueryResultCachedSticker:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedVideo:
-    """Represents a link to a video file stored on the Telegram servers. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedvideo"""
+    """Represents a link to a video file stored on the Telegram servers. By
+    default, this video file will be sent by the user with an optional
+    caption. Alternatively, you can use input_message_content to send a
+    message with the specified content instead of the video.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedvideo"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     title: str
-    """ Title for the result """
+    """Title for the result"""
     type: str
-    """ Type of the result, must be video """
+    """Type of the result, must be video"""
     video_file_id: str
-    """ A valid file identifier for the video file """
+    """A valid file identifier for the video file"""
     caption: str | None = None
-    """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the video to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the video """
+    """Optional. Content of the message to be sent instead of the video"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the video caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the video caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -536,30 +584,36 @@ class InlineQueryResultCachedVideo:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultCachedVoice:
-    """Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcachedvoice"""
+    """Represents a link to a voice message stored on the Telegram servers.
+    By default, this voice message will be sent by the user.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the voice message.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcachedvoice"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     title: str
-    """ Voice message title """
+    """Voice message title"""
     type: str
-    """ Type of the result, must be voice """
+    """Type of the result, must be voice"""
     voice_file_id: str
-    """ A valid file identifier for the voice message """
+    """A valid file identifier for the voice message"""
     caption: str | None = None
-    """ Optional. Caption, 0-1024 characters after entities parsing """
+    """Optional. Caption, 0-1024 characters after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the voice message """
+    """Optional. Content of the message to be sent instead of the voice
+    message"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the voice message caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the voice message caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -594,34 +648,37 @@ class InlineQueryResultCachedVoice:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultContact:
-    """Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultcontact"""
+    """Represents a contact with a phone number. By default, this contact
+    will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content
+    instead of the contact.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultcontact"""
 
     first_name: str
-    """ Contact's first name """
+    """Contact's first name"""
     id: str
-    """ Unique identifier for this result, 1-64 Bytes """
+    """Unique identifier for this result, 1-64 Bytes"""
     phone_number: str
-    """ Contact's phone number """
+    """Contact's phone number"""
     type: str
-    """ Type of the result, must be contact """
+    """Type of the result, must be contact"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the contact """
+    """Optional. Content of the message to be sent instead of the contact"""
     last_name: str | None = None
-    """ Optional. Contact's last name """
+    """Optional. Contact's last name"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_height: int | None = None
-    """ Optional. Thumbnail height """
+    """Optional. Thumbnail height"""
     thumbnail_url: str | None = None
-    """ Optional. Url of the thumbnail for the result """
+    """Optional. Url of the thumbnail for the result"""
     thumbnail_width: int | None = None
-    """ Optional. Thumbnail width """
+    """Optional. Thumbnail width"""
     vcard: str | None = None
-    """ Optional. Additional data about the contact in the form of a vCard, 0-2048 bytes """
+    """Optional. Additional data about the contact in the form of a vCard,
+    0-2048 bytes"""
 
     def alter(
         self,
@@ -658,40 +715,47 @@ class InlineQueryResultContact:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultDocument:
-    """Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultdocument"""
+    """Represents a link to a file. By default, this file will be sent by the
+    user with an optional caption. Alternatively, you can use
+    input_message_content to send a message with the specified content
+    instead of the file. Currently, only .PDF and .ZIP files can be sent
+    using this method.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultdocument"""
 
     document_url: str
-    """ A valid URL for the file """
+    """A valid URL for the file"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     mime_type: str
-    """ MIME type of the content of the file, either "application/pdf" or "application/zip" """
+    """MIME type of the content of the file, either "application/pdf" or
+    "application/zip" """
     title: str
-    """ Title for the result """
+    """Title for the result"""
     type: str
-    """ Type of the result, must be document """
+    """Type of the result, must be document"""
     caption: str | None = None
-    """ Optional. Caption of the document to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the document to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the file """
+    """Optional. Content of the message to be sent instead of the file"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the document caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the document caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_height: int | None = None
-    """ Optional. Thumbnail height """
+    """Optional. Thumbnail height"""
     thumbnail_url: str | None = None
-    """ Optional. URL of the thumbnail (JPEG only) for the file """
+    """Optional. URL of the thumbnail (JPEG only) for the file"""
     thumbnail_width: int | None = None
-    """ Optional. Thumbnail width """
+    """Optional. Thumbnail width"""
 
     def alter(
         self,
@@ -736,20 +800,19 @@ class InlineQueryResultDocument:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultGame:
-    """Represents a Game.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultgame"""
+    """Represents a Game.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultgame"""
 
     game_short_name: str
-    """ Short name of the game """
+    """Short name of the game"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     type: str
-    """ Type of the result, must be game """
+    """Type of the result, must be game"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
 
     def alter(
         self,
@@ -768,40 +831,48 @@ class InlineQueryResultGame:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultGif:
-    """Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultgif"""
+    """Represents a link to an animated GIF file. By default, this animated
+    GIF file will be sent by the user with optional caption.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the animation.  Telegram
+    documentation: https://core.telegram.org/bots/api#inlinequeryresultgif"""
 
     gif_url: str
-    """ A valid URL for the GIF file. File size must not exceed 1MB """
+    """A valid URL for the GIF file. File size must not exceed 1MB"""
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     thumbnail_url: str
-    """ URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result """
+    """URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the
+    result"""
     type: str
-    """ Type of the result, must be gif """
+    """Type of the result, must be gif"""
     caption: str | None = None
-    """ Optional. Caption of the GIF file to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the GIF file to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     gif_duration: int | None = None
-    """ Optional. Duration of the GIF in seconds """
+    """Optional. Duration of the GIF in seconds"""
     gif_height: int | None = None
-    """ Optional. Height of the GIF """
+    """Optional. Height of the GIF"""
     gif_width: int | None = None
-    """ Optional. Width of the GIF """
+    """Optional. Width of the GIF"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the GIF animation """
+    """Optional. Content of the message to be sent instead of the GIF
+    animation"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the caption. See formatting
+    options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_mime_type: str | None = None
-    """ Optional. MIME type of the thumbnail, must be one of "image/jpeg", "image/gif", or "video/mp4". Defaults to "image/jpeg" """
+    """Optional. MIME type of the thumbnail, must be one of "image/jpeg",
+    "image/gif", or "video/mp4". Defaults to "image/jpeg" """
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -846,40 +917,47 @@ class InlineQueryResultGif:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultLocation:
-    """Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultlocation"""
+    """Represents a location on a map. By default, the location will be sent
+    by the user. Alternatively, you can use input_message_content to send
+    a message with the specified content instead of the location.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultlocation"""
 
     id: str
-    """ Unique identifier for this result, 1-64 Bytes """
+    """Unique identifier for this result, 1-64 Bytes"""
     latitude: float
-    """ Location latitude in degrees """
+    """Location latitude in degrees"""
     longitude: float
-    """ Location longitude in degrees """
+    """Location longitude in degrees"""
     title: str
-    """ Location title """
+    """Location title"""
     type: str
-    """ Type of the result, must be location """
+    """Type of the result, must be location"""
     heading: int | None = None
-    """ Optional. For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified. """
+    """Optional. For live locations, a direction in which the user is moving,
+    in degrees. Must be between 1 and 360 if specified."""
     horizontal_accuracy: float | None = None
-    """ Optional. The radius of uncertainty for the location, measured in meters; 0-1500 """
+    """Optional. The radius of uncertainty for the location, measured in
+    meters; 0-1500"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the location """
+    """Optional. Content of the message to be sent instead of the location"""
     live_period: int | None = None
-    """ Optional. Period in seconds for which the location can be updated, should be between 60 and 86400. """
+    """Optional. Period in seconds for which the location can be updated,
+    should be between 60 and 86400."""
     proximity_alert_radius: int | None = None
-    """ Optional. For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified. """
+    """Optional. For live locations, a maximum distance for proximity alerts
+    about approaching another chat member, in meters. Must be between 1
+    and 100000 if specified."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_height: int | None = None
-    """ Optional. Thumbnail height """
+    """Optional. Thumbnail height"""
     thumbnail_url: str | None = None
-    """ Optional. Url of the thumbnail for the result """
+    """Optional. Url of the thumbnail for the result"""
     thumbnail_width: int | None = None
-    """ Optional. Thumbnail width """
+    """Optional. Thumbnail width"""
 
     def alter(
         self,
@@ -924,40 +1002,49 @@ class InlineQueryResultLocation:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultMpeg4Gif:
-    """Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif"""
+    """Represents a link to a video animation (H.264/MPEG-4 AVC video without
+    sound). By default, this animated MPEG-4 file will be sent by the user
+    with optional caption. Alternatively, you can use
+    input_message_content to send a message with the specified content
+    instead of the animation.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     mpeg4_url: str
-    """ A valid URL for the MPEG4 file. File size must not exceed 1MB """
+    """A valid URL for the MPEG4 file. File size must not exceed 1MB"""
     thumbnail_url: str
-    """ URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result """
+    """URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the
+    result"""
     type: str
-    """ Type of the result, must be mpeg4_gif """
+    """Type of the result, must be mpeg4_gif"""
     caption: str | None = None
-    """ Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the MPEG-4 file to be sent, 0-1024 characters
+    after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the video animation """
+    """Optional. Content of the message to be sent instead of the video
+    animation"""
     mpeg4_duration: int | None = None
-    """ Optional. Video duration in seconds """
+    """Optional. Video duration in seconds"""
     mpeg4_height: int | None = None
-    """ Optional. Video height """
+    """Optional. Video height"""
     mpeg4_width: int | None = None
-    """ Optional. Video width """
+    """Optional. Video width"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the caption. See formatting
+    options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_mime_type: str | None = None
-    """ Optional. MIME type of the thumbnail, must be one of "image/jpeg", "image/gif", or "video/mp4". Defaults to "image/jpeg" """
+    """Optional. MIME type of the thumbnail, must be one of "image/jpeg",
+    "image/gif", or "video/mp4". Defaults to "image/jpeg" """
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -1002,38 +1089,44 @@ class InlineQueryResultMpeg4Gif:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultPhoto:
-    """Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultphoto"""
+    """Represents a link to a photo. By default, this photo will be sent by
+    the user with optional caption. Alternatively, you can use
+    input_message_content to send a message with the specified content
+    instead of the photo.  Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultphoto"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     photo_url: str
-    """ A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB """
+    """A valid URL of the photo. Photo must be in JPEG format. Photo size
+    must not exceed 5MB"""
     thumbnail_url: str
-    """ URL of the thumbnail for the photo """
+    """URL of the thumbnail for the photo"""
     type: str
-    """ Type of the result, must be photo """
+    """Type of the result, must be photo"""
     caption: str | None = None
-    """ Optional. Caption of the photo to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the photo to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the photo """
+    """Optional. Content of the message to be sent instead of the photo"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the photo caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the photo caption. See
+    formatting options for more details."""
     photo_height: int | None = None
-    """ Optional. Height of the photo """
+    """Optional. Height of the photo"""
     photo_width: int | None = None
-    """ Optional. Width of the photo """
+    """Optional. Width of the photo"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     title: str | None = None
-    """ Optional. Title for the result """
+    """Optional. Title for the result"""
 
     def alter(
         self,
@@ -1076,42 +1169,46 @@ class InlineQueryResultPhoto:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultVenue:
-    """Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultvenue"""
+    """Represents a venue. By default, the venue will be sent by the user.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the venue.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultvenue"""
 
     address: str
-    """ Address of the venue """
+    """Address of the venue"""
     id: str
-    """ Unique identifier for this result, 1-64 Bytes """
+    """Unique identifier for this result, 1-64 Bytes"""
     latitude: float
-    """ Latitude of the venue location in degrees """
+    """Latitude of the venue location in degrees"""
     longitude: float
-    """ Longitude of the venue location in degrees """
+    """Longitude of the venue location in degrees"""
     title: str
-    """ Title of the venue """
+    """Title of the venue"""
     type: str
-    """ Type of the result, must be venue """
+    """Type of the result, must be venue"""
     foursquare_id: str | None = None
-    """ Optional. Foursquare identifier of the venue if known """
+    """Optional. Foursquare identifier of the venue if known"""
     foursquare_type: str | None = None
-    """ Optional. Foursquare type of the venue, if known. (For example, "arts_entertainment/default", "arts_entertainment/aquarium" or "food/icecream".) """
+    """Optional. Foursquare type of the venue, if known. (For example,
+    "arts_entertainment/default", "arts_entertainment/aquarium" or
+    "food/icecream".)"""
     google_place_id: str | None = None
-    """ Optional. Google Places identifier of the venue """
+    """Optional. Google Places identifier of the venue"""
     google_place_type: str | None = None
-    """ Optional. Google Places type of the venue. (See supported types.) """
+    """Optional. Google Places type of the venue. (See supported types.)"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the venue """
+    """Optional. Content of the message to be sent instead of the venue"""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     thumbnail_height: int | None = None
-    """ Optional. Thumbnail height """
+    """Optional. Thumbnail height"""
     thumbnail_url: str | None = None
-    """ Optional. Url of the thumbnail for the result """
+    """Optional. Url of the thumbnail for the result"""
     thumbnail_width: int | None = None
-    """ Optional. Thumbnail width """
+    """Optional. Thumbnail width"""
 
     def alter(
         self,
@@ -1156,42 +1253,50 @@ class InlineQueryResultVenue:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultVideo:
-    """Represents a link to a page containing an embedded video player or a video file. By default, this video file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultvideo"""
+    """Represents a link to a page containing an embedded video player or a
+    video file. By default, this video file will be sent by the user with
+    an optional caption. Alternatively, you can use input_message_content
+    to send a message with the specified content instead of the video.
+    Telegram documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultvideo"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     mime_type: str
-    """ MIME type of the content of the video URL, "text/html" or "video/mp4" """
+    """MIME type of the content of the video URL, "text/html" or "video/mp4" """
     thumbnail_url: str
-    """ URL of the thumbnail (JPEG only) for the video """
+    """URL of the thumbnail (JPEG only) for the video"""
     title: str
-    """ Title for the result """
+    """Title for the result"""
     type: str
-    """ Type of the result, must be video """
+    """Type of the result, must be video"""
     video_url: str
-    """ A valid URL for the embedded video player or video file """
+    """A valid URL for the embedded video player or video file"""
     caption: str | None = None
-    """ Optional. Caption of the video to be sent, 0-1024 characters after entities parsing """
+    """Optional. Caption of the video to be sent, 0-1024 characters after
+    entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     description: str | None = None
-    """ Optional. Short description of the result """
+    """Optional. Short description of the result"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the video. This field is required if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video). """
+    """Optional. Content of the message to be sent instead of the video. This
+    field is required if InlineQueryResultVideo is used to send an HTML-
+    page as a result (e.g., a YouTube video)."""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the video caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the video caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     video_duration: int | None = None
-    """ Optional. Video duration in seconds """
+    """Optional. Video duration in seconds"""
     video_height: int | None = None
-    """ Optional. Video height """
+    """Optional. Video height"""
     video_width: int | None = None
-    """ Optional. Video width """
+    """Optional. Video width"""
 
     def alter(
         self,
@@ -1238,32 +1343,38 @@ class InlineQueryResultVideo:
         )
 
 
-@model
+@dataclass(slots=True)
 class InlineQueryResultVoice:
-    """Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
-
-    Telegram documentation: https://core.telegram.org/bots/api#inlinequeryresultvoice"""
+    """Represents a link to a voice recording in an .OGG container encoded
+    with OPUS. By default, this voice recording will be sent by the user.
+    Alternatively, you can use input_message_content to send a message
+    with the specified content instead of the the voice message.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#inlinequeryresultvoice"""
 
     id: str
-    """ Unique identifier for this result, 1-64 bytes """
+    """Unique identifier for this result, 1-64 bytes"""
     title: str
-    """ Recording title """
+    """Recording title"""
     type: str
-    """ Type of the result, must be voice """
+    """Type of the result, must be voice"""
     voice_url: str
-    """ A valid URL for the voice recording """
+    """A valid URL for the voice recording"""
     caption: str | None = None
-    """ Optional. Caption, 0-1024 characters after entities parsing """
+    """Optional. Caption, 0-1024 characters after entities parsing"""
     caption_entities: tuple[_message_entity.MessageEntity, ...] | None = None
-    """ Optional. List of special entities that appear in the caption, which can be specified instead of parse_mode """
+    """Optional. List of special entities that appear in the caption, which
+    can be specified instead of parse_mode"""
     input_message_content: _input_message_content.InputMessageContent | None = None
-    """ Optional. Content of the message to be sent instead of the voice recording """
+    """Optional. Content of the message to be sent instead of the voice
+    recording"""
     parse_mode: str | None = None
-    """ Optional. Mode for parsing entities in the voice message caption. See formatting options for more details. """
+    """Optional. Mode for parsing entities in the voice message caption. See
+    formatting options for more details."""
     reply_markup: _inline_keyboard_markup.InlineKeyboardMarkup | None = None
-    """ Optional. Inline keyboard attached to the message """
+    """Optional. Inline keyboard attached to the message"""
     voice_duration: int | None = None
-    """ Optional. Recording duration in seconds """
+    """Optional. Recording duration in seconds"""
 
     def alter(
         self,

@@ -28,9 +28,7 @@ match args.type:
     case "code":
         root = Path('.modeus')
         code.run(
-            root / 'schemas',
-            root / 'methods',
-            schema_dir,
-            methods_dir,
+            root,
+            output,
             spec,
         )

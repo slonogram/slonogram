@@ -1,6 +1,7 @@
-from typing import TypeAlias, TypeVar
+from typing import TypeAlias, TypeVar, Callable
 
 T = TypeVar("T")
+R = TypeVar("R")
 
 
 class Omit:
@@ -19,10 +20,16 @@ def omitted_or(o: Omittable[T], or_: T) -> T:
         return or_
     return o
 
+def map_omitted(o: Omittable[T], f: Callable[[T], R]) -> Omittable[R]:
+    if isinstance(o, Omit):
+        return OMIT
+    return f(o)
+
 
 __all__ = [
     "Omit",
     "OMIT",
     "Omittable",
+    "map_omitted",
     "omitted_or",
 ]

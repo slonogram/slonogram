@@ -1,22 +1,27 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import user as _user
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class GameHighScore:
     """This object represents one row of the high scores table for a game.
-
-    Telegram documentation: https://core.telegram.org/bots/api#gamehighscore"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#gamehighscore"""
 
     position: int
-    """ Position in high score table for the game """
+    """Position in high score table for the game"""
     score: int
-    """ Score """
+    """Score"""
     user: _user.User
-    """ User """
+    """User"""
 
     def alter(
         self,

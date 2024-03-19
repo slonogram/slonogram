@@ -1,28 +1,37 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import photo_size as _photo_size
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class VideoNote:
-    """This object represents a video message (available in Telegram apps as of v.4.0).
-
-    Telegram documentation: https://core.telegram.org/bots/api#videonote"""
+    """This object represents a video message (available in Telegram apps as
+    of v.4.0).  Telegram documentation:
+    https://core.telegram.org/bots/api#videonote"""
 
     duration: int
-    """ Duration of the video in seconds as defined by sender """
+    """Duration of the video in seconds as defined by sender"""
     file_id: str
-    """ Identifier for this file, which can be used to download or reuse the file """
+    """Identifier for this file, which can be used to download or reuse the
+    file"""
     file_unique_id: str
-    """ Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file. """
+    """Unique identifier for this file, which is supposed to be the same over
+    time and for different bots. Can't be used to download or reuse the
+    file."""
     length: int
-    """ Video width and height (diameter of the video message) as defined by sender """
+    """Video width and height (diameter of the video message) as defined by
+    sender"""
     file_size: int | None = None
-    """ Optional. File size in bytes """
+    """Optional. File size in bytes"""
     thumbnail: _photo_size.PhotoSize | None = None
-    """ Optional. Video thumbnail """
+    """Optional. Video thumbnail"""
 
     def alter(
         self,

@@ -1,25 +1,35 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class LinkPreviewOptions:
-    """Describes the options used for link preview generation.
-
-    Telegram documentation: https://core.telegram.org/bots/api#linkpreviewoptions"""
+    """Describes the options used for link preview generation.  Telegram
+    documentation: https://core.telegram.org/bots/api#linkpreviewoptions"""
 
     is_disabled: bool | None = None
-    """ Optional. True, if the link preview is disabled """
+    """Optional. True, if the link preview is disabled"""
     prefer_large_media: bool | None = None
-    """ Optional. True, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview """
+    """Optional. True, if the media in the link preview is supposed to be
+    enlarged; ignored if the URL isn't explicitly specified or media size
+    change isn't supported for the preview"""
     prefer_small_media: bool | None = None
-    """ Optional. True, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview """
+    """Optional. True, if the media in the link preview is supposed to be
+    shrunk; ignored if the URL isn't explicitly specified or media size
+    change isn't supported for the preview"""
     show_above_text: bool | None = None
-    """ Optional. True, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text """
+    """Optional. True, if the link preview must be shown above the message
+    text; otherwise, the link preview will be shown below the message text"""
     url: str | None = None
-    """ Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used """
+    """Optional. URL to use for the link preview. If empty, then the first
+    URL found in the message text will be used"""
 
     def alter(
         self,

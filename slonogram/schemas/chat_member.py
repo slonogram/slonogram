@@ -1,55 +1,72 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import user as _user
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberAdministrator:
     """Represents a chat member that has some additional privileges.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberadministrator"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberadministrator"""
 
     can_be_edited: bool
-    """ True, if the bot is allowed to edit administrator privileges of that user """
+    """True, if the bot is allowed to edit administrator privileges of that
+    user"""
     can_change_info: bool
-    """ True, if the user is allowed to change the chat title, photo and other settings """
+    """True, if the user is allowed to change the chat title, photo and other
+    settings"""
     can_delete_messages: bool
-    """ True, if the administrator can delete messages of other users """
+    """True, if the administrator can delete messages of other users"""
     can_delete_stories: bool
-    """ True, if the administrator can delete stories posted by other users """
+    """True, if the administrator can delete stories posted by other users"""
     can_edit_stories: bool
-    """ True, if the administrator can edit stories posted by other users """
+    """True, if the administrator can edit stories posted by other users"""
     can_invite_users: bool
-    """ True, if the user is allowed to invite new users to the chat """
+    """True, if the user is allowed to invite new users to the chat"""
     can_manage_chat: bool
-    """ True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege. """
+    """True, if the administrator can access the chat event log, get boost
+    list, see hidden supergroup and channel members, report spam messages
+    and ignore slow mode. Implied by any other administrator privilege."""
     can_manage_video_chats: bool
-    """ True, if the administrator can manage video chats """
+    """True, if the administrator can manage video chats"""
     can_post_stories: bool
-    """ True, if the administrator can post stories to the chat """
+    """True, if the administrator can post stories to the chat"""
     can_promote_members: bool
-    """ True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user) """
+    """True, if the administrator can add new administrators with a subset of
+    their own privileges or demote administrators that they have promoted,
+    directly or indirectly (promoted by administrators that were appointed
+    by the user)"""
     can_restrict_members: bool
-    """ True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics """
+    """True, if the administrator can restrict, ban or unban chat members, or
+    access supergroup statistics"""
     is_anonymous: bool
-    """ True, if the user's presence in the chat is hidden """
+    """True, if the user's presence in the chat is hidden"""
     status: str
-    """ The member's status in the chat, always "administrator" """
+    """The member's status in the chat, always "administrator" """
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
     can_edit_messages: bool | None = None
-    """ Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only """
+    """Optional. True, if the administrator can edit messages of other users
+    and can pin messages; for channels only"""
     can_manage_topics: bool | None = None
-    """ Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only """
+    """Optional. True, if the user is allowed to create, rename, close, and
+    reopen forum topics; for supergroups only"""
     can_pin_messages: bool | None = None
-    """ Optional. True, if the user is allowed to pin messages; for groups and supergroups only """
+    """Optional. True, if the user is allowed to pin messages; for groups and
+    supergroups only"""
     can_post_messages: bool | None = None
-    """ Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only """
+    """Optional. True, if the administrator can post messages in the channel,
+    or access channel statistics; for channels only"""
     custom_title: str | None = None
-    """ Optional. Custom title for this user """
+    """Optional. Custom title for this user"""
 
     def alter(
         self,
@@ -100,18 +117,19 @@ class ChatMemberAdministrator:
         )
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberBanned:
-    """Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberbanned"""
+    """Represents a chat member that was banned in the chat and can't return
+    to the chat or view chat messages.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberbanned"""
 
     status: str
-    """ The member's status in the chat, always "kicked" """
+    """The member's status in the chat, always "kicked" """
     until_date: int
-    """ Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever """
+    """Date when restrictions will be lifted for this user; Unix time. If 0,
+    then the user is banned forever"""
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
 
     def alter(
         self,
@@ -126,16 +144,16 @@ class ChatMemberBanned:
         )
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberLeft:
-    """Represents a chat member that isn't currently a member of the chat, but may join it themselves.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberleft"""
+    """Represents a chat member that isn't currently a member of the chat,
+    but may join it themselves.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberleft"""
 
     status: str
-    """ The member's status in the chat, always "left" """
+    """The member's status in the chat, always "left" """
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
 
     def alter(
         self,
@@ -148,16 +166,16 @@ class ChatMemberLeft:
         )
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberMember:
-    """Represents a chat member that has no additional privileges or restrictions.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmembermember"""
+    """Represents a chat member that has no additional privileges or
+    restrictions.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatmembermember"""
 
     status: str
-    """ The member's status in the chat, always "member" """
+    """The member's status in the chat, always "member" """
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
 
     def alter(
         self,
@@ -170,20 +188,20 @@ class ChatMemberMember:
         )
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberOwner:
-    """Represents a chat member that owns the chat and has all administrator privileges.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberowner"""
+    """Represents a chat member that owns the chat and has all administrator
+    privileges.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberowner"""
 
     is_anonymous: bool
-    """ True, if the user's presence in the chat is hidden """
+    """True, if the user's presence in the chat is hidden"""
     status: str
-    """ The member's status in the chat, always "creator" """
+    """The member's status in the chat, always "creator" """
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
     custom_title: str | None = None
-    """ Optional. Custom title for this user """
+    """Optional. Custom title for this user"""
 
     def alter(
         self,
@@ -200,48 +218,53 @@ class ChatMemberOwner:
         )
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberRestricted:
-    """Represents a chat member that is under certain restrictions in the chat. Supergroups only.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberrestricted"""
+    """Represents a chat member that is under certain restrictions in the
+    chat. Supergroups only.  Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberrestricted"""
 
     can_add_web_page_previews: bool
-    """ True, if the user is allowed to add web page previews to their messages """
+    """True, if the user is allowed to add web page previews to their
+    messages"""
     can_change_info: bool
-    """ True, if the user is allowed to change the chat title, photo and other settings """
+    """True, if the user is allowed to change the chat title, photo and other
+    settings"""
     can_invite_users: bool
-    """ True, if the user is allowed to invite new users to the chat """
+    """True, if the user is allowed to invite new users to the chat"""
     can_manage_topics: bool
-    """ True, if the user is allowed to create forum topics """
+    """True, if the user is allowed to create forum topics"""
     can_pin_messages: bool
-    """ True, if the user is allowed to pin messages """
+    """True, if the user is allowed to pin messages"""
     can_send_audios: bool
-    """ True, if the user is allowed to send audios """
+    """True, if the user is allowed to send audios"""
     can_send_documents: bool
-    """ True, if the user is allowed to send documents """
+    """True, if the user is allowed to send documents"""
     can_send_messages: bool
-    """ True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues """
+    """True, if the user is allowed to send text messages, contacts,
+    giveaways, giveaway winners, invoices, locations and venues"""
     can_send_other_messages: bool
-    """ True, if the user is allowed to send animations, games, stickers and use inline bots """
+    """True, if the user is allowed to send animations, games, stickers and
+    use inline bots"""
     can_send_photos: bool
-    """ True, if the user is allowed to send photos """
+    """True, if the user is allowed to send photos"""
     can_send_polls: bool
-    """ True, if the user is allowed to send polls """
+    """True, if the user is allowed to send polls"""
     can_send_video_notes: bool
-    """ True, if the user is allowed to send video notes """
+    """True, if the user is allowed to send video notes"""
     can_send_videos: bool
-    """ True, if the user is allowed to send videos """
+    """True, if the user is allowed to send videos"""
     can_send_voice_notes: bool
-    """ True, if the user is allowed to send voice notes """
+    """True, if the user is allowed to send voice notes"""
     is_member: bool
-    """ True, if the user is a member of the chat at the moment of the request """
+    """True, if the user is a member of the chat at the moment of the request"""
     status: str
-    """ The member's status in the chat, always "restricted" """
+    """The member's status in the chat, always "restricted" """
     until_date: int
-    """ Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever """
+    """Date when restrictions will be lifted for this user; Unix time. If 0,
+    then the user is restricted forever"""
     user: _user.User
-    """ Information about the user """
+    """Information about the user"""
 
     def alter(
         self,

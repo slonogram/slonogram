@@ -1,24 +1,31 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import user as _user, chat as _chat
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class PollAnswer:
     """This object represents an answer of a user in a non-anonymous poll.
-
     Telegram documentation: https://core.telegram.org/bots/api#pollanswer"""
 
     option_ids: tuple[int, ...]
-    """ 0-based identifiers of chosen answer options. May be empty if the vote was retracted. """
+    """0-based identifiers of chosen answer options. May be empty if the vote
+    was retracted."""
     poll_id: str
-    """ Unique poll identifier """
+    """Unique poll identifier"""
     user: _user.User | None = None
-    """ Optional. The user that changed the answer to the poll, if the voter isn't anonymous """
+    """Optional. The user that changed the answer to the poll, if the voter
+    isn't anonymous"""
     voter_chat: _chat.Chat | None = None
-    """ Optional. The chat that changed the answer to the poll, if the voter is anonymous """
+    """Optional. The chat that changed the answer to the poll, if the voter
+    is anonymous"""
 
     def alter(
         self,

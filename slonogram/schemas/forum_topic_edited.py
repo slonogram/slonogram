@@ -1,19 +1,25 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ForumTopicEdited:
     """This object represents a service message about an edited forum topic.
-
-    Telegram documentation: https://core.telegram.org/bots/api#forumtopicedited"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#forumtopicedited"""
 
     icon_custom_emoji_id: str | None = None
-    """ Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed """
+    """Optional. New identifier of the custom emoji shown as the topic icon,
+    if it was edited; an empty string if the icon was removed"""
     name: str | None = None
-    """ Optional. New name of the topic, if it was edited """
+    """Optional. New name of the topic, if it was edited"""
 
     def alter(
         self,

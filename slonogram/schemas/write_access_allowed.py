@@ -1,21 +1,31 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class WriteAccessAllowed:
-    """This object represents a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess.
-
-    Telegram documentation: https://core.telegram.org/bots/api#writeaccessallowed"""
+    """This object represents a service message about a user allowing a bot
+    to write messages after adding it to the attachment menu, launching a
+    Web App from a link, or accepting an explicit request from a Web App
+    sent by the method requestWriteAccess.  Telegram documentation:
+    https://core.telegram.org/bots/api#writeaccessallowed"""
 
     from_attachment_menu: bool | None = None
-    """ Optional. True, if the access was granted when the bot was added to the attachment or side menu """
+    """Optional. True, if the access was granted when the bot was added to
+    the attachment or side menu"""
     from_request: bool | None = None
-    """ Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess """
+    """Optional. True, if the access was granted after the user accepted an
+    explicit request from a Web App sent by the method requestWriteAccess"""
     web_app_name: str | None = None
-    """ Optional. Name of the Web App, if the access was granted when the Web App was launched from a link """
+    """Optional. Name of the Web App, if the access was granted when the Web
+    App was launched from a link"""
 
     def alter(
         self,

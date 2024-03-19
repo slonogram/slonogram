@@ -1,24 +1,30 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import chat_boost_source as _chat_boost_source
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChatBoost:
-    """This object contains information about a chat boost.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatboost"""
+    """This object contains information about a chat boost.  Telegram
+    documentation: https://core.telegram.org/bots/api#chatboost"""
 
     add_date: int
-    """ Point in time (Unix timestamp) when the chat was boosted """
+    """Point in time (Unix timestamp) when the chat was boosted"""
     boost_id: str
-    """ Unique identifier of the boost """
+    """Unique identifier of the boost"""
     expiration_date: int
-    """ Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged """
+    """Point in time (Unix timestamp) when the boost will automatically
+    expire, unless the booster's Telegram Premium subscription is
+    prolonged"""
     source: _chat_boost_source.ChatBoostSource
-    """ Source of the added boost """
+    """Source of the added boost"""
 
     def alter(
         self,

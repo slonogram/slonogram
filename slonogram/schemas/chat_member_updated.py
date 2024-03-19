@@ -1,3 +1,8 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import (
     chat as _chat,
@@ -7,29 +12,31 @@ from slonogram.schemas import (
 )
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class ChatMemberUpdated:
     """This object represents changes in the status of a chat member.
-
-    Telegram documentation: https://core.telegram.org/bots/api#chatmemberupdated"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#chatmemberupdated"""
 
     chat: _chat.Chat
-    """ Chat the user belongs to """
+    """Chat the user belongs to"""
     date: int
-    """ Date the change was done in Unix time """
+    """Date the change was done in Unix time"""
     from_: _user.User
-    """ Performer of the action, which resulted in the change """
+    """Performer of the action, which resulted in the change"""
     new_chat_member: _chat_member.ChatMember
-    """ New information about the chat member """
+    """New information about the chat member"""
     old_chat_member: _chat_member.ChatMember
-    """ Previous information about the chat member """
+    """Previous information about the chat member"""
     invite_link: _chat_invite_link.ChatInviteLink | None = None
-    """ Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only. """
+    """Optional. Chat invite link, which was used by the user to join the
+    chat; for joining by invite link events only."""
     via_chat_folder_invite_link: bool | None = None
-    """ Optional. True, if the user joined the chat via a chat folder invite link """
+    """Optional. True, if the user joined the chat via a chat folder invite
+    link"""
 
     def alter(
         self,

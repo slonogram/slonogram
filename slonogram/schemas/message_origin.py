@@ -1,27 +1,31 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.schemas import chat as _chat, user as _user
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 from typing import TypeAlias
 
 
-@model
+@dataclass(slots=True)
 class MessageOriginChannel:
-    """The message was originally sent to a channel chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#messageoriginchannel"""
+    """The message was originally sent to a channel chat.  Telegram
+    documentation: https://core.telegram.org/bots/api#messageoriginchannel"""
 
     chat: _chat.Chat
-    """ Channel chat to which the message was originally sent """
+    """Channel chat to which the message was originally sent"""
     date: int
-    """ Date the message was sent originally in Unix time """
+    """Date the message was sent originally in Unix time"""
     message_id: int
-    """ Unique message identifier inside the chat """
+    """Unique message identifier inside the chat"""
     type: str
-    """ Type of the message origin, always "channel" """
+    """Type of the message origin, always "channel" """
     author_signature: str | None = None
-    """ Optional. Signature of the original post author """
+    """Optional. Signature of the original post author"""
 
     def alter(
         self,
@@ -40,20 +44,21 @@ class MessageOriginChannel:
         )
 
 
-@model
+@dataclass(slots=True)
 class MessageOriginChat:
     """The message was originally sent on behalf of a chat to a group chat.
-
-    Telegram documentation: https://core.telegram.org/bots/api#messageoriginchat"""
+    Telegram documentation:
+    https://core.telegram.org/bots/api#messageoriginchat"""
 
     date: int
-    """ Date the message was sent originally in Unix time """
+    """Date the message was sent originally in Unix time"""
     sender_chat: _chat.Chat
-    """ Chat that sent the message originally """
+    """Chat that sent the message originally"""
     type: str
-    """ Type of the message origin, always "chat" """
+    """Type of the message origin, always "chat" """
     author_signature: str | None = None
-    """ Optional. For messages originally sent by an anonymous chat administrator, original message author signature """
+    """Optional. For messages originally sent by an anonymous chat
+    administrator, original message author signature"""
 
     def alter(
         self,
@@ -70,18 +75,18 @@ class MessageOriginChat:
         )
 
 
-@model
+@dataclass(slots=True)
 class MessageOriginHiddenUser:
-    """The message was originally sent by an unknown user.
-
-    Telegram documentation: https://core.telegram.org/bots/api#messageoriginhiddenuser"""
+    """The message was originally sent by an unknown user.  Telegram
+    documentation:
+    https://core.telegram.org/bots/api#messageoriginhiddenuser"""
 
     date: int
-    """ Date the message was sent originally in Unix time """
+    """Date the message was sent originally in Unix time"""
     sender_user_name: str
-    """ Name of the user that sent the message originally """
+    """Name of the user that sent the message originally"""
     type: str
-    """ Type of the message origin, always "hidden_user" """
+    """Type of the message origin, always "hidden_user" """
 
     def alter(
         self,
@@ -96,18 +101,17 @@ class MessageOriginHiddenUser:
         )
 
 
-@model
+@dataclass(slots=True)
 class MessageOriginUser:
-    """The message was originally sent by a known user.
-
-    Telegram documentation: https://core.telegram.org/bots/api#messageoriginuser"""
+    """The message was originally sent by a known user.  Telegram
+    documentation: https://core.telegram.org/bots/api#messageoriginuser"""
 
     date: int
-    """ Date the message was sent originally in Unix time """
+    """Date the message was sent originally in Unix time"""
     sender_user: _user.User
-    """ User that sent the message originally """
+    """User that sent the message originally"""
     type: str
-    """ Type of the message origin, always "user" """
+    """Type of the message origin, always "user" """
 
     def alter(
         self,

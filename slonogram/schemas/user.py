@@ -1,37 +1,48 @@
+"""@generated using `modeus`
+BotAPI version: Bot API 7.1
+BotAPI changelog: https://core.telegram.org/bots/api#february-16-2024
+BotAPI release date: February 16, 2024
+"""
 from __future__ import annotations
 from slonogram.omittable import Omittable, OMIT
 from slonogram.altering import Alterer1, alter1
-from slonogram._internal.utils import model
+from dataclasses import dataclass
 
 
-@model
+@dataclass(slots=True)
 class User:
-    """This object represents a Telegram user or bot.
-
-    Telegram documentation: https://core.telegram.org/bots/api#user"""
+    """This object represents a Telegram user or bot.  Telegram
+    documentation: https://core.telegram.org/bots/api#user"""
 
     first_name: str
-    """ User's or bot's first name """
+    """User's or bot's first name"""
     id: int
-    """ Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. """
+    """Unique identifier for this user or bot. This number may have more than
+    32 significant bits and some programming languages may have
+    difficulty/silent defects in interpreting it. But it has at most 52
+    significant bits, so a 64-bit integer or double-precision float type
+    are safe for storing this identifier."""
     is_bot: bool
-    """ True, if this user is a bot """
+    """True, if this user is a bot"""
     added_to_attachment_menu: bool | None = None
-    """ Optional. True, if this user added the bot to the attachment menu """
+    """Optional. True, if this user added the bot to the attachment menu"""
     can_join_groups: bool | None = None
-    """ Optional. True, if the bot can be invited to groups. Returned only in getMe. """
+    """Optional. True, if the bot can be invited to groups. Returned only in
+    getMe."""
     can_read_all_group_messages: bool | None = None
-    """ Optional. True, if privacy mode is disabled for the bot. Returned only in getMe. """
+    """Optional. True, if privacy mode is disabled for the bot. Returned only
+    in getMe."""
     is_premium: bool | None = None
-    """ Optional. True, if this user is a Telegram Premium user """
+    """Optional. True, if this user is a Telegram Premium user"""
     language_code: str | None = None
-    """ Optional. IETF language tag of the user's language """
+    """Optional. IETF language tag of the user's language"""
     last_name: str | None = None
-    """ Optional. User's or bot's last name """
+    """Optional. User's or bot's last name"""
     supports_inline_queries: bool | None = None
-    """ Optional. True, if the bot supports inline queries. Returned only in getMe. """
+    """Optional. True, if the bot supports inline queries. Returned only in
+    getMe."""
     username: str | None = None
-    """ Optional. User's or bot's username """
+    """Optional. User's or bot's username"""
 
     def alter(
         self,
