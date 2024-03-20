@@ -6,6 +6,7 @@ from ..omittable import (
     OMIT,
     Omit,
 )
+from ..exceptions.api import APIError
 from ..abstract.json import JSONParser
 
 from json import loads
@@ -51,7 +52,13 @@ class AiohttpSession(Session):
             data={**params, **files}
         ) as response:
             js = self.json_parser(await response.read())
-            return js['result']
+            try:
+                return js['result']
+            except KeyError as e:
+                raise APIError(
+                    js['error_code'],
+                    js['description'],
+                ) from e
 
     @classmethod
     @asynccontextmanager

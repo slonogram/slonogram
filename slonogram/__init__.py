@@ -8,6 +8,8 @@ from .dispatching.dispatcher import Dispatcher
 from .handling.handler import Handler
 from .handling.activation import Activation
 
+from .polling.long import poll_for_updates
+
 __all__ = [
     "Bot",
     "activate",
@@ -16,4 +18,6 @@ __all__ = [
     "Handler",
     "Activation",
     "Stash",
+
+    "poll_for_updates",
 ]

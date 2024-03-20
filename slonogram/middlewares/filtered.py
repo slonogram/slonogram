@@ -1,5 +1,6 @@
-from typing import TypeVar
+from typing import TypeVar, Awaitable
 
+from .._internal.utils import stalled
 from ..filtering.base import Filter
 from ..dispatching.context import Context
 from ..handling.activation import Activation
@@ -22,10 +23,10 @@ class Filtered(Middlewared[M]):
     def __repr__(self) -> str:
         return f"Filtered({self.handler}, filter={self.filter})"
 
-    async def __call__(self, ctx: Context[M], /) -> Activation:
+    def __call__(self, ctx: Context[M], /) -> Awaitable[Activation]:
         if self.filter(ctx):
-            return await self.handler(ctx)
-        return Activation.stalled()
+            return self.handler(ctx)
+        return stalled()
 
 
 __all__ = ["Filtered"]

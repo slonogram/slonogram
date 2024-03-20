@@ -58,19 +58,12 @@ def _try_flatten(handler: Handler[M]) -> Iterable[Handler[M]]:
         return handler.handlers
     return (handler, )
 
-def _into_handlers(item: _MaybeHandlers[M]) -> Iterable[Handler[M]]:
-    if isinstance(item, Omit):
-        return ()
-    if isinstance(item, tuple):
-        return (Dispatcher(item), )
-    return (item, )
-
 class Dispatcher(Middlewared[M], Interested):
     __slots__ = (
         "name",
         "stash",
         "handlers",
-        "non_mergeable",
+        "_mergeable",
     )
 
     name: str | None
@@ -81,16 +74,16 @@ class Dispatcher(Middlewared[M], Interested):
         handlers: Omittable[_Handlers[M]] = OMIT,
         stash: Omittable[Stash] = OMIT,
         name: Omittable[str | None] = OMIT,
-        non_mergeable: Omittable[bool] = OMIT,
+        mergeable: Omittable[bool] = OMIT,
     ) -> None:
         self.stash = stash
         self.handlers = omitted_or(handlers, ())
         self.name = omitted_or(name, get_caller_module_name(0))
-        self.non_mergeable = omitted_or(non_mergeable, False)
-    
+        self._mergeable = omitted_or(mergeable, True)
+
     @property
     def mergeable(self) -> bool:
-        return not self.non_mergeable and isinstance(self.stash, Omit)
+        return self._mergeable and isinstance(self.stash, Omit)
 
     def alter(
         self,
@@ -109,7 +102,7 @@ class Dispatcher(Middlewared[M], Interested):
             *prev,
             *flatten(map(_try_flatten, handlers))
         ))
-    
+
     def interested(
         self: "Dispatcher[Update]",
         *,
@@ -174,10 +167,9 @@ class Dispatcher(Middlewared[M], Interested):
         /,
     ) -> Activation:
         if not isinstance(self.stash, Omit):
-            context = Context(context.bot, context.model, context.stash.append(self.stash))
+            context = context.alter(stash=lambda x: x.append(self.stash))
 
         for handler in self.handlers:
-            print(handler)
             old = context.stash
             context.stash = Stash(old)
 

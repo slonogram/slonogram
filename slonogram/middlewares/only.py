@@ -16,6 +16,7 @@ from ..types.interest import Interest
 
 if TYPE_CHECKING:
     from ..dispatching.context import Context
+    from ..dispatching.dispatcher import Dispatcher
 
     from ..handling.handler import Handler
     from ..handling.activation import Activation
@@ -27,7 +28,7 @@ M = TypeVar("M")
 
 class Only(Generic[M], Middlewared[Update], Interested):
     __slots__ = ("interests", "handler")
-    interests: tuple[Interest, ...]
+    interests: set[Interest]
 
     def __init__(
         self,
@@ -35,14 +36,21 @@ class Only(Generic[M], Middlewared[Update], Interested):
         handler: "Handler[M]",
     ) -> None:
         if isinstance(interests, Interest):
-            self.interests = (interests, )
+            self.interests = {interests}
         else:
-            self.interests = tuple(interests)
+            self.interests = set(interests)
         self.handler = unwrap(handler)
 
+    def try_merge(self, dp: "Dispatcher[M]") -> "Only":
+        from ..dispatching.dispatcher import Dispatcher
+
+        if isinstance(self.handler, Dispatcher):
+            return Only(self.interests, self.handler.register(dp))
+        return self
+
     def collect_interests(self) -> set[Interest]:
-        return set(self.interests)
-    
+        return self.interests
+
     def __repr__(self) -> str:
         return f"Only(interested={self.interests}, handler={self.handler})"
 

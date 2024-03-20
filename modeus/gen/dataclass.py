@@ -18,6 +18,7 @@ def create_dataclass(
     fields: Sequence[Field],
     type_parser: TypeParser,
     tracker: Tracker,
+    body: str | None = None,
     derive: Iterable[str] | None = None,
 ) -> str:
     out_fields: list[str] = []
@@ -36,6 +37,7 @@ def create_dataclass(
             body=create_stmts((
                 create_docstring(docs),
                 create_stmts(out_fields),
+                *((body, ) if body else ()),
                 create_stmts(out_methods),
             ))
         )
