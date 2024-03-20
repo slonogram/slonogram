@@ -189,4 +189,25 @@ print(filter("maid")) # True
 print(filter("/start maid"))  # False
 ```
 
+## Promised explanation on sessions and stash
+### Stash
 
+`Stash` is simply a very primitive DI container, it's main purpose is to store information between filter/middleware calls:
+
+```python
+def some_filter(ctx: Context[Message]) -> bool:
+    ctx.stash[str] = "Hello world"
+    return True
+
+def after_some_filter(ctx: Context[Message]) -> bool:
+    print(ctx.stash[str])  # Expected output is "Hello world"
+    return True
+```
+
+So, filtering and dispatching becomes stateful. Alternatively `Stash` can be thought as a variation of `State` monad (some people understand it in that way).
+
+`Stash` can't be abused to store information between multiple handler calls (Related, because we have `Dispatcher` that calls multiple handlers, but actually... It can be if you are brave enough, but simply don't do that).
+
+### Session
+
+`Session` is just a function with signature `async (str, ParamsMap, FilesMap) -> Any`, `ParamsMap` is a type alias for `dict[str, str]`, `FilesMap` for `dict[str, typing.BinaryIO]`. It is necessary to call telegram methods.
