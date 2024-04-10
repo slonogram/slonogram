@@ -96,7 +96,7 @@ from slonogram import (
     Context
     poll_for_updates,
     Filter,
-    activate,
+    handler_from_compatible,
 )
 from slonogram.schemas import Update, Message
 
@@ -105,11 +105,11 @@ def text_equal(text: str) -> Filter[Message]:
         return ctx.model.text == text
     return inner
 
-@activate
+@handler_from_compatible
 async def start(ctx: Context[Message]) -> None:
     print("Issued start")
 
-@activate
+@handler_from_compatible
 async def help(ctx: Context[Message]) -> None:
     print("Issued help")
 
@@ -130,9 +130,9 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-Much better, but what's an `activate` and `Filter`? In `slonogram`, your handlers is just a functions with signature `async (Context[M]) -> Activation`, but writing entirely in that style is tiresome, so, more enjoyable interface must be provided.
+Much better, but what's an `handler_from_compatible` and `Filter`? In `slonogram`, your handlers is just a functions with signature `async (Context[M]) -> Activation`, but writing entirely in that style is tiresome, so, more enjoyable interface must be provided.
 
-1. `activate` is a function that receives the `async (Context[M]) -> None` function and returns `async (Context[M]) -> Activation` function, by default it will always return `Activate(...)`, signaling that function code is triggered, additionally it wraps latter in the `Middlewared[M]` class, so that handler becomes easier to use by providing helpful methods like `.filtered(filter)`
+1. `handler_from_compatible` is a function that receives the `async (Context[M]) -> None` function and returns `async (Context[M]) -> Activation` function, by default it will always return `Activate(...)`, signaling that function code is triggered, additionally it wraps latter in the `Middlewared[M]` class, so that handler becomes easier to use by providing helpful methods like `.filtered(filter)`
 2. `Filter[M]` is a type alias for predicate function: `(Context[M]) -> bool`, `.filtered(text_equal("start"))` equivalent to the following: `Filtered(self, text_equal("start"))`.
 
 As you can see, filtering is also just a wrapper around handlers! `Middlewared` class needed just for more pleasant developer experience and is not necessary.
