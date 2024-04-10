@@ -6,7 +6,7 @@ from typing import (
     Generic,
 )
 
-from .base import Middlewared
+from .extended import ExtendedHandler
 from .utils import unwrap
 
 from .._internal.utils import stalled
@@ -25,8 +25,7 @@ from ..schemas.update import Update
 
 M = TypeVar("M")
 
-
-class Only(Generic[M], Middlewared[Update], Interested):
+class Only(Generic[M], ExtendedHandler[Update], Interested):
     __slots__ = ("interests", "handler")
     interests: set[Interest]
 

@@ -2,7 +2,6 @@ from typing import (
     TypeVar,
     TypeAlias,
     Iterable,
-    reveal_type,
     cast,
     Any,
     TYPE_CHECKING,
@@ -17,13 +16,15 @@ from .._internal.stack import get_caller_module_name
 
 from ..abstract.interested import Interested
 from ..types.interest import Interest
-from ..middlewares.base import Middlewared
+
+from ..handling.extended import ExtendedHandler
 from ..handling.handler import Handler
 from ..handling.activation import Activation
+from ..handling.only import Only
+
 from ..omittable import Omittable, omitted_or, OMIT, Omit
 from ..altering import alter1, Alterer1
 
-from ..middlewares.only import Only
 
 if TYPE_CHECKING:
     from ..schemas.update import Update
@@ -58,7 +59,7 @@ def _try_flatten(handler: Handler[M]) -> Iterable[Handler[M]]:
         return handler.handlers
     return (handler, )
 
-class Dispatcher(Middlewared[M], Interested):
+class Dispatcher(ExtendedHandler[M], Interested):
     __slots__ = (
         "name",
         "stash",

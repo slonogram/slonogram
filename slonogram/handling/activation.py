@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, TYPE_CHECKING, Self
+from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..handling.handler import Handler
@@ -9,12 +9,13 @@ if TYPE_CHECKING:
 class Activation:
     handler: "Handler[Any] | None" = None
 
-    @classmethod
-    def stalled(cls) -> Self:
-        return cls(None)
+    @staticmethod
+    def stalled() -> 'Activation':
+        return _STALLED
 
     def __bool__(self) -> bool:
         return self.handler is not None
 
+_STALLED = Activation(None)
 
 __all__ = ["Activation"]

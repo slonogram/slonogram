@@ -1,25 +1,18 @@
-[tool.poetry]
+[project]
 name = "slonogram"
-version = "0.1.0"
+version = "0.9"
 description = "Extensible and powerful telegram bot library"
-authors = ["Nero <nerodono0@gmail.com>"]
-license = "MIT"
-readme = "README.md"
+authors = [ { name = "nerodono", email = "nerodono0@gmail.com" } ]
+requires-python = ">= 3.11"
+dependencies = [
+  "anyio >= 4.3,<=5",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-anyio = "^4.3.0"
-aiohttp = { version = "^3.9.3", optional = true }
-adaptix = "3.0.0b3"
-
-[tool.poetry.extras]
-aiohttp = ["aiohttp"]
-
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.8.0"
-pyyaml = "^6.0.1"
-types-pyyaml = "^6.0.12.20240311"
+[project.optional-dependencies]
+aiohttp = [
+  "aiohttp >= 3,<=4"
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools >= 69.0"]
+build-backend = "setuptools.build_meta"
