@@ -17,7 +17,7 @@ M = TypeVar("M")
 E = TypeVar("E", bound=Exception)
 
 class ExtendedHandler(Handler[M], Interested, Protocol[M]):
-    def catch(self, exc: type[E], handler: Handler[CaughtException]) -> 'ExtendedHandler[M]':
+    def catch(self, exc: type[E], handler: Handler[CaughtException[M, E]]) -> 'ExtendedHandler[M]':
         from ..middlewares.catch import Catch
 
         return self << Catch(exc, handler)

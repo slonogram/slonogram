@@ -18,7 +18,7 @@ E = TypeVar("E", bound=Exception)
 class Catch(Generic[M, E], CurrentMiddleware[M]):
     __slots__ = ('exception', 'handler')
 
-    def __init__(self, exc: type[E], handler: Handler[CaughtException]) -> None:
+    def __init__(self, exc: type[E], handler: Handler[CaughtException[M, E]]) -> None:
         self.exception = exc
         self.handler = handler
 
@@ -29,7 +29,7 @@ class Catch(Generic[M, E], CurrentMiddleware[M]):
         try:
             return await next(ctx)
         except self.exception as exc:
-            caught = CaughtException(ctx.model, exc)
+            caught = CaughtException(ctx.model, exc, next)
             return await self.handler(ctx.with_model(caught))
 
 

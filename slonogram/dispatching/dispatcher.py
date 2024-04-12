@@ -11,7 +11,6 @@ from .stash import Stash
 from .context import Context
 
 from .._internal.utils import flatten
-from .._internal.stack import get_caller_module_name
 
 from ..types.interest import Interest
 
@@ -78,7 +77,7 @@ class Dispatcher(ExtendedHandler[M]):
     ) -> None:
         self.stash = stash
         self.handlers = omitted_or(handlers, ())
-        self.name = omitted_or(name, get_caller_module_name(0))
+        self.name = omitted_or(name, None)
         self._mergeable = omitted_or(mergeable, True)
 
     @auto_collect
