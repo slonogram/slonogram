@@ -1,7 +1,20 @@
-from slonogram import Dispatcher, Context
-from slonogram.schemas import Update, Message, CallbackQuery, InlineQuery
+from slonogram import (
+    Dispatcher,
+    Context,
+    Handler,     # for middlewares
+    Activation,  # for middlewares
+    ExtendedHandler,
+    handler_from_compatible,
+)
+from slonogram.schemas import (
+    Update,
+    Message,
+    CallbackQuery,
+    InlineQuery,
+)
 
-from slonogram.handling.compatible import handler_from_compatible
+# for .catch
+from slonogram.types.caught_exception import CaughtException
 
 @handler_from_compatible
 async def test_msg(ctx: Context[Message]) -> None:
@@ -24,12 +37,22 @@ def introduce_callback() -> Dispatcher[Update]:
 def introduce_inline() -> Dispatcher[Update]:
     return Dispatcher().interested(inline_query=test_inline)
 
-def create_dispatcher() -> Dispatcher[Update]:
+async def do_nothing(ctx: Context[Update], next: Handler[Update]) -> Activation:
+    return await next(ctx)
+
+@handler_from_compatible
+async def log_exception(ctx: Context[CaughtException[Update, SyntaxError]]) -> None:
+    print(f'Caught exception {ctx.model.exc} while dispatching {ctx.model.model}')
+
+def create_dispatcher() -> ExtendedHandler[Update]:
     return (
         Dispatcher[Update]()
             .register(introduce_message())
             .register(introduce_callback())
             .register(introduce_inline())
+        
+        .after(lambda ctx, next: next(ctx))
+        .catch(SyntaxError, log_exception)
     )
 
 dp = create_dispatcher()
