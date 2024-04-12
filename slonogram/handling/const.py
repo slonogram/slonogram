@@ -3,6 +3,7 @@ from typing import (
     TYPE_CHECKING,
 )
 
+from .auto_collect import auto_collect
 from .extended import ExtendedHandler
 from .handler import Handler
 from .activation import Activation
@@ -24,6 +25,10 @@ class Const(ExtendedHandler[M]):
             self.activation = Activation(handler)
         else:
             self.activation = Activation.stalled()
+
+    @auto_collect
+    def collect_interests(self):
+        return (self.handler,)
 
     def __repr__(self) -> str:
         status = 'stalled' if self.activation.handler is None else 'activated'

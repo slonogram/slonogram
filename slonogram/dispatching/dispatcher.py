@@ -10,13 +10,12 @@ from typing import (
 from .stash import Stash
 from .context import Context
 
-from .._internal.interests import collect_interests
 from .._internal.utils import flatten
 from .._internal.stack import get_caller_module_name
 
-from ..abstract.interested import Interested
 from ..types.interest import Interest
 
+from ..handling.auto_collect import auto_collect
 from ..handling.extended import ExtendedHandler
 from ..handling.handler import Handler
 from ..handling.activation import Activation
@@ -59,7 +58,7 @@ def _try_flatten(handler: Handler[M]) -> Iterable[Handler[M]]:
         return handler.handlers
     return (handler, )
 
-class Dispatcher(ExtendedHandler[M], Interested):
+class Dispatcher(ExtendedHandler[M]):
     __slots__ = (
         "name",
         "stash",
@@ -81,6 +80,10 @@ class Dispatcher(ExtendedHandler[M], Interested):
         self.handlers = omitted_or(handlers, ())
         self.name = omitted_or(name, get_caller_module_name(0))
         self._mergeable = omitted_or(mergeable, True)
+
+    @auto_collect
+    def collect_interests(self):
+        return self.handlers
 
     @property
     def mergeable(self) -> bool:
@@ -158,9 +161,6 @@ class Dispatcher(ExtendedHandler[M], Interested):
 
     def __repr__(self) -> str:
         return f"Dispatcher(name={self.name!r}, handlers={self.handlers})"
-
-    def collect_interests(self) -> set[Interest]:
-        return collect_interests(self.handlers)
 
     async def __call__(
         self,

@@ -5,9 +5,10 @@ from typing import (
 )
 
 from .handler import Handler
+from ..abstract.interested import Interested
 if TYPE_CHECKING:
     from ..filtering.base import Filter
-
+    
     from .follows import CurrentMiddleware
 
 from ..types.caught_exception import CaughtException
@@ -15,7 +16,7 @@ from ..types.caught_exception import CaughtException
 M = TypeVar("M")
 E = TypeVar("E", bound=Exception)
 
-class ExtendedHandler(Handler[M], Protocol[M]):
+class ExtendedHandler(Handler[M], Interested, Protocol[M]):
     def catch(self, exc: type[E], handler: Handler[CaughtException]) -> 'ExtendedHandler[M]':
         from ..middlewares.catch import Catch
 

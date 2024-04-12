@@ -1,6 +1,7 @@
 from typing import TypeVar, Awaitable, Iterable, Protocol, TYPE_CHECKING
 from functools import reduce
 
+from .auto_collect import auto_collect
 from .activation import Activation
 from .handler import Handler
 from .extended import ExtendedHandler
@@ -23,6 +24,10 @@ class Follows(ExtendedHandler[M]):
     def __init__(self, next: Handler[M], current: CurrentMiddleware[M]) -> None:
         self.next = unwrap(next)
         self.current = current
+
+    @auto_collect
+    def collect_interests(self):
+        return (self.next, )
 
     def __call__(self, ctx: 'Context[M]', /) -> Awaitable[Activation]:
         return self.current(ctx, self.next)

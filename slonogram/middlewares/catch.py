@@ -1,13 +1,10 @@
 from typing import (
     TypeVar,
-    Iterable,
-    TypeVarTuple,
     Generic,
     TYPE_CHECKING,
 )
 
 from ..handling.follows import CurrentMiddleware
-from ..handling.extended import ExtendedHandler
 from ..handling.handler import Handler
 from ..handling.activation import Activation
 if TYPE_CHECKING:

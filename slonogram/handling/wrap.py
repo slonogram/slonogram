@@ -9,6 +9,8 @@ from .extended import ExtendedHandler
 from .activation import Activation
 from .utils import unwrap
 
+from .auto_collect import auto_collect
+
 if TYPE_CHECKING:
     from ..dispatching.context import Context
 
@@ -25,6 +27,10 @@ class Wrap(ExtendedHandler[M]):
 
     def __call__(self, ctx: 'Context[M]') -> Awaitable[Activation]:
         return self.inner(ctx)
+
+    @auto_collect
+    def collect_interests(self):
+        return (self.inner,)
 
 __all__ = [
     "Wrap",
