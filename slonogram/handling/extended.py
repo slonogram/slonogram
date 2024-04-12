@@ -10,9 +10,17 @@ if TYPE_CHECKING:
 
     from .follows import CurrentMiddleware
 
+from ..types.caught_exception import CaughtException
+
 M = TypeVar("M")
+E = TypeVar("E", bound=Exception)
 
 class ExtendedHandler(Handler[M], Protocol[M]):
+    def catch(self, exc: type[E], handler: Handler[CaughtException]) -> 'ExtendedHandler[M]':
+        from ..middlewares.catch import Catch
+
+        return self << Catch(exc, handler)
+
     def filtered(self, filter: 'Filter[M]') -> 'ExtendedHandler[M]':
         from .filtered import Filtered
 
