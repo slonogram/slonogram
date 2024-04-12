@@ -25,6 +25,9 @@ class Catch(Generic[M, E], CurrentMiddleware[M]):
         self.exception = exc
         self.handler = handler
 
+    def __repr__(self) -> str:
+        return f'Catch(exc={self.exception!r}, handler={self.handler!r})'
+
     async def __call__(self, ctx: 'Context[M]', next: Handler[M]) -> Activation:
         try:
             return await next(ctx)

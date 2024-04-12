@@ -21,7 +21,7 @@ class CompatibleHandler(Protocol[M, Ret]):
 def handler_from_compatible(
     compat: CompatibleHandler[M, Ret],
     activated: Activation | None = None,
-) -> Handler[M]:
+) -> 'Handler[M]':
     @wraps(compat)
     async def inner(ctx: 'Context[M]') -> Activation:
         # mypy is stupid as fuck
