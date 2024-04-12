@@ -8,7 +8,7 @@ from functools import wraps
 from .activation import Activation
 if TYPE_CHECKING:
     from ..dispatching.context import Context
-    from ..handling.handler import Handler
+    from ..handling.extended import ExtendedHandler
 
 M = TypeVar("M")
 Ret = TypeVar("Ret", bool, None, Activation, covariant=True)
@@ -21,7 +21,9 @@ class CompatibleHandler(Protocol[M, Ret]):
 def handler_from_compatible(
     compat: CompatibleHandler[M, Ret],
     activated: Activation | None = None,
-) -> 'Handler[M]':
+) -> 'ExtendedHandler[M]':
+    from ..handling.wrap import Wrap
+
     @wraps(compat)
     async def inner(ctx: 'Context[M]') -> Activation:
         # mypy is stupid as fuck
@@ -36,7 +38,7 @@ def handler_from_compatible(
     if activated is None:
         activated = Activation(inner)
 
-    return inner
+    return Wrap(inner)
 
 __all__ = [
     "CompatibleHandler",
