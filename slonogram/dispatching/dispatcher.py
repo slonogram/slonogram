@@ -23,7 +23,6 @@ from ..handling.only import Only
 from ..omittable import Omittable, omitted_or, OMIT, Omit
 from ..altering import alter1, Alterer1
 
-
 if TYPE_CHECKING:
     from ..schemas.update import Update
     from ..schemas.maybe_inaccessible_message import Message
@@ -102,8 +101,8 @@ class Dispatcher(ExtendedHandler[M]):
 
     def register(self, *handlers: Handler[M]) -> "Dispatcher[M]":
         return self.alter(handlers=lambda prev: (
+            *flatten(map(_try_flatten, handlers)),
             *prev,
-            *flatten(map(_try_flatten, handlers))
         ))
 
     def interested(
@@ -156,7 +155,7 @@ class Dispatcher(ExtendedHandler[M]):
             handlers_mut.append(Only(interest, handler))
 
         handlers = tuple(handlers_mut)
-        return self.alter(handlers=lambda prev: (*prev, *handlers))
+        return self.register(*handlers)
 
     def __repr__(self) -> str:
         return f"Dispatcher(name={self.name!r}, handlers={self.handlers})"
