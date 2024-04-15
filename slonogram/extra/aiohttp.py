@@ -11,7 +11,7 @@ from ..abstract.json import JSONParser
 
 from json import loads
 from contextlib import asynccontextmanager
-from typing import AsyncIterator, Self, Any, Awaitable
+from typing import AsyncIterator, Self, Any
 
 try:
     from aiohttp import ClientSession
@@ -46,7 +46,7 @@ class AiohttpSession(Session):
         params: Params,
         files: FilesMap,
         /
-    ) -> Awaitable[Any]:
+    ) -> Any:
         async with self.client.post(
             f"/bot{self.token}/{name}",
             data={**params, **files}

@@ -2,13 +2,14 @@ from typing import (
     TypeVar,
     Awaitable,
     Protocol,
-    TYPE_CHECKING,
 )
 from functools import wraps
+
 from .activation import Activation
-if TYPE_CHECKING:
-    from ..dispatching.context import Context
-    from ..handling.extended import ExtendedHandler
+from .extended import ExtendedHandler
+from .utils import is_extended_handler
+
+from ..types.context import Context
 
 M = TypeVar("M")
 Ret = TypeVar("Ret", bool, None, Activation, covariant=True)
@@ -23,6 +24,9 @@ def handler_from_compatible(
     activated: Activation | None = None,
 ) -> 'ExtendedHandler[M]':
     from ..handling.wrap import Wrap
+
+    if is_extended_handler(compat):  # type: ignore
+        return compat
 
     @wraps(compat)
     async def inner(ctx: 'Context[M]') -> Activation:

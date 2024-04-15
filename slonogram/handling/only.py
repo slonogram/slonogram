@@ -7,17 +7,16 @@ from typing import (
 )
 
 from .extended import ExtendedHandler
-from .utils import unwrap
+from .utils import unwrap_handler
 
 from .._internal.utils import stalled
 from ..abstract.interested import Interested
 from ..types.interest import Interest
+from ..types.context import Context
+from ..reflect.named import get_name
 
 
 if TYPE_CHECKING:
-    from ..dispatching.context import Context
-    from ..dispatching.dispatcher import Dispatcher
-
     from ..handling.handler import Handler
     from ..handling.activation import Activation
 
@@ -38,14 +37,8 @@ class Only(Generic[M], ExtendedHandler[Update], Interested):
             self.interests = {interests}
         else:
             self.interests = set(interests)
-        self.handler = unwrap(handler)
-
-    def try_merge(self, dp: "Dispatcher[M]") -> "Only":
-        from ..dispatching.dispatcher import Dispatcher
-
-        if isinstance(self.handler, Dispatcher):
-            return Only(self.interests, self.handler.register(dp))
-        return self
+        self.handler = unwrap_handler(handler)
+        self.__name__ = get_name(handler, '')
 
     def collect_interests(self) -> set[Interest]:
         return self.interests

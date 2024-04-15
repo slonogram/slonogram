@@ -2,6 +2,8 @@ from typing import (
     TypeVar,
     TYPE_CHECKING,
     Protocol,
+    TypeAlias,
+    Callable,
 )
 
 from .handler import Handler
@@ -11,12 +13,18 @@ if TYPE_CHECKING:
     
     from .follows import CurrentMiddleware
 
+from ..reflect.named import Named
 from ..types.caught_exception import CaughtException
+
 
 M = TypeVar("M")
 E = TypeVar("E", bound=Exception)
+ReduceF: TypeAlias = Callable[['Filter[M]', 'Filter[M]'], 'Filter[M]']
 
-class ExtendedHandler(Handler[M], Interested, Protocol[M]):
+class ExtendedHandler(Handler[M], Interested, Named, Protocol[M]):
+    __name__: str = ''
+    __extended__: bool = True
+
     def catch(self, exc: type[E], handler: Handler[CaughtException[M, E]]) -> 'ExtendedHandler[M]':
         from ..middlewares.catch import Catch
 
@@ -44,7 +52,6 @@ class ExtendedHandler(Handler[M], Interested, Protocol[M]):
 
     def __repr__(self) -> str:
         ...
-
 
 __all__ = ["ExtendedHandler"]
 

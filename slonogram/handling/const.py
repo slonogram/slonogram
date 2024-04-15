@@ -1,16 +1,14 @@
 from typing import (
     TypeVar,
-    TYPE_CHECKING,
 )
 
 from .auto_collect import auto_collect
 from .extended import ExtendedHandler
 from .handler import Handler
 from .activation import Activation
-from .utils import unwrap
+from .utils import unwrap_handler
 
-if TYPE_CHECKING:
-    from ..dispatching.context import Context
+from ..types.context import Context
 
 M = TypeVar("M")
 
@@ -18,7 +16,7 @@ class Const(ExtendedHandler[M]):
     __slots__ = ('activation', 'handler')
 
     def __init__(self, activate: bool, handler: Handler[M]) -> None:
-        handler = unwrap(handler)
+        handler = unwrap_handler(handler)
         self.handler = handler
 
         if activate:
@@ -32,9 +30,9 @@ class Const(ExtendedHandler[M]):
 
     def __repr__(self) -> str:
         status = 'stalled' if self.activation.handler is None else 'activated'
-        return f"const({status}, of={self.handler!r})"
+        return f"Const({status}, of={self.handler!r})"
 
-    async def __call__(self, ctx: 'Context[M]') -> Activation:
+    async def __call__(self, ctx: Context[M]) -> Activation:
         await self.handler(ctx)
         return self.activation
 

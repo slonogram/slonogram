@@ -1,15 +1,13 @@
 from typing import (
     TypeVar,
     Generic,
-    TYPE_CHECKING,
 )
 
 from ..handling.follows import CurrentMiddleware
 from ..handling.handler import Handler
 from ..handling.activation import Activation
-if TYPE_CHECKING:
-    from ..dispatching.context import Context
 
+from ..types.context import Context
 from ..types.caught_exception import CaughtException
 
 M = TypeVar("M")

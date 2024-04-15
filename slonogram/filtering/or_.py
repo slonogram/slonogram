@@ -1,7 +1,10 @@
 from typing import TypeVar
 
-from ..dispatching.context import Context
-from .base import ExtendedFilter, Filter
+from ..types.context import Context
+
+from .base import Filter
+from .extended import ExtendedFilter
+from .utils import unwrap_predicate
 
 M = TypeVar("M")
 
@@ -15,8 +18,8 @@ class Or(ExtendedFilter[M]):
         rhs: Filter[M],
         exclusive: bool = False,
     ) -> None:
-        self.lhs = lhs
-        self.rhs = rhs
+        self.lhs = unwrap_predicate(lhs)
+        self.rhs = unwrap_predicate(rhs)
 
         self.exclusive = exclusive
 

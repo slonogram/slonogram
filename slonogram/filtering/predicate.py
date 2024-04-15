@@ -1,7 +1,8 @@
 from typing import TypeVar
 
-from ..dispatching.context import Context
-from .base import ExtendedFilter, Filter
+from ..types.context import Context
+from .base import Filter
+from .extended import ExtendedFilter
 
 M = TypeVar("M")
 

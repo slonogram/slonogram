@@ -1,18 +1,17 @@
 from typing import (
     Awaitable,
     TypeVar,
-    TYPE_CHECKING,
 )
 
 from .handler import Handler
 from .extended import ExtendedHandler
 from .activation import Activation
-from .utils import unwrap
+from .utils import unwrap_handler
+
+from ..reflect.named import get_name
+from ..types.context import Context
 
 from .auto_collect import auto_collect
-
-if TYPE_CHECKING:
-    from ..dispatching.context import Context
 
 M = TypeVar("M")
 
@@ -20,7 +19,8 @@ class Wrap(ExtendedHandler[M]):
     __slots__ = ('inner', )
 
     def __init__(self, handler: Handler[M]) -> None:
-        self.inner = unwrap(handler)
+        self.inner = unwrap_handler(handler)
+        self.__name__ = get_name(handler, '')
 
     def __repr__(self) -> str:
         return f'Wrap({self.inner!r})'

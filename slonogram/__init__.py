@@ -1,13 +1,13 @@
 from .bot import Bot
 
-from .dispatching.context import Context
-from .dispatching.stash import Stash
-from .dispatching.dispatcher import Dispatcher
+from .types.context import Context
+from .types.stash import Stash
 
 from .handling.handler import Handler
 from .handling.extended import ExtendedHandler
 from .handling.compatible import handler_from_compatible
 from .handling.activation import Activation
+from .handling.dispatcher import Dispatcher
 
 from .polling.long import poll_for_updates
 

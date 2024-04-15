@@ -1,7 +1,10 @@
 from typing import TypeVar
 
-from ..dispatching.context import Context
-from .base import ExtendedFilter, Filter
+from ..types.context import Context
+
+from .base import Filter
+from .extended import ExtendedFilter
+from .utils import unwrap_predicate
 
 M = TypeVar("M")
 
@@ -10,8 +13,8 @@ class And(ExtendedFilter[M]):
     __slots__ = ("lhs", "rhs")
 
     def __init__(self, lhs: Filter[M], rhs: Filter[M]) -> None:
-        self.lhs = lhs
-        self.rhs = rhs
+        self.lhs = unwrap_predicate(lhs)
+        self.rhs = unwrap_predicate(rhs)
 
     def __repr__(self) -> str:
         return f"And({self.lhs!r}, {self.rhs!r})"

@@ -2,7 +2,7 @@ from typing import Protocol, TypeVar, Awaitable, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .activation import Activation
-    from ..dispatching.context import Context
+    from ..types.context import Context
 
 M = TypeVar("M")
 

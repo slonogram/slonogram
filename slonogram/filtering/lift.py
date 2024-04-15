@@ -7,22 +7,22 @@ from typing import (
 )
 from functools import wraps
 
-from .base import Filter, ExtendedFilter
-from ..dispatching.context import Context
+from .base import Filter
+from .extended import ExtendedFilter
 from .predicate import Predicate
+
+from ..types.context import Context
 
 M = TypeVar("M")
 Unlifted: TypeAlias = Callable[[M], bool]
 
 
 @overload
-def lift(f: Unlifted[M], extend: Literal[True]) -> ExtendedFilter[M]:
-    ...
-
-
+def lift(f: Unlifted[M], extend: Literal[True]) -> ExtendedFilter[M]: ...
 @overload
-def lift(f: Unlifted[M], extend: Literal[False]) -> Filter[M]:
-    ...
+def lift(f: Unlifted[M], extend: Literal[False]) -> Filter[M]: ...
+@overload
+def lift(f: Unlifted[M], extend: bool) -> Filter[M]: ...
 
 
 def lift(f: Unlifted[M], extend: bool = True) -> ExtendedFilter[M] | Filter[M]:

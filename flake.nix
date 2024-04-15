@@ -22,6 +22,7 @@
             ] ++ (with pkgs; [
               uv
               just
+              sphinx
             ]);
         in
           {

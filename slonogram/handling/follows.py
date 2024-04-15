@@ -1,16 +1,14 @@
-from typing import TypeVar, Awaitable, Iterable, Protocol, TYPE_CHECKING
+from typing import TypeVar, Awaitable, Iterable, Protocol
 from functools import reduce
 
 from .auto_collect import auto_collect
 from .activation import Activation
 from .handler import Handler
 from .extended import ExtendedHandler
-from .utils import unwrap
+from .utils import unwrap_handler
 
-if TYPE_CHECKING:
-    from ..dispatching.context import Context
-
-from .wrap import Wrap
+from ..types.context import Context
+from ..reflect.named import get_name
 
 M = TypeVar("M")
 
@@ -22,8 +20,9 @@ class Follows(ExtendedHandler[M]):
     __slots__ = ("next", "current")
 
     def __init__(self, next: Handler[M], current: CurrentMiddleware[M]) -> None:
-        self.next = unwrap(next)
+        self.next = unwrap_handler(next)
         self.current = current
+        self.__name__ = get_name(next, '')
 
     @auto_collect
     def collect_interests(self):
@@ -52,6 +51,8 @@ def from_iterable(
     ```
 
     """
+    from .wrap import Wrap
+
     return reduce(lambda lhs, rhs: lhs << rhs, it, Wrap(handler))
 
 

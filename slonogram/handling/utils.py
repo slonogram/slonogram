@@ -1,10 +1,14 @@
-from typing import TypeVar, TYPE_CHECKING
-if TYPE_CHECKING:
-    from .handler import Handler
+from typing import TypeVar, TypeGuard
+
+from .handler import Handler
+from .extended import ExtendedHandler
 
 M = TypeVar("M")
 
-def unwrap(handler: 'Handler[M]') -> 'Handler[M]':
+def is_extended_handler(handler: Handler[M]) -> TypeGuard[ExtendedHandler[M]]:
+    return getattr(handler, '__extended_handler__', False)
+
+def unwrap_handler(handler: Handler[M]) -> Handler[M]:
     from .wrap import Wrap
 
     while isinstance(handler, Wrap):
@@ -12,5 +16,5 @@ def unwrap(handler: 'Handler[M]') -> 'Handler[M]':
 
     return handler
 
-__all__ = ["unwrap"]
+__all__ = ["unwrap_handler", "is_extended_handler"]
 
