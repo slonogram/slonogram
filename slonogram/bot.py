@@ -2,7 +2,7 @@ from os import environ
 from typing import AsyncIterator, Self
 from contextlib import asynccontextmanager
 
-from .abstract.session import Session
+from .session.base import Session
 from .omittable import Omittable, OMIT
 
 class Bot:

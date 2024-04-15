@@ -23,7 +23,7 @@ ReduceF: TypeAlias = Callable[['Filter[M]', 'Filter[M]'], 'Filter[M]']
 
 class ExtendedHandler(Handler[M], Interested, Named, Protocol[M]):
     __name__: str = ''
-    __extended__: bool = True
+    __extended_handler__: bool = True
 
     def catch(self, exc: type[E], handler: Handler[CaughtException[M, E]]) -> 'ExtendedHandler[M]':
         from ..middlewares.catch import Catch

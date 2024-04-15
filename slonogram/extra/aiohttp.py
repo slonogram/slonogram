@@ -1,4 +1,4 @@
-from ..abstract.session import Session
+from ..session.extended import ExtendedSession
 from ..consts import DEFAULT_BASE_URL
 from ..omittable import (
     Omittable,
@@ -22,7 +22,7 @@ except ImportError as e:
     raise NoFeatureError("aiohttp", "Failed to import `aiohttp` package") from e
 
 
-class AiohttpSession(Session):
+class AiohttpSession(ExtendedSession):
     __slots__ = ("token", "client", "json_parser")
 
     json_parser: JSONParser

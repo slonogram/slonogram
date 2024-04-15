@@ -1,16 +1,15 @@
 from typing import Awaitable, Any, assert_type
 
-from ..abstract.session import Session
+from ..session import extend_session
 from ..types.request import Request
 
-def stub(
+def _stub(
     req: Request,
     /
 ) -> Awaitable[Any]:
     _ = req
     raise NotImplementedError("Called stub")
 
-
-assert_type(stub, Session)
+stub = extend_session(_stub)
 
 __all__ = ["stub"]
