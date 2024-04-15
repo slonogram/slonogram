@@ -1,4 +1,4 @@
-from ..abstract.session import FilesMap, Params, Session
+from ..abstract.session import Session
 from ..consts import DEFAULT_BASE_URL
 from ..omittable import (
     Omittable,
@@ -8,6 +8,7 @@ from ..omittable import (
 )
 from ..exceptions.api import APIError
 from ..abstract.json import JSONParser
+from ..types.request import Request
 
 from json import loads
 from contextlib import asynccontextmanager
@@ -42,14 +43,12 @@ class AiohttpSession(Session):
 
     async def __call__(
         self,
-        name: str,
-        params: Params,
-        files: FilesMap,
+        req: Request,
         /
     ) -> Any:
         async with self.client.post(
-            f"/bot{self.token}/{name}",
-            data={**params, **files}
+            f"/bot{self.token}/{req.method_name}",
+            data={**req.params, **req.files}
         ) as response:
             js = self.json_parser(await response.read())
             try:
