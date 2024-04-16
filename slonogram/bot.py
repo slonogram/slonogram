@@ -11,6 +11,12 @@ class Bot:
         self.session = session
 
     @classmethod
+    def stub(cls) -> Self:
+        from .extra.session_stub import stub
+
+        return cls(stub)
+
+    @classmethod
     @asynccontextmanager
     async def from_env(cls, variable: str = 'TG_TOKEN') -> AsyncIterator[Self]:
         token = environ[variable]

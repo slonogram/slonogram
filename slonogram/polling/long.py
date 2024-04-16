@@ -15,11 +15,11 @@ async def poll_for_updates(
     timeout: int | None = None,
     interests: Iterable[Interest] | None = None,
 ) -> None:
-    _interests: set[Interest] | None
-    if isinstance(interests, set):
+    _interests: frozenset[Interest] | None
+    if isinstance(interests, frozenset):
         _interests = interests
     elif interests is not None:
-        _interests = set(interests)
+        _interests = frozenset(interests)
     elif isinstance(handler, Interested):
         _interests = handler.collect_interests()
     else:

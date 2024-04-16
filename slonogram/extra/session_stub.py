@@ -1,4 +1,4 @@
-from typing import Awaitable, Any, assert_type
+from typing import Awaitable, Any
 
 from ..session import extend_session
 from ..types.request import Request

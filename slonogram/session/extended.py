@@ -1,7 +1,6 @@
 from typing import TYPE_CHECKING
 
 from .base import Session
-from ..types.request import Request
 
 if TYPE_CHECKING:
     from .middleware import SessionMiddleware

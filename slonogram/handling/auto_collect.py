@@ -6,8 +6,8 @@ if TYPE_CHECKING:
     from ..types.interest import Interest
 
 S = TypeVar("S")
-def auto_collect(f: Callable[[S], Iterable['Handler[Any]']]) -> Callable[[S], set['Interest']]:
-    def collector(self: S) -> set['Interest']:
+def auto_collect(f: Callable[[S], Iterable['Handler[Any]']]) -> Callable[[S], frozenset['Interest']]:
+    def collector(self: S) -> frozenset['Interest']:
         return collect_interests(f(self))
     return collector
 

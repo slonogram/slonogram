@@ -1,9 +1,9 @@
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Self
 
 from .stash import Stash
 from ..bot import Bot
 from ..altering import Alterer1, alter1
-from ..omittable import Omittable, OMIT
+from ..omittable import Omittable, OMIT, omitted_or
 
 M = TypeVar("M")
 NM = TypeVar("NM")
@@ -24,7 +24,11 @@ class Context(Generic[M]):
         self.model = model
         self.stash = stash
         self.bot = bot
-    
+
+    @classmethod
+    def stub(cls, model: M, stash: Omittable[Stash] = OMIT) -> Self:
+        return cls(Bot.stub(), model, omitted_or(stash, Stash()))
+
     def alter(
         self,
         bot: Omittable[Alterer1[Bot]] = OMIT,

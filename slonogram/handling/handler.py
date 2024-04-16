@@ -1,8 +1,7 @@
 from typing import Protocol, TypeVar, Awaitable, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .activation import Activation
-    from ..types.context import Context
+    pass
 
 M_contra = TypeVar("M_contra", contravariant=True)
 R_co = TypeVar("R_co", covariant=True)

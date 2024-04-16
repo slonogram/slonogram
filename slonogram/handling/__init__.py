@@ -5,7 +5,7 @@ from .extended import ExtendedHandler
 from .wrap import Wrap
 from .follows import Follows, CurrentMiddleware
 from .filtered import Filtered
-from .only import Only
+from .interested_in import InterestedIn
 
 from .compatible import CompatibleHandler, handler_from_compatible
 
@@ -18,7 +18,7 @@ __all__ = [
     "Wrap",
     "Follows",
     "Filtered",
-    "Only",
+    "InterestedIn",
 
     "handler_from_compatible",
 ]

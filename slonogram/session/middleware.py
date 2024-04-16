@@ -1,4 +1,4 @@
-from typing import Protocol, Awaitable, Any, Iterable, Self, overload
+from typing import Protocol, Awaitable, Any, Iterable, overload
 from functools import reduce
 
 from .base import Session
