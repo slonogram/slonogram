@@ -29,7 +29,6 @@ def _try_flatten(handler: Handler[M]) -> Iterable[Handler[M]]:
 class Dispatcher(ExtendedHandler[M]):
     __slots__ = (
         "name",
-        "stash",
         "handlers",
         "_mergeable",
     )
@@ -40,11 +39,9 @@ class Dispatcher(ExtendedHandler[M]):
     def __init__(
         self,
         handlers: Omittable[_Handlers[M]] = OMIT,
-        stash: Omittable[Stash] = OMIT,
         name: Omittable[str | None] = OMIT,
         mergeable: Omittable[bool] = OMIT,
     ) -> None:
-        self.stash = stash
         self.handlers = omitted_or(handlers, ())
         self.name = omitted_or(name, None)
         self._mergeable = omitted_or(mergeable, True)
@@ -63,17 +60,15 @@ class Dispatcher(ExtendedHandler[M]):
 
     @property
     def mergeable(self) -> bool:
-        return self._mergeable and isinstance(self.stash, Omit)
+        return self._mergeable
 
     def alter(
         self,
         handlers: Omittable[Alterer1[_Handlers[M]]] = OMIT,
-        stash: Omittable[Alterer1[Omittable[Stash]]] = OMIT,
         name: Omittable[Alterer1[str | None]] = OMIT,
     ) -> "Dispatcher[M]":
         return Dispatcher[M](
             handlers=alter1(handlers, self.handlers),
-            stash=alter1(stash, self.stash),
             name=alter1(name, self.name),
         )
 
@@ -91,9 +86,6 @@ class Dispatcher(ExtendedHandler[M]):
         context: Context[M],
         /,
     ) -> Activation:
-        if not isinstance(self.stash, Omit):
-            context = context.alter(stash=lambda x: x.append(self.stash))
-
         for handler in self.handlers:
             old = context.stash
             context.stash = Stash(old)

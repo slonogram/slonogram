@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from .follows import CurrentMiddleware
 
 from ..reflect.named import Named
+from ..types.stash import Stash
 from ..types.caught_exception import CaughtException
 
 
@@ -24,6 +25,11 @@ ReduceF: TypeAlias = Callable[['Filter[M]', 'Filter[M]'], 'Filter[M]']
 class ExtendedHandler(Handler[M], Interested, Named, Protocol[M]):
     __name__: str = ''
     __extended_handler__: bool = True
+
+    def with_stash(self, stash: Stash) -> 'ExtendedHandler[M]':
+        from ..middlewares.inject_stash import InjectStash
+
+        return self << InjectStash(stash)
 
     def catch(self, exc: type[E], handler: Handler[CaughtException[M, E]]) -> 'ExtendedHandler[M]':
         from ..middlewares.catch import Catch
