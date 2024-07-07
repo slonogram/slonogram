@@ -34,7 +34,9 @@ class Filter(FilterFn[D]):
         return self.apply(lambda f: Filter(Or(f, rhs, exclusive=True)))
 
     def __hash__(self) -> int:
-        return hash(self.pred)
+        # I suppose this is good trade-off, potentionally big filters
+        # will be hashed fast
+        return id(self)
 
     def __eq__(self, rhs: t.Any) -> bool:
         return isinstance(rhs, Filter) and self.pred == rhs.pred
