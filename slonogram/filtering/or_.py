@@ -13,6 +13,9 @@ class Or(FilterFn[D]):
         self.rhs = rhs
         self.exclusive = exclusive
 
+    def __repr__(self) -> str:
+        return f"Or(lhs={self.lhs!r}, rhs={self.rhs!r}, exclusive={self.exclusive})"
+
     def __call__(self, ctx: Ctx[D]) -> bool:
         if self.exclusive:
             return bool(self.lhs(ctx) ^ self.rhs(ctx))

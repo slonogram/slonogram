@@ -1,6 +1,6 @@
 from .extended import Filter
-from .filter import FilterFn, lift
+from .filter import FilterFn
 
 
-__all__ = ["Filter", "FilterFn", "lift"]
+__all__ = ["Filter", "FilterFn"]
 

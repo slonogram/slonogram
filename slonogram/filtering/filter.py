@@ -1,11 +1,11 @@
 import typing as t
 
-from sena.predicate import PredicateFn
+from sena.handler.filtered import Predicate
 
 from ..types.ctx import Ctx
 
 D = t.TypeVar("D")
-FilterFn: t.TypeAlias = PredicateFn[Ctx[D]]
+FilterFn: t.TypeAlias = Predicate[Ctx[D]]
 
 __all__ = ["FilterFn"]
 

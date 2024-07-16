@@ -2,15 +2,13 @@ from __future__ import annotations
 
 import typing as t
 
-from sena.predicate import PredicateFn
-
+from .filter import FilterFn
 from .and_ import And
 from .or_ import Or
 
 from ..types.ctx import Ctx
 
 D = t.TypeVar("D")
-FilterFn: t.TypeAlias = PredicateFn[Ctx[D]]
 
 class _Missing: ...
 _MISSING = _Missing()
