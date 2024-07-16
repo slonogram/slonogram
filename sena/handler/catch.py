@@ -16,7 +16,7 @@ class CaughtException(t.Generic[B, C]):
     next: Next[B, C]
 
 
-class ExceptionHandler(t.Protocol[B, C], Next[B, CaughtException[B, C]]):
+class ExceptionHandler(Next[B, CaughtException[B, C]], t.Protocol[B, C]):
     ...
 
 

@@ -23,19 +23,19 @@ AbstractHandler: t.TypeAlias = _Handler[Activation, Ctx[D]]
 
 # To improve traces
 
-class Mapper(t.Protocol[D], _Mapper[Activation, Ctx[D]]):
+class Mapper(_Mapper[Activation, Ctx[D]], t.Protocol[D]):
     ...
 
-class Next(t.Protocol[D], _Next[Activation, Ctx[D]]):
+class Next(_Next[Activation, Ctx[D]], t.Protocol[D]):
     ...
 
 class HandlerFnFactory(
-    t.Protocol[D],
     _HandlerFnFactory[Activation, Ctx[D], Activation, Ctx[D]],
+    t.Protocol[D],
 ):
     ...
 
-class HandlerFn(t.Protocol[D], _HandlerFn[Activation, Ctx[D]]):
+class HandlerFn(_HandlerFn[Activation, Ctx[D]], t.Protocol[D]):
     ...
 
 __all__ = [

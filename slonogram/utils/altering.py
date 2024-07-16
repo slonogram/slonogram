@@ -12,7 +12,7 @@ class MorphingAlterer1(t.Protocol[KIn, KOut]):
     def __call__(self, input: KIn, /) -> KOut:
         ...
 
-class Alterer1(t.Protocol[T], MorphingAlterer1[T, T]):
+class Alterer1(MorphingAlterer1[T, T], t.Protocol[T]):
     ...
 
 def alter1(alterer: Omittable[Alterer1[T]], value: T, /) -> T:

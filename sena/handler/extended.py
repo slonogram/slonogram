@@ -29,7 +29,7 @@ class Modifier(t.Protocol[H]):
         ...
 
 
-class Handler(t.Protocol[B, C], HandlerFn[B, C]):
+class Handler(HandlerFn[B, C], t.Protocol[B, C]):
     # TODO: see `modify`, but this time `map` is erasing the type -_-.
     @abstractmethod
     def map(self, f: Mapper[B, C]) -> Handler[B, C]:

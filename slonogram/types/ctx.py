@@ -5,8 +5,6 @@ import dataclasses as dtc
 
 from .stash import Stash
 
-from ..schemas.update import Update
-
 from ..utils.omit import Omittable, OMIT
 from ..utils.altering import Alterer1, alter1
 
@@ -22,9 +20,6 @@ class Ctx(t.Generic[D]):
 
     def with_data(self, data: NewData) -> Ctx[NewData]:
         return Ctx(data, self.stash, self.memo)
-
-    def wrap_update(self, old: Update, kind: str) -> Ctx[Update]:
-        return self.with_data(dtc.replace(old, **{kind: self.data}))  # type: ignore
 
     def alter(
         self,
