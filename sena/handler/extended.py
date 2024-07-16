@@ -1,11 +1,13 @@
 from __future__ import annotations
 import typing as t
+from abc import abstractmethod
 
 from .base import HandlerFn, Next
 
 from ..control_flow import ControlFlow
 
 from .then import Then
+from .catch import Catch, ExceptionHandler
 from .filtered import Filtered, Predicate
 
 B = t.TypeVar("B")
@@ -14,24 +16,44 @@ C = t.TypeVar("C")
 Bn = t.TypeVar("Bn")
 Cn = t.TypeVar("Cn")
 
-class Handler(HandlerFn[B, C]):
-    def __init__(self, fn: HandlerFn[B, C]) -> None:
-        self.fn = fn
+H = t.TypeVar("H")
 
-    def filter(self, pred: Predicate[C]) -> Handler[B, C]:
-        return self.map(lambda f: Filtered(pred, self))
 
-    def then(self, next: HandlerFn[B, C]) -> Handler[B, C]:
-        return self.map(lambda f: Then(self, next))
+# TODO: see `Handler.modify`
+class Mapper(t.Protocol[B, C]):
+    def __call__(self, input: HandlerFn[B, C], /) -> HandlerFn[B, C]:
+        ...
 
-    def map(self, f: t.Callable[[HandlerFn[B, C]], HandlerFn[Bn, Cn]]) -> Handler[Bn, Cn]:
-        return self.modify(lambda h: Handler(f(h.fn)))
+class Modifier(t.Protocol[H]):
+    def __call__(self, input: H) -> H:
+        ...
 
-    def modify(self, fn: t.Callable[[Handler[B, C]], Handler[Bn, Cn]]) -> Handler[Bn, Cn]:
+
+class Handler(t.Protocol[B, C], HandlerFn[B, C]):
+    # TODO: see `modify`, but this time `map` is erasing the type -_-.
+    @abstractmethod
+    def map(self, f: Mapper[B, C]) -> Handler[B, C]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def __call__(self, req: C, next: Next[B, C], /) -> t.Awaitable[ControlFlow[B, C]]:
+        raise NotImplementedError
+
+    # Default sugar
+
+    # TODO: this is quite constrained, since `modify` cannot change type of the `Handler`.
+    # To be more flexible, python should support HKT.
+    def modify(self, fn: Modifier[t.Self]) -> t.Self:
         return fn(self)
 
-    def __call__(self, req: C, next: Next[B, C], /) -> t.Awaitable[ControlFlow[B, C]]:
-        return self.fn(req, next)
+    def filter(self, pred: Predicate[C]) -> Handler[B, C]:
+        return self.map(Filtered.factory(pred))
+
+    def catch(self, handler: ExceptionHandler[B, C]) -> Handler[B, C]:
+        return self.map(Catch.factory(handler))
+
+    def then(self, next: HandlerFn[B, C]) -> Handler[B, C]:
+        return self.map(Then.factory(next))
 
 __all__ = ["Handler"]
 

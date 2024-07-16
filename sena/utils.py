@@ -18,10 +18,10 @@ def extract_endpoint(e: EndpointFn[B, C]) -> EndpointFn[B, C]:
     return e
 
 def extract_handler(h: HandlerFn[B, C]) -> HandlerFn[B, C]:
-    from .handler.extended import Handler
+    from .handler.simple import Simple
 
-    if isinstance(h, Handler):
-        return h.fn
+    if isinstance(h, Simple):
+        return h.inner
 
     return h
 
