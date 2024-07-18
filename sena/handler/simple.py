@@ -8,7 +8,7 @@ from ..utils import extract_handler
 
 B = t.TypeVar("B")
 C = t.TypeVar("C")
-
+H = t.TypeVar("H")
 
 class Simple(Handler[B, C]):
     __slots__ = ('inner', )

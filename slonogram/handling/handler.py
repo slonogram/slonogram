@@ -1,4 +1,4 @@
-# Re-exporting stuff with slonogram specificity
+# Re-exporting stuff with added specificity
 import typing as t
 
 from sena.handler import (

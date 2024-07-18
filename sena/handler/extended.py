@@ -1,5 +1,6 @@
 from __future__ import annotations
 import typing as t
+
 from abc import abstractmethod
 
 from .base import HandlerFn, Next
@@ -30,7 +31,7 @@ class Modifier(t.Protocol[H]):
 
 
 class Handler(HandlerFn[B, C], t.Protocol[B, C]):
-    # TODO: see `modify`, but this time `map` is erasing the type -_-.
+    # TODO: see `modify`, but now there's a type erasure
     @abstractmethod
     def map(self, f: Mapper[B, C]) -> Handler[B, C]:
         raise NotImplementedError
