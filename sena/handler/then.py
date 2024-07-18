@@ -17,8 +17,8 @@ class Then(HandlerFn[B, C]):
         self.next = extract_handler(next)
 
     @classmethod
-    def factory(cls, current: HandlerFn[B, C]) -> HandlerFnFactory[B, C, B, C]:
-        return lambda next: cls(current, next)
+    def factory(cls, next: HandlerFn[B, C]) -> HandlerFnFactory[B, C, B, C]:
+        return lambda current: cls(current, next)
 
     def __call__(self, req: C, next: Next[B, C]) -> t.Awaitable[ControlFlow[B, C]]:
         return self.current(req, lambda r: self.next(r, next))

@@ -5,11 +5,13 @@ from abc import abstractmethod
 
 from .base import HandlerFn, Next
 
+from ..endpoint.base import EndpointFn
 from ..control_flow import ControlFlow
 
 from .then import Then
 from .catch import Catch, ExceptionHandler
 from .filtered import Filtered, Predicate
+from .connected import Connected
 
 B = t.TypeVar("B")
 C = t.TypeVar("C")
@@ -46,6 +48,12 @@ class Handler(HandlerFn[B, C], t.Protocol[B, C]):
     # To be more flexible, python should support HKT.
     def modify(self, fn: Modifier[t.Self]) -> t.Self:
         return fn(self)
+
+    def endpoint(self, endpoint: EndpointFn[B, C]) -> Next[B, C]:
+        return Connected.from_endpoint(self, endpoint)
+
+    def connect(self, next: Next[B, C]) -> Next[B, C]:
+        return Connected(self, next)
 
     def filter(self, pred: Predicate[C]) -> Handler[B, C]:
         return self.map(Filtered.factory(pred))

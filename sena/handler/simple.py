@@ -19,6 +19,9 @@ class Simple(Handler[B, C]):
     def map(self, f: Mapper[B, C]) -> t.Self:
         return type(self)(f(self.inner))
 
+    def __repr__(self) -> str:
+        return repr(self.inner)
+
     def __call__(self, req: C, next: Next[B, C]) -> t.Awaitable[ControlFlow[B, C]]:
         return self.inner(req, next)
 
