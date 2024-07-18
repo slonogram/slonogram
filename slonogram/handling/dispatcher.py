@@ -19,6 +19,7 @@ from .control_flow import ControlFlow
 D = t.TypeVar("D")
 _Handlers: t.TypeAlias = tuple[HandlerFn[D], ...]
 
+# Dispatcher for single event type
 class Dispatcher(AbstractHandler[D]):
     handlers: _Handlers[D]
 
@@ -41,7 +42,7 @@ class Dispatcher(AbstractHandler[D]):
         return self.alter(handlers=lambda prev: (*prev, *handlers))
 
     def map(self, f: Mapper[D]) -> AbstractHandler[D]:
-        return Handler(f(self))
+        return Handler[D](f(self))
 
     async def __call__(self, ctx: Ctx[D], next: Next[D]) -> ControlFlow[D]:
         for handler in self.handlers:

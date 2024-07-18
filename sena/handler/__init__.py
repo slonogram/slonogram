@@ -1,4 +1,4 @@
-from .base import HandlerFn, HandlerFnFactory
+from .base import HandlerFn, HandlerFnFactory, Next
 from .extended import Handler
 
 from .simple import Simple
@@ -8,6 +8,7 @@ __all__ = [
     "HandlerFn",
     "HandlerFnFactory",
     "Handler",
+    "Next",
 
     "Simple",
     "alt",

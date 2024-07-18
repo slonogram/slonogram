@@ -6,11 +6,11 @@ from sena.handler import (
     Handler as _Handler,
     HandlerFn as _HandlerFn,
     HandlerFnFactory as _HandlerFnFactory,
+    Next as _Next,
 )
 from sena.handler.extended import (
     Mapper as _Mapper,
     Modifier,
-    Next as _Next,
 )
 
 from ..types.ctx import Ctx

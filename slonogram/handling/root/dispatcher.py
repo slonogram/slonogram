@@ -20,6 +20,7 @@ from slonogram.schemas.message import Message
 from slonogram.schemas.callback_query import CallbackQuery
 
 
+# Dispatcher for multiple event types
 class Root(AbstractHandler[Update]):
     __slots__ = ('slots', )
 
@@ -30,10 +31,10 @@ class Root(AbstractHandler[Update]):
         return f"Root(slots={self.slots!r})"
 
     def sent_message(self, *hs: HandlerFn[Message]) -> t.Self:
-        return self.alter(slots=lambda s: s.alter(sent_message=lambda prev: (*prev, *hs)))
+        return self.alter(slots=lambda s: s.alter(sent_message=lambda dp: dp.register(*hs)))
 
     def callback_query(self, *hs: HandlerFn[CallbackQuery]) -> t.Self:
-        return self.alter(slots=lambda s: s.alter(callback_query=lambda prev: (*prev, *hs)))
+        return self.alter(slots=lambda s: s.alter(callback_query=lambda dp: dp.register(*hs)))
 
     def alter(
         self,
@@ -45,7 +46,7 @@ class Root(AbstractHandler[Update]):
         )
 
     def map(self, f: Mapper[Update]) -> AbstractHandler[Update]:
-        return Handler(f(self))
+        return Handler[Update](f(self))
 
     async def __call__(self, ctx: Ctx[Update], next: Next[Update]) -> ControlFlow[Update]:
         # TODO: let's write that tricky converting mess later
