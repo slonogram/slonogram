@@ -13,21 +13,29 @@ from .handler import (
     Mapper,
     Next,
 )
+from .reduction import try_reduce, Reducer
 from .control_flow import ControlFlow
 
 
+T = t.TypeVar("T")
 D = t.TypeVar("D")
 _Handlers: t.TypeAlias = tuple[HandlerFn[D], ...]
 
+
 # Dispatcher for single event type
 class Dispatcher(AbstractHandler[D]):
-    handlers: _Handlers[D]
+    __slots__ = ('handlers', )
 
     def __init__(self, handlers: _Handlers[D] = ()) -> None:
         self.handlers = handlers
 
     def __repr__(self) -> str:
         return f"Dispatcher(handlers={self.handlers!r})"
+
+    def reduce(self, f: Reducer[D, T], initial: T) -> T:
+        for handler in self.handlers:
+            initial = try_reduce(handler, f, initial)
+        return initial
 
     def alter(
         self,

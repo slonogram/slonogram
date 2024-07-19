@@ -2,22 +2,30 @@ import typing as t
 
 from .base import HandlerFn, Next
 from .extended import Handler, Mapper
+from .reducing import Reducer
 
 from ..control_flow import ControlFlow
 from ..utils import extract_handler
 
 B = t.TypeVar("B")
 C = t.TypeVar("C")
-H = t.TypeVar("H")
+
+T = t.TypeVar("T")
 
 class Simple(Handler[B, C]):
     __slots__ = ('inner', )
 
-    def __init__(self, inner: HandlerFn[B, C]) -> None:
+    def __init__(
+        self,
+        inner: HandlerFn[B, C],
+    ) -> None:
         self.inner = extract_handler(inner)
 
-    def map(self, f: Mapper[B, C]) -> t.Self:
+    def map(self, f: Mapper[B, C]) -> Handler[B, C]:
         return type(self)(f(self.inner))
+
+    def reduce(self, f: Reducer[B, C, T], initial: T) -> T:
+        return f(initial, self.inner)
 
     def __repr__(self) -> str:
         return repr(self.inner)

@@ -8,6 +8,9 @@ from .filtering import Filter, FilterFn
 from .session import Session, Request
 
 __all__ = [
+    "Filter",
+    "FilterFn",
+
     "Root",
     "Dispatcher",
     "Bot",

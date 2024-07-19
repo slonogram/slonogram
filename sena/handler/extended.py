@@ -4,6 +4,7 @@ import typing as t
 from abc import abstractmethod
 
 from .base import HandlerFn, Next
+from .reducing import Reducing
 
 from ..endpoint.base import EndpointFn
 from ..control_flow import ControlFlow
@@ -31,8 +32,8 @@ class Modifier(t.Protocol[H]):
     def __call__(self, input: H) -> H:
         ...
 
-
-class Handler(HandlerFn[B, C], t.Protocol[B, C]):
+@t.runtime_checkable
+class Handler(HandlerFn[B, C], Reducing[B, C], t.Protocol[B, C]):
     # TODO: see `modify`, but now there's a type erasure
     @abstractmethod
     def map(self, f: Mapper[B, C]) -> Handler[B, C]:

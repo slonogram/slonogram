@@ -1,20 +1,25 @@
 import typing as t
 
 from .base import HandlerFn, Next, HandlerFnFactory
+from .reducing import Reducing, Reducer
 
 from ..control_flow import ControlFlow
 from ..utils import extract_handler
 
 C = t.TypeVar("C")
 B = t.TypeVar("B")
+T = t.TypeVar("T")
 
 
-class Then(HandlerFn[B, C]):
+class Then(HandlerFn[B, C], Reducing[B, C]):
     __slots__ = ('current', 'next')
 
     def __init__(self, current: HandlerFn[B, C], next: HandlerFn[B, C]) -> None:
         self.current = extract_handler(current)
         self.next = extract_handler(next)
+
+    def reduce(self, f: Reducer[B, C, T], initial: T) -> T:
+        return f(f(initial, self.current), self.next)
 
     @classmethod
     def factory(cls, next: HandlerFn[B, C]) -> HandlerFnFactory[B, C, B, C]:

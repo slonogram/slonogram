@@ -5,7 +5,7 @@ from .request import Request
 from .response import Response
 
 
-class SessionFn(t.Protocol, EndpointFn[Response, Request]):
+class SessionFn(EndpointFn[Response, Request], t.Protocol):
     ...
 
 

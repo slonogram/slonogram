@@ -2,11 +2,16 @@ import typing as t
 import dataclasses as dtc
 
 from .base import HandlerFn, HandlerFnFactory, Next
+from .reducing import (
+    Reducer,
+    Reducing,
+)
 from ..control_flow import ControlFlow, Continue, Break
 
 C = t.TypeVar("C")
 B = t.TypeVar("B")
 E = t.TypeVar("E")
+T = t.TypeVar("T")
 
 @dtc.dataclass(slots=True)
 class CaughtException(t.Generic[B, C]):
@@ -20,12 +25,15 @@ class ExceptionHandler(Next[B, CaughtException[B, C]], t.Protocol[B, C]):
     ...
 
 
-class Catch(HandlerFn[B, C]):
+class Catch(HandlerFn[B, C], Reducing[B, C]):
     __slots__ = ('handler', 'exc_handler')
 
     def __init__(self, exc_handler: ExceptionHandler[B, C], handler: HandlerFn[B, C]) -> None:
         self.handler = handler
         self.exc_handler = exc_handler
+
+    def reduce(self, f: Reducer[B, C, T], initial: T) -> T:
+        return f(initial, self.handler)
 
     @classmethod
     def factory(cls, exc_handler: ExceptionHandler[B, C]) -> HandlerFnFactory[B, C, B, C]:
