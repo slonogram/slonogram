@@ -1,19 +1,23 @@
 import typing as t
 from contextlib import asynccontextmanager
 
+from sena.endpoint.utils import extend
+
 from ..consts import DEFAULT_API_ENDPOINT
 
 from ..utils.omit import OMIT, Omittable, non_omitted_or
 from ..utils.altering import Alterer1, alter1
 
-from ..session.extended import Session
+from ..session.base import SessionFn
 from ..session.request import Request
 from ..session.response import Response
 
 from aiohttp import ClientSession
 
+Acc = t.TypeVar("Acc")
 
-class AiohttpSession(Session):
+@extend
+class AiohttpSession(SessionFn):
     __slots__ = ('inner', 'api_endpoint', 'token')
 
     def __init__(

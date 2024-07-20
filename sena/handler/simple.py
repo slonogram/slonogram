@@ -2,7 +2,7 @@ import typing as t
 
 from .base import HandlerFn, Next
 from .extended import Handler, Mapper
-from .reducing import Reducer
+from .reducible import Reducer
 
 from ..control_flow import ControlFlow
 from ..utils import extract_handler

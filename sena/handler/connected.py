@@ -1,9 +1,9 @@
 import typing as t
 
 from .base import HandlerFn, Next
-from .reducing import (
+from .reducible import (
     Reducer,
-    Reducing,
+    Reducible,
 )
 
 from ..control_flow import ControlFlow, Break
@@ -25,7 +25,7 @@ class NextEndpoint(Next[B, C]):
     async def __call__(self, req: C) -> ControlFlow[B, C]:
         return Break(await self.inner(req))
 
-class Connected(Next[B, C], Reducing[B, C]):
+class Connected(Next[B, C], Reducible[B, C]):
     __slots__ = ('handler', 'next')
 
     def __init__(self, handler: HandlerFn[B, C], next: Next[B, C]) -> None:

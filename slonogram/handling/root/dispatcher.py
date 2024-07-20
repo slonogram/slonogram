@@ -10,8 +10,8 @@ from ..handler import (
 from ..control_flow import ControlFlow
 from ..reduction import Reducer
 
-from .slots import Slots
 from ..dispatcher import Dispatcher
+from .slots import Slots
 
 from slonogram.types.ctx import Ctx
 from slonogram.types.interest import Interest

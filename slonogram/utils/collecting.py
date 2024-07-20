@@ -2,7 +2,7 @@ import typing as t
 
 
 from ..handling.handler import HandlerFn
-from ..handling.reduction import Reducing
+from ..handling.reduction import Reducible
 
 from ..types.handler_meta_info import HandlerMetaInfo
 
@@ -15,7 +15,7 @@ class CollectMetaInfo(t.Protocol):
 def collect_meta_info(initial: HandlerMetaInfo, handler: HandlerFn[t.Any]) -> HandlerMetaInfo:
     if isinstance(handler, CollectMetaInfo):
         return initial.combine(handler.collect_meta_info())
-    elif isinstance(handler, Reducing):
+    elif isinstance(handler, Reducible):
         return handler.reduce(collect_meta_info, initial)
 
     return initial

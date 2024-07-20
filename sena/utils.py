@@ -10,10 +10,11 @@ C = t.TypeVar("C")
 
 
 def extract_endpoint(e: EndpointFn[B, C]) -> EndpointFn[B, C]:
-    from .endpoint.extended import Endpoint
+    from .endpoint.simple import Simple
 
-    if isinstance(e, Endpoint):
-        return e.fn
+    if isinstance(e, Simple):
+        return e.inner
+
     return e
 
 def extract_handler(h: HandlerFn[B, C]) -> HandlerFn[B, C]:

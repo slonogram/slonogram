@@ -1,36 +1,44 @@
 from __future__ import annotations
 
 import typing as t
+import abc
 
-from .base import EndpointFn, SeqEndpointFn, EndpointFnFactory
+from .reducible import Reducible
+from .base import (
+    EndpointFn,
+    SeqEndpointFn,
+)
 from .after import After
 
-B_co = t.TypeVar("B_co", covariant=True)
-C_contra = t.TypeVar("C_contra", contravariant=True)
+B = t.TypeVar("B")
+C = t.TypeVar("C")
+S = t.TypeVar("S")
 
-Bn = t.TypeVar("Bn")
-Cn = t.TypeVar("Cn")
+class Mapper(t.Protocol[B, C]):
+    def __call__(self, endpoint: EndpointFn[B, C], /) -> EndpointFn[B, C]:
+        ...
 
-class Endpoint(EndpointFn[B_co, C_contra]):
+class Modifier(t.Protocol[S]):
+    def __call__(self, value: S, /) -> S:
+        ...
+
+
+class Endpoint(EndpointFn[B, C], Reducible[B, C], t.Protocol[B, C]):
     __slots__ = ('fn', )
 
-    def __init__(self, fn: EndpointFn[B_co, C_contra]) -> None:
-        self.fn = fn
+    @abc.abstractmethod
+    def map(self, f: Mapper[B, C]) -> Endpoint[B, C]:
+        raise NotImplementedError
 
-    def after(self, current: SeqEndpointFn[B_co, C_contra]) -> Endpoint[B_co, C_contra]:
-        return self.map(lambda e: After(current, self))
+    @abc.abstractmethod
+    def __call__(self, req: C, /) -> t.Awaitable[B]:
+        raise NotImplementedError
 
-    def map(self, f: EndpointFnFactory[B_co, C_contra, Bn, Cn]) -> Endpoint[Bn, Cn]:
-        return Endpoint(f(self.fn))
+    def after(self, current: SeqEndpointFn[B, C]) -> Endpoint[B, C]:
+        return self.map(After.factory(current))
 
-    def modify(self, f: t.Callable[[Endpoint[B_co, C_contra]], Endpoint[Bn, Cn]]) -> Endpoint[Bn, Cn]:
+    def modify(self, f: Modifier[t.Self]) -> t.Self:
         return f(self)
-
-    def __call__(self, req: C_contra, /) -> t.Awaitable[B_co]:
-        return self.fn(req)
-
-    def __repr__(self) -> str:
-        return repr(self.fn)
 
 
 __all__ = ["Endpoint"]

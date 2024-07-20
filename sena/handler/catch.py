@@ -2,9 +2,9 @@ import typing as t
 import dataclasses as dtc
 
 from .base import HandlerFn, HandlerFnFactory, Next
-from .reducing import (
+from .reducible import (
     Reducer,
-    Reducing,
+    Reducible,
 )
 from ..control_flow import ControlFlow, Continue, Break
 
@@ -25,7 +25,7 @@ class ExceptionHandler(Next[B, CaughtException[B, C]], t.Protocol[B, C]):
     ...
 
 
-class Catch(HandlerFn[B, C], Reducing[B, C]):
+class Catch(HandlerFn[B, C], Reducible[B, C]):
     __slots__ = ('handler', 'exc_handler')
 
     def __init__(self, exc_handler: ExceptionHandler[B, C], handler: HandlerFn[B, C]) -> None:

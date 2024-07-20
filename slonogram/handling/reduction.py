@@ -1,9 +1,8 @@
 import typing as t
 
-from sena.handler.reducing import (
-    Reducing as _Reducing,
+from sena.handler.reducible import (
+    Reducible as _Reducible,
     Reducer as _Reducer,
-    try_reduce
 )
 
 from ..types.activation import Activation
@@ -18,14 +17,13 @@ class Reducer(_Reducer[Activation, Ctx[D], T], t.Protocol[D, T]):
     ...
 
 @t.runtime_checkable
-class Reducing(_Reducing[Activation, Ctx[D]], t.Protocol[D]):
+class Reducible(_Reducible[Activation, Ctx[D]], t.Protocol[D]):
     ...
 
 
 __all__ = [
     "Reducer",
-    "Reducing",
-    "try_reduce",
+    "Reducible",
 ]
 
 

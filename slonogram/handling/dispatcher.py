@@ -13,7 +13,7 @@ from .handler import (
     Mapper,
     Next,
 )
-from .reduction import try_reduce, Reducer
+from .reduction import Reducer
 from .control_flow import ControlFlow
 
 
@@ -34,7 +34,7 @@ class Dispatcher(AbstractHandler[D]):
 
     def reduce(self, f: Reducer[D, T], initial: T) -> T:
         for handler in self.handlers:
-            initial = try_reduce(handler, f, initial)
+            initial = f(initial, handler)
         return initial
 
     def alter(

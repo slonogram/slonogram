@@ -1,10 +1,9 @@
 import typing as t
 
 from .base import HandlerFn, Next, HandlerFnFactory
-from .reducing import (
+from .reducible import (
     Reducer,
-    Reducing,
-    try_reduce,
+    Reducible,
 )
 
 from ..control_flow import ControlFlow, Continue
@@ -20,7 +19,7 @@ class Predicate(t.Protocol[C_contra]):
     def __call__(self, req: C_contra, /) -> bool:
         ...
 
-class Filtered(HandlerFn[B, C], Reducing[B, C]):
+class Filtered(HandlerFn[B, C], Reducible[B, C]):
     __slots__ = ('pred', 'handler')
 
     def __init__(self, pred: Predicate[C], handler: HandlerFn[B, C]) -> None:
