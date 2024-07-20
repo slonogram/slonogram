@@ -1,6 +1,6 @@
 import typing as t
 
-from sena.handler.filtered import Predicate
+from sena.handling.filtered import Predicate
 
 from ..types.ctx import Ctx
 

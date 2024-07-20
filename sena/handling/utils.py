@@ -10,7 +10,7 @@ B = t.TypeVar("B")
 C = t.TypeVar("C")
 
 
-def extend(f: t.Callable[P, HandlerFn[B, C]]) -> t.Callable[P, 'Handler[B, C]']:
+def lift(f: t.Callable[P, HandlerFn[B, C]]) -> t.Callable[P, 'Handler[B, C]']:
     from .simple import Simple
 
     @functools.wraps(f)
@@ -20,5 +20,5 @@ def extend(f: t.Callable[P, HandlerFn[B, C]]) -> t.Callable[P, 'Handler[B, C]']:
     return inner
 
 
-__all__ = ["extend"]
+__all__ = ["lift"]
 

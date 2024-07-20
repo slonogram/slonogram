@@ -65,5 +65,8 @@ class Handler(HandlerFn[B, C], Reducible[B, C], t.Protocol[B, C]):
     def then(self, next: HandlerFn[B, C]) -> Handler[B, C]:
         return self.map(Then.factory(next))
 
+    def after(self, before: HandlerFn[B, C]) -> Handler[B, C]:
+        return self.map(lambda handler: Then(before, self))
+
 __all__ = ["Handler"]
 

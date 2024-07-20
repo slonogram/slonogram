@@ -26,13 +26,13 @@
           '';
           buildInputs = [ python.pkg ] ++ (with python.packages; [
             python-lsp-server
-            mypy
             pylsp-mypy
             python-lsp-ruff
           ]) ++ (with pkgs; [
             uv
             ruff
             nickel
+            mdbook
           ]);
         };
       }

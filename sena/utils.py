@@ -1,6 +1,6 @@
 import typing as t
 
-from .handler.base import HandlerFn
+from .handling.base import HandlerFn
 from .endpoint.base import EndpointFn
 
 P = t.ParamSpec("P")
@@ -18,7 +18,7 @@ def extract_endpoint(e: EndpointFn[B, C]) -> EndpointFn[B, C]:
     return e
 
 def extract_handler(h: HandlerFn[B, C]) -> HandlerFn[B, C]:
-    from sena.handler.simple import Simple
+    from .handling.simple import Simple
 
     if isinstance(h, Simple):
         return h.inner

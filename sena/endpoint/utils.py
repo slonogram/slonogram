@@ -9,7 +9,7 @@ P = t.ParamSpec("P")
 B = t.TypeVar("B")
 C = t.TypeVar("C")
 
-def extend(fn: t.Callable[P, EndpointFn[B, C]]) -> t.Callable[P, 'Endpoint[B, C]']:
+def lift(fn: t.Callable[P, EndpointFn[B, C]]) -> t.Callable[P, 'Endpoint[B, C]']:
     from .simple import Simple
 
     @functools.wraps(fn)
@@ -18,6 +18,5 @@ def extend(fn: t.Callable[P, EndpointFn[B, C]]) -> t.Callable[P, 'Endpoint[B, C]
 
     return inner
 
-
-__all__ = ["extend"]
+__all__ = ["lift"]
 

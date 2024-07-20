@@ -7,7 +7,7 @@ from .and_ import And
 from .or_ import Or
 
 from ..utils.altering import alter1, Alterer1
-from ..utils.omit import OMIT, Omittable
+from ..utils.omit import OMIT, Omittable, non_omitted_or
 from ..types.ctx import Ctx
 
 D = t.TypeVar("D")
@@ -16,33 +16,41 @@ class _Missing: ...
 _MISSING = _Missing()
 
 class Filter(FilterFn[D]):
-    __slots__ = ('pred', 'impure')
+    __slots__ = ('pred', 'pure', '_hash', '_deepest_pred')
 
-    pred: FilterFn[D]
-    impure: bool
+    pure: bool
 
     def __init__(
         self,
         pred: FilterFn[D],
-        impure: Omittable[bool] = OMIT,
+        pure: Omittable[bool] = OMIT,
     ) -> None:
+        pure = non_omitted_or(pure, True)
         self.pred = pred
 
-        if impure is OMIT:
-            self.impure = False
-        else:
-            self.impure = impure  # type: ignore
+        # Propagate impurity
+        if pure:
+            pure = pred.pure if isinstance(pred, Filter) else pure
+
+        self.pure = pure
+
+        # Precompute this for faster memoizing
+        self._hash = hash(self.pred)
+        self._deepest_pred = pred.pred if isinstance(pred, Filter) else pred
 
     def alter(
         self,
         *,
         pred: Omittable[Alterer1[FilterFn[D]]] = OMIT,
-        impure: Omittable[Alterer1[bool]] = OMIT,
-    ) -> Filter[D]:
-        return Filter(
+        pure: Omittable[Alterer1[bool]] = OMIT,
+    ) -> t.Self:
+        return type(self)(
             pred=alter1(pred, self.pred),
-            impure=alter1(impure, self.impure),
+            pure=alter1(pure, self.pure),
         )
+
+    def impure(self) -> t.Self:
+        return self.alter(pure=lambda _: False)
 
     def modify(self, f: t.Callable[[Filter[D]], Filter[D]]) -> Filter[D]:
         return f(self)
@@ -57,16 +65,16 @@ class Filter(FilterFn[D]):
         return self.alter(pred=lambda f: Filter(Or(f, rhs, exclusive=True)))
 
     def __hash__(self) -> int:
-        # I suppose this is good trade-off, potentionally big filters
-        # will be hashed fast
-        return id(self)
+        return self._hash
 
     def __eq__(self, rhs: t.Any) -> bool:
-        # See `__hash__` impl
-        return self is rhs
+        if isinstance(rhs, Filter):
+            return self._deepest_pred == rhs._deepest_pred
+
+        return self.pred == rhs or self._deepest_pred == rhs or self is rhs
 
     def __call__(self, ctx: Ctx[D], /) -> bool:
-        if self.impure:
+        if not self.pure:
             return self.pred(ctx)
 
         # Memoize already seen filters

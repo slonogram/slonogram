@@ -1,5 +1,5 @@
-from .handler.base import HandlerFn, Next
-from .handler.extended import Handler
+from .handling.base import HandlerFn, Next
+from .handling.extended import Handler
 
 from .endpoint.base import EndpointFn
 from .endpoint.extended import Endpoint
