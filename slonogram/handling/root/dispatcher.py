@@ -53,7 +53,9 @@ class Root(AbstractHandler[Update], CollectMetaInfo):
         return f"Root(slots={self.slots!r})"
 
     def reduce(self, f: Reducer[Update, T], initial: T) -> T:
+        # `Root` is not reducible in a useful way
         _ = f
+
         return initial
 
     def sent_message(self, *hs: HandlerFn[Message]) -> t.Self:
