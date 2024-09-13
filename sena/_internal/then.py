@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing as t
 
 from .base import SeqHandler
@@ -14,7 +16,7 @@ Next = t.TypeVar("Next")
 I = t.TypeVar("I")
 O = t.TypeVar("O")
 
-class Then(t.Generic[C, Next], Modify):
+class Then(Modify, t.Generic[C, Next]):
     __slots__ = ('current', 'next')
 
     def __init__(self, current: C, next: Next) -> None:

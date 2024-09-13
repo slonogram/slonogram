@@ -133,5 +133,10 @@ and modular, you can even write your own if-else without using any if-else in im
 
 ### What's an `Ext`?
 
-Wrapper around anything that adds sugar-methods to handlers. Simple as that.
+Wrapper around anything that adds sugar-methods to handlers.
+
+TODO: Provide motivation, right now this requires some context.
+
+
+
 

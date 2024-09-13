@@ -1,9 +1,16 @@
+from __future__ import annotations
+
 import typing as t
 
 from .apply import Apply
 from .then import Then
+from .continued import Continued, AsyncContinued
 
-from .base import Handler, SeqHandler
+from .base import (
+    Handler,
+    AsyncHandler,
+    SeqHandler,
+)
 
 from .modify import Modify
 from .reducible import Reducible, Reducer
@@ -34,11 +41,8 @@ class Ext(t.Generic[Inner]):
     def __init__(self, inner: Inner) -> None:
         self.inner = inner
 
-    def modify(self: Ext[M], f: t.Callable[[M], Res], /) -> Res:
-        return self.inner.modify(f)
-
-    def reduce(self: Ext[Re], f: Reducer[Acc], initial: Acc) -> Acc:
-        return self.inner.reduce(f, initial)
+    def __repr__(self) -> str:
+        return repr(self.inner)
 
     def __call__(
         self: Ext[t.Callable[P, O]],
@@ -46,6 +50,12 @@ class Ext(t.Generic[Inner]):
         **kwargs: P.kwargs,
     ) -> O:
         return self.inner(*args, **kwargs)
+
+    def modify(self: Ext[M], f: t.Callable[[M], Res], /) -> Ext[Res]:
+        return Ext(self.inner.modify(f))
+
+    def reduce(self: Ext[Re], f: Reducer[Acc], initial: Acc) -> Acc:
+        return self.inner.reduce(f, initial)
 
     # Sugar
 
@@ -56,13 +66,6 @@ class Ext(t.Generic[Inner]):
     ) -> Ext[Handler[I, O]]:
         return Ext(Apply(seq, self.inner))
 
-    # Forgive me Lord for not erasing
-    # return type of this function.
-    def then(
-        self,
-        next: N,
-    ) -> Ext[Then[Inner, N]]:
-        return Ext(Then(self.inner, next))
 
     def apply(
         self: Ext[SeqHandler[I, O, N]],
@@ -70,3 +73,21 @@ class Ext(t.Generic[Inner]):
     ) -> Ext[Handler[I, O]]:
         return Ext(Apply(self.inner, next))
 
+
+    # Forgive me Lord for not erasing
+    # return type of these functions.
+    def then(
+        self,
+        next: N,
+    ) -> Ext[Then[Inner, N]]:
+        return Ext(Then(self.inner, next))
+
+    def continued(
+        self: Ext[Handler[I, O]],
+    ) -> Ext[Continued[Handler[I, O]]]:
+        return Ext(Continued(self.inner))
+
+    def acontinued(
+        self: Ext[AsyncHandler[I, O]],
+    ) -> Ext[AsyncContinued[AsyncHandler[I, O]]]:
+        return Ext(AsyncContinued(self.inner))
