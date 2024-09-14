@@ -11,11 +11,10 @@ N = t.TypeVar("N")
 F = t.TypeVar("F")
 
 
-class Filter(plain.Handler[Ctx[D], bool]):
+class Filter(plain.Predicate[Ctx[D]]):
     ...
 
-# Yea, probably no one will use this (like why you would?).
-class SeqFilter(seq.SeqHandler[Ctx[D], bool, N]):
+class SeqFilter(seq.SeqPredicate[Ctx[D], N]):
     ...
 
 

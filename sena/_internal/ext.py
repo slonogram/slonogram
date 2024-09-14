@@ -51,8 +51,12 @@ class Ext(t.Generic[Inner]):
     ) -> O:
         return self.inner(*args, **kwargs)
 
-    def modify(self: Ext[M], f: t.Callable[[M], Res], /) -> Ext[Res]:
-        return Ext(self.inner.modify(f))
+    def untyped_modify(self, f: t.Callable[[t.Any], t.Any]) -> t.Any:
+        """Type hints don't have HKTs, so `modify` is not powerful enough.
+        """
+        if isinstance(self.inner, Modify):
+            return type(self)(self.inner.modify(f))
+        return type(self)(f(self.inner))
 
     def reduce(self: Ext[Re], f: Reducer[Acc], initial: Acc) -> Acc:
         return self.inner.reduce(f, initial)
@@ -64,30 +68,27 @@ class Ext(t.Generic[Inner]):
         self: Ext[N],
         seq: SeqHandler[I, O, N],
     ) -> Ext[Handler[I, O]]:
-        return Ext(Apply(seq, self.inner))
-
+        return self.untyped_modify(lambda inner: Apply(seq, inner))
 
     def apply(
         self: Ext[SeqHandler[I, O, N]],
         next: N,
     ) -> Ext[Handler[I, O]]:
-        return Ext(Apply(self.inner, next))
+        return self.untyped_modify(lambda lhs: Apply(lhs, next))
 
-
-    # Forgive me Lord for not erasing
-    # return type of these functions.
+    # Some type erasure performed, hope it helps.
     def then(
-        self,
+        self: Ext[Handler[I, O]],
         next: N,
-    ) -> Ext[Then[Inner, N]]:
-        return Ext(Then(self.inner, next))
+    ) -> Ext[Then[Handler[I, O], N]]:
+        return self.untyped_modify(lambda lhs: Then(lhs, next))
 
     def continued(
         self: Ext[Handler[I, O]],
     ) -> Ext[Continued[Handler[I, O]]]:
-        return Ext(Continued(self.inner))
+        return self.untyped_modify(Continued)
 
     def acontinued(
         self: Ext[AsyncHandler[I, O]],
     ) -> Ext[AsyncContinued[AsyncHandler[I, O]]]:
-        return Ext(AsyncContinued(self.inner))
+        return self.untyped_modify(AsyncContinued)

@@ -1,4 +1,5 @@
 from ._internal.base import SeqHandler, AsyncSeqHandler
+from ._internal.base import SeqPredicate
 
 from ._internal.apply import Apply
 from ._internal.then import Then
@@ -9,6 +10,7 @@ __all__ = [
     "Then",
 
     "SeqHandler",
+    "SeqPredicate",
     "AsyncSeqHandler",
 ]
 

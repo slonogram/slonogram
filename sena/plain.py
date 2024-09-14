@@ -1,4 +1,6 @@
 from ._internal.base import Handler, AsyncHandler
+from ._internal.base import Predicate
+
 from ._internal.continued import Continued, AsyncContinued
 
 
@@ -7,6 +9,7 @@ __all__ = [
     "AsyncContinued",
 
     "Handler",
+    "Predicate",
     "AsyncHandler",
 ]
 

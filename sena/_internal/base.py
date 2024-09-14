@@ -9,14 +9,20 @@ class Handler(t.Protocol[I, O]):
     def __call__(self, req: I, /) -> O:
         ...
 
-class AsyncHandler(Handler[I, t.Awaitable[O]]):
+class Predicate(Handler[I, bool], t.Protocol[I]):
+    ...
+
+class AsyncHandler(Handler[I, t.Awaitable[O]], t.Protocol[I, O]):
     ...
 
 class SeqHandler(t.Protocol[I, O, N]):
     def __call__(self, req: I, next: N, /) -> O:
         ...
 
-class AsyncSeqHandler(SeqHandler[I, t.Awaitable[O], N]):
+class SeqPredicate(SeqHandler[I, bool, N], t.Protocol[I, N]):
+    ...
+
+class AsyncSeqHandler(SeqHandler[I, t.Awaitable[O], N], t.Protocol[I, O, N]):
     ...
 
 
