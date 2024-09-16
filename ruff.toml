@@ -1,0 +1,10 @@
+exclude = []
+target-version = "py311"
+
+[lint]
+fixable = ["F401"]
+ignore = [
+  # Yelling at generics.
+  "E741"
+]
+
