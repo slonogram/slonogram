@@ -6,6 +6,7 @@ R = t.TypeVar("R")
 
 O = t.TypeVar("O")
 
+
 @t.runtime_checkable
 class Modify(t.Protocol):
     """Simple extension that allows calling plain functions
@@ -20,4 +21,3 @@ class Modify(t.Protocol):
 
 
 __all__ = ["Modify"]
-

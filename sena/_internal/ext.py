@@ -2,93 +2,89 @@ from __future__ import annotations
 
 import typing as t
 
-from .apply import Apply
-from .then import Then
-from .continued import Continued, AsyncContinued
+if t.TYPE_CHECKING:
+    from .then import Then
+    from .apply import Apply
 
-from .base import (
-    Handler,
-    AsyncHandler,
-    SeqHandler,
-)
-
+from .base import Handler, Predicate, SeqHandler
 from .modify import Modify
-from .reducible import Reducible, Reducer
+from .reducible import Reducible
 
-In = t.TypeVar("In")
-On = t.TypeVar("On")
-
-I = t.TypeVar("I")
-N = t.TypeVar("N")
-
-P = t.ParamSpec("P")
-O = t.TypeVar("O")
-
-M = t.TypeVar("M", bound=Modify)
-Res = t.TypeVar("Res")
-
-Re = t.TypeVar("Re", bound=Reducible)
 Acc = t.TypeVar("Acc")
 
 Inner = t.TypeVar("Inner")
+Output = t.TypeVar("Output")
 
-Opaque = t.TypeVar("Opaque")
+I = t.TypeVar("I", contravariant=True)
+O = t.TypeVar("O", covariant=True)
+N = t.TypeVar("N", contravariant=True)
 
-# This is required cause python kinda suck.
-class Ext(t.Generic[Inner]):
-    __slots__ = ('inner', )
+Next = t.TypeVar("Next")
+Cur = t.TypeVar("Cur")
 
-    def __init__(self, inner: Inner) -> None:
-        self.inner = inner
 
-    def __repr__(self) -> str:
-        return repr(self.inner)
-
-    def __call__(
-        self: Ext[t.Callable[P, O]],
-        *args: P.args,
-        **kwargs: P.kwargs,
-    ) -> O:
-        return self.inner(*args, **kwargs)
-
-    def untyped_modify(self, f: t.Callable[[t.Any], t.Any]) -> t.Any:
-        """Type hints don't have HKTs, so `modify` is not powerful enough.
-        """
-        if isinstance(self.inner, Modify):
-            return type(self)(self.inner.modify(f))
-        return type(self)(f(self.inner))
-
-    def reduce(self: Ext[Re], f: Reducer[Acc], initial: Acc) -> Acc:
-        return self.inner.reduce(f, initial)
-
-    # Sugar
-
-    # Basically same as `.apply`, but inverted.
+class HandlerExt(Modify, Reducible, t.Protocol):
     def after(
-        self: Ext[N],
-        seq: SeqHandler[I, O, N],
-    ) -> Ext[Handler[I, O]]:
-        return self.untyped_modify(lambda inner: Apply(seq, inner))
+        self,
+        current: SeqHandler[I, O, t.Self],
+    ) -> ExtendedHandler[I, O]:
+        from .apply import Apply
 
+        return Apply[SeqHandler[I, O, t.Self], t.Self](current, self)
+
+
+class PredicateExt(HandlerExt, t.Protocol):
+    def __and__(self: Predicate[I], rhs: Predicate[I]) -> ExtendedPredicate[I]:
+        from .binary import Binary, and_
+
+        return Binary[Predicate[I], Predicate[I], t.Any](self, rhs, and_)
+
+    def __or__(self: Predicate[I], rhs: Predicate[I]) -> ExtendedPredicate[I]:
+        from .binary import Binary, or_
+
+        return Binary[Predicate[I], Predicate[I], t.Any](self, rhs, or_)
+
+    def __xor__(self: Predicate[I], rhs: Predicate[I]) -> ExtendedPredicate[I]:
+        from .binary import Binary, xor
+
+        return Binary[Predicate[I], Predicate[I], t.Any](self, rhs, xor)
+
+    def __invert__(self: Predicate[I]) -> ExtendedPredicate[I]:
+        from .unary import Unary, not_
+
+        return Unary[Predicate[I], t.Any](self, not_)
+
+    def not_(self: Predicate[I]) -> ExtendedPredicate[I]:
+        from .unary import Unary, not_
+
+        return Unary[Predicate[I], t.Any](self, not_)
+
+
+# Handler[I, O] & HandlerExt
+class ExtendedHandler(HandlerExt, Handler[I, O], t.Protocol[I, O]): ...
+
+
+# Predicate[I] & PredicateExt
+class ExtendedPredicate(ExtendedHandler[I, bool], t.Protocol[I]): ...
+
+
+class SeqHandlerExt(Modify, Reducible, t.Protocol):
     def apply(
-        self: Ext[SeqHandler[I, O, N]],
+        self: SeqHandler[I, O, N],
         next: N,
-    ) -> Ext[Handler[I, O]]:
-        return self.untyped_modify(lambda lhs: Apply(lhs, next))
+    ) -> ExtendedHandler[I, O]:
+        from .apply import Apply
 
-    # Some type erasure performed, hope it helps.
+        return Apply[SeqHandler[I, O, N], N](self, next)
+
     def then(
-        self: Ext[Handler[I, O]],
+        self: SeqHandler[I, O, "Apply[Next, N]"],
         next: N,
-    ) -> Ext[Then[Handler[I, O], N]]:
-        return self.untyped_modify(lambda lhs: Then(lhs, next))
+    ) -> "Then[SeqHandler[I, O, Apply[Next, N]], N]":
+        from .then import Then
 
-    def continued(
-        self: Ext[Handler[I, O]],
-    ) -> Ext[Continued[Handler[I, O]]]:
-        return self.untyped_modify(Continued)
+        return Then(self, next)
 
-    def acontinued(
-        self: Ext[AsyncHandler[I, O]],
-    ) -> Ext[AsyncContinued[AsyncHandler[I, O]]]:
-        return self.untyped_modify(AsyncContinued)
+
+# SeqHandler[I, O, N] & SeqHandlerExt
+class ExtendedSeqHandler(SeqHandlerExt, SeqHandler[I, O, N], t.Protocol[I, O, N]): ...

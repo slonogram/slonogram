@@ -10,4 +10,3 @@ __all__ = [
     "Reducible",
     "try_reduce",
 ]
-

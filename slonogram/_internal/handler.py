@@ -1,20 +1,20 @@
 import typing as t
 
-import sena.plain as plain
-import sena.seq as seq
+from sena import plain, seq
+from sena.control import ControlFlow
 
 from .activation import Activation
-from slonogram.ctx import Ctx
+from .ctx import Ctx
 
 D = t.TypeVar("D")
-N = t.TypeVar("N")
+N = t.TypeVar("N", contravariant=True)
+
+Result: t.TypeAlias = ControlFlow[Ctx[D], Activation]
 
 
-class Handler(plain.AsyncHandler[Ctx[D], Activation]):
-    ...
-
-class SeqHandler(seq.AsyncSeqHandler[Ctx[D], Activation, N]):
-    ...
+class Handler(plain.Handler[Ctx[D], t.Awaitable[Result[D]]], t.Protocol[D]): ...
 
 
-
+class SeqHandler(
+    seq.SeqHandler[Ctx[D], t.Awaitable[Result[D]], N], t.Protocol[D, N]
+): ...

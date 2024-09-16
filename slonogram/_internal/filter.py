@@ -1,20 +1,15 @@
 import typing as t
 
-from sena import Ext
 import sena.plain as plain
 import sena.seq as seq
 
-from ..ctx import Ctx
+from .ctx import Ctx
 
 D = t.TypeVar("D")
-N = t.TypeVar("N")
-F = t.TypeVar("F")
+N = t.TypeVar("N", contravariant=True)
 
 
-class Filter(plain.Predicate[Ctx[D]]):
-    ...
-
-class SeqFilter(seq.SeqPredicate[Ctx[D], N]):
-    ...
+class Filter(plain.Predicate[Ctx[D]], t.Protocol[D]): ...
 
 
+class SeqFilter(seq.SeqPredicate[Ctx[D], N], t.Protocol[D, N]): ...

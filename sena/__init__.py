@@ -1,10 +1,12 @@
-from ._internal.modify import Modify
-from ._internal.ext import Ext
+from ._internal.ext import SeqHandlerExt, ExtendedSeqHandler
+from ._internal.ext import HandlerExt, ExtendedHandler
 
+from ._internal.modify import Modify
 
 __all__ = [
     "Modify",
-    "Ext",
+    "SeqHandlerExt",
+    "ExtendedSeqHandler",
+    "HandlerExt",
+    "ExtendedHandler",
 ]
-
-

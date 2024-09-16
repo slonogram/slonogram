@@ -3,8 +3,8 @@ from __future__ import annotations
 import typing as t
 
 from .reducible import Reducer
-from .base import Handler, AsyncHandler
-from .modify import Modify
+from .base import Handler
+from .ext import SeqHandlerExt
 
 H = t.TypeVar("H")
 
@@ -14,12 +14,13 @@ I = t.TypeVar("I")
 O = t.TypeVar("O")
 NR = t.TypeVar("NR")
 
-class AsyncContinued(Modify, t.Generic[H]):
+
+class AsyncContinued(SeqHandlerExt, t.Generic[H]):
     """Same as [`Continued`], but additionally awaits handler
-    and next function. 
+    and next function.
     """
 
-    __slots__ = ('handler', )
+    __slots__ = ("handler",)
 
     def __init__(self, handler: H) -> None:
         self.handler = handler
@@ -31,18 +32,19 @@ class AsyncContinued(Modify, t.Generic[H]):
         return f"AsyncContinued(handler={self.handler!r})"
 
     async def __call__(
-        self: AsyncContinued[AsyncHandler[I, O]],
+        self: AsyncContinued[Handler[I, t.Awaitable[O]]],
         req: I,
         next: t.Callable[[O], t.Awaitable[NR]],
     ) -> NR:
         return await next(await self.handler(req))
 
-class Continued(Modify, t.Generic[H]):
+
+class Continued(SeqHandlerExt, t.Generic[H]):
     """Converts plain handler into sequential handler, by simply
     feeding `next` function with output of the handler.
     """
 
-    __slots__ = ('handler', )
+    __slots__ = ("handler",)
 
     def __init__(self, handler: H) -> None:
         self.handler = handler
@@ -59,5 +61,3 @@ class Continued(Modify, t.Generic[H]):
         next: t.Callable[[O], NR],
     ) -> NR:
         return next(self.handler(req))
-
-

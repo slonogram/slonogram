@@ -3,7 +3,7 @@ from __future__ import annotations
 import typing as t
 
 from .base import SeqHandler
-from .modify import Modify
+from .ext import HandlerExt
 from .reducible import Reducer
 
 I = t.TypeVar("I")
@@ -16,8 +16,8 @@ N = t.TypeVar("N")
 Next = t.TypeVar("Next")
 
 
-class Apply(Modify, t.Generic[C, N]):
-    __slots__ = ('current', 'next')
+class Apply(HandlerExt, t.Generic[C, N]):
+    __slots__ = ("current", "next")
 
     def __init__(self, current: C, next: N) -> None:
         self.current = current
@@ -35,5 +35,3 @@ class Apply(Modify, t.Generic[C, N]):
         req: I,
     ) -> O:
         return self.current(req, self.next)
-
-

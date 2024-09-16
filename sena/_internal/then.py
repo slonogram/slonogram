@@ -5,8 +5,8 @@ import typing as t
 from .base import SeqHandler
 from .apply import Apply
 
+from .ext import SeqHandlerExt
 from .reducible import Reducer
-from .modify import Modify
 
 C = t.TypeVar("C")
 N = t.TypeVar("N")
@@ -16,8 +16,9 @@ Next = t.TypeVar("Next")
 I = t.TypeVar("I")
 O = t.TypeVar("O")
 
-class Then(Modify, t.Generic[C, Next]):
-    __slots__ = ('current', 'next')
+
+class Then(SeqHandlerExt, t.Generic[C, Next]):
+    __slots__ = ("current", "next")
 
     def __init__(self, current: C, next: Next) -> None:
         self.current = current
@@ -36,5 +37,3 @@ class Then(Modify, t.Generic[C, Next]):
         next: N,
     ) -> O:
         return self.current(req, Apply(self.next, next))
-
-

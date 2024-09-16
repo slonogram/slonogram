@@ -4,8 +4,8 @@ Acc = t.TypeVar("Acc")
 
 
 class Reducer(t.Protocol[Acc]):
-    def __call__(self, acc: Acc, item: t.Any, /) -> Acc:
-        ...
+    def __call__(self, acc: Acc, item: t.Any, /) -> Acc: ...
+
 
 @t.runtime_checkable
 class Reducible(t.Protocol):
@@ -15,6 +15,9 @@ class Reducible(t.Protocol):
         Left-associative.
         """
 
+        # By default, do nothing.
+        return initial
+
 
 def try_reduce(x: Reducible | t.Any, f: Reducer[Acc], initial: Acc) -> Acc:
     """Reduces object if it is reducible, otherwise
@@ -23,5 +26,3 @@ def try_reduce(x: Reducible | t.Any, f: Reducer[Acc], initial: Acc) -> Acc:
     if isinstance(x, Reducible):
         return x.reduce(f, initial)
     return initial
-
-
